@@ -37,6 +37,9 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref_type == 'tag'
 
+    permissions:
+      id-token: write
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
