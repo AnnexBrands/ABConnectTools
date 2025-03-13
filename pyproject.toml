@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ABConnect"
+version = "0.1.2"
+description = "A set of tools for connecting and processing data for Annex Brands, featuring robust API quoting and dynamic request building."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Brett Monson", email = "bmonson@annexbrands.com" }
+]
+keywords = [
+    "ABC", "quote", "api", "builder", "quoter", "annex brands", "data processing"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+requires-python = ">=3.8"
+
+dependencies = [
+    "pandas",
+    "openpyxl",
+    "beautifulsoup4",
+    "chardet",
+    "requests"
+]
+
+[tool.setuptools]
+packages = ["ABConnect"]
+
+[tool.setuptools.package-data]
+ABConnect = ["base/*.json"]
+
+[project.optional-dependencies]
+dev = ["pytest", "build", "twine"]
+
+[tool.pytest.ini_options]
+pythonpath = "ABConnect"
+testpaths = ["tests"]

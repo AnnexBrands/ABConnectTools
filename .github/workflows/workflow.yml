@@ -1,0 +1,60 @@
+name: Python Package CI/CD
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*.*.*'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Upgrade pip and Install Package
+        run: |
+          python -m pip install --upgrade pip
+          # Install your package using the pyproject.toml (and setup.py if present)
+          pip install .
+          # Install testing dependencies if needed (e.g., pytest)
+          pip install pytest
+
+      - name: Run Tests
+        run: pytest
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Build Package
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python setup.py sdist bdist_wheel
+      
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@v1.6.0
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}

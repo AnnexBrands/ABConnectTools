@@ -1,0 +1,26 @@
+{
+  "AccessKey": "",
+  "JobInfo": {
+    "JobType": "",
+    "CustomerComments": "",
+    "ResidenceDelivery": "",
+    "OtherRefNo": ""
+  },
+  "Customer": { "ContactDisplayId": "" },
+  "Pickup": { "ContactDisplayId": "" },
+  "Delivery": { "ZipCode": "", "CountryCode": "" },
+  "Items": [
+    {
+      "L": "",
+      "W": "",
+      "H": "",
+      "Wgt": "",
+      "Qty": "1",
+      "Value": "",
+      "Cpack": "",
+      "Description": "",
+      "NotedConditions": "",
+      "ItemNotes": ""
+    }
+  ]
+}
