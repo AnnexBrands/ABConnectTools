@@ -1,5 +1,5 @@
 import unittest
-from ABConnect.builder import APIRequestBuilder
+from ABConnect import APIRequestBuilder
 
 class TestAPIRequestBuilder(unittest.TestCase):
     def test_update_items(self):
