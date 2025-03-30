@@ -1,9 +1,9 @@
 import requests
 import logging
-from copy import deepcopy
-from ABConnect.builder import APIRequestBuilder
+from ABConnect.Builder import APIRequestBuilder
 
 logger = logging.getLogger(__name__)
+
 
 class Quoter:
     """
@@ -20,19 +20,22 @@ class Quoter:
         or
         q = Quoter()
     """
+
     def __init__(self, *args, **kwargs):
-        self.env = kwargs.get('env', '')
-        self.jobType = kwargs.get('JobType', 'Regular')
-        self.request_type = kwargs.get('type', 'qq').lower()  # Normalize to lower-case.
-        self.auto_book = kwargs.get('auto_book', False)
+        self.env = kwargs.get("env", "")
+        self.jobType = kwargs.get("JobType", "Regular")
+        self.request_type = kwargs.get("type", "qq").lower()  # Normalize to lower-case.
+        self.auto_book = kwargs.get("auto_book", False)
 
         self.url = {
-            'qq': f'https://api.{self.env}abconnect.co/api/autoprice/quickquote',
-            'qr': f'https://api.{self.env}abconnect.co/api/autoprice/v2/quoterequest'
+            "qq": f"https://api.{self.env}abconnect.co/api/autoprice/quickquote",
+            "qr": f"https://api.{self.env}abconnect.co/api/autoprice/v2/quoterequest",
         }.get(self.request_type)
 
         if not self.url:
-            raise ValueError("Invalid request type specified. Use 'qq' for quick quote or 'qr' for quote request.")
+            raise ValueError(
+                "Invalid request type specified. Use 'qq' for quick quote or 'qr' for quote request."
+            )
 
         self.builder = APIRequestBuilder(req_type=self.jobType)
         self.data = None
@@ -76,22 +79,22 @@ class Quoter:
         Parses the quote request (qr) response from the API.
         """
         try:
-            quote = self.response_json['SubmitNewQuoteRequestV2Result']
+            quote = self.response_json["SubmitNewQuoteRequestV2Result"]
         except KeyError as e:
             logger.error("Expected key missing in QR response: %s", e)
             raise Exception("Malformed QR response from ABC API") from e
 
         self.parsed_data = {
-            'quote_certified': quote.get('QuoteCertified', False),
-            'jobid': quote.get('JobID'),
-            'job': quote.get('JobDisplayID'),
-            'bookingkey': quote.get('BookingKey'),
-            'Pickup': quote.get('PriceBreakdown', {}).get('Pickup', 0),
-            'Packaging': quote.get('PriceBreakdown', {}).get('Packaging', 0),
-            'Transportation': quote.get('PriceBreakdown', {}).get('Transportation', 0),
-            'Insurance': quote.get('PriceBreakdown', {}).get('Insurance', 0),
-            'Delivery': quote.get('PriceBreakdown', {}).get('Delivery', 0),
-            'total': quote.get('TotalAmount', 0)
+            "quote_certified": quote.get("QuoteCertified", False),
+            "jobid": quote.get("JobID"),
+            "job": quote.get("JobDisplayID"),
+            "bookingkey": quote.get("BookingKey"),
+            "Pickup": quote.get("PriceBreakdown", {}).get("Pickup", 0),
+            "Packaging": quote.get("PriceBreakdown", {}).get("Packaging", 0),
+            "Transportation": quote.get("PriceBreakdown", {}).get("Transportation", 0),
+            "Insurance": quote.get("PriceBreakdown", {}).get("Insurance", 0),
+            "Delivery": quote.get("PriceBreakdown", {}).get("Delivery", 0),
+            "total": quote.get("TotalAmount", 0),
         }
 
     def parse_qq_response(self):
@@ -99,31 +102,31 @@ class Quoter:
         Parses the quick quote (qq) response from the API.
         """
         try:
-            quote = self.response_json['SubmitQuickQuoteRequestPOSTResult']
+            quote = self.response_json["SubmitQuickQuoteRequestPOSTResult"]
         except KeyError as e:
             logger.error("Expected key missing in QQ response: %s", e)
             raise Exception("Malformed QQ response from ABC API") from e
 
         self.parsed_data = {
-            'jobid': None,
-            'quote_certified': quote.get('QuoteCertified', False),
-            'job': 'Quick Quote',
-            'bookingkey': None,
-            'Pickup': quote.get('PriceBreakdown', {}).get('Pickup', 0),
-            'Packaging': quote.get('PriceBreakdown', {}).get('Packaging', 0),
-            'Transportation': quote.get('PriceBreakdown', {}).get('Transportation', 0),
-            'Insurance': quote.get('PriceBreakdown', {}).get('Insurance', 0),
-            'Delivery': quote.get('PriceBreakdown', {}).get('Delivery', 0),
-            'total': quote.get('TotalAmount', 0)
+            "jobid": None,
+            "quote_certified": quote.get("QuoteCertified", False),
+            "job": "Quick Quote",
+            "bookingkey": None,
+            "Pickup": quote.get("PriceBreakdown", {}).get("Pickup", 0),
+            "Packaging": quote.get("PriceBreakdown", {}).get("Packaging", 0),
+            "Transportation": quote.get("PriceBreakdown", {}).get("Transportation", 0),
+            "Insurance": quote.get("PriceBreakdown", {}).get("Insurance", 0),
+            "Delivery": quote.get("PriceBreakdown", {}).get("Delivery", 0),
+            "total": quote.get("TotalAmount", 0),
         }
 
     def parse_response(self):
         """
         Parses the API response based on the request type.
         """
-        if self.request_type == 'qq':
+        if self.request_type == "qq":
             self.parse_qq_response()
-        elif self.request_type == 'qr':
+        elif self.request_type == "qr":
             self.parse_qr_response()
         else:
             raise ValueError("Unsupported request type for parsing response.")
@@ -134,10 +137,10 @@ class Quoter:
         Raises an exception if the booking fails.
         """
         try:
-            book_url = 'https://abconnect.co/book/{job}?key={bookingkey}'
+            book_url = "https://abconnect.co/book/{job}?key={bookingkey}"
             url = book_url.format(
-                job=self.parsed_data.get('job', ''),
-                bookingkey=self.parsed_data.get('bookingkey', '')
+                job=self.parsed_data.get("job", ""),
+                bookingkey=self.parsed_data.get("bookingkey", ""),
             )
             response = requests.get(url)
             if response.status_code != 200:
@@ -158,14 +161,14 @@ class Quoter:
     def run(self):
         """
         Executes the full quoting process.
-        
+
         Raises:
             Exception: If no request data is loaded or if any step fails.
         Returns:
             self: The Quoter instance after processing.
         """
         if not self.data:
-            raise Exception('No data - must call load_request() first')
+            raise Exception("No data - must call load_request() first")
         self.call_quoter()
         self.parse_response()
         if self.auto_book:
@@ -183,7 +186,9 @@ class Quoter:
         if not self.parsed_data:
             raise Exception("No parsed quote data available. Call run() first.")
 
-        certified = 'Certified' if self.parsed_data.get('quote_certified') else 'Not Certified'
+        certified = (
+            "Certified" if self.parsed_data.get("quote_certified") else "Not Certified"
+        )
         summary = (
             f"Quote: {self.parsed_data.get('job', 'N/A')}\n"
             f"Certified: {certified}\n"

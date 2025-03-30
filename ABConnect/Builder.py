@@ -1,30 +1,19 @@
-import json
 from copy import deepcopy
 from typing import Any, Dict, List, Optional, Union
-from importlib import resources
+from ABConnect.common import load_json_resource
 
-def load_json_resource(filename: str) -> Any:
-    """
-    Loads a JSON file from the package's 'base' directory using importlib.resources.
-    
-    Args:
-        filename (str): The JSON file name.
-    
-    Returns:
-        The parsed JSON object.
-    """
-    with resources.open_text("ABConnect.base", filename) as f:
-        return json.load(f)
 
 class APIRequestBuilder:
     """
     Builder for API requests using static JSON configurations.
     """
-    
-    def __init__(self, req_type: str = 'Regular', base_data: Optional[Dict[str, Any]] = None):
+
+    def __init__(
+        self, req_type: str = "Regular", base_data: Optional[Dict[str, Any]] = None
+    ):
         if base_data:
             self.data = deepcopy(base_data)
-        elif req_type == '3PL':
+        elif req_type == "3PL":
             base = load_json_resource("simple_request.json")
             extracontainers = load_json_resource("extra_containers.json")
             self.data = {**base, **extracontainers}
@@ -32,27 +21,26 @@ class APIRequestBuilder:
             self.data = load_json_resource("simple_request.json")
         self.transformations = {}
 
-
-    def load(self, base_data: Dict[str, Any]) -> 'APIRequestBuilder':
+    def load(self, base_data: Dict[str, Any]) -> "APIRequestBuilder":
         """
         Loads new base data into the builder.
         """
         self.data = deepcopy(base_data)
         return self
-        
-    def update(self, path: Union[str, List[str]], value: Any) -> 'APIRequestBuilder':
+
+    def update(self, path: Union[str, List[str]], value: Any) -> "APIRequestBuilder":
         """
         Updates a nested dictionary or list structure by setting a value at the specified path.
-        
+
         Args:
             path (Union[str, List[str]]): Dot-separated keys or list of keys/indexes.
             value (Any): The value to set.
-        
+
         Returns:
             APIRequestBuilder: The updated instance.
         """
         if isinstance(path, str):
-            path = path.split('.')
+            path = path.split(".")
 
         current = self.data
         for i, key in enumerate(path[:-1]):
@@ -87,7 +75,9 @@ class APIRequestBuilder:
 
         return self
 
-    def _set_nested_value(self, data: Dict[str, Any], path: List[str], value: Any) -> None:
+    def _set_nested_value(
+        self, data: Dict[str, Any], path: List[str], value: Any
+    ) -> None:
         """
         Sets a nested value in a dictionary based on a list of keys.
         """

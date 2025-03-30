@@ -4,9 +4,7 @@ import unittest
 import json
 from openpyxl import Workbook
 
-import pandas as pd
-
-from ABConnect.loader import FileLoader
+from ABConnect import FileLoader
 
 class TestFileLoader(unittest.TestCase):
     def test_csv_loading(self):

@@ -1,0 +1,48 @@
+{
+  "35b3c7da-1d3f-4755-937f-92c177fa96ca": { "code": 1, "descr": "New Job" },
+  "9736bc14-cf49-4181-926e-2501312fec3f": { "code": 2, "descr": "Scheduled" },
+  "dbfcdde3-b55a-4eb2-940d-c64732d84f13": {
+    "code": 2.1,
+    "descr": "Pickup in progress"
+  },
+  "91606d73-a368-42b5-94a3-9b9169183a17": { "code": 2.2, "descr": "Receiving" },
+  "69f49f71-a3ab-46d8-a54a-53378739c22c": { "code": 3, "descr": "Received" },
+  "a9de6a26-60f4-4db0-a352-5f0ccc488e54": {
+    "code": 4,
+    "descr": "Packaging Started"
+  },
+  "4df29f0e-1202-4f9c-b20c-0a68c077eaf8": {
+    "code": 5,
+    "descr": "Packaging Completed"
+  },
+  "e7b13009-a4cb-4267-a1a3-fba1c31feace": { "code": 6, "descr": "Storage" },
+  "58748fa9-7b9d-487a-b0c1-6ed3a530b0ce": {
+    "code": 7,
+    "descr": "Carrier Pickup Scheduled"
+  },
+  "d8dce069-a45a-4975-8522-974d1b4b03ea": {
+    "code": 8,
+    "descr": "8 - Carrier Pickup Complete"
+  },
+  "2d73f273-2fd9-4244-87a4-79e886b6c262": {
+    "code": 9,
+    "descr": "Final Mile in Progress"
+  },
+  "a212ee9b-d8c3-41fe-9734-4232c662fbe6": {
+    "code": 9.1,
+    "descr": "Final Mile Incoming"
+  },
+  "5c35e2c8-d987-4170-9e66-517ca793c22a": {
+    "code": 9.2,
+    "descr": "Final Mile Arrived"
+  },
+  "1f6ae3bb-176e-473b-84e7-2057560f12e3": {
+    "code": 9.3,
+    "descr": "Final Mile Scheduled"
+  },
+  "b231994a-132f-404a-b4c0-3636de860d4a": {
+    "code": 9.4,
+    "descr": "Final Mile In Progress"
+  },
+  "d9ec6689-6b0f-4fdf-a92e-b9560a0528bd": { "code": 10, "descr": "Delivered" }
+}

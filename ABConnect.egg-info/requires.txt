@@ -1,0 +1,12 @@
+appdirs
+chardet
+dotenv
+beautifulsoup4
+openpyxl
+pandas
+requests
+
+[dev]
+pytest
+build
+twine
