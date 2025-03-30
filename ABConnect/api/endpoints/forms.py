@@ -18,7 +18,7 @@ class FormsEndpoint(BaseEndpoint):
         """
         shipmentplans = self._r.call("GET", "api/job/%s/form/shipments" % jobid)
         candidates = (
-            [5, 6] if seq == BolType.Carrier else [seq.value]
+            [5, 6] if seq == BolType.CARRIER else [seq.value]
         )  # results ordered so 5 precedes 6
 
         for plan in shipmentplans:

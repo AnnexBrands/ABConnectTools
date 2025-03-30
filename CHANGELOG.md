@@ -9,3 +9,7 @@
 ## 0.1.3
 * Initial release of module
     * ABConnectAPI
+
+## 0.1.4
+* Bugfix release
+
