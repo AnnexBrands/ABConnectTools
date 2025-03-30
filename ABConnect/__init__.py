@@ -4,3 +4,6 @@ from .Quoter import Quoter
 from .api import ABConnectAPI
 
 __all__ = ["FileLoader", "APIRequestBuilder", "Quoter", "ABConnectAPI"]
+
+__version__ = "0.1.4"
+VERSION = "0.1.4"
