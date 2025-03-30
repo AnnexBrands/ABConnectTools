@@ -1,3 +1,6 @@
 class BaseEndpoint:
-    def __init__(self, request_handler):
-        self._r = request_handler
+    _r = None
+
+    @classmethod
+    def set_request_handler(cls, handler):
+        cls._r = handler

@@ -1,9 +1,9 @@
 import unittest
 from unittest.mock import patch, MagicMock
-from ABConnect.quoter import Quoter
+from ABConnect.Quoter import Quoter
+
 
 class TestQuoter(unittest.TestCase):
-
     def setUp(self):
         # Sample responses for quick quote (qq) and quote request (qr)
         self.sample_qq_response = {
@@ -14,9 +14,9 @@ class TestQuoter(unittest.TestCase):
                     "Packaging": 5.0,
                     "Transportation": 15.0,
                     "Insurance": 2.0,
-                    "Delivery": 3.0
+                    "Delivery": 3.0,
                 },
-                "TotalAmount": 35.0
+                "TotalAmount": 35.0,
             }
         }
         self.sample_qr_response = {
@@ -30,9 +30,9 @@ class TestQuoter(unittest.TestCase):
                     "Packaging": 6.0,
                     "Transportation": 18.0,
                     "Insurance": 2.5,
-                    "Delivery": 3.5
+                    "Delivery": 3.5,
                 },
-                "TotalAmount": 42.0
+                "TotalAmount": 42.0,
             }
         }
 
@@ -44,7 +44,7 @@ class TestQuoter(unittest.TestCase):
         mock_response.json.return_value = self.sample_qq_response
         mock_post.return_value = mock_response
 
-        quoter = Quoter(env='', type='qq', auto_book=False)
+        quoter = Quoter(env="", type="qq", auto_book=False)
         # Load some dummy data.
         quoter.load_request({"test": "data"})
         quoter.call_quoter()
@@ -71,7 +71,7 @@ class TestQuoter(unittest.TestCase):
         mock_response.json.return_value = self.sample_qr_response
         mock_post.return_value = mock_response
 
-        quoter = Quoter(env='', type='qr', auto_book=False)
+        quoter = Quoter(env="", type="qr", auto_book=False)
         quoter.load_request({"test": "data"})
         quoter.call_quoter()
         quoter.parse_response()
@@ -89,5 +89,5 @@ class TestQuoter(unittest.TestCase):
         self.assertEqual(parsed["total"], 42.0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

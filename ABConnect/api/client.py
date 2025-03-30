@@ -1,13 +1,27 @@
 from .http import RequestHandler
 from .auth import FileTokenStorage
-from .endpoints.users import UsersEndpoint
+from ABConnect.api.endpoints import (
+    BaseEndpoint,
+    ContactsEndpoint,
+    CompaniesEndpoint,
+    DocsEndpoint,
+    FormsEndpoint,
+    ItemsEndpoint,
+    JobsEndpoint,
+    TasksEndpoint,
+    UsersEndpoint,
+)
+
 
 class ABConnectAPI:
-    def __init__(self, token_storage=None):
-        if token_storage is None:
-            token_storage = FileTokenStorage()
-        self.token_storage = token_storage
+    def __init__(self, token_storage=FileTokenStorage()):
+        BaseEndpoint.set_request_handler(RequestHandler(token_storage))
 
-        self.request_handler = RequestHandler(token_storage)
-
-        self.users = UsersEndpoint(self.request_handler)
+        self.users = UsersEndpoint()
+        self.companies = CompaniesEndpoint()
+        self.contacts = ContactsEndpoint()
+        self.docs = DocsEndpoint()
+        self.forms = FormsEndpoint()
+        self.items = ItemsEndpoint()
+        self.jobs = JobsEndpoint()
+        self.tasks = TasksEndpoint()
