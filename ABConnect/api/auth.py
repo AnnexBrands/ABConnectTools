@@ -4,6 +4,7 @@ import logging
 import requests
 import time
 from abc import ABC, abstractmethod
+from ABConnect.exceptions import LoginFailedError
 from appdirs import user_cache_dir
 from dotenv import dotenv_values
 
@@ -22,6 +23,15 @@ class TokenStorage(ABC):
     def _calc_expires_at(self, expires_in: int, buffer: int = 300) -> float:
         return time.time() + expires_in - buffer
 
+    @property
+    def expired(self) -> bool:
+        if not self._token:
+            return True
+        expires_at = self._token.get("expires_at")
+        if not expires_at:
+            return True
+        return time.time() >= expires_at
+
     @abstractmethod
     def get_token(self):
         """Return the current bearer token."""
@@ -38,22 +48,85 @@ class TokenStorage(ABC):
         pass
 
 
-# TODO
 class SessionTokenStorage(TokenStorage):
-    pass
+    def __init__(self, request, creds={}):
+        self.request = request
+        self._token = None
+        self._creds = creds
+        self._load_token()
 
+    def _load_token(self):
+        # First try to get token from session
+        if "abc_token" in self.request.session:
+            self._token = self.request.session["abc_token"]
+            if not self.expired:
+                return
 
-#     def __init__(self, request):
-#         self.request = request
+        # Then try to get refresh token from user model
+        if (
+            hasattr(self.request.user, "refresh_token")
+            and self.request.user.refresh_token
+        ):
+            self._token = {"refresh_token": self.request.user.refresh_token}
+            if self.refresh_token():
+                return
 
-#     def get_token(self):
-#         return self.request.session.get("abc_token")["access_token"]
+        # Finally fall back to credential based login
+        self._login()
 
-#     def set_token(self, token):
-#         self.request.session["abc_token"] = token
+    def _identity_body(self):
+        return {
+            "rememberMe": True,
+            "scope": "offline_access",
+            "client_id": os.getenv("ABC_CLIENT_ID"),
+            "client_secret": os.getenv("ABC_CLIENT_SECRET"),
+        }
 
-#     def _get_creds_from_env(self):
-#         return None
+    def _call_login(self, data):
+        r = requests.post(self.identity_url, data=data)
+        if r.ok:
+            resp = r.json()
+            self.set_token(resp)
+        else:
+            raise LoginFailedError().no_traceback()
+
+    def _login(self):
+        data = {
+            "grant_type": "password",
+            **self.creds(),
+            **self._identity_body(),
+        }
+        self._call_login(data)
+
+    def refresh_token(self):
+        if self._token and "refresh_token" in self._token:
+            refresh_token = self._token["refresh_token"]
+        elif self.request.user.refresh_token:
+            refresh_token = self.request.user.refresh_token
+        else:
+            return
+
+        data = {
+            "grant_type": "refresh_token",
+            "refresh_token": refresh_token,
+            **self._identity_body(),
+        }
+
+        self._call_login(data)
+
+    def get_token(self):
+        if self.expired:
+            if not self.refresh_token():
+                self._login()
+        return self._token
+
+    def set_token(self, token):
+        token["expires_at"] = self._calc_expires_at(token["expires_in"])
+        self._token = token
+        self.request.session["abc_token"] = token
+        if hasattr(self.request.user, "refresh_token"):
+            self.request.user.refresh_token = token.get("refresh_token")
+            self.request.user.save()
 
 
 class FileTokenStorage(TokenStorage):
@@ -73,14 +146,10 @@ class FileTokenStorage(TokenStorage):
         if os.path.exists(self.path):
             try:
                 with open(self.path, "r") as f:
-                    data = json.load(f)
-                    self._token = data.get("access_token")
-                    self._refresh = data.get("refresh_token")
+                    self._token = json.load(f)
             except Exception as e:
                 print(f"Error reading token file: {e}")
-        if self.expired:
-            if not self.refresh_token():
-                self._login()
+        self.get_token()
 
     def _save_token(self):
         try:
@@ -113,7 +182,7 @@ class FileTokenStorage(TokenStorage):
             resp = r.json()
             self.set_token(resp)
         else:
-            raise Exception("ABConnect Login failed")
+            raise LoginFailedError().no_traceback()
 
     def refresh_token(self):
         if not self._token or "refresh_token" not in self._token:
@@ -130,30 +199,14 @@ class FileTokenStorage(TokenStorage):
             resp = r.json()
             self.set_token(resp)
             return True
-        return False
 
     def get_token(self):
         if self.expired:
             if not self.refresh_token():
                 self._login()
-
-        if not self.expired:
-            return self._token
-
-        raise Exception(
-            "Unable to retrieve a valid token. Login and refresh both failed."
-        )
+        return self._token
 
     def set_token(self, token):
         token["expires_at"] = self._calc_expires_at(token["expires_in"])
         self._token = token
         self._save_token()
-
-    @property
-    def expired(self) -> bool:
-        if not self._token:
-            return True
-        expires_at = self._token.get("expires_at")
-        if not expires_at:
-            return True
-        return time.time() >= expires_at

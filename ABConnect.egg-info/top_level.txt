@@ -1,3 +1,0 @@
-ABConnect
-dist
-tests
