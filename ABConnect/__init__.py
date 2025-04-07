@@ -5,5 +5,5 @@ from .api import ABConnectAPI
 
 __all__ = ["FileLoader", "APIRequestBuilder", "Quoter", "ABConnectAPI"]
 
-__version__ = "0.1.5"
-VERSION = "0.1.5"
+__version__ = "0.1.6"
+VERSION = "0.1.6"

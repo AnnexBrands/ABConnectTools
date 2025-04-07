@@ -22,3 +22,13 @@ class CompaniesEndpoint(BaseEndpoint):
             raise ABConnectError(f"Company code {CompanyCode} not found.")
 
         return self._r.call("GET", f"companies/{companyid}/details")
+
+    def get_id(self, compnayid: str) -> dict:
+        """
+        Call the ABConnect get company endpoint by company id.
+
+
+        Args:
+            CompanyId (UUID): The company id to retrieve user information for.
+        """
+        return self._r.call("GET", f"companies/{compnayid}/details")

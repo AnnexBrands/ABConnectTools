@@ -16,9 +16,7 @@ from .http import RequestHandler
 
 class ABConnectAPI:
     def __init__(self, request=None):
-        token_storage = (
-            SessionTokenStorage(request) if request is None else FileTokenStorage()
-        )
+        token_storage = SessionTokenStorage(request) if request else FileTokenStorage()
 
         BaseEndpoint.set_request_handler(RequestHandler(token_storage))
 
