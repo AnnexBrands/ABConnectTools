@@ -5,8 +5,8 @@ import requests
 import time
 from abc import ABC, abstractmethod
 from ABConnect.exceptions import LoginFailedError
+from ABConnect.config import Config, get_config
 from appdirs import user_cache_dir
-from dotenv import dotenv_values
 
 # Set up logging
 logging.basicConfig(
@@ -14,11 +14,11 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-env = dotenv_values(".env")
-
 
 class TokenStorage(ABC):
-    identity_url = "https://login.abconnect.co/connect/token"
+    @property
+    def identity_url(self):
+        return Config.get_identity_url()
 
     def _calc_expires_at(self, expires_in: int, buffer: int = 300) -> float:
         return time.time() + expires_in - buffer
@@ -78,8 +78,8 @@ class SessionTokenStorage(TokenStorage):
         return {
             "rememberMe": True,
             "scope": "offline_access",
-            "client_id": os.getenv("ABC_CLIENT_ID"),
-            "client_secret": os.getenv("ABC_CLIENT_SECRET"),
+            "client_id": get_config("ABC_CLIENT_ID"),
+            "client_secret": get_config("ABC_CLIENT_SECRET"),
         }
 
     def _call_login(self, data):
@@ -159,16 +159,16 @@ class FileTokenStorage(TokenStorage):
             print(f"Error writing token file: {e}")
 
     def _get_creds(self):
-        username = os.getenv("ABCONNECT_USERNAME")
-        password = os.getenv("ABCONNECT_PASSWORD")
+        username = get_config("ABCONNECT_USERNAME")
+        password = get_config("ABCONNECT_PASSWORD")
         return {"username": username, "password": password}
 
     def _identity_body(self):
         return {
             "rememberMe": True,
             "scope": "offline_access",
-            "client_id": os.getenv("ABC_CLIENT_ID"),
-            "client_secret": os.getenv("ABC_CLIENT_SECRET"),
+            "client_id": get_config("ABC_CLIENT_ID"),
+            "client_secret": get_config("ABC_CLIENT_SECRET"),
         }
 
     def _login(self):

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ABConnect"
-version = "0.1.7"
+version = "0.1.8"
 description = "A set of tools for connecting and processing data for Annex Brands, featuring API pack and ship quoting."
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -28,6 +28,7 @@ dependencies = [
     "beautifulsoup4",
     "openpyxl",
     "pandas",
+    "pydantic>=2.0",
     "python-dotenv",
     "requests"
 ]

@@ -13,13 +13,17 @@ Initialize the API client and authenticate:
 
 .. code-block:: python
 
-   from ABConnect.api import APIClient
+   from ABConnect.api import ABConnectAPI
    
-   # Initialize client
-   client = APIClient(env='staging')  # or 'production'
+   # Initialize client (v0.1.8+ automatically includes all 223+ endpoints)
+   client = ABConnectAPI(env='staging')  # or 'production'
    
-   # Authenticate
-   client.auth.login(username='your_username', password='your_password')
+   # Authentication is handled automatically using environment variables
+   # Set these in your .env file:
+   # ABCONNECT_USERNAME=your_username
+   # ABCONNECT_PASSWORD=your_password
+   # ABC_CLIENT_ID=your_client_id
+   # ABC_CLIENT_SECRET=your_client_secret
    
    # Get user information
    user_info = client.users.me()
@@ -55,6 +59,63 @@ Working with Jobs
        recalculatePrice=True,
        applyRebate=False
    )
+
+Generic Endpoints (NEW in v0.1.8)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Access any of the 223+ API endpoints automatically:
+
+.. code-block:: python
+
+   # Standard REST operations work on any endpoint
+   companies = client.companies.list(page=1, per_page=50)
+   company = client.companies.get('company-id')
+   new_company = client.companies.create({'name': 'New Company'})
+   updated = client.companies.update('company-id', {'name': 'Updated'})
+   
+   # Access endpoints not manually implemented
+   # These are discovered from the OpenAPI specification
+   validation = client.address.is_valid(
+       Line1='123 Main St',
+       City='New York',
+       State='NY',
+       Zip='10001'
+   )
+   
+   # Use raw method for custom endpoints
+   result = client.companies.raw('GET', '/search', params={'q': 'test'})
+
+Query Builder (NEW in v0.1.8)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Build complex queries with the fluent interface:
+
+.. code-block:: python
+
+   # Filter, sort, and paginate
+   results = client.companies.query() \
+       .filter(type='Customer', active=True) \
+       .sort('name', 'desc') \
+       .page(2, per_page=25) \
+       .execute()
+   
+   # Search with field selection
+   contacts = client.contacts.query() \
+       .search('john') \
+       .select('id', 'firstName', 'lastName', 'email') \
+       .limit(10) \
+       .execute()
+   
+   # Complex filtering
+   jobs = client.jobs.query() \
+       .where('created', 'gte', '2024-01-01') \
+       .where('status', 'in', ['active', 'pending']) \
+       .expand('items', 'tasks') \
+       .execute()
+   
+   # Iterate through all results (automatic pagination)
+   for company in client.companies.query().filter(type='Customer'):
+       print(company['name'])
 
 Using the Builder
 -----------------

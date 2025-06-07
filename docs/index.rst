@@ -29,6 +29,9 @@ ABConnect provides a comprehensive set of tools for interacting with the Annex B
 Key Features
 ------------
 
+* **NEW in v0.1.8**: Automatic access to all 223+ API endpoints via generic endpoint system
+* **NEW in v0.1.8**: Fluent query builder for complex API queries
+* **NEW in v0.1.8**: Pydantic models for type-safe API responses
 * Template-based request construction
 * Flexible authentication with token storage
 * Support for both staging and production environments

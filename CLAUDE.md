@@ -2,13 +2,34 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Virtual Environment
+
+**IMPORTANT**: Always activate the virtual environment before running any Python or pip commands:
+```bash
+source .venv/bin/activate
+```
+
+All Python and pip commands should be run within the activated virtual environment to ensure correct dependencies and isolation.
+
 ## Development Commands
 
 ### Testing
 ```bash
-pytest                          # Run all tests
+pytest                          # Run all tests (uses .env.staging automatically)
 pytest tests/test_api.py        # Run specific test file
 python -m pytest tests/        # Alternative test runner
+```
+
+### Environment Configuration
+Tests automatically use `.env.staging` configuration. To run with production config:
+```bash
+ABC_ENVIRONMENT=production pytest  # Force production environment
+```
+
+Create `.env.staging` from the sample:
+```bash
+cp ABConnect/dotenv.sample .env.staging
+# Edit .env.staging with staging credentials
 ```
 
 ### Building and Publishing

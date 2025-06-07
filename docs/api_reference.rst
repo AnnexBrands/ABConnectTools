@@ -33,6 +33,43 @@ API Client
    :undoc-members:
    :show-inheritance:
 
+Generic Endpoints (NEW in v0.1.8)
+---------------------------------
+
+.. autoclass:: ABConnect.api.generic.GenericEndpoint
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Query Builder (NEW in v0.1.8)
+-----------------------------
+
+.. autoclass:: ABConnect.api.query.QueryBuilder
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Swagger Parser (NEW in v0.1.8)
+------------------------------
+
+.. autoclass:: ABConnect.api.swagger.SwaggerParser
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. autoclass:: ABConnect.api.swagger.EndpointDefinition
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Response Models (NEW in v0.1.8)
+-------------------------------
+
+.. automodule:: ABConnect.api.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Endpoints
 ---------
 
