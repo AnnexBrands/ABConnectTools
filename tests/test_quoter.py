@@ -36,7 +36,7 @@ class TestQuoter(unittest.TestCase):
             }
         }
 
-    @patch("ABConnect.quoter.requests.post")
+    @patch("ABConnect.Quoter.requests.post")
     def test_quick_quote_response(self, mock_post):
         # Setup a successful quick quote response.
         mock_response = MagicMock()
@@ -63,7 +63,7 @@ class TestQuoter(unittest.TestCase):
         self.assertIsNone(parsed["jobid"])
         self.assertIsNone(parsed["bookingkey"])
 
-    @patch("ABConnect.quoter.requests.post")
+    @patch("ABConnect.Quoter.requests.post")
     def test_quote_request_response(self, mock_post):
         # Setup a successful quote request response.
         mock_response = MagicMock()

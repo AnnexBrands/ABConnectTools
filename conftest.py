@@ -32,6 +32,25 @@ def staging_config():
     return Config()
 
 
+@pytest.fixture(scope='function')
+def api_client():
+    """Provide a fresh API client for each test."""
+    from ABConnect import ABConnectAPI
+    return ABConnectAPI()
+
+
+@pytest.fixture(scope='session')
+def test_config():
+    """Provide test configuration values."""
+    return {
+        'username': Config.get('ABCONNECT_USERNAME'),
+        'password': Config.get('ABCONNECT_PASSWORD'),
+        'client_id': Config.get('ABC_CLIENT_ID'),
+        'client_secret': Config.get('ABC_CLIENT_SECRET'),
+        'environment': Config.get_env(),
+    }
+
+
 @pytest.fixture
 def mock_api_response():
     """Provide a mock API response for testing."""

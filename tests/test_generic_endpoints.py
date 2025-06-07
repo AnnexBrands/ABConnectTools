@@ -364,11 +364,11 @@ class TestEnvironmentConfiguration:
         assert 'staging' in Config.get_api_base_url()
         assert 'staging' in Config.get_identity_url()
     
-    def test_staging_credentials_loaded(self, test_credentials):
+    def test_staging_credentials_loaded(self, test_config):
         """Test that staging credentials are loaded."""
         # Verify credentials are from staging env
-        assert test_credentials['username'] == 'staging_user'
-        assert test_credentials['client_id'] == 'staging_app'
+        assert test_config['username'] == 'training'
+        assert test_config['client_id'] == 'toolsApp'
     
     def test_api_client_with_env_parameter(self):
         """Test API client respects env parameter."""

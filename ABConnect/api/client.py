@@ -56,8 +56,10 @@ class ABConnectAPI:
         if env:
             # Temporarily set the environment
             os.environ['ABC_ENVIRONMENT'] = env
-            Config._loaded = False  # Force config reload
-            Config.load()  # Reload with new environment
+            # If already loaded from a staging env file, don't reload from default
+            if not (Config._loaded and '.staging' in Config._env_file):
+                Config._loaded = False  # Force config reload
+                Config.load()  # Reload with new environment
         
         # Set up token storage
         token_storage = SessionTokenStorage(request) if request else FileTokenStorage()
