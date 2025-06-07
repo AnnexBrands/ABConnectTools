@@ -1,0 +1,12 @@
+# Sphinx build outputs
+_build/
+_autosummary/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -15,7 +15,8 @@ class TasksEndpoint(BaseEndpoint):
         "onSiteTimeLog": {},
         "completedDate": None,
     }  # 2/3 PU and 9 DE
-    new_simple_task = {"taskCode": "PK", "timeLog": {}, "workTimeLogs": []}  # 4/5 PK
+    new_pack_task = {"taskCode": "PK", "timeLog": {}, "workTimeLogs": []}  # 4/5 PK
+    new_store_task = {"taskCode": "ST", "timeLog": {}, "workTimeLogs": []}  # 6 ST
     new_carrier_task = {
         "taskCode": "CP",
         "scheduledDate": None,
