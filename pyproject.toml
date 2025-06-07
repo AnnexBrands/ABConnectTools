@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ABConnect"
-version = "0.1.6"
+version = "0.1.7"
 description = "A set of tools for connecting and processing data for Annex Brands, featuring API pack and ship quoting."
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -40,6 +40,7 @@ ABConnect = ["base/*.json"]
 
 [project.optional-dependencies]
 dev = ["pytest", "build", "twine"]
+docs = ["sphinx>=5.0", "sphinx-rtd-theme>=1.0", "sphinx-autodoc-typehints>=1.19", "myst-parser>=0.18"]
 
 [tool.pytest.ini_options]
 pythonpath = "ABConnect"
