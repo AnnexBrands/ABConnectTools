@@ -59,14 +59,14 @@ Using curl:
 
    curl -X GET \
      -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/truck'
+     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/truck'
 
 Using AB CLI:
 
 .. code-block:: bash
 
    ab api raw get /api/company/{companyId}/truck \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
 
 **Sample Response:**
 
@@ -110,14 +110,14 @@ Using curl:
      -d '{
          "example": "data"
      }' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/truck'
+     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/truck'
 
 Using AB CLI:
 
 .. code-block:: bash
 
    ab api raw post /api/company/{companyId}/truck \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
 
 **Sample Response:**
 
@@ -165,14 +165,14 @@ Using curl:
      -d '{
          "example": "data"
      }' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/truck/789e0123-e89b-12d3-a456-426614174002'
+     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/truck/789e0123-e89b-12d3-a456-426614174002'
 
 Using AB CLI:
 
 .. code-block:: bash
 
    ab api raw put /api/company/{companyId}/truck/{truckId} \
-       companyId=123e4567-e89b-12d3-a456-426614174000 \
+       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c \
        truckId=789e0123-e89b-12d3-a456-426614174002
 
 **Sample Response:**
@@ -214,14 +214,14 @@ Using curl:
 
    curl -X DELETE \
      -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/truck/789e0123-e89b-12d3-a456-426614174002'
+     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/truck/789e0123-e89b-12d3-a456-426614174002'
 
 Using AB CLI:
 
 .. code-block:: bash
 
    ab api raw delete /api/company/{companyId}/truck/{truckId} \
-       companyId=123e4567-e89b-12d3-a456-426614174000 \
+       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c \
        truckId=789e0123-e89b-12d3-a456-426614174002
 
 **Sample Response:**

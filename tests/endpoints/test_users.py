@@ -3,27 +3,31 @@
 Documentation: https://abconnecttools.readthedocs.io/en/latest/api/users.html
 """
 
-import unittest
 from unittest.mock import patch, MagicMock
-from ABConnect import ABConnectAPI
+from . import BaseEndpointTest
 from ABConnect.exceptions import ABConnectError
 
 
-class TestUsersAPI(unittest.TestCase):
+class TestUsersEndpoints(BaseEndpointTest):
     """Test cases for Users endpoints."""
+    
+    tag_name = "Users"
+    __test__ = True
 
     def setUp(self):
         """Set up test fixtures."""
-        self.api = ABConnectAPI()
+        super().setUp()
         # Mock the raw API calls to avoid actual API requests
         self.mock_response = MagicMock()
 
-    @patch("ABConnect.api.http.RequestHandler.call")
-    def test_endpoint_availability(self, mock_call):
+    def test_endpoint_availability(self):
         """Test that endpoints are available."""
         # This is a basic test to ensure the API client initializes
         self.assertIsNotNone(self.api)
         self.assertTrue(hasattr(self.api, "raw"))
+        
+        # Test specific endpoints discovery
+        self.test_endpoint_discovery()
 
 
     def test_post_apiuserslist(self):

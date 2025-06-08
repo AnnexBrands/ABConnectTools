@@ -137,12 +137,230 @@ class Contact(ABConnectBaseModel):
     isActive: bool = True
 
 
+class CompanyBasic(ABConnectBaseModel):
+    """Basic company model returned by /api/companies/{id}."""
+
+    code: Optional[str] = None
+    name: Optional[str] = None
+    parentCompanyId: Optional[str] = None
+
+
+class AddressCoordinates(BaseModel):
+    """Coordinate model for addresses."""
+    
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+
+
+class MainAddress(BaseModel):
+    """Main address model with extended fields."""
+    
+    id: Optional[int] = None
+    isValid: Optional[bool] = None
+    dontValidate: Optional[bool] = None
+    propertyType: Optional[str] = None
+    address1Value: Optional[str] = None
+    address2Value: Optional[str] = None
+    countryName: Optional[str] = None
+    countryCode: Optional[str] = None
+    countryId: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    fullCityLine: Optional[str] = None
+    coordinates: Optional[AddressCoordinates] = None
+    address1: Optional[str] = None
+    address2: Optional[str] = None
+    city: Optional[str] = None
+    state: Optional[str] = None
+    zipCode: Optional[str] = None
+
+
+class AddressData(BaseModel):
+    """Address data model for company details."""
+    
+    company: Optional[str] = None
+    firstLastName: Optional[str] = None
+    addressLine1: Optional[str] = None
+    addressLine2: Optional[str] = None
+    contactBOLNote: Optional[str] = None
+    city: Optional[str] = None
+    state: Optional[str] = None
+    stateCode: Optional[str] = None
+    zipCode: Optional[str] = None
+    countryName: Optional[str] = None
+    propertyType: Optional[str] = None
+    fullCityLine: Optional[str] = None
+    phone: Optional[str] = None
+    cellPhone: Optional[str] = None
+    fax: Optional[str] = None
+    email: Optional[str] = None
+    addressLine2Visible: Optional[bool] = None
+    companyVisible: Optional[bool] = None
+    countryNameVisible: Optional[bool] = None
+    phoneVisible: Optional[bool] = None
+    emailVisible: Optional[bool] = None
+    fullAddressLine: Optional[str] = None
+    fullAddress: Optional[str] = None
+    countryId: Optional[str] = None
+
+
+class OverridableValue(BaseModel):
+    """Model for overridable values in company details."""
+    
+    defaultValue: Optional[str] = None
+    overrideValue: Optional[str] = None
+    forceEmpty: Optional[bool] = None
+    value: Optional[str] = None
+
+
+class OverridableAddressData(BaseModel):
+    """Overridable address data model."""
+    
+    company: Optional[OverridableValue] = None
+    firstLastName: Optional[OverridableValue] = None
+    addressLine1: Optional[OverridableValue] = None
+    addressLine2: Optional[OverridableValue] = None
+    city: Optional[OverridableValue] = None
+    state: Optional[OverridableValue] = None
+    zipCode: Optional[OverridableValue] = None
+    phone: Optional[OverridableValue] = None
+    email: Optional[OverridableValue] = None
+    fullAddressLine: Optional[str] = None
+    fullAddress: Optional[OverridableValue] = None
+    fullCityLine: Optional[OverridableValue] = None
+
+
+class CompanyInfo(BaseModel):
+    """Company info model for details response."""
+    
+    companyId: Optional[str] = None
+    companyTypeId: Optional[str] = None
+    companyDisplayId: Optional[str] = None
+    companyName: Optional[str] = None
+    companyCode: Optional[str] = None
+    companyEmail: Optional[str] = None
+    companyPhone: Optional[str] = None
+    thumbnailLogo: Optional[str] = None
+    companyLogo: Optional[str] = None
+    mapsMarkerImage: Optional[str] = None
+    mainAddress: Optional[MainAddress] = None
+    isThirdParty: Optional[bool] = None
+    isActive: Optional[bool] = None
+    isHidden: Optional[bool] = None
+
+
+class CompanyDetails(ABConnectBaseModel):
+    """Detailed company model returned by /api/companies/{companyId}/details."""
+    
+    userId: Optional[str] = None
+    companyName: Optional[str] = None
+    contactName: Optional[str] = None
+    contactPhone: Optional[str] = None
+    companyType: Optional[str] = None
+    parcelOnly: Optional[bool] = None
+    isThirdParty: Optional[bool] = None
+    companyCode: Optional[str] = None
+    parentCompanyName: Optional[str] = None
+    companyTypeID: Optional[str] = None
+    parentCompanyID: Optional[str] = None
+    companyPhone: Optional[str] = None
+    companyEmail: Optional[str] = None
+    companyFax: Optional[str] = None
+    companyWebSite: Optional[str] = None
+    industryType: Optional[str] = None
+    industryTypeName: Optional[str] = None
+    taxId: Optional[str] = None
+    customerCell: Optional[str] = None
+    companyCell: Optional[str] = None
+    pzCode: Optional[str] = None
+    referralCode: Optional[str] = None
+    companyLogo: Optional[str] = None
+    letterHeadLogo: Optional[str] = None
+    thumbnailLogo: Optional[str] = None
+    mapsMarkerImage: Optional[str] = None
+    colorTheme: Optional[str] = None
+    franchiseeMaturityType: Optional[str] = None
+    pricingToUse: Optional[str] = None
+    totalRows: Optional[int] = None
+    address: Optional[str] = None
+    companyInsurancePricing: Optional[float] = None
+    companyServicePricing: Optional[float] = None
+    companyTaxPricing: Optional[float] = None
+    wholeSaleMarkup: Optional[float] = None
+    baseMarkup: Optional[float] = None
+    mediumMarkup: Optional[float] = None
+    highMarkup: Optional[float] = None
+    miles: Optional[float] = None
+    insuranceType: Optional[str] = None
+    isGlobal: Optional[bool] = None
+    isQbUser: Optional[bool] = None
+    skipIntacct: Optional[bool] = None
+    isAccess: Optional[bool] = None
+    companyDisplayID: Optional[str] = None
+    depth: Optional[int] = None
+    franchiseeName: Optional[str] = None
+    isPrefered: Optional[bool] = None
+    createdUser: Optional[str] = None
+    mappingLocations: Optional[str] = None
+    locationCount: Optional[int] = None
+    baseParent: Optional[str] = None
+    copyMaterialFrom: Optional[str] = None
+    isHide: Optional[bool] = None
+    isDontUse: Optional[bool] = None
+    mainAddress: Optional[MainAddress] = None
+    accountManagerFranchiseeId: Optional[str] = None
+    accountManagerFranchiseeName: Optional[str] = None
+    carrierAccountsSourceCompanyId: Optional[str] = None
+    carrierAccountsSourceCompanyName: Optional[str] = None
+    autoPriceAPIEnableEmails: Optional[bool] = None
+    autoPriceAPIEnableSMSs: Optional[bool] = None
+    commercialCapabilities: Optional[int] = None
+    primaryContactId: Optional[int] = None
+    payerContactId: Optional[int] = None
+    payerContactName: Optional[str] = None
+    totalJobs: Optional[int] = None
+    totalJobsRevenue: Optional[float] = None
+    totalSales: Optional[int] = None
+    totalSalesRevenue: Optional[float] = None
+    addressData: Optional[AddressData] = None
+    overridableAddressData: Optional[OverridableAddressData] = None
+    companyInfo: Optional[CompanyInfo] = None
+    companyID: Optional[str] = None
+    addressID: Optional[int] = None
+    address1: Optional[str] = None
+    address2: Optional[str] = None
+    city: Optional[str] = None
+    state: Optional[str] = None
+    stateCode: Optional[str] = None
+    countryName: Optional[str] = None
+    countryCode: Optional[str] = None
+    countryID: Optional[str] = None
+    zipCode: Optional[str] = None
+    isActive: Optional[bool] = None
+    createdDate: Optional[datetime] = None
+    createdBy: Optional[str] = None
+    modifiedDate: Optional[datetime] = None
+    modifiedBy: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    result: Optional[str] = None
+    addressMappingID: Optional[int] = None
+    contactID: Optional[int] = None
+    userID: Optional[str] = None
+    primaryCustomerName: Optional[str] = None
+    contactInfo: Optional[str] = None
+
+
 class Company(ABConnectBaseModel):
-    """Company model."""
+    """Company model - comprehensive version."""
 
     code: Optional[str] = None
     name: Optional[str] = None
     type: Optional[CompanyType] = None
+    parentCompanyId: Optional[str] = None
+    parentCompanyName: Optional[str] = None
+    companyTypeId: Optional[str] = None
+    companyDisplayId: Optional[str] = None
     taxId: Optional[str] = None
     email: Optional[str] = None
     phone: Optional[str] = None
@@ -150,7 +368,196 @@ class Company(ABConnectBaseModel):
     addresses: List[Address] = Field(default_factory=list)
     contacts: List[Contact] = Field(default_factory=list)
     isActive: bool = True
+    isHidden: bool = False
+    isGlobal: bool = False
     metadata: Dict[str, Any] = Field(default_factory=dict)
+
+
+# Company Full Details Models
+
+class FileUpload(BaseModel):
+    """File upload model for logos."""
+    
+    filePath: Optional[str] = None
+    newFile: Optional[str] = None
+
+
+class CompanyDetailsSection(BaseModel):
+    """Details section of company full details."""
+    
+    displayId: Optional[str] = None
+    name: Optional[str] = None
+    taxId: Optional[str] = None
+    code: Optional[str] = None
+    parentId: Optional[str] = None
+    franchiseeId: Optional[str] = None
+    companyTypeId: Optional[str] = None
+    industryTypeId: Optional[str] = None
+    cellPhone: Optional[str] = None
+    phone: Optional[str] = None
+    fax: Optional[str] = None
+    email: Optional[str] = None
+    website: Optional[str] = None
+    isActive: Optional[bool] = None
+    isHidden: Optional[bool] = None
+    isGlobal: Optional[bool] = None
+    isNotUsed: Optional[bool] = None
+    isPreferred: Optional[bool] = None
+    payerContactId: Optional[int] = None
+    payerContactName: Optional[str] = None
+
+
+class CompanyPreferences(BaseModel):
+    """Company preferences model."""
+    
+    companyHeaderLogo: Optional[FileUpload] = None
+    thumbnailLogo: Optional[FileUpload] = None
+    letterHeadLogo: Optional[FileUpload] = None
+    mapsMarker: Optional[FileUpload] = None
+    isQbUser: Optional[bool] = None
+    skipIntacct: Optional[bool] = None
+    pricingToUse: Optional[str] = None
+    pzCode: Optional[str] = None
+    insuranceTypeId: Optional[str] = None
+    franchiseeMaturityTypeId: Optional[str] = None
+    isCompanyUsedAsCarrierSource: Optional[bool] = None
+    carrierAccountsSourceCompanyId: Optional[str] = None
+    carrierAccountsSourceCompanyName: Optional[str] = None
+    accountManagerFranchiseeId: Optional[str] = None
+    accountManagerFranchiseeName: Optional[str] = None
+    autoPriceAPIEnableEmails: Optional[bool] = None
+    autoPriceAPIEnableSMSs: Optional[bool] = None
+    copyMaterials: Optional[int] = None
+
+
+class TransportationCharge(BaseModel):
+    """Transportation charge model."""
+    
+    baseTripFee: Optional[float] = None
+    baseTripMile: Optional[float] = None
+    extraFee: Optional[float] = None
+    fuelSurcharge: Optional[float] = None
+
+
+class MarkupRates(BaseModel):
+    """Markup rates model."""
+    
+    wholeSale: Optional[float] = None
+    base: Optional[float] = None
+    medium: Optional[float] = None
+    high: Optional[float] = None
+
+
+class LaborCharge(BaseModel):
+    """Labor charge model."""
+    
+    cost: Optional[float] = None
+    charge: Optional[float] = None
+
+
+class AccesorialCharge(BaseModel):
+    """Accesorial charge model."""
+    
+    stairs: Optional[float] = None
+    elevator: Optional[float] = None
+    longCarry: Optional[float] = None
+    certificateOfInsurance: Optional[float] = None
+    deInstallation: Optional[float] = None
+    disassembly: Optional[float] = None
+    timeSpecific: Optional[float] = None
+    saturday: Optional[float] = None
+
+
+class Royalties(BaseModel):
+    """Royalties model."""
+    
+    franchisee: Optional[float] = None
+    national: Optional[float] = None
+    local: Optional[float] = None
+
+
+class PaymentSettings(BaseModel):
+    """Payment settings model."""
+    
+    creditCardSurcharge: Optional[float] = None
+    stripeConnected: Optional[bool] = None
+
+
+class CompanyPricing(BaseModel):
+    """Company pricing model."""
+    
+    transportationCharge: Optional[TransportationCharge] = None
+    transportationMarkups: Optional[MarkupRates] = None
+    carrierFreightMarkups: Optional[MarkupRates] = None
+    carrierOtherMarkups: Optional[MarkupRates] = None
+    materialMarkups: Optional[MarkupRates] = None
+    laborCharge: Optional[LaborCharge] = None
+    accesorialCharge: Optional[AccesorialCharge] = None
+    royalties: Optional[Royalties] = None
+    paymentSettings: Optional[PaymentSettings] = None
+
+
+class InsuranceOption(BaseModel):
+    """Insurance option model."""
+    
+    insuranceSlabId: Optional[str] = None
+    option: Optional[int] = None
+    sellPrice: Optional[float] = None
+
+
+class CompanyInsurance(BaseModel):
+    """Company insurance model."""
+    
+    isp: Optional[InsuranceOption] = None
+    nsp: Optional[InsuranceOption] = None
+    ltl: Optional[InsuranceOption] = None
+
+
+class FinalMileTariffItem(BaseModel):
+    """Final mile tariff item model."""
+    
+    groupId: Optional[str] = None
+    from_: Optional[float] = Field(None, alias="from")
+    to: Optional[float] = None
+    toCurb: Optional[float] = None
+    intoGarage: Optional[float] = None
+    roomOfChoice: Optional[float] = None
+    whiteGlove: Optional[float] = None
+    deleteGroup: Optional[bool] = None
+
+
+class TaxSettings(BaseModel):
+    """Tax settings model."""
+    
+    isTaxable: Optional[bool] = None
+    taxPercent: Optional[float] = None
+
+
+class CompanyTaxes(BaseModel):
+    """Company taxes model."""
+    
+    deliveryService: Optional[TaxSettings] = None
+    insurance: Optional[TaxSettings] = None
+    pickupService: Optional[TaxSettings] = None
+    services: Optional[TaxSettings] = None
+    transportationService: Optional[TaxSettings] = None
+    packagingMaterial: Optional[TaxSettings] = None
+    packagingLabor: Optional[TaxSettings] = None
+
+
+class CompanyFullDetails(ABConnectBaseModel):
+    """Full company details returned by /api/companies/{companyId}/fulldetails."""
+    
+    details: Optional[CompanyDetailsSection] = None
+    preferences: Optional[CompanyPreferences] = None
+    capabilities: Optional[int] = None
+    address: Optional[MainAddress] = None
+    accountInformation: Optional[Dict[str, Any]] = None  # Complex nested structure
+    pricing: Optional[CompanyPricing] = None
+    insurance: Optional[CompanyInsurance] = None
+    finalMileTariff: Optional[List[FinalMileTariffItem]] = None
+    taxes: Optional[CompanyTaxes] = None
+    readOnlyAccess: Optional[bool] = None
 
 
 class Item(ABConnectBaseModel):

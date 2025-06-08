@@ -98,14 +98,14 @@ Using curl:
 
    curl -X GET \
      -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/admin/globalsettings/companyhierarchy/company/123e4567-e89b-12d3-a456-426614174000'
+     'https://api.abconnect.co/api/admin/globalsettings/companyhierarchy/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c'
 
 Using AB CLI:
 
 .. code-block:: bash
 
    ab api raw get /api/admin/globalsettings/companyhierarchy/company/{companyId} \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
 
 **Sample Response:**
 

@@ -50,7 +50,8 @@ def generate_realistic_example_value(param_name, param_type='string'):
         if 'display' in param_lower or 'job' in param_lower:
             return 'JOB-2024-001'
         elif 'company' in param_lower:
-            return '123e4567-e89b-12d3-a456-426614174000'
+            # Use the actual test company ID
+            return 'ed282b80-54fe-4f42-bf1b-69103ce1f76c'
         elif 'contact' in param_lower:
             return '456e7890-e89b-12d3-a456-426614174001'
         else:
@@ -59,7 +60,8 @@ def generate_realistic_example_value(param_name, param_type='string'):
     # Code parameters
     elif 'code' in param_lower:
         if 'company' in param_lower:
-            return 'ABC123'
+            # Use the actual test company code
+            return 'TRAINING'
         elif 'country' in param_lower:
             return 'US'
         else:
@@ -200,61 +202,87 @@ def generate_sample_request_body(schema):
     return sample if sample else {"example": "data"}
 
 
+def load_response_examples():
+    """Load response examples from the response_examples.json file."""
+    response_examples_path = Path(__file__).parent / "api" / "response_examples.json"
+    if response_examples_path.exists():
+        with open(response_examples_path, 'r') as f:
+            return json.load(f)
+    return {}
+
+
+# Global variable to store response examples
+RESPONSE_EXAMPLES = None
+
+
+def get_endpoint_key(path, method):
+    """Generate a key for looking up response examples."""
+    # Normalize path for lookup
+    # Remove path parameters
+    normalized_path = re.sub(r'\{[^}]+\}', '{}', path)
+    
+    # Common endpoint patterns
+    if '/companies/{}/details' in normalized_path:
+        return 'companies.get_company_details'
+    elif '/companies/{}/fulldetails' in normalized_path and method == 'GET':
+        return 'companies.get_company_fulldetails'
+    elif '/companies/{}' in normalized_path and method == 'GET':
+        return 'companies.get_company_by_id'
+    elif '/companies/search' in normalized_path:
+        return 'companies.get_companies_search'
+    elif '/companies/availableByCurrentUser' in normalized_path:
+        return 'companies.get_companies_availableByCurrentUser'
+    
+    # Default key based on path
+    tag = path.split('/')[2] if len(path.split('/')) > 2 else 'generic'
+    operation = path.split('/')[-1].replace('{', '').replace('}', '')
+    return f"{tag}.{method.lower()}_{operation}"
+
+
 def generate_sample_response(endpoint):
-    """Generate a realistic sample response based on endpoint details."""
-    responses = endpoint.get('responses', {})
+    """Generate a sample response using actual API responses when available."""
+    global RESPONSE_EXAMPLES
+    if RESPONSE_EXAMPLES is None:
+        RESPONSE_EXAMPLES = load_response_examples()
+    
     path = endpoint['path']
     method = endpoint['method']
     
+    # Try to find a real response example
+    endpoint_key = get_endpoint_key(path, method)
+    
+    # Check for exact match first
+    for tag, endpoints in RESPONSE_EXAMPLES.items():
+        if tag == 'generic':
+            continue
+        for key, example in endpoints.items():
+            if example.get('endpoint') == path and example.get('method') == method:
+                response = example.get('response', {})
+                return json.dumps(response, indent=2)
+    
+    # Check for pattern match
+    parts = endpoint_key.split('.')
+    if len(parts) == 2:
+        tag, operation = parts
+        if tag in RESPONSE_EXAMPLES and operation in RESPONSE_EXAMPLES[tag]:
+            response = RESPONSE_EXAMPLES[tag][operation].get('response', {})
+            return json.dumps(response, indent=2)
+    
+    # Fallback to generic responses based on endpoint patterns
+    responses = endpoint.get('responses', {})
+    
     # Common response patterns based on endpoint
-    if 'search' in path.lower() or method == 'GET' and path.endswith('s'):
-        # List response
-        return json.dumps({
-            "data": [
-                {
-                    "id": "123e4567-e89b-12d3-a456-426614174000",
-                    "name": "Example Item 1",
-                    "code": "ITEM-001",
-                    "status": "active",
-                    "created": "2024-01-01T00:00:00Z",
-                    "modified": "2024-01-15T12:30:00Z"
-                },
-                {
-                    "id": "456e7890-e89b-12d3-a456-426614174001",
-                    "name": "Example Item 2",
-                    "code": "ITEM-002",
-                    "status": "active",
-                    "created": "2024-01-02T00:00:00Z",
-                    "modified": "2024-01-16T14:45:00Z"
-                }
-            ],
-            "pagination": {
-                "page": 1,
-                "per_page": 20,
-                "total": 2,
-                "total_pages": 1
-            }
-        }, indent=2)
+    if 'search' in path.lower() or (method == 'GET' and path.endswith('s')):
+        # List response - check if we have a generic empty list
+        if 'generic' in RESPONSE_EXAMPLES and 'empty_list' in RESPONSE_EXAMPLES['generic']:
+            return json.dumps(RESPONSE_EXAMPLES['generic']['empty_list'], indent=2)
+        return json.dumps([], indent=2)
     
     elif '{id}' in path or 'details' in path:
-        # Single item response
-        return json.dumps({
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item",
-            "code": "ITEM-001",
-            "description": "This is a detailed example item",
-            "status": "active",
-            "type": "standard",
-            "metadata": {
-                "created_by": "user@example.com",
-                "created_at": "2024-01-01T00:00:00Z",
-                "updated_at": "2024-01-15T12:30:00Z"
-            },
-            "settings": {
-                "notifications": True,
-                "auto_update": False
-            }
-        }, indent=2)
+        # Single item response - check for generic empty object
+        if 'generic' in RESPONSE_EXAMPLES and 'empty_object' in RESPONSE_EXAMPLES['generic']:
+            return json.dumps(RESPONSE_EXAMPLES['generic']['empty_object'], indent=2)
+        return json.dumps({}, indent=2)
     
     elif method == 'POST':
         # Create response

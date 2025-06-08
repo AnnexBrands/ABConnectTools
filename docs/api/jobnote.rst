@@ -179,23 +179,7 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "id": "123e4567-e89b-12d3-a456-426614174000",
-        "name": "Example Item",
-        "code": "ITEM-001",
-        "description": "This is a detailed example item",
-        "status": "active",
-        "type": "standard",
-        "metadata": {
-          "created_by": "user@example.com",
-          "created_at": "2024-01-01T00:00:00Z",
-          "updated_at": "2024-01-15T12:30:00Z"
-        },
-        "settings": {
-          "notifications": true,
-          "auto_update": false
-        }
-      }
+      {}
 
 ----
 
@@ -243,22 +227,6 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "id": "123e4567-e89b-12d3-a456-426614174000",
-        "name": "Example Item",
-        "code": "ITEM-001",
-        "description": "This is a detailed example item",
-        "status": "active",
-        "type": "standard",
-        "metadata": {
-          "created_by": "user@example.com",
-          "created_at": "2024-01-01T00:00:00Z",
-          "updated_at": "2024-01-15T12:30:00Z"
-        },
-        "settings": {
-          "notifications": true,
-          "auto_update": false
-        }
-      }
+      {}
 
 ----

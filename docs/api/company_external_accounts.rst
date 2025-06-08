@@ -56,14 +56,14 @@ Using curl:
 
    curl -X GET \
      -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/accounts/stripe/connecturl'
+     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/accounts/stripe/connecturl'
 
 Using AB CLI:
 
 .. code-block:: bash
 
    ab api raw get /api/company/{companyId}/accounts/stripe/connecturl \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
 
 **Sample Response:**
 
@@ -107,14 +107,14 @@ Using curl:
      -d '{
          "example": "data"
      }' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/accounts/stripe/completeconnection'
+     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/accounts/stripe/completeconnection'
 
 Using AB CLI:
 
 .. code-block:: bash
 
    ab api raw post /api/company/{companyId}/accounts/stripe/completeconnection \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
 
 **Sample Response:**
 
@@ -157,14 +157,14 @@ Using curl:
 
    curl -X DELETE \
      -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/accounts/stripe'
+     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/accounts/stripe'
 
 Using AB CLI:
 
 .. code-block:: bash
 
    ab api raw delete /api/company/{companyId}/accounts/stripe \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
 
 **Sample Response:**
 

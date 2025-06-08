@@ -1,7 +1,7 @@
-Endpoints
-=========
+API Reference
+=============
 
-Complete API endpoints organized by resource type.
+Complete API reference organized by resource type.
 
 .. toctree::
    :maxdepth: 2

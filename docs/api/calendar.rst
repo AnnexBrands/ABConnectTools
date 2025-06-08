@@ -56,14 +56,14 @@ Using curl:
 
    curl -X GET \
      -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/calendar/2024-01-15T12:00:00Z'
+     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/calendar/2024-01-15T12:00:00Z'
 
 Using AB CLI:
 
 .. code-block:: bash
 
    ab api raw get /api/company/{companyId}/calendar/{date} \
-       companyId=123e4567-e89b-12d3-a456-426614174000 \
+       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c \
        date=2024-01-15T12:00:00Z
 
 **Sample Response:**
@@ -105,14 +105,14 @@ Using curl:
 
    curl -X GET \
      -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/calendar/2024-01-15T12:00:00Z/baseinfo'
+     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/calendar/2024-01-15T12:00:00Z/baseinfo'
 
 Using AB CLI:
 
 .. code-block:: bash
 
    ab api raw get /api/company/{companyId}/calendar/{date}/baseinfo \
-       companyId=123e4567-e89b-12d3-a456-426614174000 \
+       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c \
        date=2024-01-15T12:00:00Z
 
 **Sample Response:**
@@ -154,14 +154,14 @@ Using curl:
 
    curl -X GET \
      -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/calendar/2024-01-15T12:00:00Z/startofday'
+     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/calendar/2024-01-15T12:00:00Z/startofday'
 
 Using AB CLI:
 
 .. code-block:: bash
 
    ab api raw get /api/company/{companyId}/calendar/{date}/startofday \
-       companyId=123e4567-e89b-12d3-a456-426614174000 \
+       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c \
        date=2024-01-15T12:00:00Z
 
 **Sample Response:**
@@ -203,14 +203,14 @@ Using curl:
 
    curl -X GET \
      -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/calendar/2024-01-15T12:00:00Z/endofday'
+     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/calendar/2024-01-15T12:00:00Z/endofday'
 
 Using AB CLI:
 
 .. code-block:: bash
 
    ab api raw get /api/company/{companyId}/calendar/{date}/endofday \
-       companyId=123e4567-e89b-12d3-a456-426614174000 \
+       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c \
        date=2024-01-15T12:00:00Z
 
 **Sample Response:**

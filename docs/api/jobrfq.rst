@@ -102,14 +102,14 @@ Using curl:
 
    curl -X GET \
      -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/rfq/statusof/example-value/forcompany/123e4567-e89b-12d3-a456-426614174000'
+     'https://api.abconnect.co/api/job/JOB-2024-001/rfq/statusof/example-value/forcompany/ed282b80-54fe-4f42-bf1b-69103ce1f76c'
 
 Using AB CLI:
 
 .. code-block:: bash
 
    ab api raw get /api/job/{jobDisplayId}/rfq/statusof/{rfqServiceType}/forcompany/{companyId} \
-       companyId=123e4567-e89b-12d3-a456-426614174000 \
+       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c \
        rfqServiceType=example-value \
        jobDisplayId=JOB-2024-001
 
