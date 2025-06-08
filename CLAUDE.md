@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **IMPORTANT**: Always activate the virtual environment before running any Python or pip commands:
 ```bash
-source .venv/bin/activate
+source claude-env/bin/activate
 ```
 
 All Python and pip commands should be run within the activated virtual environment to ensure correct dependencies and isolation.

@@ -20,6 +20,10 @@ from .http import RequestHandler
 from .swagger import SwaggerParser
 from .builder import EndpointBuilder
 from .generic import GenericEndpoint
+from .raw import RawEndpoint
+from .tagged import TaggedResourceBuilder
+from .friendly.companies import CompaniesFriendly
+from .friendly.lookup import LookupFriendly
 
 logger = logging.getLogger(__name__)
 
@@ -46,6 +50,11 @@ class ABConnectAPI:
     def __init__(self, request=None, enable_generic: bool = True, env: Optional[str] = None):
         """Initialize the API client.
         
+        This client provides three layers of API access:
+        1. Raw: Direct endpoint access (api.raw.get('/api/companies/{id}'))
+        2. Tagged: Auto-generated from swagger tags (api.companies.get_details())
+        3. Friendly: Manual convenience methods (api.companies.get_by_code())
+        
         Args:
             request: Optional Django request object for session-based token storage
             enable_generic: Whether to enable automatic endpoint generation from swagger
@@ -68,8 +77,18 @@ class ABConnectAPI:
         self._request_handler = RequestHandler(token_storage)
         BaseEndpoint.set_request_handler(self._request_handler)
         
-        # Initialize manual endpoints
+        # Initialize raw endpoint access
+        self.raw = RawEndpoint(self._request_handler)
+        
+        # Initialize swagger parser
+        self._swagger_parser = SwaggerParser()
+        
+        # Initialize manual endpoints (for backward compatibility)
         self._init_manual_endpoints()
+        
+        # Initialize tagged resources
+        self._tagged_resources: Dict[str, Any] = {}
+        self._friendly_wrappers: Dict[str, Any] = {}
         
         # Initialize generic endpoints if enabled
         self._generic_endpoints: Dict[str, GenericEndpoint] = {}
@@ -79,6 +98,7 @@ class ABConnectAPI:
         if enable_generic:
             try:
                 self._init_generic_endpoints()
+                self._init_tagged_resources()
             except Exception as e:
                 logger.warning(f"Failed to initialize generic endpoints: {e}")
                 logger.info("Manual endpoints are still available")
@@ -122,11 +142,51 @@ class ABConnectAPI:
                 # Make it available as an attribute
                 setattr(self, resource_name, endpoint_instance)
                 
-            logger.info(f"Initialized {len(self._generic_endpoints)} generic endpoints")
+            logger.debug(f"Initialized {len(self._generic_endpoints)} generic endpoints")
             
         except Exception as e:
             logger.error(f"Error initializing generic endpoints: {e}")
             raise
+    
+    def _init_tagged_resources(self):
+        """Initialize tagged resources from swagger tags."""
+        try:
+            # Build tagged resources
+            builder = TaggedResourceBuilder(self._swagger_parser)
+            resource_classes = builder.build()
+            
+            # Create instances
+            for resource_name, resource_class in resource_classes.items():
+                # Create resource instance
+                resource_instance = resource_class(
+                    resource_class._tag_name,
+                    self._request_handler
+                )
+                
+                # Store as tagged resource
+                self._tagged_resources[resource_name] = resource_instance
+                
+                # Make available as attribute if not already taken
+                if not hasattr(self, resource_name):
+                    setattr(self, resource_name, resource_instance)
+                
+                # Add friendly wrapper if available
+                if resource_name == 'companies':
+                    friendly = CompaniesFriendly(resource_instance)
+                    self._friendly_wrappers[resource_name] = friendly
+                    # Override the attribute with friendly wrapper
+                    setattr(self, resource_name, friendly)
+                elif resource_name == 'lookup':
+                    friendly = LookupFriendly(resource_instance)
+                    self._friendly_wrappers[resource_name] = friendly
+                    # Override the attribute with friendly wrapper
+                    setattr(self, resource_name, friendly)
+            
+            logger.debug(f"Initialized {len(self._tagged_resources)} tagged resources")
+            
+        except Exception as e:
+            logger.error(f"Error initializing tagged resources: {e}")
+            # Don't raise - allow fallback to generic endpoints
     
     def __getattr__(self, name: str) -> Any:
         """Allow dynamic access to endpoints not explicitly defined.
@@ -140,6 +200,10 @@ class ABConnectAPI:
         Returns:
             Endpoint instance or raises AttributeError
         """
+        # Check if it's in tagged resources
+        if name in self._tagged_resources:
+            return self._tagged_resources[name]
+            
         # Check if it's in generic endpoints
         if name in self._generic_endpoints:
             return self._generic_endpoints[name]
@@ -187,7 +251,7 @@ class ABConnectAPI:
         """Get list of all available endpoints.
         
         Returns:
-            List of endpoint names (both manual and generic)
+            List of endpoint names (manual, tagged, and generic)
         """
         endpoints = []
         
@@ -195,7 +259,53 @@ class ABConnectAPI:
         manual = ['users', 'companies', 'contacts', 'docs', 'forms', 'items', 'jobs', 'tasks']
         endpoints.extend(manual)
         
+        # Tagged resources
+        endpoints.extend(self._tagged_resources.keys())
+        
         # Generic endpoints
         endpoints.extend(self._generic_endpoints.keys())
         
         return sorted(set(endpoints))
+    
+    def get_endpoint_info(self, endpoint_name: str) -> Dict[str, Any]:
+        """Get detailed information about an endpoint.
+        
+        Args:
+            endpoint_name: Name of the endpoint
+            
+        Returns:
+            Dictionary with endpoint details including available methods
+        """
+        if not hasattr(self, endpoint_name):
+            raise ValueError(f"Endpoint '{endpoint_name}' not found")
+            
+        endpoint = getattr(self, endpoint_name)
+        info = {
+            'name': endpoint_name,
+            'type': 'manual' if endpoint_name in ['users', 'companies', 'contacts', 'docs', 'forms', 'items', 'jobs', 'tasks'] else 'generic',
+            'methods': []
+        }
+        
+        # Get available methods
+        for method in ['get', 'list', 'create', 'update', 'delete', 'query']:
+            if hasattr(endpoint, method):
+                info['methods'].append(method)
+                
+        # Special handling for lookup endpoint
+        if endpoint_name == 'lookup':
+            from ABConnect.api.models import LookupKeys
+            info['lookup_keys'] = [key.value for key in LookupKeys]
+                
+        # Get swagger paths if available
+        if hasattr(self, '_swagger_parser'):
+            paths = []
+            for path, methods in self._swagger_parser.spec.get('paths', {}).items():
+                if endpoint_name in path:
+                    paths.append({
+                        'path': path,
+                        'methods': list(methods.keys())
+                    })
+            if paths:
+                info['paths'] = paths
+                
+        return info

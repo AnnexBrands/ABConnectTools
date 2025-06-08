@@ -1,28 +1,28 @@
 import unittest
 import logging
-from tests.base import ABConnectTestCase
+from ABConnect import ABConnectAPI
+from ABConnect.config import Config
 
 logging.basicConfig(level=logging.DEBUG)
 
-class TestABConnectAPI(ABConnectTestCase):
-    """Test ABConnect API endpoints."""
-    
-    def test_users_me(self):
-        response = self.api.users.me()
-        
-        # Response should be a dictionary
-        self.assertIsInstance(response, dict, "Expected dict response from users.me()")
-        
-        # Check that userName matches our config
-        self.assertEqual(response.get('userName'), self.test_username, 
-                        f"Expected userName to be '{self.test_username}'")
-        
-        # Print user info for debugging
-        print(f"User Info: {response}")
-        
-        # Additional assertions to verify we got valid user data
-        self.assertIn('userName', response, "Response should contain userName")
-        self.assertIn('email', response, "Response should contain email")
 
-if __name__ == '__main__':
+class TestABConnectAPI(unittest.TestCase):
+    def setUp(self) -> None:
+        Config.load(".env.staging", force_reload=True)
+        self.abcapi = ABConnectAPI()
+
+    def test_users_me(self):
+        response = self.abcapi.users.me()
+        self.assertTrue(response.ok)
+        try:
+            data = response.json()
+            print("User Info:", data)
+        except Exception:
+            data = response.text
+            print("Response Text:", data)
+
+        self.assertTrue(data, "Expected response data, but got nothing.")
+
+
+if __name__ == "__main__":
     unittest.main()

@@ -1,5 +1,9 @@
 # ABConnect
 
+[![Documentation Status](https://readthedocs.org/projects/abconnecttools/badge/?version=latest)](https://abconnecttools.readthedocs.io/en/latest/?badge=latest)
+[![PyPI version](https://badge.fury.io/py/ABConnect.svg)](https://badge.fury.io/py/ABConnect)
+[![Python Support](https://img.shields.io/pypi/pyversions/ABConnect.svg)](https://pypi.org/project/ABConnect/)
+
 ABConnect is a Python package that provides a collection of tools for connecting and processing data for Annex Brands. It includes modules for quoting, building, and loading data from various file formats (CSV, JSON, XLSX), with a focus on handling unsupported characters and encoding issues seamlessly.
 
 ## Table of Contents
@@ -32,6 +36,8 @@ You can install ABConnect using pip:
 ```bash
 pip install ABConnect
 ```
+
+For more detailed installation instructions and documentation, visit [https://abconnecttools.readthedocs.io/](https://abconnecttools.readthedocs.io/)
 
 ## Configuration
 
@@ -76,3 +82,34 @@ cp ABConnect/dotenv.sample .env.staging
 ```
 
 Tests will automatically use `.env.staging` when running with pytest.
+
+## Documentation
+
+Full documentation is available at [https://abconnecttools.readthedocs.io/](https://abconnecttools.readthedocs.io/)
+
+## Development
+
+To contribute to ABConnect, clone the repository and install in development mode:
+
+```bash
+git clone https://github.com/AnnexBrands/ABConnectTools.git
+cd ABConnectTools
+pip install -e .[dev]
+```
+
+Run tests with:
+
+```bash
+pytest
+```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Links
+
+- **Documentation**: [https://abconnecttools.readthedocs.io/](https://abconnecttools.readthedocs.io/)
+- **Repository**: [https://github.com/AnnexBrands/ABConnectTools](https://github.com/AnnexBrands/ABConnectTools)
+- **Issue Tracker**: [https://github.com/AnnexBrands/ABConnectTools/issues](https://github.com/AnnexBrands/ABConnectTools/issues)
+- **PyPI**: [https://pypi.org/project/ABConnect/](https://pypi.org/project/ABConnect/)

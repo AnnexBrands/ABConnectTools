@@ -297,6 +297,53 @@ class SwaggerParser:
             all_endpoints.extend(endpoints)
         return all_endpoints
     
+    def parse_by_tags(self) -> Dict[str, List[EndpointDefinition]]:
+        """Parse all endpoints and group by their tags.
+        
+        Returns:
+            Dictionary mapping tag names to their endpoint definitions
+        """
+        endpoints_by_tag = {}
+        
+        for path, path_item in self.paths.items():
+            # Skip parameter definitions
+            if 'parameters' in path_item:
+                path_parameters = self._parse_parameters(path_item['parameters'])
+            else:
+                path_parameters = []
+            
+            # Process each HTTP method
+            for method in ['get', 'post', 'put', 'patch', 'delete', 'head', 'options']:
+                if method not in path_item:
+                    continue
+                    
+                operation = path_item[method]
+                
+                # Build endpoint definition
+                endpoint = EndpointDefinition(
+                    path=path,
+                    method=method.upper(),
+                    operation_id=operation.get('operationId'),
+                    summary=operation.get('summary'),
+                    description=operation.get('description'),
+                    tags=operation.get('tags', ['Untagged']),
+                    parameters=path_parameters + self._parse_parameters(
+                        operation.get('parameters', [])
+                    ),
+                    request_body=self._parse_request_body(
+                        operation.get('requestBody')
+                    ) if 'requestBody' in operation else None,
+                    responses=operation.get('responses', {})
+                )
+                
+                # Group by tags
+                for tag in endpoint.tags:
+                    if tag not in endpoints_by_tag:
+                        endpoints_by_tag[tag] = []
+                    endpoints_by_tag[tag].append(endpoint)
+        
+        return endpoints_by_tag
+    
     def get_schemas(self) -> Dict[str, Dict[str, Any]]:
         """Get all schema definitions."""
         return self.schemas.copy()
