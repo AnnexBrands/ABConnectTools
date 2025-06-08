@@ -264,5 +264,3 @@ POST /api/admin/advancedsettings
         "status": "created",
         "message": "Resource created successfully"
       }
-
-----

@@ -84,6 +84,12 @@ Books a job and transitions it to active status.
 
 - `jobDisplayId` (string, path) *(required)*: No description available
 
+**Response Type:**
+
+:class:`~ABConnect.api.models.jobs.Job`
+
+See the model documentation for detailed field descriptions.
+
 **Example Request:**
 
 .. tabs::
@@ -154,6 +160,12 @@ Retrieves detailed information about a specific job using its display ID.
 
 - `jobDisplayId` (string, path) *(required)*: No description available
 
+**Response Type:**
+
+:class:`~ABConnect.api.models.jobs.Job`
+
+See the model documentation for detailed field descriptions.
+
 **Example Request:**
 
 .. tabs::
@@ -201,8 +213,54 @@ Retrieves detailed information about a specific job using its display ID.
       :linenos:
 
       {
-        "status": "success",
-        "data": {}
+        "jobDisplayId": "2000000",
+        "bookedDate": "2024-08-13T14:04:04",
+        "ownerCompanyId": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "customerContact": {
+          "id": 3473290,
+          "contact": {
+            "id": 266841,
+            "contactDisplayId": "1",
+            "fullName": "Training",
+            "contactTypeId": 2,
+            "isBusiness": true,
+            "companyId": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+            "company": {
+              "companyName": "Training",
+              "companyCode": "TRAINING",
+              "companyPhone": "8009814202",
+              "companyEmail": "training@abconnect.co"
+            }
+          }
+        },
+        "jobStatusId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "jobStatusName": "Booked",
+        "jobTypeId": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+        "items": [
+          {
+            "id": 12345,
+            "description": "Widget",
+            "quantity": 1,
+            "weight": 10.5,
+            "dimensions": {
+              "length": 12,
+              "width": 8,
+              "height": 6
+            }
+          }
+        ],
+        "origin": {
+          "address1": "123 Main St",
+          "city": "Denver",
+          "state": "CO",
+          "zipCode": "80202"
+        },
+        "destination": {
+          "address1": "456 Oak Ave",
+          "city": "Los Angeles",
+          "state": "CA",
+          "zipCode": "90001"
+        }
       }
 
 ----
@@ -221,6 +279,12 @@ Search for jobs using various criteria such as status, date range, customer, or 
 *Query Parameters:*
 
 - `jobDisplayId` (integer, query): No description available
+
+**Response Type:**
+
+Array of :class:`~ABConnect.api.models.jobs.Job` objects
+
+See the model documentation for detailed field descriptions.
 
 **Example Request:**
 
@@ -1258,5 +1322,3 @@ GET /api/job/documentConfig
         "status": "success",
         "data": {}
       }
-
-----

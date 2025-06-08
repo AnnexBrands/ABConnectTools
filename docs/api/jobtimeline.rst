@@ -452,5 +452,3 @@ GET /api/job/{jobDisplayId}/timeline/{taskCode}/agent
         "status": "success",
         "data": {}
       }
-
-----

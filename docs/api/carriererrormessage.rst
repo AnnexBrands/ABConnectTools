@@ -136,5 +136,3 @@ POST /api/admin/carriererrormessage
         "status": "created",
         "message": "Resource created successfully"
       }
-
-----

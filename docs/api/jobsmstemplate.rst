@@ -386,5 +386,3 @@ POST /api/SmsTemplate/save
         "status": "created",
         "message": "Resource created successfully"
       }
-
-----

@@ -222,5 +222,3 @@ GET /api/job/{jobDisplayId}/sms/templatebased/{templateId}
         "status": "success",
         "data": {}
       }
-
-----

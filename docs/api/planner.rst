@@ -77,5 +77,3 @@ GET /api/company/{companyId}/planner
         "status": "success",
         "data": {}
       }
-
-----

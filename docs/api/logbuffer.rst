@@ -138,5 +138,3 @@ POST /api/admin/logbuffer/flushAll
         "status": "created",
         "message": "Resource created successfully"
       }
-
-----

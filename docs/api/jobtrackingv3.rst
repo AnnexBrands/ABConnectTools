@@ -81,5 +81,3 @@ GET /api/v3/job/{jobDisplayId}/tracking/{historyAmount}
         "status": "success",
         "data": {}
       }
-
-----

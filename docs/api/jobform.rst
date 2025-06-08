@@ -150,5 +150,3 @@ GET /api/job/{jobDisplayId}/form/{formid}
         "status": "success",
         "data": {}
       }
-
-----

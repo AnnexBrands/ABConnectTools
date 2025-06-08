@@ -81,5 +81,3 @@ POST /api/email/{jobDisplayId}/labelrequest
         "status": "created",
         "message": "Resource created successfully"
       }
-
-----

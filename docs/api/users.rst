@@ -326,5 +326,3 @@ GET /api/users/pocusers
       :linenos:
 
       []
-
-----

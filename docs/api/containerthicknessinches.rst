@@ -222,5 +222,3 @@ DELETE /api/company/{companyId}/containerthicknessinches
         "status": "success",
         "message": "Resource deleted successfully"
       }
-
-----

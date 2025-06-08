@@ -238,5 +238,3 @@ POST /api/job/{jobDisplayId}/freightproviders/{optionIndex}/ratequote
         "status": "created",
         "message": "Resource created successfully"
       }
-
-----

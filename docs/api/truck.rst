@@ -310,5 +310,3 @@ DELETE /api/company/{companyId}/truck/{truckId}
         "status": "success",
         "message": "Resource deleted successfully"
       }
-
-----

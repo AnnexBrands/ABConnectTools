@@ -911,5 +911,3 @@ POST /api/dashboard/gridsettings
         "status": "created",
         "message": "Resource created successfully"
       }
-
-----

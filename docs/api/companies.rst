@@ -117,6 +117,12 @@ Retrieves detailed information about a specific company using its unique identif
 
 - `id` (string, path) *(required)*: No description available
 
+**Response Type:**
+
+:class:`~ABConnect.api.models.companies.CompanyBasic`
+
+See the model documentation for detailed field descriptions.
+
 **Example Request:**
 
 .. tabs::
@@ -187,6 +193,12 @@ Retrieves comprehensive details about a company including contacts, addresses, s
 
 - `companyId` (string, path) *(required)*: No description available
 
+**Response Type:**
+
+:class:`~ABConnect.api.models.companies.CompanyDetails`
+
+See the model documentation for detailed field descriptions.
+
 **Example Request:**
 
 .. tabs::
@@ -234,255 +246,27 @@ Retrieves comprehensive details about a company including contacts, addresses, s
       :linenos:
 
       {
-        "userId": "00000000-0000-0000-0000-000000000000",
+        "companyID": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
         "companyName": "Training",
-        "contactName": null,
-        "contactPhone": null,
-        "companyType": null,
-        "parcelOnly": null,
-        "isThirdParty": false,
         "companyCode": "TRAINING",
-        "parentCompanyName": "National Logistics Services",
-        "companyTypeID": "e7f85166-34cf-429b-805d-261b44cb0c04",
-        "parentCompanyID": "5e2eefc1-d616-e911-b00c-00155d426802",
-        "companyPhone": "8009814202",
         "companyEmail": "training@abconnect.co",
-        "companyFax": "",
-        "companyWebSite": "http://abconnect.co/",
-        "industryType": "6664ddb1-b7f1-e311-b7f5-000c298b59ee",
-        "industryTypeName": null,
-        "taxId": null,
-        "customerCell": null,
-        "companyCell": "6195087798",
-        "pzCode": "PZ100",
-        "referralCode": null,
-        "companyLogo": "25d69a87-2146-4d67-8c92-843c2df302dd#NPS_230.gif",
-        "letterHeadLogo": null,
-        "thumbnailLogo": "7fc55a48-dc77-ee11-8393-16d570081145#NavisLogo.gif",
-        "mapsMarkerImage": "7fc55a48-dc77-ee11-8393-16d570081145#NavisLogo.gif",
-        "colorTheme": null,
-        "franchiseeMaturityType": "50f7d54f-7023-4697-a187-8bcda433bad2",
-        "pricingToUse": "4e8e4f3b-65f9-4625-bba0-fad6fa5e7d6e",
-        "totalRows": null,
-        "address": null,
-        "companyInsurancePricing": null,
-        "companyServicePricing": null,
-        "companyTaxPricing": null,
-        "wholeSaleMarkup": null,
-        "baseMarkup": null,
-        "mediumMarkup": null,
-        "highMarkup": null,
-        "miles": null,
-        "insuranceType": "1e18bb08-25b2-e111-b36c-00155d6b2c30",
-        "isGlobal": true,
-        "isQbUser": false,
-        "skipIntacct": true,
-        "isAccess": null,
-        "companyDisplayID": "694618",
-        "depth": null,
-        "franchiseeName": null,
-        "isPrefered": true,
-        "createdUser": null,
-        "mappingLocations": null,
-        "locationCount": null,
-        "baseParent": null,
-        "copyMaterialFrom": null,
-        "isHide": true,
-        "isDontUse": false,
+        "companyPhone": "8009814202",
         "mainAddress": {
           "id": 407491,
-          "isValid": false,
-          "dontValidate": false,
-          "propertyType": null,
-          "address1Value": "2534 Vista Dr",
-          "address2Value": "",
-          "countryName": null,
-          "countryCode": null,
-          "countryId": "daf9b34b-ce6a-4f2f-9207-15278c06b7d2",
-          "latitude": 39.2942344,
-          "longitude": -104.8221147,
-          "fullCityLine": "Castle Rock, CO, 80104",
-          "coordinates": {
-            "latitude": 39.2942344,
-            "longitude": -104.8221147
-          },
           "address1": "2534 Vista Dr",
-          "address2": null,
           "city": "Castle Rock",
           "state": "CO",
-          "zipCode": "80104"
-        },
-        "accountManagerFranchiseeId": null,
-        "accountManagerFranchiseeName": null,
-        "carrierAccountsSourceCompanyId": null,
-        "carrierAccountsSourceCompanyName": null,
-        "autoPriceAPIEnableEmails": false,
-        "autoPriceAPIEnableSMSs": false,
-        "commercialCapabilities": 135,
-        "primaryContactId": 338253,
-        "payerContactId": 765896,
-        "payerContactName": "Test Trainee",
-        "totalJobs": 16,
-        "totalJobsRevenue": 43225.58,
-        "totalSales": 130,
-        "totalSalesRevenue": 164486.74,
-        "addressData": {
-          "company": "Training",
-          "firstLastName": "Training User",
-          "addressLine1": "2534 Vista Dr",
-          "addressLine2": null,
-          "contactBOLNote": null,
-          "city": "Castle Rock",
-          "state": "CO",
-          "stateCode": null,
           "zipCode": "80104",
-          "countryName": null,
-          "propertyType": null,
-          "fullCityLine": "Castle Rock, CO, 80104",
-          "phone": "(800) 981-4202",
-          "cellPhone": null,
-          "fax": "",
-          "email": "training@abconnect.co",
-          "addressLine2Visible": false,
-          "companyVisible": true,
-          "countryNameVisible": false,
-          "phoneVisible": true,
-          "emailVisible": true,
-          "fullAddressLine": "2534 Vista Dr",
-          "fullAddress": "2534 Vista Dr, Castle Rock CO 80104",
-          "countryId": null
-        },
-        "overridableAddressData": {
-          "company": {
-            "defaultValue": "Training",
-            "overrideValue": null,
-            "forceEmpty": false,
-            "value": "Training"
-          },
-          "firstLastName": {
-            "defaultValue": "Training User",
-            "overrideValue": null,
-            "forceEmpty": false,
-            "value": "Training User"
-          },
-          "addressLine1": {
-            "defaultValue": "2534 Vista Dr",
-            "overrideValue": null,
-            "forceEmpty": false,
-            "value": "2534 Vista Dr"
-          },
-          "addressLine2": {
-            "defaultValue": null,
-            "overrideValue": null,
-            "forceEmpty": false,
-            "value": null
-          },
-          "city": {
-            "defaultValue": "Castle Rock",
-            "overrideValue": null,
-            "forceEmpty": false,
-            "value": "Castle Rock"
-          },
-          "state": {
-            "defaultValue": "CO",
-            "overrideValue": null,
-            "forceEmpty": false,
-            "value": "CO"
-          },
-          "zipCode": {
-            "defaultValue": "80104",
-            "overrideValue": null,
-            "forceEmpty": false,
-            "value": "80104"
-          },
-          "phone": {
-            "defaultValue": "(800) 981-4202",
-            "overrideValue": null,
-            "forceEmpty": false,
-            "value": "(800) 981-4202"
-          },
-          "email": {
-            "defaultValue": "training@abconnect.co",
-            "overrideValue": null,
-            "forceEmpty": false,
-            "value": "training@abconnect.co"
-          },
-          "fullAddressLine": "2534 Vista Dr",
-          "fullAddress": {
-            "defaultValue": "2534 Vista Dr, Castle Rock CO 80104",
-            "overrideValue": null,
-            "forceEmpty": false,
-            "value": "2534 Vista Dr, Castle Rock CO 80104"
-          },
-          "fullCityLine": {
-            "defaultValue": "Castle Rock, CO, 80104",
-            "overrideValue": null,
-            "forceEmpty": false,
-            "value": "Castle Rock, CO, 80104"
-          }
+          "latitude": 39.2942344,
+          "longitude": -104.8221147
         },
         "companyInfo": {
           "companyId": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
-          "companyTypeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
-          "companyDisplayId": null,
           "companyName": "Training",
           "companyCode": "TRAINING",
-          "companyEmail": "training@abconnect.co",
-          "companyPhone": "8009814202",
-          "thumbnailLogo": "7fc55a48-dc77-ee11-8393-16d570081145#NavisLogo.gif",
-          "companyLogo": "25d69a87-2146-4d67-8c92-843c2df302dd#NPS_230.gif",
-          "mapsMarkerImage": "7fc55a48-dc77-ee11-8393-16d570081145#NavisLogo.gif",
-          "mainAddress": {
-            "id": 407491,
-            "isValid": false,
-            "dontValidate": false,
-            "propertyType": null,
-            "address1Value": "2534 Vista Dr",
-            "address2Value": "",
-            "countryName": null,
-            "countryCode": null,
-            "countryId": "daf9b34b-ce6a-4f2f-9207-15278c06b7d2",
-            "latitude": 39.2942344,
-            "longitude": -104.8221147,
-            "fullCityLine": "Castle Rock, CO, 80104",
-            "coordinates": {
-              "latitude": 39.2942344,
-              "longitude": -104.8221147
-            },
-            "address1": "2534 Vista Dr",
-            "address2": null,
-            "city": "Castle Rock",
-            "state": "CO",
-            "zipCode": "80104"
-          },
           "isThirdParty": false,
-          "isActive": false,
-          "isHidden": false
-        },
-        "companyID": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
-        "addressID": null,
-        "address1": null,
-        "address2": null,
-        "city": null,
-        "state": null,
-        "stateCode": null,
-        "countryName": null,
-        "countryCode": null,
-        "countryID": null,
-        "zipCode": null,
-        "isActive": true,
-        "createdDate": null,
-        "createdBy": null,
-        "modifiedDate": null,
-        "modifiedBy": null,
-        "latitude": null,
-        "longitude": null,
-        "result": null,
-        "addressMappingID": null,
-        "contactID": null,
-        "userID": "00000000-0000-0000-0000-000000000000",
-        "primaryCustomerName": "Training User",
-        "contactInfo": null
+          "isActive": true
+        }
       }
 
 ----
@@ -495,6 +279,12 @@ GET /api/companies/availableByCurrentUser
 **Get companies available to current user**
 
 Returns a list of companies that the currently authenticated user has permission to access.
+
+**Response Type:**
+
+Array of :class:`~ABConnect.api.models.companies.CompanyBasic` objects
+
+See the model documentation for detailed field descriptions.
 
 **Example Request:**
 
@@ -565,6 +355,12 @@ Search for companies using various filters such as name, code, type, or location
 
 - `searchValue` (string, query): No description available
 
+**Response Type:**
+
+Array of :class:`~ABConnect.api.models.companies.CompanyBasic` objects
+
+See the model documentation for detailed field descriptions.
+
 **Example Request:**
 
 .. tabs::
@@ -608,14 +404,7 @@ Search for companies using various filters such as name, code, type, or location
    .. code-block:: json
       :linenos:
 
-      [
-        {
-          "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
-          "code": "TRAINING",
-          "name": "Training",
-          "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
-        }
-      ]
+      []
 
 ----
 
@@ -680,14 +469,7 @@ Perform advanced searches on companies with complex filtering, sorting, and pagi
    .. code-block:: json
       :linenos:
 
-      [
-        {
-          "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
-          "code": "TRAINING",
-          "name": "Training",
-          "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
-        }
-      ]
+      []
 
 ----
 
@@ -836,6 +618,12 @@ Retrieves all available information about a company including details, preferenc
 
 - `companyId` (string, path) *(required)*: No description available
 
+**Response Type:**
+
+:class:`~ABConnect.api.models.companies.CompanyFullDetails`
+
+See the model documentation for detailed field descriptions.
+
 **Example Request:**
 
 .. tabs::
@@ -887,77 +675,22 @@ Retrieves all available information about a company including details, preferenc
         "details": {
           "displayId": "694618",
           "name": "Training",
-          "taxId": null,
           "code": "TRAINING",
           "parentId": "5e2eefc1-d616-e911-b00c-00155d426802",
-          "franchiseeId": null,
           "companyTypeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
-          "industryTypeId": "6664ddb1-b7f1-e311-b7f5-000c298b59ee",
-          "cellPhone": "6195087798",
           "phone": "8009814202",
-          "fax": "",
           "email": "training@abconnect.co",
-          "website": "http://abconnect.co/",
-          "isActive": true,
-          "isHidden": true,
-          "isGlobal": true,
-          "isNotUsed": false,
-          "isPreferred": true,
-          "payerContactId": 765896,
-          "payerContactName": "Test Trainee"
+          "isActive": true
         },
         "preferences": {
-          "companyHeaderLogo": {
-            "filePath": "\\Uploads\\CompanyHeaderLogo\\25d69a87-2146-4d67-8c92-843c2df302dd#NPS_230.gif",
-            "newFile": null
-          },
-          "thumbnailLogo": {
-            "filePath": "\\Uploads\\ThumbnailLogo\\7fc55a48-dc77-ee11-8393-16d570081145#NavisLogo.gif",
-            "newFile": null
-          },
-          "letterHeadLogo": {
-            "filePath": null,
-            "newFile": null
-          },
-          "mapsMarker": {
-            "filePath": "\\Uploads\\MapsMarkerImage\\7fc55a48-dc77-ee11-8393-16d570081145#NavisLogo.gif",
-            "newFile": null
-          },
           "isQbUser": false,
           "skipIntacct": true,
-          "pricingToUse": "4e8e4f3b-65f9-4625-bba0-fad6fa5e7d6e",
-          "pzCode": "PZ100",
-          "insuranceTypeId": "1e18bb08-25b2-e111-b36c-00155d6b2c30",
-          "franchiseeMaturityTypeId": "50f7d54f-7023-4697-a187-8bcda433bad2",
-          "isCompanyUsedAsCarrierSource": false,
-          "carrierAccountsSourceCompanyId": null,
-          "carrierAccountsSourceCompanyName": null,
-          "accountManagerFranchiseeId": null,
-          "accountManagerFranchiseeName": null,
-          "autoPriceAPIEnableEmails": false,
-          "autoPriceAPIEnableSMSs": false,
-          "copyMaterials": 0
+          "pzCode": "PZ100"
         },
         "capabilities": 135,
         "address": {
           "id": 407491,
-          "isValid": false,
-          "dontValidate": false,
-          "propertyType": null,
-          "address1Value": "2534 Vista Dr",
-          "address2Value": "",
-          "countryName": "United States",
-          "countryCode": "US",
-          "countryId": "daf9b34b-ce6a-4f2f-9207-15278c06b7d2",
-          "latitude": 39.2942344,
-          "longitude": -104.8221147,
-          "fullCityLine": "Castle Rock, CO, 80104",
-          "coordinates": {
-            "latitude": 39.2942344,
-            "longitude": -104.8221147
-          },
           "address1": "2534 Vista Dr",
-          "address2": null,
           "city": "Castle Rock",
           "state": "CO",
           "zipCode": "80104"
@@ -965,41 +698,15 @@ Retrieves all available information about a company including details, preferenc
         "pricing": {
           "transportationCharge": {
             "baseTripFee": 100.0,
-            "baseTripMile": 3000.0,
-            "extraFee": 0.0,
-            "fuelSurcharge": 0.0
+            "baseTripMile": 3000.0
           },
           "transportationMarkups": {
             "wholeSale": 1.0,
             "base": 1.25,
             "medium": 2.3,
             "high": 2.5
-          },
-          "carrierFreightMarkups": {
-            "wholeSale": 1.98,
-            "base": 2.36,
-            "medium": 2.7,
-            "high": 2.9
           }
-        },
-        "insurance": {
-          "isp": {
-            "insuranceSlabId": "88424802-9559-489c-a69a-3e8958cafc65",
-            "option": 1,
-            "sellPrice": 2.0
-          },
-          "nsp": {
-            "insuranceSlabId": "88424802-9559-489c-a69a-3e8958cafc69",
-            "option": 2,
-            "sellPrice": 2.0
-          },
-          "ltl": {
-            "insuranceSlabId": "88424802-9559-489c-a69a-3e8958cafc67",
-            "option": 2,
-            "sellPrice": 2.0
-          }
-        },
-        "readOnlyAccess": false
+        }
       }
 
 ----
@@ -2387,5 +2094,3 @@ GET /api/companies/{companyId}/franchiseeAddresses
         "name": "Training",
         "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
       }
-
-----

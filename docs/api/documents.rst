@@ -418,5 +418,3 @@ PUT /api/documents/hide/{docId}
         "status": "updated",
         "message": "Resource updated successfully"
       }
-
-----

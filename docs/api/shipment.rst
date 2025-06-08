@@ -202,5 +202,3 @@ GET /api/shipment/document/{docId}
         "status": "success",
         "data": {}
       }
-
-----

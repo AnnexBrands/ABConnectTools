@@ -79,5 +79,3 @@ POST /api/job/{jobDisplayId}/status/quote
         "status": "created",
         "message": "Resource created successfully"
       }
-
-----

@@ -225,5 +225,3 @@ DELETE /api/company/{companyId}/accounts/stripe
         "status": "success",
         "message": "Resource deleted successfully"
       }
-
-----

@@ -306,5 +306,3 @@ POST /api/job/{jobDisplayId}/email/{emailTemplateGuid}/send
         "status": "created",
         "message": "Resource created successfully"
       }
-
-----

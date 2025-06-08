@@ -150,5 +150,3 @@ GET /api/job/{jobDisplayId}/tracking/shipment/{proNumber}
         "status": "success",
         "data": {}
       }
-
-----

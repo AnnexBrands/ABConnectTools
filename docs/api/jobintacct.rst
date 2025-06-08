@@ -379,5 +379,3 @@ POST /api/jobintacct/{jobDisplayId}/applyRebate
         "status": "created",
         "message": "Resource created successfully"
       }
-
-----

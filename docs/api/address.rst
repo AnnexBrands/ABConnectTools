@@ -293,5 +293,3 @@ GET /api/address/propertytype
         "status": "success",
         "data": {}
       }
-
-----

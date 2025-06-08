@@ -536,5 +536,3 @@ GET /api/views/datasetsp/{spName}
         "status": "success",
         "data": {}
       }
-
-----

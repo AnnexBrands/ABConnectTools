@@ -748,5 +748,3 @@ PUT /api/job/{jobDisplayId}/onhold/{onHoldId}/dates
         "status": "updated",
         "message": "Resource updated successfully"
       }
-
-----

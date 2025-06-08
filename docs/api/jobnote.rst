@@ -304,5 +304,3 @@ PUT /api/job/{jobDisplayId}/note/{id}
       :linenos:
 
       {}
-
-----

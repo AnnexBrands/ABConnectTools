@@ -303,5 +303,3 @@ DELETE /api/job/{jobDisplayId}/parcelitems/{parcelItemId}
         "status": "success",
         "message": "Resource deleted successfully"
       }
-
-----

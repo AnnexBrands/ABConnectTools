@@ -77,5 +77,3 @@ GET /api/company/{companyId}/setupdata
         "status": "success",
         "data": {}
       }
-
-----

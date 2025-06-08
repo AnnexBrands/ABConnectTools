@@ -146,5 +146,3 @@ GET /api/e-sign/result
         "status": "success",
         "data": {}
       }
-
-----

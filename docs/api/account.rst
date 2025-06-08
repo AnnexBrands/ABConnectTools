@@ -685,5 +685,3 @@ DELETE /api/account/paymentsource/{sourceId}
         "status": "success",
         "message": "Resource deleted successfully"
       }
-
-----

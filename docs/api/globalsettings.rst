@@ -337,5 +337,3 @@ POST /api/admin/globalsettings/intacct
         "status": "created",
         "message": "Resource created successfully"
       }
-
-----

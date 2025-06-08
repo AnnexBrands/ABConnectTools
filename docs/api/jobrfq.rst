@@ -156,5 +156,3 @@ GET /api/job/{jobDisplayId}/rfq/statusof/{rfqServiceType}/forcompany/{companyId}
         "status": "success",
         "data": {}
       }
-
-----

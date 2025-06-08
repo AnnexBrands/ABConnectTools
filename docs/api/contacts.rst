@@ -57,6 +57,12 @@ Retrieves information about a specific contact.
 
 - `id` (integer, path) *(required)*: No description available
 
+**Response Type:**
+
+:class:`~ABConnect.api.models.contacts.Contact`
+
+See the model documentation for detailed field descriptions.
+
 **Example Request:**
 
 .. tabs::
@@ -103,7 +109,18 @@ Retrieves information about a specific contact.
    .. code-block:: json
       :linenos:
 
-      {}
+      {
+        "id": 266841,
+        "contactDisplayId": "1",
+        "fullName": "John Doe",
+        "firstName": "John",
+        "lastName": "Doe",
+        "contactTypeId": 1,
+        "companyId": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "isActive": true,
+        "primaryEmail": "john.doe@example.com",
+        "primaryPhone": "555-123-4567"
+      }
 
 ----
 
@@ -615,5 +632,3 @@ GET /api/contacts/{contactId}/primarydetails
       :linenos:
 
       []
-
-----

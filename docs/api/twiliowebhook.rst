@@ -78,5 +78,3 @@ POST /api/webhooks/twilio/smsStatusCallback
         "status": "created",
         "message": "Resource created successfully"
       }
-
-----

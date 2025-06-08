@@ -729,5 +729,3 @@ POST /api/job/{jobDisplayId}/payment/banksource
         "status": "created",
         "message": "Resource created successfully"
       }
-
-----

@@ -513,5 +513,3 @@ GET /api/rfq/forjob/{jobId}
         "status": "success",
         "data": {}
       }
-
-----

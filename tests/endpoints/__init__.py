@@ -18,6 +18,7 @@ class BaseEndpointTest(TestCase):
         - test_company_id: 'ed282b80-54fe-4f42-bf1b-69103ce1f76c' (training company)
         - test_company_code: 'TRAINING'
         - test_job_display_id: '2000000'
+        - test_contact_id: '207818'
         
     These fixtures provide known test data that exists in both staging and production
     environments for consistent testing.
@@ -143,7 +144,7 @@ class BaseEndpointTest(TestCase):
         test_ids = {
             'company': 'ed282b80-54fe-4f42-bf1b-69103ce1f76c',  # training company
             'company_code': 'TRAINING',
-            'contact': '456e7890-e89b-12d3-a456-426614174001',
+            'contact': '207818',  # valid contact ID
             'job': '2000000',  # job display ID
             'job_display_id': '2000000',
             'user': '789e0123-e89b-12d3-a456-426614174002'
@@ -164,6 +165,11 @@ class BaseEndpointTest(TestCase):
     def test_job_display_id(self) -> str:
         """Get the test job display ID."""
         return '2000000'
+    
+    @property
+    def test_contact_id(self) -> str:
+        """Get the test contact ID."""
+        return '207818'
     
     def get_test_data(self, operation: str) -> Dict[str, Any]:
         """Get test data for a given operation.

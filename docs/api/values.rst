@@ -71,5 +71,3 @@ GET /api/Values
       :linenos:
 
       []
-
-----

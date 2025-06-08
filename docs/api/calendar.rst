@@ -296,5 +296,3 @@ GET /api/company/{companyId}/calendar/{date}/endofday
         "status": "success",
         "data": {}
       }
-
-----

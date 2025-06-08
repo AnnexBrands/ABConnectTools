@@ -89,5 +89,5 @@ class Job(ABConnectBaseModel):
     totalCost: Optional[float] = None
     
     # Additional fields
-    notes: Optional[str] = None
+    notes: Optional[List[str]] = None  # API returns notes as a list
     metadata: Dict[str, Any] = Field(default_factory=dict)

@@ -108,8 +108,14 @@ class TestCompaniesEndpoints(BaseEndpointTest):
         
         See documentation: https://abconnecttools.readthedocs.io/en/latest/api/companies.html#get_apicompaniessearch
         """
+        # Add search parameter
+        params = {
+            "searchValue": "Training"
+        }
+        
         response = self.api.raw.get(
             "/api/companies/search",
+            **params
         )
         
         # Check response

@@ -372,6 +372,26 @@ def generate_sample_response(endpoint):
     path = endpoint['path']
     method = endpoint['method']
     
+    # Map specific endpoints to response examples
+    endpoint_mappings = {
+        ('/api/job/{jobDisplayId}', 'GET'): ('job', 'get_job_by_display_id'),
+        ('/api/companies/{id}', 'GET'): ('companies', 'get_company_by_id'),
+        ('/api/companies/{companyId}/details', 'GET'): ('companies', 'get_company_details'),
+        ('/api/companies/{companyId}/fulldetails', 'GET'): ('companies', 'get_company_fulldetails'),
+        ('/api/companies/availableByCurrentUser', 'GET'): ('companies', 'get_companies_available'),
+        ('/api/contacts/{id}', 'GET'): ('contacts', 'get_contact_by_id'),
+        ('/api/users/{id}', 'GET'): ('users', 'get_user_by_id'),
+        ('/api/users', 'GET'): ('users', 'get_users_list'),
+        ('/api/lookup/{masterConstantKey}', 'GET'): ('lookups', 'get_lookup_values'),
+    }
+    
+    # Check if we have a specific example for this endpoint
+    if (path, method) in endpoint_mappings:
+        tag, key = endpoint_mappings[(path, method)]
+        if tag in RESPONSE_EXAMPLES and key in RESPONSE_EXAMPLES[tag]:
+            response = RESPONSE_EXAMPLES[tag][key].get('response', {})
+            return json.dumps(response, indent=2)
+    
     # Try to find a real response example
     endpoint_key = get_endpoint_key(path, method)
     
@@ -437,6 +457,103 @@ def generate_sample_response(endpoint):
             "status": "success",
             "data": {}
         }, indent=2)
+
+
+def get_pydantic_models():
+    """Load Pydantic model mappings for endpoints."""
+    # Define endpoint to model mappings
+    return {
+        # Job endpoints
+        ('/api/job/{jobDisplayId}', 'GET'): {
+            'model': 'Job',
+            'module': 'jobs'
+        },
+        ('/api/job/search', 'GET'): {
+            'model': 'List[Job]',
+            'module': 'jobs'
+        },
+        ('/api/job/{jobDisplayId}/book', 'POST'): {
+            'model': 'Job',
+            'module': 'jobs'
+        },
+        
+        # Company endpoints
+        ('/api/companies/{id}', 'GET'): {
+            'model': 'CompanyBasic',
+            'module': 'companies'
+        },
+        ('/api/companies/{companyId}/details', 'GET'): {
+            'model': 'CompanyDetails', 
+            'module': 'companies'
+        },
+        ('/api/companies/{companyId}/fulldetails', 'GET'): {
+            'model': 'CompanyFullDetails',
+            'module': 'companies'
+        },
+        ('/api/companies/availableByCurrentUser', 'GET'): {
+            'model': 'List[CompanyBasic]',
+            'module': 'companies'
+        },
+        ('/api/companies/search', 'GET'): {
+            'model': 'List[CompanyBasic]',
+            'module': 'companies'
+        },
+        
+        # Contact endpoints
+        ('/api/contacts/{id}', 'GET'): {
+            'model': 'Contact',
+            'module': 'contacts'
+        },
+        ('/api/contacts', 'POST'): {
+            'model': 'Contact',
+            'module': 'contacts'
+        },
+        
+        # User endpoints
+        ('/api/users', 'GET'): {
+            'model': 'List[User]',
+            'module': 'users'
+        },
+        ('/api/users/{id}', 'GET'): {
+            'model': 'User',
+            'module': 'users'
+        },
+        
+        # Lookup endpoints
+        ('/api/lookup/{masterConstantKey}', 'GET'): {
+            'model': 'List[LookupValue]',
+            'module': 'lookups'
+        },
+    }
+
+
+def format_response_model(endpoint_path, method):
+    """Get the response model documentation for an endpoint."""
+    model_mappings = get_pydantic_models()
+    model_info = model_mappings.get((endpoint_path, method))
+    
+    if not model_info:
+        return None
+        
+    model_name = model_info['model']
+    module_name = model_info['module']
+    
+    # Format the response type section
+    lines = []
+    lines.append("**Response Type:**")
+    lines.append("")
+    
+    if model_name.startswith('List['):
+        inner_model = model_name[5:-1]
+        lines.append(f"Array of :class:`~ABConnect.api.models.{module_name}.{inner_model}` objects")
+    else:
+        lines.append(f":class:`~ABConnect.api.models.{module_name}.{model_name}`")
+    
+    lines.append("")
+    lines.append("See the model documentation for detailed field descriptions.")
+    lines.append("")
+    
+    return lines
 
 
 def generate_tag_documentation(tag_name, endpoints, tag_description=""):
@@ -548,6 +665,11 @@ def generate_tag_documentation(tag_name, endpoints, tag_description=""):
                     doc.append(format_parameter(param))
                 doc.append("")
         
+        # Response Model (if available)
+        response_model_lines = format_response_model(path, method)
+        if response_model_lines:
+            doc.extend(response_model_lines)
+        
         # Example Request with tabs
         doc.append("**Example Request:**")
         doc.append("")
@@ -598,9 +720,10 @@ def generate_tag_documentation(tag_name, endpoints, tag_description=""):
             doc.append(f"      {line}")
         doc.append("")
         
-        # Add a separator between endpoints
-        doc.append("----")
-        doc.append("")
+        # Add a separator between endpoints (except for the last one)
+        if endpoint != endpoints[-1]:
+            doc.append("----")
+            doc.append("")
     
     return "\n".join(doc)
 

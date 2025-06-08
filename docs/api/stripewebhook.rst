@@ -190,5 +190,3 @@ POST /api/webhooks/stripe/checkout.session.completed
         "status": "created",
         "message": "Resource created successfully"
       }
-
-----

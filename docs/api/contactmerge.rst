@@ -164,5 +164,3 @@ PUT /api/contacts/{mergeToId}/merge
         "status": "updated",
         "message": "Resource updated successfully"
       }
-
-----

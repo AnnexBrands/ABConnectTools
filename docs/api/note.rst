@@ -284,5 +284,3 @@ GET /api/note/suggestUsers
       :linenos:
 
       []
-
-----

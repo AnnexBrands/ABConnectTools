@@ -229,5 +229,3 @@ GET /api/contacts/{contactId}/history/graphdata
         "status": "success",
         "data": {}
       }
-
-----

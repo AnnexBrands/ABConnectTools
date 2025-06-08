@@ -793,5 +793,3 @@ POST /api/job/{jobDisplayId}/shipment/exportdata
         "status": "created",
         "message": "Resource created successfully"
       }
-
-----

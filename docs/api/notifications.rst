@@ -67,5 +67,3 @@ GET /api/notifications
       :linenos:
 
       []
-
-----

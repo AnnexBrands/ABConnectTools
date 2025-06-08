@@ -72,6 +72,12 @@ Retrieves all values for a specific lookup type (e.g., CompanyTypes, ContactType
 
 - `masterConstantKey` (string, path) *(required)*: No description available
 
+**Response Type:**
+
+Array of :class:`~ABConnect.api.models.lookups.LookupValue` objects
+
+See the model documentation for detailed field descriptions.
+
 **Example Request:**
 
 .. tabs::
@@ -118,10 +124,20 @@ Retrieves all values for a specific lookup type (e.g., CompanyTypes, ContactType
    .. code-block:: json
       :linenos:
 
-      {
-        "status": "success",
-        "data": {}
-      }
+      [
+        {
+          "id": "e7f85166-34cf-429b-805d-261b44cb0c04",
+          "value": "Customer"
+        },
+        {
+          "id": "f8a96277-45df-540c-916e-362b55da1d15",
+          "value": "Vendor"
+        },
+        {
+          "id": "a9b07388-56ef-651d-a27f-473c66eb2e26",
+          "value": "Carrier"
+        }
+      ]
 
 ----
 
@@ -851,5 +867,3 @@ GET /api/lookup/contactTypes
       :linenos:
 
       []
-
-----

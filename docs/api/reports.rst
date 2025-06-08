@@ -556,5 +556,3 @@ POST /api/reports/salesDrilldown
         "status": "created",
         "message": "Resource created successfully"
       }
-
-----
