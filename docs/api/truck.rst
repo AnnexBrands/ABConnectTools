@@ -1,11 +1,5 @@
-Truck API
-=========
-
-This section covers the 4 endpoints related to Truck.
-
-.. contents::
-   :local:
-   :depth: 2
+Truck
+=====
 
 Quick Reference
 ---------------
@@ -30,15 +24,11 @@ Quick Reference
      - /api/company/{companyId}/truck/{truckId}
      - 
 
-Endpoints
----------
 
 .. _get-apicompanycompanyidtruck:
 
 GET /api/company/{companyId}/truck
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -52,21 +42,42 @@ GET /api/company/{companyId}/truck
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/truck'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/company/{companyId}/truck"
+         ,
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/company/{companyId}/truck \
-       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+      .. code-block:: bash
+
+         ab api raw get /api/company/{companyId}/truck \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/truck'
 
 **Sample Response:**
 
@@ -77,9 +88,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -89,8 +98,6 @@ Using AB CLI:
 POST /api/company/{companyId}/truck
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -99,25 +106,51 @@ POST /api/company/{companyId}/truck
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/truck'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/company/{companyId}/truck"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/company/{companyId}/truck \
-       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+      .. code-block:: bash
+
+         ab api raw post /api/company/{companyId}/truck \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/truck'
 
 **Sample Response:**
 
@@ -129,11 +162,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -142,8 +171,6 @@ Using AB CLI:
 
 PUT /api/company/{companyId}/truck/{truckId}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -154,26 +181,54 @@ PUT /api/company/{companyId}/truck/{truckId}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X PUT \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/truck/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.put(
+             "/api/company/{companyId}/truck/{truckId}"
+         ,
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+         ,
+             truckId=789e0123-e89b-12d3-a456-426614174002
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw put /api/company/{companyId}/truck/{truckId} \
-       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c \
-       truckId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw put /api/company/{companyId}/truck/{truckId} \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c \
+             truckId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X PUT \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/truck/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -185,8 +240,7 @@ Using AB CLI:
       {
         "id": "123e4567-e89b-12d3-a456-426614174000",
         "status": "updated",
-        "message": "Resource updated successfully",
-        "modified_at": "2024-01-20T10:00:00Z"
+        "message": "Resource updated successfully"
       }
 
 ----
@@ -195,8 +249,6 @@ Using AB CLI:
 
 DELETE /api/company/{companyId}/truck/{truckId}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -207,22 +259,45 @@ DELETE /api/company/{companyId}/truck/{truckId}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X DELETE \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/truck/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.delete(
+             "/api/company/{companyId}/truck/{truckId}"
+         ,
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+         ,
+             truckId=789e0123-e89b-12d3-a456-426614174002
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw delete /api/company/{companyId}/truck/{truckId} \
-       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c \
-       truckId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw delete /api/company/{companyId}/truck/{truckId} \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c \
+             truckId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X DELETE \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/truck/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 

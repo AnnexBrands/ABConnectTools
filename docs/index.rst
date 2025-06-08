@@ -30,7 +30,7 @@ ABConnect is a Python package for Annex Brands data processing and API interacti
 
 .. toctree::
    :maxdepth: 2
-   :caption: API Endpoints:
+   :caption: Endpoint Reference:
 
    api/index
 

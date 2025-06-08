@@ -1,11 +1,5 @@
-AdvancedSettings API
-====================
-
-This section covers the 4 endpoints related to AdvancedSettings.
-
-.. contents::
-   :local:
-   :depth: 2
+AdvancedSettings
+================
 
 Quick Reference
 ---------------
@@ -30,32 +24,47 @@ Quick Reference
      - /api/admin/advancedsettings
      - 
 
-Endpoints
----------
 
 .. _get-apiadminadvancedsettingsall:
 
 GET /api/admin/advancedsettings/all
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/admin/advancedsettings/all'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/admin/advancedsettings/all"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/admin/advancedsettings/all
+      .. code-block:: bash
+
+         ab api raw get /api/admin/advancedsettings/all
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/admin/advancedsettings/all'
 
 **Sample Response:**
 
@@ -66,9 +75,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -78,8 +85,6 @@ Using AB CLI:
 GET /api/admin/advancedsettings/{id}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -88,21 +93,42 @@ GET /api/admin/advancedsettings/{id}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/admin/advancedsettings/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/admin/advancedsettings/{id}"
+         ,
+             id=789e0123-e89b-12d3-a456-426614174002
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/admin/advancedsettings/{id} \
-       id=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw get /api/admin/advancedsettings/{id} \
+             id=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/admin/advancedsettings/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -120,8 +146,6 @@ Using AB CLI:
 DELETE /api/admin/advancedsettings/{id}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -130,21 +154,42 @@ DELETE /api/admin/advancedsettings/{id}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X DELETE \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/admin/advancedsettings/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.delete(
+             "/api/admin/advancedsettings/{id}"
+         ,
+             id=789e0123-e89b-12d3-a456-426614174002
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw delete /api/admin/advancedsettings/{id} \
-       id=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw delete /api/admin/advancedsettings/{id} \
+             id=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X DELETE \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/admin/advancedsettings/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -162,28 +207,50 @@ Using AB CLI:
 POST /api/admin/advancedsettings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/admin/advancedsettings'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/admin/advancedsettings"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/admin/advancedsettings
+      .. code-block:: bash
+
+         ab api raw post /api/admin/advancedsettings
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/admin/advancedsettings'
 
 **Sample Response:**
 
@@ -195,11 +262,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----

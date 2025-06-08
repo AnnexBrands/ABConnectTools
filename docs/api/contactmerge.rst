@@ -1,11 +1,5 @@
-ContactMerge API
-================
-
-This section covers the 2 endpoints related to ContactMerge.
-
-.. contents::
-   :local:
-   :depth: 2
+ContactMerge
+============
 
 Quick Reference
 ---------------
@@ -24,15 +18,11 @@ Quick Reference
      - /api/contacts/{mergeToId}/merge
      - 
 
-Endpoints
----------
 
 .. _post-apicontactsmergetoidmergepreview:
 
 POST /api/contacts/{mergeToId}/merge/preview
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -42,25 +32,51 @@ POST /api/contacts/{mergeToId}/merge/preview
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/contacts/789e0123-e89b-12d3-a456-426614174002/merge/preview'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/contacts/{mergeToId}/merge/preview"
+         ,
+             mergeToId=789e0123-e89b-12d3-a456-426614174002
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/contacts/{mergeToId}/merge/preview \
-       mergeToId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw post /api/contacts/{mergeToId}/merge/preview \
+             mergeToId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/contacts/789e0123-e89b-12d3-a456-426614174002/merge/preview'
 
 **Sample Response:**
 
@@ -72,11 +88,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -86,8 +98,6 @@ Using AB CLI:
 PUT /api/contacts/{mergeToId}/merge
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -96,25 +106,51 @@ PUT /api/contacts/{mergeToId}/merge
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X PUT \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/contacts/789e0123-e89b-12d3-a456-426614174002/merge'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.put(
+             "/api/contacts/{mergeToId}/merge"
+         ,
+             mergeToId=789e0123-e89b-12d3-a456-426614174002
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw put /api/contacts/{mergeToId}/merge \
-       mergeToId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw put /api/contacts/{mergeToId}/merge \
+             mergeToId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X PUT \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/contacts/789e0123-e89b-12d3-a456-426614174002/merge'
 
 **Sample Response:**
 
@@ -126,8 +162,7 @@ Using AB CLI:
       {
         "id": "123e4567-e89b-12d3-a456-426614174000",
         "status": "updated",
-        "message": "Resource updated successfully",
-        "modified_at": "2024-01-20T10:00:00Z"
+        "message": "Resource updated successfully"
       }
 
 ----

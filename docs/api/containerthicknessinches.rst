@@ -1,11 +1,5 @@
-ContainerThicknessInches API
-============================
-
-This section covers the 3 endpoints related to ContainerThicknessInches.
-
-.. contents::
-   :local:
-   :depth: 2
+ContainerThicknessInches
+========================
 
 Quick Reference
 ---------------
@@ -27,15 +21,11 @@ Quick Reference
      - /api/company/{companyId}/containerthicknessinches
      - 
 
-Endpoints
----------
 
 .. _get-apicompanycompanyidcontainerthicknessinches:
 
 GET /api/company/{companyId}/containerthicknessinches
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -45,21 +35,42 @@ GET /api/company/{companyId}/containerthicknessinches
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/containerthicknessinches'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/company/{companyId}/containerthicknessinches"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/company/{companyId}/containerthicknessinches \
-       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+      .. code-block:: bash
+
+         ab api raw get /api/company/{companyId}/containerthicknessinches \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/containerthicknessinches'
 
 **Sample Response:**
 
@@ -77,8 +88,6 @@ Using AB CLI:
 POST /api/company/{companyId}/containerthicknessinches
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -87,25 +96,51 @@ POST /api/company/{companyId}/containerthicknessinches
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/containerthicknessinches'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/company/{companyId}/containerthicknessinches"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/company/{companyId}/containerthicknessinches \
-       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+      .. code-block:: bash
+
+         ab api raw post /api/company/{companyId}/containerthicknessinches \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/containerthicknessinches'
 
 **Sample Response:**
 
@@ -117,11 +152,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -130,8 +161,6 @@ Using AB CLI:
 
 DELETE /api/company/{companyId}/containerthicknessinches
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -145,21 +174,42 @@ DELETE /api/company/{companyId}/containerthicknessinches
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X DELETE \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/containerthicknessinches'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.delete(
+             "/api/company/{companyId}/containerthicknessinches"
+         ,
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw delete /api/company/{companyId}/containerthicknessinches \
-       companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+      .. code-block:: bash
+
+         ab api raw delete /api/company/{companyId}/containerthicknessinches \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X DELETE \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/containerthicknessinches'
 
 **Sample Response:**
 

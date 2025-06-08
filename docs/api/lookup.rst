@@ -1,11 +1,7 @@
-Lookup API
-==========
+Lookup
+======
 
-This section covers the 14 endpoints related to Lookup.
-
-.. contents::
-   :local:
-   :depth: 2
+Access system reference data and configuration values. Lookups provide standardized lists of values used throughout the system such as company types, job statuses, and service types.
 
 Quick Reference
 ---------------
@@ -19,7 +15,7 @@ Quick Reference
      - Description
    * - GET
      - /api/lookup/{masterConstantKey}
-     - 
+     - Get lookup values
    * - GET
      - /api/lookup/{masterConstantKey}/{valueId}
      - 
@@ -60,15 +56,15 @@ Quick Reference
      - /api/lookup/contactTypes
      - 
 
-Endpoints
----------
 
 .. _get-apilookupmasterconstantkey:
 
 GET /api/lookup/{masterConstantKey}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
+**Get lookup values**
+
+Retrieves all values for a specific lookup type (e.g., CompanyTypes, ContactTypes, JobStatusTypes).
 
 **Parameters:**
 
@@ -78,21 +74,42 @@ GET /api/lookup/{masterConstantKey}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/lookup/example-value'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/lookup/{masterConstantKey}"
+         ,
+             masterConstantKey="example-value"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/lookup/{masterConstantKey} \
-       masterConstantKey=example-value
+      .. code-block:: bash
+
+         ab api raw get /api/lookup/{masterConstantKey} \
+             masterConstantKey=example-value
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/lookup/example-value'
 
 **Sample Response:**
 
@@ -103,9 +120,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -114,8 +129,6 @@ Using AB CLI:
 
 GET /api/lookup/{masterConstantKey}/{valueId}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -126,22 +139,45 @@ GET /api/lookup/{masterConstantKey}/{valueId}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/lookup/example-value/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/lookup/{masterConstantKey}/{valueId}"
+         ,
+             masterConstantKey="example-value"
+         ,
+             valueId="789e0123-e89b-12d3-a456-426614174002"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/lookup/{masterConstantKey}/{valueId} \
-       masterConstantKey=example-value \
-       valueId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw get /api/lookup/{masterConstantKey}/{valueId} \
+             masterConstantKey=example-value \
+             valueId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/lookup/example-value/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -152,9 +188,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -164,24 +198,41 @@ Using AB CLI:
 GET /api/lookup/countries
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/lookup/countries'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/lookup/countries"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/lookup/countries
+      .. code-block:: bash
+
+         ab api raw get /api/lookup/countries
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/lookup/countries'
 
 **Sample Response:**
 
@@ -199,24 +250,41 @@ Using AB CLI:
 GET /api/lookup/resetMasterConstantCache
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/lookup/resetMasterConstantCache'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/lookup/resetMasterConstantCache"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/lookup/resetMasterConstantCache
+      .. code-block:: bash
+
+         ab api raw get /api/lookup/resetMasterConstantCache
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/lookup/resetMasterConstantCache'
 
 **Sample Response:**
 
@@ -227,9 +295,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -239,24 +305,41 @@ Using AB CLI:
 GET /api/lookup/accessKeys
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/lookup/accessKeys'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/lookup/accessKeys"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/lookup/accessKeys
+      .. code-block:: bash
+
+         ab api raw get /api/lookup/accessKeys
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/lookup/accessKeys'
 
 **Sample Response:**
 
@@ -274,8 +357,6 @@ Using AB CLI:
 GET /api/lookup/accessKey/{accessKey}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -284,21 +365,42 @@ GET /api/lookup/accessKey/{accessKey}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/lookup/accessKey/example-value'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/lookup/accessKey/{accessKey}"
+         ,
+             accessKey="example-value"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/lookup/accessKey/{accessKey} \
-       accessKey=example-value
+      .. code-block:: bash
+
+         ab api raw get /api/lookup/accessKey/{accessKey} \
+             accessKey=example-value
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/lookup/accessKey/example-value'
 
 **Sample Response:**
 
@@ -309,9 +411,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -321,8 +421,6 @@ Using AB CLI:
 GET /api/lookup/documentTypes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Query Parameters:*
@@ -331,20 +429,39 @@ GET /api/lookup/documentTypes
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/lookup/documentTypes'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/lookup/documentTypes"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/lookup/documentTypes
+      .. code-block:: bash
+
+         ab api raw get /api/lookup/documentTypes
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/lookup/documentTypes'
 
 **Sample Response:**
 
@@ -362,8 +479,6 @@ Using AB CLI:
 GET /api/lookup/items
 ~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Query Parameters:*
@@ -373,20 +488,39 @@ GET /api/lookup/items
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/lookup/items'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/lookup/items"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/lookup/items
+      .. code-block:: bash
+
+         ab api raw get /api/lookup/items
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/lookup/items'
 
 **Sample Response:**
 
@@ -404,24 +538,41 @@ Using AB CLI:
 GET /api/lookup/referCategory
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/lookup/referCategory'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/lookup/referCategory"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/lookup/referCategory
+      .. code-block:: bash
+
+         ab api raw get /api/lookup/referCategory
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/lookup/referCategory'
 
 **Sample Response:**
 
@@ -432,9 +583,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -444,24 +593,41 @@ Using AB CLI:
 GET /api/lookup/referCategoryHeirachy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/lookup/referCategoryHeirachy'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/lookup/referCategoryHeirachy"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/lookup/referCategoryHeirachy
+      .. code-block:: bash
+
+         ab api raw get /api/lookup/referCategoryHeirachy
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/lookup/referCategoryHeirachy'
 
 **Sample Response:**
 
@@ -472,9 +638,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -484,24 +648,41 @@ Using AB CLI:
 GET /api/lookup/PPCCampaigns
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/lookup/PPCCampaigns'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/lookup/PPCCampaigns"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/lookup/PPCCampaigns
+      .. code-block:: bash
+
+         ab api raw get /api/lookup/PPCCampaigns
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/lookup/PPCCampaigns'
 
 **Sample Response:**
 
@@ -519,24 +700,41 @@ Using AB CLI:
 GET /api/lookup/parcelPackageTypes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/lookup/parcelPackageTypes'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/lookup/parcelPackageTypes"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/lookup/parcelPackageTypes
+      .. code-block:: bash
+
+         ab api raw get /api/lookup/parcelPackageTypes
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/lookup/parcelPackageTypes'
 
 **Sample Response:**
 
@@ -554,24 +752,41 @@ Using AB CLI:
 GET /api/lookup/comonInsurance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/lookup/comonInsurance'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/lookup/comonInsurance"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/lookup/comonInsurance
+      .. code-block:: bash
+
+         ab api raw get /api/lookup/comonInsurance
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/lookup/comonInsurance'
 
 **Sample Response:**
 
@@ -582,9 +797,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -594,24 +807,41 @@ Using AB CLI:
 GET /api/lookup/contactTypes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/lookup/contactTypes'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/lookup/contactTypes"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/lookup/contactTypes
+      .. code-block:: bash
+
+         ab api raw get /api/lookup/contactTypes
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/lookup/contactTypes'
 
 **Sample Response:**
 

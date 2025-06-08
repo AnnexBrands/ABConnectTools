@@ -1,11 +1,7 @@
-Notifications API
-=================
+Notifications
+=============
 
-This section covers the 1 endpoints related to Notifications.
-
-.. contents::
-   :local:
-   :depth: 2
+Manage system notifications and alerts for users including email and SMS preferences.
 
 Quick Reference
 ---------------
@@ -21,32 +17,47 @@ Quick Reference
      - /api/notifications
      - 
 
-Endpoints
----------
 
 .. _get-apinotifications:
 
 GET /api/notifications
 ~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/notifications'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/notifications"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/notifications
+      .. code-block:: bash
+
+         ab api raw get /api/notifications
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/notifications'
 
 **Sample Response:**
 

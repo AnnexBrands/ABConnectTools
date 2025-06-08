@@ -1,11 +1,5 @@
-JobParcelItems API
-==================
-
-This section covers the 4 endpoints related to JobParcelItems.
-
-.. contents::
-   :local:
-   :depth: 2
+JobParcelItems
+==============
 
 Quick Reference
 ---------------
@@ -30,15 +24,11 @@ Quick Reference
      - /api/job/{jobDisplayId}/parcelitems/{parcelItemId}
      - 
 
-Endpoints
----------
 
 .. _get-apijobjobdisplayidparcelitems:
 
 GET /api/job/{jobDisplayId}/parcelitems
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -48,21 +38,42 @@ GET /api/job/{jobDisplayId}/parcelitems
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/parcelitems'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/job/{jobDisplayId}/parcelitems"
+         ,
+             jobDisplayId="2000000"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/job/{jobDisplayId}/parcelitems \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw get /api/job/{jobDisplayId}/parcelitems \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/job/2000000/parcelitems'
 
 **Sample Response:**
 
@@ -80,8 +91,6 @@ Using AB CLI:
 POST /api/job/{jobDisplayId}/parcelitems
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -90,25 +99,51 @@ POST /api/job/{jobDisplayId}/parcelitems
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/parcelitems'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/job/{jobDisplayId}/parcelitems"
+         ,
+             jobDisplayId="2000000"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/job/{jobDisplayId}/parcelitems \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw post /api/job/{jobDisplayId}/parcelitems \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/job/2000000/parcelitems'
 
 **Sample Response:**
 
@@ -120,11 +155,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -133,8 +164,6 @@ Using AB CLI:
 
 PUT /api/job/{jobDisplayId}/parcelitems/{parcelItemId}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -145,26 +174,54 @@ PUT /api/job/{jobDisplayId}/parcelitems/{parcelItemId}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X PUT \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/parcelitems/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.put(
+             "/api/job/{jobDisplayId}/parcelitems/{parcelItemId}"
+         ,
+             parcelItemId="789e0123-e89b-12d3-a456-426614174002"
+         ,
+             jobDisplayId="2000000"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw put /api/job/{jobDisplayId}/parcelitems/{parcelItemId} \
-       parcelItemId=789e0123-e89b-12d3-a456-426614174002 \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw put /api/job/{jobDisplayId}/parcelitems/{parcelItemId} \
+             parcelItemId=789e0123-e89b-12d3-a456-426614174002 \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X PUT \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/job/2000000/parcelitems/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -176,8 +233,7 @@ Using AB CLI:
       {
         "id": "123e4567-e89b-12d3-a456-426614174000",
         "status": "updated",
-        "message": "Resource updated successfully",
-        "modified_at": "2024-01-20T10:00:00Z"
+        "message": "Resource updated successfully"
       }
 
 ----
@@ -186,8 +242,6 @@ Using AB CLI:
 
 DELETE /api/job/{jobDisplayId}/parcelitems/{parcelItemId}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -198,22 +252,45 @@ DELETE /api/job/{jobDisplayId}/parcelitems/{parcelItemId}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X DELETE \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/parcelitems/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.delete(
+             "/api/job/{jobDisplayId}/parcelitems/{parcelItemId}"
+         ,
+             parcelItemId="789e0123-e89b-12d3-a456-426614174002"
+         ,
+             jobDisplayId="2000000"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw delete /api/job/{jobDisplayId}/parcelitems/{parcelItemId} \
-       parcelItemId=789e0123-e89b-12d3-a456-426614174002 \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw delete /api/job/{jobDisplayId}/parcelitems/{parcelItemId} \
+             parcelItemId=789e0123-e89b-12d3-a456-426614174002 \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X DELETE \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/job/2000000/parcelitems/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 

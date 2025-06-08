@@ -1,11 +1,7 @@
-Contacts API
-============
+Contacts
+========
 
-This section covers the 9 endpoints related to Contacts.
-
-.. contents::
-   :local:
-   :depth: 2
+Manage contact information for individuals associated with companies. Contacts can have various roles such as primary contact, billing contact, or operations contact.
 
 Quick Reference
 ---------------
@@ -19,7 +15,7 @@ Quick Reference
      - Description
    * - GET
      - /api/contacts/{id}
-     - 
+     - Get contact by ID
    * - GET
      - /api/contacts/user
      - 
@@ -45,15 +41,15 @@ Quick Reference
      - /api/contacts/{contactId}/primarydetails
      - 
 
-Endpoints
----------
 
 .. _get-apicontactsid:
 
 GET /api/contacts/{id}
 ~~~~~~~~~~~~~~~~~~~~~~
 
-****
+**Get contact by ID**
+
+Retrieves information about a specific contact.
 
 **Parameters:**
 
@@ -63,21 +59,42 @@ GET /api/contacts/{id}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/contacts/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/contacts/{id}"
+         ,
+             id=789e0123-e89b-12d3-a456-426614174002
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/contacts/{id} \
-       id=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw get /api/contacts/{id} \
+             id=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/contacts/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -95,24 +112,41 @@ Using AB CLI:
 GET /api/contacts/user
 ~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/contacts/user'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/contacts/user"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/contacts/user
+      .. code-block:: bash
+
+         ab api raw get /api/contacts/user
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/contacts/user'
 
 **Sample Response:**
 
@@ -123,9 +157,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -135,8 +167,6 @@ Using AB CLI:
 GET /api/contacts/{contactId}/editdetails
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -145,21 +175,42 @@ GET /api/contacts/{contactId}/editdetails
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/contacts/456e7890-e89b-12d3-a456-426614174001/editdetails'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/contacts/{contactId}/editdetails"
+         ,
+             contactId=456e7890-e89b-12d3-a456-426614174001
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/contacts/{contactId}/editdetails \
-       contactId=456e7890-e89b-12d3-a456-426614174001
+      .. code-block:: bash
+
+         ab api raw get /api/contacts/{contactId}/editdetails \
+             contactId=456e7890-e89b-12d3-a456-426614174001
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/contacts/456e7890-e89b-12d3-a456-426614174001/editdetails'
 
 **Sample Response:**
 
@@ -177,8 +228,6 @@ Using AB CLI:
 PUT /api/contacts/{contactId}/editdetails
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -191,25 +240,51 @@ PUT /api/contacts/{contactId}/editdetails
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X PUT \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/contacts/456e7890-e89b-12d3-a456-426614174001/editdetails'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.put(
+             "/api/contacts/{contactId}/editdetails"
+         ,
+             contactId="456e7890-e89b-12d3-a456-426614174001"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw put /api/contacts/{contactId}/editdetails \
-       contactId=456e7890-e89b-12d3-a456-426614174001
+      .. code-block:: bash
+
+         ab api raw put /api/contacts/{contactId}/editdetails \
+             contactId=456e7890-e89b-12d3-a456-426614174001
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X PUT \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/contacts/456e7890-e89b-12d3-a456-426614174001/editdetails'
 
 **Sample Response:**
 
@@ -227,8 +302,6 @@ Using AB CLI:
 POST /api/contacts/editdetails
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Query Parameters:*
@@ -237,24 +310,48 @@ POST /api/contacts/editdetails
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/contacts/editdetails'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/contacts/editdetails"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/contacts/editdetails
+      .. code-block:: bash
+
+         ab api raw post /api/contacts/editdetails
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/contacts/editdetails'
 
 **Sample Response:**
 
@@ -272,8 +369,6 @@ Using AB CLI:
 POST /api/contacts/search
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Query Parameters:*
@@ -282,24 +377,48 @@ POST /api/contacts/search
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/contacts/search'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/contacts/search"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/contacts/search
+      .. code-block:: bash
+
+         ab api raw post /api/contacts/search
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/contacts/search'
 
 **Sample Response:**
 
@@ -317,28 +436,50 @@ Using AB CLI:
 POST /api/contacts/v2/search
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/contacts/v2/search'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/contacts/v2/search"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/contacts/v2/search
+      .. code-block:: bash
+
+         ab api raw post /api/contacts/v2/search
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/contacts/v2/search'
 
 **Sample Response:**
 
@@ -356,28 +497,50 @@ Using AB CLI:
 POST /api/contacts/customers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/contacts/customers'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/contacts/customers"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/contacts/customers
+      .. code-block:: bash
+
+         ab api raw post /api/contacts/customers
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/contacts/customers'
 
 **Sample Response:**
 
@@ -389,11 +552,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -403,8 +562,6 @@ Using AB CLI:
 GET /api/contacts/{contactId}/primarydetails
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -413,21 +570,42 @@ GET /api/contacts/{contactId}/primarydetails
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/contacts/456e7890-e89b-12d3-a456-426614174001/primarydetails'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/contacts/{contactId}/primarydetails"
+         ,
+             contactId=456e7890-e89b-12d3-a456-426614174001
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/contacts/{contactId}/primarydetails \
-       contactId=456e7890-e89b-12d3-a456-426614174001
+      .. code-block:: bash
+
+         ab api raw get /api/contacts/{contactId}/primarydetails \
+             contactId=456e7890-e89b-12d3-a456-426614174001
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/contacts/456e7890-e89b-12d3-a456-426614174001/primarydetails'
 
 **Sample Response:**
 

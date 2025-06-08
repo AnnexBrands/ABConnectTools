@@ -1,11 +1,5 @@
-JobTrackingV2 API
-=================
-
-This section covers the 1 endpoints related to JobTrackingV2.
-
-.. contents::
-   :local:
-   :depth: 2
+JobTrackingV2
+=============
 
 Quick Reference
 ---------------
@@ -21,15 +15,11 @@ Quick Reference
      - /api/v2/job/{jobDisplayId}/tracking/{historyAmount}
      - 
 
-Endpoints
----------
 
 .. _get-apiv2jobjobdisplayidtrackinghistoryamount:
 
 GET /api/v2/job/{jobDisplayId}/tracking/{historyAmount}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -43,21 +33,42 @@ GET /api/v2/job/{jobDisplayId}/tracking/{historyAmount}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/v2/job/JOB-2024-001/tracking/{historyAmount}'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/v2/job/{jobDisplayId}/tracking/{historyAmount}"
+         ,
+             jobDisplayId=2000000
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/v2/job/{jobDisplayId}/tracking/{historyAmount} \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw get /api/v2/job/{jobDisplayId}/tracking/{historyAmount} \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/v2/job/2000000/tracking/{historyAmount}'
 
 **Sample Response:**
 
@@ -68,9 +79,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
