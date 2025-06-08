@@ -1,11 +1,7 @@
-Companies API
-=============
+Companies
+=========
 
-This section covers the 29 endpoints related to Companies.
-
-.. contents::
-   :local:
-   :depth: 2
+Manage company records including customers, vendors, carriers, and franchisees. Companies are the core entities in the system that can place orders, provide services, or act as shipping partners.
 
 Quick Reference
 ---------------
@@ -19,19 +15,19 @@ Quick Reference
      - Description
    * - GET
      - /api/companies/{id}
-     - 
+     - Get company by ID
    * - GET
      - /api/companies/{companyId}/details
-     - 
+     - Get company details
    * - GET
      - /api/companies/availableByCurrentUser
-     - 
+     - Get companies available to current user
    * - GET
      - /api/companies/search
-     - 
+     - Search companies
    * - POST
      - /api/companies/search/v2
-     - 
+     - Advanced company search
    * - POST
      - /api/companies/list
      - 
@@ -40,10 +36,10 @@ Quick Reference
      - 
    * - GET
      - /api/companies/{companyId}/fulldetails
-     - 
+     - Get complete company information
    * - PUT
      - /api/companies/{companyId}/fulldetails
-     - 
+     - Update complete company information
    * - POST
      - /api/companies/fulldetails
      - 
@@ -105,15 +101,15 @@ Quick Reference
      - /api/companies/{companyId}/franchiseeAddresses
      - 
 
-Endpoints
----------
 
 .. _get-apicompaniesid:
 
 GET /api/companies/{id}
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-****
+**Get company by ID**
+
+Retrieves detailed information about a specific company using its unique identifier.
 
 **Parameters:**
 
@@ -121,23 +117,50 @@ GET /api/companies/{id}
 
 - `id` (string, path) *(required)*: No description available
 
+**Response Type:**
+
+:class:`~ABConnect.api.models.companies.CompanyBasic`
+
+See the model documentation for detailed field descriptions.
+
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/{id}"
+         ,
+             id="789e0123-e89b-12d3-a456-426614174002"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/{id} \
-       id=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw get /api/companies/{id} \
+             id=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -147,21 +170,10 @@ Using AB CLI:
       :linenos:
 
       {
-        "id": "123e4567-e89b-12d3-a456-426614174000",
-        "name": "Example Item",
-        "code": "ITEM-001",
-        "description": "This is a detailed example item",
-        "status": "active",
-        "type": "standard",
-        "metadata": {
-          "created_by": "user@example.com",
-          "created_at": "2024-01-01T00:00:00Z",
-          "updated_at": "2024-01-15T12:30:00Z"
-        },
-        "settings": {
-          "notifications": true,
-          "auto_update": false
-        }
+        "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "code": "TRAINING",
+        "name": "Training",
+        "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
       }
 
 ----
@@ -171,7 +183,9 @@ Using AB CLI:
 GET /api/companies/{companyId}/details
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
+**Get company details**
+
+Retrieves comprehensive details about a company including contacts, addresses, settings, and financial information.
 
 **Parameters:**
 
@@ -179,23 +193,50 @@ GET /api/companies/{companyId}/details
 
 - `companyId` (string, path) *(required)*: No description available
 
+**Response Type:**
+
+:class:`~ABConnect.api.models.companies.CompanyDetails`
+
+See the model documentation for detailed field descriptions.
+
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/123e4567-e89b-12d3-a456-426614174000/details'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/{companyId}/details"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/{companyId}/details \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw get /api/companies/{companyId}/details \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/ed282b80-54fe-4f42-bf1b-69103ce1f76c/details'
 
 **Sample Response:**
 
@@ -205,29 +246,26 @@ Using AB CLI:
       :linenos:
 
       {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
-          },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
-          }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
+        "companyID": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "companyName": "Training",
+        "companyCode": "TRAINING",
+        "companyEmail": "training@abconnect.co",
+        "companyPhone": "8009814202",
+        "mainAddress": {
+          "id": 407491,
+          "address1": "2534 Vista Dr",
+          "city": "Castle Rock",
+          "state": "CO",
+          "zipCode": "80104",
+          "latitude": 39.2942344,
+          "longitude": -104.8221147
+        },
+        "companyInfo": {
+          "companyId": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+          "companyName": "Training",
+          "companyCode": "TRAINING",
+          "isThirdParty": false,
+          "isActive": true
         }
       }
 
@@ -238,24 +276,51 @@ Using AB CLI:
 GET /api/companies/availableByCurrentUser
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
+**Get companies available to current user**
+
+Returns a list of companies that the currently authenticated user has permission to access.
+
+**Response Type:**
+
+Array of :class:`~ABConnect.api.models.companies.CompanyBasic` objects
+
+See the model documentation for detailed field descriptions.
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/availableByCurrentUser'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/availableByCurrentUser"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/availableByCurrentUser
+      .. code-block:: bash
+
+         ab api raw get /api/companies/availableByCurrentUser
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/availableByCurrentUser'
 
 **Sample Response:**
 
@@ -264,12 +329,14 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
+      [
+        {
+          "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+          "code": "TRAINING",
+          "name": "Training",
+          "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
         }
-      }
+      ]
 
 ----
 
@@ -278,7 +345,9 @@ Using AB CLI:
 GET /api/companies/search
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
+**Search companies**
+
+Search for companies using various filters such as name, code, type, or location.
 
 **Parameters:**
 
@@ -286,22 +355,47 @@ GET /api/companies/search
 
 - `searchValue` (string, query): No description available
 
+**Response Type:**
+
+Array of :class:`~ABConnect.api.models.companies.CompanyBasic` objects
+
+See the model documentation for detailed field descriptions.
+
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/search'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/search"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/search
+      .. code-block:: bash
+
+         ab api raw get /api/companies/search
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/search'
 
 **Sample Response:**
 
@@ -310,32 +404,7 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
-          },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
-          }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
-        }
-      }
+      []
 
 ----
 
@@ -344,28 +413,54 @@ Using AB CLI:
 POST /api/companies/search/v2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
+**Advanced company search**
+
+Perform advanced searches on companies with complex filtering, sorting, and pagination options.
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/companies/search/v2'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/companies/search/v2"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/companies/search/v2
+      .. code-block:: bash
+
+         ab api raw post /api/companies/search/v2
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/companies/search/v2'
 
 **Sample Response:**
 
@@ -374,32 +469,7 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
-          },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
-          }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
-        }
-      }
+      []
 
 ----
 
@@ -408,28 +478,50 @@ Using AB CLI:
 POST /api/companies/list
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/companies/list'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/companies/list"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/companies/list
+      .. code-block:: bash
+
+         ab api raw post /api/companies/list
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/companies/list'
 
 **Sample Response:**
 
@@ -441,11 +533,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -455,28 +543,50 @@ Using AB CLI:
 POST /api/companies/simplelist
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/companies/simplelist'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/companies/simplelist"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/companies/simplelist
+      .. code-block:: bash
+
+         ab api raw post /api/companies/simplelist
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/companies/simplelist'
 
 **Sample Response:**
 
@@ -488,11 +598,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -502,7 +608,9 @@ Using AB CLI:
 GET /api/companies/{companyId}/fulldetails
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
+**Get complete company information**
+
+Retrieves all available information about a company including details, preferences, capabilities, pricing, and insurance settings.
 
 **Parameters:**
 
@@ -510,23 +618,50 @@ GET /api/companies/{companyId}/fulldetails
 
 - `companyId` (string, path) *(required)*: No description available
 
+**Response Type:**
+
+:class:`~ABConnect.api.models.companies.CompanyFullDetails`
+
+See the model documentation for detailed field descriptions.
+
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/123e4567-e89b-12d3-a456-426614174000/fulldetails'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/{companyId}/fulldetails"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/{companyId}/fulldetails \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw get /api/companies/{companyId}/fulldetails \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/ed282b80-54fe-4f42-bf1b-69103ce1f76c/fulldetails'
 
 **Sample Response:**
 
@@ -536,29 +671,41 @@ Using AB CLI:
       :linenos:
 
       {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
+        "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "details": {
+          "displayId": "694618",
+          "name": "Training",
+          "code": "TRAINING",
+          "parentId": "5e2eefc1-d616-e911-b00c-00155d426802",
+          "companyTypeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+          "phone": "8009814202",
+          "email": "training@abconnect.co",
+          "isActive": true
+        },
+        "preferences": {
+          "isQbUser": false,
+          "skipIntacct": true,
+          "pzCode": "PZ100"
+        },
+        "capabilities": 135,
+        "address": {
+          "id": 407491,
+          "address1": "2534 Vista Dr",
+          "city": "Castle Rock",
+          "state": "CO",
+          "zipCode": "80104"
+        },
+        "pricing": {
+          "transportationCharge": {
+            "baseTripFee": 100.0,
+            "baseTripMile": 3000.0
           },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
+          "transportationMarkups": {
+            "wholeSale": 1.0,
+            "base": 1.25,
+            "medium": 2.3,
+            "high": 2.5
           }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
         }
       }
 
@@ -569,7 +716,9 @@ Using AB CLI:
 PUT /api/companies/{companyId}/fulldetails
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
+**Update complete company information**
+
+Updates all company information including details, preferences, capabilities, pricing, and insurance settings.
 
 **Parameters:**
 
@@ -579,25 +728,51 @@ PUT /api/companies/{companyId}/fulldetails
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X PUT \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/companies/123e4567-e89b-12d3-a456-426614174000/fulldetails'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.put(
+             "/api/companies/{companyId}/fulldetails"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw put /api/companies/{companyId}/fulldetails \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw put /api/companies/{companyId}/fulldetails \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X PUT \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/companies/ed282b80-54fe-4f42-bf1b-69103ce1f76c/fulldetails'
 
 **Sample Response:**
 
@@ -606,23 +781,7 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "id": "123e4567-e89b-12d3-a456-426614174000",
-        "name": "Example Item",
-        "code": "ITEM-001",
-        "description": "This is a detailed example item",
-        "status": "active",
-        "type": "standard",
-        "metadata": {
-          "created_by": "user@example.com",
-          "created_at": "2024-01-01T00:00:00Z",
-          "updated_at": "2024-01-15T12:30:00Z"
-        },
-        "settings": {
-          "notifications": true,
-          "auto_update": false
-        }
-      }
+      {}
 
 ----
 
@@ -631,28 +790,50 @@ Using AB CLI:
 POST /api/companies/fulldetails
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/companies/fulldetails'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/companies/fulldetails"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/companies/fulldetails
+      .. code-block:: bash
+
+         ab api raw post /api/companies/fulldetails
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/companies/fulldetails'
 
 **Sample Response:**
 
@@ -661,23 +842,7 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "id": "123e4567-e89b-12d3-a456-426614174000",
-        "name": "Example Item",
-        "code": "ITEM-001",
-        "description": "This is a detailed example item",
-        "status": "active",
-        "type": "standard",
-        "metadata": {
-          "created_by": "user@example.com",
-          "created_at": "2024-01-01T00:00:00Z",
-          "updated_at": "2024-01-15T12:30:00Z"
-        },
-        "settings": {
-          "notifications": true,
-          "auto_update": false
-        }
-      }
+      {}
 
 ----
 
@@ -685,8 +850,6 @@ Using AB CLI:
 
 GET /api/companies/infoFromKey
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -696,20 +859,39 @@ GET /api/companies/infoFromKey
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/infoFromKey'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/infoFromKey"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/infoFromKey
+      .. code-block:: bash
+
+         ab api raw get /api/companies/infoFromKey
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/infoFromKey'
 
 **Sample Response:**
 
@@ -720,9 +902,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -732,8 +912,6 @@ Using AB CLI:
 GET /api/companies/{companyId}/geosettings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -742,21 +920,42 @@ GET /api/companies/{companyId}/geosettings
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/123e4567-e89b-12d3-a456-426614174000/geosettings'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/{companyId}/geosettings"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/{companyId}/geosettings \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw get /api/companies/{companyId}/geosettings \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/ed282b80-54fe-4f42-bf1b-69103ce1f76c/geosettings'
 
 **Sample Response:**
 
@@ -766,30 +965,10 @@ Using AB CLI:
       :linenos:
 
       {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
-          },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
-          }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
-        }
+        "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "code": "TRAINING",
+        "name": "Training",
+        "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
       }
 
 ----
@@ -799,8 +978,6 @@ Using AB CLI:
 POST /api/companies/{companyId}/geosettings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -809,25 +986,51 @@ POST /api/companies/{companyId}/geosettings
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/companies/123e4567-e89b-12d3-a456-426614174000/geosettings'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/companies/{companyId}/geosettings"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/companies/{companyId}/geosettings \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw post /api/companies/{companyId}/geosettings \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/companies/ed282b80-54fe-4f42-bf1b-69103ce1f76c/geosettings'
 
 **Sample Response:**
 
@@ -839,11 +1042,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -852,8 +1051,6 @@ Using AB CLI:
 
 GET /api/companies/geosettings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -865,20 +1062,39 @@ GET /api/companies/geosettings
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/geosettings'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/geosettings"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/geosettings
+      .. code-block:: bash
+
+         ab api raw get /api/companies/geosettings
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/geosettings'
 
 **Sample Response:**
 
@@ -887,32 +1103,7 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
-          },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
-          }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
-        }
-      }
+      []
 
 ----
 
@@ -921,28 +1112,50 @@ Using AB CLI:
 POST /api/companies/filteredCustomers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/companies/filteredCustomers'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/companies/filteredCustomers"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/companies/filteredCustomers
+      .. code-block:: bash
+
+         ab api raw post /api/companies/filteredCustomers
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/companies/filteredCustomers'
 
 **Sample Response:**
 
@@ -954,11 +1167,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -968,8 +1177,6 @@ Using AB CLI:
 GET /api/companies/{companyId}/carrierAcounts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -978,21 +1185,42 @@ GET /api/companies/{companyId}/carrierAcounts
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/123e4567-e89b-12d3-a456-426614174000/carrierAcounts'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/{companyId}/carrierAcounts"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/{companyId}/carrierAcounts \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw get /api/companies/{companyId}/carrierAcounts \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/ed282b80-54fe-4f42-bf1b-69103ce1f76c/carrierAcounts'
 
 **Sample Response:**
 
@@ -1002,30 +1230,10 @@ Using AB CLI:
       :linenos:
 
       {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
-          },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
-          }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
-        }
+        "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "code": "TRAINING",
+        "name": "Training",
+        "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
       }
 
 ----
@@ -1035,8 +1243,6 @@ Using AB CLI:
 POST /api/companies/{companyId}/carrierAcounts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -1045,25 +1251,51 @@ POST /api/companies/{companyId}/carrierAcounts
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/companies/123e4567-e89b-12d3-a456-426614174000/carrierAcounts'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/companies/{companyId}/carrierAcounts"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/companies/{companyId}/carrierAcounts \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw post /api/companies/{companyId}/carrierAcounts \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/companies/ed282b80-54fe-4f42-bf1b-69103ce1f76c/carrierAcounts'
 
 **Sample Response:**
 
@@ -1075,11 +1307,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -1089,8 +1317,6 @@ Using AB CLI:
 GET /api/companies/{companyId}/capabilities
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -1099,21 +1325,42 @@ GET /api/companies/{companyId}/capabilities
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/123e4567-e89b-12d3-a456-426614174000/capabilities'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/{companyId}/capabilities"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/{companyId}/capabilities \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw get /api/companies/{companyId}/capabilities \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/ed282b80-54fe-4f42-bf1b-69103ce1f76c/capabilities'
 
 **Sample Response:**
 
@@ -1123,30 +1370,10 @@ Using AB CLI:
       :linenos:
 
       {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
-          },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
-          }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
-        }
+        "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "code": "TRAINING",
+        "name": "Training",
+        "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
       }
 
 ----
@@ -1156,8 +1383,6 @@ Using AB CLI:
 POST /api/companies/{companyId}/capabilities
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -1166,25 +1391,51 @@ POST /api/companies/{companyId}/capabilities
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/companies/123e4567-e89b-12d3-a456-426614174000/capabilities'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/companies/{companyId}/capabilities"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/companies/{companyId}/capabilities \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw post /api/companies/{companyId}/capabilities \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/companies/ed282b80-54fe-4f42-bf1b-69103ce1f76c/capabilities'
 
 **Sample Response:**
 
@@ -1196,11 +1447,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -1210,8 +1457,6 @@ Using AB CLI:
 GET /api/companies/{companyId}/packagingsettings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -1220,21 +1465,42 @@ GET /api/companies/{companyId}/packagingsettings
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/123e4567-e89b-12d3-a456-426614174000/packagingsettings'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/{companyId}/packagingsettings"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/{companyId}/packagingsettings \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw get /api/companies/{companyId}/packagingsettings \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/ed282b80-54fe-4f42-bf1b-69103ce1f76c/packagingsettings'
 
 **Sample Response:**
 
@@ -1244,30 +1510,10 @@ Using AB CLI:
       :linenos:
 
       {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
-          },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
-          }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
-        }
+        "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "code": "TRAINING",
+        "name": "Training",
+        "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
       }
 
 ----
@@ -1277,8 +1523,6 @@ Using AB CLI:
 POST /api/companies/{companyId}/packagingsettings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -1287,25 +1531,51 @@ POST /api/companies/{companyId}/packagingsettings
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/companies/123e4567-e89b-12d3-a456-426614174000/packagingsettings'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/companies/{companyId}/packagingsettings"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/companies/{companyId}/packagingsettings \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw post /api/companies/{companyId}/packagingsettings \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/companies/ed282b80-54fe-4f42-bf1b-69103ce1f76c/packagingsettings'
 
 **Sample Response:**
 
@@ -1317,11 +1587,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -1331,8 +1597,6 @@ Using AB CLI:
 GET /api/companies/{companyId}/inheritedPackagingTariffs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -1345,21 +1609,42 @@ GET /api/companies/{companyId}/inheritedPackagingTariffs
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/123e4567-e89b-12d3-a456-426614174000/inheritedPackagingTariffs'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/{companyId}/inheritedPackagingTariffs"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/{companyId}/inheritedPackagingTariffs \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw get /api/companies/{companyId}/inheritedPackagingTariffs \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/ed282b80-54fe-4f42-bf1b-69103ce1f76c/inheritedPackagingTariffs'
 
 **Sample Response:**
 
@@ -1369,30 +1654,10 @@ Using AB CLI:
       :linenos:
 
       {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
-          },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
-          }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
-        }
+        "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "code": "TRAINING",
+        "name": "Training",
+        "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
       }
 
 ----
@@ -1402,8 +1667,6 @@ Using AB CLI:
 GET /api/companies/{companyId}/packaginglabor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -1412,21 +1675,42 @@ GET /api/companies/{companyId}/packaginglabor
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/123e4567-e89b-12d3-a456-426614174000/packaginglabor'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/{companyId}/packaginglabor"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/{companyId}/packaginglabor \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw get /api/companies/{companyId}/packaginglabor \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/ed282b80-54fe-4f42-bf1b-69103ce1f76c/packaginglabor'
 
 **Sample Response:**
 
@@ -1436,10 +1720,10 @@ Using AB CLI:
       :linenos:
 
       {
-        "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "code": "TRAINING",
+        "name": "Training",
+        "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
       }
 
 ----
@@ -1449,8 +1733,6 @@ Using AB CLI:
 POST /api/companies/{companyId}/packaginglabor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -1459,25 +1741,51 @@ POST /api/companies/{companyId}/packaginglabor
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/companies/123e4567-e89b-12d3-a456-426614174000/packaginglabor'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/companies/{companyId}/packaginglabor"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/companies/{companyId}/packaginglabor \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw post /api/companies/{companyId}/packaginglabor \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/companies/ed282b80-54fe-4f42-bf1b-69103ce1f76c/packaginglabor'
 
 **Sample Response:**
 
@@ -1489,11 +1797,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -1502,8 +1806,6 @@ Using AB CLI:
 
 GET /api/companies/{companyId}/inheritedpackaginglabor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -1517,21 +1819,42 @@ GET /api/companies/{companyId}/inheritedpackaginglabor
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/123e4567-e89b-12d3-a456-426614174000/inheritedpackaginglabor'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/{companyId}/inheritedpackaginglabor"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/{companyId}/inheritedpackaginglabor \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw get /api/companies/{companyId}/inheritedpackaginglabor \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/ed282b80-54fe-4f42-bf1b-69103ce1f76c/inheritedpackaginglabor'
 
 **Sample Response:**
 
@@ -1541,10 +1864,10 @@ Using AB CLI:
       :linenos:
 
       {
-        "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "code": "TRAINING",
+        "name": "Training",
+        "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
       }
 
 ----
@@ -1554,24 +1877,41 @@ Using AB CLI:
 GET /api/companies/geoAreaCompanies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/geoAreaCompanies'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/geoAreaCompanies"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/geoAreaCompanies
+      .. code-block:: bash
+
+         ab api raw get /api/companies/geoAreaCompanies
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/geoAreaCompanies'
 
 **Sample Response:**
 
@@ -1580,32 +1920,7 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
-          },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
-          }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
-        }
-      }
+      []
 
 ----
 
@@ -1614,24 +1929,41 @@ Using AB CLI:
 GET /api/companies/brands
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/brands'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/brands"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/brands
+      .. code-block:: bash
+
+         ab api raw get /api/companies/brands
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/brands'
 
 **Sample Response:**
 
@@ -1640,32 +1972,7 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
-          },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
-          }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
-        }
-      }
+      []
 
 ----
 
@@ -1674,24 +1981,41 @@ Using AB CLI:
 GET /api/companies/brandstree
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/brandstree'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/brandstree"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/brandstree
+      .. code-block:: bash
+
+         ab api raw get /api/companies/brandstree
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/brandstree'
 
 **Sample Response:**
 
@@ -1702,9 +2026,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -1714,8 +2036,6 @@ Using AB CLI:
 GET /api/companies/{companyId}/franchiseeAddresses
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -1724,21 +2044,42 @@ GET /api/companies/{companyId}/franchiseeAddresses
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/companies/123e4567-e89b-12d3-a456-426614174000/franchiseeAddresses'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/companies/{companyId}/franchiseeAddresses"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/companies/{companyId}/franchiseeAddresses \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw get /api/companies/{companyId}/franchiseeAddresses \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/companies/ed282b80-54fe-4f42-bf1b-69103ce1f76c/franchiseeAddresses'
 
 **Sample Response:**
 
@@ -1748,30 +2089,8 @@ Using AB CLI:
       :linenos:
 
       {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
-          },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
-          }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
-        }
+        "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "code": "TRAINING",
+        "name": "Training",
+        "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
       }
-
-----

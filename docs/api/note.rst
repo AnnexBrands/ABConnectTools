@@ -1,11 +1,5 @@
-Note API
-========
-
-This section covers the 4 endpoints related to Note.
-
-.. contents::
-   :local:
-   :depth: 2
+Note
+====
 
 Quick Reference
 ---------------
@@ -30,15 +24,11 @@ Quick Reference
      - /api/note/suggestUsers
      - 
 
-Endpoints
----------
 
 .. _get-apinote:
 
 GET /api/note
 ~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -51,20 +41,39 @@ GET /api/note
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/note'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/note"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/note
+      .. code-block:: bash
+
+         ab api raw get /api/note
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/note'
 
 **Sample Response:**
 
@@ -75,9 +84,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -87,28 +94,50 @@ Using AB CLI:
 POST /api/note
 ~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/note'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/note"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/note
+      .. code-block:: bash
+
+         ab api raw post /api/note
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/note'
 
 **Sample Response:**
 
@@ -120,11 +149,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -134,8 +159,6 @@ Using AB CLI:
 PUT /api/note/{id}
 ~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -144,25 +167,51 @@ PUT /api/note/{id}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X PUT \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/note/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.put(
+             "/api/note/{id}"
+         ,
+             id=789e0123-e89b-12d3-a456-426614174002
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw put /api/note/{id} \
-       id=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw put /api/note/{id} \
+             id=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X PUT \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/note/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -171,23 +220,7 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "id": "123e4567-e89b-12d3-a456-426614174000",
-        "name": "Example Item",
-        "code": "ITEM-001",
-        "description": "This is a detailed example item",
-        "status": "active",
-        "type": "standard",
-        "metadata": {
-          "created_by": "user@example.com",
-          "created_at": "2024-01-01T00:00:00Z",
-          "updated_at": "2024-01-15T12:30:00Z"
-        },
-        "settings": {
-          "notifications": true,
-          "auto_update": false
-        }
-      }
+      {}
 
 ----
 
@@ -195,8 +228,6 @@ Using AB CLI:
 
 GET /api/note/suggestUsers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -208,21 +239,42 @@ GET /api/note/suggestUsers
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/note/suggestUsers?SearchKey=example-value'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/note/suggestUsers"
+         ,
+             SearchKey="example-value"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/note/suggestUsers \
-       SearchKey=example-value
+      .. code-block:: bash
+
+         ab api raw get /api/note/suggestUsers \
+             SearchKey=example-value
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/note/suggestUsers?SearchKey=example-value'
 
 **Sample Response:**
 
@@ -231,31 +283,4 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
-          },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
-          }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
-        }
-      }
-
-----
+      []

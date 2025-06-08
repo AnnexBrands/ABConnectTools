@@ -1,11 +1,5 @@
-LogBuffer API
-=============
-
-This section covers the 2 endpoints related to LogBuffer.
-
-.. contents::
-   :local:
-   :depth: 2
+LogBuffer
+=========
 
 Quick Reference
 ---------------
@@ -24,36 +18,56 @@ Quick Reference
      - /api/admin/logbuffer/flushAll
      - 
 
-Endpoints
----------
 
 .. _post-apiadminlogbufferflush:
 
 POST /api/admin/logbuffer/flush
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/admin/logbuffer/flush'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/admin/logbuffer/flush"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/admin/logbuffer/flush
+      .. code-block:: bash
+
+         ab api raw post /api/admin/logbuffer/flush
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/admin/logbuffer/flush'
 
 **Sample Response:**
 
@@ -65,11 +79,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -79,25 +89,42 @@ Using AB CLI:
 POST /api/admin/logbuffer/flushAll
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     'https://api.abconnect.co/api/admin/logbuffer/flushAll'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/admin/logbuffer/flushAll"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/admin/logbuffer/flushAll
+      .. code-block:: bash
+
+         ab api raw post /api/admin/logbuffer/flushAll
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           'https://api.abconnect.co/api/admin/logbuffer/flushAll'
 
 **Sample Response:**
 
@@ -109,11 +136,5 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
-
-----

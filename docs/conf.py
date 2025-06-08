@@ -29,6 +29,7 @@ extensions = [
     'myst_parser',
     'sphinx_copybutton',
     'sphinx_togglebutton',
+    'sphinx_tabs.tabs',
 ]
 
 templates_path = ['_templates']

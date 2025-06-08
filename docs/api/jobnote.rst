@@ -1,11 +1,5 @@
-JobNote API
-===========
-
-This section covers the 4 endpoints related to JobNote.
-
-.. contents::
-   :local:
-   :depth: 2
+JobNote
+=======
 
 Quick Reference
 ---------------
@@ -30,15 +24,11 @@ Quick Reference
      - /api/job/{jobDisplayId}/note/{id}
      - 
 
-Endpoints
----------
 
 .. _get-apijobjobdisplayidnote:
 
 GET /api/job/{jobDisplayId}/note
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -53,21 +43,42 @@ GET /api/job/{jobDisplayId}/note
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/note'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/job/{jobDisplayId}/note"
+         ,
+             jobDisplayId="2000000"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/job/{jobDisplayId}/note \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw get /api/job/{jobDisplayId}/note \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/job/2000000/note'
 
 **Sample Response:**
 
@@ -78,9 +89,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -90,8 +99,6 @@ Using AB CLI:
 POST /api/job/{jobDisplayId}/note
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -100,25 +107,51 @@ POST /api/job/{jobDisplayId}/note
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/note'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/job/{jobDisplayId}/note"
+         ,
+             jobDisplayId="2000000"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/job/{jobDisplayId}/note \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw post /api/job/{jobDisplayId}/note \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/job/2000000/note'
 
 **Sample Response:**
 
@@ -130,11 +163,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -144,8 +173,6 @@ Using AB CLI:
 GET /api/job/{jobDisplayId}/note/{id}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -155,22 +182,45 @@ GET /api/job/{jobDisplayId}/note/{id}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/note/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/job/{jobDisplayId}/note/{id}"
+         ,
+             id="789e0123-e89b-12d3-a456-426614174002"
+         ,
+             jobDisplayId="2000000"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/job/{jobDisplayId}/note/{id} \
-       id=789e0123-e89b-12d3-a456-426614174002 \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw get /api/job/{jobDisplayId}/note/{id} \
+             id=789e0123-e89b-12d3-a456-426614174002 \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/job/2000000/note/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -179,23 +229,7 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "id": "123e4567-e89b-12d3-a456-426614174000",
-        "name": "Example Item",
-        "code": "ITEM-001",
-        "description": "This is a detailed example item",
-        "status": "active",
-        "type": "standard",
-        "metadata": {
-          "created_by": "user@example.com",
-          "created_at": "2024-01-01T00:00:00Z",
-          "updated_at": "2024-01-15T12:30:00Z"
-        },
-        "settings": {
-          "notifications": true,
-          "auto_update": false
-        }
-      }
+      {}
 
 ----
 
@@ -204,8 +238,6 @@ Using AB CLI:
 PUT /api/job/{jobDisplayId}/note/{id}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -215,26 +247,54 @@ PUT /api/job/{jobDisplayId}/note/{id}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X PUT \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/note/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.put(
+             "/api/job/{jobDisplayId}/note/{id}"
+         ,
+             id="789e0123-e89b-12d3-a456-426614174002"
+         ,
+             jobDisplayId="2000000"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw put /api/job/{jobDisplayId}/note/{id} \
-       id=789e0123-e89b-12d3-a456-426614174002 \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw put /api/job/{jobDisplayId}/note/{id} \
+             id=789e0123-e89b-12d3-a456-426614174002 \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X PUT \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/job/2000000/note/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -243,22 +303,4 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "id": "123e4567-e89b-12d3-a456-426614174000",
-        "name": "Example Item",
-        "code": "ITEM-001",
-        "description": "This is a detailed example item",
-        "status": "active",
-        "type": "standard",
-        "metadata": {
-          "created_by": "user@example.com",
-          "created_at": "2024-01-01T00:00:00Z",
-          "updated_at": "2024-01-15T12:30:00Z"
-        },
-        "settings": {
-          "notifications": true,
-          "auto_update": false
-        }
-      }
-
-----
+      {}

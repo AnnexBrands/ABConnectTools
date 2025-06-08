@@ -1,0 +1,226 @@
+{
+  "job": {
+    "get_job_by_display_id": {
+      "endpoint": "/api/job/{jobDisplayId}",
+      "method": "GET",
+      "response": {
+        "jobDisplayId": "2000000",
+        "bookedDate": "2024-08-13T14:04:04",
+        "ownerCompanyId": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "customerContact": {
+          "id": 3473290,
+          "contact": {
+            "id": 266841,
+            "contactDisplayId": "1",
+            "fullName": "Training",
+            "contactTypeId": 2,
+            "isBusiness": true,
+            "companyId": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+            "company": {
+              "companyName": "Training",
+              "companyCode": "TRAINING",
+              "companyPhone": "8009814202",
+              "companyEmail": "training@abconnect.co"
+            }
+          }
+        },
+        "jobStatusId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "jobStatusName": "Booked",
+        "jobTypeId": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+        "items": [
+          {
+            "id": 12345,
+            "description": "Widget",
+            "quantity": 1,
+            "weight": 10.5,
+            "dimensions": {
+              "length": 12,
+              "width": 8,
+              "height": 6
+            }
+          }
+        ],
+        "origin": {
+          "address1": "123 Main St",
+          "city": "Denver",
+          "state": "CO",
+          "zipCode": "80202"
+        },
+        "destination": {
+          "address1": "456 Oak Ave",
+          "city": "Los Angeles",
+          "state": "CA",
+          "zipCode": "90001"
+        }
+      }
+    }
+  },
+  "companies": {
+    "get_company_by_id": {
+      "endpoint": "/api/companies/{id}",
+      "method": "GET",
+      "response": {
+        "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "code": "TRAINING",
+        "name": "Training",
+        "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
+      }
+    },
+    "get_company_details": {
+      "endpoint": "/api/companies/{companyId}/details",
+      "method": "GET",
+      "response": {
+        "companyID": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "companyName": "Training",
+        "companyCode": "TRAINING",
+        "companyEmail": "training@abconnect.co",
+        "companyPhone": "8009814202",
+        "mainAddress": {
+          "id": 407491,
+          "address1": "2534 Vista Dr",
+          "city": "Castle Rock",
+          "state": "CO",
+          "zipCode": "80104",
+          "latitude": 39.2942344,
+          "longitude": -104.8221147
+        },
+        "companyInfo": {
+          "companyId": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+          "companyName": "Training",
+          "companyCode": "TRAINING",
+          "isThirdParty": false,
+          "isActive": true
+        }
+      }
+    },
+    "get_company_fulldetails": {
+      "endpoint": "/api/companies/{companyId}/fulldetails", 
+      "method": "GET",
+      "response": {
+        "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "details": {
+          "displayId": "694618",
+          "name": "Training",
+          "code": "TRAINING",
+          "parentId": "5e2eefc1-d616-e911-b00c-00155d426802",
+          "companyTypeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+          "phone": "8009814202",
+          "email": "training@abconnect.co",
+          "isActive": true
+        },
+        "preferences": {
+          "isQbUser": false,
+          "skipIntacct": true,
+          "pzCode": "PZ100"
+        },
+        "capabilities": 135,
+        "address": {
+          "id": 407491,
+          "address1": "2534 Vista Dr",
+          "city": "Castle Rock",
+          "state": "CO",
+          "zipCode": "80104"
+        },
+        "pricing": {
+          "transportationCharge": {
+            "baseTripFee": 100.0,
+            "baseTripMile": 3000.0
+          },
+          "transportationMarkups": {
+            "wholeSale": 1.0,
+            "base": 1.25,
+            "medium": 2.3,
+            "high": 2.5
+          }
+        }
+      }
+    },
+    "get_companies_available": {
+      "endpoint": "/api/companies/availableByCurrentUser",
+      "method": "GET",
+      "response": [
+        {
+          "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+          "code": "TRAINING",
+          "name": "Training",
+          "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
+        }
+      ]
+    }
+  },
+  "lookups": {
+    "get_lookup_values": {
+      "endpoint": "/api/lookup/{masterConstantKey}",
+      "method": "GET",
+      "response": [
+        {
+          "id": "e7f85166-34cf-429b-805d-261b44cb0c04",
+          "value": "Customer"
+        },
+        {
+          "id": "f8a96277-45df-540c-916e-362b55da1d15",
+          "value": "Vendor"
+        },
+        {
+          "id": "a9b07388-56ef-651d-a27f-473c66eb2e26",
+          "value": "Carrier"
+        }
+      ]
+    }
+  },
+  "contacts": {
+    "get_contact_by_id": {
+      "endpoint": "/api/contacts/{id}",
+      "method": "GET",
+      "response": {
+        "id": 266841,
+        "contactDisplayId": "1",
+        "fullName": "John Doe",
+        "firstName": "John",
+        "lastName": "Doe",
+        "contactTypeId": 1,
+        "companyId": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+        "isActive": true,
+        "primaryEmail": "john.doe@example.com",
+        "primaryPhone": "555-123-4567"
+      }
+    }
+  },
+  "users": {
+    "get_user_by_id": {
+      "endpoint": "/api/users/{id}",
+      "method": "GET", 
+      "response": {
+        "id": "123e4567-e89b-12d3-a456-426614174000",
+        "userName": "john.doe",
+        "email": "john.doe@example.com",
+        "firstName": "John",
+        "lastName": "Doe",
+        "isActive": true,
+        "roles": ["User", "Admin"]
+      }
+    },
+    "get_users_list": {
+      "endpoint": "/api/users",
+      "method": "GET",
+      "response": [
+        {
+          "id": "123e4567-e89b-12d3-a456-426614174000",
+          "userName": "john.doe",
+          "email": "john.doe@example.com",
+          "firstName": "John",
+          "lastName": "Doe",
+          "isActive": true
+        }
+      ]
+    }
+  },
+  "generic": {
+    "empty_list": [],
+    "empty_object": {},
+    "success_response": {
+      "status": "success",
+      "message": "Operation completed successfully"
+    }
+  }
+}

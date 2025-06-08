@@ -1,11 +1,5 @@
-GridViews API
-=============
-
-This section covers the 8 endpoints related to GridViews.
-
-.. contents::
-   :local:
-   :depth: 2
+GridViews
+=========
 
 Quick Reference
 ---------------
@@ -42,32 +36,47 @@ Quick Reference
      - /api/views/datasetsp/{spName}
      - 
 
-Endpoints
----------
 
 .. _get-apiviewsall:
 
 GET /api/views/all
 ~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/views/all'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/views/all"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/views/all
+      .. code-block:: bash
+
+         ab api raw get /api/views/all
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/views/all'
 
 **Sample Response:**
 
@@ -78,9 +87,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -90,8 +97,6 @@ Using AB CLI:
 GET /api/views/{viewId}
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -100,21 +105,42 @@ GET /api/views/{viewId}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/views/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/views/{viewId}"
+         ,
+             viewId=789e0123-e89b-12d3-a456-426614174002
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/views/{viewId} \
-       viewId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw get /api/views/{viewId} \
+             viewId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/views/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -125,9 +151,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -137,8 +161,6 @@ Using AB CLI:
 DELETE /api/views/{viewId}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -147,21 +169,42 @@ DELETE /api/views/{viewId}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X DELETE \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/views/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.delete(
+             "/api/views/{viewId}"
+         ,
+             viewId=789e0123-e89b-12d3-a456-426614174002
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw delete /api/views/{viewId} \
-       viewId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw delete /api/views/{viewId} \
+             viewId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X DELETE \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/views/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -182,8 +225,6 @@ Using AB CLI:
 GET /api/views/{viewId}/accessinfo
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -192,21 +233,42 @@ GET /api/views/{viewId}/accessinfo
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/views/789e0123-e89b-12d3-a456-426614174002/accessinfo'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/views/{viewId}/accessinfo"
+         ,
+             viewId=789e0123-e89b-12d3-a456-426614174002
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/views/{viewId}/accessinfo \
-       viewId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw get /api/views/{viewId}/accessinfo \
+             viewId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/views/789e0123-e89b-12d3-a456-426614174002/accessinfo'
 
 **Sample Response:**
 
@@ -217,9 +279,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -229,28 +289,50 @@ Using AB CLI:
 POST /api/views
 ~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/views'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/views"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/views
+      .. code-block:: bash
+
+         ab api raw post /api/views
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/views'
 
 **Sample Response:**
 
@@ -262,11 +344,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -276,8 +354,6 @@ Using AB CLI:
 PUT /api/views/{viewId}/access
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -286,25 +362,51 @@ PUT /api/views/{viewId}/access
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X PUT \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/views/789e0123-e89b-12d3-a456-426614174002/access'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.put(
+             "/api/views/{viewId}/access"
+         ,
+             viewId=789e0123-e89b-12d3-a456-426614174002
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw put /api/views/{viewId}/access \
-       viewId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw put /api/views/{viewId}/access \
+             viewId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X PUT \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/views/789e0123-e89b-12d3-a456-426614174002/access'
 
 **Sample Response:**
 
@@ -316,8 +418,7 @@ Using AB CLI:
       {
         "id": "123e4567-e89b-12d3-a456-426614174000",
         "status": "updated",
-        "message": "Resource updated successfully",
-        "modified_at": "2024-01-20T10:00:00Z"
+        "message": "Resource updated successfully"
       }
 
 ----
@@ -327,24 +428,41 @@ Using AB CLI:
 GET /api/views/datasetsps
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/views/datasetsps'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/views/datasetsps"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/views/datasetsps
+      .. code-block:: bash
+
+         ab api raw get /api/views/datasetsps
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/views/datasetsps'
 
 **Sample Response:**
 
@@ -353,32 +471,7 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
-          },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
-          }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
-        }
-      }
+      []
 
 ----
 
@@ -386,8 +479,6 @@ Using AB CLI:
 
 GET /api/views/datasetsp/{spName}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -397,21 +488,42 @@ GET /api/views/datasetsp/{spName}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/views/datasetsp/Example Name'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/views/datasetsp/{spName}"
+         ,
+             spName="Example Name"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/views/datasetsp/{spName} \
-       spName=Example Name
+      .. code-block:: bash
+
+         ab api raw get /api/views/datasetsp/{spName} \
+             spName=Example Name
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/views/datasetsp/Example Name'
 
 **Sample Response:**
 
@@ -422,9 +534,5 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
-
-----

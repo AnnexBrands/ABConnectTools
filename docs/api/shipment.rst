@@ -1,11 +1,5 @@
-Shipment API
-============
-
-This section covers the 3 endpoints related to Shipment.
-
-.. contents::
-   :local:
-   :depth: 2
+Shipment
+========
 
 Quick Reference
 ---------------
@@ -27,15 +21,11 @@ Quick Reference
      - /api/shipment/document/{docId}
      - 
 
-Endpoints
----------
 
 .. _get-apishipment:
 
 GET /api/shipment
 ~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -47,20 +37,39 @@ GET /api/shipment
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/shipment'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/shipment"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/shipment
+      .. code-block:: bash
+
+         ab api raw get /api/shipment
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/shipment'
 
 **Sample Response:**
 
@@ -71,9 +80,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -83,24 +90,41 @@ Using AB CLI:
 GET /api/shipment/accessorials
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/shipment/accessorials'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/shipment/accessorials"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/shipment/accessorials
+      .. code-block:: bash
+
+         ab api raw get /api/shipment/accessorials
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/shipment/accessorials'
 
 **Sample Response:**
 
@@ -109,32 +133,7 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
-          },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
-          }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
-        }
-      }
+      []
 
 ----
 
@@ -142,8 +141,6 @@ Using AB CLI:
 
 GET /api/shipment/document/{docId}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -157,21 +154,42 @@ GET /api/shipment/document/{docId}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/shipment/document/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/shipment/document/{docId}"
+         ,
+             docId="789e0123-e89b-12d3-a456-426614174002"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/shipment/document/{docId} \
-       docId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw get /api/shipment/document/{docId} \
+             docId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/shipment/document/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -182,9 +200,5 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
-
-----

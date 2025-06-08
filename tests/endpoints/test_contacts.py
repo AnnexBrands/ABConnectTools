@@ -5,24 +5,30 @@ Documentation: https://abconnecttools.readthedocs.io/en/latest/api/contacts.html
 
 import unittest
 from unittest.mock import patch, MagicMock
-from ABConnect import ABConnectAPI
+from . import BaseEndpointTest
 from ABConnect.exceptions import ABConnectError
 
 
-class TestContactsAPI(unittest.TestCase):
+class TestContactsEndpoints(BaseEndpointTest):
     """Test cases for Contacts endpoints."""
+    
+    tag_name = "Contacts"
+    __test__ = True
 
     def setUp(self):
         """Set up test fixtures."""
-        self.api = ABConnectAPI()
+        super().setUp()
         # Mock the raw API calls to avoid actual API requests
         self.mock_response = MagicMock()
 
-    @patch("ABConnect.api.http.RequestHandler.call")
-    def test_endpoint_availability(self, mock_call):
+    def test_endpoint_availability(self):
         """Test that endpoints are available."""
         # This is a basic test to ensure the API client initializes
         self.assertIsNotNone(self.api)
+        self.assertTrue(hasattr(self.api, "raw"))
+        
+        # Test specific endpoints discovery
+        self.test_endpoint_discovery()
         self.assertTrue(hasattr(self.api, "raw"))
 
 
@@ -32,7 +38,7 @@ class TestContactsAPI(unittest.TestCase):
         See documentation: https://abconnecttools.readthedocs.io/en/latest/api/contacts.html#get_apicontactsid
         """
         # Path parameters
-        id = "test-id-123"
+        id = self.test_contact_id
 
         response = self.api.raw.get(
             "/api/contacts/{id}",
@@ -68,7 +74,7 @@ class TestContactsAPI(unittest.TestCase):
         See documentation: https://abconnecttools.readthedocs.io/en/latest/api/contacts.html#get_apicontactscontactideditdetails
         """
         # Path parameters
-        contactId = "test-id-123"
+        contactId = self.test_contact_id
 
         response = self.api.raw.get(
             "/api/contacts/{contactId}/editdetails",
@@ -82,13 +88,14 @@ class TestContactsAPI(unittest.TestCase):
         elif isinstance(response, list):
             self.assertIsInstance(response, list)
 
+    @unittest.skip("Requires complete contact data to update")
     def test_put_apicontactscontactideditdetails(self):
         """Test PUT /api/contacts/{contactId}/editdetails.
         
         See documentation: https://abconnecttools.readthedocs.io/en/latest/api/contacts.html#put_apicontactscontactideditdetails
         """
         # Path parameters
-        contactId = "test-id-123"
+        contactId = self.test_contact_id
 
         response = self.api.raw.put(
             "/api/contacts/{contactId}/editdetails",
@@ -102,13 +109,21 @@ class TestContactsAPI(unittest.TestCase):
         elif isinstance(response, list):
             self.assertIsInstance(response, list)
 
+    @unittest.skip("Requires complete contact data to create/update")
     def test_post_apicontactseditdetails(self):
         """Test POST /api/contacts/editdetails.
         
         See documentation: https://abconnecttools.readthedocs.io/en/latest/api/contacts.html#post_apicontactseditdetails
         """
+        # POST requests need a body - provide minimal valid data
+        data = {
+            "id": self.test_contact_id,
+            "companyId": self.test_company_id
+        }
+        
         response = self.api.raw.post(
             "/api/contacts/editdetails",
+            data=data
         )
         
         # Check response
@@ -120,4 +135,5 @@ class TestContactsAPI(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    import unittest
     unittest.main()

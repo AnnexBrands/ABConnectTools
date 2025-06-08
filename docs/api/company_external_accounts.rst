@@ -1,11 +1,5 @@
-Company External Accounts API
-=============================
-
-This section covers the 3 endpoints related to Company External Accounts.
-
-.. contents::
-   :local:
-   :depth: 2
+Company External Accounts
+=========================
 
 Quick Reference
 ---------------
@@ -27,15 +21,11 @@ Quick Reference
      - /api/company/{companyId}/accounts/stripe
      - 
 
-Endpoints
----------
 
 .. _get-apicompanycompanyidaccountsstripeconnecturl:
 
 GET /api/company/{companyId}/accounts/stripe/connecturl
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -49,21 +39,42 @@ GET /api/company/{companyId}/accounts/stripe/connecturl
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/accounts/stripe/connecturl'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/company/{companyId}/accounts/stripe/connecturl"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/company/{companyId}/accounts/stripe/connecturl \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw get /api/company/{companyId}/accounts/stripe/connecturl \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/accounts/stripe/connecturl'
 
 **Sample Response:**
 
@@ -74,9 +85,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -86,8 +95,6 @@ Using AB CLI:
 POST /api/company/{companyId}/accounts/stripe/completeconnection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -96,25 +103,51 @@ POST /api/company/{companyId}/accounts/stripe/completeconnection
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/accounts/stripe/completeconnection'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/company/{companyId}/accounts/stripe/completeconnection"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/company/{companyId}/accounts/stripe/completeconnection \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw post /api/company/{companyId}/accounts/stripe/completeconnection \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/accounts/stripe/completeconnection'
 
 **Sample Response:**
 
@@ -126,11 +159,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -140,8 +169,6 @@ Using AB CLI:
 DELETE /api/company/{companyId}/accounts/stripe
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -150,21 +177,42 @@ DELETE /api/company/{companyId}/accounts/stripe
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X DELETE \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/accounts/stripe'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.delete(
+             "/api/company/{companyId}/accounts/stripe"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw delete /api/company/{companyId}/accounts/stripe \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw delete /api/company/{companyId}/accounts/stripe \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X DELETE \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/accounts/stripe'
 
 **Sample Response:**
 
@@ -177,5 +225,3 @@ Using AB CLI:
         "status": "success",
         "message": "Resource deleted successfully"
       }
-
-----

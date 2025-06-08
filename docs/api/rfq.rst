@@ -1,11 +1,5 @@
-RfQ API
-=======
-
-This section covers the 7 endpoints related to RfQ.
-
-.. contents::
-   :local:
-   :depth: 2
+RfQ
+===
 
 Quick Reference
 ---------------
@@ -39,15 +33,11 @@ Quick Reference
      - /api/rfq/forjob/{jobId}
      - 
 
-Endpoints
----------
 
 .. _get-apirfqrfqid:
 
 GET /api/rfq/{rfqId}
 ~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -57,21 +47,42 @@ GET /api/rfq/{rfqId}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/rfq/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/rfq/{rfqId}"
+         ,
+             rfqId=789e0123-e89b-12d3-a456-426614174002
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/rfq/{rfqId} \
-       rfqId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw get /api/rfq/{rfqId} \
+             rfqId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/rfq/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -82,9 +93,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -94,8 +103,6 @@ Using AB CLI:
 POST /api/rfq/{rfqId}/accept
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -104,25 +111,51 @@ POST /api/rfq/{rfqId}/accept
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/rfq/789e0123-e89b-12d3-a456-426614174002/accept'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/rfq/{rfqId}/accept"
+         ,
+             rfqId=789e0123-e89b-12d3-a456-426614174002
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/rfq/{rfqId}/accept \
-       rfqId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw post /api/rfq/{rfqId}/accept \
+             rfqId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/rfq/789e0123-e89b-12d3-a456-426614174002/accept'
 
 **Sample Response:**
 
@@ -134,11 +167,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -148,8 +177,6 @@ Using AB CLI:
 POST /api/rfq/{rfqId}/decline
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -158,22 +185,43 @@ POST /api/rfq/{rfqId}/decline
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     'https://api.abconnect.co/api/rfq/789e0123-e89b-12d3-a456-426614174002/decline'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/rfq/{rfqId}/decline"
+         ,
+             rfqId=789e0123-e89b-12d3-a456-426614174002
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/rfq/{rfqId}/decline \
-       rfqId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw post /api/rfq/{rfqId}/decline \
+             rfqId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           'https://api.abconnect.co/api/rfq/789e0123-e89b-12d3-a456-426614174002/decline'
 
 **Sample Response:**
 
@@ -185,11 +233,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -199,8 +243,6 @@ Using AB CLI:
 POST /api/rfq/{rfqId}/cancel
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -209,22 +251,43 @@ POST /api/rfq/{rfqId}/cancel
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     'https://api.abconnect.co/api/rfq/789e0123-e89b-12d3-a456-426614174002/cancel'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/rfq/{rfqId}/cancel"
+         ,
+             rfqId=789e0123-e89b-12d3-a456-426614174002
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/rfq/{rfqId}/cancel \
-       rfqId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw post /api/rfq/{rfqId}/cancel \
+             rfqId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           'https://api.abconnect.co/api/rfq/789e0123-e89b-12d3-a456-426614174002/cancel'
 
 **Sample Response:**
 
@@ -236,11 +299,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -249,8 +308,6 @@ Using AB CLI:
 
 POST /api/rfq/{rfqId}/acceptwinner
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -264,22 +321,43 @@ POST /api/rfq/{rfqId}/acceptwinner
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     'https://api.abconnect.co/api/rfq/789e0123-e89b-12d3-a456-426614174002/acceptwinner'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/rfq/{rfqId}/acceptwinner"
+         ,
+             rfqId=789e0123-e89b-12d3-a456-426614174002
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/rfq/{rfqId}/acceptwinner \
-       rfqId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw post /api/rfq/{rfqId}/acceptwinner \
+             rfqId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           'https://api.abconnect.co/api/rfq/789e0123-e89b-12d3-a456-426614174002/acceptwinner'
 
 **Sample Response:**
 
@@ -291,11 +369,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -305,8 +379,6 @@ Using AB CLI:
 POST /api/rfq/{rfqId}/comment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -315,25 +387,51 @@ POST /api/rfq/{rfqId}/comment
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/rfq/789e0123-e89b-12d3-a456-426614174002/comment'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/rfq/{rfqId}/comment"
+         ,
+             rfqId=789e0123-e89b-12d3-a456-426614174002
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/rfq/{rfqId}/comment \
-       rfqId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw post /api/rfq/{rfqId}/comment \
+             rfqId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/rfq/789e0123-e89b-12d3-a456-426614174002/comment'
 
 **Sample Response:**
 
@@ -345,11 +443,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -358,8 +452,6 @@ Using AB CLI:
 
 GET /api/rfq/forjob/{jobId}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -373,21 +465,42 @@ GET /api/rfq/forjob/{jobId}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/rfq/forjob/JOB-2024-001'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/rfq/forjob/{jobId}"
+         ,
+             jobId="JOB-2024-001"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/rfq/forjob/{jobId} \
-       jobId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw get /api/rfq/forjob/{jobId} \
+             jobId=JOB-2024-001
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/rfq/forjob/JOB-2024-001'
 
 **Sample Response:**
 
@@ -398,9 +511,5 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
-
-----

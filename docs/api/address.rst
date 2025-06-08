@@ -1,11 +1,7 @@
-Address API
-===========
+Address
+=======
 
-This section covers the 4 endpoints related to Address.
-
-.. contents::
-   :local:
-   :depth: 2
+Manage and validate physical addresses used for shipping origins, destinations, and company locations.
 
 Quick Reference
 ---------------
@@ -30,15 +26,11 @@ Quick Reference
      - /api/address/propertytype
      - 
 
-Endpoints
----------
 
 .. _get-apiaddressisvalid:
 
 GET /api/address/isvalid
 ~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -51,20 +43,39 @@ GET /api/address/isvalid
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/address/isvalid'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/address/isvalid"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/address/isvalid
+      .. code-block:: bash
+
+         ab api raw get /api/address/isvalid
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/address/isvalid'
 
 **Sample Response:**
 
@@ -75,9 +86,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -87,8 +96,6 @@ Using AB CLI:
 POST /api/address/{addressId}/validated
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -97,25 +104,51 @@ POST /api/address/{addressId}/validated
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/address/789e0123-e89b-12d3-a456-426614174002/validated'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/address/{addressId}/validated"
+         ,
+             addressId=789e0123-e89b-12d3-a456-426614174002
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/address/{addressId}/validated \
-       addressId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw post /api/address/{addressId}/validated \
+             addressId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/address/789e0123-e89b-12d3-a456-426614174002/validated'
 
 **Sample Response:**
 
@@ -127,11 +160,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -141,8 +170,6 @@ Using AB CLI:
 POST /api/address/{addressId}/avoidValidation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -151,22 +178,43 @@ POST /api/address/{addressId}/avoidValidation
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     'https://api.abconnect.co/api/address/789e0123-e89b-12d3-a456-426614174002/avoidValidation'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/address/{addressId}/avoidValidation"
+         ,
+             addressId=789e0123-e89b-12d3-a456-426614174002
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/address/{addressId}/avoidValidation \
-       addressId=789e0123-e89b-12d3-a456-426614174002
+      .. code-block:: bash
+
+         ab api raw post /api/address/{addressId}/avoidValidation \
+             addressId=789e0123-e89b-12d3-a456-426614174002
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           'https://api.abconnect.co/api/address/789e0123-e89b-12d3-a456-426614174002/avoidValidation'
 
 **Sample Response:**
 
@@ -178,11 +226,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -191,8 +235,6 @@ Using AB CLI:
 
 GET /api/address/propertytype
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -206,20 +248,39 @@ GET /api/address/propertytype
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/address/propertytype'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/address/propertytype"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/address/propertytype
+      .. code-block:: bash
+
+         ab api raw get /api/address/propertytype
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/address/propertytype'
 
 **Sample Response:**
 
@@ -230,9 +291,5 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
-
-----

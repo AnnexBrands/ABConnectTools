@@ -1,11 +1,7 @@
-Email API
-=========
+Email
+=====
 
-This section covers the 1 endpoints related to Email.
-
-.. contents::
-   :local:
-   :depth: 2
+Send and manage email communications related to jobs, quotes, and customer notifications.
 
 Quick Reference
 ---------------
@@ -21,15 +17,11 @@ Quick Reference
      - /api/email/{jobDisplayId}/labelrequest
      - 
 
-Endpoints
----------
 
 .. _post-apiemailjobdisplayidlabelrequest:
 
 POST /api/email/{jobDisplayId}/labelrequest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -39,22 +31,43 @@ POST /api/email/{jobDisplayId}/labelrequest
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     'https://api.abconnect.co/api/email/JOB-2024-001/labelrequest'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/email/{jobDisplayId}/labelrequest"
+         ,
+             jobDisplayId="2000000"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/email/{jobDisplayId}/labelrequest \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw post /api/email/{jobDisplayId}/labelrequest \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           'https://api.abconnect.co/api/email/2000000/labelrequest'
 
 **Sample Response:**
 
@@ -66,11 +79,5 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
-
-----

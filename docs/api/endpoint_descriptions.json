@@ -1,0 +1,129 @@
+{
+  "endpoints": {
+    "/api/companies/{id}": {
+      "get": {
+        "summary": "Get company by ID",
+        "description": "Retrieves detailed information about a specific company using its unique identifier."
+      }
+    },
+    "/api/companies/{companyId}/details": {
+      "get": {
+        "summary": "Get company details",
+        "description": "Retrieves comprehensive details about a company including contacts, addresses, settings, and financial information."
+      }
+    },
+    "/api/companies/availableByCurrentUser": {
+      "get": {
+        "summary": "Get companies available to current user",
+        "description": "Returns a list of companies that the currently authenticated user has permission to access."
+      }
+    },
+    "/api/companies/search": {
+      "get": {
+        "summary": "Search companies",
+        "description": "Search for companies using various filters such as name, code, type, or location."
+      }
+    },
+    "/api/companies/search/v2": {
+      "post": {
+        "summary": "Advanced company search",
+        "description": "Perform advanced searches on companies with complex filtering, sorting, and pagination options."
+      }
+    },
+    "/api/companies/{companyId}/fulldetails": {
+      "get": {
+        "summary": "Get complete company information",
+        "description": "Retrieves all available information about a company including details, preferences, capabilities, pricing, and insurance settings."
+      },
+      "put": {
+        "summary": "Update complete company information",
+        "description": "Updates all company information including details, preferences, capabilities, pricing, and insurance settings."
+      }
+    },
+    "/api/contacts/{id}": {
+      "get": {
+        "summary": "Get contact by ID",
+        "description": "Retrieves information about a specific contact."
+      },
+      "put": {
+        "summary": "Update contact",
+        "description": "Updates an existing contact's information."
+      },
+      "delete": {
+        "summary": "Delete contact",
+        "description": "Permanently removes a contact from the system."
+      }
+    },
+    "/api/contacts": {
+      "post": {
+        "summary": "Create new contact",
+        "description": "Creates a new contact in the system."
+      }
+    },
+    "/api/job/{jobDisplayId}": {
+      "get": {
+        "summary": "Get job by display ID",
+        "description": "Retrieves detailed information about a specific job using its display ID."
+      }
+    },
+    "/api/job/{jobDisplayId}/book": {
+      "post": {
+        "summary": "Book a job",
+        "description": "Books a job and transitions it to active status."
+      }
+    },
+    "/api/job/search": {
+      "get": {
+        "summary": "Search jobs",
+        "description": "Search for jobs using various criteria such as status, date range, customer, or location."
+      }
+    },
+    "/api/lookup/{masterConstantKey}": {
+      "get": {
+        "summary": "Get lookup values",
+        "description": "Retrieves all values for a specific lookup type (e.g., CompanyTypes, ContactTypes, JobStatusTypes)."
+      }
+    },
+    "/api/users": {
+      "get": {
+        "summary": "List users",
+        "description": "Retrieves a list of users in the system."
+      },
+      "post": {
+        "summary": "Create user",
+        "description": "Creates a new user account."
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "summary": "Get user by ID",
+        "description": "Retrieves information about a specific user."
+      },
+      "put": {
+        "summary": "Update user",
+        "description": "Updates an existing user's information."
+      },
+      "delete": {
+        "summary": "Delete user",
+        "description": "Deactivates or removes a user account."
+      }
+    }
+  },
+  "tags": {
+    "Companies": "Manage company records including customers, vendors, carriers, and franchisees. Companies are the core entities in the system that can place orders, provide services, or act as shipping partners.",
+    "Contacts": "Manage contact information for individuals associated with companies. Contacts can have various roles such as primary contact, billing contact, or operations contact.",
+    "Job": "Manage shipping and logistics jobs. Jobs represent the movement of goods from origin to destination and include quotes, bookings, tracking, and completion.",
+    "Users": "Manage user accounts and authentication. Users are individuals who can log into the system and perform various operations based on their permissions.",
+    "Lookup": "Access system reference data and configuration values. Lookups provide standardized lists of values used throughout the system such as company types, job statuses, and service types.",
+    "Documents": "Manage documents and files associated with jobs, companies, or contacts. Includes invoices, bills of lading, photos, and other supporting documentation.",
+    "Dashboard": "Access dashboard widgets and analytics data for business intelligence and reporting.",
+    "Reports": "Generate and access various business reports including financial summaries, operational metrics, and custom reports.",
+    "Address": "Manage and validate physical addresses used for shipping origins, destinations, and company locations.",
+    "Calendar": "Access calendar events and scheduling information for jobs, deliveries, and appointments.",
+    "Email": "Send and manage email communications related to jobs, quotes, and customer notifications.",
+    "JobPayment": "Process and track payments for jobs including credit cards, ACH, and other payment methods.",
+    "JobShipment": "Manage shipment details within jobs including tracking, carrier assignments, and delivery confirmation.",
+    "JobTracking": "Track real-time status and location of shipments throughout the delivery process.",
+    "Notifications": "Manage system notifications and alerts for users including email and SMS preferences."
+  }
+}

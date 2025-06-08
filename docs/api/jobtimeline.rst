@@ -1,11 +1,5 @@
-JobTimeline API
-===============
-
-This section covers the 6 endpoints related to JobTimeline.
-
-.. contents::
-   :local:
-   :depth: 2
+JobTimeline
+===========
 
 Quick Reference
 ---------------
@@ -36,15 +30,11 @@ Quick Reference
      - /api/job/{jobDisplayId}/timeline/{taskCode}/agent
      - 
 
-Endpoints
----------
 
 .. _get-apijobjobdisplayidtimeline:
 
 GET /api/job/{jobDisplayId}/timeline
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -54,21 +44,42 @@ GET /api/job/{jobDisplayId}/timeline
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/timeline'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/job/{jobDisplayId}/timeline"
+         ,
+             jobDisplayId="2000000"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/job/{jobDisplayId}/timeline \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw get /api/job/{jobDisplayId}/timeline \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/job/2000000/timeline'
 
 **Sample Response:**
 
@@ -79,9 +90,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -90,8 +99,6 @@ Using AB CLI:
 
 POST /api/job/{jobDisplayId}/timeline
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -105,25 +112,51 @@ POST /api/job/{jobDisplayId}/timeline
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/timeline'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/job/{jobDisplayId}/timeline"
+         ,
+             jobDisplayId="2000000"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/job/{jobDisplayId}/timeline \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw post /api/job/{jobDisplayId}/timeline \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/job/2000000/timeline'
 
 **Sample Response:**
 
@@ -135,11 +168,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -148,8 +177,6 @@ Using AB CLI:
 
 PATCH /api/job/{jobDisplayId}/timeline/{timelineTaskId}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -160,26 +187,54 @@ PATCH /api/job/{jobDisplayId}/timeline/{timelineTaskId}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X PATCH \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/timeline/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.patch(
+             "/api/job/{jobDisplayId}/timeline/{timelineTaskId}"
+         ,
+             timelineTaskId="789e0123-e89b-12d3-a456-426614174002"
+         ,
+             jobDisplayId="2000000"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw patch /api/job/{jobDisplayId}/timeline/{timelineTaskId} \
-       timelineTaskId=789e0123-e89b-12d3-a456-426614174002 \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw patch /api/job/{jobDisplayId}/timeline/{timelineTaskId} \
+             timelineTaskId=789e0123-e89b-12d3-a456-426614174002 \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X PATCH \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/job/2000000/timeline/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -191,8 +246,7 @@ Using AB CLI:
       {
         "id": "123e4567-e89b-12d3-a456-426614174000",
         "status": "updated",
-        "message": "Resource updated successfully",
-        "modified_at": "2024-01-20T10:00:00Z"
+        "message": "Resource updated successfully"
       }
 
 ----
@@ -201,8 +255,6 @@ Using AB CLI:
 
 DELETE /api/job/{jobDisplayId}/timeline/{timelineTaskId}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -213,22 +265,45 @@ DELETE /api/job/{jobDisplayId}/timeline/{timelineTaskId}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X DELETE \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/timeline/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.delete(
+             "/api/job/{jobDisplayId}/timeline/{timelineTaskId}"
+         ,
+             timelineTaskId="789e0123-e89b-12d3-a456-426614174002"
+         ,
+             jobDisplayId="2000000"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw delete /api/job/{jobDisplayId}/timeline/{timelineTaskId} \
-       timelineTaskId=789e0123-e89b-12d3-a456-426614174002 \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw delete /api/job/{jobDisplayId}/timeline/{timelineTaskId} \
+             timelineTaskId=789e0123-e89b-12d3-a456-426614174002 \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X DELETE \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/job/2000000/timeline/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -249,8 +324,6 @@ Using AB CLI:
 GET /api/job/{jobDisplayId}/timeline/{timelineTaskIdentifier}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -260,22 +333,45 @@ GET /api/job/{jobDisplayId}/timeline/{timelineTaskIdentifier}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/timeline/789e0123-e89b-12d3-a456-426614174002'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/job/{jobDisplayId}/timeline/{timelineTaskIdentifier}"
+         ,
+             timelineTaskIdentifier="789e0123-e89b-12d3-a456-426614174002"
+         ,
+             jobDisplayId="2000000"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/job/{jobDisplayId}/timeline/{timelineTaskIdentifier} \
-       timelineTaskIdentifier=789e0123-e89b-12d3-a456-426614174002 \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw get /api/job/{jobDisplayId}/timeline/{timelineTaskIdentifier} \
+             timelineTaskIdentifier=789e0123-e89b-12d3-a456-426614174002 \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/job/2000000/timeline/789e0123-e89b-12d3-a456-426614174002'
 
 **Sample Response:**
 
@@ -286,9 +382,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -297,8 +391,6 @@ Using AB CLI:
 
 GET /api/job/{jobDisplayId}/timeline/{taskCode}/agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -309,22 +401,45 @@ GET /api/job/{jobDisplayId}/timeline/{taskCode}/agent
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/timeline/CODE-001/agent'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/job/{jobDisplayId}/timeline/{taskCode}/agent"
+         ,
+             taskCode="CODE-001"
+         ,
+             jobDisplayId="2000000"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/job/{jobDisplayId}/timeline/{taskCode}/agent \
-       taskCode=CODE-001 \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw get /api/job/{jobDisplayId}/timeline/{taskCode}/agent \
+             taskCode=CODE-001 \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/job/2000000/timeline/CODE-001/agent'
 
 **Sample Response:**
 
@@ -335,9 +450,5 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
-
-----

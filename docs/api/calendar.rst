@@ -1,11 +1,7 @@
-Calendar API
-============
+Calendar
+========
 
-This section covers the 4 endpoints related to Calendar.
-
-.. contents::
-   :local:
-   :depth: 2
+Access calendar events and scheduling information for jobs, deliveries, and appointments.
 
 Quick Reference
 ---------------
@@ -30,15 +26,11 @@ Quick Reference
      - /api/company/{companyId}/calendar/{date}/endofday
      - 
 
-Endpoints
----------
 
 .. _get-apicompanycompanyidcalendardate:
 
 GET /api/company/{companyId}/calendar/{date}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -49,22 +41,45 @@ GET /api/company/{companyId}/calendar/{date}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/calendar/2024-01-15T12:00:00Z'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/company/{companyId}/calendar/{date}"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         ,
+             date="2024-01-15T12:00:00Z"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/company/{companyId}/calendar/{date} \
-       companyId=123e4567-e89b-12d3-a456-426614174000 \
-       date=2024-01-15T12:00:00Z
+      .. code-block:: bash
+
+         ab api raw get /api/company/{companyId}/calendar/{date} \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c \
+             date=2024-01-15T12:00:00Z
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/calendar/2024-01-15T12:00:00Z'
 
 **Sample Response:**
 
@@ -75,9 +90,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -87,8 +100,6 @@ Using AB CLI:
 GET /api/company/{companyId}/calendar/{date}/baseinfo
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -98,22 +109,45 @@ GET /api/company/{companyId}/calendar/{date}/baseinfo
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/calendar/2024-01-15T12:00:00Z/baseinfo'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/company/{companyId}/calendar/{date}/baseinfo"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         ,
+             date="2024-01-15T12:00:00Z"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/company/{companyId}/calendar/{date}/baseinfo \
-       companyId=123e4567-e89b-12d3-a456-426614174000 \
-       date=2024-01-15T12:00:00Z
+      .. code-block:: bash
+
+         ab api raw get /api/company/{companyId}/calendar/{date}/baseinfo \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c \
+             date=2024-01-15T12:00:00Z
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/calendar/2024-01-15T12:00:00Z/baseinfo'
 
 **Sample Response:**
 
@@ -124,9 +158,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -136,8 +168,6 @@ Using AB CLI:
 GET /api/company/{companyId}/calendar/{date}/startofday
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -147,22 +177,45 @@ GET /api/company/{companyId}/calendar/{date}/startofday
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/calendar/2024-01-15T12:00:00Z/startofday'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/company/{companyId}/calendar/{date}/startofday"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         ,
+             date="2024-01-15T12:00:00Z"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/company/{companyId}/calendar/{date}/startofday \
-       companyId=123e4567-e89b-12d3-a456-426614174000 \
-       date=2024-01-15T12:00:00Z
+      .. code-block:: bash
+
+         ab api raw get /api/company/{companyId}/calendar/{date}/startofday \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c \
+             date=2024-01-15T12:00:00Z
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/calendar/2024-01-15T12:00:00Z/startofday'
 
 **Sample Response:**
 
@@ -173,9 +226,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -185,8 +236,6 @@ Using AB CLI:
 GET /api/company/{companyId}/calendar/{date}/endofday
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -196,22 +245,45 @@ GET /api/company/{companyId}/calendar/{date}/endofday
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/company/123e4567-e89b-12d3-a456-426614174000/calendar/2024-01-15T12:00:00Z/endofday'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/company/{companyId}/calendar/{date}/endofday"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         ,
+             date="2024-01-15T12:00:00Z"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/company/{companyId}/calendar/{date}/endofday \
-       companyId=123e4567-e89b-12d3-a456-426614174000 \
-       date=2024-01-15T12:00:00Z
+      .. code-block:: bash
+
+         ab api raw get /api/company/{companyId}/calendar/{date}/endofday \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c \
+             date=2024-01-15T12:00:00Z
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c/calendar/2024-01-15T12:00:00Z/endofday'
 
 **Sample Response:**
 
@@ -222,9 +294,5 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
-
-----

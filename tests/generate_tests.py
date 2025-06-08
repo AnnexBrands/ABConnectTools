@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate comprehensive tests for all API endpoints.
 
-This script creates test files for all swagger-defined endpoints.
+This script creates test files for all swagger-defined endpoints in the tests/endpoints directory.
 """
 
 import json
@@ -36,12 +36,16 @@ def generate_endpoint_test(endpoint, tag_name):
     for param in endpoint.get('parameters', []):
         if param.get('in') == 'path':
             param_name = param['name']
-            if 'id' in param_name.lower():
-                example_value = 'test-id-123'
+            if 'companyid' in param_name.lower() or param_name.lower() == 'id' and 'companies' in path:
+                example_value = 'self.test_company_id'
+                path_params[param_name] = example_value
+            elif 'id' in param_name.lower():
+                example_value = '"test-id-123"'
+                path_params[param_name] = example_value
             else:
-                example_value = 'test-value'
-            path_params[param_name] = example_value
-            example_path = example_path.replace(f'{{{param_name}}}', example_value)
+                example_value = '"test-value"'
+                path_params[param_name] = example_value
+            example_path = example_path.replace(f'{{{param_name}}}', str(example_value).strip('"'))
     
     # Generate test method
     test_code = [
@@ -52,7 +56,10 @@ def generate_endpoint_test(endpoint, tag_name):
     if path_params:
         test_code.append("        # Path parameters")
         for name, value in path_params.items():
-            test_code.append(f'        {name} = "{value}"')
+            if value.startswith('self.'):
+                test_code.append(f'        {name} = {value}')
+            else:
+                test_code.append(f'        {name} = {value}')
         test_code.append("")
     
     test_code.append(f'        response = self.api.raw.{method}(')
@@ -77,34 +84,40 @@ def generate_endpoint_test(endpoint, tag_name):
 def generate_tag_test_file(tag_name, endpoints):
     """Generate test file for a tag."""
     class_name = ''.join(word.capitalize() for word in tag_name.split())
-    class_name = f"Test{class_name}API"
+    class_name = f"Test{class_name}Endpoints"
     
     # Generate file content
     content = [
-        '"""Tests for {} API endpoints."""'.format(tag_name),
+        '"""Tests for {} API endpoints.'.format(tag_name),
         '',
-        'import unittest',
+        'Documentation: https://abconnecttools.readthedocs.io/en/latest/api/{}.html'.format(sanitize_name(tag_name)),
+        '"""',
+        '',
         'from unittest.mock import patch, MagicMock',
-        'from ABConnect import ABConnectAPI',
+        'from . import BaseEndpointTest',
         'from ABConnect.exceptions import ABConnectError',
         '',
         '',
-        f'class {class_name}(unittest.TestCase):',
+        f'class {class_name}(BaseEndpointTest):',
         '    """Test cases for {} endpoints."""'.format(tag_name),
+        '    ',
+        f'    tag_name = "{tag_name}"',
+        '    __test__ = True',
         '',
         '    def setUp(self):',
         '        """Set up test fixtures."""',
-        '        self.api = ABConnectAPI()',
+        '        super().setUp()',
         '        # Mock the raw API calls to avoid actual API requests',
         '        self.mock_response = MagicMock()',
         '',
-        '    @patch("ABConnect.api.http.RequestHandler.call")',
-        '    def test_endpoint_availability(self, mock_call):',
+        '    def test_endpoint_availability(self):',
         '        """Test that endpoints are available."""',
         '        # This is a basic test to ensure the API client initializes',
         '        self.assertIsNotNone(self.api)',
         '        self.assertTrue(hasattr(self.api, "raw"))',
-        ''
+        '        ',
+        '        # Test specific endpoints discovery',
+        '        self.test_endpoint_discovery()'
     ]
     
     # Add test methods for each endpoint
@@ -311,123 +324,47 @@ def main():
                 for tag in tags:
                     tag_groups[tag].append(endpoint_info)
     
+    # Create endpoints directory if it doesn't exist
+    endpoints_dir = Path(__file__).parent / "endpoints"
+    endpoints_dir.mkdir(exist_ok=True)
+    
     # Generate test files
     generated_files = []
+    existing_files = set(f.name for f in endpoints_dir.glob("test_*.py"))
     
-    # Generate test for each major tag
-    major_tags = ['Companies', 'Contacts', 'Job', 'Lookup', 'Users']
-    
-    for tag in major_tags:
-        if tag in tag_groups:
-            endpoints = tag_groups[tag]
-            filename = f"test_{sanitize_name(tag)}_api.py"
-            filepath = Path(__file__).parent / filename
+    # Generate test for each tag that doesn't already have a test file
+    for tag, endpoints in tag_groups.items():
+        filename = f"test_{sanitize_name(tag)}.py"
+        
+        # Skip if file already exists
+        if filename in existing_files:
+            print(f"Skipping {filename} - already exists")
+            continue
             
-            content = generate_tag_test_file(tag, endpoints)
-            with open(filepath, 'w') as f:
-                f.write(content)
-            
-            generated_files.append(filename)
-            print(f"Generated {filename} with tests for {len(endpoints)} endpoints")
+        filepath = endpoints_dir / filename
+        
+        content = generate_tag_test_file(tag, endpoints)
+        with open(filepath, 'w') as f:
+            f.write(content)
+        
+        generated_files.append(filename)
+        print(f"Generated {filename} with tests for {len(endpoints)} endpoints")
     
-    # Generate CLI tests
+    # Generate CLI tests only if it doesn't exist
     cli_test_path = Path(__file__).parent / "test_cli.py"
-    with open(cli_test_path, 'w') as f:
-        f.write(generate_cli_tests())
+    if not cli_test_path.exists():
+        with open(cli_test_path, 'w') as f:
+            f.write(generate_cli_tests())
+        
+        generated_files.append("test_cli.py")
+        print("Generated test_cli.py with CLI command tests")
+    else:
+        print("Skipping test_cli.py - already exists")
     
-    generated_files.append("test_cli.py")
-    print("Generated test_cli.py with CLI command tests")
-    
-    print(f"\nGenerated {len(generated_files)} test files")
-    
-    # Update existing test_api.py to use new architecture
-    update_test_api()
+    print(f"\nGenerated {len(generated_files)} new test files")
+    print(f"Total test files in endpoints/: {len(list(endpoints_dir.glob('test_*.py')))}")
 
 
-def update_test_api():
-    """Update the existing test_api.py file."""
-    content = '''"""Tests for ABConnect API client."""
-
-import unittest
-from unittest.mock import patch, MagicMock
-from ABConnect import ABConnectAPI
-from ABConnect.config import Config
-
-
-class TestABConnectAPI(unittest.TestCase):
-    """Test cases for ABConnect API client."""
-    
-    def setUp(self):
-        """Set up test fixtures."""
-        Config.load(".env.staging", force_reload=True)
-        self.api = ABConnectAPI()
-        
-    def test_api_initialization(self):
-        """Test API client initialization."""
-        self.assertIsNotNone(self.api)
-        self.assertTrue(hasattr(self.api, 'raw'))
-        self.assertTrue(hasattr(self.api, 'users'))
-        self.assertTrue(hasattr(self.api, 'companies'))
-        
-    def test_raw_api_available(self):
-        """Test raw API is available."""
-        self.assertTrue(hasattr(self.api.raw, 'get'))
-        self.assertTrue(hasattr(self.api.raw, 'post'))
-        self.assertTrue(hasattr(self.api.raw, 'put'))
-        self.assertTrue(hasattr(self.api.raw, 'delete'))
-        
-    @patch('ABConnect.api.http.RequestHandler.call')
-    def test_raw_get(self, mock_call):
-        """Test raw GET request."""
-        mock_call.return_value = {'status': 'success'}
-        
-        result = self.api.raw.get('/api/test')
-        
-        mock_call.assert_called_once_with('GET', 'test', params={})
-        self.assertEqual(result, {'status': 'success'})
-        
-    @patch('ABConnect.api.http.RequestHandler.call')
-    def test_raw_post(self, mock_call):
-        """Test raw POST request."""
-        mock_call.return_value = {'id': '123', 'status': 'created'}
-        
-        data = {'name': 'Test'}
-        result = self.api.raw.post('/api/test', data=data)
-        
-        mock_call.assert_called_once_with('POST', 'test', json=data, params={})
-        self.assertEqual(result['status'], 'created')
-        
-    def test_available_endpoints(self):
-        """Test listing available endpoints."""
-        endpoints = self.api.available_endpoints
-        
-        self.assertIsInstance(endpoints, list)
-        self.assertIn('users', endpoints)
-        self.assertIn('companies', endpoints)
-        self.assertGreater(len(endpoints), 10)  # Should have many endpoints
-        
-    def test_endpoint_info(self):
-        """Test getting endpoint information."""
-        # Test manual endpoint
-        info = self.api.get_endpoint_info('users')
-        self.assertEqual(info['name'], 'users')
-        self.assertEqual(info['type'], 'manual')
-        self.assertIn('methods', info)
-        
-        # Test lookup endpoint special handling
-        info = self.api.get_endpoint_info('lookup')
-        self.assertIn('lookup_keys', info)
-
-
-if __name__ == "__main__":
-    unittest.main()
-'''
-    
-    test_api_path = Path(__file__).parent / "test_api.py"
-    with open(test_api_path, 'w') as f:
-        f.write(content)
-    
-    print("Updated test_api.py with new architecture tests")
 
 
 if __name__ == "__main__":

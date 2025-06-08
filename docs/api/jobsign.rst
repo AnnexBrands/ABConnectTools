@@ -1,11 +1,5 @@
-JobSign API
-===========
-
-This section covers the 2 endpoints related to JobSign.
-
-.. contents::
-   :local:
-   :depth: 2
+JobSign
+=======
 
 Quick Reference
 ---------------
@@ -24,15 +18,11 @@ Quick Reference
      - /api/e-sign/result
      - 
 
-Endpoints
----------
 
 .. _get-apie-signjobdisplayidbookingkey:
 
 GET /api/e-sign/{jobDisplayId}/{bookingKey}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -43,22 +33,45 @@ GET /api/e-sign/{jobDisplayId}/{bookingKey}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/e-sign/JOB-2024-001/example-value'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/e-sign/{jobDisplayId}/{bookingKey}"
+         ,
+             jobDisplayId="2000000"
+         ,
+             bookingKey="example-value"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/e-sign/{jobDisplayId}/{bookingKey} \
-       jobDisplayId=JOB-2024-001 \
-       bookingKey=example-value
+      .. code-block:: bash
+
+         ab api raw get /api/e-sign/{jobDisplayId}/{bookingKey} \
+             jobDisplayId=2000000 \
+             bookingKey=example-value
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/e-sign/2000000/example-value'
 
 **Sample Response:**
 
@@ -69,9 +82,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -80,8 +91,6 @@ Using AB CLI:
 
 GET /api/e-sign/result
 ~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -92,20 +101,39 @@ GET /api/e-sign/result
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/e-sign/result'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/e-sign/result"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/e-sign/result
+      .. code-block:: bash
+
+         ab api raw get /api/e-sign/result
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/e-sign/result'
 
 **Sample Response:**
 
@@ -116,9 +144,5 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
-
-----

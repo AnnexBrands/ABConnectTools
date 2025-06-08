@@ -1,11 +1,5 @@
-JobFreightProviders API
-=======================
-
-This section covers the 3 endpoints related to JobFreightProviders.
-
-.. contents::
-   :local:
-   :depth: 2
+JobFreightProviders
+===================
 
 Quick Reference
 ---------------
@@ -27,15 +21,11 @@ Quick Reference
      - /api/job/{jobDisplayId}/freightproviders/{optionIndex}/ratequote
      - 
 
-Endpoints
----------
 
 .. _post-apijobjobdisplayidfreightproviders:
 
 POST /api/job/{jobDisplayId}/freightproviders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -45,25 +35,51 @@ POST /api/job/{jobDisplayId}/freightproviders
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/freightproviders'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/job/{jobDisplayId}/freightproviders"
+         ,
+             jobDisplayId="2000000"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/job/{jobDisplayId}/freightproviders \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw post /api/job/{jobDisplayId}/freightproviders \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/job/2000000/freightproviders'
 
 **Sample Response:**
 
@@ -75,11 +91,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -88,8 +100,6 @@ Using AB CLI:
 
 GET /api/job/{jobDisplayId}/freightproviders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -105,21 +115,42 @@ GET /api/job/{jobDisplayId}/freightproviders
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/freightproviders'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/job/{jobDisplayId}/freightproviders"
+         ,
+             jobDisplayId="2000000"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/job/{jobDisplayId}/freightproviders \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw get /api/job/{jobDisplayId}/freightproviders \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/job/2000000/freightproviders'
 
 **Sample Response:**
 
@@ -128,32 +159,7 @@ Using AB CLI:
    .. code-block:: json
       :linenos:
 
-      {
-        "data": [
-          {
-            "id": "123e4567-e89b-12d3-a456-426614174000",
-            "name": "Example Item 1",
-            "code": "ITEM-001",
-            "status": "active",
-            "created": "2024-01-01T00:00:00Z",
-            "modified": "2024-01-15T12:30:00Z"
-          },
-          {
-            "id": "456e7890-e89b-12d3-a456-426614174001",
-            "name": "Example Item 2",
-            "code": "ITEM-002",
-            "status": "active",
-            "created": "2024-01-02T00:00:00Z",
-            "modified": "2024-01-16T14:45:00Z"
-          }
-        ],
-        "pagination": {
-          "page": 1,
-          "per_page": 20,
-          "total": 2,
-          "total_pages": 1
-        }
-      }
+      []
 
 ----
 
@@ -161,8 +167,6 @@ Using AB CLI:
 
 POST /api/job/{jobDisplayId}/freightproviders/{optionIndex}/ratequote
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -173,26 +177,54 @@ POST /api/job/{jobDisplayId}/freightproviders/{optionIndex}/ratequote
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/job/JOB-2024-001/freightproviders/100/ratequote'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/job/{jobDisplayId}/freightproviders/{optionIndex}/ratequote"
+         ,
+             optionIndex="100"
+         ,
+             jobDisplayId="2000000"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/job/{jobDisplayId}/freightproviders/{optionIndex}/ratequote \
-       optionIndex=100 \
-       jobDisplayId=JOB-2024-001
+      .. code-block:: bash
+
+         ab api raw post /api/job/{jobDisplayId}/freightproviders/{optionIndex}/ratequote \
+             optionIndex=100 \
+             jobDisplayId=2000000
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/job/2000000/freightproviders/100/ratequote'
 
 **Sample Response:**
 
@@ -204,11 +236,5 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
-
-----

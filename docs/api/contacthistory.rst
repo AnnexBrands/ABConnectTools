@@ -1,11 +1,5 @@
-ContactHistory API
-==================
-
-This section covers the 3 endpoints related to ContactHistory.
-
-.. contents::
-   :local:
-   :depth: 2
+ContactHistory
+==============
 
 Quick Reference
 ---------------
@@ -27,15 +21,11 @@ Quick Reference
      - /api/contacts/{contactId}/history/graphdata
      - 
 
-Endpoints
----------
 
 .. _post-apicontactscontactidhistory:
 
 POST /api/contacts/{contactId}/history
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-****
 
 **Parameters:**
 
@@ -45,25 +35,51 @@ POST /api/contacts/{contactId}/history
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/contacts/456e7890-e89b-12d3-a456-426614174001/history'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/contacts/{contactId}/history"
+         ,
+             contactId=456e7890-e89b-12d3-a456-426614174001
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/contacts/{contactId}/history \
-       contactId=456e7890-e89b-12d3-a456-426614174001
+      .. code-block:: bash
+
+         ab api raw post /api/contacts/{contactId}/history \
+             contactId=456e7890-e89b-12d3-a456-426614174001
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/contacts/456e7890-e89b-12d3-a456-426614174001/history'
 
 **Sample Response:**
 
@@ -75,11 +91,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -89,8 +101,6 @@ Using AB CLI:
 GET /api/contacts/{contactId}/history/aggregated
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -103,21 +113,42 @@ GET /api/contacts/{contactId}/history/aggregated
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/contacts/456e7890-e89b-12d3-a456-426614174001/history/aggregated'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/contacts/{contactId}/history/aggregated"
+         ,
+             contactId=456e7890-e89b-12d3-a456-426614174001
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/contacts/{contactId}/history/aggregated \
-       contactId=456e7890-e89b-12d3-a456-426614174001
+      .. code-block:: bash
+
+         ab api raw get /api/contacts/{contactId}/history/aggregated \
+             contactId=456e7890-e89b-12d3-a456-426614174001
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/contacts/456e7890-e89b-12d3-a456-426614174001/history/aggregated'
 
 **Sample Response:**
 
@@ -128,9 +159,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -140,8 +169,6 @@ Using AB CLI:
 GET /api/contacts/{contactId}/history/graphdata
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -154,21 +181,42 @@ GET /api/contacts/{contactId}/history/graphdata
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/contacts/456e7890-e89b-12d3-a456-426614174001/history/graphdata'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/contacts/{contactId}/history/graphdata"
+         ,
+             contactId=456e7890-e89b-12d3-a456-426614174001
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/contacts/{contactId}/history/graphdata \
-       contactId=456e7890-e89b-12d3-a456-426614174001
+      .. code-block:: bash
+
+         ab api raw get /api/contacts/{contactId}/history/graphdata \
+             contactId=456e7890-e89b-12d3-a456-426614174001
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/contacts/456e7890-e89b-12d3-a456-426614174001/history/graphdata'
 
 **Sample Response:**
 
@@ -179,9 +227,5 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
-
-----

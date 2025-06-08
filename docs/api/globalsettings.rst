@@ -1,11 +1,5 @@
-GlobalSettings API
-==================
-
-This section covers the 5 endpoints related to GlobalSettings.
-
-.. contents::
-   :local:
-   :depth: 2
+GlobalSettings
+==============
 
 Quick Reference
 ---------------
@@ -33,32 +27,47 @@ Quick Reference
      - /api/admin/globalsettings/intacct
      - 
 
-Endpoints
----------
 
 .. _get-apiadminglobalsettingscompanyhierarchy:
 
 GET /api/admin/globalsettings/companyhierarchy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/admin/globalsettings/companyhierarchy'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/admin/globalsettings/companyhierarchy"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/admin/globalsettings/companyhierarchy
+      .. code-block:: bash
+
+         ab api raw get /api/admin/globalsettings/companyhierarchy
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/admin/globalsettings/companyhierarchy'
 
 **Sample Response:**
 
@@ -69,9 +78,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -81,8 +88,6 @@ Using AB CLI:
 GET /api/admin/globalsettings/companyhierarchy/company/{companyId}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Path Parameters:*
@@ -91,21 +96,42 @@ GET /api/admin/globalsettings/companyhierarchy/company/{companyId}
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X GET \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     'https://api.abconnect.co/api/admin/globalsettings/companyhierarchy/company/123e4567-e89b-12d3-a456-426614174000'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.get(
+             "/api/admin/globalsettings/companyhierarchy/company/{companyId}"
+         ,
+             companyId="ed282b80-54fe-4f42-bf1b-69103ce1f76c"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw get /api/admin/globalsettings/companyhierarchy/company/{companyId} \
-       companyId=123e4567-e89b-12d3-a456-426614174000
+      .. code-block:: bash
+
+         ab api raw get /api/admin/globalsettings/companyhierarchy/company/{companyId} \
+             companyId=ed282b80-54fe-4f42-bf1b-69103ce1f76c
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X GET \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           'https://api.abconnect.co/api/admin/globalsettings/companyhierarchy/company/ed282b80-54fe-4f42-bf1b-69103ce1f76c'
 
 **Sample Response:**
 
@@ -116,9 +142,7 @@ Using AB CLI:
 
       {
         "status": "success",
-        "data": {
-          "message": "Operation completed successfully"
-        }
+        "data": {}
       }
 
 ----
@@ -128,28 +152,50 @@ Using AB CLI:
 POST /api/admin/globalsettings/getinsuranceexceptions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/admin/globalsettings/getinsuranceexceptions'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/admin/globalsettings/getinsuranceexceptions"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/admin/globalsettings/getinsuranceexceptions
+      .. code-block:: bash
+
+         ab api raw post /api/admin/globalsettings/getinsuranceexceptions
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/admin/globalsettings/getinsuranceexceptions'
 
 **Sample Response:**
 
@@ -161,11 +207,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -175,8 +217,6 @@ Using AB CLI:
 POST /api/admin/globalsettings/approveinsuranceexception
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Parameters:**
 
 *Query Parameters:*
@@ -185,21 +225,40 @@ POST /api/admin/globalsettings/approveinsuranceexception
 
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     'https://api.abconnect.co/api/admin/globalsettings/approveinsuranceexception'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/admin/globalsettings/approveinsuranceexception"
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/admin/globalsettings/approveinsuranceexception
+      .. code-block:: bash
+
+         ab api raw post /api/admin/globalsettings/approveinsuranceexception
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           'https://api.abconnect.co/api/admin/globalsettings/approveinsuranceexception'
 
 **Sample Response:**
 
@@ -211,11 +270,7 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
 
 ----
@@ -225,28 +280,50 @@ Using AB CLI:
 POST /api/admin/globalsettings/intacct
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-****
-
 **Example Request:**
 
-Using curl:
+.. tabs::
 
-.. code-block:: bash
-   :linenos:
+   .. tab:: Python
 
-   curl -X POST \
-     -H 'Authorization: Bearer YOUR_API_TOKEN' \
-     -H 'Content-Type: application/json' \
-     -d '{
-         "example": "data"
-     }' \
-     'https://api.abconnect.co/api/admin/globalsettings/intacct'
+      .. code-block:: python
 
-Using AB CLI:
+         from ABConnect import ABConnectAPI
+         
+         # Initialize the API client
+         api = ABConnectAPI()
+         
+         # Make the API call
+         response = api.raw.post(
+             "/api/admin/globalsettings/intacct"
+         ,
+             data=
+             {
+                 "example": "data"
+         }
+         
+         )
+         
+         # Process the response
+         print(response)
 
-.. code-block:: bash
+   .. tab:: CLI
 
-   ab api raw post /api/admin/globalsettings/intacct
+      .. code-block:: bash
+
+         ab api raw post /api/admin/globalsettings/intacct
+
+   .. tab:: curl
+
+      .. code-block:: bash
+
+         curl -X POST \
+           -H 'Authorization: Bearer YOUR_API_TOKEN' \
+           -H 'Content-Type: application/json' \
+           -d '{
+               "example": "data"
+           }' \
+           'https://api.abconnect.co/api/admin/globalsettings/intacct'
 
 **Sample Response:**
 
@@ -258,11 +335,5 @@ Using AB CLI:
       {
         "id": "789e0123-e89b-12d3-a456-426614174002",
         "status": "created",
-        "message": "Resource created successfully",
-        "data": {
-          "id": "789e0123-e89b-12d3-a456-426614174002",
-          "created_at": "2024-01-20T10:00:00Z"
-        }
+        "message": "Resource created successfully"
       }
-
-----
