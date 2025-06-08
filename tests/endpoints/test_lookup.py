@@ -3,9 +3,11 @@
 Documentation: https://abconnecttools.readthedocs.io/en/latest/api/lookup.html
 """
 
+import unittest
 from unittest.mock import patch, MagicMock
 from . import BaseEndpointTest
-from ABConnect.exceptions import ABConnectError
+from ABConnect.exceptions import ABConnectError, RequestError
+from ABConnect.api.models import LookupKeys, LookupValue
 
 
 class TestLookupEndpoints(BaseEndpointTest):
@@ -35,20 +37,32 @@ class TestLookupEndpoints(BaseEndpointTest):
         
         See documentation: https://abconnecttools.readthedocs.io/en/latest/api/lookup.html#get_apilookupmasterconstantkey
         """
-        # Path parameters
-        masterConstantKey = "test-value"
+        # Use a real lookup key for testing
+        masterConstantKey = LookupKeys.COMPANYTYPES.value
 
-        response = self.api.raw.get(
-            "/api/lookup/{masterConstantKey}",
-            masterConstantKey=masterConstantKey,
-        )
-        
-        # Check response
-        self.assertIsNotNone(response)
-        if isinstance(response, dict):
-            self.assertIsInstance(response, dict)
-        elif isinstance(response, list):
+        try:
+            response = self.api.raw.get(
+                "/api/lookup/{masterConstantKey}",
+                masterConstantKey=masterConstantKey,
+            )
+            
+            # Check response
+            self.assertIsNotNone(response)
             self.assertIsInstance(response, list)
+            
+            # Validate each item with the LookupValue model
+            for item in response[:5]:  # Validate first 5 items
+                lookup_value = LookupValue.model_validate(item)
+                self.assertIsInstance(lookup_value, LookupValue)
+                self.assertIsNotNone(lookup_value.id)
+                self.assertTrue(lookup_value.value or lookup_value.name, 
+                               "Lookup must have either value or name")
+                
+        except RequestError as e:
+            if e.status_code == 404:
+                self.skipTest(f"Lookup key {masterConstantKey} returns 404")
+            else:
+                raise
 
     def test_get_apilookupmasterconstantkeyvalueid(self):
         """Test GET /api/lookup/{masterConstantKey}/{valueId}.

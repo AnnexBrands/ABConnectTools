@@ -1,8 +1,8 @@
 """Lookup models for ABConnect API."""
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 from enum import Enum
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 
 
 class LookupKeys(str, Enum):
@@ -49,9 +49,23 @@ class LookupKeys(str, Enum):
 
 class LookupValue(BaseModel):
     """Lookup value model."""
-    id: str
-    value: str
+    id: Union[str, int]  # Can be either string or int
+    value: Optional[str] = None  # Some lookups use 'value'
+    name: Optional[str] = None   # Some lookups use 'name'
     description: Optional[str] = None
-    isActive: bool = True
+    isActive: Optional[bool] = True
     sortOrder: Optional[int] = None
     metadata: Optional[Dict[str, Any]] = None
+    
+    @field_validator('id', mode='before')
+    @classmethod
+    def convert_id_to_string(cls, v):
+        """Convert ID to string if it's an integer."""
+        if isinstance(v, int):
+            return str(v)
+        return v
+    
+    @property
+    def display_value(self) -> str:
+        """Get the display value (prefers 'value' over 'name')."""
+        return self.value or self.name or ""
