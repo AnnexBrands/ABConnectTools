@@ -1,4 +1,6 @@
 
+# Changelog
+
 ## 0.1.2
 
 * Initial release of modules
@@ -36,4 +38,13 @@
 * **New**: Centralized configuration management via `Config` class
 * Backward compatibility maintained with existing endpoint implementations
 * Virtual environment usage documented in CLAUDE.md
+
+## 0.1.9 (Upcoming)
+* **New**: Three-layer API architecture (Raw, Tagged, Friendly)
+* **New**: CLI with commands for config, endpoints, lookup, and raw API access
+* **Enhancement**: Comprehensive API documentation for all 223 endpoints
+* **Enhancement**: Interactive bash examples with copy buttons
+* **Enhancement**: Collapsible sample responses in documentation
+* **Enhancement**: Test files with documentation cross-references
+* **Enhancement**: Practical usage examples focused on common workflows
 

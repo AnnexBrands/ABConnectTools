@@ -7,13 +7,37 @@ ABConnect is a Python package for Annex Brands data processing and API interacti
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Getting Started:
 
    installation
-   quickstart
+   quickstart_python
+   quickstart_cli
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Command Line Interface:
+
+   cli
+   examples_cli
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Python Library:
+
    api_reference
    modules/index
-   examples
+   examples_python
+
+.. toctree::
+   :maxdepth: 2
+   :caption: API Endpoints:
+
+   api/index
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Reference:
+
    changelog
 
 Overview
@@ -29,9 +53,9 @@ ABConnect provides a comprehensive set of tools for interacting with the Annex B
 Key Features
 ------------
 
-* **NEW in v0.1.8**: Automatic access to all 223+ API endpoints via generic endpoint system
-* **NEW in v0.1.8**: Fluent query builder for complex API queries
-* **NEW in v0.1.8**: Pydantic models for type-safe API responses
+* Automatic access to all 223+ API endpoints via generic endpoint system
+* Fluent query builder for complex API queries
+* Pydantic models for type-safe API responses
 * Template-based request construction
 * Flexible authentication with token storage
 * Support for both staging and production environments

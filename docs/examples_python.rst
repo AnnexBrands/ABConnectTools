@@ -1,7 +1,7 @@
-Examples
-========
+Python Library Examples
+=======================
 
-This section provides practical examples of using ABConnect.
+This section provides practical examples of using ABConnect as a Python library.
 
 .. contents::
    :local:
@@ -29,23 +29,6 @@ Basic API Usage
    for company in companies:
        print(f"{company['name']} ({company['code']})")
 
-Command Line Usage
-~~~~~~~~~~~~~~~~~~
-
-.. code-block:: bash
-
-   # Get your user profile
-   ab me
-   
-   # Look up company types
-   ab lookup CompanyTypes
-   
-   # Search for companies
-   ab api raw get /api/companies/search page=1 per_page=20
-   
-   # Get company by code
-   ab company --code ABC123
-
 Working with Companies
 ----------------------
 
@@ -66,12 +49,6 @@ Search and Filter
    
    # Get company setup data
    setup = api.raw.get(f'/api/company/{company_id}/setupdata')
-
-.. code-block:: bash
-
-   # CLI examples
-   ab api raw get /api/companies/search name="ABC Corp" active=true
-   ab api raw get /api/companies/{id}/details id=123e4567-e89b-12d3-a456-426614174000
 
 Managing Contacts
 ~~~~~~~~~~~~~~~~~
@@ -151,12 +128,6 @@ Job Timeline Management
        'completed': True
    })
 
-.. code-block:: bash
-
-   # CLI examples
-   ab api raw get /api/job/{jobDisplayId} jobDisplayId=JOB-2024-001
-   ab api raw get /api/job/{jobDisplayId}/timeline jobDisplayId=JOB-2024-001
-
 Lookup Values
 -------------
 
@@ -175,13 +146,6 @@ Master Constants
    
    # Get countries
    countries = api.raw.get('/api/lookup/countries')
-
-.. code-block:: bash
-
-   # CLI examples
-   ab lookup CompanyTypes
-   ab lookup JobsStatusTypes --format json
-   ab lookup FreightTypes
 
 File Operations
 ---------------
@@ -204,12 +168,6 @@ Loading Files
    
    # Load JSON
    json_data = loader.load('config.json')
-
-.. code-block:: bash
-
-   # CLI example
-   ab load data.csv
-   ab load report.xlsx --format json
 
 Quoting
 -------
@@ -234,11 +192,6 @@ Quick Quote
    
    print(f"Quote ID: {quote['id']}")
    print(f"Total: ${quote['total']}")
-
-.. code-block:: bash
-
-   # CLI example
-   ab quote CUST123 10001 90001 --weight 1000 --pieces 5
 
 Quote Request
 ~~~~~~~~~~~~~
@@ -362,12 +315,6 @@ Switching Environments
    os.environ['ABC_ENVIRONMENT'] = 'staging'
    api = ABConnectAPI()
 
-.. code-block:: bash
-
-   # CLI configuration
-   ab config --show
-   ab config --env staging
-
 Django Integration
 ------------------
 
@@ -387,3 +334,60 @@ Session-Based Authentication
        user = api.raw.get('/api/account/profile')
        
        return render(request, 'template.html', {'user': user})
+
+Using Generic Endpoints
+-----------------------
+
+Automatic Endpoint Discovery
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+   from ABConnect.api.generic import GenericEndpoints
+   
+   # Initialize with automatic discovery
+   endpoints = GenericEndpoints()
+   
+   # Access any endpoint dynamically
+   response = endpoints.companies.search(page=1, per_page=10)
+   
+   # Or use path-style access
+   response = endpoints.call('companies/search', page=1)
+
+Query Builder
+~~~~~~~~~~~~~
+
+.. code-block:: python
+
+   from ABConnect.api.query import QueryBuilder
+   
+   # Build complex queries
+   query = QueryBuilder()
+   results = (query
+       .filter(status='active')
+       .filter(created_after='2024-01-01')
+       .sort_by('created_at', desc=True)
+       .limit(50)
+       .page(1)
+       .execute('/api/jobs/search'))
+
+Response Models
+~~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+   # Responses are automatically parsed into Pydantic models
+   companies = endpoints.companies.search()
+   
+   # Access fields with type safety
+   for company in companies:
+       print(f"ID: {company.id}")
+       print(f"Name: {company.name}")
+       print(f"Created: {company.created_at}")
+
+See Also
+--------
+
+- :doc:`api_reference` - Complete API class reference
+- :doc:`modules/index` - Detailed module documentation
+- :doc:`quickstart_python` - Getting started with the Python library

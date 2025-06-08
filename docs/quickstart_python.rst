@@ -60,8 +60,8 @@ Working with Jobs
        applyRebate=False
    )
 
-Generic Endpoints (NEW in v0.1.8)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Generic Endpoints
+~~~~~~~~~~~~~~~~~
 
 Access any of the 223+ API endpoints automatically:
 
@@ -85,8 +85,8 @@ Access any of the 223+ API endpoints automatically:
    # Use raw method for custom endpoints
    result = client.companies.raw('GET', '/search', params={'q': 'test'})
 
-Query Builder (NEW in v0.1.8)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Query Builder
+~~~~~~~~~~~~~
 
 Build complex queries with the fluent interface:
 
