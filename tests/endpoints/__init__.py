@@ -17,8 +17,9 @@ class BaseEndpointTest(TestCase):
     Test Fixtures:
         - test_company_id: 'ed282b80-54fe-4f42-bf1b-69103ce1f76c' (training company)
         - test_company_code: 'TRAINING'
+        - test_job_display_id: '2000000'
         
-    These fixtures provide a known company that exists in both staging and production
+    These fixtures provide known test data that exists in both staging and production
     environments for consistent testing.
     """
     
@@ -141,9 +142,10 @@ class BaseEndpointTest(TestCase):
         # Common test IDs - override in subclasses with real values
         test_ids = {
             'company': 'ed282b80-54fe-4f42-bf1b-69103ce1f76c',  # training company
-            'company_code': 'training',
+            'company_code': 'TRAINING',
             'contact': '456e7890-e89b-12d3-a456-426614174001',
-            'job': 'JOB-2024-001',
+            'job': '2000000',  # job display ID
+            'job_display_id': '2000000',
             'user': '789e0123-e89b-12d3-a456-426614174002'
         }
         return test_ids.get(resource_type)
@@ -157,6 +159,11 @@ class BaseEndpointTest(TestCase):
     def test_company_code(self) -> str:
         """Get the test company code."""
         return 'TRAINING'
+    
+    @property
+    def test_job_display_id(self) -> str:
+        """Get the test job display ID."""
+        return '2000000'
     
     def get_test_data(self, operation: str) -> Dict[str, Any]:
         """Get test data for a given operation.

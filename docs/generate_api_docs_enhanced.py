@@ -47,7 +47,11 @@ def generate_realistic_example_value(param_name, param_type='string'):
     
     # ID parameters
     if 'id' in param_lower:
-        if 'display' in param_lower or 'job' in param_lower:
+        if 'display' in param_lower and 'job' in param_lower:
+            # Use the actual test job display ID
+            return '2000000'
+        elif 'job' in param_lower:
+            # For other job IDs, use a generic format
             return 'JOB-2024-001'
         elif 'company' in param_lower:
             # Use the actual test company ID

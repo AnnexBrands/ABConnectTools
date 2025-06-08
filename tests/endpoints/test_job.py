@@ -35,8 +35,8 @@ class TestJobEndpoints(BaseEndpointTest):
         
         See documentation: https://abconnecttools.readthedocs.io/en/latest/api/job.html#post_apijobjobdisplayidbook
         """
-        # Path parameters
-        jobDisplayId = "test-id-123"
+        # Path parameters - use the test job display ID
+        jobDisplayId = self.test_job_display_id
 
         response = self.api.raw.post(
             "/api/job/{jobDisplayId}/book",
@@ -55,8 +55,8 @@ class TestJobEndpoints(BaseEndpointTest):
         
         See documentation: https://abconnecttools.readthedocs.io/en/latest/api/job.html#get_apijobjobdisplayid
         """
-        # Path parameters
-        jobDisplayId = "test-id-123"
+        # Path parameters - use the test job display ID
+        jobDisplayId = self.test_job_display_id
 
         response = self.api.raw.get(
             "/api/job/{jobDisplayId}",
@@ -107,8 +107,8 @@ class TestJobEndpoints(BaseEndpointTest):
         
         See documentation: https://abconnecttools.readthedocs.io/en/latest/api/job.html#get_apijobjobdisplayidcalendaritems
         """
-        # Path parameters
-        jobDisplayId = "test-id-123"
+        # Path parameters - use the test job display ID
+        jobDisplayId = self.test_job_display_id
 
         response = self.api.raw.get(
             "/api/job/{jobDisplayId}/calendaritems",
