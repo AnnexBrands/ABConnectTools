@@ -1,6 +1,7 @@
 import requests
 import logging
 from ABConnect.Builder import APIRequestBuilder
+from ABConnect.config import Config
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +23,13 @@ class Quoter:
     """
 
     def __init__(self, *args, **kwargs):
-        self.env = kwargs.get("env", "")
+        # Use environment from kwargs or config
+        env_param = kwargs.get("env", "")
+        if not env_param:
+            # Check config for environment
+            env_param = Config.get_env()
+        self.env = 'staging' if env_param == 'staging' else ''
+        
         self.jobType = kwargs.get("JobType", "Regular")
         self.request_type = kwargs.get("type", "qq").lower()  # Normalize to lower-case.
         self.auto_book = kwargs.get("auto_book", False)

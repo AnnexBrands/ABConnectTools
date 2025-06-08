@@ -2,6 +2,7 @@ import logging
 import requests
 from typing import BinaryIO, Mapping, Tuple, Union, Optional
 from ABConnect.exceptions import RequestError, NotLoggedInError
+from ABConnect.config import Config
 
 logger = logging.getLogger(__name__)
 
@@ -15,7 +16,7 @@ class RequestHandler:
     """Handles HTTP requests to the ABConnect API."""
 
     def __init__(self, token_storage):
-        self.base_url = "https://portal.abconnect.co/api/"
+        self.base_url = Config.get_api_base_url()
         self.token_storage = token_storage
 
     def _get_auth_headers(self):

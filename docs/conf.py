@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.abspath('..'))
 project = 'ABConnect'
 copyright = '2024, Annex Brands'
 author = 'Annex Brands'
-release = '0.1.4'
+release = '0.1.8'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -27,6 +27,8 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx_autodoc_typehints',
     'myst_parser',
+    'sphinx_copybutton',
+    'sphinx_togglebutton',
 ]
 
 templates_path = ['_templates']
@@ -89,3 +91,17 @@ myst_enable_extensions = [
     "smartquotes",
     "replacements",
 ]
+
+# Copybutton configuration
+copybutton_prompt_text = r">>> |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: "
+copybutton_prompt_is_regexp = True
+copybutton_only_copy_prompt_lines = False
+copybutton_exclude = '.linenos'
+
+# Code highlighting
+pygments_style = 'sphinx'
+highlight_language = 'python'
+
+# Toggle button configuration for collapsible sections
+togglebutton_hint = "Click to show"
+togglebutton_hint_hide = "Click to hide"

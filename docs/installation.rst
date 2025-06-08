@@ -22,7 +22,7 @@ For development, clone the repository and install in editable mode:
 
 .. code-block:: bash
 
-   git clone <repository-url>
+   git clone https://github.com/AnnexBrands/ABConnectTools.git
    cd ABConnectTools
    pip install -e .[dev]
 
@@ -31,23 +31,41 @@ This will install the package along with development dependencies needed for tes
 Environment Configuration
 -------------------------
 
-ABConnect uses environment variables for configuration. Create a ``.env`` file in your project root:
+ABConnect uses environment variables for configuration. You'll need to create two environment files from the sample:
 
 .. code-block:: bash
 
-   # Copy the sample environment file
-   cp ABConnect/dotenv.sample .env
+   # Copy the sample to create both staging and production environment files
+   cp .env.sample .env.staging
+   cp .env.sample .env
 
-Then edit the ``.env`` file with your configuration:
+Configuration Variables
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Edit both ``.env.staging`` and ``.env`` files with your credentials:
 
 .. code-block:: bash
 
-   # API Configuration
-   API_BASE_URL=https://api.example.com
-   API_TOKEN=your-api-token
+   # ABC Connect credentials
+   ABCONNECT_USERNAME=your_username
+   ABCONNECT_PASSWORD=your_password
+   ABC_CLIENT_ID=your_app_name
+   ABC_CLIENT_SECRET=your_client_secret
    
-   # Environment (staging or production)
-   ENVIRONMENT=staging
+   # API environment setting
+   ABC_ENVIRONMENT=staging  # or 'production' for .env file
+
+.. note::
+
+   To request a client secret for API access, please contact abconnect@annexbrands.com
+
+Environment Usage
+~~~~~~~~~~~~~~~~~
+
+- ``.env.staging`` - Used automatically by tests and development
+- ``.env`` - Used for production operations
+
+The package will automatically use ``.env.staging`` when running tests via pytest.
 
 Django Integration
 ------------------
