@@ -42,3 +42,7 @@
 - Centralized configuration management via `Config` class
 - Backward compatibility maintained with existing endpoint implementations
 - Virtual environment usage documented in CLAUDE.md
+
+## 0.1.9
+
+- Test case and documentation improvements.
