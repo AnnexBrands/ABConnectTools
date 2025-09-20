@@ -6,11 +6,8 @@ Provides type-safe access to admin/* endpoints.
 
 from typing import List, Optional
 from .base import BaseEndpoint
-try:
-    from ..models import CompanyHierarchyInfo, SelectApproveInsuranceResult
-except ImportError:
-    # Models not available, will return dict responses
-    pass
+# Model imports temporarily disabled
+    # Temporarily disabled: # Model imports temporarily disabled
 
 
 class AdminEndpoint(BaseEndpoint):
@@ -94,7 +91,7 @@ class AdminEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def get_globalsettings_companyhierarchy(self) -> CompanyHierarchyInfo:
+    def get_globalsettings_companyhierarchy(self) -> dict:
         """GET /api/admin/globalsettings/companyhierarchy
         
         
@@ -105,7 +102,7 @@ class AdminEndpoint(BaseEndpoint):
         path = "/globalsettings/companyhierarchy"
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_globalsettings_companyhierarchy_company(self, companyId: str) -> CompanyHierarchyInfo:
+    def get_globalsettings_companyhierarchy_company(self, companyId: str) -> dict:
         """GET /api/admin/globalsettings/companyhierarchy/company/{companyId}
         
         
@@ -117,7 +114,7 @@ class AdminEndpoint(BaseEndpoint):
         path = path.replace("{companyId}", companyId)
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def post_globalsettings_getinsuranceexceptions(self, data: dict = None) -> List[SelectApproveInsuranceResult]:
+    def post_globalsettings_getinsuranceexceptions(self, data: dict = None) -> List[dict]:
         """POST /api/admin/globalsettings/getinsuranceexceptions
         
         

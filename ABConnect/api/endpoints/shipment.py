@@ -6,11 +6,8 @@ Provides type-safe access to shipment/* endpoints.
 
 from typing import Optional
 from .base import BaseEndpoint
-try:
-    from ..models import ShipmentDetails, ShippingDocument
-except ImportError:
-    # Models not available, will return dict responses
-    pass
+# Model imports disabled
+    # Model imports disabled
 
 
 class ShipmentEndpoint(BaseEndpoint):
@@ -22,7 +19,7 @@ class ShipmentEndpoint(BaseEndpoint):
     
     api_path = "shipment"
 
-    def get_get(self, franchisee_id: Optional[str] = None, provider_id: Optional[str] = None, pro_number: Optional[str] = None) -> ShipmentDetails:
+    def get_get(self, franchisee_id: Optional[str] = None, provider_id: Optional[str] = None, pro_number: Optional[str] = None) -> dict:
         """GET /api/shipment
         
         
@@ -53,7 +50,7 @@ class ShipmentEndpoint(BaseEndpoint):
         path = "/accessorials"
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_document(self, docId: str, franchisee_id: Optional[str] = None) -> ShippingDocument:
+    def get_document(self, docId: str, franchisee_id: Optional[str] = None) -> dict:
         """GET /api/shipment/document/{docId}
         
         

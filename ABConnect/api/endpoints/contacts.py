@@ -6,11 +6,8 @@ Provides type-safe access to contacts/* endpoints.
 
 from typing import List, Optional
 from .base import BaseEndpoint
-try:
-    from ..models import ContactDetailedInfo, ContactHistoryAggregatedCost, ContactHistoryGraphData, ContactHistoryInfo, ContactPrimaryDetails, MergeContactsPreviewInfo, SearchContactEntityResult
-except ImportError:
-    # Models not available, will return dict responses
-    pass
+# Model imports disabled
+    # Model imports disabled
 
 
 class ContactsEndpoint(BaseEndpoint):
@@ -22,7 +19,7 @@ class ContactsEndpoint(BaseEndpoint):
     
     api_path = "contacts"
 
-    def post_history(self, contactId: str, data: dict = None) -> ContactHistoryInfo:
+    def post_history(self, contactId: str, data: dict = None) -> dict:
         """POST /api/contacts/{contactId}/history
         
         
@@ -36,7 +33,7 @@ class ContactsEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def get_history_aggregated(self, contactId: str, statuses: Optional[str] = None) -> ContactHistoryAggregatedCost:
+    def get_history_aggregated(self, contactId: str, statuses: Optional[str] = None) -> dict:
         """GET /api/contacts/{contactId}/history/aggregated
         
         
@@ -53,7 +50,7 @@ class ContactsEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)
-    def get_history_graphdata(self, contactId: str, statuses: Optional[str] = None) -> ContactHistoryGraphData:
+    def get_history_graphdata(self, contactId: str, statuses: Optional[str] = None) -> dict:
         """GET /api/contacts/{contactId}/history/graphdata
         
         
@@ -70,7 +67,7 @@ class ContactsEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)
-    def post_merge_preview(self, mergeToId: str, data: dict = None) -> MergeContactsPreviewInfo:
+    def post_merge_preview(self, mergeToId: str, data: dict = None) -> dict:
         """POST /api/contacts/{mergeToId}/merge/preview
         
         
@@ -121,7 +118,7 @@ class ContactsEndpoint(BaseEndpoint):
         path = "/user"
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_editdetails(self, contactId: str) -> ContactDetailedInfo:
+    def get_editdetails(self, contactId: str) -> dict:
         """GET /api/contacts/{contactId}/editdetails
         
         
@@ -188,7 +185,7 @@ class ContactsEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def post_v2_search(self, data: dict = None) -> List[SearchContactEntityResult]:
+    def post_v2_search(self, data: dict = None) -> List[dict]:
         """POST /api/contacts/v2/search
         
         
@@ -214,7 +211,7 @@ class ContactsEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def get_primarydetails(self, contactId: str) -> ContactPrimaryDetails:
+    def get_primarydetails(self, contactId: str) -> dict:
         """GET /api/contacts/{contactId}/primarydetails
         
         

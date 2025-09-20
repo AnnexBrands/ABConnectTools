@@ -1,19 +1,11 @@
-"""Account API endpoints.
+"""Account API endpoints."""
 
-Auto-generated from swagger.json specification.
-Provides type-safe access to account/* endpoints.
-"""
-
-from typing import Optional
+from typing import Optional, Dict, Any
 from .base import BaseEndpoint
 
 
 class AccountEndpoint(BaseEndpoint):
-    """Account API endpoint operations.
-    
-    Handles all API operations for /api/account/* endpoints.
-    Total endpoints: 10
-    """
+    """Used to manage user accounts, authentication, and profiles."""
     
     api_path = "account"
 
@@ -100,17 +92,13 @@ class AccountEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def get_profile(self) -> dict:
-        """GET /api/account/profile
-        
-        
+    def get_profile(self) -> Dict[str, Any]:
+        """Get current user profile information.
         
         Returns:
-            dict: API response data
+            User profile with contact info, company details, and payment sources.
         """
-        path = "/profile"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        return self._make_request("GET", "profile")
     def post_setpassword(self, data: dict = None) -> dict:
         """POST /api/account/setpassword
         

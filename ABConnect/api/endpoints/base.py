@@ -79,7 +79,7 @@ class BaseEndpoint:
         return response
     
     def _cast_response(self, response: Any, method: str, full_path: str, 
-                      operation_id: Optional[str] = None) -> Any:
+                      operation_id: Optional[str] = None) -> dict:
         """Cast response to appropriate Pydantic model.
         
         Args:

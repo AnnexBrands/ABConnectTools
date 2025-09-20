@@ -6,11 +6,8 @@ Provides type-safe access to lookup/* endpoints.
 
 from typing import List, Optional
 from .base import BaseEndpoint
-try:
-    from ..models import ContactTypeEntity, CountryCodeDto, GuidSequentialRangeValue
-except ImportError:
-    # Models not available, will return dict responses
-    pass
+# Model imports disabled
+    # Model imports disabled
 
 
 class LookupEndpoint(BaseEndpoint):
@@ -47,7 +44,7 @@ class LookupEndpoint(BaseEndpoint):
         path = path.replace("{valueId}", valueId)
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_countries(self) -> List[CountryCodeDto]:
+    def get_countries(self) -> List[dict]:
         """GET /api/lookup/countries
         
         
@@ -181,7 +178,7 @@ class LookupEndpoint(BaseEndpoint):
         path = "/comonInsurance"
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_contacttypes(self) -> List[ContactTypeEntity]:
+    def get_contacttypes(self) -> List[dict]:
         """GET /api/lookup/contactTypes
         
         
@@ -192,7 +189,7 @@ class LookupEndpoint(BaseEndpoint):
         path = "/contactTypes"
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_densityclassmap(self, carrier_api: Optional[str] = None) -> List[GuidSequentialRangeValue]:
+    def get_densityclassmap(self, carrier_api: Optional[str] = None) -> List[dict]:
         """GET /api/lookup/densityClassMap
         
         

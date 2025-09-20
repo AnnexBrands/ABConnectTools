@@ -6,11 +6,8 @@ Provides type-safe access to company/* endpoints.
 
 from typing import List, Optional
 from .base import BaseEndpoint
-try:
-    from ..models import BaseInfoCalendar, Calendar, CompanySetupData, ContainerThickness, PlannerTask, SaveEntityResponse, ServiceWarningResponse, Truck
-except ImportError:
-    # Models not available, will return dict responses
-    pass
+# Model imports disabled
+    # Model imports disabled
 
 
 class CompanyEndpoint(BaseEndpoint):
@@ -22,7 +19,7 @@ class CompanyEndpoint(BaseEndpoint):
     
     api_path = "company"
 
-    def get_calendar(self, companyId: str, date: str) -> Calendar:
+    def get_calendar(self, companyId: str, date: str) -> dict:
         """GET /api/company/{companyId}/calendar/{date}
         
         
@@ -35,7 +32,7 @@ class CompanyEndpoint(BaseEndpoint):
         path = path.replace("{date}", date)
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_calendar_baseinfo(self, companyId: str, date: str) -> BaseInfoCalendar:
+    def get_calendar_baseinfo(self, companyId: str, date: str) -> dict:
         """GET /api/company/{companyId}/calendar/{date}/baseinfo
         
         
@@ -117,7 +114,7 @@ class CompanyEndpoint(BaseEndpoint):
         path = path.replace("{companyId}", companyId)
         kwargs = {}
         return self._make_request("DELETE", path, **kwargs)
-    def get_setupdata(self, companyId: str) -> CompanySetupData:
+    def get_setupdata(self, companyId: str) -> dict:
         """GET /api/company/{companyId}/setupdata
         
         
@@ -129,7 +126,7 @@ class CompanyEndpoint(BaseEndpoint):
         path = path.replace("{companyId}", companyId)
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_containerthicknessinches(self, companyId: str) -> List[ContainerThickness]:
+    def get_containerthicknessinches(self, companyId: str) -> List[dict]:
         """GET /api/company/{companyId}/containerthicknessinches
         
         
@@ -172,7 +169,7 @@ class CompanyEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("DELETE", path, **kwargs)
-    def get_planner(self, companyId: str) -> List[PlannerTask]:
+    def get_planner(self, companyId: str) -> List[dict]:
         """GET /api/company/{companyId}/planner
         
         
@@ -184,7 +181,7 @@ class CompanyEndpoint(BaseEndpoint):
         path = path.replace("{companyId}", companyId)
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_truck(self, companyId: str, only_own_trucks: Optional[str] = None) -> List[Truck]:
+    def get_truck(self, companyId: str, only_own_trucks: Optional[str] = None) -> List[dict]:
         """GET /api/company/{companyId}/truck
         
         
@@ -201,7 +198,7 @@ class CompanyEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)
-    def post_truck(self, companyId: str, data: dict = None) -> SaveEntityResponse:
+    def post_truck(self, companyId: str, data: dict = None) -> dict:
         """POST /api/company/{companyId}/truck
         
         
@@ -215,7 +212,7 @@ class CompanyEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def put_truck(self, companyId: str, truckId: str, data: dict = None) -> SaveEntityResponse:
+    def put_truck(self, companyId: str, truckId: str, data: dict = None) -> dict:
         """PUT /api/company/{companyId}/truck/{truckId}
         
         
@@ -230,7 +227,7 @@ class CompanyEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("PUT", path, **kwargs)
-    def delete_truck(self, companyId: str, truckId: str) -> ServiceWarningResponse:
+    def delete_truck(self, companyId: str, truckId: str) -> dict:
         """DELETE /api/company/{companyId}/truck/{truckId}
         
         

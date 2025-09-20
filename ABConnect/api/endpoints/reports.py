@@ -5,11 +5,8 @@ Provides type-safe access to reports/* endpoints.
 """
 
 from .base import BaseEndpoint
-try:
-    from ..models import InsuranceReport, ReferredByReport, RevenueCustomer, SalesForecastReport, SalesForecastSummary, Web2LeadReport
-except ImportError:
-    # Models not available, will return dict responses
-    pass
+# Model imports disabled
+    # Model imports disabled
 
 
 class ReportsEndpoint(BaseEndpoint):
@@ -21,7 +18,7 @@ class ReportsEndpoint(BaseEndpoint):
     
     api_path = "reports"
 
-    def post_insurance(self, data: dict = None) -> InsuranceReport:
+    def post_insurance(self, data: dict = None) -> dict:
         """POST /api/reports/insurance
         
         
@@ -34,7 +31,7 @@ class ReportsEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def post_sales(self, data: dict = None) -> SalesForecastReport:
+    def post_sales(self, data: dict = None) -> dict:
         """POST /api/reports/sales
         
         
@@ -47,7 +44,7 @@ class ReportsEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def post_sales_summary(self, data: dict = None) -> SalesForecastSummary:
+    def post_sales_summary(self, data: dict = None) -> dict:
         """POST /api/reports/sales/summary
         
         
@@ -60,7 +57,7 @@ class ReportsEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def post_referredby(self, data: dict = None) -> ReferredByReport:
+    def post_referredby(self, data: dict = None) -> dict:
         """POST /api/reports/referredBy
         
         
@@ -73,7 +70,7 @@ class ReportsEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def post_web2lead(self, data: dict = None) -> Web2LeadReport:
+    def post_web2lead(self, data: dict = None) -> dict:
         """POST /api/reports/web2Lead
         
         
@@ -86,7 +83,7 @@ class ReportsEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def post_toprevenuesalesreps(self, data: dict = None) -> RevenueCustomer:
+    def post_toprevenuesalesreps(self, data: dict = None) -> dict:
         """POST /api/reports/topRevenueSalesReps
         
         
@@ -99,7 +96,7 @@ class ReportsEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def post_toprevenuecustomers(self, data: dict = None) -> RevenueCustomer:
+    def post_toprevenuecustomers(self, data: dict = None) -> dict:
         """POST /api/reports/topRevenueCustomers
         
         

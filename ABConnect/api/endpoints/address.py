@@ -6,11 +6,8 @@ Provides type-safe access to address/* endpoints.
 
 from typing import Optional
 from .base import BaseEndpoint
-try:
-    from ..models import AddressIsValidResult, PropertyType
-except ImportError:
-    # Models not available, will return dict responses
-    pass
+# Temporarily disable model imports until circular dependencies resolved
+# # Model imports temporarily disabled
 
 
 class AddressEndpoint(BaseEndpoint):
@@ -22,7 +19,7 @@ class AddressEndpoint(BaseEndpoint):
     
     api_path = "address"
 
-    def get_isvalid(self, line1: Optional[str] = None, city: Optional[str] = None, state: Optional[str] = None, zip: Optional[str] = None) -> AddressIsValidResult:
+    def get_isvalid(self, line1: Optional[str] = None, city: Optional[str] = None, state: Optional[str] = None, zip: Optional[str] = None) -> dict:
         """GET /api/address/isvalid
         
         
@@ -70,7 +67,7 @@ class AddressEndpoint(BaseEndpoint):
         path = path.replace("{addressId}", addressId)
         kwargs = {}
         return self._make_request("POST", path, **kwargs)
-    def get_propertytype(self, address1: Optional[str] = None, address2: Optional[str] = None, city: Optional[str] = None, state: Optional[str] = None, zip_code: Optional[str] = None) -> PropertyType:
+    def get_propertytype(self, address1: Optional[str] = None, address2: Optional[str] = None, city: Optional[str] = None, state: Optional[str] = None, zip_code: Optional[str] = None) -> dict:
         """GET /api/address/propertytype
         
         

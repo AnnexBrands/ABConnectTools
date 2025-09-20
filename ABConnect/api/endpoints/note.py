@@ -6,11 +6,8 @@ Provides type-safe access to note/* endpoints.
 
 from typing import List, Optional
 from .base import BaseEndpoint
-try:
-    from ..models import Notes, SuggestedContactEntity
-except ImportError:
-    # Models not available, will return dict responses
-    pass
+# Model imports disabled
+    # Model imports disabled
 
 
 class NoteEndpoint(BaseEndpoint):
@@ -22,7 +19,7 @@ class NoteEndpoint(BaseEndpoint):
     
     api_path = "note"
 
-    def get_get(self, category: Optional[str] = None, job_id: Optional[str] = None, contact_id: Optional[str] = None, company_id: Optional[str] = None) -> List[Notes]:
+    def get_get(self, category: Optional[str] = None, job_id: Optional[str] = None, contact_id: Optional[str] = None, company_id: Optional[str] = None) -> List[dict]:
         """GET /api/note
         
         
@@ -44,7 +41,7 @@ class NoteEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)
-    def post_post(self, data: dict = None) -> Notes:
+    def post_post(self, data: dict = None) -> dict:
         """POST /api/note
         
         
@@ -71,7 +68,7 @@ class NoteEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("PUT", path, **kwargs)
-    def get_suggestusers(self, search_key: str = None, job_franchisee_id: Optional[str] = None, company_id: Optional[str] = None) -> List[SuggestedContactEntity]:
+    def get_suggestusers(self, search_key: str = None, job_franchisee_id: Optional[str] = None, company_id: Optional[str] = None) -> List[dict]:
         """GET /api/note/suggestUsers
         
         

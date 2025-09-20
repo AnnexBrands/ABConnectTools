@@ -6,11 +6,8 @@ Provides type-safe access to v3/* endpoints.
 
 from typing import Optional
 from .base import BaseEndpoint
-try:
-    from ..models import JobTrackingResponseV3
-except ImportError:
-    # Models not available, will return dict responses
-    pass
+# Model imports disabled
+    # Model imports disabled
 
 
 class V3Endpoint(BaseEndpoint):
@@ -22,7 +19,7 @@ class V3Endpoint(BaseEndpoint):
     
     api_path = "v3"
 
-    def get_job_tracking(self, jobDisplayId: str, historyAmount: str, history_amount: Optional[str] = None) -> JobTrackingResponseV3:
+    def get_job_tracking(self, jobDisplayId: str, historyAmount: str, history_amount: Optional[str] = None) -> dict:
         """GET /api/v3/job/{jobDisplayId}/tracking/{historyAmount}
         
         

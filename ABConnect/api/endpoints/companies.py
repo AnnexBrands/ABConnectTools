@@ -6,11 +6,8 @@ Provides type-safe access to companies/* endpoints.
 
 from typing import List, Optional
 from .base import BaseEndpoint
-try:
-    from ..models import CompanyAddressInfo, CompanyDetails, SearchCompanyResponse
-except ImportError:
-    # Models not available, will return dict responses
-    pass
+# Temporarily disable model imports until circular dependencies resolved  
+# # Model imports temporarily disabled
 
 
 class CompaniesEndpoint(BaseEndpoint):
@@ -73,7 +70,7 @@ class CompaniesEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)
-    def post_search_v2(self, data: dict = None) -> List[SearchCompanyResponse]:
+    def post_search_v2(self, data: dict = None) -> List[dict]:
         """POST /api/companies/search/v2
         
         
@@ -112,7 +109,7 @@ class CompaniesEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def get_fulldetails(self, companyId: str) -> CompanyDetails:
+    def get_fulldetails(self, companyId: str) -> dict:
         """GET /api/companies/{companyId}/fulldetails
         
         
@@ -124,7 +121,7 @@ class CompaniesEndpoint(BaseEndpoint):
         path = path.replace("{companyId}", companyId)
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def put_fulldetails(self, companyId: str, data: dict = None) -> CompanyDetails:
+    def put_fulldetails(self, companyId: str, data: dict = None) -> dict:
         """PUT /api/companies/{companyId}/fulldetails
         
         
@@ -415,7 +412,7 @@ class CompaniesEndpoint(BaseEndpoint):
         path = "/brandstree"
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_franchiseeaddresses(self, companyId: str) -> List[CompanyAddressInfo]:
+    def get_franchiseeaddresses(self, companyId: str) -> List[dict]:
         """GET /api/companies/{companyId}/franchiseeAddresses
         
         
