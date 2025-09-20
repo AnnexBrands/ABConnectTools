@@ -140,6 +140,135 @@ def cmd_load(args):
         sys.exit(1)
 
 
+def cmd_swagger(args):
+    """Show swagger API structure hierarchically."""
+    import json
+    from pathlib import Path
+    from collections import defaultdict
+    
+    # Load swagger.json
+    swagger_path = Path(__file__).parent / "base" / "swagger.json"
+    with open(swagger_path, 'r') as f:
+        swagger = json.load(f)
+    
+    # Extract information
+    schemas = swagger.get('components', {}).get('schemas', {})
+    paths = swagger.get('paths', {})
+    
+    # Group endpoints by tags
+    tag_endpoints = defaultdict(list)
+    tag_methods = defaultdict(set)
+    tag_descriptions = {}
+    
+    for path, methods in paths.items():
+        for method, spec in methods.items():
+            tags = spec.get('tags', ['Untagged'])
+            for tag in tags:
+                endpoint_info = {
+                    'method': method.upper(),
+                    'path': path,
+                    'summary': spec.get('summary', ''),
+                    'description': spec.get('description', ''),
+                    'operationId': spec.get('operationId', '')
+                }
+                tag_endpoints[tag].append(endpoint_info)
+                tag_methods[tag].add(method.upper())
+    
+    # Handle specific tag request
+    if args.tag:
+        tag = args.tag
+        if tag not in tag_endpoints:
+            print(f"❌ Tag '{tag}' not found")
+            print(f"Available tags: {', '.join(sorted(tag_endpoints.keys()))}")
+            sys.exit(1)
+        
+        endpoints = tag_endpoints[tag]
+        methods = sorted(tag_methods[tag])
+        
+        print(f"📂 {tag} Tag - Complete Endpoint List")
+        print("=" * 60)
+        print(f"Total endpoints: {len(endpoints)}")
+        print(f"HTTP methods: {', '.join(methods)}")
+        print()
+        
+        for i, endpoint in enumerate(sorted(endpoints, key=lambda x: (x['path'], x['method'])), 1):
+            print(f"{i:2}. {endpoint['method']} {endpoint['path']}")
+            if endpoint['summary'] and args.verbose:
+                print(f"    📝 {endpoint['summary']}")
+            if endpoint['operationId'] and args.verbose:
+                print(f"    🔧 Operation: {endpoint['operationId']}")
+            if args.verbose:
+                print()
+        return
+    
+    if args.schemas:
+        # Show schemas grouped by inferred categories
+        print(f"📋 SWAGGER SCHEMAS ({len(schemas)} total)")
+        print("=" * 60)
+        
+        # Group schemas by category (inferred from name patterns)
+        schema_groups = defaultdict(list)
+        for schema_name in schemas.keys():
+            name_lower = schema_name.lower()
+            if 'company' in name_lower:
+                schema_groups['Companies'].append(schema_name)
+            elif 'job' in name_lower:
+                schema_groups['Jobs'].append(schema_name)
+            elif 'contact' in name_lower:
+                schema_groups['Contacts'].append(schema_name)
+            elif 'address' in name_lower:
+                schema_groups['Addresses'].append(schema_name)
+            elif 'user' in name_lower:
+                schema_groups['Users'].append(schema_name)
+            elif any(word in name_lower for word in ['request', 'response', 'model']):
+                schema_groups['Common Models'].append(schema_name)
+            else:
+                schema_groups['Other'].append(schema_name)
+        
+        for group, schema_list in sorted(schema_groups.items()):
+            print(f"\n🏷️  {group} ({len(schema_list)} schemas)")
+            for schema in sorted(schema_list)[:10]:  # Show first 10
+                print(f"   {schema}")
+            if len(schema_list) > 10:
+                print(f"   ... and {len(schema_list) - 10} more")
+    
+    elif args.tags:
+        # Show just tag summary
+        print(f"🏷️  SWAGGER TAGS ({len(tag_endpoints)} total)")
+        print("=" * 60)
+        for tag in sorted(tag_endpoints.keys()):
+            endpoint_count = len(tag_endpoints[tag])
+            methods = sorted(tag_methods[tag])
+            print(f"{tag:30} {endpoint_count:3} endpoints  [{', '.join(methods)}]")
+    
+    else:
+        # Show full hierarchical structure
+        print(f"🌳 SWAGGER API STRUCTURE")
+        print("=" * 60)
+        print(f"📊 Summary: {len(schemas)} schemas, {len(tag_endpoints)} tags, {sum(len(eps) for eps in tag_endpoints.values())} endpoints")
+        print()
+        
+        for tag in sorted(tag_endpoints.keys()):
+            endpoints = tag_endpoints[tag]
+            methods = sorted(tag_methods[tag])
+            
+            print(f"📂 {tag} ({len(endpoints)} endpoints)")
+            print(f"   Methods: {', '.join(methods)}")
+            
+            if args.verbose:
+                for endpoint in sorted(endpoints, key=lambda x: (x['path'], x['method']))[:15]:  # Show first 15
+                    print(f"   ├─ {endpoint['method']} {endpoint['path']}")
+                if len(endpoints) > 15:
+                    print(f"   └─ ... and {len(endpoints) - 15} more")
+            else:
+                # Show just a few examples
+                for endpoint in sorted(endpoints, key=lambda x: (x['path'], x['method']))[:3]:
+                    print(f"   ├─ {endpoint['method']} {endpoint['path']}")
+                if len(endpoints) > 3:
+                    print(f"   └─ ... and {len(endpoints) - 3} more")
+            print()
+
+
 def cmd_endpoints(args):
     """List available API endpoints."""
     api = ABConnectAPI()
@@ -278,7 +407,7 @@ def cmd_api(args):
             result = api.raw.call(method.upper(), path, data=data, **params)
 
         else:
-            # Tagged or friendly access - not supported yet
+            # Tagged endpoint access - not supported yet
             print("Error: Non-raw API access not implemented yet")
             print("Use: ab api raw <method> <path> [params...]")
             sys.exit(1)
@@ -374,6 +503,23 @@ def main():
         "--verbose", "-v", action="store_true", help="Show verbose output"
     )
     endpoints_parser.set_defaults(func=cmd_endpoints)
+
+    # Swagger command
+    swagger_parser = subparsers.add_parser("swagger", help="Show swagger API structure hierarchically")
+    swagger_parser.add_argument(
+        "tag", nargs="?", help="Show all endpoints for specific tag (e.g., 'Companies', 'Jobs')"
+    )
+    swagger_group = swagger_parser.add_mutually_exclusive_group()
+    swagger_group.add_argument(
+        "--schemas", "-s", action="store_true", help="Show schemas grouped by category"
+    )
+    swagger_group.add_argument(
+        "--tags", "-t", action="store_true", help="Show only tag summary"
+    )
+    swagger_parser.add_argument(
+        "--verbose", "-v", action="store_true", help="Show more details (summaries, operation IDs)"
+    )
+    swagger_parser.set_defaults(func=cmd_swagger)
 
     # API command
     api_parser = subparsers.add_parser("api", help="Execute API calls")

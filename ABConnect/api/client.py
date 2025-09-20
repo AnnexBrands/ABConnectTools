@@ -16,14 +16,13 @@ from ABConnect.api.endpoints import (
 )
 
 from .auth import FileTokenStorage, SessionTokenStorage
-from .http import RequestHandler
+from .http_client import RequestHandler
 from .swagger import SwaggerParser
 from .builder import EndpointBuilder
 from .generic import GenericEndpoint
 from .raw import RawEndpoint
 from .tagged import TaggedResourceBuilder
-from .friendly.companies import CompaniesFriendly
-from .friendly.lookup import LookupFriendly
+# Friendly modules removed - using new schema-first approach
 
 logger = logging.getLogger(__name__)
 
@@ -88,7 +87,7 @@ class ABConnectAPI:
         
         # Initialize tagged resources
         self._tagged_resources: Dict[str, Any] = {}
-        self._friendly_wrappers: Dict[str, Any] = {}
+        # Friendly wrappers removed - using new schema-first approach
         
         # Initialize generic endpoints if enabled
         self._generic_endpoints: Dict[str, GenericEndpoint] = {}
@@ -170,17 +169,7 @@ class ABConnectAPI:
                 if not hasattr(self, resource_name):
                     setattr(self, resource_name, resource_instance)
                 
-                # Add friendly wrapper if available
-                if resource_name == 'companies':
-                    friendly = CompaniesFriendly(resource_instance)
-                    self._friendly_wrappers[resource_name] = friendly
-                    # Override the attribute with friendly wrapper
-                    setattr(self, resource_name, friendly)
-                elif resource_name == 'lookup':
-                    friendly = LookupFriendly(resource_instance)
-                    self._friendly_wrappers[resource_name] = friendly
-                    # Override the attribute with friendly wrapper
-                    setattr(self, resource_name, friendly)
+                # Friendly wrappers removed - using new schema-first typed endpoints
             
             logger.debug(f"Initialized {len(self._tagged_resources)} tagged resources")
             

@@ -1,5 +1,5 @@
 from .client import ABConnectAPI
-from .http import RequestHandler
+from .http_client import RequestHandler
 from .auth import FileTokenStorage, SessionTokenStorage
 from .swagger import SwaggerParser, EndpointDefinition, Parameter
 from .generic import GenericEndpoint
