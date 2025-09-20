@@ -104,6 +104,22 @@ class Config:
         return "https://login.abconnect.co/connect/token"
 
     @classmethod
+    def get_swagger_url(cls) -> str:
+        """Get swagger API URL for current environment.
+
+        Returns:
+            Swagger API URL
+        """
+        # Allow override via environment variable
+        custom_url = cls.get("ABC_SWAGGER_URL")
+        if custom_url:
+            return custom_url
+            
+        if cls.get_env() == "staging":
+            return "https://portal.staging.abconnect.co/swagger/v1/swagger.json"
+        return "https://portal.abconnect.co/swagger/v1/swagger.json"
+
+    @classmethod
     def reset(cls):
         """Reset configuration (useful for testing)."""
         cls._loaded = False
