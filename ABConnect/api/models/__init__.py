@@ -1,132 +1,358 @@
-"""Response models for API data structures.
+"""ABConnect API models package.
 
-This module provides data models and type definitions for API responses,
-organized by swagger tags for better structure and maintainability.
+Auto-generated from swagger.json specification.
+Contains Pydantic models for all API schemas.
 """
 
-# Import all models for backward compatibility
-from .base import (
-    ABConnectBaseModel,
-    CompanyType,
-    COMPANY_TYPE_IDS,
-    JobStatus,
-    TaskStatus,
-    ContactType,
-    MODEL_REGISTRY,
-    get_model_class,
-    parse_response
-)
+from .base import *
+from .enums import *
+from .account import *
+from .address import *
+from .advancedsettings import *
+from .calendar import *
+from .carriererrormessage import *
+from .companies import *
+from .companysettings import *
+from .contacthistory import *
+from .contactmerge import *
+from .contacts import *
+from .containerthicknessinches import *
+from .dashboard import *
+from .documents import *
+from .globalsettings import *
+from .gridviews import *
+from .job import *
+from .jobemail import *
+from .jobform import *
+from .jobfreightproviders import *
+from .jobintacct import *
+from .jobnote import *
+from .jobonhold import *
+from .jobparcelitems import *
+from .jobpayment import *
+from .jobrfq import *
+from .jobshipment import *
+from .jobsms import *
+from .jobsmstemplate import *
+from .jobtimeline import *
+from .jobtracking import *
+from .jobtrackingv3 import *
+from .lookup import *
+from .note import *
+from .planner import *
+from .reports import *
+from .rfq import *
+from .shared import *
+from .shipment import *
+from .truck import *
+from .twiliowebhook import *
+from .users import *
 
-from .addresses import (
-    AddressCoordinates,
-    AddressBase,
-    Address,
-    MainAddress,
-    AddressData,
-    OverridableValue,
-    OverridableAddressData
-)
-
-from .companies import (
-    CompanyBase,
-    CompanyBasic,
-    CompanyInfo,
-    CompanyDetails,
-    CompanyDetailsSection,
-    CompanyPreferences,
-    CompanyPricing,
-    CompanyInsurance,
-    CompanyFullDetails,
-    FileUpload,
-    TransportationCharge,
-    MarkupRates,
-    InsuranceOption
-)
-
-from .contacts import Contact
-
-from .jobs import (
-    JobItem,
-    JobTask,
-    JobShipment,
-    JobPayment,
-    Job
-)
-
-from .users import User
-
-from .documents import Document
-
-from .forms import FormField, Form
-
-from .lookups import LookupKeys, LookupValue
-
-from .responses import PaginatedResponse, ErrorResponse
-
-# Make all imports available at package level
+# Export all models and utilities
 __all__ = [
-    # Base models and enums
-    'ABConnectBaseModel',
-    'CompanyType',
-    'COMPANY_TYPE_IDS',
-    'JobStatus',
-    'TaskStatus',
-    'ContactType',
-    
-    # Address models
-    'AddressCoordinates',
-    'AddressBase',
-    'Address',
-    'MainAddress',
-    'AddressData',
-    'OverridableValue',
-    'OverridableAddressData',
-    
-    # Company models
-    'CompanyBase',
-    'CompanyBasic',
-    'CompanyInfo',
-    'CompanyDetails',
-    'CompanyDetailsSection',
-    'CompanyPreferences',
-    'CompanyPricing',
-    'CompanyInsurance',
-    'CompanyFullDetails',
-    'FileUpload',
-    'TransportationCharge',
-    'MarkupRates',
-    'InsuranceOption',
-    
-    # Contact models
-    'Contact',
-    
-    # Job models
-    'JobItem',
-    'JobTask',
-    'JobShipment',
-    'JobPayment',
-    'Job',
-    
-    # User models
-    'User',
-    
-    # Document models
-    'Document',
-    
-    # Form models
-    'FormField',
-    'Form',
-    
-    # Lookup models
-    'LookupKeys',
-    'LookupValue',
-    
-    # Response models
-    'PaginatedResponse',
-    'ErrorResponse',
-    
-    # Utility functions
-    'MODEL_REGISTRY',
-    'get_model_class',
-    'parse_response'
+    # Base classes
+    "ABConnectBaseModel",
+    "IdentifiedModel",
+    "TimestampedModel",
+    "ActiveModel",
+    "CompanyRelatedModel",
+    "JobRelatedModel",
+    "FullAuditModel",
+    "CompanyAuditModel",
+    "JobAuditModel",
+    # Enums
+    "CarrierAPI",
+    "CopyMaterialsFrom",
+    "DashboardType",
+    "DocumentSource",
+    "ForgotType",
+    "GeometryType",
+    "HistoryCodeABCState",
+    "InheritSettingFrom",
+    "KnownFormId",
+    "LabelImageType",
+    "LabelType",
+    "ListSortDirection",
+    "PaymentType",
+    "RangeDateEnum",
+    "RetransTimeZoneEnum",
+    "SelectedOption",
+    "SendEmailStatus",
+    "ServiceType",
+    "SortByField",
+    "StatusEnum",
+    "CommercialCapabilities",
+    "JobAccessLevel",
+    "JobContactType",
+    "JobType",
+    "PropertyType",
+    "QuoteRequestStatus",
+    # Models
+    "AcceptModel",
+    "AccesorialCharges",
+    "Address",
+    "AddressData",
+    "AddressDetails",
+    "AddressDetailsMergePreviewDataItem",
+    "AddressIsValidResult",
+    "AdvancedSettingsEntitySaveModel",
+    "AttachCustomerBankModel",
+    "AutoCompleteValue",
+    "Base64File",
+    "BaseContactDetails",
+    "BaseInfoCalendar",
+    "BaseInfoCalendarJob",
+    "BaseTask",
+    "BaseTaskModel",
+    "BookShipmentRequest",
+    "BookShipmentSpecificParams",
+    "Calendar",
+    "CalendarAddress",
+    "CalendarContact",
+    "CalendarItem",
+    "CalendarJob",
+    "CalendarNotes",
+    "CalendarTask",
+    "CarrierAccountInfo",
+    "CarrierErrorMessage",
+    "CarrierInfo",
+    "CarrierProviderMessage",
+    "CarrierRateModel",
+    "CarrierTask",
+    "CarrierTaskModel",
+    "ChangeJobAgentRequest",
+    "ChangePasswordModel",
+    "Commodity",
+    "Company",
+    "CompanyAddressInfo",
+    "CompanyDetails",
+    "CompanyDetailsBaseInfo",
+    "CompanyDetailsFinalMileTariffItem",
+    "CompanyDetailsInsurancePricing",
+    "CompanyDetailsPreferences",
+    "CompanyDetailsServicePricings",
+    "CompanyDetailsTaxPricing",
+    "CompanyHierarchyInfo",
+    "CompanyImageData",
+    "CompanyInfo",
+    "CompanyInsurancePricing",
+    "CompanyListItem",
+    "CompanyServicePricing",
+    "CompanySetupData",
+    "CompanyTaxPricing",
+    "ConfirmEmailModel",
+    "Contact",
+    "ContactAddressDetails",
+    "ContactAddressEditDetails",
+    "ContactDetailedInfo",
+    "ContactDetails",
+    "ContactDetailsCompanyInfo",
+    "ContactEmailDetails",
+    "ContactEmailEditDetails",
+    "ContactHistoryAggregatedCost",
+    "ContactHistoryDataSourceLoadOptions",
+    "ContactHistoryGraphData",
+    "ContactHistoryInfo",
+    "ContactHistoryPricePerPound",
+    "ContactHistoryRevenueSum",
+    "ContactPhoneDetails",
+    "ContactPhoneEditDetails",
+    "ContactPrimaryDetails",
+    "ContactTypeEntity",
+    "ContainerThickness",
+    "CountryCodeDto",
+    "CreateJobIntacctModel",
+    "CreateScheduledJobEmailResponse",
+    "CreateUserModel",
+    "CreatedTask",
+    "CustomerInfo",
+    "DeleteShipRequestModel",
+    "DeleteTaskResponse",
+    "Details",
+    "DocumentDetails",
+    "DocumentUpdateModel",
+    "EmailDetails",
+    "EstesAccountData",
+    "ExportPackingInfo",
+    "ExportTotalCosts",
+    "ExpressFreightDetail",
+    "ExtendedOnHoldInfo",
+    "FedExAccountData",
+    "FedExRestApiAccount",
+    "FedExSpecific",
+    "FeedbackSaveModel",
+    "ForgotLoginModel",
+    "FormsShipmentPlan",
+    "ForwardAirAccountData",
+    "FranchiseeCarrierAccounts",
+    "FreightRateRequestAddressDetails",
+    "FreightShimpment",
+    "GlobalTranzAccountData",
+    "GridSettingsEntity",
+    "GridViewAccess",
+    "GridViewDetails",
+    "GroupingInfo",
+    "HandlingUnitModel",
+    "InTheFieldTaskModel",
+    "InboundNewDashboardItem",
+    "IncrementJobStatusInputModel",
+    "IncrementJobStatusResponseModel",
+    "InhouseNewDashboardItem",
+    "InitialNoteModel",
+    "InsuranceOption",
+    "InsuranceReport",
+    "InsuranceReportRequest",
+    "InternationalParams",
+    "ItemTotals",
+    "Items",
+    "JToken",
+    "JobCarrierRatesModel",
+    "JobContactDetails",
+    "JobExportData",
+    "JobItemNotesData",
+    "JobParcelAddOn",
+    "JobSaveRequest",
+    "JobSaveRequestModel",
+    "JobTaskNote",
+    "JobTrackingResponseV3",
+    "LaborCharges",
+    "LastObtainNFM",
+    "LatLng",
+    "LocalDeliveriesNewDashboardItem",
+    "LookupItem",
+    "MasterMaterials",
+    "MergeContactsPreviewInfo",
+    "MergeContactsPreviewRequestModel",
+    "MergeContactsRequestModel",
+    "MergeContactsSearchRequestModel",
+    "MergeContactsSearchRequestParameters",
+    "NameValueEntity",
+    "NoteModel",
+    "Notes",
+    "ObtainNFMParcelItem",
+    "ObtainNFMParcelService",
+    "OnHoldDetails",
+    "OnHoldNoteDetails",
+    "OnHoldUser",
+    "OnlinePaymentSettings",
+    "OutboundNewDashboardItem",
+    "OverridableAddressData",
+    "PackagingLaborHours",
+    "PackagingLaborSettings",
+    "PackagingTariffSettings",
+    "PageOrderedRequestModel",
+    "ParcelItem",
+    "ParcelItemWithPackage",
+    "PaymentSourceDetails",
+    "PhoneDetails",
+    "PickupLaborHoursRule",
+    "PilotAccountData",
+    "PlannerAddress",
+    "PlannerContact",
+    "PlannerLabor",
+    "PlannerTask",
+    "PricedFreightProvider",
+    "QuoteRequestComment",
+    "QuoteRequestDisplayInfo",
+    "RecentEstimatesNewDashboardItem",
+    "ReferredByReport",
+    "ReferredByReportRequest",
+    "RegistrationModel",
+    "RequestedParcelPackaging",
+    "ResetPasswordModel",
+    "ResolveJobOnHoldResponse",
+    "RevenueCustomer",
+    "RoadRunnerAccountData",
+    "RoyaltiesCharges",
+    "SalesForecastReport",
+    "SalesForecastReportRequest",
+    "SalesForecastSummary",
+    "SalesForecastSummaryRequest",
+    "SaveEntityResponse",
+    "SaveGeoSettingModel",
+    "SaveGridSettingsModel",
+    "SaveOnHoldDatesModel",
+    "SaveOnHoldRequest",
+    "SaveOnHoldResponse",
+    "SaveResponseModel",
+    "SaveTruckRequest",
+    "SaveValidatedRequest",
+    "SearchAddress",
+    "SearchCompanyDataSourceLoadOptions",
+    "SearchCompanyModel",
+    "SearchCompanyResponse",
+    "SearchContactEntityResult",
+    "SearchContactRequest",
+    "SearchCustomerInfo",
+    "SearchJobFilter",
+    "SearchJobInfo",
+    "SelectApproveInsuranceResult",
+    "SendDocumentEmailModel",
+    "SendSMSModel",
+    "ServiceBaseResponse",
+    "ServiceInfo",
+    "ServicePricingsMarkup",
+    "ServiceWarningResponse",
+    "SetRateModel",
+    "ShipmentContactAddressDetails",
+    "ShipmentContactDetails",
+    "ShipmentDetails",
+    "ShipmentOriginDestination",
+    "ShipmentPlanProvider",
+    "ShipmentTrackingDetails",
+    "ShipmentTrackingDocument",
+    "ShippingDocument",
+    "ShippingHistoryStatus",
+    "ShippingPackageInfo",
+    "SimplePriceTariff",
+    "SimpleTaskModel",
+    "SmsTemplateModel",
+    "SoldToAddress",
+    "SoldToDetails",
+    "SortBy",
+    "SortByModel",
+    "SortingInfo",
+    "StoredProcedureColumn",
+    "StringMergePreviewDataItem",
+    "StringOverridable",
+    "SuggestedContactEntity",
+    "SummaryInfo",
+    "TagBoxDataSourceLoadOptions",
+    "TaskNoteModel",
+    "TaskTruckInfo",
+    "TaxOption",
+    "TeamWWAccountData",
+    "TimeLog",
+    "TimeLogModel",
+    "TimeLogPause",
+    "TimeLogPauseModel",
+    "TimeSpan",
+    "TimelineResponse",
+    "TrackingCarrierProps",
+    "TrackingStatusV2",
+    "TransferModel",
+    "TransportationCharges",
+    "TransportationRatesRequest",
+    "TransportationRatesRequestModel",
+    "Truck",
+    "TwilioSmsStatusCallback",
+    "UPSAccountData",
+    "UPSSpecific",
+    "USPSAccountData",
+    "USPSSpecific",
+    "UndoIncrementJobStatusInputModel",
+    "UpdateCarrierAccountsModel",
+    "UpdateDateModel",
+    "UpdateTaskModel",
+    "UpdateTruckModel",
+    "UserInfo",
+    "Users",
+    "VerifyBankAccountRequest",
+    "Web2LeadReport",
+    "Web2LeadRevenueFilter",
+    "Web2LeadV2RequestModel",
+    "WebApiDataSourceLoadOptions",
+    "WeightInfo",
+    "WorkTimeLog",
+    "WorkTimeLogModel",
 ]

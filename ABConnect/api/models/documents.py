@@ -1,18 +1,17 @@
-"""Document models for ABConnect API."""
+"""Documents models for ABConnect API."""
 
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from pydantic import Field
 from .base import ABConnectBaseModel
 
+class DocumentUpdateModel(ABConnectBaseModel):
+    """DocumentUpdateModel model"""
 
-class Document(ABConnectBaseModel):
-    """Document model."""
-    name: Optional[str] = None
-    type: Optional[str] = None
-    size: Optional[int] = None
-    mimeType: Optional[str] = None
-    url: Optional[str] = None
-    jobId: Optional[str] = None
-    uploadedBy: Optional[str] = None
-    tags: List[str] = Field(default_factory=list)
-    metadata: Dict[str, Any] = Field(default_factory=dict)
+    file_name: Optional[str] = Field(None, alias="fileName")
+    type_id: Optional[int] = Field(None, alias="typeId")
+    shared: Optional[int] = Field(None)
+    tags: Optional[List[str]] = Field(None)
+    job_items: Optional[List[str]] = Field(None, alias="jobItems")
+
+
+__all__ = ['DocumentUpdateModel']

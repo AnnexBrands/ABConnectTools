@@ -1,274 +1,474 @@
-"""Company models for ABConnect API."""
+"""Companies models for ABConnect API."""
 
-from datetime import datetime
-from typing import Optional
-from pydantic import BaseModel, Field
-from .base import ABConnectBaseModel
-from .addresses import MainAddress, AddressData, OverridableAddressData
+from typing import Any, Dict, List, Optional
+from pydantic import Field
+from .base import ABConnectBaseModel, ActiveModel, CompanyRelatedModel, IdentifiedModel, TimestampedModel
 
+class Company(TimestampedModel):
+    """Company model"""
 
-class CompanyBase(ABConnectBaseModel):
-    """Base company model with fields common to all company responses."""
-    code: Optional[str] = None
-    name: Optional[str] = None
-    parentCompanyId: Optional[str] = None
-    
-    # Common fields that appear in multiple responses
-    companyTypeId: Optional[str] = Field(None, alias="companyTypeID")
-    companyEmail: Optional[str] = None
-    companyPhone: Optional[str] = None
-    isActive: Optional[bool] = None
-
-
-class CompanyBasic(CompanyBase):
-    """Basic company model returned by /api/companies/{id}.
-    
-    This is the simplest company response with just the essential fields.
-    """
-    pass  # All fields inherited from CompanyBase
-
-
-class CompanyInfo(CompanyBase):
-    """Company info model used within other responses."""
-    companyId: Optional[str] = None
-    companyDisplayId: Optional[str] = None
-    companyName: Optional[str] = None
-    companyCode: Optional[str] = None
-    thumbnailLogo: Optional[str] = None
-    companyLogo: Optional[str] = None
-    mapsMarkerImage: Optional[str] = None
-    mainAddress: Optional[MainAddress] = None
-    isThirdParty: Optional[bool] = None
-    isHidden: Optional[bool] = None
-
-
-class CompanyDetails(CompanyBase):
-    """Detailed company model returned by /api/companies/{companyId}/details.
-    
-    This includes all fields from CompanyBase plus extensive additional details.
-    """
-    # User and contact information
-    userId: Optional[str] = Field(None, alias="userID")
-    contactName: Optional[str] = None
-    contactPhone: Optional[str] = None
-    primaryContactId: Optional[int] = None
-    payerContactId: Optional[int] = None
-    payerContactName: Optional[str] = None
-    primaryCustomerName: Optional[str] = None
-    contactInfo: Optional[str] = None
-    
-    # Company type and classification
-    companyType: Optional[str] = None
-    parentCompanyName: Optional[str] = None
-    parentCompanyID: Optional[str] = None
-    franchiseeName: Optional[str] = None
-    
-    # Contact details
-    companyFax: Optional[str] = None
-    companyWebSite: Optional[str] = None
-    companyCell: Optional[str] = None
-    customerCell: Optional[str] = None
-    
-    # Business information
-    industryType: Optional[str] = None
-    industryTypeName: Optional[str] = None
-    taxId: Optional[str] = None
-    companyDisplayID: Optional[str] = None
-    
-    # Logos and branding
-    companyLogo: Optional[str] = None
-    letterHeadLogo: Optional[str] = None
-    thumbnailLogo: Optional[str] = None
-    mapsMarkerImage: Optional[str] = None
-    colorTheme: Optional[str] = None
-    
-    # Settings and preferences
-    parcelOnly: Optional[bool] = None
-    isThirdParty: Optional[bool] = None
-    isGlobal: Optional[bool] = None
-    isQbUser: Optional[bool] = None
-    skipIntacct: Optional[bool] = None
-    isAccess: Optional[bool] = None
-    isPrefered: Optional[bool] = None
-    isHide: Optional[bool] = None
-    isDontUse: Optional[bool] = None
-    
-    # Codes and references
-    pzCode: Optional[str] = None
-    referralCode: Optional[str] = None
-    
-    # Pricing and insurance
-    franchiseeMaturityType: Optional[str] = None
-    pricingToUse: Optional[str] = None
-    insuranceType: Optional[str] = None
-    wholeSaleMarkup: Optional[float] = None
-    baseMarkup: Optional[float] = None
-    mediumMarkup: Optional[float] = None
-    highMarkup: Optional[float] = None
-    companyInsurancePricing: Optional[float] = None
-    companyServicePricing: Optional[float] = None
-    companyTaxPricing: Optional[float] = None
-    
-    # Carrier and account management
-    accountManagerFranchiseeId: Optional[str] = None
-    accountManagerFranchiseeName: Optional[str] = None
-    carrierAccountsSourceCompanyId: Optional[str] = None
-    carrierAccountsSourceCompanyName: Optional[str] = None
-    
-    # API settings
-    autoPriceAPIEnableEmails: Optional[bool] = None
-    autoPriceAPIEnableSMSs: Optional[bool] = None
-    
-    # Capabilities and statistics
-    commercialCapabilities: Optional[int] = None
-    totalJobs: Optional[int] = None
-    totalJobsRevenue: Optional[float] = None
-    totalSales: Optional[int] = None
-    totalSalesRevenue: Optional[float] = None
-    
-    # Address information
-    mainAddress: Optional[MainAddress] = None
-    addressData: Optional[AddressData] = None
-    overridableAddressData: Optional[OverridableAddressData] = None
-    companyInfo: Optional[CompanyInfo] = None
-    
-    # Legacy fields
-    companyID: Optional[str] = None
-    addressID: Optional[int] = None
-    address: Optional[str] = None
-    address1: Optional[str] = None
-    address2: Optional[str] = None
-    city: Optional[str] = None
-    state: Optional[str] = None
-    stateCode: Optional[str] = None
-    countryName: Optional[str] = None
-    countryCode: Optional[str] = None
-    countryID: Optional[str] = None
-    zipCode: Optional[str] = None
-    latitude: Optional[float] = None
-    longitude: Optional[float] = None
-    
-    # Metadata
-    totalRows: Optional[int] = None
-    depth: Optional[int] = None
-    miles: Optional[float] = None
-    createdUser: Optional[str] = None
-    createdDate: Optional[datetime] = None
-    createdBy: Optional[str] = None
-    modifiedDate: Optional[datetime] = None
-    modifiedBy: Optional[str] = None
-    
-    # Other fields
-    result: Optional[str] = None
-    addressMappingID: Optional[int] = None
-    contactID: Optional[int] = None
-    mappingLocations: Optional[str] = None
-    locationCount: Optional[int] = None
-    baseParent: Optional[str] = None
-    copyMaterialFrom: Optional[str] = None
+    company_id: Optional[str] = Field(None, alias="companyId")
+    address_id: Optional[str] = Field(None, alias="addressId")
+    address1: Optional[str] = Field(None)
+    address2: Optional[str] = Field(None)
+    city: Optional[str] = Field(None)
+    state: Optional[str] = Field(None)
+    state_code: Optional[str] = Field(None, alias="stateCode")
+    country_name: Optional[str] = Field(None, alias="countryName")
+    country_code: Optional[str] = Field(None, alias="countryCode")
+    country_id: Optional[str] = Field(None, alias="countryId")
+    zip_code: Optional[str] = Field(None, alias="zipCode")
+    is_active: Optional[bool] = Field(None, alias="isActive")
+    latitude: Optional[str] = Field(None)
+    longitude: Optional[str] = Field(None)
+    result: Optional[str] = Field(None)
+    address_mapping_id: Optional[str] = Field(None, alias="addressMappingId")
+    contact_id: Optional[str] = Field(None, alias="contactId")
+    user_id: Optional[str] = Field(None, alias="userId")
+    primary_customer_name: Optional[str] = Field(None, alias="primaryCustomerName")
+    contact_info: Optional[Contact] = Field(None, alias="contactInfo")
+    address: Optional[Address] = Field(None)
+    user_id: Optional[str] = Field(None, alias="userId")
+    company_name: Optional[str] = Field(None, alias="companyName")
+    contact_name: Optional[str] = Field(None, alias="contactName")
+    contact_phone: Optional[str] = Field(None, alias="contactPhone")
+    company_type: Optional[str] = Field(None, alias="companyType")
+    parcel_only: Optional[bool] = Field(None, alias="parcelOnly")
+    is_third_party: Optional[bool] = Field(None, alias="isThirdParty")
+    company_code: Optional[str] = Field(None, alias="companyCode")
+    parent_company_name: Optional[str] = Field(None, alias="parentCompanyName")
+    company_type_id: Optional[str] = Field(None, alias="companyTypeId")
+    parent_company_id: Optional[str] = Field(None, alias="parentCompanyId")
+    company_phone: Optional[str] = Field(None, alias="companyPhone")
+    company_email: Optional[str] = Field(None, alias="companyEmail")
+    company_fax: Optional[str] = Field(None, alias="companyFax")
+    company_web_site: Optional[str] = Field(None, alias="companyWebSite")
+    industry_type: Optional[str] = Field(None, alias="industryType")
+    industry_type_name: Optional[str] = Field(None, alias="industryTypeName")
+    tax_id: Optional[str] = Field(None, alias="taxId")
+    customer_cell: Optional[str] = Field(None, alias="customerCell")
+    company_cell: Optional[str] = Field(None, alias="companyCell")
+    pz_code: Optional[str] = Field(None, alias="pzCode")
+    referral_code: Optional[str] = Field(None, alias="referralCode")
+    company_logo: Optional[str] = Field(None, alias="companyLogo")
+    letter_head_logo: Optional[str] = Field(None, alias="letterHeadLogo")
+    thumbnail_logo: Optional[str] = Field(None, alias="thumbnailLogo")
+    maps_marker_image: Optional[str] = Field(None, alias="mapsMarkerImage")
+    color_theme: Optional[str] = Field(None, alias="colorTheme")
+    franchisee_maturity_type: Optional[str] = Field(None, alias="franchiseeMaturityType")
+    pricing_to_use: Optional[str] = Field(None, alias="pricingToUse")
+    total_rows: Optional[int] = Field(None, alias="totalRows")
+    company_insurance_pricing: Optional[CompanyInsurancePricing] = Field(None, alias="companyInsurancePricing")
+    company_service_pricing: Optional[CompanyServicePricing] = Field(None, alias="companyServicePricing")
+    company_tax_pricing: Optional[CompanyTaxPricing] = Field(None, alias="companyTaxPricing")
+    whole_sale_markup: Optional[float] = Field(None, alias="wholeSaleMarkup")
+    base_markup: Optional[float] = Field(None, alias="baseMarkup")
+    medium_markup: Optional[float] = Field(None, alias="mediumMarkup")
+    high_markup: Optional[float] = Field(None, alias="highMarkup")
+    miles: Optional[float] = Field(None)
+    insurance_type: Optional[str] = Field(None, alias="insuranceType")
+    is_global: Optional[bool] = Field(None, alias="isGlobal")
+    is_qb_user: Optional[bool] = Field(None, alias="isQbUser")
+    skip_intacct: Optional[bool] = Field(None, alias="skipIntacct")
+    is_access: Optional[str] = Field(None, alias="isAccess")
+    company_display_id: Optional[str] = Field(None, alias="companyDisplayId")
+    depth: Optional[int] = Field(None)
+    franchisee_name: Optional[str] = Field(None, alias="franchiseeName")
+    is_prefered: Optional[bool] = Field(None, alias="isPrefered")
+    created_user: Optional[str] = Field(None, alias="createdUser")
+    mapping_locations: Optional[str] = Field(None, alias="mappingLocations")
+    location_count: Optional[str] = Field(None, alias="locationCount")
+    base_parent: Optional[str] = Field(None, alias="baseParent")
+    copy_material_from: Optional[str] = Field(None, alias="copyMaterialFrom")
+    is_hide: Optional[bool] = Field(None, alias="isHide")
+    is_dont_use: Optional[bool] = Field(None, alias="isDontUse")
+    main_address: Optional[AddressDetails] = Field(None, alias="mainAddress")
+    account_manager_franchisee_id: Optional[str] = Field(None, alias="accountManagerFranchiseeId")
+    account_manager_franchisee_name: Optional[str] = Field(None, alias="accountManagerFranchiseeName")
+    carrier_accounts_source_company_id: Optional[str] = Field(None, alias="carrierAccountsSourceCompanyId")
+    carrier_accounts_source_company_name: Optional[str] = Field(None, alias="carrierAccountsSourceCompanyName")
+    auto_price_api_enable_emails: Optional[bool] = Field(None, alias="autoPriceApiEnableEmails")
+    auto_price_api_enable_sm_ss: Optional[bool] = Field(None, alias="autoPriceApiEnableSmSs")
+    commercial_capabilities: Optional[CommercialCapabilities] = Field(None, alias="commercialCapabilities")
+    primary_contact_id: Optional[int] = Field(None, alias="primaryContactId")
+    payer_contact_id: Optional[int] = Field(None, alias="payerContactId")
+    payer_contact_name: Optional[str] = Field(None, alias="payerContactName")
+    total_jobs: Optional[int] = Field(None, alias="totalJobs")
+    total_jobs_revenue: Optional[float] = Field(None, alias="totalJobsRevenue")
+    total_sales: Optional[int] = Field(None, alias="totalSales")
+    total_sales_revenue: Optional[float] = Field(None, alias="totalSalesRevenue")
+    address_data: Optional[AddressData] = Field(None, alias="addressData")
+    overridable_address_data: Optional[OverridableAddressData] = Field(None, alias="overridableAddressData")
+    company_info: Optional[CompanyInfo] = Field(None, alias="companyInfo")
 
 
-# Company Full Details Models (for /api/companies/{companyId}/fulldetails)
+class CompanyAddressInfo(CompanyRelatedModel):
+    """CompanyAddressInfo model"""
 
-class FileUpload(BaseModel):
-    """File upload model for logos."""
-    filePath: Optional[str] = None
-    newFile: Optional[str] = None
-
-
-class CompanyDetailsSection(BaseModel):
-    """Details section of company full details."""
-    displayId: Optional[str] = None
-    name: Optional[str] = None
-    taxId: Optional[str] = None
-    code: Optional[str] = None
-    parentId: Optional[str] = None
-    franchiseeId: Optional[str] = None
-    companyTypeId: Optional[str] = None
-    industryTypeId: Optional[str] = None
-    cellPhone: Optional[str] = None
-    phone: Optional[str] = None
-    fax: Optional[str] = None
-    email: Optional[str] = None
-    website: Optional[str] = None
-    isActive: Optional[bool] = None
-    isHidden: Optional[bool] = None
-    isGlobal: Optional[bool] = None
-    isNotUsed: Optional[bool] = None
-    isPreferred: Optional[bool] = None
-    payerContactId: Optional[int] = None
-    payerContactName: Optional[str] = None
+    company_code: Optional[str] = Field(None, alias="companyCode")
+    address: Optional[PlannerAddress] = Field(None)
 
 
-class CompanyPreferences(BaseModel):
-    """Company preferences model."""
-    companyHeaderLogo: Optional[FileUpload] = None
-    thumbnailLogo: Optional[FileUpload] = None
-    letterHeadLogo: Optional[FileUpload] = None
-    mapsMarker: Optional[FileUpload] = None
-    isQbUser: Optional[bool] = None
-    skipIntacct: Optional[bool] = None
-    pricingToUse: Optional[str] = None
-    pzCode: Optional[str] = None
-    insuranceTypeId: Optional[str] = None
-    franchiseeMaturityTypeId: Optional[str] = None
-    isCompanyUsedAsCarrierSource: Optional[bool] = None
-    carrierAccountsSourceCompanyId: Optional[str] = None
-    carrierAccountsSourceCompanyName: Optional[str] = None
-    accountManagerFranchiseeId: Optional[str] = None
-    accountManagerFranchiseeName: Optional[str] = None
-    autoPriceAPIEnableEmails: Optional[bool] = None
-    autoPriceAPIEnableSMSs: Optional[bool] = None
-    copyMaterials: Optional[int] = None
+class CompanyDetails(IdentifiedModel):
+    """CompanyDetails model"""
+
+    details: Optional[CompanyDetailsBaseInfo] = Field(None)
+    preferences: Optional[CompanyDetailsPreferences] = Field(None)
+    capabilities: Optional[CommercialCapabilities] = Field(None)
+    address: Optional[AddressDetails] = Field(None)
+    account_information: Optional[FranchiseeCarrierAccounts] = Field(None, alias="accountInformation")
+    pricing: Optional[CompanyDetailsServicePricings] = Field(None)
+    insurance: Optional[CompanyDetailsInsurancePricing] = Field(None)
+    final_mile_tariff: Optional[List[CompanyDetailsFinalMileTariffItem]] = Field(None, alias="finalMileTariff")
+    taxes: Optional[CompanyDetailsTaxPricing] = Field(None)
+    read_only_access: Optional[bool] = Field(None, alias="readOnlyAccess")
 
 
-class TransportationCharge(BaseModel):
-    """Transportation charge model."""
-    baseTripFee: Optional[float] = None
-    baseTripMile: Optional[float] = None
-    extraFee: Optional[float] = None
-    fuelSurcharge: Optional[float] = None
+class CompanyDetailsBaseInfo(ActiveModel):
+    """CompanyDetailsBaseInfo model"""
+
+    display_id: Optional[str] = Field(None, alias="displayId")
+    name: Optional[str] = Field(None)
+    tax_id: Optional[str] = Field(None, alias="taxId")
+    code: Optional[str] = Field(None)
+    parent_id: Optional[str] = Field(None, alias="parentId")
+    franchisee_id: Optional[str] = Field(None, alias="franchiseeId")
+    company_type_id: Optional[str] = Field(None, alias="companyTypeId")
+    industry_type_id: Optional[str] = Field(None, alias="industryTypeId")
+    cell_phone: Optional[str] = Field(None, alias="cellPhone")
+    phone: Optional[str] = Field(None)
+    fax: Optional[str] = Field(None)
+    email: Optional[str] = Field(None)
+    website: Optional[str] = Field(None)
+    is_hidden: Optional[bool] = Field(None, alias="isHidden")
+    is_global: Optional[bool] = Field(None, alias="isGlobal")
+    is_not_used: Optional[bool] = Field(None, alias="isNotUsed")
+    is_preferred: Optional[bool] = Field(None, alias="isPreferred")
+    payer_contact_id: Optional[int] = Field(None, alias="payerContactId")
+    payer_contact_name: Optional[str] = Field(None, alias="payerContactName")
 
 
-class MarkupRates(BaseModel):
-    """Markup rates model."""
-    wholeSale: Optional[float] = None
-    base: Optional[float] = None
-    medium: Optional[float] = None
-    high: Optional[float] = None
+class CompanyDetailsFinalMileTariffItem(ABConnectBaseModel):
+    """CompanyDetailsFinalMileTariffItem model"""
+
+    group_id: Optional[str] = Field(None, alias="groupId")
+    from: Optional[float] = Field(None)
+    to: Optional[float] = Field(None)
+    to_curb: Optional[float] = Field(None, alias="toCurb")
+    into_garage: Optional[float] = Field(None, alias="intoGarage")
+    room_of_choice: Optional[float] = Field(None, alias="roomOfChoice")
+    white_glove: Optional[float] = Field(None, alias="whiteGlove")
+    delete_group: Optional[bool] = Field(None, alias="deleteGroup")
 
 
-class CompanyPricing(BaseModel):
-    """Company pricing model."""
-    transportationCharge: Optional[TransportationCharge] = None
-    transportationMarkups: Optional[MarkupRates] = None
-    carrierFreightMarkups: Optional[MarkupRates] = None
+class CompanyDetailsInsurancePricing(ABConnectBaseModel):
+    """CompanyDetailsInsurancePricing model"""
+
+    isp: Optional[InsuranceOption] = Field(None)
+    nsp: Optional[InsuranceOption] = Field(None)
+    ltl: Optional[InsuranceOption] = Field(None)
 
 
-class InsuranceOption(BaseModel):
-    """Insurance option model."""
-    insuranceSlabId: Optional[str] = None
-    option: Optional[int] = None
-    sellPrice: Optional[float] = None
+class CompanyDetailsPreferences(ABConnectBaseModel):
+    """CompanyDetailsPreferences model"""
+
+    company_header_logo: Optional[CompanyImageData] = Field(None, alias="companyHeaderLogo")
+    thumbnail_logo: Optional[CompanyImageData] = Field(None, alias="thumbnailLogo")
+    letter_head_logo: Optional[CompanyImageData] = Field(None, alias="letterHeadLogo")
+    maps_marker: Optional[CompanyImageData] = Field(None, alias="mapsMarker")
+    is_qb_user: Optional[bool] = Field(None, alias="isQbUser")
+    skip_intacct: Optional[bool] = Field(None, alias="skipIntacct")
+    pricing_to_use: Optional[str] = Field(None, alias="pricingToUse")
+    pz_code: Optional[str] = Field(None, alias="pzCode")
+    insurance_type_id: Optional[str] = Field(None, alias="insuranceTypeId")
+    franchisee_maturity_type_id: Optional[str] = Field(None, alias="franchiseeMaturityTypeId")
+    is_company_used_as_carrier_source: Optional[bool] = Field(None, alias="isCompanyUsedAsCarrierSource")
+    carrier_accounts_source_company_id: Optional[str] = Field(None, alias="carrierAccountsSourceCompanyId")
+    carrier_accounts_source_company_name: Optional[str] = Field(None, alias="carrierAccountsSourceCompanyName")
+    account_manager_franchisee_id: Optional[str] = Field(None, alias="accountManagerFranchiseeId")
+    account_manager_franchisee_name: Optional[str] = Field(None, alias="accountManagerFranchiseeName")
+    auto_price_api_enable_emails: Optional[bool] = Field(None, alias="autoPriceApiEnableEmails")
+    auto_price_api_enable_sm_ss: Optional[bool] = Field(None, alias="autoPriceApiEnableSmSs")
+    copy_materials: Optional[CopyMaterialsFrom] = Field(None, alias="copyMaterials")
 
 
-class CompanyInsurance(BaseModel):
-    """Company insurance model."""
-    isp: Optional[InsuranceOption] = None
-    nsp: Optional[InsuranceOption] = None
-    ltl: Optional[InsuranceOption] = None
+class CompanyDetailsServicePricings(ABConnectBaseModel):
+    """CompanyDetailsServicePricings model"""
+
+    transportation_charge: Optional[TransportationCharges] = Field(None, alias="transportationCharge")
+    transportation_markups: Optional[ServicePricingsMarkup] = Field(None, alias="transportationMarkups")
+    carrier_freight_markups: Optional[ServicePricingsMarkup] = Field(None, alias="carrierFreightMarkups")
+    carrier_other_markups: Optional[ServicePricingsMarkup] = Field(None, alias="carrierOtherMarkups")
+    material_markups: Optional[ServicePricingsMarkup] = Field(None, alias="materialMarkups")
+    labor_charge: Optional[LaborCharges] = Field(None, alias="laborCharge")
+    accesorial_charge: Optional[AccesorialCharges] = Field(None, alias="accesorialCharge")
+    royalties: Optional[RoyaltiesCharges] = Field(None)
+    payment_settings: Optional[OnlinePaymentSettings] = Field(None, alias="paymentSettings")
 
 
-class CompanyFullDetails(CompanyBase):
-    """Full company details returned by /api/companies/{companyId}/fulldetails.
-    
-    This inherits from CompanyBase but overrides the ID field and adds sections.
-    """
-    id: Optional[str] = None  # This endpoint returns id at root level
-    details: Optional[CompanyDetailsSection] = None
-    preferences: Optional[CompanyPreferences] = None
-    capabilities: Optional[int] = None
-    address: Optional[MainAddress] = None
-    pricing: Optional[CompanyPricing] = None
-    insurance: Optional[CompanyInsurance] = None
-    readOnlyAccess: Optional[bool] = None
+class CompanyDetailsTaxPricing(ABConnectBaseModel):
+    """CompanyDetailsTaxPricing model"""
+
+    delivery_service: Optional[TaxOption] = Field(None, alias="deliveryService")
+    insurance: Optional[TaxOption] = Field(None)
+    pickup_service: Optional[TaxOption] = Field(None, alias="pickupService")
+    services: Optional[TaxOption] = Field(None)
+    transportation_service: Optional[TaxOption] = Field(None, alias="transportationService")
+    packaging_material: Optional[TaxOption] = Field(None, alias="packagingMaterial")
+    packaging_labor: Optional[TaxOption] = Field(None, alias="packagingLabor")
+
+
+class CompanyImageData(ABConnectBaseModel):
+    """CompanyImageData model"""
+
+    file_path: Optional[str] = Field(None, alias="filePath")
+    new_file: Optional[Base64File] = Field(None, alias="newFile")
+
+
+class CompanyInfo(ActiveModel):
+    """CompanyInfo model"""
+
+    company_id: Optional[str] = Field(None, alias="companyId")
+    company_type_id: Optional[str] = Field(None, alias="companyTypeId")
+    company_display_id: Optional[str] = Field(None, alias="companyDisplayId")
+    company_name: Optional[str] = Field(None, alias="companyName")
+    company_code: Optional[str] = Field(None, alias="companyCode")
+    company_email: Optional[str] = Field(None, alias="companyEmail")
+    company_phone: Optional[str] = Field(None, alias="companyPhone")
+    thumbnail_logo: Optional[str] = Field(None, alias="thumbnailLogo")
+    company_logo: Optional[str] = Field(None, alias="companyLogo")
+    maps_marker_image: Optional[str] = Field(None, alias="mapsMarkerImage")
+    main_address: Optional[AddressDetails] = Field(None, alias="mainAddress")
+    is_third_party: Optional[bool] = Field(None, alias="isThirdParty")
+    is_hidden: Optional[bool] = Field(None, alias="isHidden")
+
+
+class CompanyInsurancePricing(ActiveModel):
+    """CompanyInsurancePricing model"""
+
+    insurance_slab_id: Optional[str] = Field(None, alias="insuranceSlabId")
+    deductible_amount: Optional[float] = Field(None, alias="deductibleAmount")
+    rate: Optional[float] = Field(None)
+    company_id: Optional[str] = Field(None, alias="companyId")
+    transp_type_id: Optional[str] = Field(None, alias="transpTypeId")
+    company_name: Optional[str] = Field(None, alias="companyName")
+    createdby: Optional[str] = Field(None)
+    modifiedby: Optional[str] = Field(None)
+    revision: Optional[int] = Field(None)
+    insurance_type: Optional[str] = Field(None, alias="insuranceType")
+    whole_sale_markup: Optional[float] = Field(None, alias="wholeSaleMarkup")
+    base_markup: Optional[float] = Field(None, alias="baseMarkup")
+    medium_markup: Optional[float] = Field(None, alias="mediumMarkup")
+    high_markup: Optional[float] = Field(None, alias="highMarkup")
+
+
+class CompanyServicePricing(TimestampedModel):
+    """CompanyServicePricing model"""
+
+    service_pricing_id: Optional[str] = Field(None, alias="servicePricingId")
+    user_id: Optional[str] = Field(None, alias="userId")
+    company_id: Optional[str] = Field(None, alias="companyId")
+    service_category_id: Optional[str] = Field(None, alias="serviceCategoryId")
+    category_value: Optional[float] = Field(None, alias="categoryValue")
+    whole_sale_markup: Optional[float] = Field(None, alias="wholeSaleMarkup")
+    base_markup: Optional[float] = Field(None, alias="baseMarkup")
+    medium_markup: Optional[float] = Field(None, alias="mediumMarkup")
+    high_markup: Optional[float] = Field(None, alias="highMarkup")
+    is_active: Optional[bool] = Field(None, alias="isActive")
+    is_taxable: Optional[bool] = Field(None, alias="isTaxable")
+    tax_percent: Optional[float] = Field(None, alias="taxPercent")
+    company_code: Optional[str] = Field(None, alias="companyCode")
+    service_category_name: Optional[str] = Field(None, alias="serviceCategoryName")
+    company_name: Optional[str] = Field(None, alias="companyName")
+    company_type_id: Optional[str] = Field(None, alias="companyTypeId")
+    parent_category_id: Optional[str] = Field(None, alias="parentCategoryId")
+    zip_code: Optional[str] = Field(None, alias="zipCode")
+
+
+class CompanyTaxPricing(CompanyRelatedModel):
+    """CompanyTaxPricing model"""
+
+    job_id: Optional[str] = Field(None, alias="jobId")
+    service_category_id: Optional[str] = Field(None, alias="serviceCategoryId")
+    tax_slab_id: Optional[str] = Field(None, alias="taxSlabId")
+    is_taxable: Optional[bool] = Field(None, alias="isTaxable")
+    tax_percent: Optional[float] = Field(None, alias="taxPercent")
+    service_categoty_name: Optional[str] = Field(None, alias="serviceCategotyName")
+
+
+class ContactDetailsCompanyInfo(ActiveModel):
+    """ContactDetailsCompanyInfo model"""
+
+    company_id: Optional[str] = Field(None, alias="companyId")
+    company_type_id: Optional[str] = Field(None, alias="companyTypeId")
+    company_display_id: Optional[str] = Field(None, alias="companyDisplayId")
+    company_name: Optional[str] = Field(None, alias="companyName")
+    company_code: Optional[str] = Field(None, alias="companyCode")
+    company_email: Optional[str] = Field(None, alias="companyEmail")
+    company_phone: Optional[str] = Field(None, alias="companyPhone")
+    thumbnail_logo: Optional[str] = Field(None, alias="thumbnailLogo")
+    company_logo: Optional[str] = Field(None, alias="companyLogo")
+    maps_marker_image: Optional[str] = Field(None, alias="mapsMarkerImage")
+    main_address: Optional[AddressDetails] = Field(None, alias="mainAddress")
+    is_third_party: Optional[bool] = Field(None, alias="isThirdParty")
+    is_hidden: Optional[bool] = Field(None, alias="isHidden")
+    is_global: Optional[bool] = Field(None, alias="isGlobal")
+    industry_type_id: Optional[str] = Field(None, alias="industryTypeId")
+    payer_id: Optional[str] = Field(None, alias="payerId")
+    payer_name: Optional[str] = Field(None, alias="payerName", max_length=100)
+    tax_id: Optional[str] = Field(None, alias="taxId", max_length=100)
+
+
+class PackagingLaborSettings(ABConnectBaseModel):
+    """PackagingLaborSettings model"""
+
+    inherit_tariffs_from: Optional[InheritSettingFrom] = Field(None, alias="inheritTariffsFrom")
+    own_tariffs: Optional[List[PackagingLaborHours]] = Field(None, alias="ownTariffs")
+
+
+class PackagingTariffSettings(ABConnectBaseModel):
+    """PackagingTariffSettings model"""
+
+    inherit_tariffs_from: Optional[InheritSettingFrom] = Field(None, alias="inheritTariffsFrom")
+    own_tariffs: Optional[List[SimplePriceTariff]] = Field(None, alias="ownTariffs")
+
+
+class SaveGeoSettingModel(IdentifiedModel):
+    """SaveGeoSettingModel model"""
+
+    name: Optional[str] = Field(None)
+    geometry_type: Optional[GeometryType] = Field(None, alias="geometryType")
+    coordinates: Optional[List[LatLng]] = Field(None)
+    center: Optional[LatLng] = Field(None)
+    radius: Optional[float] = Field(None)
+    is_exclusive: Optional[bool] = Field(None, alias="isExclusive")
+    is_active: Optional[bool] = Field(None, alias="isActive")
+    use_only_for_condition_json: Optional[str] = Field(None, alias="useOnlyForConditionJson")
+    use_only_for_filter_expression_json: Optional[str] = Field(None, alias="useOnlyForFilterExpressionJson")
+    pickup_rules: Optional[List[SimplePriceTariff]] = Field(None, alias="pickupRules")
+    pickup_labor_hours_rules: Optional[List[PickupLaborHoursRule]] = Field(None, alias="pickupLaborHoursRules")
+    delivery_rules: Optional[List[SimplePriceTariff]] = Field(None, alias="deliveryRules")
+
+
+class SearchCompanyDataSourceLoadOptions(ABConnectBaseModel):
+    """SearchCompanyDataSourceLoadOptions model"""
+
+    require_total_count: Optional[bool] = Field(None, alias="requireTotalCount")
+    require_group_count: Optional[bool] = Field(None, alias="requireGroupCount")
+    is_count_query: Optional[bool] = Field(None, alias="isCountQuery")
+    is_summary_query: Optional[bool] = Field(None, alias="isSummaryQuery")
+    skip: Optional[int] = Field(None)
+    take: Optional[int] = Field(None)
+    sort: Optional[List[SortingInfo]] = Field(None)
+    group: Optional[List[GroupingInfo]] = Field(None)
+    filter: Optional[List[Dict[str, Any]]] = Field(None)
+    total_summary: Optional[List[SummaryInfo]] = Field(None, alias="totalSummary")
+    group_summary: Optional[List[SummaryInfo]] = Field(None, alias="groupSummary")
+    select: Optional[List[str]] = Field(None)
+    pre_select: Optional[List[str]] = Field(None, alias="preSelect")
+    remote_select: Optional[bool] = Field(None, alias="remoteSelect")
+    remote_grouping: Optional[bool] = Field(None, alias="remoteGrouping")
+    expand_linq_sum_type: Optional[bool] = Field(None, alias="expandLinqSumType")
+    primary_key: Optional[List[str]] = Field(None, alias="primaryKey")
+    default_sort: Optional[str] = Field(None, alias="defaultSort")
+    string_to_lower: Optional[bool] = Field(None, alias="stringToLower")
+    paginate_via_primary_key: Optional[bool] = Field(None, alias="paginateViaPrimaryKey")
+    sort_by_primary_key: Optional[bool] = Field(None, alias="sortByPrimaryKey")
+    allow_async_over_sync: Optional[bool] = Field(None, alias="allowAsyncOverSync")
+    search_model: Optional[SearchCompanyModel] = Field(None, alias="searchModel")
+
+
+class SearchCompanyModel(CompanyRelatedModel):
+    """SearchCompanyModel model"""
+
+    company_code: Optional[str] = Field(None, alias="companyCode")
+    company_display_id: Optional[str] = Field(None, alias="companyDisplayId")
+    company_type_id: Optional[str] = Field(None, alias="companyTypeId")
+    phone: Optional[str] = Field(None)
+    email: Optional[str] = Field(None)
+    city: Optional[str] = Field(None)
+    state: Optional[str] = Field(None)
+    zip_code: Optional[str] = Field(None, alias="zipCode")
+
+
+class SearchCompanyResponse(CompanyRelatedModel):
+    """SearchCompanyResponse model"""
+
+    company_code: Optional[str] = Field(None, alias="companyCode")
+    company_display_id: Optional[str] = Field(None, alias="companyDisplayId")
+    parent_company_id: Optional[str] = Field(None, alias="parentCompanyId")
+    parent_company_name: Optional[str] = Field(None, alias="parentCompanyName")
+    company_type_id: Optional[str] = Field(None, alias="companyTypeId")
+    company_type: Optional[str] = Field(None, alias="companyType")
+    phone: Optional[str] = Field(None)
+    email: Optional[str] = Field(None)
+    address1: Optional[str] = Field(None)
+    city: Optional[str] = Field(None)
+    state: Optional[str] = Field(None)
+    zip: Optional[str] = Field(None)
+
+
+class TagBoxDataSourceLoadOptions(ABConnectBaseModel):
+    """TagBoxDataSourceLoadOptions model"""
+
+    require_total_count: Optional[bool] = Field(None, alias="requireTotalCount")
+    require_group_count: Optional[bool] = Field(None, alias="requireGroupCount")
+    is_count_query: Optional[bool] = Field(None, alias="isCountQuery")
+    is_summary_query: Optional[bool] = Field(None, alias="isSummaryQuery")
+    skip: Optional[int] = Field(None)
+    take: Optional[int] = Field(None)
+    sort: Optional[List[SortingInfo]] = Field(None)
+    group: Optional[List[GroupingInfo]] = Field(None)
+    filter: Optional[List[Dict[str, Any]]] = Field(None)
+    total_summary: Optional[List[SummaryInfo]] = Field(None, alias="totalSummary")
+    group_summary: Optional[List[SummaryInfo]] = Field(None, alias="groupSummary")
+    select: Optional[List[str]] = Field(None)
+    pre_select: Optional[List[str]] = Field(None, alias="preSelect")
+    remote_select: Optional[bool] = Field(None, alias="remoteSelect")
+    remote_grouping: Optional[bool] = Field(None, alias="remoteGrouping")
+    expand_linq_sum_type: Optional[bool] = Field(None, alias="expandLinqSumType")
+    primary_key: Optional[List[str]] = Field(None, alias="primaryKey")
+    default_sort: Optional[str] = Field(None, alias="defaultSort")
+    string_to_lower: Optional[bool] = Field(None, alias="stringToLower")
+    paginate_via_primary_key: Optional[bool] = Field(None, alias="paginateViaPrimaryKey")
+    sort_by_primary_key: Optional[bool] = Field(None, alias="sortByPrimaryKey")
+    allow_async_over_sync: Optional[bool] = Field(None, alias="allowAsyncOverSync")
+    search_value: Optional[str] = Field(None, alias="searchValue")
+
+
+class UpdateCarrierAccountsModel(ABConnectBaseModel):
+    """UpdateCarrierAccountsModel model"""
+
+    use_source_company: Optional[bool] = Field(None, alias="useSourceCompany")
+    carrier_accounts_source_company_id: Optional[str] = Field(None, alias="carrierAccountsSourceCompanyId")
+    carrier_accounts: Optional[FranchiseeCarrierAccounts] = Field(None, alias="carrierAccounts")
+
+
+class WebApiDataSourceLoadOptions(ABConnectBaseModel):
+    """WebApiDataSourceLoadOptions model"""
+
+    require_total_count: Optional[bool] = Field(None, alias="requireTotalCount")
+    require_group_count: Optional[bool] = Field(None, alias="requireGroupCount")
+    is_count_query: Optional[bool] = Field(None, alias="isCountQuery")
+    is_summary_query: Optional[bool] = Field(None, alias="isSummaryQuery")
+    skip: Optional[int] = Field(None)
+    take: Optional[int] = Field(None)
+    sort: Optional[List[SortingInfo]] = Field(None)
+    group: Optional[List[GroupingInfo]] = Field(None)
+    filter: Optional[List[Dict[str, Any]]] = Field(None)
+    total_summary: Optional[List[SummaryInfo]] = Field(None, alias="totalSummary")
+    group_summary: Optional[List[SummaryInfo]] = Field(None, alias="groupSummary")
+    select: Optional[List[str]] = Field(None)
+    pre_select: Optional[List[str]] = Field(None, alias="preSelect")
+    remote_select: Optional[bool] = Field(None, alias="remoteSelect")
+    remote_grouping: Optional[bool] = Field(None, alias="remoteGrouping")
+    expand_linq_sum_type: Optional[bool] = Field(None, alias="expandLinqSumType")
+    primary_key: Optional[List[str]] = Field(None, alias="primaryKey")
+    default_sort: Optional[str] = Field(None, alias="defaultSort")
+    string_to_lower: Optional[bool] = Field(None, alias="stringToLower")
+    paginate_via_primary_key: Optional[bool] = Field(None, alias="paginateViaPrimaryKey")
+    sort_by_primary_key: Optional[bool] = Field(None, alias="sortByPrimaryKey")
+    allow_async_over_sync: Optional[bool] = Field(None, alias="allowAsyncOverSync")
+
+
+__all__ = ['Company', 'CompanyAddressInfo', 'CompanyDetails', 'CompanyDetailsBaseInfo', 'CompanyDetailsFinalMileTariffItem', 'CompanyDetailsInsurancePricing', 'CompanyDetailsPreferences', 'CompanyDetailsServicePricings', 'CompanyDetailsTaxPricing', 'CompanyImageData', 'CompanyInfo', 'CompanyInsurancePricing', 'CompanyServicePricing', 'CompanyTaxPricing', 'ContactDetailsCompanyInfo', 'PackagingLaborSettings', 'PackagingTariffSettings', 'SaveGeoSettingModel', 'SearchCompanyDataSourceLoadOptions', 'SearchCompanyModel', 'SearchCompanyResponse', 'TagBoxDataSourceLoadOptions', 'UpdateCarrierAccountsModel', 'WebApiDataSourceLoadOptions']

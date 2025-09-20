@@ -31,8 +31,7 @@
               "schema": {
                 "$ref": "#/components/schemas/RegistrationModel"
               }
-            },
-            "application/*+json": {
+            },"application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/RegistrationModel"
               }
@@ -1146,35 +1145,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/api/companies/search/carrier-accounts": {
-      "get": {
-        "tags": [
-          "Companies"
-        ],
-        "parameters": [
-          {
-            "name": "currentCompanyId",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "query",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
           }
         }
       }
@@ -4619,22 +4589,34 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/SaveAllFreightItemsRequest"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FreightShimpment"
+                }
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SaveAllFreightItemsRequest"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FreightShimpment"
+                }
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/SaveAllFreightItemsRequest"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FreightShimpment"
+                }
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/SaveAllFreightItemsRequest"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FreightShimpment"
+                }
               }
             }
           }
@@ -4841,54 +4823,6 @@
         "responses": {
           "200": {
             "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/job/{jobDisplayId}/packagingcontainers": {
-      "get": {
-        "tags": [
-          "Job"
-        ],
-        "parameters": [
-          {
-            "name": "jobDisplayId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Packaging"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Packaging"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Packaging"
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -6430,22 +6364,34 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/SaveAllParcelItemsRequest"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ParcelItem"
+                }
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SaveAllParcelItemsRequest"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ParcelItem"
+                }
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/SaveAllParcelItemsRequest"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ParcelItem"
+                }
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/SaveAllParcelItemsRequest"
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ParcelItem"
+                }
               }
             }
           }
@@ -6483,12 +6429,21 @@
         }
       }
     },
-    "/api/job/{jobDisplayId}/parcel-items-with-materials": {
-      "get": {
+    "/api/job/{jobDisplayId}/parcelitems/{parcelItemId}": {
+      "put": {
         "tags": [
           "JobParcelItems"
         ],
         "parameters": [
+          {
+            "name": "parcelItemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
           {
             "name": "jobDisplayId",
             "in": "path",
@@ -6498,40 +6453,36 @@
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ParcelItemWithMaterials"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ParcelItemWithMaterials"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ParcelItemWithMaterials"
-                  }
-                }
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParcelItem"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParcelItem"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParcelItem"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParcelItem"
               }
             }
           }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
         }
-      }
-    },
-    "/api/job/{jobDisplayId}/parcelitems/{parcelItemId}": {
+      },
       "delete": {
         "tags": [
           "JobParcelItems"
@@ -8772,53 +8723,6 @@
         }
       }
     },
-    "/api/lookup/densityClassMap": {
-      "get": {
-        "tags": [
-          "Lookup"
-        ],
-        "parameters": [
-          {
-            "name": "carrierApi",
-            "in": "query",
-            "schema": {
-              "$ref": "#/components/schemas/CarrierAPI"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/GuidSequentialRangeValue"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/GuidSequentialRangeValue"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/GuidSequentialRangeValue"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/note": {
       "get": {
         "tags": [
@@ -10683,13 +10587,6 @@
             "format": "uuid",
             "nullable": true
           },
-          "countrySkipZipCodeVerification": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "zipCodeResolvingFailed": {
-            "type": "boolean"
-          },
           "latitude": {
             "type": "number",
             "format": "double",
@@ -12236,10 +12133,6 @@
           "totalSalesRevenue": {
             "type": "number",
             "format": "double"
-          },
-          "isReadonly": {
-            "type": "boolean",
-            "nullable": true
           },
           "addressData": {
             "$ref": "#/components/schemas/AddressData"
@@ -13897,7 +13790,7 @@
           },
           "filter": {
             "type": "array",
-            "items": {},
+            "items": { },
             "nullable": true
           },
           "totalSummary": {
@@ -14767,6 +14660,30 @@
       "FedExAccountData": {
         "type": "object",
         "properties": {
+          "key": {
+            "maxLength": 48,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "accountNumber": {
+            "maxLength": 48,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "meterNumber": {
+            "maxLength": 48,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
           "restApiAccounts": {
             "type": "array",
             "items": {
@@ -15067,6 +14984,10 @@
       "FreightShimpment": {
         "type": "object",
         "properties": {
+          "itemID": {
+            "type": "string",
+            "format": "uuid"
+          },
           "itemLength": {
             "type": "number",
             "format": "double",
@@ -15086,16 +15007,6 @@
             "type": "number",
             "format": "double",
             "nullable": true
-          },
-          "netCubicFeet": {
-            "type": "number",
-            "format": "double",
-            "nullable": true,
-            "readOnly": true
-          },
-          "itemID": {
-            "type": "string",
-            "format": "uuid"
           },
           "itemValue": {
             "type": "number",
@@ -15145,6 +15056,12 @@
           "ceilingTransportationWeight": {
             "type": "integer",
             "format": "int32",
+            "readOnly": true
+          },
+          "netCubicFeet": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
             "readOnly": true
           },
           "jobID": {
@@ -15358,20 +15275,6 @@
           "isExpanded": {
             "type": "boolean",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "GuidSequentialRangeValue": {
-        "type": "object",
-        "properties": {
-          "rangeEnd": {
-            "type": "number",
-            "format": "double"
-          },
-          "value": {
-            "type": "string",
-            "format": "uuid"
           }
         },
         "additionalProperties": false
@@ -16040,6 +15943,10 @@
       "Items": {
         "type": "object",
         "properties": {
+          "itemID": {
+            "type": "string",
+            "format": "uuid"
+          },
           "itemLength": {
             "type": "number",
             "format": "double",
@@ -16059,16 +15966,6 @@
             "type": "number",
             "format": "double",
             "nullable": true
-          },
-          "netCubicFeet": {
-            "type": "number",
-            "format": "double",
-            "nullable": true,
-            "readOnly": true
-          },
-          "itemID": {
-            "type": "string",
-            "format": "uuid"
           },
           "itemValue": {
             "type": "number",
@@ -16094,6 +15991,12 @@
             "type": "string",
             "format": "date-time",
             "nullable": true
+          },
+          "netCubicFeet": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
+            "readOnly": true
           },
           "companyID": {
             "type": "string",
@@ -16391,6 +16294,11 @@
             "format": "double",
             "readOnly": true
           },
+          "pkdGirth": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
           "pkdLengthPlusGirth": {
             "type": "number",
             "format": "double",
@@ -16647,63 +16555,6 @@
           },
           "addOnAPI": {
             "$ref": "#/components/schemas/CarrierAPI"
-          }
-        },
-        "additionalProperties": false
-      },
-      "JobParcelItemMaterial": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "nullable": true
-          },
-          "weight": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "length": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "width": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "height": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "cost": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "price": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "quantity": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -17892,41 +17743,6 @@
         },
         "additionalProperties": false
       },
-      "Packaging": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "length": {
-            "type": "number",
-            "format": "double"
-          },
-          "width": {
-            "type": "number",
-            "format": "double"
-          },
-          "height": {
-            "type": "number",
-            "format": "double"
-          },
-          "weight": {
-            "type": "number",
-            "format": "double"
-          },
-          "totalCost": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "PackagingLaborHours": {
         "type": "object",
         "properties": {
@@ -18064,74 +17880,6 @@
             "type": "string",
             "nullable": true,
             "readOnly": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ParcelItemWithMaterials": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "jobItemId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "quantity": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "jobItemPkdLength": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "jobItemPkdWidth": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "jobItemPkdHeight": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "jobItemPkdWeight": {
-            "type": "number",
-            "format": "double"
-          },
-          "jobItemParcelValue": {
-            "type": "number",
-            "format": "double"
-          },
-          "parcelPackageTypeId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "insureKey": {
-            "type": "string",
-            "nullable": true,
-            "readOnly": true
-          },
-          "packageTypeCode": {
-            "type": "string",
-            "nullable": true
-          },
-          "materials": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/JobParcelItemMaterial"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -19245,48 +18993,6 @@
         },
         "additionalProperties": false
       },
-      "SaveAllFreightItemsRequest": {
-        "type": "object",
-        "properties": {
-          "jobModifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "forceUpdate": {
-            "type": "boolean"
-          },
-          "freightItems": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FreightShimpment"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "SaveAllParcelItemsRequest": {
-        "type": "object",
-        "properties": {
-          "jobModifiedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "forceUpdate": {
-            "type": "boolean"
-          },
-          "parcelItems": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ParcelItem"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "SaveEntityResponse": {
         "type": "object",
         "properties": {
@@ -19638,7 +19344,7 @@
           },
           "filter": {
             "type": "array",
-            "items": {},
+            "items": { },
             "nullable": true
           },
           "totalSummary": {
@@ -19816,9 +19522,6 @@
           "zip": {
             "type": "string",
             "nullable": true
-          },
-          "isPrefered": {
-            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -21135,7 +20838,7 @@
           },
           "filter": {
             "type": "array",
-            "items": {},
+            "items": { },
             "nullable": true
           },
           "totalSummary": {
@@ -21699,6 +21402,24 @@
       "UPSAccountData": {
         "type": "object",
         "properties": {
+          "accessLicenseNumber": {
+            "maxLength": 48,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "userName": {
+            "maxLength": 48,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
           "shipperNumber": {
             "maxLength": 48,
             "minLength": 0,
@@ -21716,6 +21437,9 @@
             "minLength": 0,
             "type": "string",
             "nullable": true
+          },
+          "useNewApi": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -21737,10 +21461,6 @@
             "nullable": true
           },
           "descriptionOnLabel": {
-            "type": "string",
-            "nullable": true
-          },
-          "exemptionOrITN": {
             "type": "string",
             "nullable": true
           }
@@ -22423,7 +22143,7 @@
           },
           "filter": {
             "type": "array",
-            "items": {},
+            "items": { },
             "nullable": true
           },
           "totalSummary": {
@@ -22569,7 +22289,7 @@
   },
   "security": [
     {
-      "bearerAuth": []
+      "bearerAuth": [ ]
     }
   ]
 }
