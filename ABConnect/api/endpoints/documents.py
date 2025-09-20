@@ -1,7 +1,7 @@
 """Documents API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/documents/* endpoints.
+Provides type-safe access to documents/* endpoints.
 """
 
 from typing import Optional
@@ -15,7 +15,7 @@ class DocumentsEndpoint(BaseEndpoint):
     Total endpoints: 6
     """
     
-    api_path = "/api/documents"
+    api_path = "documents"
 
     def get_get_thumbnail(self, docPath: str) -> dict:
         """GET /api/documents/get/thumbnail/{docPath}
@@ -27,6 +27,7 @@ class DocumentsEndpoint(BaseEndpoint):
         """
         path = "/get/thumbnail/{docPath}"
         path = path.replace("{docPath}", docPath)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_get(self, docPath: str) -> dict:
         """GET /api/documents/get/{docPath}
@@ -38,6 +39,7 @@ class DocumentsEndpoint(BaseEndpoint):
         """
         path = "/get/{docPath}"
         path = path.replace("{docPath}", docPath)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_list(self, job_display_id: Optional[str] = None, item_id: Optional[str] = None, rfq_id: Optional[str] = None) -> dict:
         """GET /api/documents/list
@@ -96,4 +98,5 @@ class DocumentsEndpoint(BaseEndpoint):
         """
         path = "/hide/{docId}"
         path = path.replace("{docId}", docId)
+        kwargs = {}
         return self._make_request("PUT", path, **kwargs)

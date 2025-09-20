@@ -1,7 +1,7 @@
 """Webhooks API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/webhooks/* endpoints.
+Provides type-safe access to webhooks/* endpoints.
 """
 
 from .base import BaseEndpoint
@@ -14,7 +14,7 @@ class WebhooksEndpoint(BaseEndpoint):
     Total endpoints: 4
     """
     
-    api_path = "/api/webhooks"
+    api_path = "webhooks"
 
     def post_stripe_handle(self) -> dict:
         """POST /api/webhooks/stripe/handle
@@ -25,6 +25,7 @@ class WebhooksEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/stripe/handle"
+        kwargs = {}
         return self._make_request("POST", path, **kwargs)
     def post_stripe_connect_handle(self) -> dict:
         """POST /api/webhooks/stripe/connect/handle
@@ -35,6 +36,7 @@ class WebhooksEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/stripe/connect/handle"
+        kwargs = {}
         return self._make_request("POST", path, **kwargs)
     def post_stripe_checkout_session_completed(self) -> dict:
         """POST /api/webhooks/stripe/checkout.session.completed
@@ -45,6 +47,7 @@ class WebhooksEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/stripe/checkout.session.completed"
+        kwargs = {}
         return self._make_request("POST", path, **kwargs)
     def post_twilio_smsstatuscallback(self, data: dict = None) -> dict:
         """POST /api/webhooks/twilio/smsStatusCallback

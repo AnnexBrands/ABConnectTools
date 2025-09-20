@@ -1,7 +1,7 @@
 """Account API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/account/* endpoints.
+Provides type-safe access to account/* endpoints.
 """
 
 from typing import Optional
@@ -15,7 +15,7 @@ class AccountEndpoint(BaseEndpoint):
     Total endpoints: 10
     """
     
-    api_path = "/api/account"
+    api_path = "account"
 
     def post_register(self, data: dict = None) -> dict:
         """POST /api/account/register
@@ -109,6 +109,7 @@ class AccountEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/profile"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_setpassword(self, data: dict = None) -> dict:
         """POST /api/account/setpassword
@@ -147,4 +148,5 @@ class AccountEndpoint(BaseEndpoint):
         """
         path = "/paymentsource/{sourceId}"
         path = path.replace("{sourceId}", sourceId)
+        kwargs = {}
         return self._make_request("DELETE", path, **kwargs)

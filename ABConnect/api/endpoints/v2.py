@@ -1,7 +1,7 @@
 """V2 API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/v2/* endpoints.
+Provides type-safe access to v2/* endpoints.
 """
 
 from typing import Optional
@@ -15,7 +15,7 @@ class V2Endpoint(BaseEndpoint):
     Total endpoints: 1
     """
     
-    api_path = "/api/v2"
+    api_path = "v2"
 
     def get_job_tracking(self, jobDisplayId: str, historyAmount: str, history_amount: Optional[str] = None) -> dict:
         """GET /api/v2/job/{jobDisplayId}/tracking/{historyAmount}

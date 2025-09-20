@@ -1,7 +1,7 @@
 """Rfq API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/rfq/* endpoints.
+Provides type-safe access to rfq/* endpoints.
 """
 
 from typing import Optional
@@ -15,7 +15,7 @@ class RfqEndpoint(BaseEndpoint):
     Total endpoints: 7
     """
     
-    api_path = "/api/rfq"
+    api_path = "rfq"
 
     def get_get(self, rfqId: str) -> dict:
         """GET /api/rfq/{rfqId}
@@ -27,6 +27,7 @@ class RfqEndpoint(BaseEndpoint):
         """
         path = "/{rfqId}"
         path = path.replace("{rfqId}", rfqId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_accept(self, rfqId: str, data: dict = None) -> dict:
         """POST /api/rfq/{rfqId}/accept
@@ -52,6 +53,7 @@ class RfqEndpoint(BaseEndpoint):
         """
         path = "/{rfqId}/decline"
         path = path.replace("{rfqId}", rfqId)
+        kwargs = {}
         return self._make_request("POST", path, **kwargs)
     def post_cancel(self, rfqId: str) -> dict:
         """POST /api/rfq/{rfqId}/cancel
@@ -63,6 +65,7 @@ class RfqEndpoint(BaseEndpoint):
         """
         path = "/{rfqId}/cancel"
         path = path.replace("{rfqId}", rfqId)
+        kwargs = {}
         return self._make_request("POST", path, **kwargs)
     def post_acceptwinner(self, rfqId: str, final_amount: Optional[str] = None) -> dict:
         """POST /api/rfq/{rfqId}/acceptwinner

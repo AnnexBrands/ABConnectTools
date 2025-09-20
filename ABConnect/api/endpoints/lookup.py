@@ -1,21 +1,26 @@
 """Lookup API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/lookup/* endpoints.
+Provides type-safe access to lookup/* endpoints.
 """
 
-from typing import Optional
+from typing import List, Optional
 from .base import BaseEndpoint
+try:
+    from ..models import ContactTypeEntity, CountryCodeDto, GuidSequentialRangeValue
+except ImportError:
+    # Models not available, will return dict responses
+    pass
 
 
 class LookupEndpoint(BaseEndpoint):
     """Lookup API endpoint operations.
     
     Handles all API operations for /api/lookup/* endpoints.
-    Total endpoints: 14
+    Total endpoints: 15
     """
     
-    api_path = "/api/lookup"
+    api_path = "lookup"
 
     def get_get(self, masterConstantKey: str) -> dict:
         """GET /api/lookup/{masterConstantKey}
@@ -27,6 +32,7 @@ class LookupEndpoint(BaseEndpoint):
         """
         path = "/{masterConstantKey}"
         path = path.replace("{masterConstantKey}", masterConstantKey)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_get(self, masterConstantKey: str, valueId: str) -> dict:
         """GET /api/lookup/{masterConstantKey}/{valueId}
@@ -39,8 +45,9 @@ class LookupEndpoint(BaseEndpoint):
         path = "/{masterConstantKey}/{valueId}"
         path = path.replace("{masterConstantKey}", masterConstantKey)
         path = path.replace("{valueId}", valueId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_countries(self) -> dict:
+    def get_countries(self) -> List[CountryCodeDto]:
         """GET /api/lookup/countries
         
         
@@ -49,6 +56,7 @@ class LookupEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/countries"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_resetmasterconstantcache(self) -> dict:
         """GET /api/lookup/resetMasterConstantCache
@@ -59,6 +67,7 @@ class LookupEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/resetMasterConstantCache"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_accesskeys(self) -> dict:
         """GET /api/lookup/accessKeys
@@ -69,6 +78,7 @@ class LookupEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/accessKeys"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_accesskey(self, accessKey: str) -> dict:
         """GET /api/lookup/accessKey/{accessKey}
@@ -80,6 +90,7 @@ class LookupEndpoint(BaseEndpoint):
         """
         path = "/accessKey/{accessKey}"
         path = path.replace("{accessKey}", accessKey)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_documenttypes(self, document_source: Optional[str] = None) -> dict:
         """GET /api/lookup/documentTypes
@@ -124,6 +135,7 @@ class LookupEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/referCategory"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_refercategoryheirachy(self) -> dict:
         """GET /api/lookup/referCategoryHeirachy
@@ -134,6 +146,7 @@ class LookupEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/referCategoryHeirachy"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_ppccampaigns(self) -> dict:
         """GET /api/lookup/PPCCampaigns
@@ -144,6 +157,7 @@ class LookupEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/PPCCampaigns"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_parcelpackagetypes(self) -> dict:
         """GET /api/lookup/parcelPackageTypes
@@ -154,6 +168,7 @@ class LookupEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/parcelPackageTypes"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_comoninsurance(self) -> dict:
         """GET /api/lookup/comonInsurance
@@ -164,8 +179,9 @@ class LookupEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/comonInsurance"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_contacttypes(self) -> dict:
+    def get_contacttypes(self) -> List[ContactTypeEntity]:
         """GET /api/lookup/contactTypes
         
         
@@ -174,4 +190,21 @@ class LookupEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/contactTypes"
+        kwargs = {}
+        return self._make_request("GET", path, **kwargs)
+    def get_densityclassmap(self, carrier_api: Optional[str] = None) -> List[GuidSequentialRangeValue]:
+        """GET /api/lookup/densityClassMap
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/densityClassMap"
+        kwargs = {}
+        params = {}
+        if carrier_api is not None:
+            params["carrierApi"] = carrier_api
+        if params:
+            kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)

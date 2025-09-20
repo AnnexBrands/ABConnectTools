@@ -1,7 +1,7 @@
 """Values API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/Values/* endpoints.
+Provides type-safe access to Values/* endpoints.
 """
 
 from typing import Optional
@@ -15,7 +15,7 @@ class ValuesEndpoint(BaseEndpoint):
     Total endpoints: 1
     """
     
-    api_path = "/api/Values"
+    api_path = "Values"
 
     def get_get(self, code: Optional[str] = None) -> dict:
         """GET /api/Values

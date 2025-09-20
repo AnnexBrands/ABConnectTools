@@ -1,11 +1,16 @@
 """Company API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/company/* endpoints.
+Provides type-safe access to company/* endpoints.
 """
 
-from typing import Optional
+from typing import List, Optional
 from .base import BaseEndpoint
+try:
+    from ..models import BaseInfoCalendar, Calendar, CompanySetupData, ContainerThickness, PlannerTask, SaveEntityResponse, ServiceWarningResponse, Truck
+except ImportError:
+    # Models not available, will return dict responses
+    pass
 
 
 class CompanyEndpoint(BaseEndpoint):
@@ -15,9 +20,9 @@ class CompanyEndpoint(BaseEndpoint):
     Total endpoints: 16
     """
     
-    api_path = "/api/company"
+    api_path = "company"
 
-    def get_calendar(self, companyId: str, date: str) -> dict:
+    def get_calendar(self, companyId: str, date: str) -> Calendar:
         """GET /api/company/{companyId}/calendar/{date}
         
         
@@ -28,8 +33,9 @@ class CompanyEndpoint(BaseEndpoint):
         path = "/{companyId}/calendar/{date}"
         path = path.replace("{companyId}", companyId)
         path = path.replace("{date}", date)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_calendar_baseinfo(self, companyId: str, date: str) -> dict:
+    def get_calendar_baseinfo(self, companyId: str, date: str) -> BaseInfoCalendar:
         """GET /api/company/{companyId}/calendar/{date}/baseinfo
         
         
@@ -40,6 +46,7 @@ class CompanyEndpoint(BaseEndpoint):
         path = "/{companyId}/calendar/{date}/baseinfo"
         path = path.replace("{companyId}", companyId)
         path = path.replace("{date}", date)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_calendar_startofday(self, companyId: str, date: str) -> dict:
         """GET /api/company/{companyId}/calendar/{date}/startofday
@@ -52,6 +59,7 @@ class CompanyEndpoint(BaseEndpoint):
         path = "/{companyId}/calendar/{date}/startofday"
         path = path.replace("{companyId}", companyId)
         path = path.replace("{date}", date)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_calendar_endofday(self, companyId: str, date: str) -> dict:
         """GET /api/company/{companyId}/calendar/{date}/endofday
@@ -64,6 +72,7 @@ class CompanyEndpoint(BaseEndpoint):
         path = "/{companyId}/calendar/{date}/endofday"
         path = path.replace("{companyId}", companyId)
         path = path.replace("{date}", date)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_accounts_stripe_connecturl(self, companyId: str, return_uri: Optional[str] = None) -> dict:
         """GET /api/company/{companyId}/accounts/stripe/connecturl
@@ -106,8 +115,9 @@ class CompanyEndpoint(BaseEndpoint):
         """
         path = "/{companyId}/accounts/stripe"
         path = path.replace("{companyId}", companyId)
+        kwargs = {}
         return self._make_request("DELETE", path, **kwargs)
-    def get_setupdata(self, companyId: str) -> dict:
+    def get_setupdata(self, companyId: str) -> CompanySetupData:
         """GET /api/company/{companyId}/setupdata
         
         
@@ -117,8 +127,9 @@ class CompanyEndpoint(BaseEndpoint):
         """
         path = "/{companyId}/setupdata"
         path = path.replace("{companyId}", companyId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_containerthicknessinches(self, companyId: str) -> dict:
+    def get_containerthicknessinches(self, companyId: str) -> List[ContainerThickness]:
         """GET /api/company/{companyId}/containerthicknessinches
         
         
@@ -128,6 +139,7 @@ class CompanyEndpoint(BaseEndpoint):
         """
         path = "/{companyId}/containerthicknessinches"
         path = path.replace("{companyId}", companyId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_containerthicknessinches(self, companyId: str, data: dict = None) -> dict:
         """POST /api/company/{companyId}/containerthicknessinches
@@ -160,7 +172,7 @@ class CompanyEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("DELETE", path, **kwargs)
-    def get_planner(self, companyId: str) -> dict:
+    def get_planner(self, companyId: str) -> List[PlannerTask]:
         """GET /api/company/{companyId}/planner
         
         
@@ -170,8 +182,9 @@ class CompanyEndpoint(BaseEndpoint):
         """
         path = "/{companyId}/planner"
         path = path.replace("{companyId}", companyId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_truck(self, companyId: str, only_own_trucks: Optional[str] = None) -> dict:
+    def get_truck(self, companyId: str, only_own_trucks: Optional[str] = None) -> List[Truck]:
         """GET /api/company/{companyId}/truck
         
         
@@ -188,7 +201,7 @@ class CompanyEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)
-    def post_truck(self, companyId: str, data: dict = None) -> dict:
+    def post_truck(self, companyId: str, data: dict = None) -> SaveEntityResponse:
         """POST /api/company/{companyId}/truck
         
         
@@ -202,7 +215,7 @@ class CompanyEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def put_truck(self, companyId: str, truckId: str, data: dict = None) -> dict:
+    def put_truck(self, companyId: str, truckId: str, data: dict = None) -> SaveEntityResponse:
         """PUT /api/company/{companyId}/truck/{truckId}
         
         
@@ -217,7 +230,7 @@ class CompanyEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("PUT", path, **kwargs)
-    def delete_truck(self, companyId: str, truckId: str) -> dict:
+    def delete_truck(self, companyId: str, truckId: str) -> ServiceWarningResponse:
         """DELETE /api/company/{companyId}/truck/{truckId}
         
         
@@ -228,4 +241,5 @@ class CompanyEndpoint(BaseEndpoint):
         path = "/{companyId}/truck/{truckId}"
         path = path.replace("{companyId}", companyId)
         path = path.replace("{truckId}", truckId)
+        kwargs = {}
         return self._make_request("DELETE", path, **kwargs)

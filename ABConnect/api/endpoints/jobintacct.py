@@ -1,7 +1,7 @@
 """Jobintacct API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/jobintacct/* endpoints.
+Provides type-safe access to jobintacct/* endpoints.
 """
 
 from .base import BaseEndpoint
@@ -14,7 +14,7 @@ class JobintacctEndpoint(BaseEndpoint):
     Total endpoints: 5
     """
     
-    api_path = "/api/jobintacct"
+    api_path = "jobintacct"
 
     def get_get(self, jobDisplayId: str) -> dict:
         """GET /api/jobintacct/{jobDisplayId}
@@ -26,6 +26,7 @@ class JobintacctEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_post(self, jobDisplayId: str, data: dict = None) -> dict:
         """POST /api/jobintacct/{jobDisplayId}
@@ -66,6 +67,7 @@ class JobintacctEndpoint(BaseEndpoint):
         path = "/{jobDisplayId}/{franchiseeId}"
         path = path.replace("{jobDisplayId}", jobDisplayId)
         path = path.replace("{franchiseeId}", franchiseeId)
+        kwargs = {}
         return self._make_request("DELETE", path, **kwargs)
     def post_applyrebate(self, jobDisplayId: str, data: dict = None) -> dict:
         """POST /api/jobintacct/{jobDisplayId}/applyRebate

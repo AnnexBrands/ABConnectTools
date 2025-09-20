@@ -50,7 +50,7 @@ def sanitize_method_name(operation_id: str, method: str, path: str) -> str:
 def generate_endpoint_module(module_name: str, paths: list, swagger_data: dict) -> str:
     """Generate endpoint module code."""
     class_name = f"{to_pascal_case(module_name)}Endpoint"
-    api_path = f"/api/{module_name}"
+    api_path = module_name  # Relative path without /api/ prefix
     
     # Extract all methods for this module
     methods = []
@@ -100,7 +100,35 @@ def generate_endpoint_module(module_name: str, paths: list, swagger_data: dict) 
         # Create relative path for internal use
         relative_path = path.replace(f'/api/{module_name}', '') or '/'
         
-        method_code = f'''    def {method_name}(self{param_str}) -> dict:
+        # Determine return type based on response schema
+        return_type = "dict"  # Default fallback
+        
+        # Check if there's a response schema in swagger
+        responses = spec.get('responses', {})
+        success_response = responses.get('200', {})
+        content = success_response.get('content', {})
+        
+        for media_type, media_spec in content.items():
+            schema = media_spec.get('schema', {})
+            if '$ref' in schema:
+                ref_path = schema['$ref']
+                if ref_path.startswith('#/components/schemas/'):
+                    model_name = ref_path.split('/')[-1]
+                    return_type = model_name
+                    imports.add(model_name)
+                    break
+            elif schema.get('type') == 'array':
+                items = schema.get('items', {})
+                if '$ref' in items:
+                    ref_path = items['$ref']
+                    if ref_path.startswith('#/components/schemas/'):
+                        item_model = ref_path.split('/')[-1]
+                        return_type = f"List[{item_model}]"
+                        imports.add('List')
+                        imports.add(item_model)
+                        break
+        
+        method_code = f'''    def {method_name}(self{param_str}) -> {return_type}:
         """{summary or f'{method} {path}'}
         
         {description}
@@ -116,9 +144,8 @@ def generate_endpoint_module(module_name: str, paths: list, swagger_data: dict) 
                 method_code += f'''
         path = path.replace("{{{param}}}", {param})'''
         
-        # Handle query parameters
-        if query_params or spec.get('requestBody'):
-            method_code += '''
+        # Always initialize kwargs for consistency
+        method_code += '''
         kwargs = {}'''
             
         if query_params:
@@ -140,16 +167,36 @@ def generate_endpoint_module(module_name: str, paths: list, swagger_data: dict) 
         if data is not None:
             kwargs["json"] = data'''
         
-        method_code += f'''
+        # Add operation_id for response casting
+        operation_id = spec.get('operationId', '')
+        if operation_id:
+            method_code += f'''
+        return self._make_request("{method}", path, operation_id="{operation_id}", **kwargs)'''
+        else:
+            method_code += f'''
         return self._make_request("{method}", path, **kwargs)'''
         
         methods.append(method_code)
     
     # Generate module code
     import_lines = []
-    if 'Optional' in imports:
-        import_lines.append('from typing import Optional')
+    
+    # Standard typing imports
+    typing_imports = [imp for imp in imports if imp in ['Optional', 'List', 'Dict', 'Any', 'Union']]
+    if typing_imports:
+        import_lines.append(f'from typing import {", ".join(sorted(typing_imports))}')
+    
+    # Base endpoint import
     import_lines.append('from .base import BaseEndpoint')
+    
+    # Model imports (try to import from models package)
+    model_imports = [imp for imp in imports if imp not in {'BaseEndpoint', 'Optional', 'List', 'Dict', 'Any', 'Union'}]
+    if model_imports:
+        import_lines.append('try:')
+        import_lines.append(f'    from ..models import {", ".join(sorted(model_imports))}')
+        import_lines.append('except ImportError:')
+        import_lines.append('    # Models not available, will return dict responses')
+        import_lines.append('    pass')
     
     module_code = f'''"""{to_pascal_case(module_name)} API endpoints.
 
@@ -163,7 +210,7 @@ Provides type-safe access to {api_path}/* endpoints.
 class {class_name}(BaseEndpoint):
     """{to_pascal_case(module_name)} API endpoint operations.
     
-    Handles all API operations for {api_path}/* endpoints.
+    Handles all API operations for /api/{api_path}/* endpoints.
     Total endpoints: {len(paths)}
     """
     

@@ -1,21 +1,26 @@
 """Companies API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/companies/* endpoints.
+Provides type-safe access to companies/* endpoints.
 """
 
-from typing import Optional
+from typing import List, Optional
 from .base import BaseEndpoint
+try:
+    from ..models import CompanyAddressInfo, CompanyDetails, SearchCompanyResponse
+except ImportError:
+    # Models not available, will return dict responses
+    pass
 
 
 class CompaniesEndpoint(BaseEndpoint):
     """Companies API endpoint operations.
     
     Handles all API operations for /api/companies/* endpoints.
-    Total endpoints: 29
+    Total endpoints: 30
     """
     
-    api_path = "/api/companies"
+    api_path = "companies"
 
     def get_get(self, id: str) -> dict:
         """GET /api/companies/{id}
@@ -27,6 +32,7 @@ class CompaniesEndpoint(BaseEndpoint):
         """
         path = "/{id}"
         path = path.replace("{id}", id)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_details(self, companyId: str) -> dict:
         """GET /api/companies/{companyId}/details
@@ -38,6 +44,7 @@ class CompaniesEndpoint(BaseEndpoint):
         """
         path = "/{companyId}/details"
         path = path.replace("{companyId}", companyId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_availablebycurrentuser(self) -> dict:
         """GET /api/companies/availableByCurrentUser
@@ -48,6 +55,7 @@ class CompaniesEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/availableByCurrentUser"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_search(self, search_value: Optional[str] = None) -> dict:
         """GET /api/companies/search
@@ -65,7 +73,7 @@ class CompaniesEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)
-    def post_search_v2(self, data: dict = None) -> dict:
+    def post_search_v2(self, data: dict = None) -> List[SearchCompanyResponse]:
         """POST /api/companies/search/v2
         
         
@@ -104,7 +112,7 @@ class CompaniesEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def get_fulldetails(self, companyId: str) -> dict:
+    def get_fulldetails(self, companyId: str) -> CompanyDetails:
         """GET /api/companies/{companyId}/fulldetails
         
         
@@ -114,8 +122,9 @@ class CompaniesEndpoint(BaseEndpoint):
         """
         path = "/{companyId}/fulldetails"
         path = path.replace("{companyId}", companyId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def put_fulldetails(self, companyId: str, data: dict = None) -> dict:
+    def put_fulldetails(self, companyId: str, data: dict = None) -> CompanyDetails:
         """PUT /api/companies/{companyId}/fulldetails
         
         
@@ -129,6 +138,24 @@ class CompaniesEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("PUT", path, **kwargs)
+    def get_search_carrier_accounts(self, current_company_id: Optional[str] = None, query: Optional[str] = None) -> dict:
+        """GET /api/companies/search/carrier-accounts
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/search/carrier-accounts"
+        kwargs = {}
+        params = {}
+        if current_company_id is not None:
+            params["currentCompanyId"] = current_company_id
+        if query is not None:
+            params["query"] = query
+        if params:
+            kwargs["params"] = params
+        return self._make_request("GET", path, **kwargs)
     def post_fulldetails(self, data: dict = None) -> dict:
         """POST /api/companies/fulldetails
         
@@ -168,6 +195,7 @@ class CompaniesEndpoint(BaseEndpoint):
         """
         path = "/{companyId}/geosettings"
         path = path.replace("{companyId}", companyId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_geosettings(self, companyId: str, data: dict = None) -> dict:
         """POST /api/companies/{companyId}/geosettings
@@ -226,6 +254,7 @@ class CompaniesEndpoint(BaseEndpoint):
         """
         path = "/{companyId}/carrierAcounts"
         path = path.replace("{companyId}", companyId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_carrieracounts(self, companyId: str, data: dict = None) -> dict:
         """POST /api/companies/{companyId}/carrierAcounts
@@ -251,6 +280,7 @@ class CompaniesEndpoint(BaseEndpoint):
         """
         path = "/{companyId}/capabilities"
         path = path.replace("{companyId}", companyId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_capabilities(self, companyId: str, data: dict = None) -> dict:
         """POST /api/companies/{companyId}/capabilities
@@ -276,6 +306,7 @@ class CompaniesEndpoint(BaseEndpoint):
         """
         path = "/{companyId}/packagingsettings"
         path = path.replace("{companyId}", companyId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_packagingsettings(self, companyId: str, data: dict = None) -> dict:
         """POST /api/companies/{companyId}/packagingsettings
@@ -318,6 +349,7 @@ class CompaniesEndpoint(BaseEndpoint):
         """
         path = "/{companyId}/packaginglabor"
         path = path.replace("{companyId}", companyId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_packaginglabor(self, companyId: str, data: dict = None) -> dict:
         """POST /api/companies/{companyId}/packaginglabor
@@ -359,6 +391,7 @@ class CompaniesEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/geoAreaCompanies"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_brands(self) -> dict:
         """GET /api/companies/brands
@@ -369,6 +402,7 @@ class CompaniesEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/brands"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_brandstree(self) -> dict:
         """GET /api/companies/brandstree
@@ -379,8 +413,9 @@ class CompaniesEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/brandstree"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_franchiseeaddresses(self, companyId: str) -> dict:
+    def get_franchiseeaddresses(self, companyId: str) -> List[CompanyAddressInfo]:
         """GET /api/companies/{companyId}/franchiseeAddresses
         
         
@@ -390,4 +425,5 @@ class CompaniesEndpoint(BaseEndpoint):
         """
         path = "/{companyId}/franchiseeAddresses"
         path = path.replace("{companyId}", companyId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)

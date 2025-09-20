@@ -1,11 +1,16 @@
 """Note API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/note/* endpoints.
+Provides type-safe access to note/* endpoints.
 """
 
-from typing import Optional
+from typing import List, Optional
 from .base import BaseEndpoint
+try:
+    from ..models import Notes, SuggestedContactEntity
+except ImportError:
+    # Models not available, will return dict responses
+    pass
 
 
 class NoteEndpoint(BaseEndpoint):
@@ -15,9 +20,9 @@ class NoteEndpoint(BaseEndpoint):
     Total endpoints: 4
     """
     
-    api_path = "/api/note"
+    api_path = "note"
 
-    def get_get(self, category: Optional[str] = None, job_id: Optional[str] = None, contact_id: Optional[str] = None, company_id: Optional[str] = None) -> dict:
+    def get_get(self, category: Optional[str] = None, job_id: Optional[str] = None, contact_id: Optional[str] = None, company_id: Optional[str] = None) -> List[Notes]:
         """GET /api/note
         
         
@@ -39,7 +44,7 @@ class NoteEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)
-    def post_post(self, data: dict = None) -> dict:
+    def post_post(self, data: dict = None) -> Notes:
         """POST /api/note
         
         
@@ -66,7 +71,7 @@ class NoteEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("PUT", path, **kwargs)
-    def get_suggestusers(self, search_key: str = None, job_franchisee_id: Optional[str] = None, company_id: Optional[str] = None) -> dict:
+    def get_suggestusers(self, search_key: str = None, job_franchisee_id: Optional[str] = None, company_id: Optional[str] = None) -> List[SuggestedContactEntity]:
         """GET /api/note/suggestUsers
         
         

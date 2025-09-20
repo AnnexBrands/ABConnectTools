@@ -1,7 +1,7 @@
 """Users API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/users/* endpoints.
+Provides type-safe access to users/* endpoints.
 """
 
 from .base import BaseEndpoint
@@ -14,7 +14,7 @@ class UsersEndpoint(BaseEndpoint):
     Total endpoints: 5
     """
     
-    api_path = "/api/users"
+    api_path = "users"
 
     def post_list(self, data: dict = None) -> dict:
         """POST /api/users/list
@@ -64,6 +64,7 @@ class UsersEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/roles"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_pocusers(self) -> dict:
         """GET /api/users/pocusers
@@ -74,4 +75,5 @@ class UsersEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/pocusers"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)

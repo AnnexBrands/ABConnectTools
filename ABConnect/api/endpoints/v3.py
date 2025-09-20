@@ -1,11 +1,16 @@
 """V3 API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/v3/* endpoints.
+Provides type-safe access to v3/* endpoints.
 """
 
 from typing import Optional
 from .base import BaseEndpoint
+try:
+    from ..models import JobTrackingResponseV3
+except ImportError:
+    # Models not available, will return dict responses
+    pass
 
 
 class V3Endpoint(BaseEndpoint):
@@ -15,9 +20,9 @@ class V3Endpoint(BaseEndpoint):
     Total endpoints: 1
     """
     
-    api_path = "/api/v3"
+    api_path = "v3"
 
-    def get_job_tracking(self, jobDisplayId: str, historyAmount: str, history_amount: Optional[str] = None) -> dict:
+    def get_job_tracking(self, jobDisplayId: str, historyAmount: str, history_amount: Optional[str] = None) -> JobTrackingResponseV3:
         """GET /api/v3/job/{jobDisplayId}/tracking/{historyAmount}
         
         

@@ -1,21 +1,26 @@
 """Job API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/job/* endpoints.
+Provides type-safe access to job/* endpoints.
 """
 
-from typing import Optional
+from typing import List, Optional
 from .base import BaseEndpoint
+try:
+    from ..models import CarrierTask, CompanyListItem, DeleteTaskResponse, ExtendedOnHoldInfo, FormsShipmentPlan, JobCarrierRatesModel, JobParcelAddOn, JobTaskNote, OnHoldDetails, OnHoldNoteDetails, OnHoldUser, Packaging, ParcelItemWithMaterials, ParcelItemWithPackage, PricedFreightProvider, QuoteRequestDisplayInfo, QuoteRequestStatus, ResolveJobOnHoldResponse, SaveOnHoldResponse, SaveResponseModel, ServiceBaseResponse, ShipmentOriginDestination, ShipmentTrackingDetails, TimelineResponse
+except ImportError:
+    # Models not available, will return dict responses
+    pass
 
 
 class JobEndpoint(BaseEndpoint):
     """Job API endpoint operations.
     
     Handles all API operations for /api/job/* endpoints.
-    Total endpoints: 80
+    Total endpoints: 81
     """
     
-    api_path = "/api/job"
+    api_path = "job"
 
     def post_book(self, jobDisplayId: str) -> dict:
         """POST /api/job/{jobDisplayId}/book
@@ -27,6 +32,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/book"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("POST", path, **kwargs)
     def get_get(self, jobDisplayId: str) -> dict:
         """GET /api/job/{jobDisplayId}
@@ -38,6 +44,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_search(self, job_display_id: Optional[str] = None) -> dict:
         """GET /api/job/search
@@ -78,6 +85,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/calendaritems"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def put_save(self, data: dict = None) -> dict:
         """PUT /api/job/save
@@ -115,6 +123,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/feedback/{jobDisplayId}"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_feedback(self, jobDisplayId: str, data: dict = None) -> dict:
         """POST /api/job/feedback/{jobDisplayId}
@@ -168,6 +177,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/submanagementstatus"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_item_notes(self, jobDisplayId: str, data: dict = None) -> dict:
         """POST /api/job/{jobDisplayId}/item/notes
@@ -207,6 +217,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/updatePageConfig"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_price(self, jobDisplayId: str) -> dict:
         """GET /api/job/{jobDisplayId}/price
@@ -218,6 +229,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/price"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_jobaccesslevel(self, job_display_id: Optional[str] = None, job_item_id: Optional[str] = None) -> dict:
         """GET /api/job/jobAccessLevel
@@ -246,6 +258,19 @@ class JobEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/documentConfig"
+        kwargs = {}
+        return self._make_request("GET", path, **kwargs)
+    def get_packagingcontainers(self, jobDisplayId: str) -> List[Packaging]:
+        """GET /api/job/{jobDisplayId}/packagingcontainers
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{jobDisplayId}/packagingcontainers"
+        path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_email_senddocument(self, jobDisplayId: str, data: dict = None) -> dict:
         """POST /api/job/{jobDisplayId}/email/senddocument
@@ -285,6 +310,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/email/createtransactionalemail"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("POST", path, **kwargs)
     def post_email_send(self, jobDisplayId: str, emailTemplateGuid: str) -> dict:
         """POST /api/job/{jobDisplayId}/email/{emailTemplateGuid}/send
@@ -297,8 +323,9 @@ class JobEndpoint(BaseEndpoint):
         path = "/{jobDisplayId}/email/{emailTemplateGuid}/send"
         path = path.replace("{jobDisplayId}", jobDisplayId)
         path = path.replace("{emailTemplateGuid}", emailTemplateGuid)
+        kwargs = {}
         return self._make_request("POST", path, **kwargs)
-    def get_form_shipments(self, jobDisplayId: str) -> dict:
+    def get_form_shipments(self, jobDisplayId: str) -> List[FormsShipmentPlan]:
         """GET /api/job/{jobDisplayId}/form/shipments
         
         
@@ -308,6 +335,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/form/shipments"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_form(self, jobDisplayId: str, formid: str, type: Optional[str] = None, shipment_plan_id: Optional[str] = None) -> dict:
         """GET /api/job/{jobDisplayId}/form/{formid}
@@ -329,7 +357,7 @@ class JobEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)
-    def post_freightproviders(self, jobDisplayId: str, data: dict = None) -> dict:
+    def post_freightproviders(self, jobDisplayId: str, data: dict = None) -> ServiceBaseResponse:
         """POST /api/job/{jobDisplayId}/freightproviders
         
         
@@ -343,7 +371,7 @@ class JobEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def get_freightproviders(self, jobDisplayId: str, provider_indexes: Optional[str] = None, shipment_types: Optional[str] = None, only_active: Optional[str] = None) -> dict:
+    def get_freightproviders(self, jobDisplayId: str, provider_indexes: Optional[str] = None, shipment_types: Optional[str] = None, only_active: Optional[str] = None) -> List[PricedFreightProvider]:
         """GET /api/job/{jobDisplayId}/freightproviders
         
         
@@ -364,7 +392,7 @@ class JobEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)
-    def post_freightproviders_ratequote(self, jobDisplayId: str, optionIndex: str, data: dict = None) -> dict:
+    def post_freightproviders_ratequote(self, jobDisplayId: str, optionIndex: str, data: dict = None) -> ServiceBaseResponse:
         """POST /api/job/{jobDisplayId}/freightproviders/{optionIndex}/ratequote
         
         
@@ -379,7 +407,7 @@ class JobEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def get_note(self, jobDisplayId: str, category: Optional[str] = None, task_code: Optional[str] = None) -> dict:
+    def get_note(self, jobDisplayId: str, category: Optional[str] = None, task_code: Optional[str] = None) -> List[JobTaskNote]:
         """GET /api/job/{jobDisplayId}/note
         
         
@@ -398,7 +426,7 @@ class JobEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)
-    def post_note(self, jobDisplayId: str, data: dict = None) -> dict:
+    def post_note(self, jobDisplayId: str, data: dict = None) -> JobTaskNote:
         """POST /api/job/{jobDisplayId}/note
         
         
@@ -412,7 +440,7 @@ class JobEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def get_note(self, jobDisplayId: str, id: str) -> dict:
+    def get_note(self, jobDisplayId: str, id: str) -> JobTaskNote:
         """GET /api/job/{jobDisplayId}/note/{id}
         
         
@@ -423,6 +451,7 @@ class JobEndpoint(BaseEndpoint):
         path = "/{jobDisplayId}/note/{id}"
         path = path.replace("{jobDisplayId}", jobDisplayId)
         path = path.replace("{id}", id)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def put_note(self, jobDisplayId: str, id: str, data: dict = None) -> dict:
         """PUT /api/job/{jobDisplayId}/note/{id}
@@ -439,7 +468,7 @@ class JobEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("PUT", path, **kwargs)
-    def get_onhold(self, jobDisplayId: str) -> dict:
+    def get_onhold(self, jobDisplayId: str) -> List[ExtendedOnHoldInfo]:
         """GET /api/job/{jobDisplayId}/onhold
         
         
@@ -449,8 +478,9 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/onhold"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def post_onhold(self, jobDisplayId: str, data: dict = None) -> dict:
+    def post_onhold(self, jobDisplayId: str, data: dict = None) -> SaveOnHoldResponse:
         """POST /api/job/{jobDisplayId}/onhold
         
         
@@ -474,8 +504,9 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/onhold"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("DELETE", path, **kwargs)
-    def get_onhold(self, jobDisplayId: str, id: str) -> dict:
+    def get_onhold(self, jobDisplayId: str, id: str) -> OnHoldDetails:
         """GET /api/job/{jobDisplayId}/onhold/{id}
         
         
@@ -486,8 +517,9 @@ class JobEndpoint(BaseEndpoint):
         path = "/{jobDisplayId}/onhold/{id}"
         path = path.replace("{jobDisplayId}", jobDisplayId)
         path = path.replace("{id}", id)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def put_onhold(self, jobDisplayId: str, onHoldId: str, data: dict = None) -> dict:
+    def put_onhold(self, jobDisplayId: str, onHoldId: str, data: dict = None) -> SaveOnHoldResponse:
         """PUT /api/job/{jobDisplayId}/onhold/{onHoldId}
         
         
@@ -502,7 +534,7 @@ class JobEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("PUT", path, **kwargs)
-    def put_onhold_resolve(self, jobDisplayId: str, onHoldId: str, data: dict = None) -> dict:
+    def put_onhold_resolve(self, jobDisplayId: str, onHoldId: str, data: dict = None) -> ResolveJobOnHoldResponse:
         """PUT /api/job/{jobDisplayId}/onhold/{onHoldId}/resolve
         
         
@@ -517,7 +549,7 @@ class JobEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("PUT", path, **kwargs)
-    def post_onhold_comment(self, jobDisplayId: str, onHoldId: str, data: dict = None) -> dict:
+    def post_onhold_comment(self, jobDisplayId: str, onHoldId: str, data: dict = None) -> OnHoldNoteDetails:
         """POST /api/job/{jobDisplayId}/onhold/{onHoldId}/comment
         
         
@@ -532,7 +564,7 @@ class JobEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def get_onhold_followupusers(self, jobDisplayId: str) -> dict:
+    def get_onhold_followupusers(self, jobDisplayId: str) -> List[OnHoldUser]:
         """GET /api/job/{jobDisplayId}/onhold/followupusers
         
         
@@ -542,8 +574,9 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/onhold/followupusers"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_onhold_followupuser(self, jobDisplayId: str, contactId: str) -> dict:
+    def get_onhold_followupuser(self, jobDisplayId: str, contactId: str) -> OnHoldUser:
         """GET /api/job/{jobDisplayId}/onhold/followupuser/{contactId}
         
         
@@ -554,8 +587,9 @@ class JobEndpoint(BaseEndpoint):
         path = "/{jobDisplayId}/onhold/followupuser/{contactId}"
         path = path.replace("{jobDisplayId}", jobDisplayId)
         path = path.replace("{contactId}", contactId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def put_onhold_dates(self, jobDisplayId: str, onHoldId: str, data: dict = None) -> dict:
+    def put_onhold_dates(self, jobDisplayId: str, onHoldId: str, data: dict = None) -> ResolveJobOnHoldResponse:
         """PUT /api/job/{jobDisplayId}/onhold/{onHoldId}/dates
         
         
@@ -570,7 +604,7 @@ class JobEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("PUT", path, **kwargs)
-    def get_parcelitems(self, jobDisplayId: str) -> dict:
+    def get_parcelitems(self, jobDisplayId: str) -> List[ParcelItemWithPackage]:
         """GET /api/job/{jobDisplayId}/parcelitems
         
         
@@ -580,8 +614,9 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/parcelitems"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def post_parcelitems(self, jobDisplayId: str, data: dict = None) -> dict:
+    def post_parcelitems(self, jobDisplayId: str, data: dict = None) -> List[ParcelItemWithPackage]:
         """POST /api/job/{jobDisplayId}/parcelitems
         
         
@@ -595,21 +630,18 @@ class JobEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def put_parcelitems(self, jobDisplayId: str, parcelItemId: str, data: dict = None) -> dict:
-        """PUT /api/job/{jobDisplayId}/parcelitems/{parcelItemId}
+    def get_parcel_items_with_materials(self, jobDisplayId: str) -> List[ParcelItemWithMaterials]:
+        """GET /api/job/{jobDisplayId}/parcel-items-with-materials
         
         
         
         Returns:
             dict: API response data
         """
-        path = "/{jobDisplayId}/parcelitems/{parcelItemId}"
+        path = "/{jobDisplayId}/parcel-items-with-materials"
         path = path.replace("{jobDisplayId}", jobDisplayId)
-        path = path.replace("{parcelItemId}", parcelItemId)
         kwargs = {}
-        if data is not None:
-            kwargs["json"] = data
-        return self._make_request("PUT", path, **kwargs)
+        return self._make_request("GET", path, **kwargs)
     def delete_parcelitems(self, jobDisplayId: str, parcelItemId: str) -> dict:
         """DELETE /api/job/{jobDisplayId}/parcelitems/{parcelItemId}
         
@@ -621,6 +653,7 @@ class JobEndpoint(BaseEndpoint):
         path = "/{jobDisplayId}/parcelitems/{parcelItemId}"
         path = path.replace("{jobDisplayId}", jobDisplayId)
         path = path.replace("{parcelItemId}", parcelItemId)
+        kwargs = {}
         return self._make_request("DELETE", path, **kwargs)
     def get_payment_create(self, jobDisplayId: str) -> dict:
         """GET /api/job/{jobDisplayId}/payment/create
@@ -632,6 +665,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/payment/create"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_payment_achpaymentsession(self, jobDisplayId: str) -> dict:
         """POST /api/job/{jobDisplayId}/payment/ACHPaymentSession
@@ -643,6 +677,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/payment/ACHPaymentSession"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("POST", path, **kwargs)
     def post_payment_achcredittransfer(self, jobDisplayId: str) -> dict:
         """POST /api/job/{jobDisplayId}/payment/ACHCreditTransfer
@@ -654,6 +689,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/payment/ACHCreditTransfer"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("POST", path, **kwargs)
     def get_payment(self, jobDisplayId: str, job_sub_key: Optional[str] = None) -> dict:
         """GET /api/job/{jobDisplayId}/payment
@@ -710,6 +746,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/payment/cancelJobACHVerification"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("POST", path, **kwargs)
     def get_payment_sources(self, jobDisplayId: str) -> dict:
         """GET /api/job/{jobDisplayId}/payment/sources
@@ -721,6 +758,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/payment/sources"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_payment_bysource(self, jobDisplayId: str, data: dict = None) -> dict:
         """POST /api/job/{jobDisplayId}/payment/bysource
@@ -750,7 +788,7 @@ class JobEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def get_rfq(self, jobDisplayId: str, rfq_service_type: Optional[str] = None) -> dict:
+    def get_rfq(self, jobDisplayId: str, rfq_service_type: Optional[str] = None) -> List[QuoteRequestDisplayInfo]:
         """GET /api/job/{jobDisplayId}/rfq
         
         
@@ -767,7 +805,7 @@ class JobEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)
-    def get_rfq_statusof_forcompany(self, jobDisplayId: str, rfqServiceType: str, companyId: str) -> dict:
+    def get_rfq_statusof_forcompany(self, jobDisplayId: str, rfqServiceType: str, companyId: str) -> QuoteRequestStatus:
         """GET /api/job/{jobDisplayId}/rfq/statusof/{rfqServiceType}/forcompany/{companyId}
         
         
@@ -779,6 +817,7 @@ class JobEndpoint(BaseEndpoint):
         path = path.replace("{jobDisplayId}", jobDisplayId)
         path = path.replace("{rfqServiceType}", rfqServiceType)
         path = path.replace("{companyId}", companyId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_shipment_book(self, jobDisplayId: str, data: dict = None) -> dict:
         """POST /api/job/{jobDisplayId}/shipment/book
@@ -808,7 +847,7 @@ class JobEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("DELETE", path, **kwargs)
-    def get_shipment_ratequotes(self, jobDisplayId: str, ship_out_date: Optional[str] = None, rates_sources: Optional[str] = None, settings_key: Optional[str] = None) -> dict:
+    def get_shipment_ratequotes(self, jobDisplayId: str, ship_out_date: Optional[str] = None, rates_sources: Optional[str] = None, settings_key: Optional[str] = None) -> JobCarrierRatesModel:
         """GET /api/job/{jobDisplayId}/shipment/ratequotes
         
         
@@ -829,7 +868,7 @@ class JobEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)
-    def post_shipment_ratequotes(self, jobDisplayId: str, data: dict = None) -> dict:
+    def post_shipment_ratequotes(self, jobDisplayId: str, data: dict = None) -> JobCarrierRatesModel:
         """POST /api/job/{jobDisplayId}/shipment/ratequotes
         
         
@@ -843,7 +882,7 @@ class JobEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def get_shipment_origindestination(self, jobDisplayId: str) -> dict:
+    def get_shipment_origindestination(self, jobDisplayId: str) -> ShipmentOriginDestination:
         """GET /api/job/{jobDisplayId}/shipment/origindestination
         
         
@@ -853,8 +892,9 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/shipment/origindestination"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_shipment_accessorials(self, jobDisplayId: str) -> dict:
+    def get_shipment_accessorials(self, jobDisplayId: str) -> List[JobParcelAddOn]:
         """GET /api/job/{jobDisplayId}/shipment/accessorials
         
         
@@ -864,6 +904,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/shipment/accessorials"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_shipment_accessorial(self, jobDisplayId: str, data: dict = None) -> dict:
         """POST /api/job/{jobDisplayId}/shipment/accessorial
@@ -890,6 +931,7 @@ class JobEndpoint(BaseEndpoint):
         path = "/{jobDisplayId}/shipment/accessorial/{addOnId}"
         path = path.replace("{jobDisplayId}", jobDisplayId)
         path = path.replace("{addOnId}", addOnId)
+        kwargs = {}
         return self._make_request("DELETE", path, **kwargs)
     def get_shipment_ratesstate(self, jobDisplayId: str) -> dict:
         """GET /api/job/{jobDisplayId}/shipment/ratesstate
@@ -901,6 +943,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/shipment/ratesstate"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_shipment_exportdata(self, jobDisplayId: str) -> dict:
         """GET /api/job/{jobDisplayId}/shipment/exportdata
@@ -912,6 +955,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/shipment/exportdata"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_shipment_exportdata(self, jobDisplayId: str, data: dict = None) -> dict:
         """POST /api/job/{jobDisplayId}/shipment/exportdata
@@ -937,6 +981,7 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/sms"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_sms(self, jobDisplayId: str, data: dict = None) -> dict:
         """POST /api/job/{jobDisplayId}/sms
@@ -963,6 +1008,7 @@ class JobEndpoint(BaseEndpoint):
         path = "/{jobDisplayId}/sms/templatebased/{templateId}"
         path = path.replace("{jobDisplayId}", jobDisplayId)
         path = path.replace("{templateId}", templateId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_status_quote(self, jobDisplayId: str) -> dict:
         """POST /api/job/{jobDisplayId}/status/quote
@@ -974,8 +1020,9 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/status/quote"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("POST", path, **kwargs)
-    def get_timeline(self, jobDisplayId: str) -> dict:
+    def get_timeline(self, jobDisplayId: str) -> TimelineResponse:
         """GET /api/job/{jobDisplayId}/timeline
         
         
@@ -985,8 +1032,9 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/timeline"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def post_timeline(self, jobDisplayId: str, create_email: Optional[str] = None, data: dict = None) -> dict:
+    def post_timeline(self, jobDisplayId: str, create_email: Optional[str] = None, data: dict = None) -> SaveResponseModel:
         """POST /api/job/{jobDisplayId}/timeline
         
         
@@ -1020,7 +1068,7 @@ class JobEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("PATCH", path, **kwargs)
-    def delete_timeline(self, jobDisplayId: str, timelineTaskId: str) -> dict:
+    def delete_timeline(self, jobDisplayId: str, timelineTaskId: str) -> DeleteTaskResponse:
         """DELETE /api/job/{jobDisplayId}/timeline/{timelineTaskId}
         
         
@@ -1031,8 +1079,9 @@ class JobEndpoint(BaseEndpoint):
         path = "/{jobDisplayId}/timeline/{timelineTaskId}"
         path = path.replace("{jobDisplayId}", jobDisplayId)
         path = path.replace("{timelineTaskId}", timelineTaskId)
+        kwargs = {}
         return self._make_request("DELETE", path, **kwargs)
-    def get_timeline(self, jobDisplayId: str, timelineTaskIdentifier: str) -> dict:
+    def get_timeline(self, jobDisplayId: str, timelineTaskIdentifier: str) -> CarrierTask:
         """GET /api/job/{jobDisplayId}/timeline/{timelineTaskIdentifier}
         
         
@@ -1043,8 +1092,9 @@ class JobEndpoint(BaseEndpoint):
         path = "/{jobDisplayId}/timeline/{timelineTaskIdentifier}"
         path = path.replace("{jobDisplayId}", jobDisplayId)
         path = path.replace("{timelineTaskIdentifier}", timelineTaskIdentifier)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_timeline_agent(self, jobDisplayId: str, taskCode: str) -> dict:
+    def get_timeline_agent(self, jobDisplayId: str, taskCode: str) -> CompanyListItem:
         """GET /api/job/{jobDisplayId}/timeline/{taskCode}/agent
         
         
@@ -1055,6 +1105,7 @@ class JobEndpoint(BaseEndpoint):
         path = "/{jobDisplayId}/timeline/{taskCode}/agent"
         path = path.replace("{jobDisplayId}", jobDisplayId)
         path = path.replace("{taskCode}", taskCode)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_tracking(self, jobDisplayId: str) -> dict:
         """GET /api/job/{jobDisplayId}/tracking
@@ -1066,8 +1117,9 @@ class JobEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/tracking"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_tracking_shipment(self, jobDisplayId: str, proNumber: str) -> dict:
+    def get_tracking_shipment(self, jobDisplayId: str, proNumber: str) -> ShipmentTrackingDetails:
         """GET /api/job/{jobDisplayId}/tracking/shipment/{proNumber}
         
         
@@ -1078,4 +1130,5 @@ class JobEndpoint(BaseEndpoint):
         path = "/{jobDisplayId}/tracking/shipment/{proNumber}"
         path = path.replace("{jobDisplayId}", jobDisplayId)
         path = path.replace("{proNumber}", proNumber)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)

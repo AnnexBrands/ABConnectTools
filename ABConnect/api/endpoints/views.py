@@ -1,7 +1,7 @@
 """Views API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/views/* endpoints.
+Provides type-safe access to views/* endpoints.
 """
 
 from .base import BaseEndpoint
@@ -14,7 +14,7 @@ class ViewsEndpoint(BaseEndpoint):
     Total endpoints: 8
     """
     
-    api_path = "/api/views"
+    api_path = "views"
 
     def get_all(self) -> dict:
         """GET /api/views/all
@@ -25,6 +25,7 @@ class ViewsEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/all"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_get(self, viewId: str) -> dict:
         """GET /api/views/{viewId}
@@ -36,6 +37,7 @@ class ViewsEndpoint(BaseEndpoint):
         """
         path = "/{viewId}"
         path = path.replace("{viewId}", viewId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def delete_delete(self, viewId: str) -> dict:
         """DELETE /api/views/{viewId}
@@ -47,6 +49,7 @@ class ViewsEndpoint(BaseEndpoint):
         """
         path = "/{viewId}"
         path = path.replace("{viewId}", viewId)
+        kwargs = {}
         return self._make_request("DELETE", path, **kwargs)
     def get_accessinfo(self, viewId: str) -> dict:
         """GET /api/views/{viewId}/accessinfo
@@ -58,6 +61,7 @@ class ViewsEndpoint(BaseEndpoint):
         """
         path = "/{viewId}/accessinfo"
         path = path.replace("{viewId}", viewId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_post(self, data: dict = None) -> dict:
         """POST /api/views
@@ -95,6 +99,7 @@ class ViewsEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/datasetsps"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_datasetsp(self, spName: str) -> dict:
         """GET /api/views/datasetsp/{spName}
@@ -106,4 +111,5 @@ class ViewsEndpoint(BaseEndpoint):
         """
         path = "/datasetsp/{spName}"
         path = path.replace("{spName}", spName)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)

@@ -36,7 +36,7 @@ def get_lookup_values(api, master_constant_key: str):
 
 def main():
     """Get company types from the API."""
-    Config.load('.env.staging', force_reload=True)
+    Config.load('.env', force_reload=True)
     print(f"🔌 Using {Config.get_env()} environment")
     
     api = ABConnectAPI()

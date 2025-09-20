@@ -269,6 +269,131 @@ def cmd_swagger(args):
             print()
 
 
+def cmd_endpoint_help(args):
+    """Show help for a specific endpoint or execute endpoint method."""
+    endpoint_name = args.endpoint_name
+    method_name = getattr(args, 'method_name', None)
+    
+    # Map of endpoint names to their info
+    endpoint_info = {
+        'account': ('AccountEndpoint', '/api/account', 'Account management and authentication'),
+        'address': ('AddressEndpoint', '/api/address', 'Address validation and property types'),  
+        'admin': ('AdminEndpoint', '/api/admin', 'Administrative settings and configurations'),
+        'companies': ('CompaniesEndpoint', '/api/companies', 'Company management operations'),
+        'company': ('CompanyEndpoint', '/api/company', 'Single company operations'),
+        'contacts': ('ContactsEndpoint', '/api/contacts', 'Contact management operations'),
+        'dashboard': ('DashboardEndpoint', '/api/dashboard', 'Dashboard data and analytics'),
+        'documents': ('DocumentsEndpoint', '/api/documents', 'Document management'),
+        'email': ('EmailEndpoint', '/api/email', 'Email operations'),
+        'job': ('JobEndpoint', '/api/job', 'Job management operations'),
+        'jobs': ('JobEndpoint', '/api/job', 'Job management operations (alias for job)'),
+        'jobintacct': ('JobintacctEndpoint', '/api/jobintacct', 'Job integration with Intacct'),
+        'lookup': ('LookupEndpoint', '/api/lookup', 'Master data lookups'),
+        'note': ('NoteEndpoint', '/api/note', 'Note management'),
+        'reports': ('ReportsEndpoint', '/api/reports', 'Reporting endpoints'),
+        'rfq': ('RfqEndpoint', '/api/rfq', 'Request for Quote operations'),
+        'shipment': ('ShipmentEndpoint', '/api/shipment', 'Shipment operations'),
+        'users': ('UsersEndpoint', '/api/users', 'User management'),
+        'views': ('ViewsEndpoint', '/api/views', 'Grid view configurations'),
+        'webhooks': ('WebhooksEndpoint', '/api/webhooks', 'Webhook handling'),
+    }
+    
+    if endpoint_name not in endpoint_info:
+        print(f"❌ Unknown endpoint: {endpoint_name}")
+        print(f"Available endpoints: {', '.join(sorted(endpoint_info.keys()))}")
+        sys.exit(1)
+    
+    class_name, api_path, description = endpoint_info[endpoint_name]
+    
+    # If method name provided, execute the method
+    if method_name:
+        try:
+            # Initialize API client
+            api = ABConnectAPI(enable_generic=False)
+            endpoint = getattr(api, endpoint_name)
+            
+            if not hasattr(endpoint, method_name):
+                print(f"❌ Method '{method_name}' not found on {endpoint_name} endpoint")
+                available_methods = [m for m in dir(endpoint) if not m.startswith('_') and callable(getattr(endpoint, m))]
+                print(f"Available methods: {', '.join(available_methods)}")
+                sys.exit(1)
+            
+            # Get method and check if it needs parameters
+            method = getattr(endpoint, method_name)
+            import inspect
+            sig = inspect.signature(method)
+            
+            # For now, just call methods with no required parameters
+            required_params = [p for p in sig.parameters.values() 
+                             if p.default == inspect.Parameter.empty and p.name != 'self']
+            
+            if required_params:
+                print(f"❌ Method '{method_name}' requires parameters: {[p.name for p in required_params]}")
+                print(f"Method signature: {method_name}{sig}")
+                print("💡 Parameter support coming soon - use 'ab api raw' for now")
+                sys.exit(1)
+            
+            # Execute method
+            print(f"🔄 Executing {endpoint_name}.{method_name}()...")
+            result = method()
+            
+            print("✅ Method executed successfully")
+            print(json.dumps(result, indent=2) if isinstance(result, (dict, list)) else str(result))
+            
+        except Exception as e:
+            print(f"❌ Error executing {endpoint_name}.{method_name}(): {e}")
+            sys.exit(1)
+        
+        return
+    
+    print(f"📂 {endpoint_name.upper()} ENDPOINT")
+    print("=" * 60)
+    print(f"Class: {class_name}")
+    print(f"API Path: {api_path}")
+    print(f"Description: {description}")
+    print()
+    
+    # Get actual endpoint methods using swagger
+    import json
+    from pathlib import Path
+    
+    swagger_path = Path(__file__).parent / "base" / "swagger.json"
+    with open(swagger_path, 'r') as f:
+        swagger = json.load(f)
+    
+    # Find all endpoints for this API path
+    matching_endpoints = []
+    for path, methods in swagger['paths'].items():
+        if path.startswith(api_path) or (endpoint_name == 'jobs' and path.startswith('/api/job')):
+            for method, spec in methods.items():
+                matching_endpoints.append({
+                    'method': method.upper(),
+                    'path': path,
+                    'summary': spec.get('summary', ''),
+                    'operationId': spec.get('operationId', '')
+                })
+    
+    if matching_endpoints:
+        print(f"📋 Available Methods ({len(matching_endpoints)} total):")
+        print()
+        
+        for i, endpoint in enumerate(sorted(matching_endpoints, key=lambda x: (x['path'], x['method'])), 1):
+            print(f"{i:2}. {endpoint['method']} {endpoint['path']}")
+            if endpoint['summary']:
+                print(f"    📝 {endpoint['summary']}")
+            if args.verbose and endpoint['operationId']:
+                print(f"    🔧 Operation: {endpoint['operationId']}")
+            print()
+        
+        print("💡 Usage Examples:")
+        print(f"   ab api raw get {api_path}/{{id}} id=your-id-here")
+        print(f"   ab api raw post {api_path} data='{{...}}'")
+        print()
+        print(f"🔗 For all endpoints: ab swagger {endpoint_name.title()}")
+    else:
+        print("No endpoints found for this module.")
+
+
 def cmd_endpoints(args):
     """List available API endpoints."""
     api = ABConnectAPI()
@@ -537,9 +662,32 @@ def main():
     )
     raw_parser.set_defaults(func=cmd_api, raw=True)
 
-    # Tagged/Friendly API access
-    # These are handled differently when not using 'raw' subcommand
-    # We'll handle these in the cmd_api function based on positional args
+    # Dynamic endpoint help commands (avoid conflicts with existing commands)
+    existing_commands = {'config', 'me', 'company', 'quote', 'lookup', 'load', 'endpoints', 'swagger', 'api'}
+    endpoint_names = [
+        'account', 'address', 'admin', 'companies', 'contacts',
+        'dashboard', 'documents', 'email', 'job', 'jobs', 'jobintacct', 
+        'note', 'reports', 'rfq', 'shipment', 'users', 'views', 'webhooks'
+    ]
+    
+    for endpoint_name in endpoint_names:
+        # Skip if conflicts with existing command
+        if endpoint_name in existing_commands:
+            continue
+            
+        # Create help description
+        help_text = f"Show help for {endpoint_name} endpoint"
+        if endpoint_name == 'jobs':
+            help_text = "Show help for job endpoint (alias)"
+        
+        endpoint_parser = subparsers.add_parser(endpoint_name, help=help_text)
+        endpoint_parser.add_argument(
+            "method_name", nargs="?", help="Method name to execute (e.g., get_profile)"
+        )
+        endpoint_parser.add_argument(
+            "--verbose", "-v", action="store_true", help="Show operation IDs and details"
+        )
+        endpoint_parser.set_defaults(func=cmd_endpoint_help, endpoint_name=endpoint_name)
 
     # Parse arguments
     args = parser.parse_args()

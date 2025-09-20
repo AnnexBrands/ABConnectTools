@@ -1,11 +1,16 @@
 """Dashboard API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/dashboard/* endpoints.
+Provides type-safe access to dashboard/* endpoints.
 """
 
-from typing import Optional
+from typing import List, Optional
 from .base import BaseEndpoint
+try:
+    from ..models import GridSettingsEntity, InboundNewDashboardItem, IncrementJobStatusResponseModel, InhouseNewDashboardItem, LocalDeliveriesNewDashboardItem, OutboundNewDashboardItem, RecentEstimatesNewDashboardItem
+except ImportError:
+    # Models not available, will return dict responses
+    pass
 
 
 class DashboardEndpoint(BaseEndpoint):
@@ -15,7 +20,7 @@ class DashboardEndpoint(BaseEndpoint):
     Total endpoints: 13
     """
     
-    api_path = "/api/dashboard"
+    api_path = "dashboard"
 
     def get_get(self, view_id: Optional[str] = None, company_id: Optional[str] = None) -> dict:
         """GET /api/dashboard
@@ -45,6 +50,7 @@ class DashboardEndpoint(BaseEndpoint):
         """
         path = "/gridviewstate/{id}"
         path = path.replace("{id}", id)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_gridviewstate(self, id: str, data: dict = None) -> dict:
         """POST /api/dashboard/gridviewstate/{id}
@@ -76,7 +82,7 @@ class DashboardEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)
-    def post_inbound(self, company_id: Optional[str] = None, data: dict = None) -> dict:
+    def post_inbound(self, company_id: Optional[str] = None, data: dict = None) -> List[InboundNewDashboardItem]:
         """POST /api/dashboard/inbound
         
         
@@ -94,7 +100,7 @@ class DashboardEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def post_recentestimates(self, company_id: Optional[str] = None, data: dict = None) -> dict:
+    def post_recentestimates(self, company_id: Optional[str] = None, data: dict = None) -> List[RecentEstimatesNewDashboardItem]:
         """POST /api/dashboard/recentestimates
         
         
@@ -112,7 +118,7 @@ class DashboardEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def post_inhouse(self, company_id: Optional[str] = None, data: dict = None) -> dict:
+    def post_inhouse(self, company_id: Optional[str] = None, data: dict = None) -> List[InhouseNewDashboardItem]:
         """POST /api/dashboard/inhouse
         
         
@@ -130,7 +136,7 @@ class DashboardEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def post_outbound(self, company_id: Optional[str] = None, data: dict = None) -> dict:
+    def post_outbound(self, company_id: Optional[str] = None, data: dict = None) -> List[OutboundNewDashboardItem]:
         """POST /api/dashboard/outbound
         
         
@@ -148,7 +154,7 @@ class DashboardEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def post_local_deliveries(self, company_id: Optional[str] = None, data: dict = None) -> dict:
+    def post_local_deliveries(self, company_id: Optional[str] = None, data: dict = None) -> List[LocalDeliveriesNewDashboardItem]:
         """POST /api/dashboard/local-deliveries
         
         
@@ -166,7 +172,7 @@ class DashboardEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def post_incrementjobstatus(self, data: dict = None) -> dict:
+    def post_incrementjobstatus(self, data: dict = None) -> IncrementJobStatusResponseModel:
         """POST /api/dashboard/incrementjobstatus
         
         
@@ -192,7 +198,7 @@ class DashboardEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def get_gridsettings(self, company_id: Optional[str] = None, dashboard_type: Optional[str] = None) -> dict:
+    def get_gridsettings(self, company_id: Optional[str] = None, dashboard_type: Optional[str] = None) -> GridSettingsEntity:
         """GET /api/dashboard/gridsettings
         
         

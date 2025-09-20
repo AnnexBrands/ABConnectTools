@@ -1,7 +1,7 @@
 """Email API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/email/* endpoints.
+Provides type-safe access to email/* endpoints.
 """
 
 from .base import BaseEndpoint
@@ -14,7 +14,7 @@ class EmailEndpoint(BaseEndpoint):
     Total endpoints: 1
     """
     
-    api_path = "/api/email"
+    api_path = "email"
 
     def post_labelrequest(self, jobDisplayId: str) -> dict:
         """POST /api/email/{jobDisplayId}/labelrequest
@@ -26,4 +26,5 @@ class EmailEndpoint(BaseEndpoint):
         """
         path = "/{jobDisplayId}/labelrequest"
         path = path.replace("{jobDisplayId}", jobDisplayId)
+        kwargs = {}
         return self._make_request("POST", path, **kwargs)

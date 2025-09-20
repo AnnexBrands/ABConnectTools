@@ -1,11 +1,16 @@
 """Admin API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/admin/* endpoints.
+Provides type-safe access to admin/* endpoints.
 """
 
-from typing import Optional
+from typing import List, Optional
 from .base import BaseEndpoint
+try:
+    from ..models import CompanyHierarchyInfo, SelectApproveInsuranceResult
+except ImportError:
+    # Models not available, will return dict responses
+    pass
 
 
 class AdminEndpoint(BaseEndpoint):
@@ -15,7 +20,7 @@ class AdminEndpoint(BaseEndpoint):
     Total endpoints: 13
     """
     
-    api_path = "/api/admin"
+    api_path = "admin"
 
     def get_advancedsettings_all(self) -> dict:
         """GET /api/admin/advancedsettings/all
@@ -26,6 +31,7 @@ class AdminEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/advancedsettings/all"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_advancedsettings(self, id: str) -> dict:
         """GET /api/admin/advancedsettings/{id}
@@ -37,6 +43,7 @@ class AdminEndpoint(BaseEndpoint):
         """
         path = "/advancedsettings/{id}"
         path = path.replace("{id}", id)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def delete_advancedsettings(self, id: str) -> dict:
         """DELETE /api/admin/advancedsettings/{id}
@@ -48,6 +55,7 @@ class AdminEndpoint(BaseEndpoint):
         """
         path = "/advancedsettings/{id}"
         path = path.replace("{id}", id)
+        kwargs = {}
         return self._make_request("DELETE", path, **kwargs)
     def post_advancedsettings(self, data: dict = None) -> dict:
         """POST /api/admin/advancedsettings
@@ -71,6 +79,7 @@ class AdminEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/carriererrormessage/all"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def post_carriererrormessage(self, data: dict = None) -> dict:
         """POST /api/admin/carriererrormessage
@@ -85,7 +94,7 @@ class AdminEndpoint(BaseEndpoint):
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
-    def get_globalsettings_companyhierarchy(self) -> dict:
+    def get_globalsettings_companyhierarchy(self) -> CompanyHierarchyInfo:
         """GET /api/admin/globalsettings/companyhierarchy
         
         
@@ -94,8 +103,9 @@ class AdminEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/globalsettings/companyhierarchy"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_globalsettings_companyhierarchy_company(self, companyId: str) -> dict:
+    def get_globalsettings_companyhierarchy_company(self, companyId: str) -> CompanyHierarchyInfo:
         """GET /api/admin/globalsettings/companyhierarchy/company/{companyId}
         
         
@@ -105,8 +115,9 @@ class AdminEndpoint(BaseEndpoint):
         """
         path = "/globalsettings/companyhierarchy/company/{companyId}"
         path = path.replace("{companyId}", companyId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def post_globalsettings_getinsuranceexceptions(self, data: dict = None) -> dict:
+    def post_globalsettings_getinsuranceexceptions(self, data: dict = None) -> List[SelectApproveInsuranceResult]:
         """POST /api/admin/globalsettings/getinsuranceexceptions
         
         
@@ -170,4 +181,5 @@ class AdminEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/logbuffer/flushAll"
+        kwargs = {}
         return self._make_request("POST", path, **kwargs)

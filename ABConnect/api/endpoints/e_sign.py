@@ -1,7 +1,7 @@
 """ESign API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/e-sign/* endpoints.
+Provides type-safe access to e-sign/* endpoints.
 """
 
 from typing import Optional
@@ -15,7 +15,7 @@ class ESignEndpoint(BaseEndpoint):
     Total endpoints: 2
     """
     
-    api_path = "/api/e-sign"
+    api_path = "e-sign"
 
     def get_get(self, jobDisplayId: str, bookingKey: str) -> dict:
         """GET /api/e-sign/{jobDisplayId}/{bookingKey}
@@ -28,6 +28,7 @@ class ESignEndpoint(BaseEndpoint):
         path = "/{jobDisplayId}/{bookingKey}"
         path = path.replace("{jobDisplayId}", jobDisplayId)
         path = path.replace("{bookingKey}", bookingKey)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_result(self, envelope: Optional[str] = None, event: Optional[str] = None) -> dict:
         """GET /api/e-sign/result

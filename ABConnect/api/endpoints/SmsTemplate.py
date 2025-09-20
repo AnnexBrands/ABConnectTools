@@ -1,7 +1,7 @@
 """Smstemplate API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/SmsTemplate/* endpoints.
+Provides type-safe access to SmsTemplate/* endpoints.
 """
 
 from typing import Optional
@@ -15,7 +15,7 @@ class SmstemplateEndpoint(BaseEndpoint):
     Total endpoints: 6
     """
     
-    api_path = "/api/SmsTemplate"
+    api_path = "SmsTemplate"
 
     def get_notificationtokens(self) -> dict:
         """GET /api/SmsTemplate/notificationTokens
@@ -26,6 +26,7 @@ class SmstemplateEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/notificationTokens"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_jobstatuses(self) -> dict:
         """GET /api/SmsTemplate/jobStatuses
@@ -36,6 +37,7 @@ class SmstemplateEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/jobStatuses"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def get_list(self, company_id: Optional[str] = None) -> dict:
         """GET /api/SmsTemplate/list
@@ -63,6 +65,7 @@ class SmstemplateEndpoint(BaseEndpoint):
         """
         path = "/{templateId}"
         path = path.replace("{templateId}", templateId)
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
     def delete_delete(self, templateId: str) -> dict:
         """DELETE /api/SmsTemplate/{templateId}
@@ -74,6 +77,7 @@ class SmstemplateEndpoint(BaseEndpoint):
         """
         path = "/{templateId}"
         path = path.replace("{templateId}", templateId)
+        kwargs = {}
         return self._make_request("DELETE", path, **kwargs)
     def post_save(self, data: dict = None) -> dict:
         """POST /api/SmsTemplate/save

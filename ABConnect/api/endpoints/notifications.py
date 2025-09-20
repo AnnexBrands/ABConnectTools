@@ -1,7 +1,7 @@
 """Notifications API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/notifications/* endpoints.
+Provides type-safe access to notifications/* endpoints.
 """
 
 from .base import BaseEndpoint
@@ -14,7 +14,7 @@ class NotificationsEndpoint(BaseEndpoint):
     Total endpoints: 1
     """
     
-    api_path = "/api/notifications"
+    api_path = "notifications"
 
     def get_get(self) -> dict:
         """GET /api/notifications
@@ -25,4 +25,5 @@ class NotificationsEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)

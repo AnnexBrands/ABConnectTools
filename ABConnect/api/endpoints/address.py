@@ -1,11 +1,16 @@
 """Address API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/address/* endpoints.
+Provides type-safe access to address/* endpoints.
 """
 
 from typing import Optional
 from .base import BaseEndpoint
+try:
+    from ..models import AddressIsValidResult, PropertyType
+except ImportError:
+    # Models not available, will return dict responses
+    pass
 
 
 class AddressEndpoint(BaseEndpoint):
@@ -15,9 +20,9 @@ class AddressEndpoint(BaseEndpoint):
     Total endpoints: 4
     """
     
-    api_path = "/api/address"
+    api_path = "address"
 
-    def get_isvalid(self, line1: Optional[str] = None, city: Optional[str] = None, state: Optional[str] = None, zip: Optional[str] = None) -> dict:
+    def get_isvalid(self, line1: Optional[str] = None, city: Optional[str] = None, state: Optional[str] = None, zip: Optional[str] = None) -> AddressIsValidResult:
         """GET /api/address/isvalid
         
         
@@ -63,8 +68,9 @@ class AddressEndpoint(BaseEndpoint):
         """
         path = "/{addressId}/avoidValidation"
         path = path.replace("{addressId}", addressId)
+        kwargs = {}
         return self._make_request("POST", path, **kwargs)
-    def get_propertytype(self, address1: Optional[str] = None, address2: Optional[str] = None, city: Optional[str] = None, state: Optional[str] = None, zip_code: Optional[str] = None) -> dict:
+    def get_propertytype(self, address1: Optional[str] = None, address2: Optional[str] = None, city: Optional[str] = None, state: Optional[str] = None, zip_code: Optional[str] = None) -> PropertyType:
         """GET /api/address/propertytype
         
         

@@ -1,11 +1,16 @@
 """Shipment API endpoints.
 
 Auto-generated from swagger.json specification.
-Provides type-safe access to /api/shipment/* endpoints.
+Provides type-safe access to shipment/* endpoints.
 """
 
 from typing import Optional
 from .base import BaseEndpoint
+try:
+    from ..models import ShipmentDetails, ShippingDocument
+except ImportError:
+    # Models not available, will return dict responses
+    pass
 
 
 class ShipmentEndpoint(BaseEndpoint):
@@ -15,9 +20,9 @@ class ShipmentEndpoint(BaseEndpoint):
     Total endpoints: 3
     """
     
-    api_path = "/api/shipment"
+    api_path = "shipment"
 
-    def get_get(self, franchisee_id: Optional[str] = None, provider_id: Optional[str] = None, pro_number: Optional[str] = None) -> dict:
+    def get_get(self, franchisee_id: Optional[str] = None, provider_id: Optional[str] = None, pro_number: Optional[str] = None) -> ShipmentDetails:
         """GET /api/shipment
         
         
@@ -46,8 +51,9 @@ class ShipmentEndpoint(BaseEndpoint):
             dict: API response data
         """
         path = "/accessorials"
+        kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_document(self, docId: str, franchisee_id: Optional[str] = None) -> dict:
+    def get_document(self, docId: str, franchisee_id: Optional[str] = None) -> ShippingDocument:
         """GET /api/shipment/document/{docId}
         
         
