@@ -1,125 +1,393 @@
-"""Companies endpoint for interacting with company resources.
+"""Companies API endpoints.
 
-This module provides methods for retrieving company information from the ABC API.
-It supports fetching companies by both company code and company ID.
+Auto-generated from swagger.json specification.
+Provides type-safe access to /api/companies/* endpoints.
 """
 
-from ABConnect.api.endpoints.base import BaseEndpoint
-from ABConnect.common import load_json_resource
-from ABConnect.exceptions import ABConnectError
+from typing import Optional
+from .base import BaseEndpoint
 
 
 class CompaniesEndpoint(BaseEndpoint):
-    """Endpoint for company-related API operations.
+    """Companies API endpoint operations.
     
-    This endpoint provides methods to retrieve company information
-    from the ABC API using either company codes or UUIDs.
-    
-    The company code lookup uses a local cache (base/companies.json)
-    to map company codes to UUIDs for better performance.
-    
-    Available Methods:
-        - get: Retrieve company by company code (uses local cache)
-        - get_id: Retrieve company by UUID (direct API call)
+    Handles all API operations for /api/companies/* endpoints.
+    Total endpoints: 29
     """
-    def get(self, CompanyCode: str) -> dict:
-        """Retrieve company information by company code.
+    
+    api_path = "/api/companies"
+
+    def get_get(self, id: str) -> dict:
+        """GET /api/companies/{id}
         
-        This method uses a local cache (base/companies.json) to map company
-        codes to UUIDs, then fetches the company details from the API.
-        The cache should be periodically updated to ensure accuracy.
-
-        Args:
-            CompanyCode (str): The unique company code (e.g., 'ABC123', 'XYZ789').
-                This is typically a short alphanumeric identifier assigned to
-                each company.
-
+        
+        
         Returns:
-            dict: A dictionary containing company information with structure::
-
-                {
-                    'id': 'uuid-string',
-                    'companyCode': 'ABC123',
-                    'name': 'Company Name',
-                    'type': 'Customer|Vendor|Agent',
-                    'addresses': [...],
-                    'contacts': [...],
-                    'settings': {...},
-                    'active': True|False
-                }
-
-        Raises:
-            ABConnectError: If the company code is not found in the local cache
-                or if there's an API error fetching company details.
-            
-        Example:
-            >>> endpoint = CompaniesEndpoint()
-            >>> company = endpoint.get('ABC123')
-            >>> print(f"Company Name: {company['name']}")
-            >>> print(f"Company ID: {company['id']}")
-            
-        Note:
-            This method depends on the base/companies.json file being up-to-date.
-            If a company code is not found, the cache may need to be refreshed.
+            dict: API response data
         """
-        companies = load_json_resource("companies.json")
-        companyid = companies.get(CompanyCode)
-
-        if not companyid:
-            raise ABConnectError(f"Company code {CompanyCode} not found.")
-
-        return self._r.call("GET", f"companies/{companyid}/details")
-
-    def get_id(self, compnayid: str) -> dict:
-        """Retrieve company information by company UUID.
+        path = "/{id}"
+        path = path.replace("{id}", id)
+        return self._make_request("GET", path, **kwargs)
+    def get_details(self, companyId: str) -> dict:
+        """GET /api/companies/{companyId}/details
         
-        This method directly queries the API using the company's UUID,
-        bypassing the local cache lookup. It's useful when you already
-        have the company ID or when the cache might be outdated.
         
-        Note:
-            The parameter name has a typo (compnayid instead of companyid)
-            but is kept for backward compatibility.
-
-        Args:
-            compnayid (str): The company's UUID (e.g., '123e4567-e89b-12d3-a456-426614174000').
-                Despite the parameter name typo, this should be a valid UUID string.
-
+        
         Returns:
-            dict: A dictionary containing company information with structure::
-
-                {
-                    'id': 'uuid-string',
-                    'companyCode': 'ABC123',
-                    'name': 'Company Name',
-                    'type': 'Customer|Vendor|Agent',
-                    'addresses': [
-                        {
-                            'id': 123,
-                            'type': 'Billing|Shipping',
-                            'line1': '123 Main St',
-                            'city': 'New York',
-                            'state': 'NY',
-                            'zip': '10001'
-                        }
-                    ],
-                    'contacts': [...],
-                    'settings': {...},
-                    'active': True|False,
-                    'created': '2023-01-01T00:00:00Z',
-                    'modified': '2023-12-01T00:00:00Z'
-                }
-
-        Raises:
-            ABConnectError: If the company UUID is not found or if there's an API error.
-            
-        Example:
-            >>> endpoint = CompaniesEndpoint()
-            >>> company_id = '123e4567-e89b-12d3-a456-426614174000'
-            >>> company = endpoint.get_id(company_id)
-            >>> print(f"Company: {company['name']} ({company['companyCode']})")
-            
-        See Also:
-            - get: Retrieve company by company code (uses cache)
+            dict: API response data
         """
-        return self._r.call("GET", f"companies/{compnayid}/details")
+        path = "/{companyId}/details"
+        path = path.replace("{companyId}", companyId)
+        return self._make_request("GET", path, **kwargs)
+    def get_availablebycurrentuser(self) -> dict:
+        """GET /api/companies/availableByCurrentUser
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/availableByCurrentUser"
+        return self._make_request("GET", path, **kwargs)
+    def get_search(self, search_value: Optional[str] = None) -> dict:
+        """GET /api/companies/search
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/search"
+        kwargs = {}
+        params = {}
+        if search_value is not None:
+            params["searchValue"] = search_value
+        if params:
+            kwargs["params"] = params
+        return self._make_request("GET", path, **kwargs)
+    def post_search_v2(self, data: dict = None) -> dict:
+        """POST /api/companies/search/v2
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/search/v2"
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+    def post_list(self, data: dict = None) -> dict:
+        """POST /api/companies/list
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/list"
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+    def post_simplelist(self, data: dict = None) -> dict:
+        """POST /api/companies/simplelist
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/simplelist"
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+    def get_fulldetails(self, companyId: str) -> dict:
+        """GET /api/companies/{companyId}/fulldetails
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{companyId}/fulldetails"
+        path = path.replace("{companyId}", companyId)
+        return self._make_request("GET", path, **kwargs)
+    def put_fulldetails(self, companyId: str, data: dict = None) -> dict:
+        """PUT /api/companies/{companyId}/fulldetails
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{companyId}/fulldetails"
+        path = path.replace("{companyId}", companyId)
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("PUT", path, **kwargs)
+    def post_fulldetails(self, data: dict = None) -> dict:
+        """POST /api/companies/fulldetails
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/fulldetails"
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+    def get_infofromkey(self, key: Optional[str] = None) -> dict:
+        """GET /api/companies/infoFromKey
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/infoFromKey"
+        kwargs = {}
+        params = {}
+        if key is not None:
+            params["key"] = key
+        if params:
+            kwargs["params"] = params
+        return self._make_request("GET", path, **kwargs)
+    def get_geosettings(self, companyId: str) -> dict:
+        """GET /api/companies/{companyId}/geosettings
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{companyId}/geosettings"
+        path = path.replace("{companyId}", companyId)
+        return self._make_request("GET", path, **kwargs)
+    def post_geosettings(self, companyId: str, data: dict = None) -> dict:
+        """POST /api/companies/{companyId}/geosettings
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{companyId}/geosettings"
+        path = path.replace("{companyId}", companyId)
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+    def get_geosettings(self, latitude: Optional[str] = None, longitude: Optional[str] = None, miles_radius: Optional[str] = None) -> dict:
+        """GET /api/companies/geosettings
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/geosettings"
+        kwargs = {}
+        params = {}
+        if latitude is not None:
+            params["Latitude"] = latitude
+        if longitude is not None:
+            params["Longitude"] = longitude
+        if miles_radius is not None:
+            params["milesRadius"] = miles_radius
+        if params:
+            kwargs["params"] = params
+        return self._make_request("GET", path, **kwargs)
+    def post_filteredcustomers(self, data: dict = None) -> dict:
+        """POST /api/companies/filteredCustomers
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/filteredCustomers"
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+    def get_carrieracounts(self, companyId: str) -> dict:
+        """GET /api/companies/{companyId}/carrierAcounts
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{companyId}/carrierAcounts"
+        path = path.replace("{companyId}", companyId)
+        return self._make_request("GET", path, **kwargs)
+    def post_carrieracounts(self, companyId: str, data: dict = None) -> dict:
+        """POST /api/companies/{companyId}/carrierAcounts
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{companyId}/carrierAcounts"
+        path = path.replace("{companyId}", companyId)
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+    def get_capabilities(self, companyId: str) -> dict:
+        """GET /api/companies/{companyId}/capabilities
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{companyId}/capabilities"
+        path = path.replace("{companyId}", companyId)
+        return self._make_request("GET", path, **kwargs)
+    def post_capabilities(self, companyId: str, data: dict = None) -> dict:
+        """POST /api/companies/{companyId}/capabilities
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{companyId}/capabilities"
+        path = path.replace("{companyId}", companyId)
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+    def get_packagingsettings(self, companyId: str) -> dict:
+        """GET /api/companies/{companyId}/packagingsettings
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{companyId}/packagingsettings"
+        path = path.replace("{companyId}", companyId)
+        return self._make_request("GET", path, **kwargs)
+    def post_packagingsettings(self, companyId: str, data: dict = None) -> dict:
+        """POST /api/companies/{companyId}/packagingsettings
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{companyId}/packagingsettings"
+        path = path.replace("{companyId}", companyId)
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+    def get_inheritedpackagingtariffs(self, companyId: str, inherit_from: Optional[str] = None) -> dict:
+        """GET /api/companies/{companyId}/inheritedPackagingTariffs
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{companyId}/inheritedPackagingTariffs"
+        path = path.replace("{companyId}", companyId)
+        kwargs = {}
+        params = {}
+        if inherit_from is not None:
+            params["inheritFrom"] = inherit_from
+        if params:
+            kwargs["params"] = params
+        return self._make_request("GET", path, **kwargs)
+    def get_packaginglabor(self, companyId: str) -> dict:
+        """GET /api/companies/{companyId}/packaginglabor
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{companyId}/packaginglabor"
+        path = path.replace("{companyId}", companyId)
+        return self._make_request("GET", path, **kwargs)
+    def post_packaginglabor(self, companyId: str, data: dict = None) -> dict:
+        """POST /api/companies/{companyId}/packaginglabor
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{companyId}/packaginglabor"
+        path = path.replace("{companyId}", companyId)
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+    def get_inheritedpackaginglabor(self, companyId: str, inherit_from: Optional[str] = None) -> dict:
+        """GET /api/companies/{companyId}/inheritedpackaginglabor
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{companyId}/inheritedpackaginglabor"
+        path = path.replace("{companyId}", companyId)
+        kwargs = {}
+        params = {}
+        if inherit_from is not None:
+            params["inheritFrom"] = inherit_from
+        if params:
+            kwargs["params"] = params
+        return self._make_request("GET", path, **kwargs)
+    def get_geoareacompanies(self) -> dict:
+        """GET /api/companies/geoAreaCompanies
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/geoAreaCompanies"
+        return self._make_request("GET", path, **kwargs)
+    def get_brands(self) -> dict:
+        """GET /api/companies/brands
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/brands"
+        return self._make_request("GET", path, **kwargs)
+    def get_brandstree(self) -> dict:
+        """GET /api/companies/brandstree
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/brandstree"
+        return self._make_request("GET", path, **kwargs)
+    def get_franchiseeaddresses(self, companyId: str) -> dict:
+        """GET /api/companies/{companyId}/franchiseeAddresses
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{companyId}/franchiseeAddresses"
+        path = path.replace("{companyId}", companyId)
+        return self._make_request("GET", path, **kwargs)

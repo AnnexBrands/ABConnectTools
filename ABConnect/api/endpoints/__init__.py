@@ -1,21 +1,63 @@
-from ABConnect.api.endpoints.base import BaseEndpoint
-from ABConnect.api.endpoints.companies import CompaniesEndpoint
-from ABConnect.api.endpoints.contacts import ContactsEndpoint
-from ABConnect.api.endpoints.docs import DocsEndpoint
-from ABConnect.api.endpoints.forms import FormsEndpoint
-from ABConnect.api.endpoints.items import ItemsEndpoint
-from ABConnect.api.endpoints.jobs import JobsEndpoint
-from ABConnect.api.endpoints.tasks import TasksEndpoint
-from ABConnect.api.endpoints.users import UsersEndpoint
+"""ABConnect API endpoints package.
 
+Auto-generated from swagger.json specification.
+Contains endpoint classes for all API modules.
+"""
+
+from .base import BaseEndpoint
+
+from .SmsTemplate import SmstemplateEndpoint
+from .Values import ValuesEndpoint
+from .account import AccountEndpoint
+from .address import AddressEndpoint
+from .admin import AdminEndpoint
+from .companies import CompaniesEndpoint
+from .company import CompanyEndpoint
+from .contacts import ContactsEndpoint
+from .dashboard import DashboardEndpoint
+from .documents import DocumentsEndpoint
+from .e_sign import ESignEndpoint
+from .email import EmailEndpoint
+from .job import JobEndpoint
+from .jobintacct import JobintacctEndpoint
+from .lookup import LookupEndpoint
+from .note import NoteEndpoint
+from .notifications import NotificationsEndpoint
+from .reports import ReportsEndpoint
+from .rfq import RfqEndpoint
+from .shipment import ShipmentEndpoint
+from .users import UsersEndpoint
+from .v2 import V2Endpoint
+from .v3 import V3Endpoint
+from .views import ViewsEndpoint
+from .webhooks import WebhooksEndpoint
+
+# Export all endpoint classes
 __all__ = [
     "BaseEndpoint",
+    "SmstemplateEndpoint",
+    "ValuesEndpoint",
+    "AccountEndpoint",
+    "AddressEndpoint",
+    "AdminEndpoint",
     "CompaniesEndpoint",
+    "CompanyEndpoint",
     "ContactsEndpoint",
-    "DocsEndpoint",
-    "FormsEndpoint",
-    "ItemsEndpoint",
-    "JobsEndpoint",
-    "TasksEndpoint",
+    "DashboardEndpoint",
+    "DocumentsEndpoint",
+    "ESignEndpoint",
+    "EmailEndpoint",
+    "JobEndpoint",
+    "JobintacctEndpoint",
+    "LookupEndpoint",
+    "NoteEndpoint",
+    "NotificationsEndpoint",
+    "ReportsEndpoint",
+    "RfqEndpoint",
+    "ShipmentEndpoint",
     "UsersEndpoint",
+    "V2Endpoint",
+    "V3Endpoint",
+    "ViewsEndpoint",
+    "WebhooksEndpoint",
 ]

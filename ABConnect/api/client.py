@@ -5,14 +5,31 @@ import os
 from ABConnect.config import Config
 from ABConnect.api.endpoints import (
     BaseEndpoint,
+    AccountEndpoint,
+    AddressEndpoint,
+    AdminEndpoint, 
     CompaniesEndpoint,
+    CompanyEndpoint,
     ContactsEndpoint,
-    DocsEndpoint,
-    FormsEndpoint,
-    ItemsEndpoint,
-    JobsEndpoint,
-    TasksEndpoint,
+    DashboardEndpoint,
+    DocumentsEndpoint,
+    ESignEndpoint,
+    EmailEndpoint,
+    JobEndpoint,
+    JobintacctEndpoint,
+    LookupEndpoint,
+    NoteEndpoint,
+    NotificationsEndpoint,
+    ReportsEndpoint,
+    RfqEndpoint,
+    ShipmentEndpoint,
+    SmstemplateEndpoint,
     UsersEndpoint,
+    V2Endpoint,
+    V3Endpoint,
+    ValuesEndpoint,
+    ViewsEndpoint,
+    WebhooksEndpoint,
 )
 
 from .auth import FileTokenStorage, SessionTokenStorage
@@ -28,22 +45,34 @@ logger = logging.getLogger(__name__)
 
 
 class ABConnectAPI:
-    """Main API client for ABConnect with automatic endpoint discovery.
+    """Main API client for ABConnect with schema-first endpoint structure.
     
-    This client provides access to all API endpoints, both manually implemented
-    and automatically generated from the OpenAPI specification.
+    This client provides type-safe access to all 256 API endpoints across
+    25 modules, auto-generated from swagger specification.
     
-    Attributes:
-        users: User management endpoints
-        companies: Company management endpoints
-        contacts: Contact management endpoints
-        docs: Document management endpoints
-        forms: Form management endpoints
-        items: Item management endpoints
-        jobs: Job management endpoints
-        tasks: Task management endpoints
+    Core Endpoints:
+        account: Account management and authentication
+        address: Address validation and property types
+        admin: Administrative settings and configurations
+        companies: Company management (29 endpoints)
+        company: Single company operations
+        contacts: Contact management (14 endpoints)
+        dashboard: Dashboard data and analytics
+        documents: Document management
+        email: Email operations
+        job: Job management (80 endpoints) 
+        jobintacct: Job integration with Intacct
+        lookup: Master data lookups (14 endpoints)
+        note: Note management
+        reports: Reporting endpoints
+        rfq: Request for Quote operations
+        shipment: Shipment operations
+        users: User management
+        views: Grid view configurations
+        webhooks: Webhook handling
         
-    Additional endpoints are automatically discovered and available as attributes.
+    Legacy Compatibility:
+        jobs: Alias for job endpoint (backward compatibility)
     """
     
     def __init__(self, request=None, enable_generic: bool = True, env: Optional[str] = None):
@@ -103,15 +132,36 @@ class ABConnectAPI:
                 logger.info("Manual endpoints are still available")
     
     def _init_manual_endpoints(self):
-        """Initialize manually implemented endpoints."""
-        self.users = UsersEndpoint()
+        """Initialize schema-first endpoints from swagger specification."""
+        # Core API modules (25 total)
+        self.account = AccountEndpoint()
+        self.address = AddressEndpoint() 
+        self.admin = AdminEndpoint()
         self.companies = CompaniesEndpoint()
+        self.company = CompanyEndpoint()
         self.contacts = ContactsEndpoint()
-        self.docs = DocsEndpoint()
-        self.forms = FormsEndpoint()
-        self.items = ItemsEndpoint()
-        self.jobs = JobsEndpoint()
-        self.tasks = TasksEndpoint()
+        self.dashboard = DashboardEndpoint()
+        self.documents = DocumentsEndpoint()
+        self.e_sign = ESignEndpoint()
+        self.email = EmailEndpoint()
+        self.job = JobEndpoint()  # 80 endpoints - largest module
+        self.jobintacct = JobintacctEndpoint()
+        self.lookup = LookupEndpoint()
+        self.note = NoteEndpoint()
+        self.notifications = NotificationsEndpoint()
+        self.reports = ReportsEndpoint()
+        self.rfq = RfqEndpoint()
+        self.shipment = ShipmentEndpoint()
+        self.sms_template = SmstemplateEndpoint()
+        self.users = UsersEndpoint()
+        self.v2 = V2Endpoint()
+        self.v3 = V3Endpoint()
+        self.values = ValuesEndpoint()
+        self.views = ViewsEndpoint()
+        self.webhooks = WebhooksEndpoint()
+        
+        # Maintain backward compatibility
+        self.jobs = self.job  # Alias for existing code
     
     def _init_generic_endpoints(self):
         """Initialize automatically generated endpoints from swagger."""

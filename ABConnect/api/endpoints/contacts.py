@@ -1,68 +1,219 @@
-"""Contacts endpoint for managing contact information.
+"""Contacts API endpoints.
 
-This module provides methods for retrieving contact details from the ABC API.
+Auto-generated from swagger.json specification.
+Provides type-safe access to /api/contacts/* endpoints.
 """
 
-from ABConnect.api.endpoints.base import BaseEndpoint
+from typing import Optional
+from .base import BaseEndpoint
 
 
 class ContactsEndpoint(BaseEndpoint):
-    """Endpoint for contact-related API operations.
+    """Contacts API endpoint operations.
     
-    This endpoint provides methods to retrieve contact information
-    from the ABC API using contact IDs.
+    Handles all API operations for /api/contacts/* endpoints.
+    Total endpoints: 14
     """
-    def get(self, id: int) -> dict:
-        """Retrieve contact information by contact ID.
+    
+    api_path = "/api/contacts"
+
+    def post_history(self, contactId: str, data: dict = None) -> dict:
+        """POST /api/contacts/{contactId}/history
         
-        Fetches detailed information about a specific contact using their
-        unique identifier.
-
-        Args:
-            id (int): The unique contact identifier. This should be a positive
-                integer representing the contact's ID in the system.
-
+        
+        
         Returns:
-            dict: A dictionary containing contact information with structure::
-
-                {
-                    'id': 123,
-                    'firstName': 'John',
-                    'lastName': 'Doe',
-                    'email': 'john.doe@example.com',
-                    'phone': '+1-555-123-4567',
-                    'mobile': '+1-555-987-6543',
-                    'title': 'Operations Manager',
-                    'companyId': 'uuid-string',
-                    'companyName': 'ABC Company',
-                    'addresses': [
-                        {
-                            'type': 'Business',
-                            'line1': '123 Main St',
-                            'line2': 'Suite 100',
-                            'city': 'New York',
-                            'state': 'NY',
-                            'zip': '10001',
-                            'country': 'US'
-                        }
-                    ],
-                    'preferences': {
-                        'emailNotifications': True,
-                        'smsNotifications': False
-                    },
-                    'active': True,
-                    'created': '2023-01-01T00:00:00Z',
-                    'modified': '2023-12-01T00:00:00Z'
-                }
-
-        Raises:
-            ABConnectError: If the contact ID is not found or if there's an API error.
-            
-        Example:
-            >>> endpoint = ContactsEndpoint()
-            >>> contact = endpoint.get(12345)
-            >>> print(f"Contact: {contact['firstName']} {contact['lastName']}")
-            >>> print(f"Email: {contact['email']}")
-            >>> print(f"Company: {contact['companyName']}")
+            dict: API response data
         """
-        return self._r.call("GET", f"contacts/{id}")
+        path = "/{contactId}/history"
+        path = path.replace("{contactId}", contactId)
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+    def get_history_aggregated(self, contactId: str, statuses: Optional[str] = None) -> dict:
+        """GET /api/contacts/{contactId}/history/aggregated
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{contactId}/history/aggregated"
+        path = path.replace("{contactId}", contactId)
+        kwargs = {}
+        params = {}
+        if statuses is not None:
+            params["statuses"] = statuses
+        if params:
+            kwargs["params"] = params
+        return self._make_request("GET", path, **kwargs)
+    def get_history_graphdata(self, contactId: str, statuses: Optional[str] = None) -> dict:
+        """GET /api/contacts/{contactId}/history/graphdata
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{contactId}/history/graphdata"
+        path = path.replace("{contactId}", contactId)
+        kwargs = {}
+        params = {}
+        if statuses is not None:
+            params["statuses"] = statuses
+        if params:
+            kwargs["params"] = params
+        return self._make_request("GET", path, **kwargs)
+    def post_merge_preview(self, mergeToId: str, data: dict = None) -> dict:
+        """POST /api/contacts/{mergeToId}/merge/preview
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{mergeToId}/merge/preview"
+        path = path.replace("{mergeToId}", mergeToId)
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+    def put_merge(self, mergeToId: str, data: dict = None) -> dict:
+        """PUT /api/contacts/{mergeToId}/merge
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{mergeToId}/merge"
+        path = path.replace("{mergeToId}", mergeToId)
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("PUT", path, **kwargs)
+    def get_get(self, id: str) -> dict:
+        """GET /api/contacts/{id}
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{id}"
+        path = path.replace("{id}", id)
+        return self._make_request("GET", path, **kwargs)
+    def get_user(self) -> dict:
+        """GET /api/contacts/user
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/user"
+        return self._make_request("GET", path, **kwargs)
+    def get_editdetails(self, contactId: str) -> dict:
+        """GET /api/contacts/{contactId}/editdetails
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{contactId}/editdetails"
+        path = path.replace("{contactId}", contactId)
+        return self._make_request("GET", path, **kwargs)
+    def put_editdetails(self, contactId: str, franchisee_id: Optional[str] = None, data: dict = None) -> dict:
+        """PUT /api/contacts/{contactId}/editdetails
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{contactId}/editdetails"
+        path = path.replace("{contactId}", contactId)
+        kwargs = {}
+        params = {}
+        if franchisee_id is not None:
+            params["franchiseeId"] = franchisee_id
+        if params:
+            kwargs["params"] = params
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("PUT", path, **kwargs)
+    def post_editdetails(self, franchisee_id: Optional[str] = None, data: dict = None) -> dict:
+        """POST /api/contacts/editdetails
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/editdetails"
+        kwargs = {}
+        params = {}
+        if franchisee_id is not None:
+            params["franchiseeId"] = franchisee_id
+        if params:
+            kwargs["params"] = params
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+    def post_search(self, company_id: Optional[str] = None, data: dict = None) -> dict:
+        """POST /api/contacts/search
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/search"
+        kwargs = {}
+        params = {}
+        if company_id is not None:
+            params["companyId"] = company_id
+        if params:
+            kwargs["params"] = params
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+    def post_v2_search(self, data: dict = None) -> dict:
+        """POST /api/contacts/v2/search
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/v2/search"
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+    def post_customers(self, data: dict = None) -> dict:
+        """POST /api/contacts/customers
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/customers"
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+    def get_primarydetails(self, contactId: str) -> dict:
+        """GET /api/contacts/{contactId}/primarydetails
+        
+        
+        
+        Returns:
+            dict: API response data
+        """
+        path = "/{contactId}/primarydetails"
+        path = path.replace("{contactId}", contactId)
+        return self._make_request("GET", path, **kwargs)
