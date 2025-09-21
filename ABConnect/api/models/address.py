@@ -1,8 +1,11 @@
 """Address models for ABConnect API."""
 
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 from pydantic import Field
 from .base import ABConnectBaseModel, CompanyRelatedModel, IdentifiedModel, TimestampedModel
+
+if TYPE_CHECKING:
+    from .contacts import Contact
 
 class Address(TimestampedModel):
     """Address model"""
@@ -26,7 +29,7 @@ class Address(TimestampedModel):
     contact_id: Optional[str] = Field(None, alias="contactId")
     user_id: Optional[str] = Field(None, alias="userId")
     primary_customer_name: Optional[str] = Field(None, alias="primaryCustomerName")
-    contact_info: Optional[Contact] = Field(None, alias="contactInfo")
+    contact_info: Optional["Contact"] = Field(None, alias="contactInfo")
     address: Optional[str] = Field(None)
 
 

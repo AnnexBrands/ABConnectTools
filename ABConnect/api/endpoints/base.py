@@ -6,6 +6,8 @@ integration with auto-generated Pydantic models.
 """
 
 from typing import Any, Optional
+import requests
+from ABConnect.config import get_config
 
 
 class BaseEndpoint:
@@ -78,16 +80,16 @@ class BaseEndpoint:
         
         return response
     
-    def _cast_response(self, response: Any, method: str, full_path: str, 
+    def _cast_response(self, response: Any, method: str, full_path: str,
                       operation_id: Optional[str] = None) -> dict:
         """Cast response to appropriate Pydantic model.
-        
+
         Args:
             response: Raw API response
             method: HTTP method
             full_path: Full API path including /api/ prefix
             operation_id: Optional operation ID
-            
+
         Returns:
             Typed model instance or original response
         """
@@ -98,3 +100,20 @@ class BaseEndpoint:
         except ImportError:
             # If response mapper not available, return raw response
             return response
+
+    @staticmethod
+    def get_cache(key: str) -> Optional[str]:
+        """Get cached data from cache service.
+
+        Args:
+            key: Cache key to retrieve
+
+        Returns:
+            Cached value or None if not found
+        """
+        cache_url = "https://tasks.abconnect.co/cache/%s"
+        headers = {'x-api-key': get_config("ABC_CLIENT_SECRET")}
+        result = requests.get(cache_url % key, headers=headers).text
+        if result:
+            return result
+        return None

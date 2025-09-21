@@ -4,20 +4,61 @@ Auto-generated from swagger.json specification.
 Provides type-safe access to companies/* endpoints.
 """
 
-from typing import List, Optional
+from typing import List, Optional, Union
 from .base import BaseEndpoint
-# Temporarily disable model imports until circular dependencies resolved  
+# Temporarily disable model imports until circular dependencies resolved
 # # Model imports temporarily disabled
 
 
 class CompaniesEndpoint(BaseEndpoint):
     """Companies API endpoint operations.
-    
+
     Handles all API operations for /api/companies/* endpoints.
     Total endpoints: 30
     """
-    
+
     api_path = "companies"
+
+    def get(self, code_or_id: str, details: str = "full", **kwargs) -> dict:
+        """Convenience method to get company by code or ID.
+
+        Args:
+            code_or_id: Company code (e.g., '16023SC') or UUID
+            details: Level of detail - 'short', 'full' (default), or 'details'
+            **kwargs: Additional query parameters
+
+        Returns:
+            Company data as Pydantic model or dict
+
+        Examples:
+            # Get by code with full details (default)
+            company = api.companies.get('16023SC')
+
+            # Get by ID with short details
+            company = api.companies.get('23493e85-a92e-e711-9f52-00155d426802', details='short')
+
+            # Get by code with specific details endpoint
+            company = api.companies.get('16023SC', details='details')
+        """
+        # Determine if it's a UUID (contains dashes and is 36 chars) or code
+        is_uuid = '-' in code_or_id and len(code_or_id) == 36
+
+        if not is_uuid:
+            # It's a code, use cache to get the company ID
+            company_id = self.get_cache(code_or_id)
+            # Cache returns "null" string for non-existent keys
+            if not company_id or company_id.strip() in ("", "null"):
+                raise ValueError(f"Company with code '{code_or_id}' not found in cache")
+            # Now treat it as a UUID (cache returns uppercase, but API handles both)
+            code_or_id = company_id.strip()
+
+        # Use appropriate endpoint based on detail level
+        if details == 'short':
+            return self.get_get(code_or_id)
+        elif details == 'details':
+            return self.get_details(code_or_id)
+        else:  # full
+            return self.get_fulldetails(code_or_id)
 
     def get_get(self, id: str) -> dict:
         """GET /api/companies/{id}

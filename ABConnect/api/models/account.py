@@ -3,6 +3,7 @@
 from typing import Optional
 from pydantic import Field
 from .base import ABConnectBaseModel
+from .enums import ForgotType
 
 class ChangePasswordModel(ABConnectBaseModel):
     """ChangePasswordModel model"""

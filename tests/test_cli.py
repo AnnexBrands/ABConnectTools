@@ -7,7 +7,7 @@ import json
 from io import StringIO
 from ABConnect.cli import (
     cmd_api, cmd_endpoints, cmd_lookup, cmd_company,
-    cmd_quote, cmd_me, cmd_config
+    cmd_quote, cmd_me, cmd_config, cmd_address
 )
 
 
@@ -97,6 +97,147 @@ class TestCLICommands(unittest.TestCase):
         # Check API was called
         mock_api.raw.get.assert_called_with('lookup/CompanyTypes')
         
+    @patch('ABConnect.cli.ABConnectAPI')
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_cmd_company_by_id(self, mock_stdout, mock_api_class):
+        """Test company command with ID."""
+        # Mock API instance
+        mock_api = MagicMock()
+        mock_api.companies.get_get.return_value = {
+            'id': '123-abc',
+            'name': 'Test Company',
+            'code': 'TEST001'
+        }
+        mock_api_class.return_value = mock_api
+
+        # Create args
+        args = argparse.Namespace(
+            code=None,
+            id='123-abc'
+        )
+
+        # Run command
+        cmd_company(args)
+
+        # Check API was called with correct method
+        mock_api.companies.get_get.assert_called_once_with('123-abc')
+
+        # Check output is JSON
+        output = mock_stdout.getvalue()
+        data = json.loads(output)
+        self.assertEqual(data['id'], '123-abc')
+        self.assertEqual(data['name'], 'Test Company')
+
+    @patch('ABConnect.cli.ABConnectAPI')
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_cmd_company_by_code(self, mock_stdout, mock_api_class):
+        """Test company command with code."""
+        # Mock API instance
+        mock_api = MagicMock()
+        mock_api.companies.get_search.return_value = [{
+            'id': '123-abc',
+            'name': 'Test Company',
+            'code': 'TEST001'
+        }]
+        mock_api_class.return_value = mock_api
+
+        # Create args
+        args = argparse.Namespace(
+            code='TEST001',
+            id=None
+        )
+
+        # Run command
+        cmd_company(args)
+
+        # Check API was called with correct method
+        mock_api.companies.get_search.assert_called_once_with(search_value='TEST001')
+
+        # Check output is JSON
+        output = mock_stdout.getvalue()
+        data = json.loads(output)
+        self.assertIsInstance(data, list)
+        self.assertEqual(data[0]['code'], 'TEST001')
+
+    @patch('ABConnect.cli.ABConnectAPI')
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_cmd_address_by_id(self, mock_stdout, mock_api_class):
+        """Test address command with ID."""
+        # Mock API instance
+        mock_api = MagicMock()
+        mock_api.address.get_by_id.return_value = {
+            'id': 'addr-123',
+            'address1': '123 Main St',
+            'city': 'Springfield',
+            'state': 'IL',
+            'zip': '62701'
+        }
+        mock_api_class.return_value = mock_api
+
+        # Create args
+        args = argparse.Namespace(
+            id='addr-123',
+            search=None,
+            validate=False
+        )
+
+        # Run command
+        cmd_address(args)
+
+        # Check API was called
+        mock_api.address.get_by_id.assert_called_once_with('addr-123')
+
+        # Check output is JSON
+        output = mock_stdout.getvalue()
+        data = json.loads(output)
+        self.assertEqual(data['id'], 'addr-123')
+        self.assertEqual(data['city'], 'Springfield')
+
+    @patch('ABConnect.cli.ABConnectAPI')
+    @patch('sys.stdout', new_callable=StringIO)
+    def test_cmd_address_validate(self, mock_stdout, mock_api_class):
+        """Test address validation command."""
+        # Mock API instance
+        mock_api = MagicMock()
+        mock_api.address.validate.return_value = {
+            'valid': True,
+            'normalized': {
+                'address1': '123 MAIN ST',
+                'city': 'SPRINGFIELD',
+                'state': 'IL',
+                'zip': '62701-1234'
+            }
+        }
+        mock_api_class.return_value = mock_api
+
+        # Create args
+        args = argparse.Namespace(
+            id=None,
+            search=None,
+            validate=True,
+            address1='123 Main St',
+            city='Springfield',
+            state='IL',
+            zip='62701'
+        )
+
+        # Run command
+        cmd_address(args)
+
+        # Check API was called
+        mock_api.address.validate.assert_called_once_with(
+            address1='123 Main St',
+            city='Springfield',
+            state='IL',
+            zip='62701'
+        )
+
+        # Check output is JSON
+        output = mock_stdout.getvalue()
+        data = json.loads(output)
+        self.assertEqual(data['valid'], True)
+        self.assertIn('normalized', data)
+
     @patch('ABConnect.cli.Config')
     def test_cmd_config_show(self, mock_config_class):
         """Test config show command."""

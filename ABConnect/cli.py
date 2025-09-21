@@ -48,17 +48,49 @@ def cmd_me(args):
         sys.exit(1)
 
 
+def cmd_address(args):
+    """Get or validate address information."""
+    api = ABConnectAPI()
+    try:
+        if args.id:
+            # Get address by ID using raw API
+            address = api.raw.get(f"/api/address/{args.id}")
+        elif args.validate:
+            # Validate address
+            params = {}
+            if args.line1:
+                params['line1'] = args.line1
+            if args.city:
+                params['city'] = args.city
+            if args.state:
+                params['state'] = args.state
+            if args.zip:
+                params['zip'] = args.zip
+
+            if not params:
+                print("Error: Provide address components to validate (--line1, --city, --state, --zip)")
+                sys.exit(1)
+
+            address = api.address.get_isvalid(**params)
+        else:
+            print("Error: Provide either --id or --validate with address components")
+            sys.exit(1)
+
+        print(json.dumps(address, indent=2))
+    except Exception as e:
+        print(f"Error: {e}")
+        sys.exit(1)
+
+
 def cmd_company(args):
     """Get company information."""
     api = ABConnectAPI()
     try:
-        if args.code:
-            company = api.companies.get(args.code)
-        elif args.id:
-            company = api.companies.get_id(args.id)
-        else:
-            print("Error: Provide either --code or --id")
-            sys.exit(1)
+        # Use the new convenience method
+        code_or_id = args.code or args.id
+        details = args.details if hasattr(args, 'details') else 'short'
+
+        company = api.companies.get(code_or_id, details=details)
 
         print(json.dumps(company, indent=2))
     except Exception as e:
@@ -579,7 +611,20 @@ def main():
     company_group = company_parser.add_mutually_exclusive_group(required=True)
     company_group.add_argument("--code", help="Company code")
     company_group.add_argument("--id", help="Company ID (UUID)")
+    company_parser.add_argument("--details", choices=["short", "full", "details"],
+                               default="short", help="Level of detail (default: short)")
     company_parser.set_defaults(func=cmd_company)
+
+    # Address command
+    address_parser = subparsers.add_parser("address", help="Get or validate address information")
+    address_group = address_parser.add_mutually_exclusive_group(required=True)
+    address_group.add_argument("--id", help="Address ID to retrieve")
+    address_group.add_argument("--validate", action="store_true", help="Validate an address")
+    address_parser.add_argument("--line1", help="Address line 1 (for validation)")
+    address_parser.add_argument("--city", help="City (for validation)")
+    address_parser.add_argument("--state", help="State (for validation)")
+    address_parser.add_argument("--zip", help="ZIP code (for validation)")
+    address_parser.set_defaults(func=cmd_address)
 
     # Quote command
     quote_parser = subparsers.add_parser("quote", help="Get a quote")
@@ -663,10 +708,10 @@ def main():
     raw_parser.set_defaults(func=cmd_api, raw=True)
 
     # Dynamic endpoint help commands (avoid conflicts with existing commands)
-    existing_commands = {'config', 'me', 'company', 'quote', 'lookup', 'load', 'endpoints', 'swagger', 'api'}
+    existing_commands = {'config', 'me', 'company', 'quote', 'lookup', 'load', 'endpoints', 'swagger', 'api', 'address'}
     endpoint_names = [
         'account', 'address', 'admin', 'companies', 'contacts',
-        'dashboard', 'documents', 'email', 'job', 'jobs', 'jobintacct', 
+        'dashboard', 'documents', 'email', 'job', 'jobs', 'jobintacct',
         'note', 'reports', 'rfq', 'shipment', 'users', 'views', 'webhooks'
     ]
     
