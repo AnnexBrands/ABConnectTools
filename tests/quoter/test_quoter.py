@@ -1,10 +1,16 @@
-import unittest
+"""Tests for Quoter main class."""
+
 from unittest.mock import patch, MagicMock
+from . import QuoterTestCase
 from ABConnect.Quoter import Quoter
 
 
-class TestQuoter(unittest.TestCase):
+class TestQuoter(QuoterTestCase):
+    """Test suite for Quoter class."""
+
     def setUp(self):
+        """Set up test fixtures."""
+        super().setUp()
         # Sample responses for quick quote (qq) and quote request (qr)
         self.sample_qq_response = {
             "SubmitQuickQuoteRequestPOSTResult": {
@@ -36,8 +42,14 @@ class TestQuoter(unittest.TestCase):
             }
         }
 
+    def test_quoter_initialization(self):
+        """Test quoter initialization."""
+        quoter = Quoter(env="", type="qq", auto_book=False)
+        self.assertIsNotNone(quoter)
+
     @patch("ABConnect.Quoter.requests.post")
     def test_quick_quote_response(self, mock_post):
+        """Test processing quick quote response."""
         # Setup a successful quick quote response.
         mock_response = MagicMock()
         mock_response.status_code = 200
@@ -65,6 +77,7 @@ class TestQuoter(unittest.TestCase):
 
     @patch("ABConnect.Quoter.requests.post")
     def test_quote_request_response(self, mock_post):
+        """Test processing quote request response."""
         # Setup a successful quote request response.
         mock_response = MagicMock()
         mock_response.status_code = 200
@@ -88,6 +101,15 @@ class TestQuoter(unittest.TestCase):
         self.assertEqual(parsed["Delivery"], 3.5)
         self.assertEqual(parsed["total"], 42.0)
 
+    def test_builder_integration(self):
+        """Test integration with APIRequestBuilder."""
+        self.skipTest("Not yet implemented")
 
-if __name__ == "__main__":
-    unittest.main()
+    def test_api_integration(self):
+        """Test integration with ABConnect API."""
+        self.skipTest("Not yet implemented")
+
+    def test_auto_booking_functionality(self):
+        """Test auto-booking capability."""
+        quoter = Quoter(env="", type="qr", auto_book=True)
+        self.assertTrue(quoter.auto_book)
