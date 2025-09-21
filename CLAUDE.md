@@ -173,9 +173,51 @@ Full-featured API client with three access layers (in order of preference):
 - `base/statuses.json`: Static status reference data
 - `base/swagger.json`: OpenAPI specification for endpoint discovery
 
+## Domain Knowledge
+
+### Data Format Standards
+
+**URL Format**
+-- make request url is expected to have "double api" like https://portal.abconnect.co/api/api/documents
+
+**Job IDs:**
+- Format: UUID (string)
+- Test job ID: `"550e8400-e29b-41d4-a716-446655440000"`
+- Example usage: `job_id="550e8400-e29b-41d4-a716-446655440000"`
+
+**Job Display IDs:**
+- Format: Integer (not string)
+- Test job display ID: `2000000`
+- Example usage: `job_display_id=2000000`, `JobDisplayId=2000000`
+
+**Item IDs:**
+- Format: UUID (string) for most operations
+- Test item ID: `"550e8400-e29b-41d4-a716-446655440001"`
+- Example usage: `itemid="550e8400-e29b-41d4-a716-446655440001"`, `item_id="550e8400-e29b-41d4-a716-446655440001"`
+
+**Document Types:**
+- Item Photo: `document_type=6`
+- General Document: `document_type=1`
+- Technical Drawing: `document_type=2`
+
+**Sharing Levels:**
+- Private: `shared=0`
+- Shared: `shared=28` (default for shared items)
+- Public: `shared=1`
+
+### Test Data Standards
+
+When writing tests and examples, always use these consistent values:
+- Job ID: `"550e8400-e29b-41d4-a716-446655440000"` (UUID)
+- Job Display ID: `2000000` (integer)
+- Item ID: `"550e8400-e29b-41d4-a716-446655440001"` (UUID)
+- RFQ ID: `987` (when needed)
+
+This ensures realistic test scenarios since most jobs don't have 100+ items.
+
 ## Requirements
 
 - Python 3.11+ required
-- Key dependencies: pydantic>=2.0, pandas, requests, python-dotenv, beautifulsoup4, openpyxl
+- Key dependencies: pydantic>=2.0, pandas, requests, python-dotenv, beautifulsoup4, openpyxl, Pillow
 - Development dependencies: pytest, build, twine
 - Documentation dependencies: sphinx, sphinx-rtd-theme, myst-parser

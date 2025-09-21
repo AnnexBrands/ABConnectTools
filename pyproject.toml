@@ -27,6 +27,7 @@ dependencies = [
     "beautifulsoup4",
     "openpyxl",
     "pandas",
+    "Pillow",
     "pydantic>=2.0",
     "python-dotenv",
     "requests"

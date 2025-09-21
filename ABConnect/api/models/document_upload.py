@@ -8,11 +8,11 @@ from .base import ABConnectBaseModel
 class ItemPhotoUploadRequest(BaseModel):
     """Request model for uploading item photos."""
 
-    job_display_id: str = Field(..., alias="JobDisplayId", description="The job display ID (e.g., 'JOB-2024-001')")
+    job_display_id: int = Field(..., alias="JobDisplayId", description="The job display ID (e.g., 2000000)")
     document_type: int = Field(..., alias="DocumentType", description="Document type ID (6 for Item_Photo)")
     document_type_description: str = Field(..., alias="DocumentTypeDescription", description="Document type description")
     shared: int = Field(28, alias="Shared", description="Sharing level")
-    job_items: List[int] = Field(..., alias="JobItems", description="List of item IDs")
+    job_items: List[str] = Field(..., alias="JobItems", description="List of item UUIDs")
     rfq_id: Optional[int] = Field(None, alias="RfqId", description="RFQ ID if applicable")
 
     class Config:
