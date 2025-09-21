@@ -19,16 +19,17 @@ class CompaniesEndpoint(BaseEndpoint):
 
     api_path = "companies"
 
-    def get(self, code_or_id: str, details: str = "full", **kwargs) -> dict:
+    def get(self, code_or_id: str, details: str = "full", cast: bool = False, **kwargs) -> dict:
         """Convenience method to get company by code or ID.
 
         Args:
             code_or_id: Company code (e.g., '16023SC') or UUID
             details: Level of detail - 'short', 'full' (default), or 'details'
+            cast: If True, cast response to Pydantic model
             **kwargs: Additional query parameters
 
         Returns:
-            Company data as Pydantic model or dict
+            Company data as Pydantic model (if cast=True) or dict
 
         Examples:
             # Get by code with full details (default)
@@ -53,12 +54,15 @@ class CompaniesEndpoint(BaseEndpoint):
             code_or_id = company_id.strip()
 
         # Use appropriate endpoint based on detail level
+        # Pass cast_response parameter to enable model casting
+        kwargs['cast_response'] = cast
+
         if details == 'short':
-            return self.get_get(code_or_id)
+            return self._make_request("GET", f"/{code_or_id}", **kwargs)
         elif details == 'details':
-            return self.get_details(code_or_id)
+            return self._make_request("GET", f"/{code_or_id}/details", **kwargs)
         else:  # full
-            return self.get_fulldetails(code_or_id)
+            return self._make_request("GET", f"/{code_or_id}/fulldetails", **kwargs)
 
     def get_get(self, id: str) -> dict:
         """GET /api/companies/{id}

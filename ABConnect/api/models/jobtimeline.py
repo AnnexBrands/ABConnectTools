@@ -1,9 +1,13 @@
 """Jobtimeline models for ABConnect API."""
 
-from typing import List, Optional
+from typing import List, Optional, TYPE_CHECKING
 from datetime import datetime
 from pydantic import Field
 from .base import ABConnectBaseModel, IdentifiedModel, TimestampedModel
+
+if TYPE_CHECKING:
+    from .jobnote import JobTaskNote
+    from .shared import InitialNoteModel, WorkTimeLogModel, WorkTimeLog
 
 class BaseTaskModel(TimestampedModel):
     """BaseTaskModel model"""
@@ -12,8 +16,8 @@ class BaseTaskModel(TimestampedModel):
     job_id: Optional[str] = Field(None, alias="jobId")
     task_code: str = Field(..., alias="taskCode", min_length=1)
     planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
-    initial_note: Optional[InitialNoteModel] = Field(None, alias="initialNote")
-    work_time_logs: Optional[List[WorkTimeLogModel]] = Field(None, alias="workTimeLogs")
+    initial_note: Optional["InitialNoteModel"] = Field(None, alias="initialNote")
+    work_time_logs: Optional[List["WorkTimeLogModel"]] = Field(None, alias="workTimeLogs")
 
 
 class CarrierTask(TimestampedModel):
@@ -23,8 +27,8 @@ class CarrierTask(TimestampedModel):
     job_id: Optional[str] = Field(None, alias="jobId")
     task_code: Optional[str] = Field(None, alias="taskCode")
     planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
-    notes: Optional[List[JobTaskNote]] = Field(None)
-    work_time_logs: Optional[List[WorkTimeLog]] = Field(None, alias="workTimeLogs")
+    notes: Optional[List["JobTaskNote"]] = Field(None)
+    work_time_logs: Optional[List["WorkTimeLog"]] = Field(None, alias="workTimeLogs")
     scheduled_date: Optional[datetime] = Field(None, alias="scheduledDate")
     pickup_completed_date: Optional[datetime] = Field(None, alias="pickupCompletedDate")
     delivery_completed_date: Optional[datetime] = Field(None, alias="deliveryCompletedDate")

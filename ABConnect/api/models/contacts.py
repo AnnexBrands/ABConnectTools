@@ -1,9 +1,13 @@
 """Contacts models for ABConnect API."""
 
-from typing import List, Optional
+from typing import List, Optional, TYPE_CHECKING
 from datetime import datetime
 from pydantic import Field
 from .base import ABConnectBaseModel, CompanyRelatedModel, IdentifiedModel, TimestampedModel
+
+if TYPE_CHECKING:
+    from .companies import Company
+    from .address import Address
 
 class BaseContactDetails(CompanyRelatedModel):
     """BaseContactDetails model"""
@@ -100,7 +104,7 @@ class Contact(TimestampedModel):
     master_constant_value: Optional[str] = Field(None, alias="masterConstantValue")
     total_record: Optional[int] = Field(None, alias="totalRecord")
     industry_type: Optional[str] = Field(None, alias="industryType")
-    contact_address: Optional[Address] = Field(None, alias="contactAddress")
+    contact_address: Optional["Address"] = Field(None, alias="contactAddress")
     contact_user: Optional[Users] = Field(None, alias="contactUser")
     total_items: Optional[int] = Field(None, alias="totalItems")
     contact_web_site: Optional[str] = Field(None, alias="contactWebSite")
@@ -154,7 +158,7 @@ class ContactDetailedInfo(IdentifiedModel):
     company_id: Optional[str] = Field(None, alias="companyId")
     root_contact_id: Optional[int] = Field(None, alias="rootContactId")
     owner_franchisee_id: Optional[str] = Field(None, alias="ownerFranchiseeId")
-    company: Optional[Company] = Field(None)
+    company: Optional["Company"] = Field(None)
     legacy_guid: Optional[str] = Field(None, alias="legacyGuid")
     is_primary: Optional[bool] = Field(None, alias="isPrimary")
     assistant: Optional[str] = Field(None)
@@ -193,7 +197,7 @@ class ContactDetails(IdentifiedModel):
     company_id: Optional[str] = Field(None, alias="companyId")
     root_contact_id: Optional[int] = Field(None, alias="rootContactId")
     owner_franchisee_id: Optional[str] = Field(None, alias="ownerFranchiseeId")
-    company: Optional[Company] = Field(None)
+    company: Optional["Company"] = Field(None)
     legacy_guid: Optional[str] = Field(None, alias="legacyGuid")
     is_primary: Optional[bool] = Field(None, alias="isPrimary")
     assistant: Optional[str] = Field(None)
@@ -284,7 +288,7 @@ class ContactPrimaryDetails(CompanyRelatedModel):
     cell_phone: Optional[str] = Field(None, alias="cellPhone")
     fax: Optional[str] = Field(None)
     address: Optional[AddressDetails] = Field(None)
-    company: Optional[Company] = Field(None)
+    company: Optional["Company"] = Field(None)
 
 
 class MergeContactsSearchRequestModel(ABConnectBaseModel):

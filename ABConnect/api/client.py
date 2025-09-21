@@ -161,7 +161,9 @@ class ABConnectAPI:
         self.webhooks = WebhooksEndpoint()
         
         # Maintain backward compatibility
-        self.jobs = self.job  # Alias for existing code
+        self.docs = self.documents  # Alias
+        self.jobs = self.job  # Alias
+        self.ship = self.shipment  # Alias
     
     def _init_generic_endpoints(self):
         """Initialize automatically generated endpoints from swagger."""

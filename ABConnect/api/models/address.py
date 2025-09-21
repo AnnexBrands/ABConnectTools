@@ -3,6 +3,7 @@
 from typing import Optional, TYPE_CHECKING
 from pydantic import Field
 from .base import ABConnectBaseModel, CompanyRelatedModel, IdentifiedModel, TimestampedModel
+from .enums import PropertyType
 
 if TYPE_CHECKING:
     from .contacts import Contact

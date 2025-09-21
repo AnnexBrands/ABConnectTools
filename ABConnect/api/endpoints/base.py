@@ -94,11 +94,13 @@ class BaseEndpoint:
             Typed model instance or original response
         """
         try:
-            from .response_mapper import get_response_mapper
+            from ..response_mapper import get_response_mapper
             mapper = get_response_mapper()
             return mapper.cast_response(response, method, full_path, operation_id)
-        except ImportError:
+        except ImportError as e:
             # If response mapper not available, return raw response
+            import logging
+            logging.debug(f"Failed to import response_mapper: {e}")
             return response
 
     @staticmethod

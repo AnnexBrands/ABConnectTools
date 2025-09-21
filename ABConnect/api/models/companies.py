@@ -1,8 +1,14 @@
 """Companies models for ABConnect API."""
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, TYPE_CHECKING
 from pydantic import Field
 from .base import ABConnectBaseModel, ActiveModel, CompanyRelatedModel, IdentifiedModel, TimestampedModel
+from .shared import LatLng
+from .enums import CommercialCapabilities
+
+if TYPE_CHECKING:
+    from .contacts import Contact
+    from .address import Address, AddressDetails, AddressData, OverridableAddressData, PlannerAddress
 
 class Company(TimestampedModel):
     """Company model"""
@@ -26,8 +32,8 @@ class Company(TimestampedModel):
     contact_id: Optional[str] = Field(None, alias="contactId")
     user_id: Optional[str] = Field(None, alias="userId")
     primary_customer_name: Optional[str] = Field(None, alias="primaryCustomerName")
-    contact_info: Optional[Contact] = Field(None, alias="contactInfo")
-    address: Optional[Address] = Field(None)
+    contact_info: Optional["Contact"] = Field(None, alias="contactInfo")
+    address: Optional["Address"] = Field(None)
     user_id: Optional[str] = Field(None, alias="userId")
     company_name: Optional[str] = Field(None, alias="companyName")
     contact_name: Optional[str] = Field(None, alias="contactName")
@@ -58,9 +64,9 @@ class Company(TimestampedModel):
     franchisee_maturity_type: Optional[str] = Field(None, alias="franchiseeMaturityType")
     pricing_to_use: Optional[str] = Field(None, alias="pricingToUse")
     total_rows: Optional[int] = Field(None, alias="totalRows")
-    company_insurance_pricing: Optional[CompanyInsurancePricing] = Field(None, alias="companyInsurancePricing")
-    company_service_pricing: Optional[CompanyServicePricing] = Field(None, alias="companyServicePricing")
-    company_tax_pricing: Optional[CompanyTaxPricing] = Field(None, alias="companyTaxPricing")
+    company_insurance_pricing: Optional["CompanyInsurancePricing"] = Field(None, alias="companyInsurancePricing")
+    company_service_pricing: Optional["CompanyServicePricing"] = Field(None, alias="companyServicePricing")
+    company_tax_pricing: Optional["CompanyTaxPricing"] = Field(None, alias="companyTaxPricing")
     whole_sale_markup: Optional[float] = Field(None, alias="wholeSaleMarkup")
     base_markup: Optional[float] = Field(None, alias="baseMarkup")
     medium_markup: Optional[float] = Field(None, alias="mediumMarkup")
@@ -82,7 +88,7 @@ class Company(TimestampedModel):
     copy_material_from: Optional[str] = Field(None, alias="copyMaterialFrom")
     is_hide: Optional[bool] = Field(None, alias="isHide")
     is_dont_use: Optional[bool] = Field(None, alias="isDontUse")
-    main_address: Optional[AddressDetails] = Field(None, alias="mainAddress")
+    main_address: Optional["AddressDetails"] = Field(None, alias="mainAddress")
     account_manager_franchisee_id: Optional[str] = Field(None, alias="accountManagerFranchiseeId")
     account_manager_franchisee_name: Optional[str] = Field(None, alias="accountManagerFranchiseeName")
     carrier_accounts_source_company_id: Optional[str] = Field(None, alias="carrierAccountsSourceCompanyId")
@@ -97,8 +103,8 @@ class Company(TimestampedModel):
     total_jobs_revenue: Optional[float] = Field(None, alias="totalJobsRevenue")
     total_sales: Optional[int] = Field(None, alias="totalSales")
     total_sales_revenue: Optional[float] = Field(None, alias="totalSalesRevenue")
-    address_data: Optional[AddressData] = Field(None, alias="addressData")
-    overridable_address_data: Optional[OverridableAddressData] = Field(None, alias="overridableAddressData")
+    address_data: Optional["AddressData"] = Field(None, alias="addressData")
+    overridable_address_data: Optional["OverridableAddressData"] = Field(None, alias="overridableAddressData")
     company_info: Optional[CompanyInfo] = Field(None, alias="companyInfo")
 
 
@@ -106,7 +112,7 @@ class CompanyAddressInfo(CompanyRelatedModel):
     """CompanyAddressInfo model"""
 
     company_code: Optional[str] = Field(None, alias="companyCode")
-    address: Optional[PlannerAddress] = Field(None)
+    address: Optional["PlannerAddress"] = Field(None)
 
 
 class CompanyDetails(IdentifiedModel):
@@ -115,7 +121,7 @@ class CompanyDetails(IdentifiedModel):
     details: Optional[CompanyDetailsBaseInfo] = Field(None)
     preferences: Optional[CompanyDetailsPreferences] = Field(None)
     capabilities: Optional[CommercialCapabilities] = Field(None)
-    address: Optional[AddressDetails] = Field(None)
+    address: Optional["AddressDetails"] = Field(None)
     account_information: Optional[FranchiseeCarrierAccounts] = Field(None, alias="accountInformation")
     pricing: Optional[CompanyDetailsServicePricings] = Field(None)
     insurance: Optional[CompanyDetailsInsurancePricing] = Field(None)
@@ -152,8 +158,8 @@ class CompanyDetailsFinalMileTariffItem(ABConnectBaseModel):
     """CompanyDetailsFinalMileTariffItem model"""
 
     group_id: Optional[str] = Field(None, alias="groupId")
-    from: Optional[float] = Field(None)
-    to: Optional[float] = Field(None)
+    from_amount: Optional[float] = Field(None, alias="from")
+    to_amount: Optional[float] = Field(None, alias="to")
     to_curb: Optional[float] = Field(None, alias="toCurb")
     into_garage: Optional[float] = Field(None, alias="intoGarage")
     room_of_choice: Optional[float] = Field(None, alias="roomOfChoice")
@@ -238,7 +244,7 @@ class CompanyInfo(ActiveModel):
     thumbnail_logo: Optional[str] = Field(None, alias="thumbnailLogo")
     company_logo: Optional[str] = Field(None, alias="companyLogo")
     maps_marker_image: Optional[str] = Field(None, alias="mapsMarkerImage")
-    main_address: Optional[AddressDetails] = Field(None, alias="mainAddress")
+    main_address: Optional["AddressDetails"] = Field(None, alias="mainAddress")
     is_third_party: Optional[bool] = Field(None, alias="isThirdParty")
     is_hidden: Optional[bool] = Field(None, alias="isHidden")
 
@@ -309,7 +315,7 @@ class ContactDetailsCompanyInfo(ActiveModel):
     thumbnail_logo: Optional[str] = Field(None, alias="thumbnailLogo")
     company_logo: Optional[str] = Field(None, alias="companyLogo")
     maps_marker_image: Optional[str] = Field(None, alias="mapsMarkerImage")
-    main_address: Optional[AddressDetails] = Field(None, alias="mainAddress")
+    main_address: Optional["AddressDetails"] = Field(None, alias="mainAddress")
     is_third_party: Optional[bool] = Field(None, alias="isThirdParty")
     is_hidden: Optional[bool] = Field(None, alias="isHidden")
     is_global: Optional[bool] = Field(None, alias="isGlobal")

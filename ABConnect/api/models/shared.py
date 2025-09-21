@@ -1,11 +1,14 @@
 """Shared models for ABConnect API."""
 
-from typing import List, Optional
+from typing import List, Optional, TYPE_CHECKING
 from datetime import datetime
 from datetime import date
 from pydantic import Field
 from .base import ABConnectBaseModel, CompanyRelatedModel, IdentifiedModel, JobRelatedModel, TimestampedModel
-from .enums import RetransTimeZoneEnum
+from .enums import RetransTimeZoneEnum, LabelType, PaymentType, LabelImageType, JobAccessLevel
+
+if TYPE_CHECKING:
+    from .jobnote import JobTaskNote
 
 class AccesorialCharges(ABConnectBaseModel):
     """AccesorialCharges model"""
@@ -40,8 +43,8 @@ class BaseTask(TimestampedModel):
     job_id: Optional[str] = Field(None, alias="jobId")
     task_code: Optional[str] = Field(None, alias="taskCode")
     planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
-    notes: Optional[List[JobTaskNote]] = Field(None)
-    work_time_logs: Optional[List[WorkTimeLog]] = Field(None, alias="workTimeLogs")
+    notes: Optional[List["JobTaskNote"]] = Field(None)
+    work_time_logs: Optional[List["WorkTimeLog"]] = Field(None, alias="workTimeLogs")
     target_start_date: Optional[datetime] = Field(None, alias="targetStartDate")
     actual_end_date: Optional[datetime] = Field(None, alias="actualEndDate")
 
@@ -53,7 +56,7 @@ class BookShipmentSpecificParams(ABConnectBaseModel):
     payment_type: Optional[PaymentType] = Field(None, alias="paymentType")
     third_party_company_id: Optional[str] = Field(None, alias="thirdPartyCompanyId")
     label_image_type: Optional[LabelImageType] = Field(None, alias="labelImageType")
-    fed_ex_express_freight_detail: Optional[ExpressFreightDetail] = Field(None, alias="fedExExpressFreightDetail")
+    fed_ex_express_freight_detail: Optional["ExpressFreightDetail"] = Field(None, alias="fedExExpressFreightDetail")
 
 
 class CalendarItem(IdentifiedModel):

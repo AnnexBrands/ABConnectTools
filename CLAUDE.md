@@ -6,6 +6,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Development follows a plan of add docs, add tests, write code, pass tests, review/improve.
 
+**API Endpoint Organization:**
+- All endpoints are organized by their API path
+- Endpoints and models maintain a 1:1 relationship with swagger.json
+- Swagger tests alert when manual endpoint creation is needed (endpoints are not auto-generated)
+- Each endpoint requires:
+  - Corresponding Pydantic models
+  - Example usage in documentation
+  - Unit tests
+  - Endpoint implementation
+
 ## Virtual Environment
 
 **IMPORTANT**: Create and activate a virtual environment before running any Python or pip commands:
