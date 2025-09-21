@@ -13,7 +13,7 @@ import importlib
 import sys
 
 # Add parent directory to path for base_test import
-sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from base_test import ABConnectTestCase
 
 

@@ -16,6 +16,20 @@ Development follows a plan of add docs, add tests, write code, pass tests, revie
   - Unit tests
   - Endpoint implementation
 
+**Four-Way Harmony Requirement:**
+For each API endpoint/path, maintain consistency across:
+1. **Sphinx Documentation** (`docs/`) - API reference and examples
+2. **Example Files** (`examples/`) - Working code demonstrations
+3. **Unit Tests** (`tests/`) - Comprehensive test coverage
+4. **Implementation** (`ABConnect/api/endpoints/` + `ABConnect/api/models/`) - Actual code
+
+When adding a new endpoint:
+- Create example file showing Python API, CLI (without raw), and curl usage
+- Add unit tests covering all endpoint methods
+- Update sphinx docs with model documentation
+- Ensure Pydantic models have descriptive __repr__ methods
+- Verify CLI suggestions use friendly/tagged methods, not raw API calls
+
 ## Virtual Environment
 
 **IMPORTANT**: Create and activate a virtual environment before running any Python or pip commands:
@@ -127,10 +141,15 @@ ABConnect is a Python package for Annex Brands data processing and API interacti
 - Interactive mode for user prompts
 
 #### API (`ABConnect.api`)
-Full-featured API client with three access layers:
-1. **Raw**: Direct endpoint access (`api.raw.get('/api/companies/{id}')`)
-2. **Tagged**: Auto-generated from swagger tags (`api.companies.get_details()`)
-3. **Friendly**: Manual convenience methods (`api.companies.get_by_code()`)
+Full-featured API client with three access layers (in order of preference):
+1. **Friendly CLI**: Endpoint commands (`ab smstemplate get_notificationtokens`)
+2. **Friendly Python**: Direct endpoint methods (`api.sms_template.get_notificationtokens()`)
+3. **Raw API** (last resort): Direct endpoint access (`api.raw.get('/api/SmsTemplate/notificationTokens')`)
+
+**Usage Guidelines:**
+- Use friendly CLI/Python methods when available (no parameters needed)
+- Fall back to raw API only when parameters are required or friendly methods don't exist
+- Raw API should be considered a last resort, not the primary interface
 
 ### API Client Structure
 - **Endpoint Classes**: Users, Companies, Contacts, Docs, Forms, Items, Jobs, Tasks

@@ -6,6 +6,7 @@ Provides type-safe access to companies/* endpoints.
 
 from typing import List, Optional, Union
 from .base import BaseEndpoint
+from ..utils import resolve_company_identifier
 # Temporarily disable model imports until circular dependencies resolved
 # # Model imports temporarily disabled
 
@@ -41,28 +42,19 @@ class CompaniesEndpoint(BaseEndpoint):
             # Get by code with specific details endpoint
             company = api.companies.get('16023SC', details='details')
         """
-        # Determine if it's a UUID (contains dashes and is 36 chars) or code
-        is_uuid = '-' in code_or_id and len(code_or_id) == 36
-
-        if not is_uuid:
-            # It's a code, use cache to get the company ID
-            company_id = self.get_cache(code_or_id)
-            # Cache returns "null" string for non-existent keys
-            if not company_id or company_id.strip() in ("", "null"):
-                raise ValueError(f"Company with code '{code_or_id}' not found in cache")
-            # Now treat it as a UUID (cache returns uppercase, but API handles both)
-            code_or_id = company_id.strip()
+        # Use DRY helper to resolve company code/ID to UUID
+        company_uuid = resolve_company_identifier(code_or_id, self)
 
         # Use appropriate endpoint based on detail level
         # Pass cast_response parameter to enable model casting
         kwargs['cast_response'] = cast
 
         if details == 'short':
-            return self._make_request("GET", f"/{code_or_id}", **kwargs)
+            return self._make_request("GET", f"/{company_uuid}", **kwargs)
         elif details == 'details':
-            return self._make_request("GET", f"/{code_or_id}/details", **kwargs)
+            return self._make_request("GET", f"/{company_uuid}/details", **kwargs)
         else:  # full
-            return self._make_request("GET", f"/{code_or_id}/fulldetails", **kwargs)
+            return self._make_request("GET", f"/{company_uuid}/fulldetails", **kwargs)
 
     def get_get(self, id: str) -> dict:
         """GET /api/companies/{id}

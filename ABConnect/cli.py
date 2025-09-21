@@ -325,6 +325,7 @@ def cmd_endpoint_help(args):
         'reports': ('ReportsEndpoint', '/api/reports', 'Reporting endpoints'),
         'rfq': ('RfqEndpoint', '/api/rfq', 'Request for Quote operations'),
         'shipment': ('ShipmentEndpoint', '/api/shipment', 'Shipment operations'),
+        'smstemplate': ('SmstemplateEndpoint', '/api/SmsTemplate', 'SMS template management'),
         'users': ('UsersEndpoint', '/api/users', 'User management'),
         'views': ('ViewsEndpoint', '/api/views', 'Grid view configurations'),
         'webhooks': ('WebhooksEndpoint', '/api/webhooks', 'Webhook handling'),
@@ -342,7 +343,9 @@ def cmd_endpoint_help(args):
         try:
             # Initialize API client
             api = ABConnectAPI(enable_generic=False)
-            endpoint = getattr(api, endpoint_name)
+            # Map CLI endpoint names to API endpoint names
+            api_endpoint_name = endpoint_name.replace('smstemplate', 'sms_template')
+            endpoint = getattr(api, api_endpoint_name)
             
             if not hasattr(endpoint, method_name):
                 print(f"❌ Method '{method_name}' not found on {endpoint_name} endpoint")
@@ -354,20 +357,36 @@ def cmd_endpoint_help(args):
             method = getattr(endpoint, method_name)
             import inspect
             sig = inspect.signature(method)
-            
-            # For now, just call methods with no required parameters
-            required_params = [p for p in sig.parameters.values() 
-                             if p.default == inspect.Parameter.empty and p.name != 'self']
-            
-            if required_params:
-                print(f"❌ Method '{method_name}' requires parameters: {[p.name for p in required_params]}")
+
+            # Get parameters from command line
+            method_params = getattr(args, 'params', [])
+
+            # Analyze method signature
+            param_list = [p for p in sig.parameters.values() if p.name != 'self']
+            required_params = [p for p in param_list if p.default == inspect.Parameter.empty]
+
+            # Check if we have enough parameters
+            if len(method_params) < len(required_params):
+                if required_params:
+                    print(f"❌ Method '{method_name}' requires {len(required_params)} parameter(s): {[p.name for p in required_params]}")
+                    print(f"Method signature: {method_name}{sig}")
+                    print(f"Provided: {len(method_params)} parameter(s)")
+                    sys.exit(1)
+
+            # Check if we have too many parameters
+            if len(method_params) > len(param_list):
+                print(f"❌ Method '{method_name}' accepts at most {len(param_list)} parameter(s)")
                 print(f"Method signature: {method_name}{sig}")
-                print("💡 Parameter support coming soon - use 'ab api raw' for now")
+                print(f"Provided: {len(method_params)} parameter(s)")
                 sys.exit(1)
-            
-            # Execute method
-            print(f"🔄 Executing {endpoint_name}.{method_name}()...")
-            result = method()
+
+            # Execute method with parameters
+            if method_params:
+                print(f"🔄 Executing {endpoint_name}.{method_name}({', '.join(method_params)})...")
+                result = method(*method_params)
+            else:
+                print(f"🔄 Executing {endpoint_name}.{method_name}()...")
+                result = method()
             
             print("✅ Method executed successfully")
             print(json.dumps(result, indent=2) if isinstance(result, (dict, list)) else str(result))
@@ -386,7 +405,6 @@ def cmd_endpoint_help(args):
     print()
     
     # Get actual endpoint methods using swagger
-    import json
     from pathlib import Path
     
     swagger_path = Path(__file__).parent / "base" / "swagger.json"
@@ -418,6 +436,9 @@ def cmd_endpoint_help(args):
             print()
         
         print("💡 Usage Examples:")
+        print(f"   # 🎯 Preferred: Use friendly endpoint commands when available")
+        print(f"   ab {endpoint_name} method_name")
+        print(f"   # ⚠️  Fallback: Use raw API only when friendly commands don't support parameters")
         print(f"   ab api raw get {api_path}/{{id}} id=your-id-here")
         print(f"   ab api raw post {api_path} data='{{...}}'")
         print()
@@ -523,10 +544,12 @@ def cmd_endpoints(args):
 def cmd_api(args):
     """Execute API commands.
 
-    Supports three access patterns:
-    1. Raw: ab api raw get /api/companies/{id} --id=123
-    2. Tagged: ab api companies get-details --id=123
-    3. Friendly: ab api companies get-by-code ABC123
+    Supports three access patterns (in order of preference):
+    1. Friendly endpoint commands: ab smstemplate get_notificationtokens
+    2. Tagged endpoints: ab api companies get-details --id=123  [NOT YET IMPLEMENTED]
+    3. Raw API (last resort): ab api raw get /api/companies/{id} id=123
+
+    Use friendly endpoint commands when available, fallback to raw API only when needed.
     """
     api = ABConnectAPI()
 
@@ -712,7 +735,7 @@ def main():
     endpoint_names = [
         'account', 'address', 'admin', 'companies', 'contacts',
         'dashboard', 'documents', 'email', 'job', 'jobs', 'jobintacct',
-        'note', 'reports', 'rfq', 'shipment', 'users', 'views', 'webhooks'
+        'note', 'reports', 'rfq', 'shipment', 'smstemplate', 'users', 'views', 'webhooks'
     ]
     
     for endpoint_name in endpoint_names:
@@ -728,6 +751,9 @@ def main():
         endpoint_parser = subparsers.add_parser(endpoint_name, help=help_text)
         endpoint_parser.add_argument(
             "method_name", nargs="?", help="Method name to execute (e.g., get_profile)"
+        )
+        endpoint_parser.add_argument(
+            "params", nargs="*", help="Method parameters as positional arguments"
         )
         endpoint_parser.add_argument(
             "--verbose", "-v", action="store_true", help="Show operation IDs and details"

@@ -2,6 +2,77 @@
 
 Following our constitution and matching the ABConnect package structure.
 
+## Running Tests
+
+### Individual Test Files
+```bash
+# Constitution compliance
+python -m tests.test_constitution
+
+# Swagger endpoint implementation check with tree output
+python -m tests.api.swagger.test_all_swagger_endpoints_have_implementations
+
+# Swagger compliance and coverage
+python -m tests.api.swagger.test_compliance
+
+# Swagger synchronization (reveals server gaps)
+python -m tests.api.swagger.test_sync
+
+# Core API functionality
+python -m tests.api.test_api
+
+# Builder functionality
+python -m tests.builder.test_api_request_builder
+
+# Quoter functionality
+python -m tests.quoter.test_quoter
+python -m tests.quoter.test_quick_quote
+python -m tests.quoter.test_quote_request
+
+# Loader functionality
+python -m tests.loader.test_file_loader
+```
+
+### Module Groups
+```bash
+# All API tests
+python -m unittest discover tests/api
+
+# All builder tests
+python -m unittest discover tests/builder
+
+# All quoter tests
+python -m unittest discover tests/quoter
+
+# All loader tests
+python -m unittest discover tests/loader
+
+# All swagger tests
+python -m unittest discover tests/api/swagger
+```
+
+### Comprehensive Test Runs
+```bash
+# All tests
+python -m unittest discover tests
+
+# Constitution and critical checks
+python -m tests.test_constitution
+python -m tests.api.swagger.test_all_swagger_endpoints_have_implementations
+
+# Gap detection (critical for API evolution)
+python -m tests.api.swagger.test_sync
+```
+
+### Visual Output Tests
+```bash
+# Tree structure of endpoint implementations
+python -m tests.api.swagger.test_all_swagger_endpoints_have_implementations
+
+# Swagger compliance report
+python -m tests.api.swagger.test_compliance
+```
+
 ## Complete Test Directory Structure
 
 ```
