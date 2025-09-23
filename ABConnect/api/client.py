@@ -7,7 +7,7 @@ from ABConnect.api.endpoints import (
     BaseEndpoint,
     AccountEndpoint,
     AddressEndpoint,
-    AdminEndpoint, 
+    AdminEndpoint,
     CompaniesEndpoint,
     CompanyEndpoint,
     ContactsEndpoint,
@@ -15,7 +15,6 @@ from ABConnect.api.endpoints import (
     DocumentsEndpoint,
     ESignEndpoint,
     EmailEndpoint,
-    JobEndpoint,
     JobintacctEndpoint,
     LookupEndpoint,
     NoteEndpoint,
@@ -31,6 +30,7 @@ from ABConnect.api.endpoints import (
     ViewsEndpoint,
     WebhooksEndpoint,
 )
+from ABConnect.api.endpoints.jobs import JobsPackage
 
 from .auth import FileTokenStorage, SessionTokenStorage
 from .http_client import RequestHandler
@@ -135,7 +135,7 @@ class ABConnectAPI:
         """Initialize schema-first endpoints from swagger specification."""
         # Core API modules (25 total)
         self.account = AccountEndpoint()
-        self.address = AddressEndpoint() 
+        self.address = AddressEndpoint()
         self.admin = AdminEndpoint()
         self.companies = CompaniesEndpoint()
         self.company = CompanyEndpoint()
@@ -144,7 +144,7 @@ class ABConnectAPI:
         self.documents = DocumentsEndpoint()
         self.e_sign = ESignEndpoint()
         self.email = EmailEndpoint()
-        self.job = JobEndpoint()  # 80 endpoints - largest module
+        self.jobs = JobsPackage(self._request_handler)  # New package structure with submodules
         self.jobintacct = JobintacctEndpoint()
         self.lookup = LookupEndpoint()
         self.note = NoteEndpoint()
@@ -159,10 +159,10 @@ class ABConnectAPI:
         self.values = ValuesEndpoint()
         self.views = ViewsEndpoint()
         self.webhooks = WebhooksEndpoint()
-        
+
         # Maintain backward compatibility
         self.docs = self.documents  # Alias
-        self.jobs = self.job  # Alias
+        self.job = self.jobs.job  # Backward compatibility - point to main job submodule
         self.ship = self.shipment  # Alias
     
     def _init_generic_endpoints(self):

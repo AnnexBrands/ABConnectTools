@@ -1,0 +1,67 @@
+"""Jobs API endpoints package.
+
+This package contains all job-related endpoints organized by their swagger tags.
+"""
+
+from .job import JobEndpoint
+from .email import JobEmailEndpoint
+from .form import JobFormEndpoint
+from .freightproviders import JobFreightProvidersEndpoint
+from .intacct import JobIntacctEndpoint
+from .note import JobNoteEndpoint
+from .onhold import JobOnHoldEndpoint
+from .parcelitems import JobParcelItemsEndpoint
+from .payment import JobPaymentEndpoint
+from .rfq import JobRfqEndpoint
+from .shipment import JobShipmentEndpoint
+from .sms import JobSmsEndpoint
+from .status import JobStatusEndpoint
+from .timeline import JobTimelineEndpoint
+from .tracking import JobTrackingEndpoint
+
+
+class JobsPackage:
+    """Container for all job-related endpoints."""
+
+    def __init__(self, request_handler=None):
+        """Initialize all job endpoints.
+
+        Args:
+            request_handler: Optional request handler (for backward compatibility)
+        """
+        # All endpoint classes use the shared request handler via BaseEndpoint
+        self.job = JobEndpoint()
+        self.email = JobEmailEndpoint()
+        self.form = JobFormEndpoint()
+        self.freightproviders = JobFreightProvidersEndpoint()
+        self.intacct = JobIntacctEndpoint()
+        self.note = JobNoteEndpoint()
+        self.onhold = JobOnHoldEndpoint()
+        self.parcelitems = JobParcelItemsEndpoint()
+        self.payment = JobPaymentEndpoint()
+        self.rfq = JobRfqEndpoint()
+        self.shipment = JobShipmentEndpoint()
+        self.sms = JobSmsEndpoint()
+        self.status = JobStatusEndpoint()
+        self.timeline = JobTimelineEndpoint()
+        self.tracking = JobTrackingEndpoint()
+
+
+__all__ = [
+    'JobsPackage',
+    'JobEndpoint',
+    'JobEmailEndpoint',
+    'JobFormEndpoint',
+    'JobFreightProvidersEndpoint',
+    'JobIntacctEndpoint',
+    'JobNoteEndpoint',
+    'JobOnHoldEndpoint',
+    'JobParcelItemsEndpoint',
+    'JobPaymentEndpoint',
+    'JobRfqEndpoint',
+    'JobShipmentEndpoint',
+    'JobSmsEndpoint',
+    'JobStatusEndpoint',
+    'JobTimelineEndpoint',
+    'JobTrackingEndpoint'
+]

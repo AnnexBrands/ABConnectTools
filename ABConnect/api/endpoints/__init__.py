@@ -18,7 +18,6 @@ from .dashboard import DashboardEndpoint
 from .documents import DocumentsEndpoint
 from .e_sign import ESignEndpoint
 from .email import EmailEndpoint
-from .job import JobEndpoint
 from .jobintacct import JobintacctEndpoint
 from .lookup import LookupEndpoint
 from .note import NoteEndpoint
@@ -47,7 +46,6 @@ __all__ = [
     "DocumentsEndpoint",
     "ESignEndpoint",
     "EmailEndpoint",
-    "JobEndpoint",
     "JobintacctEndpoint",
     "LookupEndpoint",
     "NoteEndpoint",
