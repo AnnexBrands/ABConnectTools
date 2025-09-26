@@ -4,6 +4,7 @@ This package contains all job-related endpoints organized by their swagger tags.
 """
 
 from .job import JobEndpoint
+from .job_helpers import JobHelpers
 from .email import JobEmailEndpoint
 from .form import JobFormEndpoint
 from .freightproviders import JobFreightProvidersEndpoint
@@ -17,6 +18,7 @@ from .shipment import JobShipmentEndpoint
 from .sms import JobSmsEndpoint
 from .status import JobStatusEndpoint
 from .timeline import JobTimelineEndpoint
+from .timeline_helpers import TimelineHelpers
 from .tracking import JobTrackingEndpoint
 
 
@@ -30,7 +32,7 @@ class JobsPackage:
             request_handler: Optional request handler (for backward compatibility)
         """
         # All endpoint classes use the shared request handler via BaseEndpoint
-        self.job = JobEndpoint()
+        self.job = JobHelpers()  # Use enhanced job endpoint with helpers
         self.email = JobEmailEndpoint()
         self.form = JobFormEndpoint()
         self.freightproviders = JobFreightProvidersEndpoint()
@@ -43,13 +45,14 @@ class JobsPackage:
         self.shipment = JobShipmentEndpoint()
         self.sms = JobSmsEndpoint()
         self.status = JobStatusEndpoint()
-        self.timeline = JobTimelineEndpoint()
+        self.timeline = TimelineHelpers()  # Use enhanced timeline with helpers
         self.tracking = JobTrackingEndpoint()
 
 
 __all__ = [
     'JobsPackage',
     'JobEndpoint',
+    'JobHelpers',
     'JobEmailEndpoint',
     'JobFormEndpoint',
     'JobFreightProvidersEndpoint',
@@ -63,5 +66,6 @@ __all__ = [
     'JobSmsEndpoint',
     'JobStatusEndpoint',
     'JobTimelineEndpoint',
+    'TimelineHelpers',
     'JobTrackingEndpoint'
 ]

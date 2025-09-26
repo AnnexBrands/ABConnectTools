@@ -71,3 +71,43 @@ def resolve_company_id_param(company: Union[str, None], endpoint: BaseEndpoint) 
     if company_id:
         return {"companyId": company_id}
     return {}
+
+
+def resolve_agent_identifier(agent: Union[str, None], endpoint: BaseEndpoint) -> Optional[str]:
+    """Resolve an agent code or ID to an agent UUID.
+
+    This is a DRY helper that handles the common pattern of accepting either
+    an agent code (e.g., 'JM', 'ABC') or UUID and resolving it to a UUID for API calls.
+
+    Args:
+        agent: Agent code (e.g., 'JM') or UUID. If None, returns None.
+        endpoint: BaseEndpoint instance to use for cache lookups
+
+    Returns:
+        Agent UUID string, or None if agent is None
+
+    Raises:
+        ValueError: If agent code not found in cache or invalid format
+
+    Examples:
+        # With UUID (passes through)
+        uuid = resolve_agent_identifier('550e8400-e29b-41d4-a716-446655440000', endpoint)
+
+        # With code (resolves via cache)
+        uuid = resolve_agent_identifier('JM', endpoint)
+
+        # With None (passes through)
+        uuid = resolve_agent_identifier(None, endpoint)  # Returns None
+    """
+    if agent is None:
+        return None
+
+    # Determine if it's a UUID (contains dashes and is 36 chars) or code
+    if '-' in agent and len(agent) == 36:
+        return agent
+
+    # Lookup agent code in cache
+    agent_id = endpoint.get_cache(agent)
+    if not agent_id or agent_id.strip() in ("", "null"):
+        raise ValueError(f"Agent with code '{agent}' not found in cache")
+    return agent_id.strip()

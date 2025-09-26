@@ -82,7 +82,7 @@ class JobTimelineEndpoint(BaseEndpoint):
         kwargs = {}
         return self._make_request("DELETE", path, **kwargs)
 
-    def get_timeline(self, timelineTaskIdentifier: str, jobDisplayId: str) -> Dict[str, Any]:
+    def get_timeline_task(self, timelineTaskIdentifier: str, jobDisplayId: str) -> Dict[str, Any]:
         """GET /api/job/{jobDisplayId}/timeline/{timelineTaskIdentifier}
 
         

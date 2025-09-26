@@ -164,6 +164,7 @@ class ABConnectAPI:
         self.docs = self.documents  # Alias
         self.job = self.jobs.job  # Backward compatibility - point to main job submodule
         self.ship = self.shipment  # Alias
+        self.tasks = self.jobs.timeline  # Alias - tasks operations are in timeline
     
     def _init_generic_endpoints(self):
         """Initialize automatically generated endpoints from swagger."""
