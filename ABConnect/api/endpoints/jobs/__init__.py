@@ -4,7 +4,7 @@ This package contains all job-related endpoints organized by their swagger tags.
 """
 
 from .job import JobEndpoint
-from .job_helpers import JobHelpers
+from .agent_helpers import AgentEndpoint
 from .email import JobEmailEndpoint
 from .form import JobFormEndpoint
 from .freightproviders import JobFreightProvidersEndpoint
@@ -32,7 +32,8 @@ class JobsPackage:
             request_handler: Optional request handler (for backward compatibility)
         """
         # All endpoint classes use the shared request handler via BaseEndpoint
-        self.job = JobHelpers()  # Use enhanced job endpoint with helpers
+        self.agent = AgentEndpoint()  # Use enhanced job endpoint with helpers
+        self.job = JobEndpoint()
         self.email = JobEmailEndpoint()
         self.form = JobFormEndpoint()
         self.freightproviders = JobFreightProvidersEndpoint()
@@ -45,27 +46,27 @@ class JobsPackage:
         self.shipment = JobShipmentEndpoint()
         self.sms = JobSmsEndpoint()
         self.status = JobStatusEndpoint()
-        self.timeline = TimelineHelpers()  # Use enhanced timeline with helpers
+        self.timeline = JobTimelineEndpoint()
         self.tracking = JobTrackingEndpoint()
 
 
 __all__ = [
-    'JobsPackage',
-    'JobEndpoint',
-    'JobHelpers',
-    'JobEmailEndpoint',
-    'JobFormEndpoint',
-    'JobFreightProvidersEndpoint',
-    'JobIntacctEndpoint',
-    'JobNoteEndpoint',
-    'JobOnHoldEndpoint',
-    'JobParcelItemsEndpoint',
-    'JobPaymentEndpoint',
-    'JobRfqEndpoint',
-    'JobShipmentEndpoint',
-    'JobSmsEndpoint',
-    'JobStatusEndpoint',
-    'JobTimelineEndpoint',
-    'TimelineHelpers',
-    'JobTrackingEndpoint'
+    "JobsPackage",
+    "JobEndpoint",
+    "JobHelpers",
+    "JobEmailEndpoint",
+    "JobFormEndpoint",
+    "JobFreightProvidersEndpoint",
+    "JobIntacctEndpoint",
+    "JobNoteEndpoint",
+    "JobOnHoldEndpoint",
+    "JobParcelItemsEndpoint",
+    "JobPaymentEndpoint",
+    "JobRfqEndpoint",
+    "JobShipmentEndpoint",
+    "JobSmsEndpoint",
+    "JobStatusEndpoint",
+    "JobTimelineEndpoint",
+    "TimelineHelpers",
+    "JobTrackingEndpoint",
 ]

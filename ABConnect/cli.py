@@ -301,6 +301,82 @@ def cmd_swagger(args):
             print()
 
 
+def cmd_jobs(args):
+    """Handle jobs package commands with submodules."""
+    if not hasattr(args, 'submodule'):
+        # Show help for jobs package
+        print("📂 JOBS PACKAGE")
+        print("=" * 60)
+        print("The jobs package contains multiple submodules:")
+        print()
+        print("  agent      - Agent operations (OA/DA changes)")
+        print("  job        - Core job operations")
+        print("  email      - Job email operations")
+        print("  form       - Job form operations")
+        print("  timeline   - Timeline and task operations")
+        print("  rfq        - Job RFQ operations")
+        print("  shipment   - Job shipment operations")
+        print("  status     - Job status operations")
+        print()
+        print("Usage examples:")
+        print("  ab jobs agent oa 2000000 JM          # Change OA to JM")
+        print("  ab jobs agent da 2000000 ABC         # Change DA to ABC")
+        print("  ab jobs job get 2000000              # Get job details")
+        print("  ab jobs timeline get 2000000         # Get job timeline")
+        return
+
+    api = ABConnectAPI()
+    submodule = args.submodule
+    method_name = getattr(args, 'method', None)
+
+    # Get the submodule from jobs package
+    if not hasattr(api.jobs, submodule):
+        print(f"❌ Unknown jobs submodule: {submodule}")
+        print("Available submodules: agent, job, email, form, timeline, rfq, shipment, status")
+        sys.exit(1)
+
+    endpoint = getattr(api.jobs, submodule)
+
+    if not method_name:
+        # Show methods for submodule
+        print(f"📂 jobs.{submodule} endpoint")
+        print("=" * 60)
+        methods = [m for m in dir(endpoint) if not m.startswith('_') and callable(getattr(endpoint, m))]
+        print(f"Available methods: {', '.join(methods)}")
+        return
+
+    # Execute the method
+    if not hasattr(endpoint, method_name):
+        print(f"❌ Method '{method_name}' not found on jobs.{submodule}")
+        available_methods = [m for m in dir(endpoint) if not m.startswith('_') and callable(getattr(endpoint, m))]
+        print(f"Available methods: {', '.join(available_methods)}")
+        sys.exit(1)
+
+    method = getattr(endpoint, method_name)
+    method_params = getattr(args, 'params', [])
+
+    try:
+        if method_params:
+            # Convert numeric parameters if needed
+            converted_params = []
+            for param in method_params:
+                if param.isdigit():
+                    converted_params.append(int(param))
+                else:
+                    converted_params.append(param)
+            print(f"🔄 Executing jobs.{submodule}.{method_name}({', '.join(map(str, converted_params))})...")
+            result = method(*converted_params)
+        else:
+            print(f"🔄 Executing jobs.{submodule}.{method_name}()...")
+            result = method()
+
+        print("✅ Method executed successfully")
+        print(json.dumps(result, indent=2) if isinstance(result, (dict, list)) else str(result))
+    except Exception as e:
+        print(f"❌ Error: {e}")
+        sys.exit(1)
+
+
 def cmd_endpoint_help(args):
     """Show help for a specific endpoint or execute endpoint method."""
     endpoint_name = args.endpoint_name
@@ -730,24 +806,68 @@ def main():
     )
     raw_parser.set_defaults(func=cmd_api, raw=True)
 
+    # Jobs command with submodules
+    jobs_parser = subparsers.add_parser("jobs", help="Jobs package with submodules")
+    jobs_subparsers = jobs_parser.add_subparsers(dest="submodule", help="Jobs submodules")
+
+    # Agent submodule
+    agent_parser = jobs_subparsers.add_parser("agent", help="Agent operations (OA/DA changes)")
+    agent_parser.add_argument("method", nargs="?", help="Method name (oa, da, change)")
+    agent_parser.add_argument("params", nargs="*", help="Method parameters")
+
+    # Job submodule
+    job_parser = jobs_subparsers.add_parser("job", help="Core job operations")
+    job_parser.add_argument("method", nargs="?", help="Method name")
+    job_parser.add_argument("params", nargs="*", help="Method parameters")
+
+    # Email submodule
+    email_parser = jobs_subparsers.add_parser("email", help="Job email operations")
+    email_parser.add_argument("method", nargs="?", help="Method name")
+    email_parser.add_argument("params", nargs="*", help="Method parameters")
+
+    # Form submodule
+    form_parser = jobs_subparsers.add_parser("form", help="Job form operations")
+    form_parser.add_argument("method", nargs="?", help="Method name")
+    form_parser.add_argument("params", nargs="*", help="Method parameters")
+
+    # Timeline submodule
+    timeline_parser = jobs_subparsers.add_parser("timeline", help="Timeline and task operations")
+    timeline_parser.add_argument("method", nargs="?", help="Method name")
+    timeline_parser.add_argument("params", nargs="*", help="Method parameters")
+
+    # RFQ submodule
+    rfq_parser = jobs_subparsers.add_parser("rfq", help="Job RFQ operations")
+    rfq_parser.add_argument("method", nargs="?", help="Method name")
+    rfq_parser.add_argument("params", nargs="*", help="Method parameters")
+
+    # Shipment submodule
+    shipment_parser = jobs_subparsers.add_parser("shipment", help="Job shipment operations")
+    shipment_parser.add_argument("method", nargs="?", help="Method name")
+    shipment_parser.add_argument("params", nargs="*", help="Method parameters")
+
+    # Status submodule
+    status_parser = jobs_subparsers.add_parser("status", help="Job status operations")
+    status_parser.add_argument("method", nargs="?", help="Method name")
+    status_parser.add_argument("params", nargs="*", help="Method parameters")
+
+    jobs_parser.set_defaults(func=cmd_jobs)
+
     # Dynamic endpoint help commands (avoid conflicts with existing commands)
-    existing_commands = {'config', 'me', 'company', 'quote', 'lookup', 'load', 'endpoints', 'swagger', 'api', 'address'}
+    existing_commands = {'config', 'me', 'company', 'quote', 'lookup', 'load', 'endpoints', 'swagger', 'api', 'address', 'jobs'}
     endpoint_names = [
         'account', 'address', 'admin', 'companies', 'contacts',
-        'dashboard', 'documents', 'email', 'job', 'jobs', 'jobintacct',
+        'dashboard', 'documents', 'email', 'job', 'jobintacct',
         'note', 'reports', 'rfq', 'shipment', 'smstemplate', 'users', 'views', 'webhooks'
     ]
-    
+
     for endpoint_name in endpoint_names:
         # Skip if conflicts with existing command
         if endpoint_name in existing_commands:
             continue
-            
+
         # Create help description
         help_text = f"Show help for {endpoint_name} endpoint"
-        if endpoint_name == 'jobs':
-            help_text = "Show help for job endpoint (alias)"
-        
+
         endpoint_parser = subparsers.add_parser(endpoint_name, help=help_text)
         endpoint_parser.add_argument(
             "method_name", nargs="?", help="Method name to execute (e.g., get_profile)"

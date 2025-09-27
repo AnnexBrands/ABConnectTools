@@ -155,8 +155,6 @@ Full-featured API client with three access layers (in order of preference):
 - **Endpoint Classes**: Users, Companies, Contacts, Docs, Forms, Items, Jobs, Tasks
 - **Base Classes**: `BaseEndpoint` provides common functionality
 - **Authentication**: Token storage supports both file-based (standalone) and session-based (Django) modes
-- **Generic Endpoints**: 223+ endpoints auto-discovered from OpenAPI spec
-- **Query Builder**: Fluent interface for complex API queries
 - **Pydantic Models**: Type-safe request/response validation
 
 ### Key Design Patterns

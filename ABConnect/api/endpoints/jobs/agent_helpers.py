@@ -12,14 +12,14 @@ logger = logging.getLogger(__name__)
 
 # ServiceType mapping based on API enum
 # These values map to the ServiceType enum in the API
-SERVICE_TYPE_PICKPACK = 0   # Origin Agent (OA) - PickPack operations
-SERVICE_TYPE_DELIVERY = 1   # Delivery Agent (DA) - Delivery operations
-SERVICE_TYPE_2 = 2          # Unknown - needs documentation
-SERVICE_TYPE_3 = 3          # Unknown - needs documentation
-SERVICE_TYPE_4 = 4          # Unknown - needs documentation
+SERVICE_TYPE_PICKPACK = 0  # Origin Agent (OA) - PickPack operations
+SERVICE_TYPE_DELIVERY = 1  # Delivery Agent (DA) - Delivery operations
+SERVICE_TYPE_2 = 2  # Unknown - needs documentation
+SERVICE_TYPE_3 = 3  # Unknown - needs documentation
+SERVICE_TYPE_4 = 4  # Unknown - needs documentation
 
 
-class JobHelpers(JobEndpoint):
+class AgentEndpoint(JobEndpoint):
     """Enhanced job endpoint with helper methods for common operations.
 
     Extends the base JobEndpoint with convenience methods that:
@@ -47,7 +47,13 @@ class JobHelpers(JobEndpoint):
 
         return resolve_agent_identifier(agent, self)
 
-    def change_oa(self, jobid: int, agent: str, recalculate_price: bool = False, apply_rebate: bool = False) -> Dict[str, Any]:
+    def oa(
+        self,
+        jobid: int,
+        agent: str,
+        recalculate_price: bool = False,
+        apply_rebate: bool = False,
+    ) -> Dict[str, Any]:
         """Change Origin Agent (PickPack) for a job.
 
         Args:
@@ -68,19 +74,27 @@ class JobHelpers(JobEndpoint):
         """
         agent_id = self._resolve_agent_identifier(agent)
 
-        logger.info(f"Changing Origin Agent for job {jobid} to {agent} (UUID: {agent_id})")
+        logger.info(
+            f"Changing Origin Agent for job {jobid} to {agent} (UUID: {agent_id})"
+        )
 
         return self.post_changeAgent(
             jobDisplayId=str(jobid),
             data={
-                "serviceType": SERVICE_TYPE_PICKPACK,
+                "serviceType": "PickAndPack",
                 "agentId": agent_id,
                 "recalculatePrice": recalculate_price,
-                "applyRebate": apply_rebate
-            }
+                "applyRebate": apply_rebate,
+            },
         )
 
-    def change_da(self, jobid: int, agent: str, recalculate_price: bool = False, apply_rebate: bool = False) -> Dict[str, Any]:
+    def da(
+        self,
+        jobid: int,
+        agent: str,
+        recalculate_price: bool = False,
+        apply_rebate: bool = False,
+    ) -> Dict[str, Any]:
         """Change Delivery Agent for a job.
 
         Args:
@@ -101,7 +115,9 @@ class JobHelpers(JobEndpoint):
         """
         agent_id = self._resolve_agent_identifier(agent)
 
-        logger.info(f"Changing Delivery Agent for job {jobid} to {agent} (UUID: {agent_id})")
+        logger.info(
+            f"Changing Delivery Agent for job {jobid} to {agent} (UUID: {agent_id})"
+        )
 
         return self.post_changeAgent(
             jobDisplayId=str(jobid),
@@ -109,11 +125,18 @@ class JobHelpers(JobEndpoint):
                 "serviceType": SERVICE_TYPE_DELIVERY,
                 "agentId": agent_id,
                 "recalculatePrice": recalculate_price,
-                "applyRebate": apply_rebate
-            }
+                "applyRebate": apply_rebate,
+            },
         )
 
-    def change_agent(self, jobid: int, agent: str, service_type: int, recalculate_price: bool = False, apply_rebate: bool = False) -> Dict[str, Any]:
+    def change(
+        self,
+        jobid: int,
+        agent: str,
+        service_type: int,
+        recalculate_price: bool = False,
+        apply_rebate: bool = False,
+    ) -> Dict[str, Any]:
         """Change agent for any service type.
 
         Generic method for changing agents when you need to specify the service type.
@@ -137,7 +160,9 @@ class JobHelpers(JobEndpoint):
         """
         agent_id = self._resolve_agent_identifier(agent)
 
-        logger.info(f"Changing agent for job {jobid} to {agent} (UUID: {agent_id}) with service type {service_type}")
+        logger.info(
+            f"Changing agent for job {jobid} to {agent} (UUID: {agent_id}) with service type {service_type}"
+        )
 
         return self.post_changeAgent(
             jobDisplayId=str(jobid),
@@ -145,6 +170,6 @@ class JobHelpers(JobEndpoint):
                 "serviceType": service_type,
                 "agentId": agent_id,
                 "recalculatePrice": recalculate_price,
-                "applyRebate": apply_rebate
-            }
+                "applyRebate": apply_rebate,
+            },
         )
