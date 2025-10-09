@@ -2,7 +2,6 @@ from typing import Optional, Dict, Type, Any, List
 import logging
 import os
 
-from ABConnect.api.endpoints.jobs.agent_helpers import AgentEndpoint
 from ABConnect.config import Config
 from ABConnect.api.endpoints import (
     BaseEndpoint,
@@ -166,7 +165,6 @@ class ABConnectAPI:
         self.webhooks = WebhooksEndpoint()
 
         # Maintain backward compatibility
-        self.agent = AgentEndpoint()  # Alias
         self.docs = self.documents  # Alias
         self.job = self.jobs.job  # Backward compatibility - point to main job submodule
         self.ship = self.shipment  # Alias

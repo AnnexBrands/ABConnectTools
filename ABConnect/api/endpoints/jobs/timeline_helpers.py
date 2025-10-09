@@ -27,22 +27,27 @@ class TimelineHelpers(JobTimelineEndpoint):
     """
 
     # Task templates for creating new tasks
+    new_field_task_sch = {
+        "taskCode": "PU",
+        "completedDate": None,
+    }  # Status 2
+
     new_field_task = {
         "taskCode": "PU",
         "onSiteTimeLog": {},
         "completedDate": None,
-    }  # Status 2/3: Pickup and Delivery
+    }  # Status 3
 
     new_pack_task = {
         "taskCode": "PK",
         "timeLog": {},
-        "workTimeLogs": []
+        "workTimeLogs": [],
     }  # Status 4/5: Packaging
 
     new_store_task = {
         "taskCode": "ST",
         "timeLog": {},
-        "workTimeLogs": []
+        "workTimeLogs": [],
     }  # Status 6: Storage
 
     new_carrier_task = {
@@ -52,7 +57,9 @@ class TimelineHelpers(JobTimelineEndpoint):
         "deliveryCompletedDate": None,
     }  # Status 7/8/10: Carrier operations
 
-    def get_task(self, jobid: int, taskcode: str) -> Tuple[Dict[str, Any], Optional[Dict[str, Any]]]:
+    def get_task(
+        self, jobid: int, taskcode: str
+    ) -> Tuple[Dict[str, Any], Optional[Dict[str, Any]]]:
         """Get a specific task from the timeline with status information.
 
         Args:
@@ -82,7 +89,9 @@ class TimelineHelpers(JobTimelineEndpoint):
 
         return status, None
 
-    def set_task(self, jobid: int, taskcode: str, task: Dict[str, Any], createEmail: bool = False) -> Dict[str, Any]:
+    def set_task(
+        self, jobid: int, taskcode: str, task: Dict[str, Any], createEmail: bool = False
+    ) -> Dict[str, Any]:
         """Update or create a timeline task.
 
         This method handles both creating new tasks and updating existing ones.
@@ -100,12 +109,18 @@ class TimelineHelpers(JobTimelineEndpoint):
         return self.post_timeline(
             jobDisplayId=str(jobid),
             create_email="true" if createEmail else "false",
-            data=task
+            data=task,
         )
 
     # ========== Pickup/Field Operations (Status 2-3) ==========
 
-    def schedule(self, jobid: int, start: str, end: Optional[str] = None, createEmail: bool = False) -> Optional[Dict[str, Any]]:
+    def schedule(
+        self,
+        jobid: int,
+        start: str,
+        end: Optional[str] = None,
+        createEmail: bool = False,
+    ) -> Optional[Dict[str, Any]]:
         """Set the pickup scheduled date for a job (Status 2).
 
         Args:
@@ -121,11 +136,13 @@ class TimelineHelpers(JobTimelineEndpoint):
         curr = statusinfo.get("code", 0)
 
         if curr >= 2:
-            logger.warning(f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})")
+            logger.warning(
+                f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})"
+            )
             return None
 
         if not task:
-            task = self.new_field_task.copy()
+            task = self.new_field_task_sch.copy()
 
         task["plannedStartDate"] = start
         if end:
@@ -137,7 +154,9 @@ class TimelineHelpers(JobTimelineEndpoint):
         """Alias for schedule() - Set status 2."""
         return self.schedule(*args, **kwargs)
 
-    def received(self, jobid: int, start: str, end: str, createEmail: bool = False) -> Optional[Dict[str, Any]]:
+    def received(
+        self, jobid: int, start: str, end: str, createEmail: bool = False
+    ) -> Optional[Dict[str, Any]]:
         """Set the received date for a job (Status 3).
 
         Args:
@@ -153,7 +172,9 @@ class TimelineHelpers(JobTimelineEndpoint):
         curr = statusinfo.get("code", 0)
 
         if curr >= 3:
-            logger.warning(f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})")
+            logger.warning(
+                f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})"
+            )
             return None
 
         if not task:
@@ -169,7 +190,9 @@ class TimelineHelpers(JobTimelineEndpoint):
 
     # ========== Packaging Operations (Status 4-5) ==========
 
-    def pack_start(self, jobid: int, start: str, createEmail: bool = False) -> Optional[Dict[str, Any]]:
+    def pack_start(
+        self, jobid: int, start: str, createEmail: bool = False
+    ) -> Optional[Dict[str, Any]]:
         """Set the packing start date for a job (Status 4).
 
         Args:
@@ -184,7 +207,9 @@ class TimelineHelpers(JobTimelineEndpoint):
         curr = statusinfo.get("code", 0)
 
         if curr >= 4:
-            logger.warning(f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})")
+            logger.warning(
+                f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})"
+            )
             return None
 
         if not task:
@@ -197,7 +222,9 @@ class TimelineHelpers(JobTimelineEndpoint):
         """Alias for pack_start() - Set status 4."""
         return self.pack_start(*args, **kwargs)
 
-    def pack_finish(self, jobid: int, end: str, createEmail: bool = False) -> Optional[Dict[str, Any]]:
+    def pack_finish(
+        self, jobid: int, end: str, createEmail: bool = False
+    ) -> Optional[Dict[str, Any]]:
         """Set the packing finish date for a job (Status 5).
 
         Args:
@@ -212,7 +239,9 @@ class TimelineHelpers(JobTimelineEndpoint):
         curr = statusinfo.get("code", 0)
 
         if curr >= 5:
-            logger.warning(f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})")
+            logger.warning(
+                f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})"
+            )
             return None
 
         if not task:
@@ -228,7 +257,9 @@ class TimelineHelpers(JobTimelineEndpoint):
 
     # ========== Storage Operations (Status 6) ==========
 
-    def storage_begin(self, jobid: int, start: str, createEmail: bool = False) -> Dict[str, Any]:
+    def storage_begin(
+        self, jobid: int, start: str, createEmail: bool = False
+    ) -> Dict[str, Any]:
         """Set the storage start date for a job (Status 6).
 
         Args:
@@ -254,7 +285,9 @@ class TimelineHelpers(JobTimelineEndpoint):
         """Alias for storage_begin() - Set status 6."""
         return self.storage_begin(*args, **kwargs)
 
-    def storage_end(self, jobid: int, end: str, createEmail: bool = False) -> Dict[str, Any]:
+    def storage_end(
+        self, jobid: int, end: str, createEmail: bool = False
+    ) -> Dict[str, Any]:
         """Set the storage end date for a job.
 
         Args:
@@ -278,7 +311,9 @@ class TimelineHelpers(JobTimelineEndpoint):
 
     # ========== Carrier Operations (Status 7-8, 10) ==========
 
-    def carrier_schedule(self, jobid: int, start: str, createEmail: bool = False) -> Optional[Dict[str, Any]]:
+    def carrier_schedule(
+        self, jobid: int, start: str, createEmail: bool = False
+    ) -> Optional[Dict[str, Any]]:
         """Set the carrier scheduled date for a job (Status 7).
 
         Args:
@@ -293,7 +328,9 @@ class TimelineHelpers(JobTimelineEndpoint):
         curr = statusinfo.get("code", 0)
 
         if curr >= 7:
-            logger.warning(f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})")
+            logger.warning(
+                f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})"
+            )
             return None
 
         if not task:
@@ -306,7 +343,9 @@ class TimelineHelpers(JobTimelineEndpoint):
         """Alias for carrier_schedule() - Set status 7."""
         return self.carrier_schedule(*args, **kwargs)
 
-    def carrier_pickup(self, jobid: int, start: str, createEmail: bool = False) -> Optional[Dict[str, Any]]:
+    def carrier_pickup(
+        self, jobid: int, start: str, createEmail: bool = False
+    ) -> Optional[Dict[str, Any]]:
         """Set the carrier pickup date for a job (Status 8).
 
         Args:
@@ -321,7 +360,9 @@ class TimelineHelpers(JobTimelineEndpoint):
         curr = statusinfo.get("code", 0)
 
         if curr >= 8:
-            logger.warning(f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})")
+            logger.warning(
+                f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})"
+            )
             return None
 
         if not task:
@@ -334,7 +375,9 @@ class TimelineHelpers(JobTimelineEndpoint):
         """Alias for carrier_pickup() - Set status 8."""
         return self.carrier_pickup(*args, **kwargs)
 
-    def carrier_delivery(self, jobid: int, end: str, createEmail: bool = False) -> Dict[str, Any]:
+    def carrier_delivery(
+        self, jobid: int, end: str, createEmail: bool = False
+    ) -> Dict[str, Any]:
         """Set the carrier delivery date for a job (Status 10).
 
         Args:
@@ -372,8 +415,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         status, task = self.get_task(jobid, taskcode)
         if task and "id" in task:
             return self.delete_timeline(
-                timelineTaskId=str(task["id"]),
-                jobDisplayId=str(jobid)
+                timelineTaskId=str(task["id"]), jobDisplayId=str(jobid)
             )
 
         logger.warning(f"Task {taskcode} not found for job {jobid}")

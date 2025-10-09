@@ -46,7 +46,7 @@ class JobsPackage:
         self.shipment = JobShipmentEndpoint()
         self.sms = JobSmsEndpoint()
         self.status = JobStatusEndpoint()
-        self.timeline = JobTimelineEndpoint()
+        self.timeline = TimelineHelpers()
         self.tracking = JobTrackingEndpoint()
 
 
