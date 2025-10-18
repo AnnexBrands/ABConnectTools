@@ -7,6 +7,7 @@ from .enums import PropertyType
 
 if TYPE_CHECKING:
     from .contacts import Contact
+    from .shared import LatLng, StringOverridable
 
 class Address(TimestampedModel):
     """Address model"""
@@ -82,7 +83,7 @@ class AddressDetails(IdentifiedModel):
     latitude: Optional[float] = Field(None)
     longitude: Optional[float] = Field(None)
     full_city_line: Optional[str] = Field(None, alias="fullCityLine")
-    coordinates: Optional[LatLng] = Field(None)
+    coordinates: Optional["LatLng"] = Field(None)
 
 
 class AddressDetailsMergePreviewDataItem(ABConnectBaseModel):
@@ -138,18 +139,18 @@ class FreightRateRequestAddressDetails(ABConnectBaseModel):
 class OverridableAddressData(ABConnectBaseModel):
     """OverridableAddressData model"""
 
-    company: Optional[StringOverridable] = Field(None)
-    first_last_name: Optional[StringOverridable] = Field(None, alias="firstLastName")
-    address_line1: Optional[StringOverridable] = Field(None, alias="addressLine1")
-    address_line2: Optional[StringOverridable] = Field(None, alias="addressLine2")
-    city: Optional[StringOverridable] = Field(None)
-    state: Optional[StringOverridable] = Field(None)
-    zip_code: Optional[StringOverridable] = Field(None, alias="zipCode")
-    phone: Optional[StringOverridable] = Field(None)
-    email: Optional[StringOverridable] = Field(None)
+    company: Optional["StringOverridable"] = Field(None)
+    first_last_name: Optional["StringOverridable"] = Field(None, alias="firstLastName")
+    address_line1: Optional["StringOverridable"] = Field(None, alias="addressLine1")
+    address_line2: Optional["StringOverridable"] = Field(None, alias="addressLine2")
+    city: Optional["StringOverridable"] = Field(None)
+    state: Optional["StringOverridable"] = Field(None)
+    zip_code: Optional["StringOverridable"] = Field(None, alias="zipCode")
+    phone: Optional["StringOverridable"] = Field(None)
+    email: Optional["StringOverridable"] = Field(None)
     full_address_line: Optional[str] = Field(None, alias="fullAddressLine")
-    full_address: Optional[StringOverridable] = Field(None, alias="fullAddress")
-    full_city_line: Optional[StringOverridable] = Field(None, alias="fullCityLine")
+    full_address: Optional["StringOverridable"] = Field(None, alias="fullAddress")
+    full_city_line: Optional["StringOverridable"] = Field(None, alias="fullCityLine")
 
 
 class PlannerAddress(ABConnectBaseModel):

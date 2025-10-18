@@ -7,7 +7,8 @@ from .base import ABConnectBaseModel, IdentifiedModel, TimestampedModel
 
 if TYPE_CHECKING:
     from .jobnote import JobTaskNote
-    from .shared import InitialNoteModel, WorkTimeLogModel, WorkTimeLog
+    from .shared import InitialNoteModel, WorkTimeLogModel, WorkTimeLog, LookupItem, BaseTask, UpdateDateModel, UpdateTruckModel
+    from .jobonhold import OnHoldDetails
 
 class BaseTaskModel(TimestampedModel):
     """BaseTaskModel model"""
@@ -50,7 +51,7 @@ class DeleteTaskResponse(ABConnectBaseModel):
 
     success: Optional[bool] = Field(None)
     error_message: Optional[str] = Field(None, alias="errorMessage")
-    job_sub_management_status: Optional[LookupItem] = Field(None, alias="jobSubManagementStatus")
+    job_sub_management_status: Optional["LookupItem"] = Field(None, alias="jobSubManagementStatus")
 
 
 class SaveResponseModel(ABConnectBaseModel):
@@ -59,9 +60,9 @@ class SaveResponseModel(ABConnectBaseModel):
     success: Optional[bool] = Field(None)
     error_message: Optional[str] = Field(None, alias="errorMessage")
     task_exists: Optional[bool] = Field(None, alias="taskExists")
-    task: Optional[BaseTask] = Field(None)
+    task: Optional["BaseTask"] = Field(None)
     email_log_id: Optional[int] = Field(None, alias="emailLogId")
-    job_sub_management_status: Optional[LookupItem] = Field(None, alias="jobSubManagementStatus")
+    job_sub_management_status: Optional["LookupItem"] = Field(None, alias="jobSubManagementStatus")
 
 
 class TimelineResponse(ABConnectBaseModel):
@@ -69,22 +70,22 @@ class TimelineResponse(ABConnectBaseModel):
 
     success: Optional[bool] = Field(None)
     error_message: Optional[str] = Field(None, alias="errorMessage")
-    tasks: Optional[List[BaseTask]] = Field(None)
-    on_holds: Optional[List[OnHoldDetails]] = Field(None, alias="onHolds")
+    tasks: Optional[List["BaseTask"]] = Field(None)
+    on_holds: Optional[List["OnHoldDetails"]] = Field(None, alias="onHolds")
     days_per_sla: Optional[int] = Field(None, alias="daysPerSla")
     delivery_service_done_by: Optional[str] = Field(None, alias="deliveryServiceDoneBy")
-    job_sub_management_status: Optional[LookupItem] = Field(None, alias="jobSubManagementStatus")
+    job_sub_management_status: Optional["LookupItem"] = Field(None, alias="jobSubManagementStatus")
     job_booked_date: Optional[datetime] = Field(None, alias="jobBookedDate")
 
 
 class UpdateTaskModel(ABConnectBaseModel):
     """UpdateTaskModel model"""
 
-    truck_id: Optional[UpdateTruckModel] = Field(None, alias="truckId")
-    planned_start_date: Optional[UpdateDateModel] = Field(None, alias="plannedStartDate")
-    preferred_start_date: Optional[UpdateDateModel] = Field(None, alias="preferredStartDate")
-    planned_end_date: Optional[UpdateDateModel] = Field(None, alias="plannedEndDate")
-    preferred_end_date: Optional[UpdateDateModel] = Field(None, alias="preferredEndDate")
+    truck_id: Optional["UpdateTruckModel"] = Field(None, alias="truckId")
+    planned_start_date: Optional["UpdateDateModel"] = Field(None, alias="plannedStartDate")
+    preferred_start_date: Optional["UpdateDateModel"] = Field(None, alias="preferredStartDate")
+    planned_end_date: Optional["UpdateDateModel"] = Field(None, alias="plannedEndDate")
+    preferred_end_date: Optional["UpdateDateModel"] = Field(None, alias="preferredEndDate")
 
 
 __all__ = ['BaseTaskModel', 'CarrierTask', 'CompanyListItem', 'DeleteTaskResponse', 'SaveResponseModel', 'TimelineResponse', 'UpdateTaskModel']

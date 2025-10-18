@@ -1,9 +1,21 @@
 """Job models for ABConnect API."""
 
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, TYPE_CHECKING
 from datetime import datetime
 from pydantic import Field
 from .base import ABConnectBaseModel, IdentifiedModel, JobRelatedModel, TimestampedModel
+from .enums import JobAccessLevel, ServiceType, JobContactType, JobType
+
+if TYPE_CHECKING:
+    from .shared import (
+        CalendarTask, DocumentDetails, CalendarNotes, CalendarItem,
+        EmailDetails, PhoneDetails, AddressDetails,
+        Commodity, ExportPackingInfo, ExportTotalCosts, SoldToDetails,
+        USPSSpecific, FedExSpecific, UPSSpecific,
+        InitialNoteModel, WorkTimeLogModel, Items, ServiceInfo, SortByModel,
+        SearchCustomerInfo
+    )
+    from .contacts import ContactDetails
 
 class BaseInfoCalendarJob(JobRelatedModel):
     """BaseInfoCalendarJob model"""
@@ -11,7 +23,7 @@ class BaseInfoCalendarJob(JobRelatedModel):
     agent_id: Optional[str] = Field(None, alias="agentId")
     job_display_id: Optional[int] = Field(None, alias="jobDisplayId")
     address_id: Optional[int] = Field(None, alias="addressId")
-    calendar_task: Optional[CalendarTask] = Field(None, alias="calendarTask")
+    calendar_task: Optional["CalendarTask"] = Field(None, alias="calendarTask")
 
 
 class CalendarJob(JobRelatedModel):
@@ -21,10 +33,10 @@ class CalendarJob(JobRelatedModel):
     job_display_id: Optional[int] = Field(None, alias="jobDisplayId")
     address_id: Optional[int] = Field(None, alias="addressId")
     contact_id: Optional[int] = Field(None, alias="contactId")
-    calendar_task: Optional[CalendarTask] = Field(None, alias="calendarTask")
-    documents: Optional[List[DocumentDetails]] = Field(None)
-    notes: Optional[List[CalendarNotes]] = Field(None)
-    items: Optional[List[CalendarItem]] = Field(None)
+    calendar_task: Optional["CalendarTask"] = Field(None, alias="calendarTask")
+    documents: Optional[List["DocumentDetails"]] = Field(None)
+    notes: Optional[List["CalendarNotes"]] = Field(None)
+    items: Optional[List["CalendarItem"]] = Field(None)
     contact_email: Optional[str] = Field(None, alias="contactEmail")
     contact_phone: Optional[str] = Field(None, alias="contactPhone")
     access_level: Optional[JobAccessLevel] = Field(None, alias="accessLevel")
@@ -88,10 +100,10 @@ class FreightShimpment(TimestampedModel):
 class JobContactDetails(IdentifiedModel):
     """JobContactDetails model"""
 
-    contact: Optional[ContactDetails] = Field(None)
-    email: Optional[EmailDetails] = Field(None)
-    phone: Optional[PhoneDetails] = Field(None)
-    address: Optional[AddressDetails] = Field(None)
+    contact: Optional["ContactDetails"] = Field(None)
+    email: Optional["EmailDetails"] = Field(None)
+    phone: Optional["PhoneDetails"] = Field(None)
+    address: Optional["AddressDetails"] = Field(None)
     care_of: Optional[str] = Field(None, alias="careOf")
     legacy_guid: Optional[str] = Field(None, alias="legacyGuid")
     contact_email_mapping_id: Optional[int] = Field(None, alias="contactEmailMappingId")
@@ -104,19 +116,19 @@ class JobContactDetails(IdentifiedModel):
 class JobExportData(ABConnectBaseModel):
     """JobExportData model"""
 
-    commodities: Optional[List[Commodity]] = Field(None)
-    packing_info: Optional[List[ExportPackingInfo]] = Field(None, alias="packingInfo")
+    commodities: Optional[List["Commodity"]] = Field(None)
+    packing_info: Optional[List["ExportPackingInfo"]] = Field(None, alias="packingInfo")
     customs_value: float = Field(..., alias="customsValue")
     invoice_number: Optional[str] = Field(None, alias="invoiceNumber")
     purchase_order_number: Optional[str] = Field(None, alias="purchaseOrderNumber")
     terms_of_sale: Optional[str] = Field(None, alias="termsOfSale")
     exporter_tax_id: Optional[str] = Field(None, alias="exporterTaxId")
     consignee_tax_id: Optional[str] = Field(None, alias="consigneeTaxId")
-    total_costs: Optional[ExportTotalCosts] = Field(None, alias="totalCosts")
-    sold_to: Optional[SoldToDetails] = Field(None, alias="soldTo")
-    usps_specific: Optional[USPSSpecific] = Field(None, alias="uspsSpecific")
-    fed_ex_specific: Optional[FedExSpecific] = Field(None, alias="fedExSpecific")
-    ups_specific: Optional[UPSSpecific] = Field(None, alias="upsSpecific")
+    total_costs: Optional["ExportTotalCosts"] = Field(None, alias="totalCosts")
+    sold_to: Optional["SoldToDetails"] = Field(None, alias="soldTo")
+    usps_specific: Optional["USPSSpecific"] = Field(None, alias="uspsSpecific")
+    fed_ex_specific: Optional["FedExSpecific"] = Field(None, alias="fedExSpecific")
+    ups_specific: Optional["UPSSpecific"] = Field(None, alias="upsSpecific")
 
 
 class JobItemNotesData(ABConnectBaseModel):
@@ -139,10 +151,10 @@ class JobSaveRequestModel(ABConnectBaseModel):
     customer_contact: Optional[JobContactDetails] = Field(None, alias="customerContact")
     pickup_contact: Optional[JobContactDetails] = Field(None, alias="pickupContact")
     delivery_contact: Optional[JobContactDetails] = Field(None, alias="deliveryContact")
-    items: Optional[List[Items]] = Field(None)
+    items: Optional[List["Items"]] = Field(None)
     job_type: Optional[JobType] = Field(None, alias="jobType")
-    pickup_service: Optional[ServiceInfo] = Field(None, alias="pickupService")
-    delivery_service: Optional[ServiceInfo] = Field(None, alias="deliveryService")
+    pickup_service: Optional["ServiceInfo"] = Field(None, alias="pickupService")
+    delivery_service: Optional["ServiceInfo"] = Field(None, alias="deliveryService")
 
 
 class SearchJobFilter(ABConnectBaseModel):
@@ -151,11 +163,11 @@ class SearchJobFilter(ABConnectBaseModel):
     page_size: int = Field(..., alias="pageSize")
     page_no: int = Field(..., alias="pageNo")
     total_count: Optional[int] = Field(None, alias="totalCount")
-    sort_by: SortByModel = Field(..., alias="sortBy")
-    job_info: Optional[SearchJobInfo] = Field(None, alias="jobInfo")
-    customer_info: Optional[SearchCustomerInfo] = Field(None, alias="customerInfo")
-    pickup_info: Optional[SearchCustomerInfo] = Field(None, alias="pickupInfo")
-    delivery_info: Optional[SearchCustomerInfo] = Field(None, alias="deliveryInfo")
+    sort_by: "SortByModel" = Field(..., alias="sortBy")
+    job_info: Optional["SearchJobInfo"] = Field(None, alias="jobInfo")
+    customer_info: Optional["SearchCustomerInfo"] = Field(None, alias="customerInfo")
+    pickup_info: Optional["SearchCustomerInfo"] = Field(None, alias="pickupInfo")
+    delivery_info: Optional["SearchCustomerInfo"] = Field(None, alias="deliveryInfo")
     from_date: Optional[datetime] = Field(None, alias="fromDate")
     to_date: Optional[datetime] = Field(None, alias="toDate")
     is_default_search_type: Optional[bool] = Field(None, alias="isDefaultSearchType")

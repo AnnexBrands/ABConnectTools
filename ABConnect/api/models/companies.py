@@ -3,12 +3,18 @@
 from typing import Any, Dict, List, Optional, TYPE_CHECKING
 from pydantic import Field
 from .base import ABConnectBaseModel, ActiveModel, CompanyRelatedModel, IdentifiedModel, TimestampedModel
-from .shared import LatLng
-from .enums import CommercialCapabilities
+from .shared import (
+    LatLng, FranchiseeCarrierAccounts, InsuranceOption, TransportationCharges,
+    ServicePricingsMarkup, LaborCharges, AccesorialCharges, RoyaltiesCharges,
+    OnlinePaymentSettings, Base64File, SimplePriceTariff, PickupLaborHoursRule,
+    TaxOption, PackagingLaborHours, SortingInfo, GroupingInfo, SummaryInfo
+)
+from .enums import CommercialCapabilities, InheritSettingFrom, GeometryType, CopyMaterialsFrom
+from .address import AddressDetails, AddressData, OverridableAddressData, PlannerAddress
 
 if TYPE_CHECKING:
     from .contacts import Contact
-    from .address import Address, AddressDetails, AddressData, OverridableAddressData, PlannerAddress
+    from .address import Address
 
 class Company(TimestampedModel):
     """Company model"""
@@ -88,7 +94,7 @@ class Company(TimestampedModel):
     copy_material_from: Optional[str] = Field(None, alias="copyMaterialFrom")
     is_hide: Optional[bool] = Field(None, alias="isHide")
     is_dont_use: Optional[bool] = Field(None, alias="isDontUse")
-    main_address: Optional["AddressDetails"] = Field(None, alias="mainAddress")
+    main_address: Optional[AddressDetails] = Field(None, alias="mainAddress")
     account_manager_franchisee_id: Optional[str] = Field(None, alias="accountManagerFranchiseeId")
     account_manager_franchisee_name: Optional[str] = Field(None, alias="accountManagerFranchiseeName")
     carrier_accounts_source_company_id: Optional[str] = Field(None, alias="carrierAccountsSourceCompanyId")
@@ -103,30 +109,30 @@ class Company(TimestampedModel):
     total_jobs_revenue: Optional[float] = Field(None, alias="totalJobsRevenue")
     total_sales: Optional[int] = Field(None, alias="totalSales")
     total_sales_revenue: Optional[float] = Field(None, alias="totalSalesRevenue")
-    address_data: Optional["AddressData"] = Field(None, alias="addressData")
-    overridable_address_data: Optional["OverridableAddressData"] = Field(None, alias="overridableAddressData")
-    company_info: Optional[CompanyInfo] = Field(None, alias="companyInfo")
+    address_data: Optional[AddressData] = Field(None, alias="addressData")
+    overridable_address_data: Optional[OverridableAddressData] = Field(None, alias="overridableAddressData")
+    company_info: Optional["CompanyInfo"] = Field(None, alias="companyInfo")
 
 
 class CompanyAddressInfo(CompanyRelatedModel):
     """CompanyAddressInfo model"""
 
     company_code: Optional[str] = Field(None, alias="companyCode")
-    address: Optional["PlannerAddress"] = Field(None)
+    address: Optional[PlannerAddress] = Field(None)
 
 
 class CompanyDetails(IdentifiedModel):
     """CompanyDetails model"""
 
-    details: Optional[CompanyDetailsBaseInfo] = Field(None)
-    preferences: Optional[CompanyDetailsPreferences] = Field(None)
+    details: Optional["CompanyDetailsBaseInfo"] = Field(None)
+    preferences: Optional["CompanyDetailsPreferences"] = Field(None)
     capabilities: Optional[CommercialCapabilities] = Field(None)
-    address: Optional["AddressDetails"] = Field(None)
+    address: Optional[AddressDetails] = Field(None)
     account_information: Optional[FranchiseeCarrierAccounts] = Field(None, alias="accountInformation")
-    pricing: Optional[CompanyDetailsServicePricings] = Field(None)
-    insurance: Optional[CompanyDetailsInsurancePricing] = Field(None)
-    final_mile_tariff: Optional[List[CompanyDetailsFinalMileTariffItem]] = Field(None, alias="finalMileTariff")
-    taxes: Optional[CompanyDetailsTaxPricing] = Field(None)
+    pricing: Optional["CompanyDetailsServicePricings"] = Field(None)
+    insurance: Optional["CompanyDetailsInsurancePricing"] = Field(None)
+    final_mile_tariff: Optional[List["CompanyDetailsFinalMileTariffItem"]] = Field(None, alias="finalMileTariff")
+    taxes: Optional["CompanyDetailsTaxPricing"] = Field(None)
     read_only_access: Optional[bool] = Field(None, alias="readOnlyAccess")
 
 
@@ -178,10 +184,10 @@ class CompanyDetailsInsurancePricing(ABConnectBaseModel):
 class CompanyDetailsPreferences(ABConnectBaseModel):
     """CompanyDetailsPreferences model"""
 
-    company_header_logo: Optional[CompanyImageData] = Field(None, alias="companyHeaderLogo")
-    thumbnail_logo: Optional[CompanyImageData] = Field(None, alias="thumbnailLogo")
-    letter_head_logo: Optional[CompanyImageData] = Field(None, alias="letterHeadLogo")
-    maps_marker: Optional[CompanyImageData] = Field(None, alias="mapsMarker")
+    company_header_logo: Optional["CompanyImageData"] = Field(None, alias="companyHeaderLogo")
+    thumbnail_logo: Optional["CompanyImageData"] = Field(None, alias="thumbnailLogo")
+    letter_head_logo: Optional["CompanyImageData"] = Field(None, alias="letterHeadLogo")
+    maps_marker: Optional["CompanyImageData"] = Field(None, alias="mapsMarker")
     is_qb_user: Optional[bool] = Field(None, alias="isQbUser")
     skip_intacct: Optional[bool] = Field(None, alias="skipIntacct")
     pricing_to_use: Optional[str] = Field(None, alias="pricingToUse")
@@ -244,7 +250,7 @@ class CompanyInfo(ActiveModel):
     thumbnail_logo: Optional[str] = Field(None, alias="thumbnailLogo")
     company_logo: Optional[str] = Field(None, alias="companyLogo")
     maps_marker_image: Optional[str] = Field(None, alias="mapsMarkerImage")
-    main_address: Optional["AddressDetails"] = Field(None, alias="mainAddress")
+    main_address: Optional[AddressDetails] = Field(None, alias="mainAddress")
     is_third_party: Optional[bool] = Field(None, alias="isThirdParty")
     is_hidden: Optional[bool] = Field(None, alias="isHidden")
 
@@ -315,7 +321,7 @@ class ContactDetailsCompanyInfo(ActiveModel):
     thumbnail_logo: Optional[str] = Field(None, alias="thumbnailLogo")
     company_logo: Optional[str] = Field(None, alias="companyLogo")
     maps_marker_image: Optional[str] = Field(None, alias="mapsMarkerImage")
-    main_address: Optional["AddressDetails"] = Field(None, alias="mainAddress")
+    main_address: Optional[AddressDetails] = Field(None, alias="mainAddress")
     is_third_party: Optional[bool] = Field(None, alias="isThirdParty")
     is_hidden: Optional[bool] = Field(None, alias="isHidden")
     is_global: Optional[bool] = Field(None, alias="isGlobal")
@@ -381,7 +387,7 @@ class SearchCompanyDataSourceLoadOptions(ABConnectBaseModel):
     paginate_via_primary_key: Optional[bool] = Field(None, alias="paginateViaPrimaryKey")
     sort_by_primary_key: Optional[bool] = Field(None, alias="sortByPrimaryKey")
     allow_async_over_sync: Optional[bool] = Field(None, alias="allowAsyncOverSync")
-    search_model: Optional[SearchCompanyModel] = Field(None, alias="searchModel")
+    search_model: Optional["SearchCompanyModel"] = Field(None, alias="searchModel")
 
 
 class SearchCompanyModel(CompanyRelatedModel):

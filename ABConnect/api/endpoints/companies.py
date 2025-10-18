@@ -7,8 +7,19 @@ Provides type-safe access to companies/* endpoints.
 from typing import List, Optional, Union
 from .base import BaseEndpoint
 from ..utils import resolve_company_identifier
-# Temporarily disable model imports until circular dependencies resolved
-# # Model imports temporarily disabled
+from ..models.companies import (
+    Company,
+    CompanyDetails,
+    SearchCompanyResponse,
+    SearchCompanyDataSourceLoadOptions,
+    SearchCompanyModel,
+    TagBoxDataSourceLoadOptions,
+    WebApiDataSourceLoadOptions,
+    SaveGeoSettingModel,
+    UpdateCarrierAccountsModel,
+    PackagingLaborSettings,
+    PackagingTariffSettings
+)
 
 
 class CompaniesEndpoint(BaseEndpoint):

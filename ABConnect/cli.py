@@ -49,32 +49,25 @@ def cmd_me(args):
 
 
 def cmd_address(args):
-    """Get or validate address information."""
+    """Validate address information."""
     api = ABConnectAPI()
     try:
-        if args.id:
-            # Get address by ID using raw API
-            address = api.raw.get(f"/api/address/{args.id}")
-        elif args.validate:
-            # Validate address
-            params = {}
-            if args.line1:
-                params['line1'] = args.line1
-            if args.city:
-                params['city'] = args.city
-            if args.state:
-                params['state'] = args.state
-            if args.zip:
-                params['zip'] = args.zip
+        # Validate address
+        params = {}
+        if args.line1:
+            params['line1'] = args.line1
+        if args.city:
+            params['city'] = args.city
+        if args.state:
+            params['state'] = args.state
+        if args.zip:
+            params['zip'] = args.zip
 
-            if not params:
-                print("Error: Provide address components to validate (--line1, --city, --state, --zip)")
-                sys.exit(1)
-
-            address = api.address.get_isvalid(**params)
-        else:
-            print("Error: Provide either --id or --validate with address components")
+        if not params:
+            print("Error: Provide address components to validate (--line1, --city, --state, --zip)")
             sys.exit(1)
+
+        address = api.address.get_isvalid(**params)
 
         print(json.dumps(address, indent=2))
     except Exception as e:
@@ -715,14 +708,11 @@ def main():
     company_parser.set_defaults(func=cmd_company)
 
     # Address command
-    address_parser = subparsers.add_parser("address", help="Get or validate address information")
-    address_group = address_parser.add_mutually_exclusive_group(required=True)
-    address_group.add_argument("--id", help="Address ID to retrieve")
-    address_group.add_argument("--validate", action="store_true", help="Validate an address")
-    address_parser.add_argument("--line1", help="Address line 1 (for validation)")
-    address_parser.add_argument("--city", help="City (for validation)")
-    address_parser.add_argument("--state", help="State (for validation)")
-    address_parser.add_argument("--zip", help="ZIP code (for validation)")
+    address_parser = subparsers.add_parser("address", help="Validate address information")
+    address_parser.add_argument("--line1", help="Address line 1")
+    address_parser.add_argument("--city", help="City")
+    address_parser.add_argument("--state", help="State")
+    address_parser.add_argument("--zip", help="ZIP code")
     address_parser.set_defaults(func=cmd_address)
 
     # Quote command

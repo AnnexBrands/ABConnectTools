@@ -4,10 +4,13 @@ from typing import List, Optional, TYPE_CHECKING
 from datetime import datetime
 from pydantic import Field
 from .base import ABConnectBaseModel, CompanyRelatedModel, IdentifiedModel, TimestampedModel
+from .enums import ListSortDirection
 
 if TYPE_CHECKING:
-    from .companies import Company
-    from .address import Address
+    from .companies import Company, ContactDetailsCompanyInfo
+    from .address import Address, FreightRateRequestAddressDetails
+    from .shared import PhoneDetails, EmailDetails, AddressDetails, PageOrderedRequestModel, AutoCompleteValue
+    from .users import Users
 
 class BaseContactDetails(CompanyRelatedModel):
     """BaseContactDetails model"""
@@ -65,7 +68,7 @@ class Contact(TimestampedModel):
     contact_id: Optional[str] = Field(None, alias="contactId")
     user_id: Optional[str] = Field(None, alias="userId")
     primary_customer_name: Optional[str] = Field(None, alias="primaryCustomerName")
-    contact_info: Optional[Contact] = Field(None, alias="contactInfo")
+    contact_info: Optional["Contact"] = Field(None, alias="contactInfo")
     address: Optional[str] = Field(None)
     parent_company_id: Optional[str] = Field(None, alias="parentCompanyId")
     user_id: Optional[str] = Field(None, alias="userId")
@@ -105,7 +108,7 @@ class Contact(TimestampedModel):
     total_record: Optional[int] = Field(None, alias="totalRecord")
     industry_type: Optional[str] = Field(None, alias="industryType")
     contact_address: Optional["Address"] = Field(None, alias="contactAddress")
-    contact_user: Optional[Users] = Field(None, alias="contactUser")
+    contact_user: Optional["Users"] = Field(None, alias="contactUser")
     total_items: Optional[int] = Field(None, alias="totalItems")
     contact_web_site: Optional[str] = Field(None, alias="contactWebSite")
     is_global: Optional[bool] = Field(None, alias="isGlobal")
@@ -127,7 +130,7 @@ class ContactAddressDetails(IdentifiedModel):
     is_active: Optional[bool] = Field(None, alias="isActive")
     deactivated_reason: Optional[str] = Field(None, alias="deactivatedReason")
     meta_data: Optional[str] = Field(None, alias="metaData")
-    address: Optional[AddressDetails] = Field(None)
+    address: Optional["AddressDetails"] = Field(None)
 
 
 class ContactAddressEditDetails(IdentifiedModel):
@@ -136,7 +139,7 @@ class ContactAddressEditDetails(IdentifiedModel):
     is_active: Optional[bool] = Field(None, alias="isActive")
     deactivated_reason: Optional[str] = Field(None, alias="deactivatedReason")
     meta_data: Optional[str] = Field(None, alias="metaData")
-    address: Optional[AddressDetails] = Field(None)
+    address: Optional["AddressDetails"] = Field(None)
     editable: Optional[bool] = Field(None)
     detail_hash: Optional[str] = Field(None, alias="detailHash")
 
@@ -167,17 +170,17 @@ class ContactDetailedInfo(IdentifiedModel):
     birth_date: Optional[datetime] = Field(None, alias="birthDate")
     job_title_id: Optional[int] = Field(None, alias="jobTitleId")
     job_title: Optional[str] = Field(None, alias="jobTitle")
-    emails_list: Optional[List[ContactEmailEditDetails]] = Field(None, alias="emailsList")
-    phones_list: Optional[List[ContactPhoneEditDetails]] = Field(None, alias="phonesList")
+    emails_list: Optional[List["ContactEmailEditDetails"]] = Field(None, alias="emailsList")
+    phones_list: Optional[List["ContactPhoneEditDetails"]] = Field(None, alias="phonesList")
     addresses_list: Optional[List[ContactAddressEditDetails]] = Field(None, alias="addressesList")
     fax: Optional[str] = Field(None)
-    primary_phone_detail: Optional[PhoneDetails] = Field(None, alias="primaryPhoneDetail")
+    primary_phone_detail: Optional["PhoneDetails"] = Field(None, alias="primaryPhoneDetail")
     primary_phone: Optional[str] = Field(None, alias="primaryPhone")
-    primary_email_detail: Optional[EmailDetails] = Field(None, alias="primaryEmailDetail")
+    primary_email_detail: Optional["EmailDetails"] = Field(None, alias="primaryEmailDetail")
     primary_email: Optional[str] = Field(None, alias="primaryEmail")
-    primary_address_detail: Optional[AddressDetails] = Field(None, alias="primaryAddressDetail")
+    primary_address_detail: Optional["AddressDetails"] = Field(None, alias="primaryAddressDetail")
     editable: Optional[bool] = Field(None)
-    contact_details_company_info: Optional[ContactDetailsCompanyInfo] = Field(None, alias="contactDetailsCompanyInfo")
+    contact_details_company_info: Optional["ContactDetailsCompanyInfo"] = Field(None, alias="contactDetailsCompanyInfo")
 
 
 class ContactDetails(IdentifiedModel):
@@ -206,15 +209,15 @@ class ContactDetails(IdentifiedModel):
     birth_date: Optional[datetime] = Field(None, alias="birthDate")
     job_title_id: Optional[int] = Field(None, alias="jobTitleId")
     job_title: Optional[str] = Field(None, alias="jobTitle")
-    emails_list: Optional[List[ContactEmailDetails]] = Field(None, alias="emailsList")
-    phones_list: Optional[List[ContactPhoneDetails]] = Field(None, alias="phonesList")
-    addresses_list: Optional[List[ContactAddressDetails]] = Field(None, alias="addressesList")
+    emails_list: Optional[List["ContactEmailDetails"]] = Field(None, alias="emailsList")
+    phones_list: Optional[List["ContactPhoneDetails"]] = Field(None, alias="phonesList")
+    addresses_list: Optional[List["ContactAddressDetails"]] = Field(None, alias="addressesList")
     fax: Optional[str] = Field(None)
-    primary_phone_detail: Optional[PhoneDetails] = Field(None, alias="primaryPhoneDetail")
+    primary_phone_detail: Optional["PhoneDetails"] = Field(None, alias="primaryPhoneDetail")
     primary_phone: Optional[str] = Field(None, alias="primaryPhone")
-    primary_email_detail: Optional[EmailDetails] = Field(None, alias="primaryEmailDetail")
+    primary_email_detail: Optional["EmailDetails"] = Field(None, alias="primaryEmailDetail")
     primary_email: Optional[str] = Field(None, alias="primaryEmail")
-    primary_address_detail: Optional[AddressDetails] = Field(None, alias="primaryAddressDetail")
+    primary_address_detail: Optional["AddressDetails"] = Field(None, alias="primaryAddressDetail")
     editable: Optional[bool] = Field(None)
     is_empty: Optional[bool] = Field(None, alias="isEmpty")
     full_name_update_required: Optional[bool] = Field(None, alias="fullNameUpdateRequired")
@@ -226,7 +229,7 @@ class ContactEmailDetails(IdentifiedModel):
     is_active: Optional[bool] = Field(None, alias="isActive")
     deactivated_reason: Optional[str] = Field(None, alias="deactivatedReason")
     meta_data: Optional[str] = Field(None, alias="metaData")
-    email: Optional[EmailDetails] = Field(None)
+    email: Optional["EmailDetails"] = Field(None)
 
 
 class ContactEmailEditDetails(IdentifiedModel):
@@ -235,7 +238,7 @@ class ContactEmailEditDetails(IdentifiedModel):
     is_active: Optional[bool] = Field(None, alias="isActive")
     deactivated_reason: Optional[str] = Field(None, alias="deactivatedReason")
     meta_data: Optional[str] = Field(None, alias="metaData")
-    email: Optional[EmailDetails] = Field(None)
+    email: Optional["EmailDetails"] = Field(None)
     editable: Optional[bool] = Field(None)
     detail_hash: Optional[str] = Field(None, alias="detailHash")
 
@@ -265,7 +268,7 @@ class ContactPhoneDetails(IdentifiedModel):
     is_active: Optional[bool] = Field(None, alias="isActive")
     deactivated_reason: Optional[str] = Field(None, alias="deactivatedReason")
     meta_data: Optional[str] = Field(None, alias="metaData")
-    phone: Optional[PhoneDetails] = Field(None)
+    phone: Optional["PhoneDetails"] = Field(None)
 
 
 class ContactPhoneEditDetails(IdentifiedModel):
@@ -274,7 +277,7 @@ class ContactPhoneEditDetails(IdentifiedModel):
     is_active: Optional[bool] = Field(None, alias="isActive")
     deactivated_reason: Optional[str] = Field(None, alias="deactivatedReason")
     meta_data: Optional[str] = Field(None, alias="metaData")
-    phone: Optional[PhoneDetails] = Field(None)
+    phone: Optional["PhoneDetails"] = Field(None)
     editable: Optional[bool] = Field(None)
     detail_hash: Optional[str] = Field(None, alias="detailHash")
 
@@ -287,15 +290,15 @@ class ContactPrimaryDetails(CompanyRelatedModel):
     phone: Optional[str] = Field(None)
     cell_phone: Optional[str] = Field(None, alias="cellPhone")
     fax: Optional[str] = Field(None)
-    address: Optional[AddressDetails] = Field(None)
+    address: Optional["AddressDetails"] = Field(None)
     company: Optional["Company"] = Field(None)
 
 
 class MergeContactsSearchRequestModel(ABConnectBaseModel):
     """MergeContactsSearchRequestModel model"""
 
-    main_search_request: MergeContactsSearchRequestParameters = Field(..., alias="mainSearchRequest")
-    load_options: PageOrderedRequestModel = Field(..., alias="loadOptions")
+    main_search_request: "MergeContactsSearchRequestParameters" = Field(..., alias="mainSearchRequest")
+    load_options: "PageOrderedRequestModel" = Field(..., alias="loadOptions")
 
 
 class MergeContactsSearchRequestParameters(CompanyRelatedModel):
@@ -368,8 +371,8 @@ class ShipmentContactAddressDetails(CompanyRelatedModel):
     contact_name: Optional[str] = Field(None, alias="contactName")
     phone_number: Optional[str] = Field(None, alias="phoneNumber")
     email_address: Optional[str] = Field(None, alias="emailAddress")
-    address: Optional[AddressDetails] = Field(None)
-    tax_ids: Optional[List[AutoCompleteValue]] = Field(None, alias="taxIds")
+    address: Optional["AddressDetails"] = Field(None)
+    tax_ids: Optional[List["AutoCompleteValue"]] = Field(None, alias="taxIds")
 
 
 class ShipmentContactDetails(CompanyRelatedModel):
@@ -379,7 +382,7 @@ class ShipmentContactDetails(CompanyRelatedModel):
     phone_number: Optional[str] = Field(None, alias="phoneNumber")
     email_address: Optional[str] = Field(None, alias="emailAddress")
     tax_id: Optional[str] = Field(None, alias="taxId")
-    address: Optional[FreightRateRequestAddressDetails] = Field(None)
+    address: Optional["FreightRateRequestAddressDetails"] = Field(None)
     is_empty: Optional[bool] = Field(None, alias="isEmpty")
 
 

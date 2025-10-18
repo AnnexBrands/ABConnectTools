@@ -5,10 +5,13 @@ from datetime import datetime
 from datetime import date
 from pydantic import Field
 from .base import ABConnectBaseModel, CompanyRelatedModel, IdentifiedModel, JobRelatedModel, TimestampedModel
-from .enums import RetransTimeZoneEnum, LabelType, PaymentType, LabelImageType, JobAccessLevel
+from .enums import RetransTimeZoneEnum, LabelType, PaymentType, LabelImageType, JobAccessLevel, CarrierAPI, HistoryCodeABCState, ListSortDirection, SortByField, SelectedOption
 
 if TYPE_CHECKING:
     from .jobnote import JobTaskNote
+    from .address import AddressDetails, PlannerAddress, SearchAddress, SoldToAddress
+    from .contacts import PlannerContact
+    from .jobparcelitems import ParcelItem
 
 class AccesorialCharges(ABConnectBaseModel):
     """AccesorialCharges model"""
@@ -93,8 +96,8 @@ class CalendarTask(TimestampedModel):
     task_code: Optional[str] = Field(None, alias="taskCode")
     planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
     planned_end_date: Optional[datetime] = Field(None, alias="plannedEndDate")
-    on_site_time_log: Optional[TimeLog] = Field(None, alias="onSiteTimeLog")
-    trip_time_log: Optional[TimeLog] = Field(None, alias="tripTimeLog")
+    on_site_time_log: Optional["TimeLog"] = Field(None, alias="onSiteTimeLog")
+    trip_time_log: Optional["TimeLog"] = Field(None, alias="tripTimeLog")
     completed_date: Optional[datetime] = Field(None, alias="completedDate")
 
 
@@ -139,8 +142,8 @@ class CarrierTaskModel(TimestampedModel):
     job_id: Optional[str] = Field(None, alias="jobId")
     task_code: str = Field(..., alias="taskCode", min_length=1)
     planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
-    initial_note: Optional[InitialNoteModel] = Field(None, alias="initialNote")
-    work_time_logs: Optional[List[WorkTimeLogModel]] = Field(None, alias="workTimeLogs")
+    initial_note: Optional["InitialNoteModel"] = Field(None, alias="initialNote")
+    work_time_logs: Optional[List["WorkTimeLogModel"]] = Field(None, alias="workTimeLogs")
     scheduled_date: Optional[datetime] = Field(None, alias="scheduledDate")
     pickup_completed_date: Optional[datetime] = Field(None, alias="pickupCompletedDate")
     delivery_completed_date: Optional[datetime] = Field(None, alias="deliveryCompletedDate")
@@ -173,7 +176,7 @@ class CreatedTask(TimestampedModel):
     preferred_start_date: Optional[datetime] = Field(None, alias="preferredStartDate")
     planned_end_date: Optional[datetime] = Field(None, alias="plannedEndDate")
     preferred_end_date: Optional[datetime] = Field(None, alias="preferredEndDate")
-    truck: Optional[TaskTruckInfo] = Field(None)
+    truck: Optional["TaskTruckInfo"] = Field(None)
 
 
 class CustomerInfo(ABConnectBaseModel):
@@ -181,7 +184,7 @@ class CustomerInfo(ABConnectBaseModel):
 
     name: Optional[str] = Field(None)
     email: Optional[str] = Field(None)
-    address: Optional[AddressDetails] = Field(None)
+    address: Optional["AddressDetails"] = Field(None)
     contact_display_id: Optional[str] = Field(None, alias="contactDisplayId")
     customer_id: Optional[str] = Field(None, alias="customerId")
 
@@ -189,9 +192,9 @@ class CustomerInfo(ABConnectBaseModel):
 class Details(ABConnectBaseModel):
     """Details model"""
 
-    contact: Optional[PlannerContact] = Field(None)
-    address: Optional[PlannerAddress] = Field(None)
-    labor: Optional[PlannerLabor] = Field(None)
+    contact: Optional["PlannerContact"] = Field(None)
+    address: Optional["PlannerAddress"] = Field(None)
+    labor: Optional["PlannerLabor"] = Field(None)
 
 
 class DocumentDetails(IdentifiedModel):
@@ -260,7 +263,7 @@ class FedExAccountData(ABConnectBaseModel):
     password: Optional[str] = Field(None, min_length=0, max_length=32)
     account_number: Optional[str] = Field(None, alias="accountNumber", min_length=0, max_length=48)
     meter_number: Optional[str] = Field(None, alias="meterNumber", min_length=0, max_length=48)
-    rest_api_accounts: Optional[List[FedExRestApiAccount]] = Field(None, alias="restApiAccounts")
+    rest_api_accounts: Optional[List["FedExRestApiAccount"]] = Field(None, alias="restApiAccounts")
 
 
 class FedExRestApiAccount(IdentifiedModel):
@@ -299,14 +302,14 @@ class FranchiseeCarrierAccounts(ABConnectBaseModel):
     lmi_client_code: Optional[str] = Field(None, alias="lmiClientCode")
     use_flat_rates: Optional[bool] = Field(None, alias="useFlatRates")
     fed_ex: Optional[FedExAccountData] = Field(None, alias="fedEx")
-    ups: Optional[UPSAccountData] = Field(None)
-    road_runner: Optional[RoadRunnerAccountData] = Field(None, alias="roadRunner")
-    pilot: Optional[PilotAccountData] = Field(None)
-    team_ww: Optional[TeamWWAccountData] = Field(None, alias="teamWw")
+    ups: Optional["UPSAccountData"] = Field(None)
+    road_runner: Optional["RoadRunnerAccountData"] = Field(None, alias="roadRunner")
+    pilot: Optional["PilotAccountData"] = Field(None)
+    team_ww: Optional["TeamWWAccountData"] = Field(None, alias="teamWw")
     estes: Optional[EstesAccountData] = Field(None)
     forward_air: Optional[ForwardAirAccountData] = Field(None, alias="forwardAir")
-    global_tranz: Optional[GlobalTranzAccountData] = Field(None, alias="globalTranz")
-    usps: Optional[USPSAccountData] = Field(None)
+    global_tranz: Optional["GlobalTranzAccountData"] = Field(None, alias="globalTranz")
+    usps: Optional["USPSAccountData"] = Field(None)
     lmi_user_name: Optional[str] = Field(None, alias="lmiUserName")
 
 
@@ -346,14 +349,14 @@ class InTheFieldTaskModel(TimestampedModel):
     job_id: Optional[str] = Field(None, alias="jobId")
     task_code: str = Field(..., alias="taskCode", min_length=1)
     planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
-    initial_note: Optional[InitialNoteModel] = Field(None, alias="initialNote")
-    work_time_logs: Optional[List[WorkTimeLogModel]] = Field(None, alias="workTimeLogs")
+    initial_note: Optional["InitialNoteModel"] = Field(None, alias="initialNote")
+    work_time_logs: Optional[List["WorkTimeLogModel"]] = Field(None, alias="workTimeLogs")
     planned_end_date: Optional[datetime] = Field(None, alias="plannedEndDate")
     preferred_start_date: Optional[datetime] = Field(None, alias="preferredStartDate")
     preferred_end_date: Optional[datetime] = Field(None, alias="preferredEndDate")
-    truck: Optional[TaskTruckInfo] = Field(None)
-    on_site_time_log: Optional[TimeLogModel] = Field(None, alias="onSiteTimeLog")
-    trip_time_log: Optional[TimeLogModel] = Field(None, alias="tripTimeLog")
+    truck: Optional["TaskTruckInfo"] = Field(None)
+    on_site_time_log: Optional["TimeLogModel"] = Field(None, alias="onSiteTimeLog")
+    trip_time_log: Optional["TimeLogModel"] = Field(None, alias="tripTimeLog")
     completed_date: Optional[datetime] = Field(None, alias="completedDate")
 
 
@@ -450,7 +453,7 @@ class Items(TimestampedModel):
     total_packed_value: Optional[float] = Field(None, alias="totalPackedValue")
     total_weight: Optional[float] = Field(None, alias="totalWeight")
     stc: Optional[str] = Field(None)
-    materials: Optional[List[MasterMaterials]] = Field(None)
+    materials: Optional[List["MasterMaterials"]] = Field(None)
     material_total_cost: Optional[float] = Field(None, alias="materialTotalCost")
     is_access: Optional[str] = Field(None, alias="isAccess")
     job_item_parcel_value: Optional[float] = Field(None, alias="jobItemParcelValue")
@@ -467,7 +470,7 @@ class Items(TimestampedModel):
     second_dimension: Optional[float] = Field(None, alias="secondDimension")
     pkd_girth: Optional[float] = Field(None, alias="pkdGirth")
     pkd_length_plus_girth: Optional[float] = Field(None, alias="pkdLengthPlusGirth")
-    requested_parcel_packagings: Optional[List[RequestedParcelPackaging]] = Field(None, alias="requestedParcelPackagings")
+    requested_parcel_packagings: Optional[List["RequestedParcelPackaging"]] = Field(None, alias="requestedParcelPackagings")
     parcel_package_type_id: Optional[int] = Field(None, alias="parcelPackageTypeId")
     transportation_length: Optional[int] = Field(None, alias="transportationLength")
     transportation_width: Optional[int] = Field(None, alias="transportationWidth")
@@ -495,8 +498,8 @@ class LastObtainNFM(ABConnectBaseModel):
     to_zip: Optional[str] = Field(None, alias="toZip")
     item_weight: Optional[float] = Field(None, alias="itemWeight")
     services: Optional[List[str]] = Field(None)
-    parcel_items: Optional[List[ObtainNFMParcelItem]] = Field(None, alias="parcelItems")
-    parcel_services: Optional[List[ObtainNFMParcelService]] = Field(None, alias="parcelServices")
+    parcel_items: Optional[List["ObtainNFMParcelItem"]] = Field(None, alias="parcelItems")
+    parcel_services: Optional[List["ObtainNFMParcelService"]] = Field(None, alias="parcelServices")
     ship_out_date: Optional[datetime] = Field(None, alias="shipOutDate")
 
 
@@ -675,7 +678,7 @@ class SearchCustomerInfo(CompanyRelatedModel):
     """SearchCustomerInfo model"""
 
     full_name: Optional[str] = Field(None, alias="fullName")
-    address: Optional[SearchAddress] = Field(None)
+    address: Optional["SearchAddress"] = Field(None)
 
 
 class ServiceInfo(ABConnectBaseModel):
@@ -726,7 +729,7 @@ class ShippingPackageInfo(ABConnectBaseModel):
     """ShippingPackageInfo model"""
 
     tracking_number: Optional[str] = Field(None, alias="trackingNumber")
-    weight: Optional[WeightInfo] = Field(None)
+    weight: Optional["WeightInfo"] = Field(None)
 
 
 class SimplePriceTariff(IdentifiedModel):
@@ -746,8 +749,8 @@ class SimpleTaskModel(TimestampedModel):
     task_code: str = Field(..., alias="taskCode", min_length=1)
     planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
     initial_note: Optional[InitialNoteModel] = Field(None, alias="initialNote")
-    work_time_logs: Optional[List[WorkTimeLogModel]] = Field(None, alias="workTimeLogs")
-    time_log: Optional[TimeLogModel] = Field(None, alias="timeLog")
+    work_time_logs: Optional[List["WorkTimeLogModel"]] = Field(None, alias="workTimeLogs")
+    time_log: Optional["TimeLogModel"] = Field(None, alias="timeLog")
 
 
 class SoldToDetails(CompanyRelatedModel):
@@ -756,7 +759,7 @@ class SoldToDetails(CompanyRelatedModel):
     contact_name: Optional[str] = Field(None, alias="contactName")
     phone_number: Optional[str] = Field(None, alias="phoneNumber")
     email_address: Optional[str] = Field(None, alias="emailAddress")
-    address: Optional[SoldToAddress] = Field(None)
+    address: Optional["SoldToAddress"] = Field(None)
     tax_id: Optional[str] = Field(None, alias="taxId")
 
 
@@ -837,7 +840,7 @@ class TimeLog(IdentifiedModel):
 
     start: Optional[datetime] = Field(None)
     end: Optional[datetime] = Field(None)
-    pauses: Optional[List[TimeLogPause]] = Field(None)
+    pauses: Optional[List["TimeLogPause"]] = Field(None)
 
 
 class TimeLogModel(IdentifiedModel):
@@ -845,7 +848,7 @@ class TimeLogModel(IdentifiedModel):
 
     start: Optional[datetime] = Field(None)
     end: Optional[datetime] = Field(None)
-    pauses: Optional[List[TimeLogPauseModel]] = Field(None)
+    pauses: Optional[List["TimeLogPauseModel"]] = Field(None)
 
 
 class TimeLogPause(IdentifiedModel):
@@ -912,7 +915,7 @@ class TransportationRatesRequest(ABConnectBaseModel):
     ship_out_date: Optional[datetime] = Field(None, alias="shipOutDate")
     rates_sources: Optional[List[CarrierAPI]] = Field(None, alias="ratesSources")
     settings_key: Optional[str] = Field(None, alias="settingsKey")
-    override_parcel_items: Optional[List[ParcelItem]] = Field(None, alias="overrideParcelItems")
+    override_parcel_items: Optional[List["ParcelItem"]] = Field(None, alias="overrideParcelItems")
 
 
 class UPSAccountData(ABConnectBaseModel):
