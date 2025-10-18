@@ -10,6 +10,9 @@ from ABConnect.api.endpoints.base import BaseEndpoint
 from ABConnect.api.models.jobparcelitems import ParcelItem
 from ABConnect.api.models.job import FreightShimpment
 from ABConnect.api.models.shared import CalendarItem
+from ABConnect.api.models.jobnote import TaskNoteModel
+from ABConnect.common import TaskCodes
+from ABConnect.config import get_config
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -50,9 +53,11 @@ class ItemsHelper(BaseEndpoint):
         # Import endpoint classes here to avoid circular imports
         from ABConnect.api.endpoints.jobs.parcelitems import JobParcelItemsEndpoint
         from ABConnect.api.endpoints.jobs.job import JobEndpoint
+        from ABConnect.api.endpoints.jobs.note import JobNoteEndpoint
 
         self._parcel_endpoint = JobParcelItemsEndpoint()
         self._job_endpoint = JobEndpoint()
+        self._note_endpoint = JobNoteEndpoint()
 
     def parcelitems(self, job_display_id: Union[int, str]) -> List[ParcelItem]:
         """Fetch parcel items for a job with Pydantic model casting.
@@ -176,6 +181,129 @@ class ItemsHelper(BaseEndpoint):
         except Exception as e:
             logger.error(f"Error casting calendar items to Pydantic models: {e}")
             raise
+
+    def logged_delete_parcel_items(self, job_display_id: Union[int, str]) -> bool:
+        """Delete all parcel items for a job and log the action with a note.
+
+        This method:
+        1. Fetches all parcel items for the job
+        2. Creates a compact note listing deleted items with their details
+        3. Deletes each parcel item
+        4. Returns success/failure status
+
+        Args:
+            job_display_id: The job display ID (int or string)
+
+        Returns:
+            bool: True if all operations succeeded, False if any errors occurred
+
+        Example:
+            >>> items_helper = api.jobs.items
+            >>> success = items_helper.logged_delete_parcel_items(4675060)
+            >>> if success:
+            ...     print("All parcel items deleted and logged successfully")
+        """
+        logger.info(f"Starting logged deletion of parcel items for job {job_display_id}")
+
+        try:
+            # Get current user from authentication config
+            try:
+                user_name = get_config("ABCONNECT_USERNAME", "").strip()
+            except Exception as e:
+                logger.warning(f"Could not get username from config: {e}")
+                user_name = ""
+
+            # Get all parcel items
+            parcel_items = self.parcelitems(job_display_id)
+
+            if not parcel_items:
+                logger.info(f"No parcel items found for job {job_display_id}")
+                return True  # Nothing to delete, consider it success
+
+            # Format compact note with parcel item details
+            item_summaries = []
+            for item in parcel_items:
+                # Format: qty descr LxHxD Wlbs
+                qty = item.quantity or 1
+                desc = item.description or "Item"
+                length = item.job_item_pkd_length or 0
+                height = item.job_item_pkd_height or 0
+                depth = item.job_item_pkd_width or 0  # Width is actually depth in our notation
+                weight = item.job_item_pkd_weight or 0
+
+                summary = f"{qty} {desc} {length}x{height}x{depth} {weight}lbs"
+                item_summaries.append(summary)
+
+            # Create compact note
+            items_list = ", ".join(item_summaries)
+            if user_name:
+                note_text = f"{user_name} deleted parcel items [{items_list}]"
+            else:
+                note_text = f"Deleted parcel items [{items_list}]"
+
+            # Truncate if note is too long (8000 char limit)
+            if len(note_text) > 7900:
+                note_text = note_text[:7900] + "...]"
+
+            logger.debug(f"Creating note: {note_text}")
+
+            # Create note using TaskNoteModel
+            note = TaskNoteModel(
+                comments=note_text,
+                task_code=TaskCodes.PACKAGING,
+                is_important=False,
+                is_completed=False,
+                send_notification=False
+            )
+
+            # Post the note
+            note_data = note.model_dump(by_alias=True, exclude_none=True)
+            note_response = self._note_endpoint.post_note(
+                jobDisplayId=str(job_display_id),
+                data=note_data
+            )
+            logger.info(f"Note created successfully: {note_response.get('id', 'N/A')}")
+
+            # Delete each parcel item
+            # Note: Use item.id (integer like 2443776), not item.job_item_id (UUID)
+            deleted_count = 0
+            failed_items = []
+
+            for item in parcel_items:
+                logger.info(f"Attempting to delete parcel item {item.id} (description: {item.description})")
+                try:
+                    self._parcel_endpoint.delete_parcelitems(
+                        parcelItemId=str(item.id),
+                        jobDisplayId=str(job_display_id)
+                    )
+                    deleted_count += 1
+                    logger.info(f"Successfully deleted parcel item {item.id}")
+                except Exception as e:
+                    # DELETE endpoint returns 200 with non-JSON response, which raises an error
+                    # Check if it's actually a successful deletion (HTTP 200)
+                    error_msg = str(e)
+                    logger.debug(f"Exception during delete of item {item.id}: {error_msg}")
+
+                    if "HTTP 200" in error_msg and "not valid JSON" in error_msg:
+                        # This is actually a successful deletion
+                        deleted_count += 1
+                        logger.info(f"Successfully deleted parcel item {item.id} (200 OK, non-JSON response)")
+                    else:
+                        # Real error - log it but continue with other items
+                        logger.error(f"Failed to delete parcel item {item.id}: {error_msg}")
+                        failed_items.append(item.id)
+
+            # Report results
+            if failed_items:
+                logger.warning(f"Failed to delete {len(failed_items)} items: {failed_items}")
+                return False
+
+            logger.info(f"Successfully deleted {deleted_count} parcel items for job {job_display_id}")
+            return True
+
+        except Exception as e:
+            logger.error(f"Error in logged_delete_parcel_items for job {job_display_id}: {e}")
+            return False
 
 
 __all__ = ['ItemsHelper']

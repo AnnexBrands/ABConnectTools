@@ -1,6 +1,69 @@
 JobParcelItems
 ==============
 
+Helper Methods
+--------------
+
+The ``ItemsHelper`` class provides convenient high-level methods for working with job items,
+including parcel items, freight items, and calendar items. These methods automatically handle
+Pydantic model casting for type safety.
+
+Logged Delete Parcel Items
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Delete all parcel items for a job and automatically create a note logging the action.
+
+**Method:** ``api.jobs.items.logged_delete_parcel_items(job_display_id)``
+
+**Parameters:**
+
+- ``job_display_id`` (int or str): The job display ID
+
+**Returns:**
+
+- ``bool``: True if all operations succeeded, False if any errors occurred
+
+**Behavior:**
+
+1. Gets the current username from authentication config (``ABCONNECT_USERNAME``)
+2. Fetches all parcel items for the specified job
+3. Creates a compact note listing the deleted items with their details (quantity, description, dimensions, weight)
+4. Deletes each parcel item from the job
+5. Logs all operations with appropriate error handling
+
+**Note Format:** ``{username} deleted parcel items [{qty} {desc} {L}x{H}x{D} {W}lbs, ...]``
+
+If no username is available, the note will be: ``Deleted parcel items [{qty} {desc} {L}x{H}x{D} {W}lbs, ...]``
+
+**Example:**
+
+.. code-block:: python
+
+   from ABConnect.api import ABConnectAPI
+
+   # Initialize the API client
+   api = ABConnectAPI()
+
+   # Delete all parcel items for a job with automatic logging
+   success = api.jobs.items.logged_delete_parcel_items(4675060)
+
+   if success:
+       print("All parcel items deleted and logged successfully")
+   else:
+       print("Failed to delete parcel items - check logs for details")
+
+**CLI Example:**
+
+This helper method is designed for Python API use. For CLI operations, use the raw endpoints below.
+
+**See Also:**
+
+- :ref:`get-apijobjobdisplayidparcelitems` - Get parcel items for a job
+- :ref:`delete-apijobjobdisplayidparcelitemsparcelitemid` - Delete individual parcel item
+- :doc:`jobnote` - Note API for viewing created notes
+
+----
+
 Quick Reference
 ---------------
 

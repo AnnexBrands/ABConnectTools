@@ -72,6 +72,24 @@ def demonstrate_items_helper():
             print(f"   ... and {len(job_items) - 3} more items")
     print()
 
+    # Example 4: Logged Delete Parcel Items
+    print("4. DELETE PARCEL ITEMS WITH LOGGING")
+    print("   Access: api.jobs.items.logged_delete_parcel_items(job_id)")
+    print("   Returns: bool (success/failure)\n")
+    print("   This method will:")
+    print("   • Fetch all parcel items for the job")
+    print("   • Create a note logging the deletion with item details")
+    print("   • Delete each parcel item")
+    print("   • Return True if successful, False otherwise")
+    print()
+    print("   Example usage:")
+    print(f"   success = api.jobs.items.logged_delete_parcel_items({PARCEL_JOB_ID})")
+    print("   if success:")
+    print("       print('Parcel items deleted and logged')")
+    print()
+    print("   Note format: 'User deleted parcel items [2 Box 10x5x3 25lbs, ...]'")
+    print()
+
     # Show comparison
     print("=" * 60)
     print("COMPARISON: Old vs New Approach")
@@ -136,6 +154,14 @@ def code_examples():
     print("print(f'  {len(parcel)} parcel items')")
     print("print(f'  {len(freight)} freight items')")
     print("print(f'  {len(calendar)} calendar items')")
+    print()
+
+    print("# Example 5: Delete all parcel items with logging")
+    print("success = api.jobs.items.logged_delete_parcel_items(4675060)")
+    print("if success:")
+    print("    print('All parcel items deleted and logged successfully')")
+    print("else:")
+    print("    print('Failed to delete parcel items - check logs')")
     print()
 
 
