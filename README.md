@@ -97,11 +97,66 @@ cd ABConnectTools
 pip install -e .[dev]
 ```
 
-Run tests with:
+### Testing
+
+Run all tests with:
 
 ```bash
 pytest
 ```
+
+#### Testing Model Implementation Against Swagger
+
+ABConnect maintains strict alignment with the API's swagger specification. Several tests verify that all models and endpoints are properly implemented:
+
+**1. Test All Endpoints Have Implementations**
+```bash
+# Comprehensive test with visual tree output showing which endpoints are implemented
+pytest tests/api/swagger/test_all_swagger_endpoints_have_implementations.py -v
+
+# Displays:
+# ✅ Working endpoints with path count
+# ❌ Missing endpoint files
+# ⚠️  Import failures for endpoints that exist but can't be imported
+```
+
+**2. Test Constitution Compliance**
+```bash
+# Tests endpoint-model pairing and swagger-first principles
+pytest tests/test_constitution.py -v
+
+# Verifies:
+# - All swagger endpoints have implementations
+# - Endpoints have corresponding Pydantic models
+# - No duplicate or violating files exist
+```
+
+**3. Verify Model Imports**
+```bash
+# Test that all models can be imported without errors
+python -c "from ABConnect.api.models import shared, companies, contacts, job, address, jobtimeline; print('All model imports successful')"
+
+# Test specific model validation and inspect fields
+python -c "from ABConnect.api.models.jobparcelitems import ParcelItem; print(list(ParcelItem.model_fields.keys()))"
+```
+
+**4. Run Specific Test Categories**
+```bash
+# Test only API endpoints
+pytest tests/api/ -v
+
+# Test only models
+pytest tests/api/models/ -v
+
+# Test swagger compliance with detailed output
+pytest tests/api/swagger/ -v -s
+```
+
+**Test Coverage Summary**
+- **Endpoint Tests**: Verify all 223+ API endpoints are accessible
+- **Model Tests**: Validate Pydantic models match swagger schemas
+- **Integration Tests**: Test end-to-end API workflows
+- **Constitution Tests**: Ensure code follows architecture principles
 
 ## License
 

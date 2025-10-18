@@ -1,9 +1,16 @@
 """Tests for swagger synchronization functionality."""
 
 import json
+import sys
 from pathlib import Path
 from unittest.mock import patch, mock_open
-from ...base_test import ABConnectTestCase
+
+# Add tests directory to path for base_test imports
+tests_dir = Path(__file__).parent.parent.parent
+if str(tests_dir) not in sys.path:
+    sys.path.insert(0, str(tests_dir))
+
+from base_test import ABConnectTestCase
 
 
 class TestSwaggerSync(ABConnectTestCase):

@@ -52,7 +52,7 @@ class JobNoteEndpoint(BaseEndpoint):
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
 
-    def get_note(self, id: str, jobDisplayId: str) -> Dict[str, Any]:
+    def get_note_by_id(self, id: str, jobDisplayId: str) -> Dict[str, Any]:
         """GET /api/job/{jobDisplayId}/note/{id}
 
         

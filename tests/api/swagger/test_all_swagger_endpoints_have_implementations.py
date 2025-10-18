@@ -49,9 +49,17 @@ class TestAllSwaggerEndpointsHaveImplementations(ABConnectTestCase):
             endpoint_info = endpoint_paths[endpoint_name]
             path_count = len(endpoint_info['paths'])
 
-            # Check if file exists
+            # Check if file exists (either as .py file or package directory)
             endpoint_file = self.endpoints_dir / f"{endpoint_name}.py"
-            file_exists = endpoint_file.exists()
+            endpoint_package = self.endpoints_dir / endpoint_name
+            file_exists = endpoint_file.exists() or (endpoint_package.exists() and endpoint_package.is_dir())
+
+            # Special case: 'job' endpoint is implemented as 'jobs' package
+            if endpoint_name == 'job' and not file_exists:
+                jobs_package = self.endpoints_dir / 'jobs'
+                if jobs_package.exists() and jobs_package.is_dir():
+                    file_exists = True
+                    endpoint_package = jobs_package
 
             # Try to import from API client
             can_import = False
@@ -59,36 +67,46 @@ class TestAllSwaggerEndpointsHaveImplementations(ABConnectTestCase):
 
             if file_exists:
                 try:
-                    # Test if we can import the endpoint class directly
-                    from ABConnect.api.endpoints import BaseEndpoint
-
-                    # Import endpoint classes to verify they exist and are importable
-                    endpoint_class_name = f"{endpoint_name.title()}Endpoint"
-
-                    # Handle special cases for class names
-                    class_name_mappings = {
-                        'SmsTemplate': 'SmstemplateEndpoint',
-                        'Values': 'ValuesEndpoint',
-                        'e_sign': 'ESignEndpoint',
-                    }
-
-                    actual_class_name = class_name_mappings.get(endpoint_name, endpoint_class_name)
-
-                    # Try to import the specific endpoint class
-                    try:
-                        import importlib
-                        module = importlib.import_module('ABConnect.api.endpoints')
-                        endpoint_class = getattr(module, actual_class_name)
-
-                        # Verify it's a subclass of BaseEndpoint
-                        if issubclass(endpoint_class, BaseEndpoint):
+                    # Special handling for 'job' endpoint (implemented as 'jobs' package)
+                    if endpoint_name == 'job':
+                        # Check if the jobs package can be imported
+                        try:
+                            from ABConnect.api.endpoints.jobs import JobsPackage
                             can_import = True
                             successful_imports.append(endpoint_name)
-                        else:
-                            import_error = f"{actual_class_name} is not a BaseEndpoint subclass"
+                        except ImportError as e:
+                            import_error = f"Cannot import JobsPackage: {e}"
+                    else:
+                        # Test if we can import the endpoint class directly
+                        from ABConnect.api.endpoints import BaseEndpoint
 
-                    except AttributeError:
-                        import_error = f"Class {actual_class_name} not found in endpoints module"
+                        # Import endpoint classes to verify they exist and are importable
+                        endpoint_class_name = f"{endpoint_name.title()}Endpoint"
+
+                        # Handle special cases for class names
+                        class_name_mappings = {
+                            'SmsTemplate': 'SmstemplateEndpoint',
+                            'Values': 'ValuesEndpoint',
+                            'e_sign': 'ESignEndpoint',
+                        }
+
+                        actual_class_name = class_name_mappings.get(endpoint_name, endpoint_class_name)
+
+                        # Try to import the specific endpoint class
+                        try:
+                            import importlib
+                            module = importlib.import_module('ABConnect.api.endpoints')
+                            endpoint_class = getattr(module, actual_class_name)
+
+                            # Verify it's a subclass of BaseEndpoint
+                            if issubclass(endpoint_class, BaseEndpoint):
+                                can_import = True
+                                successful_imports.append(endpoint_name)
+                            else:
+                                import_error = f"{actual_class_name} is not a BaseEndpoint subclass"
+
+                        except AttributeError:
+                            import_error = f"Class {actual_class_name} not found in endpoints module"
 
                 except Exception as e:
                     import_error = str(e)
@@ -101,7 +119,14 @@ class TestAllSwaggerEndpointsHaveImplementations(ABConnectTestCase):
             # Display status with tree structure
             if file_exists and can_import:
                 status = "✅"  # Green check
-                detail = f"({path_count} paths)"
+                # Check if it's a package implementation
+                is_package = endpoint_package.exists() and endpoint_package.is_dir()
+                if endpoint_name == 'job' and (self.endpoints_dir / 'jobs').is_dir():
+                    detail = f"({path_count} paths, via 'jobs' package)"
+                elif is_package:
+                    detail = f"({path_count} paths, package)"
+                else:
+                    detail = f"({path_count} paths)"
             elif file_exists and not can_import:
                 status = "⚠️ "  # Warning - file exists but can't import
                 detail = f"(FILE EXISTS, IMPORT FAILED: {import_error})"
@@ -191,11 +216,18 @@ class TestAllSwaggerEndpointsHaveImplementations(ABConnectTestCase):
                     endpoint_groups[endpoint] = []
                 endpoint_groups[endpoint].append(path)
 
-        # Count implemented paths (endpoints that exist)
+        # Count implemented paths (endpoints that exist as files or packages)
         implemented_paths = 0
         for endpoint, paths in endpoint_groups.items():
             endpoint_file = self.endpoints_dir / f"{endpoint}.py"
-            if endpoint_file.exists():
+            endpoint_package = self.endpoints_dir / endpoint
+
+            # Special case: 'job' endpoint is implemented as 'jobs' package
+            if endpoint == 'job':
+                jobs_package = self.endpoints_dir / 'jobs'
+                if jobs_package.exists() and jobs_package.is_dir():
+                    implemented_paths += len(paths)
+            elif endpoint_file.exists() or (endpoint_package.exists() and endpoint_package.is_dir()):
                 implemented_paths += len(paths)
 
         coverage = (implemented_paths / total_paths * 100) if total_paths > 0 else 0

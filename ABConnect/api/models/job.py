@@ -67,9 +67,12 @@ class FeedbackSaveModel(ABConnectBaseModel):
 
 
 class FreightShimpment(TimestampedModel):
-    """FreightShimpment model"""
+    """FreightShimpment model
 
-    item_id: Optional[str] = Field(None, alias="itemId")
+    Note: API returns jobID, jobFreightID, itemID (capital ID) but we accept both formats.
+    """
+
+    item_id: Optional[str] = Field(None, validation_alias="itemID", serialization_alias="itemId")
     item_length: Optional[float] = Field(None, alias="itemLength")
     item_width: Optional[float] = Field(None, alias="itemWidth")
     item_height: Optional[float] = Field(None, alias="itemHeight")
@@ -81,12 +84,12 @@ class FreightShimpment(TimestampedModel):
     transportation_height: Optional[int] = Field(None, alias="transportationHeight")
     ceiling_transportation_weight: Optional[int] = Field(None, alias="ceilingTransportationWeight")
     net_cubic_feet: Optional[float] = Field(None, alias="netCubicFeet")
-    job_id: Optional[str] = Field(None, alias="jobId")
+    job_id: Optional[str] = Field(None, validation_alias="jobID", serialization_alias="jobId")
     quantity: Optional[int] = Field(None)
     freight_item_id: Optional[str] = Field(None, alias="freightItemId")
     freight_item_class_id: Optional[str] = Field(None, alias="freightItemClassId")
     cube: Optional[float] = Field(None)
-    job_freight_id: Optional[str] = Field(None, alias="jobFreightId")
+    job_freight_id: Optional[str] = Field(None, validation_alias="jobFreightID", serialization_alias="jobFreightId")
     freight_description: Optional[str] = Field(None, alias="freightDescription")
     freight_item_value: Optional[str] = Field(None, alias="freightItemValue")
     freight_item_class: Optional[str] = Field(None, alias="freightItemClass")

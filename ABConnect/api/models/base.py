@@ -5,14 +5,14 @@ found across the 293 swagger schemas.
 """
 
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 from enum import Enum
 from pydantic import BaseModel, Field, ConfigDict, validator
 
 
 class ABConnectBaseModel(BaseModel):
     """Base class for all ABConnect API models.
-    
+
     Provides common configuration and utilities.
     """
     model_config = ConfigDict(
@@ -26,7 +26,7 @@ class ABConnectBaseModel(BaseModel):
 
 class IdentifiedModel(ABConnectBaseModel):
     """Base for models with ID fields (63 schemas have 'id')."""
-    id: Optional[str] = Field(None, description="Unique identifier")
+    id: Optional[Union[str, int]] = Field(None, description="Unique identifier")
 
 
 class TimestampedModel(ABConnectBaseModel):

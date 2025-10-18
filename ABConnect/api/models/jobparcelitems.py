@@ -16,6 +16,7 @@ class ParcelItem(IdentifiedModel):
     job_item_pkd_weight: Optional[float] = Field(None, alias="jobItemPkdWeight")
     job_item_parcel_value: Optional[float] = Field(None, alias="jobItemParcelValue")
     parcel_package_type_id: Optional[int] = Field(None, alias="parcelPackageTypeId")
+    package_type_code: Optional[str] = Field(None, alias="packageTypeCode")
     insure_key: Optional[str] = Field(None, alias="insureKey")
 
 

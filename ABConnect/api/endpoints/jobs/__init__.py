@@ -9,6 +9,7 @@ from .email import JobEmailEndpoint
 from .form import JobFormEndpoint
 from .freightproviders import JobFreightProvidersEndpoint
 from .intacct import JobIntacctEndpoint
+from .items_helpers import ItemsHelper
 from .note import JobNoteEndpoint
 from .onhold import JobOnHoldEndpoint
 from .parcelitems import JobParcelItemsEndpoint
@@ -38,6 +39,7 @@ class JobsPackage:
         self.form = JobFormEndpoint()
         self.freightproviders = JobFreightProvidersEndpoint()
         self.intacct = JobIntacctEndpoint()
+        self.items = ItemsHelper()  # Items helper with Pydantic model casting
         self.note = JobNoteEndpoint()
         self.onhold = JobOnHoldEndpoint()
         self.parcelitems = JobParcelItemsEndpoint()
@@ -53,11 +55,12 @@ class JobsPackage:
 __all__ = [
     "JobsPackage",
     "JobEndpoint",
-    "JobHelpers",
+    "AgentEndpoint",
     "JobEmailEndpoint",
     "JobFormEndpoint",
     "JobFreightProvidersEndpoint",
     "JobIntacctEndpoint",
+    "ItemsHelper",
     "JobNoteEndpoint",
     "JobOnHoldEndpoint",
     "JobParcelItemsEndpoint",
