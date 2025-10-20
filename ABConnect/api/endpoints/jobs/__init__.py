@@ -15,6 +15,7 @@ from .onhold import JobOnHoldEndpoint
 from .parcelitems import JobParcelItemsEndpoint
 from .payment import JobPaymentEndpoint
 from .rfq import JobRfqEndpoint
+from .ship_helpers import ShipHelper
 from .shipment import JobShipmentEndpoint
 from .sms import JobSmsEndpoint
 from .status import JobStatusEndpoint
@@ -45,6 +46,7 @@ class JobsPackage:
         self.parcelitems = JobParcelItemsEndpoint()
         self.payment = JobPaymentEndpoint()
         self.rfq = JobRfqEndpoint()
+        self.ship = ShipHelper()
         self.shipment = JobShipmentEndpoint()
         self.sms = JobSmsEndpoint()
         self.status = JobStatusEndpoint()
@@ -66,6 +68,7 @@ __all__ = [
     "JobParcelItemsEndpoint",
     "JobPaymentEndpoint",
     "JobRfqEndpoint",
+    "ShipHelper",
     "JobShipmentEndpoint",
     "JobSmsEndpoint",
     "JobStatusEndpoint",

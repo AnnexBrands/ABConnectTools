@@ -3,8 +3,9 @@
 Auto-generated from swagger.json specification.
 """
 
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Union
 from ABConnect.api.endpoints.base import BaseEndpoint
+from ABConnect.api.models.jobshipment import BookShipmentRequest
 
 
 class JobShipmentEndpoint(BaseEndpoint):
@@ -15,20 +16,28 @@ class JobShipmentEndpoint(BaseEndpoint):
 
     api_path = "job"
 
-    def post_shipment_book(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def post_shipment_book(
+        self,
+        jobDisplayId: str,
+        data: Optional[Union[BookShipmentRequest, Dict[str, Any]]] = None
+    ) -> Dict[str, Any]:
         """POST /api/job/{jobDisplayId}/shipment/book
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: BookShipmentRequest as Pydantic model or dict
 
         Returns:
             Dict[str, Any]: API response data
         """
-        path = "/{jobDisplayId}/shipment/book"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        path = f"/{jobDisplayId}/shipment/book"
+
         kwargs = {}
         if data is not None:
-            kwargs["json"] = data
+            # Validate incoming data and convert to API format
+            validated_data = BookShipmentRequest.check(data)
+            kwargs["json"] = validated_data
+
         return self._make_request("POST", path, **kwargs)
 
     def delete_shipment(self, jobDisplayId: str) -> Dict[str, Any]:

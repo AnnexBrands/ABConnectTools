@@ -4,13 +4,15 @@ from typing import Optional
 from datetime import datetime
 from pydantic import Field
 from .base import ABConnectBaseModel, JobRelatedModel
+from .enums import CarrierAPI
+from .shared import CarrierAccountInfo
 
 class PricedFreightProvider(ABConnectBaseModel):
     """PricedFreightProvider model"""
 
     option_index: Optional[int] = Field(None, alias="optionIndex")
     shipment_type: Optional[str] = Field(None, alias="shipmentType")
-    provider_api: Optional[CarrierAPI] = Field(None, alias="providerApi")
+    provider_api: Optional[CarrierAPI] = Field(None, alias="providerAPI")
     provider_id: Optional[str] = Field(None, alias="providerId")
     provider_code: Optional[str] = Field(None, alias="providerCode")
     provider_company_name: Optional[str] = Field(None, alias="providerCompanyName")
@@ -21,7 +23,7 @@ class PricedFreightProvider(ABConnectBaseModel):
     option_active: Optional[bool] = Field(None, alias="optionActive")
     shipment_accepted: Optional[bool] = Field(None, alias="shipmentAccepted")
     shipment_accepted_date: Optional[datetime] = Field(None, alias="shipmentAcceptedDate")
-    obtain_nfm_job_state: Optional[str] = Field(None, alias="obtainNfmJobState")
+    obtain_nfm_job_state: Optional[str] = Field(None, alias="obtainNFMJobState")
     used_carrier_account_info: Optional[CarrierAccountInfo] = Field(None, alias="usedCarrierAccountInfo")
 
 

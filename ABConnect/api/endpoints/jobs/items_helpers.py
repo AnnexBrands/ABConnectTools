@@ -305,5 +305,76 @@ class ItemsHelper(BaseEndpoint):
             logger.error(f"Error in logged_delete_parcel_items for job {job_display_id}: {e}")
             return False
 
+    def replace_parcels(self, job_display_id: Union[int, str], parcel_items: List[Union[ParcelItem, dict]]) -> bool:
+        """Replace all parcel items for a job with new items.
+
+        This method:
+        1. Deletes all existing parcel items with logging (using logged_delete_parcel_items)
+        2. Posts the new parcel items to the job
+        3. Returns success/failure status
+
+        Args:
+            job_display_id: The job display ID (int or string)
+            parcel_items: List of parcel items (ParcelItem models or dictionaries)
+
+        Returns:
+            bool: True if all operations succeeded, False if any errors occurred
+
+        Example:
+            >>> from ABConnect.api.models.jobparcelitems import ParcelItem
+            >>> items_helper = api.jobs.items
+            >>> new_items = [
+            ...     ParcelItem(
+            ...         description="Box 1",
+            ...         quantity=2,
+            ...         job_item_pkd_length=10.0,
+            ...         job_item_pkd_width=8.0,
+            ...         job_item_pkd_height=6.0,
+            ...         job_item_pkd_weight=25.0
+            ...     )
+            ... ]
+            >>> success = items_helper.replace_parcels(4675060, new_items)
+            >>> if success:
+            ...     print("Parcel items replaced successfully")
+        """
+        logger.info(f"Starting parcel replacement for job {job_display_id}")
+
+        try:
+            # Step 1: Delete existing parcel items with logging
+            delete_success = self.logged_delete_parcel_items(job_display_id)
+            if not delete_success:
+                logger.error(f"Failed to delete existing parcel items for job {job_display_id}")
+                return False
+
+            # Step 2: Prepare new parcel items data
+            items_data = []
+            for item in parcel_items:
+                if isinstance(item, ParcelItem):
+                    # Convert Pydantic model to dict with aliases
+                    item_dict = item.model_dump(by_alias=True, exclude_none=True)
+                elif isinstance(item, dict):
+                    item_dict = item
+                else:
+                    logger.error(f"Invalid parcel item type: {type(item)}")
+                    return False
+                items_data.append(item_dict)
+
+            # Step 3: Post new parcel items
+            logger.info(f"Posting {len(items_data)} new parcel items to job {job_display_id}")
+            try:
+                response = self._parcel_endpoint.post_parcelitems(
+                    jobDisplayId=str(job_display_id),
+                    data=items_data
+                )
+                logger.info(f"Successfully posted new parcel items: {response}")
+                return True
+            except Exception as e:
+                logger.error(f"Failed to post new parcel items: {e}")
+                return False
+
+        except Exception as e:
+            logger.error(f"Error in replace_parcels for job {job_display_id}: {e}")
+            return False
+
 
 __all__ = ['ItemsHelper']

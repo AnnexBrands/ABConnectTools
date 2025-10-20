@@ -5,9 +5,12 @@ found across the 293 swagger schemas.
 """
 
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Union, TypeVar, Type
 from enum import Enum
-from pydantic import BaseModel, Field, ConfigDict, validator
+from pydantic import BaseModel, Field, ConfigDict, validator, TypeAdapter
+
+
+T = TypeVar('T', bound='ABConnectBaseModel')
 
 
 class ABConnectBaseModel(BaseModel):
@@ -22,6 +25,49 @@ class ABConnectBaseModel(BaseModel):
         validate_assignment=True,
         use_enum_values=True
     )
+
+    @classmethod
+    def check(cls: Type[T], data: Union[Dict[str, Any], List[Dict[str, Any]], T, List[T]], exclude_unset: bool = True) -> Union[Dict[str, Any], List[Dict[str, Any]]]:
+        """Validate data and return as dict(s) with proper aliasing.
+
+        This method validates incoming data against the model schema and returns
+        it as a dict (or list of dicts) suitable for API requests.
+
+        Args:
+            data: Data to validate - can be:
+                - Single dict
+                - List of dicts
+                - Single model instance
+                - List of model instances
+            exclude_unset: If True (default), only include fields that were explicitly
+                provided in the input data. If False, include all fields with their
+                default values.
+
+        Returns:
+            Validated data as dict(s) with camelCase field names (by_alias=True)
+            Only includes fields that were actually provided (exclude_unset=True)
+
+        Raises:
+            ValidationError: If data doesn't match the model schema
+
+        Example:
+            # Only sends fields that were provided
+            data = {"ratesKey": "abc", "carrierCode": "UPS"}
+            SetRateModel.check(data)  # {"ratesKey": "abc", "carrierCode": "UPS"}
+            # carrierAccountId and active are NOT included (weren't provided)
+
+            # To include all fields with defaults:
+            SetRateModel.check(data, exclude_unset=False)
+        """
+        # Handle list of items
+        if isinstance(data, list):
+            adapter = TypeAdapter(List[cls])
+            validated = adapter.validate_python(data)
+            return [item.model_dump(by_alias=True, exclude_unset=exclude_unset) for item in validated]
+
+        # Handle single item (dict or model instance)
+        validated = cls.model_validate(data)
+        return validated.model_dump(by_alias=True, exclude_unset=exclude_unset)
 
 
 class IdentifiedModel(ABConnectBaseModel):
