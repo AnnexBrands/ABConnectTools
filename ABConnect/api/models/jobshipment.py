@@ -1,9 +1,29 @@
 """Jobshipment models for ABConnect API."""
 
-from typing import List, Optional
+from __future__ import annotations
+
+from typing import List, Optional, TYPE_CHECKING
 from datetime import datetime
 from pydantic import Field
 from .base import ABConnectBaseModel
+from .enums import CarrierAPI
+
+if TYPE_CHECKING:
+    from .job import JobExportData
+    from .contacts import ShipmentContactDetails, ShipmentContactAddressDetails
+    from .shared import (
+        BookShipmentSpecificParams,
+        Commodity,
+        ExportPackingInfo,
+        ExportTotalCosts,
+        USPSSpecific,
+        FedExSpecific,
+        UPSSpecific,
+        CarrierRateModel,
+        LastObtainNFM,
+        CarrierProviderMessage,
+        HandlingUnitModel,
+    )
 
 class BookShipmentRequest(ABConnectBaseModel):
     """BookShipmentRequest model"""
@@ -76,3 +96,34 @@ class TransportationRatesRequestModel(ABConnectBaseModel):
 
 
 __all__ = ['BookShipmentRequest', 'DeleteShipRequestModel', 'InternationalParams', 'JobCarrierRatesModel', 'JobParcelAddOn', 'ShipmentOriginDestination', 'TransportationRatesRequestModel']
+
+# Rebuild models to resolve forward references
+# This is done after all models are defined to avoid circular import issues
+def _rebuild_models():
+    """Rebuild all models in this module to resolve forward references."""
+    try:
+        # Import the modules containing the forward-referenced classes
+        from . import job, contacts, shared, address
+
+        # Create a namespace with all the classes that might be referenced
+        namespace = {}
+        for module in [job, contacts, shared, address]:
+            for attr_name in dir(module):
+                attr = getattr(module, attr_name)
+                if isinstance(attr, type):  # Only include classes
+                    namespace[attr_name] = attr
+
+        # Now rebuild all models with the complete namespace
+        BookShipmentRequest.model_rebuild(_types_namespace=namespace)
+        DeleteShipRequestModel.model_rebuild(_types_namespace=namespace)
+        InternationalParams.model_rebuild(_types_namespace=namespace)
+        JobCarrierRatesModel.model_rebuild(_types_namespace=namespace)
+        JobParcelAddOn.model_rebuild(_types_namespace=namespace)
+        ShipmentOriginDestination.model_rebuild(_types_namespace=namespace)
+        TransportationRatesRequestModel.model_rebuild(_types_namespace=namespace)
+    except Exception:
+        # If rebuild fails, models will be rebuilt lazily by Pydantic
+        pass
+
+# Call rebuild when module is imported
+_rebuild_models()

@@ -28,10 +28,11 @@ class ABConnectBaseModel(BaseModel):
 
     @classmethod
     def check(cls: Type[T], data: Union[Dict[str, Any], List[Dict[str, Any]], T, List[T]], exclude_unset: bool = True) -> Union[Dict[str, Any], List[Dict[str, Any]]]:
-        """Validate data and return as dict(s) with proper aliasing.
+        """Validate data and return as dict(s) with proper aliasing and JSON serialization.
 
         This method validates incoming data against the model schema and returns
-        it as a dict (or list of dicts) suitable for API requests.
+        it as a dict (or list of dicts) suitable for API requests. All special types
+        (datetime, UUID, etc.) are automatically serialized to JSON-compatible formats.
 
         Args:
             data: Data to validate - can be:
@@ -44,16 +45,18 @@ class ABConnectBaseModel(BaseModel):
                 default values.
 
         Returns:
-            Validated data as dict(s) with camelCase field names (by_alias=True)
-            Only includes fields that were actually provided (exclude_unset=True)
+            Validated data as dict(s) with:
+            - camelCase field names (by_alias=True)
+            - JSON-serializable values (mode='json') - datetime as ISO strings, etc.
+            - Only fields that were actually provided (exclude_unset=True by default)
 
         Raises:
             ValidationError: If data doesn't match the model schema
 
         Example:
-            # Only sends fields that were provided
-            data = {"ratesKey": "abc", "carrierCode": "UPS"}
-            SetRateModel.check(data)  # {"ratesKey": "abc", "carrierCode": "UPS"}
+            # Only sends fields that were provided, datetime serialized to ISO string
+            data = {"ratesKey": "abc", "shipOutDate": datetime.now()}
+            SetRateModel.check(data)  # {"ratesKey": "abc", "shipOutDate": "2025-10-19T..."}
             # carrierAccountId and active are NOT included (weren't provided)
 
             # To include all fields with defaults:
@@ -63,11 +66,11 @@ class ABConnectBaseModel(BaseModel):
         if isinstance(data, list):
             adapter = TypeAdapter(List[cls])
             validated = adapter.validate_python(data)
-            return [item.model_dump(by_alias=True, exclude_unset=exclude_unset) for item in validated]
+            return [item.model_dump(by_alias=True, exclude_unset=exclude_unset, mode='json') for item in validated]
 
         # Handle single item (dict or model instance)
         validated = cls.model_validate(data)
-        return validated.model_dump(by_alias=True, exclude_unset=exclude_unset)
+        return validated.model_dump(by_alias=True, exclude_unset=exclude_unset, mode='json')
 
 
 class IdentifiedModel(ABConnectBaseModel):

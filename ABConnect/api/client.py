@@ -166,8 +166,6 @@ class ABConnectAPI:
 
         # Maintain backward compatibility
         self.docs = self.documents  # Alias
-        self.job = self.jobs.job  # Backward compatibility - point to main job submodule
-        self.ship = self.shipment  # Alias
 
     def _init_generic_endpoints(self):
         """Initialize automatically generated endpoints from swagger."""

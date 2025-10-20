@@ -63,7 +63,7 @@ class JobEmailEndpoint(BaseEndpoint):
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
 
-    def post_email_send(self, emailTemplateGuid: str, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def post_email_send(self, jobDisplayId: str, emailTemplateGuid: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """POST /api/job/{jobDisplayId}/email/{emailTemplateGuid}/send
 
         
@@ -72,7 +72,7 @@ class JobEmailEndpoint(BaseEndpoint):
         Returns:
             Dict[str, Any]: API response data
         """
-        path = "/{jobDisplayId}/email/{emailTemplateGuid}/send"
+        path = f"/{jobDisplayId}/email/{emailTemplateGuid}/send"
         path = path.replace("{emailTemplateGuid}", str(emailTemplateGuid))
         path = path.replace("{jobDisplayId}", str(jobDisplayId))
         kwargs = {}
