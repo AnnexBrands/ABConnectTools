@@ -39,6 +39,26 @@ class RequestHandler:
 
         if response.status_code == 204:
             return None
+
+        # Check Content-Type header to determine how to handle the response
+        content_type = response.headers.get('Content-Type', '').lower()
+
+        # Binary content types should return bytes directly
+        binary_content_types = [
+            'application/pdf',
+            'application/octet-stream',
+            'image/',
+            'video/',
+            'audio/',
+            'application/zip',
+            'application/x-zip-compressed',
+        ]
+
+        if any(ct in content_type for ct in binary_content_types):
+            logger.debug(f"Returning binary content for Content-Type: {content_type}")
+            return response.content
+
+        # Try to parse as JSON for JSON content types or when Content-Type is not specified
         try:
             return response.json()
         except requests.exceptions.JSONDecodeError:

@@ -223,6 +223,44 @@ class TestDocumentsEndpoint:
 
         mock_request.assert_called_once_with("PUT", "/hide/456")
 
+    @patch('ABConnect.api.endpoints.documents.DocumentsEndpoint._make_request')
+    def test_get_get_with_pdf_returns_bytes(self, mock_request):
+        """Test that get_get returns bytes for PDF documents."""
+        # Simulate binary PDF content
+        pdf_bytes = b'%PDF-1.4\n%\xe2\xe3\xcf\xd3\n'
+        mock_request.return_value = pdf_bytes
+
+        result = self.docs_endpoint.get_get("path/to/document.pdf")
+
+        mock_request.assert_called_once_with("GET", "/get/path/to/document.pdf")
+        assert isinstance(result, bytes)
+        assert result == pdf_bytes
+
+    @patch('ABConnect.api.endpoints.documents.DocumentsEndpoint._make_request')
+    def test_get_get_with_json_returns_dict(self, mock_request):
+        """Test that get_get can still return JSON when applicable."""
+        json_response = {"success": True, "message": "Document retrieved"}
+        mock_request.return_value = json_response
+
+        result = self.docs_endpoint.get_get("path/to/metadata")
+
+        mock_request.assert_called_once_with("GET", "/get/path/to/metadata")
+        assert isinstance(result, dict)
+        assert result == json_response
+
+    @patch('ABConnect.api.endpoints.documents.DocumentsEndpoint._make_request')
+    def test_get_get_thumbnail_returns_bytes(self, mock_request):
+        """Test that get_get_thumbnail returns bytes for image thumbnails."""
+        # Simulate image bytes
+        image_bytes = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR'
+        mock_request.return_value = image_bytes
+
+        result = self.docs_endpoint.get_get_thumbnail("path/to/image.jpg")
+
+        mock_request.assert_called_once_with("GET", "/get/thumbnail/path/to/image.jpg")
+        assert isinstance(result, bytes)
+        assert result == image_bytes
+
 
 class TestDocumentsIntegration:
     """Integration tests for the Documents API."""

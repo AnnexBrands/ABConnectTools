@@ -28,8 +28,8 @@ class Quoter:
         if not env_param:
             # Check config for environment
             env_param = Config.get_env()
-        self.env = 'staging' if env_param == 'staging' else ''
-        
+        self.env = "staging" if env_param == "staging" else ""
+
         self.jobType = kwargs.get("JobType", "Regular")
         self.request_type = kwargs.get("type", "qq").lower()  # Normalize to lower-case.
         self.auto_book = kwargs.get("auto_book", False)
@@ -95,6 +95,7 @@ class Quoter:
             "quote_certified": quote.get("QuoteCertified", False),
             "jobid": quote.get("JobID"),
             "job": quote.get("JobDisplayID"),
+            "carrier": quote.get("CarrierInfo", {}).get("Api", "N/A"),
             "bookingkey": quote.get("BookingKey"),
             "Pickup": quote.get("PriceBreakdown", {}).get("Pickup", 0),
             "Packaging": quote.get("PriceBreakdown", {}).get("Packaging", 0),
@@ -118,6 +119,7 @@ class Quoter:
             "jobid": None,
             "quote_certified": quote.get("QuoteCertified", False),
             "job": "Quick Quote",
+            "carrier": quote.get("CarrierInfo", {}).get("Api", "N/A"),
             "bookingkey": None,
             "Pickup": quote.get("PriceBreakdown", {}).get("Pickup", 0),
             "Packaging": quote.get("PriceBreakdown", {}).get("Packaging", 0),

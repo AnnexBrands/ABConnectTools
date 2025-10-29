@@ -20,25 +20,41 @@ class DocumentsEndpoint(BaseEndpoint):
     
     api_path = "documents"
 
-    def get_get_thumbnail(self, docPath: str) -> dict:
+    def get_get_thumbnail(self, docPath: str) -> Union[dict, bytes]:
         """GET /api/documents/get/thumbnail/{docPath}
-        
-        
-        
+
+        Get a thumbnail of a document. Returns binary image data for image thumbnails,
+        or JSON response data for other cases.
+
+        Args:
+            docPath: Path to the document
+
         Returns:
-            dict: API response data
+            Union[dict, bytes]: Binary image data for thumbnails, or JSON response data
         """
         path = "/get/thumbnail/{docPath}"
         path = path.replace("{docPath}", docPath)
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_get(self, docPath: str) -> dict:
+
+    def get_get(self, docPath: str) -> Union[dict, bytes]:
         """GET /api/documents/get/{docPath}
-        
-        
-        
+
+        Download a document. Returns binary data for files like PDFs, images, etc.,
+        or JSON response data for other cases.
+
+        Args:
+            docPath: Path to the document
+
         Returns:
-            dict: API response data
+            Union[dict, bytes]: Binary document data (e.g., PDF bytes, image bytes),
+                               or JSON response data
+
+        Example:
+            >>> # Download a PDF document
+            >>> pdf_bytes = client.docs.get_get("path/to/document.pdf")
+            >>> with open("downloaded.pdf", "wb") as f:
+            ...     f.write(pdf_bytes)
         """
         path = "/get/{docPath}"
         path = path.replace("{docPath}", docPath)
