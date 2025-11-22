@@ -5,7 +5,7 @@ Auto-generated from swagger.json specification.
 
 from typing import List, Optional, Dict, Any, Union
 from ABConnect.api.endpoints.base import BaseEndpoint
-from ABConnect.api.models.jobshipment import BookShipmentRequest
+from ABConnect.api.models.jobshipment import BookShipmentRequest, DeleteShipRequestModel
 
 
 class JobShipmentEndpoint(BaseEndpoint):
@@ -19,7 +19,7 @@ class JobShipmentEndpoint(BaseEndpoint):
     def post_shipment_book(
         self,
         jobDisplayId: str,
-        data: Optional[Union[BookShipmentRequest, Dict[str, Any]]] = None
+        data: Optional[Union[BookShipmentRequest, Dict[str, Any]]] = None,
     ) -> Dict[str, Any]:
         """POST /api/job/{jobDisplayId}/shipment/book
 
@@ -40,11 +40,20 @@ class JobShipmentEndpoint(BaseEndpoint):
 
         return self._make_request("POST", path, **kwargs)
 
-    def delete_shipment(self, jobDisplayId: str) -> Dict[str, Any]:
+    def delete_shipment(
+        self,
+        jobDisplayId: str,
+        option_index: int = 3,
+        force_delete: bool = True,
+        data: Optional[Union[DeleteShipRequestModel, Dict[str, Any]]] = None,
+    ) -> Dict[str, Any]:
         """DELETE /api/job/{jobDisplayId}/shipment
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            option_index: Option index for deletion (default: 3)
+            force_delete: Force delete flag (default: True)
+            data: DeleteShipRequestModel as Pydantic model or dict (optional, overrides params)
 
         Returns:
             Dict[str, Any]: API response data
@@ -52,13 +61,30 @@ class JobShipmentEndpoint(BaseEndpoint):
         path = "/{jobDisplayId}/shipment"
         path = path.replace("{jobDisplayId}", str(jobDisplayId))
         kwargs = {}
+
+        # Use provided data or construct from parameters
+        if data is None:
+            data = DeleteShipRequestModel(
+                option_index=option_index, force_delete=force_delete
+            )
+
+        # Validate incoming data and convert to API format
+        validated_data = DeleteShipRequestModel.check(data)
+        kwargs["json"] = validated_data
+
         return self._make_request("DELETE", path, **kwargs)
 
-    def get_shipment_ratequotes(self, jobDisplayId: str, ship_out_date: Optional[str] = None, rates_sources: Optional[str] = None, settings_key: Optional[str] = None) -> Dict[str, Any]:
+    def get_shipment_ratequotes(
+        self,
+        jobDisplayId: str,
+        ship_out_date: Optional[str] = None,
+        rates_sources: Optional[str] = None,
+        settings_key: Optional[str] = None,
+    ) -> Dict[str, Any]:
         """GET /api/job/{jobDisplayId}/shipment/ratequotes
 
-        
-        
+
+
 
         Returns:
             Dict[str, Any]: API response data
@@ -77,11 +103,13 @@ class JobShipmentEndpoint(BaseEndpoint):
             kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)
 
-    def post_shipment_ratequotes(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def post_shipment_ratequotes(
+        self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         """POST /api/job/{jobDisplayId}/shipment/ratequotes
 
-        
-        
+
+
 
         Returns:
             Dict[str, Any]: API response data
@@ -96,8 +124,8 @@ class JobShipmentEndpoint(BaseEndpoint):
     def get_shipment_origindestination(self, jobDisplayId: str) -> Dict[str, Any]:
         """GET /api/job/{jobDisplayId}/shipment/origindestination
 
-        
-        
+
+
 
         Returns:
             Dict[str, Any]: API response data
@@ -110,8 +138,8 @@ class JobShipmentEndpoint(BaseEndpoint):
     def get_shipment_accessorials(self, jobDisplayId: str) -> Dict[str, Any]:
         """GET /api/job/{jobDisplayId}/shipment/accessorials
 
-        
-        
+
+
 
         Returns:
             Dict[str, Any]: API response data
@@ -121,11 +149,13 @@ class JobShipmentEndpoint(BaseEndpoint):
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
 
-    def post_shipment_accessorial(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def post_shipment_accessorial(
+        self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         """POST /api/job/{jobDisplayId}/shipment/accessorial
 
-        
-        
+
+
 
         Returns:
             Dict[str, Any]: API response data
@@ -137,11 +167,13 @@ class JobShipmentEndpoint(BaseEndpoint):
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
 
-    def delete_shipment_accessorial(self, addOnId: str, jobDisplayId: str) -> Dict[str, Any]:
+    def delete_shipment_accessorial(
+        self, addOnId: str, jobDisplayId: str
+    ) -> Dict[str, Any]:
         """DELETE /api/job/{jobDisplayId}/shipment/accessorial/{addOnId}
 
-        
-        
+
+
 
         Returns:
             Dict[str, Any]: API response data
@@ -155,8 +187,8 @@ class JobShipmentEndpoint(BaseEndpoint):
     def get_shipment_ratesstate(self, jobDisplayId: str) -> Dict[str, Any]:
         """GET /api/job/{jobDisplayId}/shipment/ratesstate
 
-        
-        
+
+
 
         Returns:
             Dict[str, Any]: API response data
@@ -169,8 +201,8 @@ class JobShipmentEndpoint(BaseEndpoint):
     def get_shipment_exportdata(self, jobDisplayId: str) -> Dict[str, Any]:
         """GET /api/job/{jobDisplayId}/shipment/exportdata
 
-        
-        
+
+
 
         Returns:
             Dict[str, Any]: API response data
@@ -180,11 +212,13 @@ class JobShipmentEndpoint(BaseEndpoint):
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
 
-    def post_shipment_exportdata(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def post_shipment_exportdata(
+        self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         """POST /api/job/{jobDisplayId}/shipment/exportdata
 
-        
-        
+
+
 
         Returns:
             Dict[str, Any]: API response data
