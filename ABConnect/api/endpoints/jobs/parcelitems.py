@@ -3,8 +3,9 @@
 Auto-generated from swagger.json specification.
 """
 
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Union
 from ABConnect.api.endpoints.base import BaseEndpoint
+from ABConnect.api.models.jobparcelitems import ParcelItem, SaveAllParcelItemsRequest
 
 
 class JobParcelItemsEndpoint(BaseEndpoint):
@@ -15,41 +16,63 @@ class JobParcelItemsEndpoint(BaseEndpoint):
 
     api_path = "job"
 
-    def get_parcelitems(self, jobDisplayId: str) -> Dict[str, Any]:
+    def get_parcelitems(
+        self, jobDisplayId: str
+    ) -> Union[List[ParcelItem], List[Dict[str, Any]]]:
         """GET /api/job/{jobDisplayId}/parcelitems
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
 
         Returns:
-            Dict[str, Any]: API response data
+            Union[List[ParcelItem], List[Dict[str, Any]]]: List of ParcelItem models or list of dicts
         """
-        path = "/{jobDisplayId}/parcelitems"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
+        path = f"/{jobDisplayId}/parcelitems"
+        kwargs = {"cast_response": True}
         return self._make_request("GET", path, **kwargs)
 
-    def post_parcelitems(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def post_parcelitems(
+        self,
+        jobDisplayId: str,
+        data: Optional[Union[SaveAllParcelItemsRequest, Dict[str, Any]]] = None,
+        parcel_items: Optional[List[Union[ParcelItem, Dict[str, Any]]]] = None,
+        force_update: bool = False,
+        job_modified_date: Optional[str] = None,
+    ) -> Union[List[ParcelItem], List[Dict[str, Any]]]:
         """POST /api/job/{jobDisplayId}/parcelitems
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: SaveAllParcelItemsRequest as Pydantic model or dict (optional, overrides other params)
+            parcel_items: List of ParcelItem models or dicts (used if data not provided)
+            force_update: Force update flag (default: False)
+            job_modified_date: Job modified date (optional)
 
         Returns:
-            Dict[str, Any]: API response data
+            Union[List[ParcelItem], List[Dict[str, Any]]]: List of ParcelItem models or list of dicts
         """
-        path = "/{jobDisplayId}/parcelitems"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        if data is not None:
-            kwargs["json"] = data
+        path = f"/{jobDisplayId}/parcelitems"
+        kwargs = {"cast_response": True}
+
+        # Use provided data or construct from parameters
+        if data is None:
+            data = SaveAllParcelItemsRequest(
+                parcel_items=parcel_items,
+                force_update=force_update,
+                job_modified_date=job_modified_date,
+            )
+
+        # Validate incoming data and convert to API format
+        validated_data = SaveAllParcelItemsRequest.check(data)
+        kwargs["json"] = validated_data
+
         return self._make_request("POST", path, **kwargs)
 
     def get_parcel_items_with_materials(self, jobDisplayId: str) -> Dict[str, Any]:
         """GET /api/job/{jobDisplayId}/parcel-items-with-materials
 
-        
-        
+
+
 
         Returns:
             Dict[str, Any]: API response data
@@ -59,11 +82,13 @@ class JobParcelItemsEndpoint(BaseEndpoint):
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
 
-    def delete_parcelitems(self, parcelItemId: str, jobDisplayId: str) -> Dict[str, Any]:
+    def delete_parcelitems(
+        self, parcelItemId: str, jobDisplayId: str
+    ) -> Dict[str, Any]:
         """DELETE /api/job/{jobDisplayId}/parcelitems/{parcelItemId}
 
-        
-        
+
+
 
         Returns:
             Dict[str, Any]: API response data
