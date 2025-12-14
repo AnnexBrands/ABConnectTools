@@ -835,6 +835,540 @@
         }
       }
     },
+    "/api/commodity/{id}": {
+      "get": {
+        "tags": [
+          "Commodity"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityWithParentsServiceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityWithParentsServiceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityWithParentsServiceResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Commodity"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCommodityModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCommodityModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCommodityModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCommodityModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityServiceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityServiceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityServiceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/commodity/suggestions": {
+      "post": {
+        "tags": [
+          "Commodity"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetCommoditySuggestionsDataSourceLoadOptions"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetCommoditySuggestionsDataSourceLoadOptions"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetCommoditySuggestionsDataSourceLoadOptions"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetCommoditySuggestionsDataSourceLoadOptions"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommodityWithParents"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommodityWithParents"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommodityWithParents"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/commodity/search": {
+      "post": {
+        "tags": [
+          "Commodity"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApiDataSourceLoadOptions"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApiDataSourceLoadOptions"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApiDataSourceLoadOptions"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApiDataSourceLoadOptions"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommodityDetails"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommodityDetails"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommodityDetails"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/commodity": {
+      "post": {
+        "tags": [
+          "Commodity"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCommodityModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCommodityModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCommodityModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCommodityModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityServiceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityServiceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityServiceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/commodity-map/{id}": {
+      "get": {
+        "tags": [
+          "CommodityMap"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityMapDetailsServiceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityMapDetailsServiceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityMapDetailsServiceResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CommodityMap"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCommodityMapModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCommodityMapModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCommodityMapModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCommodityMapModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityMapServiceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityMapServiceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityMapServiceResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "CommodityMap"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceBaseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceBaseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceBaseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/commodity-map/search": {
+      "post": {
+        "tags": [
+          "CommodityMap"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApiDataSourceLoadOptions"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApiDataSourceLoadOptions"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApiDataSourceLoadOptions"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebApiDataSourceLoadOptions"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommodityMapDetails"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommodityMapDetails"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CommodityMapDetails"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/commodity-map": {
+      "post": {
+        "tags": [
+          "CommodityMap"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCommodityMapModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCommodityMapModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCommodityMapModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCommodityMapModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityMapServiceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityMapServiceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CommodityMapServiceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/companies/{id}": {
       "get": {
         "tags": [
@@ -1835,6 +2369,55 @@
         }
       }
     },
+    "/api/companies/suggest-carriers": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "parameters": [
+          {
+            "name": "trackingNumber",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "minLength": 5,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CarrierCompanyInfo"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CarrierCompanyInfo"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CarrierCompanyInfo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/company/{companyId}/accounts/stripe/connecturl": {
       "get": {
         "tags": [
@@ -1988,6 +2571,98 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/company/{companyId}/gridsettings": {
+      "get": {
+        "tags": [
+          "CompanySettings"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dashboardType",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/DashboardType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GridSettingsEntity"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GridSettingsEntity"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GridSettingsEntity"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CompanySettings"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveGridSettingsModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveGridSettingsModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveGridSettingsModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveGridSettingsModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -3041,7 +3716,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/InboundNewDashboardItem"
+                    "$ref": "#/components/schemas/AgentInboundViewRecord"
                   }
                 }
               },
@@ -3049,7 +3724,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/InboundNewDashboardItem"
+                    "$ref": "#/components/schemas/AgentInboundViewRecord"
                   }
                 }
               },
@@ -3057,7 +3732,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/InboundNewDashboardItem"
+                    "$ref": "#/components/schemas/AgentInboundViewRecord"
                   }
                 }
               }
@@ -3133,7 +3808,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/RecentEstimatesNewDashboardItem"
+                    "$ref": "#/components/schemas/AgentRecentEstimatesViewRecord"
                   }
                 }
               },
@@ -3141,7 +3816,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/RecentEstimatesNewDashboardItem"
+                    "$ref": "#/components/schemas/AgentRecentEstimatesViewRecord"
                   }
                 }
               },
@@ -3149,7 +3824,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/RecentEstimatesNewDashboardItem"
+                    "$ref": "#/components/schemas/AgentRecentEstimatesViewRecord"
                   }
                 }
               }
@@ -3225,7 +3900,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/InhouseNewDashboardItem"
+                    "$ref": "#/components/schemas/AgentInhouseViewRecord"
                   }
                 }
               },
@@ -3233,7 +3908,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/InhouseNewDashboardItem"
+                    "$ref": "#/components/schemas/AgentInhouseViewRecord"
                   }
                 }
               },
@@ -3241,7 +3916,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/InhouseNewDashboardItem"
+                    "$ref": "#/components/schemas/AgentInhouseViewRecord"
                   }
                 }
               }
@@ -3317,7 +3992,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/OutboundNewDashboardItem"
+                    "$ref": "#/components/schemas/AgentOutboundViewRecord"
                   }
                 }
               },
@@ -3325,7 +4000,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/OutboundNewDashboardItem"
+                    "$ref": "#/components/schemas/AgentOutboundViewRecord"
                   }
                 }
               },
@@ -3333,7 +4008,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/OutboundNewDashboardItem"
+                    "$ref": "#/components/schemas/AgentOutboundViewRecord"
                   }
                 }
               }
@@ -3409,7 +4084,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/LocalDeliveriesNewDashboardItem"
+                    "$ref": "#/components/schemas/AgentLocalDeliveriesViewRecord"
                   }
                 }
               },
@@ -3417,7 +4092,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/LocalDeliveriesNewDashboardItem"
+                    "$ref": "#/components/schemas/AgentLocalDeliveriesViewRecord"
                   }
                 }
               },
@@ -3425,7 +4100,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/LocalDeliveriesNewDashboardItem"
+                    "$ref": "#/components/schemas/AgentLocalDeliveriesViewRecord"
                   }
                 }
               }
@@ -3450,195 +4125,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/api/dashboard/incrementjobstatus": {
-      "post": {
-        "tags": [
-          "Dashboard"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/IncrementJobStatusInputModel"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/IncrementJobStatusInputModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/IncrementJobStatusInputModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/IncrementJobStatusInputModel"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/IncrementJobStatusResponseModel"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/IncrementJobStatusResponseModel"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/IncrementJobStatusResponseModel"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/dashboard/undoincrementjobstatus": {
-      "post": {
-        "tags": [
-          "Dashboard"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UndoIncrementJobStatusInputModel"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UndoIncrementJobStatusInputModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UndoIncrementJobStatusInputModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UndoIncrementJobStatusInputModel"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/dashboard/gridsettings": {
-      "get": {
-        "tags": [
-          "Dashboard"
-        ],
-        "parameters": [
-          {
-            "name": "companyId",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "dashboardType",
-            "in": "query",
-            "schema": {
-              "$ref": "#/components/schemas/DashboardType"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/GridSettingsEntity"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GridSettingsEntity"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GridSettingsEntity"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Dashboard"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaveGridSettingsModel"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaveGridSettingsModel"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaveGridSettingsModel"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaveGridSettingsModel"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
           }
         }
       }
@@ -4291,10 +4777,51 @@
         }
       }
     },
-    "/api/job/{jobDisplayId}/book": {
-      "post": {
+    "/api/job/{jobDisplayId}/form/invoice": {
+      "get": {
         "tags": [
-          "Job"
+          "InvoiceJobForm"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/FormType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/job/{jobDisplayId}/form/invoice/editable": {
+      "get": {
+        "tags": [
+          "InvoiceJobForm"
         ],
         "parameters": [
           {
@@ -4308,7 +4835,24 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/USAREditableFormResponseModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/USAREditableFormResponseModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/USAREditableFormResponseModel"
+                }
+              }
+            }
           }
         }
       }
@@ -4711,6 +5255,62 @@
           "200": {
             "description": "Success"
           }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/job/{jobDisplayId}/item/{itemId}": {
+      "put": {
+        "tags": [
+          "Job"
+        ],
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "jobDisplayId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobItemInfoData"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobItemInfoData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobItemInfoData"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/JobItemInfoData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
         }
       }
     },
@@ -4777,7 +5377,24 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobUpdatePageConfig"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobUpdatePageConfig"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobUpdatePageConfig"
+                }
+              }
+            }
           }
         }
       }
@@ -4889,6 +5506,28 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/job/{jobDisplayId}/book": {
+      "post": {
+        "tags": [
+          "JobBooking"
+        ],
+        "parameters": [
+          {
+            "name": "jobDisplayId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -5086,40 +5725,333 @@
         }
       }
     },
-    "/api/job/{jobDisplayId}/form/{formid}": {
+    "/api/job/{jobDisplayId}/form/item-labels": {
+      "get": {
+        "tags": [
+          "JobForm"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/job/{jobDisplayId}/form/packaging-labels": {
       "get": {
         "tags": [
           "JobForm"
         ],
         "parameters": [
           {
-            "name": "formId",
-            "in": "path",
-            "required": true,
+            "name": "shipmentPlanId",
+            "in": "query",
             "schema": {
-              "$ref": "#/components/schemas/KnownFormId"
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/job/{jobDisplayId}/form/quick-sale": {
+      "get": {
+        "tags": [
+          "JobForm"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/job/{jobDisplayId}/form/credit-card-authorization": {
+      "get": {
+        "tags": [
+          "JobForm"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/job/{jobDisplayId}/form/address-label": {
+      "get": {
+        "tags": [
+          "JobForm"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/job/{jobDisplayId}/form/customer-quote": {
+      "get": {
+        "tags": [
+          "JobForm"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/job/{jobDisplayId}/form/packing-slip": {
+      "get": {
+        "tags": [
+          "JobForm"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/job/{jobDisplayId}/form/packaging-specification": {
+      "get": {
+        "tags": [
+          "JobForm"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/job/{jobDisplayId}/form/bill-of-lading": {
+      "get": {
+        "tags": [
+          "JobForm"
+        ],
+        "parameters": [
+          {
+            "name": "shipmentPlanId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
             }
           },
+          {
+            "name": "providerOptionIndex",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/job/{jobDisplayId}/form/operations": {
+      "get": {
+        "tags": [
+          "JobForm"
+        ],
+        "parameters": [
           {
             "name": "type",
             "in": "query",
             "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "shipmentPlanID",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "jobDisplayId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
+              "$ref": "#/components/schemas/OperationsFormType"
             }
           }
         ],
@@ -7558,7 +8490,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int64"
             }
           }
         ],
@@ -7582,6 +8515,52 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/SendSMSModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/job/{jobDisplayId}/sms/read": {
+      "post": {
+        "tags": [
+          "JobSms"
+        ],
+        "parameters": [
+          {
+            "name": "jobDisplayId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarkSmsAsReadModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarkSmsAsReadModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarkSmsAsReadModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarkSmsAsReadModel"
               }
             }
           }
@@ -8290,6 +9269,111 @@
         }
       }
     },
+    "/api/job/{jobDisplayId}/timeline/incrementjobstatus": {
+      "post": {
+        "tags": [
+          "JobTimeline"
+        ],
+        "parameters": [
+          {
+            "name": "jobDisplayId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IncrementJobStatusInputModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IncrementJobStatusInputModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IncrementJobStatusInputModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/IncrementJobStatusInputModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncrementJobStatusResponseModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncrementJobStatusResponseModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncrementJobStatusResponseModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/job/{jobDisplayId}/timeline/undoincrementjobstatus": {
+      "post": {
+        "tags": [
+          "JobTimeline"
+        ],
+        "parameters": [
+          {
+            "name": "jobDisplayId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/job/{jobDisplayId}/tracking": {
       "get": {
         "tags": [
@@ -8819,6 +9903,227 @@
         }
       }
     },
+    "/api/company/{companyId}/material": {
+      "get": {
+        "tags": [
+          "Material"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "options",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/WebApiDataSourceLoadOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CompanyMaterial"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CompanyMaterial"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CompanyMaterial"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Material"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveCompanyMaterialModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveCompanyMaterialModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveCompanyMaterialModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveCompanyMaterialModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyMaterial"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyMaterial"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyMaterial"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/company/{companyId}/material/{materialId}": {
+      "put": {
+        "tags": [
+          "Material"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "materialId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveCompanyMaterialModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveCompanyMaterialModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveCompanyMaterialModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveCompanyMaterialModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyMaterial"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyMaterial"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyMaterial"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Material"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "materialId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/note": {
       "get": {
         "tags": [
@@ -9083,6 +10388,155 @@
         "responses": {
           "200": {
             "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/partner/{id}": {
+      "get": {
+        "tags": [
+          "Partner"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerServiceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerServiceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PartnerServiceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/partner": {
+      "get": {
+        "tags": [
+          "Partner"
+        ],
+        "parameters": [
+          {
+            "name": "searchText",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Partner"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Partner"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Partner"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/partner/search": {
+      "post": {
+        "tags": [
+          "Partner"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchPartnersDataSourceLoadOptions"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchPartnersDataSourceLoadOptions"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchPartnersDataSourceLoadOptions"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchPartnersDataSourceLoadOptions"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Partner"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Partner"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Partner"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -10163,24 +11617,67 @@
         ],
         "requestBody": {
           "content": {
-            "application/json-patch+json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/TwilioSmsStatusCallback"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TwilioSmsStatusCallback"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TwilioSmsStatusCallback"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/TwilioSmsStatusCallback"
+                "type": "object",
+                "properties": {
+                  "MessagingServiceSid": {
+                    "type": "string"
+                  },
+                  "ApiVersion": {
+                    "type": "string"
+                  },
+                  "MessageStatus": {
+                    "type": "string"
+                  },
+                  "SmsSid": {
+                    "type": "string"
+                  },
+                  "SmsStatus": {
+                    "type": "string"
+                  },
+                  "To": {
+                    "type": "string"
+                  },
+                  "From": {
+                    "type": "string"
+                  },
+                  "MessageSid": {
+                    "type": "string"
+                  },
+                  "AccountSid": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "MessagingServiceSid": {
+                  "style": "form"
+                },
+                "ApiVersion": {
+                  "style": "form"
+                },
+                "MessageStatus": {
+                  "style": "form"
+                },
+                "SmsSid": {
+                  "style": "form"
+                },
+                "SmsStatus": {
+                  "style": "form"
+                },
+                "To": {
+                  "style": "form"
+                },
+                "From": {
+                  "style": "form"
+                },
+                "MessageSid": {
+                  "style": "form"
+                },
+                "AccountSid": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -10188,6 +11685,177 @@
         "responses": {
           "200": {
             "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/webhooks/twilio/body-sms-inbound": {
+      "post": {
+        "tags": [
+          "TwilioWebhook"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TwilioInboundMessageWebhookModel"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TwilioInboundMessageWebhookModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TwilioInboundMessageWebhookModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TwilioInboundMessageWebhookModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/webhooks/twilio/form-sms-inbound": {
+      "post": {
+        "tags": [
+          "TwilioWebhook"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "MessagingServiceSid": {
+                    "type": "string"
+                  },
+                  "AccountSid": {
+                    "type": "string"
+                  },
+                  "From": {
+                    "type": "string"
+                  },
+                  "To": {
+                    "type": "string"
+                  },
+                  "Body": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "MessagingServiceSid": {
+                  "style": "form"
+                },
+                "AccountSid": {
+                  "style": "form"
+                },
+                "From": {
+                  "style": "form"
+                },
+                "To": {
+                  "style": "form"
+                },
+                "Body": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/job/{jobDisplayId}/form/usar": {
+      "get": {
+        "tags": [
+          "UsarJobForm"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/UsarFormType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/job/{jobDisplayId}/form/usar/editable": {
+      "get": {
+        "tags": [
+          "UsarJobForm"
+        ],
+        "parameters": [
+          {
+            "name": "jobDisplayId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/USAREditableFormResponseModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/USAREditableFormResponseModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/USAREditableFormResponseModel"
+                }
+              }
+            }
           }
         }
       }
@@ -10401,6 +12069,48 @@
           "saturday": {
             "type": "number",
             "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddCommodityMapModel": {
+        "type": "object",
+        "properties": {
+          "commodityId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "partnerId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "outerId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddCommodityModel": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },
@@ -10784,6 +12494,662 @@
           "name": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgentInboundViewRecord": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parentCompanyId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "currentJobStatusSort": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currentJobStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "jobID": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "jobDisplayID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "unreadInboundExists": {
+            "type": "boolean"
+          },
+          "notesState": {
+            "$ref": "#/components/schemas/NotesState"
+          },
+          "usarSigned": {
+            "type": "boolean"
+          },
+          "paymentState": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "actionRequired": {
+            "type": "boolean"
+          },
+          "rfqState": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isQuickSale": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "companyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "intacctStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "pickupAgentCompany": {
+            "type": "string",
+            "nullable": true
+          },
+          "pickupCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "pickupZip": {
+            "type": "string",
+            "nullable": true
+          },
+          "destCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "destZip": {
+            "type": "string",
+            "nullable": true
+          },
+          "pickupStartDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "pickupStartTime": {
+            "$ref": "#/components/schemas/TimeSpan"
+          },
+          "pickupEndTime": {
+            "$ref": "#/components/schemas/TimeSpan"
+          },
+          "franchisee": {
+            "type": "string",
+            "nullable": true
+          },
+          "customerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "pickupZone": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "jobPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "otherRefNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesRep": {
+            "type": "string",
+            "nullable": true
+          },
+          "laborCount": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "laborTime": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "followUpPipelineId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "followUpHeatId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "followUpDueDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isJobOnHold": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgentInhouseViewRecord": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parentCompanyId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "currentJobStatusSort": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currentJobStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "jobID": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "jobDisplayID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "unreadInboundExists": {
+            "type": "boolean"
+          },
+          "notesState": {
+            "$ref": "#/components/schemas/NotesState"
+          },
+          "usarSigned": {
+            "type": "boolean"
+          },
+          "paymentState": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isQuickSale": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "companyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "intacctStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "franchisee": {
+            "type": "string",
+            "nullable": true
+          },
+          "pickupCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "destCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "destZip": {
+            "type": "string",
+            "nullable": true
+          },
+          "pickupDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "customerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "otherRefNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesRep": {
+            "type": "string",
+            "nullable": true
+          },
+          "daysInhouse": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "shipOutBy": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "eta": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "deliveryDeadLine": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "jobPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "carrierName": {
+            "type": "string",
+            "nullable": true
+          },
+          "followUpPipelineId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "followUpHeatId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "followUpDueDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isJobOnHold": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgentLocalDeliveriesViewRecord": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parentCompanyId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "currentJobStatusSort": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currentJobStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "jobID": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "jobDisplayID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "intacctStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "deliveryZone": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "deliveryContact": {
+            "type": "string",
+            "nullable": true
+          },
+          "deliveryCompany": {
+            "type": "string",
+            "nullable": true
+          },
+          "destCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "destZip": {
+            "type": "string",
+            "nullable": true
+          },
+          "deliveryScheduledStart": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "deliveryScheduledEnd": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "deliveryComplete": {
+            "type": "string",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          },
+          "proNum": {
+            "type": "string",
+            "nullable": true
+          },
+          "transportationState": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "transportationStateDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "laborCount": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "laborTime": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "unreadInboundExists": {
+            "type": "boolean"
+          },
+          "notesState": {
+            "$ref": "#/components/schemas/NotesState"
+          },
+          "usarSigned": {
+            "type": "boolean"
+          },
+          "paymentState": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "salesRep": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgentOutboundViewRecord": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parentCompanyId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "currentJobStatusSort": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currentJobStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "jobID": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "jobDisplayID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "unreadInboundExists": {
+            "type": "boolean"
+          },
+          "notesState": {
+            "$ref": "#/components/schemas/NotesState"
+          },
+          "usarSigned": {
+            "type": "boolean"
+          },
+          "paymentState": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isQuickSale": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "companyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "intacctStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "franchisee": {
+            "type": "string",
+            "nullable": true
+          },
+          "destCity": {
+            "type": "string",
+            "nullable": true
+          },
+          "destZip": {
+            "type": "string",
+            "nullable": true
+          },
+          "pickupDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "totalDays": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "deliveryDeadLine": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "daysToDelDeadLine": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "carrierName": {
+            "type": "string",
+            "nullable": true
+          },
+          "eta": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "customerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "jobPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "proNum": {
+            "type": "string",
+            "nullable": true
+          },
+          "transportationState": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "transportationStateDescription": {
+            "type": "string",
+            "nullable": true
+          },
+          "otherRefNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesRep": {
+            "type": "string",
+            "nullable": true
+          },
+          "followUpPipelineId": {
+            "type": "string",
+            "nullable": true
+          },
+          "followUpHeatId": {
+            "type": "string",
+            "nullable": true
+          },
+          "followUpDueDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isJobOnHold": {
+            "type": "boolean"
+          },
+          "shipped": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AgentRecentEstimatesViewRecord": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parentCompanyId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "currentJobStatusSort": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currentJobStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "jobID": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "jobDisplayID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "jobStatusID": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "customerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "salesRep": {
+            "type": "string",
+            "nullable": true
+          },
+          "item": {
+            "type": "string",
+            "nullable": true
+          },
+          "franchisee": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "jobPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "quotedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "otherRefNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "isNotReviewed": {
+            "type": "boolean"
+          },
+          "unReadInboundExists": {
+            "type": "boolean"
+          },
+          "notesState": {
+            "$ref": "#/components/schemas/NotesState"
+          },
+          "rfqState": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "usarSigned": {
+            "type": "boolean"
+          },
+          "paymentState": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -11338,6 +13704,10 @@
           },
           "accessLevel": {
             "$ref": "#/components/schemas/JobAccessLevel"
+          },
+          "unreadSMSCount": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -11463,6 +13833,27 @@
           "friendlyName": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CarrierCompanyInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "carrierAPI": {
+            "$ref": "#/components/schemas/CarrierAPI"
           }
         },
         "additionalProperties": false
@@ -11780,67 +14171,231 @@
         "format": "int32"
       },
       "Commodity": {
-        "required": [
-          "quantity",
-          "unitPrice",
-          "weight"
-        ],
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
           "description": {
             "type": "string",
             "nullable": true
           },
-          "weight": {
-            "type": "number",
-            "format": "double"
-          },
-          "unitPrice": {
-            "type": "number",
-            "format": "double"
-          },
-          "countryId": {
-            "type": "string",
-            "format": "uuid",
+          "parentId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           },
-          "countryIATACode": {
-            "type": "string",
-            "nullable": true
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CommodityDetails": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
           },
-          "quantity": {
-            "type": "number",
-            "format": "double"
-          },
-          "unitOfMeasure": {
+          "code": {
             "type": "string",
             "nullable": true
           },
-          "scheduleBNumber": {
+          "name": {
             "type": "string",
             "nullable": true
           },
-          "eccn": {
+          "description": {
             "type": "string",
             "nullable": true
           },
-          "exportLicenseCode": {
+          "isActive": {
+            "type": "boolean"
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "parentName": {
             "type": "string",
             "nullable": true
           },
-          "specialMarks": {
+          "parentCode": {
             "type": "string",
             "nullable": true
           },
-          "itemValue": {
-            "type": "number",
-            "format": "double",
+          "parentIsActive": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CommodityForMapInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nameOrCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CommodityMap": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "commodityId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "partnerId": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           },
-          "fullDescription": {
+          "outerId": {
             "type": "string",
-            "nullable": true,
-            "readOnly": true
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CommodityMapDetails": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "outerId": {
+            "type": "string",
+            "nullable": true
+          },
+          "commodity": {
+            "$ref": "#/components/schemas/CommodityForMapInfo"
+          },
+          "partner": {
+            "$ref": "#/components/schemas/Partner"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CommodityMapDetailsServiceResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/CommodityMapDetails"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CommodityMapServiceResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/CommodityMap"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CommodityServiceResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Commodity"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CommodityWithParents": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "parentCommodities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Commodity"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CommodityWithParentsServiceResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/CommodityWithParents"
           }
         },
         "additionalProperties": false
@@ -12614,6 +15169,10 @@
             "type": "string",
             "nullable": true
           },
+          "mapsMarkerImage": {
+            "type": "string",
+            "nullable": true
+          },
           "children": {
             "type": "array",
             "items": {
@@ -12790,6 +15349,79 @@
           "typeId": {
             "type": "string",
             "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompanyMaterial": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "length": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "width": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "height": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "weight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cost": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "wasteFactor": {
+            "type": "number",
+            "format": "double",
             "nullable": true
           }
         },
@@ -13897,7 +16529,7 @@
           },
           "filter": {
             "type": "array",
-            "items": {},
+            "items": { },
             "nullable": true
           },
           "totalSummary": {
@@ -14629,6 +17261,72 @@
         },
         "additionalProperties": false
       },
+      "ExportDataCommodity": {
+        "required": [
+          "quantity",
+          "unitPrice",
+          "weight"
+        ],
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "weight": {
+            "type": "number",
+            "format": "double"
+          },
+          "unitPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "countryId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "countryIATACode": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "unitOfMeasure": {
+            "type": "string",
+            "nullable": true
+          },
+          "scheduleBNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "eccn": {
+            "type": "string",
+            "nullable": true
+          },
+          "exportLicenseCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "specialMarks": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "fullDescription": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ExportPackingInfo": {
         "type": "object",
         "properties": {
@@ -14880,6 +17578,16 @@
         "type": "integer",
         "format": "int32"
       },
+      "FormType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "FormsShipmentPlan": {
         "type": "object",
         "properties": {
@@ -14989,8 +17697,8 @@
           "roadRunner": {
             "$ref": "#/components/schemas/RoadRunnerAccountData"
           },
-          "pilot": {
-            "$ref": "#/components/schemas/PilotAccountData"
+          "maersk": {
+            "$ref": "#/components/schemas/MaerskAccountData"
           },
           "teamWW": {
             "$ref": "#/components/schemas/TeamWWAccountData"
@@ -15219,6 +17927,120 @@
         ],
         "type": "integer",
         "format": "int32"
+      },
+      "GetCommoditySuggestionsDataSourceLoadOptions": {
+        "type": "object",
+        "properties": {
+          "requireTotalCount": {
+            "type": "boolean"
+          },
+          "requireGroupCount": {
+            "type": "boolean"
+          },
+          "isCountQuery": {
+            "type": "boolean"
+          },
+          "isSummaryQuery": {
+            "type": "boolean"
+          },
+          "skip": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "take": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SortingInfo"
+            },
+            "nullable": true
+          },
+          "group": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupingInfo"
+            },
+            "nullable": true
+          },
+          "filter": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "totalSummary": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SummaryInfo"
+            },
+            "nullable": true
+          },
+          "groupSummary": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SummaryInfo"
+            },
+            "nullable": true
+          },
+          "select": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "preSelect": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "remoteSelect": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "remoteGrouping": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "expandLinqSumType": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "primaryKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "defaultSort": {
+            "type": "string",
+            "nullable": true
+          },
+          "stringToLower": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "paginateViaPrimaryKey": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "sortByPrimaryKey": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "allowAsyncOverSync": {
+            "type": "boolean"
+          },
+          "searchModel": {
+            "$ref": "#/components/schemas/SearchCommodityModel"
+          }
+        },
+        "additionalProperties": false
       },
       "GlobalTranzAccountData": {
         "type": "object",
@@ -15506,149 +18328,9 @@
         },
         "additionalProperties": false
       },
-      "InboundNewDashboardItem": {
-        "type": "object",
-        "properties": {
-          "jobID": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "jobDisplayID": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "currentJobStatus": {
-            "type": "string",
-            "nullable": true
-          },
-          "unreadInboundExists": {
-            "type": "boolean"
-          },
-          "importantNoteExists": {
-            "type": "boolean"
-          },
-          "usarSigned": {
-            "type": "boolean"
-          },
-          "paymentState": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "actionRequired": {
-            "type": "boolean"
-          },
-          "rfqState": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "isQuickSale": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "companyName": {
-            "type": "string",
-            "nullable": true
-          },
-          "intacctStatus": {
-            "type": "string",
-            "nullable": true
-          },
-          "pickupAgentCompany": {
-            "type": "string",
-            "nullable": true
-          },
-          "pickupCity": {
-            "type": "string",
-            "nullable": true
-          },
-          "pickupZip": {
-            "type": "string",
-            "nullable": true
-          },
-          "destCity": {
-            "type": "string",
-            "nullable": true
-          },
-          "destZip": {
-            "type": "string",
-            "nullable": true
-          },
-          "pickupDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "franchisee": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerName": {
-            "type": "string",
-            "nullable": true
-          },
-          "pickUpZone": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "jobPrice": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "otherRefNo": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "salesRep": {
-            "type": "string",
-            "nullable": true
-          },
-          "numberOfMen": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "tripTime": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "onSiteTime": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "followUpPipelineId": {
-            "type": "string",
-            "nullable": true
-          },
-          "followUpHeatId": {
-            "type": "string",
-            "nullable": true
-          },
-          "followUpDueDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "isJobOnHold": {
-            "type": "boolean"
-          }
-        },
-        "additionalProperties": false
-      },
       "IncrementJobStatusInputModel": {
         "type": "object",
         "properties": {
-          "jobId": {
-            "type": "string",
-            "format": "uuid"
-          },
           "clientDateTime": {
             "type": "string",
             "format": "date-time"
@@ -15680,127 +18362,6 @@
         ],
         "type": "integer",
         "format": "int32"
-      },
-      "InhouseNewDashboardItem": {
-        "type": "object",
-        "properties": {
-          "jobID": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "jobDisplayID": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "isQuickSale": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "companyName": {
-            "type": "string",
-            "nullable": true
-          },
-          "currentJobStatus": {
-            "type": "string",
-            "nullable": true
-          },
-          "intacctStatus": {
-            "type": "string",
-            "nullable": true
-          },
-          "franchisee": {
-            "type": "string",
-            "nullable": true
-          },
-          "originCity": {
-            "type": "string",
-            "nullable": true
-          },
-          "destCity": {
-            "type": "string",
-            "nullable": true
-          },
-          "destZip": {
-            "type": "string",
-            "nullable": true
-          },
-          "pickupDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "customerName": {
-            "type": "string",
-            "nullable": true
-          },
-          "otherRefNo": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "salesRep": {
-            "type": "string",
-            "nullable": true
-          },
-          "daysInhouse": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "shipOutBy": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "eta": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "deliveryDeadLine": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "jobPrice": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "carrierName": {
-            "type": "string",
-            "nullable": true
-          },
-          "unreadInboundExists": {
-            "type": "boolean"
-          },
-          "followUpPipelineId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "followUpHeatId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
-          },
-          "followUpDueDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "isJobOnHold": {
-            "type": "boolean"
-          },
-          "laborHrs": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
       },
       "InitialNoteModel": {
         "required": [
@@ -15950,7 +18511,7 @@
           "commodities": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Commodity"
+              "$ref": "#/components/schemas/ExportDataCommodity"
             },
             "nullable": true
           },
@@ -16381,6 +18942,14 @@
           "autoPackFailed": {
             "type": "boolean"
           },
+          "doNotTip": {
+            "type": "boolean"
+          },
+          "commodityId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "longestDimension": {
             "type": "number",
             "format": "double",
@@ -16531,6 +19100,9 @@
           },
           "jobContactType": {
             "$ref": "#/components/schemas/JobContactType"
+          },
+          "propertyType": {
+            "$ref": "#/components/schemas/PropertyType"
           }
         },
         "additionalProperties": false
@@ -16553,7 +19125,7 @@
           "commodities": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Commodity"
+              "$ref": "#/components/schemas/ExportDataCommodity"
             },
             "nullable": true
           },
@@ -16602,6 +19174,25 @@
           },
           "upsSpecific": {
             "$ref": "#/components/schemas/UPSSpecific"
+          }
+        },
+        "additionalProperties": false
+      },
+      "JobItemInfoData": {
+        "type": "object",
+        "properties": {
+          "commodityId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "notedConditions": {
+            "type": "string",
+            "nullable": true
+          },
+          "jobItemNotes": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -16827,24 +19418,17 @@
         "type": "integer",
         "format": "int32"
       },
-      "KnownFormId": {
-        "enum": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6,
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-        ],
-        "type": "integer",
-        "format": "int32"
+      "JobUpdatePageConfig": {
+        "type": "object",
+        "properties": {
+          "pageControls": {
+            "$ref": "#/components/schemas/UpdatePageControls"
+          },
+          "workflowControls": {
+            "$ref": "#/components/schemas/WorkflowControls"
+          }
+        },
+        "additionalProperties": false
       },
       "LabelImageType": {
         "enum": [
@@ -16951,112 +19535,6 @@
         "type": "integer",
         "format": "int32"
       },
-      "LocalDeliveriesNewDashboardItem": {
-        "type": "object",
-        "properties": {
-          "jobID": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "jobDisplayID": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "currentJobStatus": {
-            "type": "string",
-            "nullable": true
-          },
-          "intacctStatus": {
-            "type": "string",
-            "nullable": true
-          },
-          "deliveryZone": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "deliveryContact": {
-            "type": "string",
-            "nullable": true
-          },
-          "deliveryCompany": {
-            "type": "string",
-            "nullable": true
-          },
-          "destCity": {
-            "type": "string",
-            "nullable": true
-          },
-          "destZip": {
-            "type": "string",
-            "nullable": true
-          },
-          "deliveryScheduledStart": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "deliveryScheduledEnd": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "deliveryComplete": {
-            "type": "string",
-            "nullable": true
-          },
-          "note": {
-            "type": "string",
-            "nullable": true
-          },
-          "proNum": {
-            "type": "string",
-            "nullable": true
-          },
-          "transportationState": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "transportationStateDescription": {
-            "type": "string",
-            "nullable": true
-          },
-          "numberOfMen": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "tripTime": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "onSiteTime": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "unreadInboundExists": {
-            "type": "boolean"
-          },
-          "importantNoteExists": {
-            "type": "boolean"
-          },
-          "usarSigned": {
-            "type": "boolean"
-          },
-          "paymentState": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "salesRep": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "LookupItem": {
         "type": "object",
         "properties": {
@@ -17066,6 +19544,59 @@
           },
           "name": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MaerskAccountData": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "tariffHeaderId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "userName": {
+            "maxLength": 48,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "maxLength": 128,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "addressId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "controlStation": {
+            "maxLength": 32,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MarkSmsAsReadModel": {
+        "type": "object",
+        "properties": {
+          "smsIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
             "nullable": true
           }
         },
@@ -17535,6 +20066,15 @@
         },
         "additionalProperties": false
       },
+      "NotesState": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "ObtainNFMParcelItem": {
         "type": "object",
         "properties": {
@@ -17719,134 +20259,13 @@
         },
         "additionalProperties": false
       },
-      "OutboundNewDashboardItem": {
-        "type": "object",
-        "properties": {
-          "jobID": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "jobDisplayID": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "isQuickSale": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "companyName": {
-            "type": "string",
-            "nullable": true
-          },
-          "currentJobStatus": {
-            "type": "string",
-            "nullable": true
-          },
-          "intacctStatus": {
-            "type": "string",
-            "nullable": true
-          },
-          "franchisee": {
-            "type": "string",
-            "nullable": true
-          },
-          "destCity": {
-            "type": "string",
-            "nullable": true
-          },
-          "destZip": {
-            "type": "string",
-            "nullable": true
-          },
-          "pickupDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "totalDays": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "deliveryDeadLine": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "daysToDelDeadLine": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "carrierName": {
-            "type": "string",
-            "nullable": true
-          },
-          "eta": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "customerName": {
-            "type": "string",
-            "nullable": true
-          },
-          "jobPrice": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "proNum": {
-            "type": "string",
-            "nullable": true
-          },
-          "transportationState": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "transportationStateDescription": {
-            "type": "string",
-            "nullable": true
-          },
-          "otherRefNo": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "salesRep": {
-            "type": "string",
-            "nullable": true
-          },
-          "unreadInboundExists": {
-            "type": "boolean"
-          },
-          "followUpPipelineId": {
-            "type": "string",
-            "nullable": true
-          },
-          "followUpHeatId": {
-            "type": "string",
-            "nullable": true
-          },
-          "followUpDueDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "isJobOnHold": {
-            "type": "boolean"
-          },
-          "shipped": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
+      "OperationsFormType": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "OverridableAddressData": {
         "type": "object",
@@ -18197,6 +20616,36 @@
         },
         "additionalProperties": false
       },
+      "Partner": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PartnerServiceResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "errorMessage": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/Partner"
+          }
+        },
+        "additionalProperties": false
+      },
       "PaymentSourceDetails": {
         "type": "object",
         "properties": {
@@ -18276,45 +20725,6 @@
           "onSiteHours": {
             "type": "number",
             "format": "double"
-          }
-        },
-        "additionalProperties": false
-      },
-      "PilotAccountData": {
-        "type": "object",
-        "properties": {
-          "locationId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "tariffHeaderId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "userName": {
-            "maxLength": 48,
-            "minLength": 0,
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "maxLength": 128,
-            "minLength": 0,
-            "type": "string",
-            "nullable": true
-          },
-          "addressId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "controlStation": {
-            "maxLength": 32,
-            "minLength": 0,
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -18685,70 +21095,6 @@
         ],
         "type": "integer",
         "format": "int32"
-      },
-      "RecentEstimatesNewDashboardItem": {
-        "type": "object",
-        "properties": {
-          "jobID": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "jobDisplayID": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "jobStatusID": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "currentJobStatus": {
-            "type": "string",
-            "nullable": true
-          },
-          "customerName": {
-            "type": "string",
-            "nullable": true
-          },
-          "salesRep": {
-            "type": "string",
-            "nullable": true
-          },
-          "item": {
-            "type": "string",
-            "nullable": true
-          },
-          "franchisee": {
-            "type": "string",
-            "nullable": true
-          },
-          "companyName": {
-            "type": "string",
-            "nullable": true
-          },
-          "jobPrice": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "quotedDate": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "otherRefNo": {
-            "type": "string",
-            "nullable": true
-          },
-          "createdBy": {
-            "type": "string",
-            "nullable": true
-          },
-          "rfqState": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
       },
       "ReferredByReport": {
         "type": "object",
@@ -19287,6 +21633,70 @@
         },
         "additionalProperties": false
       },
+      "SaveCompanyMaterialModel": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "unit": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "length": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "width": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "height": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "weight": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cost": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "wasteFactor": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "SaveEntityResponse": {
         "type": "object",
         "properties": {
@@ -19374,16 +21784,11 @@
       },
       "SaveGridSettingsModel": {
         "required": [
-          "companyId",
           "dashboardType",
           "settings"
         ],
         "type": "object",
         "properties": {
-          "companyId": {
-            "type": "string",
-            "format": "uuid"
-          },
           "dashboardType": {
             "$ref": "#/components/schemas/DashboardType"
           },
@@ -19599,6 +22004,19 @@
         },
         "additionalProperties": false
       },
+      "SearchCommodityModel": {
+        "type": "object",
+        "properties": {
+          "searchText": {
+            "type": "string",
+            "nullable": true
+          },
+          "includeNotActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "SearchCompanyDataSourceLoadOptions": {
         "type": "object",
         "properties": {
@@ -19638,7 +22056,7 @@
           },
           "filter": {
             "type": "array",
-            "items": {},
+            "items": { },
             "nullable": true
           },
           "totalSummary": {
@@ -19995,6 +22413,10 @@
       "SearchCustomerInfo": {
         "type": "object",
         "properties": {
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
           "companyName": {
             "type": "string",
             "nullable": true
@@ -20034,6 +22456,10 @@
           },
           "sortBy": {
             "$ref": "#/components/schemas/SortByModel"
+          },
+          "quickSearchText": {
+            "type": "string",
+            "nullable": true
           },
           "jobInfo": {
             "$ref": "#/components/schemas/SearchJobInfo"
@@ -20094,6 +22520,117 @@
           "statusName": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SearchPartnersDataSourceLoadOptions": {
+        "type": "object",
+        "properties": {
+          "requireTotalCount": {
+            "type": "boolean"
+          },
+          "requireGroupCount": {
+            "type": "boolean"
+          },
+          "isCountQuery": {
+            "type": "boolean"
+          },
+          "isSummaryQuery": {
+            "type": "boolean"
+          },
+          "skip": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "take": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sort": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SortingInfo"
+            },
+            "nullable": true
+          },
+          "group": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupingInfo"
+            },
+            "nullable": true
+          },
+          "filter": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "totalSummary": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SummaryInfo"
+            },
+            "nullable": true
+          },
+          "groupSummary": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SummaryInfo"
+            },
+            "nullable": true
+          },
+          "select": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "preSelect": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "remoteSelect": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "remoteGrouping": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "expandLinqSumType": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "primaryKey": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "defaultSort": {
+            "type": "string",
+            "nullable": true
+          },
+          "stringToLower": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "paginateViaPrimaryKey": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "sortByPrimaryKey": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "allowAsyncOverSync": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -21135,7 +23672,7 @@
           },
           "filter": {
             "type": "array",
-            "items": {},
+            "items": { },
             "nullable": true
           },
           "totalSummary": {
@@ -21682,14 +24219,26 @@
         },
         "additionalProperties": false
       },
-      "TwilioSmsStatusCallback": {
+      "TwilioInboundMessageWebhookModel": {
         "type": "object",
         "properties": {
-          "messageStatus": {
+          "messagingServiceSid": {
             "type": "string",
             "nullable": true
           },
-          "messageSid": {
+          "accountSid": {
+            "type": "string",
+            "nullable": true
+          },
+          "from": {
+            "type": "string",
+            "nullable": true
+          },
+          "to": {
+            "type": "string",
+            "nullable": true
+          },
+          "body": {
             "type": "string",
             "nullable": true
           }
@@ -21743,6 +24292,19 @@
           "exemptionOrITN": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "USAREditableFormResponseModel": {
+        "type": "object",
+        "properties": {
+          "htmlMarkup": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/UsarEditableModel"
           }
         },
         "additionalProperties": false
@@ -21807,16 +24369,6 @@
         },
         "additionalProperties": false
       },
-      "UndoIncrementJobStatusInputModel": {
-        "type": "object",
-        "properties": {
-          "jobId": {
-            "type": "string",
-            "format": "uuid"
-          }
-        },
-        "additionalProperties": false
-      },
       "UpdateCarrierAccountsModel": {
         "type": "object",
         "properties": {
@@ -21834,6 +24386,51 @@
         },
         "additionalProperties": false
       },
+      "UpdateCommodityMapModel": {
+        "type": "object",
+        "properties": {
+          "commodityId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "partnerId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "outerId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateCommodityModel": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "parentId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "UpdateDateModel": {
         "type": "object",
         "properties": {
@@ -21844,6 +24441,23 @@
           }
         },
         "additionalProperties": false
+      },
+      "UpdatePageControls": {
+        "enum": [
+          0,
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "UpdateTaskModel": {
         "type": "object",
@@ -21876,6 +24490,36 @@
           }
         },
         "additionalProperties": false
+      },
+      "UsarEditableModel": {
+        "type": "object",
+        "properties": {
+          "templatePath": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "isEditable": {
+            "type": "boolean"
+          },
+          "templateName": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UsarFormType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "UserInfo": {
         "type": "object",
@@ -22423,7 +25067,7 @@
           },
           "filter": {
             "type": "array",
-            "items": {},
+            "items": { },
             "nullable": true
           },
           "totalSummary": {
@@ -22556,6 +25200,23 @@
           }
         },
         "additionalProperties": false
+      },
+      "WorkflowControls": {
+        "enum": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          32,
+          64,
+          128,
+          256,
+          512,
+          1024
+        ],
+        "type": "integer",
+        "format": "int32"
       }
     },
     "securitySchemes": {
@@ -22569,7 +25230,7 @@
   },
   "security": [
     {
-      "bearerAuth": []
+      "bearerAuth": [ ]
     }
   ]
 }

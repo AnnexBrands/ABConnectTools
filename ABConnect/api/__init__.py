@@ -2,19 +2,16 @@ from .client import ABConnectAPI
 from .http_client import RequestHandler
 from .auth import FileTokenStorage, SessionTokenStorage
 from .swagger import SwaggerParser, EndpointDefinition, Parameter
-from .generic import GenericEndpoint
-from .builder import EndpointBuilder
-from .query import QueryBuilder
+
+# NOTE: GenericEndpoint, EndpointBuilder, QueryBuilder are deprecated
+# They have been commented out as part of the swagger 708->709 migration
 
 __all__ = [
-    'ABConnectAPI', 
-    'RequestHandler', 
-    'FileTokenStorage', 
+    'ABConnectAPI',
+    'RequestHandler',
+    'FileTokenStorage',
     'SessionTokenStorage',
     'SwaggerParser',
     'EndpointDefinition',
     'Parameter',
-    'GenericEndpoint',
-    'EndpointBuilder',
-    'QueryBuilder'
 ]

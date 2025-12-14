@@ -52,6 +52,7 @@ class BaseEndpoint:
         path: str,
         operation_id: Optional[str] = None,
         cast_response: bool = True,
+        validate_request: bool = True,
         **kwargs,
     ):
         """Make HTTP request using the shared request handler.
@@ -61,10 +62,16 @@ class BaseEndpoint:
             path: API path (will be prefixed with api_path if relative)
             operation_id: Optional swagger operation ID for response casting
             cast_response: Whether to cast response to Pydantic model
+            validate_request: Whether to validate request data against Pydantic model.
+                Defaults to True. Set to False to skip validation for edge cases.
             **kwargs: Additional arguments for the request
 
         Returns:
             API response data (cast to Pydantic model if available)
+
+        Raises:
+            pydantic.ValidationError: If validate_request=True and request data
+                doesn't match the expected model schema
         """
         # Build relative path (RequestHandler will add base URL with /api/)
         if path.startswith("/"):
@@ -77,6 +84,12 @@ class BaseEndpoint:
         else:
             full_path = path
 
+        # Validate request data if present and validation is enabled
+        if validate_request and 'json' in kwargs and kwargs['json'] is not None:
+            kwargs['json'] = self._validate_request(
+                kwargs['json'], method, f"/api/{full_path}"
+            )
+
         # Make the API call
         response = self._r.call(method, full_path, **kwargs)
 
@@ -87,6 +100,41 @@ class BaseEndpoint:
             )
 
         return response
+
+    def _validate_request(
+        self,
+        data: Any,
+        method: str,
+        full_path: str,
+    ) -> Any:
+        """Validate request data against appropriate Pydantic model.
+
+        Uses ABConnectBaseModel.check() for validation, which validates
+        the data and returns it as a JSON-serializable dict with proper
+        camelCase field aliases.
+
+        Args:
+            data: Raw request data (dict or list)
+            method: HTTP method
+            full_path: Full API path including /api/ prefix
+
+        Returns:
+            Validated and transformed data
+
+        Raises:
+            pydantic.ValidationError: If data doesn't match the model schema
+        """
+        try:
+            from ..request_mapper import get_request_mapper
+
+            mapper = get_request_mapper()
+            return mapper.validate_request(data, method, full_path)
+        except ImportError as e:
+            # If request mapper not available, pass through unchanged
+            import logging
+
+            logging.debug(f"Failed to import request_mapper: {e}")
+            return data
 
     def _cast_response(
         self,

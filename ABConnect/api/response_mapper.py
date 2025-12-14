@@ -5,7 +5,6 @@ Pydantic models, enabling automatic type casting of responses.
 """
 
 from typing import Any, Dict, Optional, Type, Union
-import importlib
 import logging
 
 logger = logging.getLogger(__name__)
@@ -18,41 +17,20 @@ class ResponseMapper:
         self._model_cache: Dict[str, Type] = {}
         self._models_rebuilt = False
 
-        # Mapping of endpoint patterns to model names
-        # Format: (method, path_pattern) -> model_name
-        self.endpoint_mappings = {
-            # Companies endpoints
-            ('GET', '/api/companies/{id}'): 'Company',
-            ('GET', '/api/companies/{companyId}/details'): 'CompanyDetails',
-            ('GET', '/api/companies/{companyId}/fulldetails'): 'CompanyDetails',
+        # Load auto-generated mappings from schema_mappings module
+        from .schema_mappings import RESPONSE_MAPPINGS
+        self.endpoint_mappings = dict(RESPONSE_MAPPINGS)
+
+        # Add any custom mappings not in swagger (legacy or special cases)
+        # These override auto-generated mappings if there's a conflict
+        custom_mappings = {
+            # Legacy mappings that may not be in swagger
             ('GET', '/api/companies/search'): ['Company'],  # List response
-            ('POST', '/api/companies/search/v2'): ['SearchCompanyResponse'],
             ('POST', '/api/companies/list'): ['Company'],
             ('POST', '/api/companies/simplelist'): ['Company'],
-
-            # Address endpoints
-            ('GET', '/api/address/{id}'): 'Address',
-            ('GET', '/api/address/isvalid'): 'AddressModel',
-            ('POST', '/api/address/{addressId}/validated'): 'Address',
-
-            # Contacts endpoints
-            ('GET', '/api/contacts/{id}'): 'Contact',
             ('GET', '/api/contacts/search'): ['Contact'],
-            ('POST', '/api/contacts'): 'Contact',
-            ('PUT', '/api/contacts/{id}'): 'Contact',
-
-            # Users endpoints
-            ('GET', '/api/users/me'): 'UserAccessProfileModel',
-            ('GET', '/api/users/{id}'): 'UserAccessProfileModel',
-
-            # Account endpoints
-            ('POST', '/api/account/login'): 'LoginModel',
-            ('POST', '/api/account/changepassword'): 'ChangePasswordModel',
-            ('POST', '/api/account/forgotpassword'): 'ForgotPasswordRequest',
-            ('POST', '/api/account/resetpassword'): 'ResetPasswordRequest',
-
-            # Add more mappings as needed...
         }
+        self.endpoint_mappings.update(custom_mappings)
 
     def _ensure_models_rebuilt(self):
         """Ensure models are rebuilt to resolve forward references."""
@@ -80,7 +58,7 @@ class ResponseMapper:
             # Ensure models are rebuilt
             self._ensure_models_rebuilt()
 
-            # Try to import from models package
+            # Try to import from models package (uses lazy loading)
             from ABConnect.api import models
             model_class = getattr(models, model_name, None)
 
@@ -88,31 +66,7 @@ class ResponseMapper:
                 self._model_cache[model_name] = model_class
                 return model_class
 
-            # If not found, try individual module import
-            # This handles cases where the model might not be in __init__.py
-            module_map = {
-                'Company': 'companies',
-                'CompanyDetails': 'companies',
-                'SearchCompanyResponse': 'companies',
-                'Address': 'address',
-                'AddressModel': 'address',
-                'Contact': 'contacts',
-                'UserAccessProfileModel': 'account',
-                'LoginModel': 'account',
-                'ChangePasswordModel': 'account',
-                'ForgotPasswordRequest': 'account',
-                'ResetPasswordRequest': 'account',
-            }
-
-            if model_name in module_map:
-                module_name = module_map[model_name]
-                module = importlib.import_module(
-                    f'ABConnect.api.models.{module_name}'
-                )
-                model_class = getattr(module, model_name, None)
-                if model_class:
-                    self._model_cache[model_name] = model_class
-                    return model_class
+            logger.debug(f"Model {model_name} not found in models package")
 
         except Exception as e:
             logger.warning(f"Failed to load model {model_name}: {e}")
