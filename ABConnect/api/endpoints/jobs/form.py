@@ -24,8 +24,7 @@ class JobFormEndpoint(BaseEndpoint):
         Returns:
             Dict[str, Any]: API response data
         """
-        path = "/{jobDisplayId}/form/shipments"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        path = f"/{jobDisplayId}/form/shipments"
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
 
@@ -38,9 +37,7 @@ class JobFormEndpoint(BaseEndpoint):
         Returns:
             Dict[str, Any]: API response data
         """
-        path = "/{jobDisplayId}/form/{formid}"
-        path = path.replace("{formId}", str(formId))
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        path = f"/{jobDisplayId}/form/{formId}"
         kwargs = {}
         params = {}
         if type is not None:

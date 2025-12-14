@@ -75,10 +75,7 @@ class ABConnectAPI:
         jobs: Alias for job endpoint (backward compatibility)
     """
 
-    def __init__(
-        # self, request=None, enable_generic: bool = True, env: Optional[str] = None
-        self, *args, **kwargs
-    ):
+    def __init__(self, *args, **kwargs):
         """Initialize the API client.
 
         This client provides three layers of API access:
