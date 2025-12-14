@@ -12,11 +12,11 @@ class JobFormHelper(JobFormEndpoint):
         optionIndex = shipment['optionIndex']
         name = f"{job}_{transport_mode}_BOL.pdf"
         data = self.get_form_bill_of_lading(job, shipmentPlanId, optionIndex)
-        return {"name": name, "data": data}
+        return {name: data}
 
         
     def get_hbl(self, job: str):
-        self.get_bol(job, "House")
+        return self.get_bol(job, "House")
 
     def get_ops(self, job: str):
-        self.get_form_operations(job)
+        return self.get_form_operations(job)
