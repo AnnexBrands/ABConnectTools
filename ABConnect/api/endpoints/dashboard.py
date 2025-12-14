@@ -2,12 +2,16 @@
 
 Auto-generated from swagger.json specification.
 Provides type-safe access to dashboard/* endpoints.
+
+Note: Some endpoints were removed in API version 709:
+- /api/dashboard/gridsettings -> Use /api/company/{companyId}/gridsettings
+- /api/dashboard/incrementjobstatus -> Use /api/job/{jobDisplayId}/timeline/incrementjobstatus
+- /api/dashboard/undoincrementjobstatus -> Use /api/job/{jobDisplayId}/timeline/undoincrementjobstatus
 """
 
+import warnings
 from typing import List, Optional
 from .base import BaseEndpoint
-# Model imports temporarily disabled
-    # Temporarily disabled: # Model imports temporarily disabled
 
 
 class DashboardEndpoint(BaseEndpoint):
@@ -171,38 +175,67 @@ class DashboardEndpoint(BaseEndpoint):
         return self._make_request("POST", path, **kwargs)
     def post_incrementjobstatus(self, data: dict = None) -> dict:
         """POST /api/dashboard/incrementjobstatus
-        
-        
-        
+
+        .. deprecated:: 709
+            This endpoint was removed in API version 709.
+            Use :meth:`ABConnect.api.endpoints.jobs.timeline.JobTimelineEndpoint.post_incrementjobstatus`
+            at ``/api/job/{jobDisplayId}/timeline/incrementjobstatus`` instead.
+
         Returns:
             dict: API response data
         """
+        warnings.warn(
+            "post_incrementjobstatus() is deprecated since API v709. "
+            "Use api.jobs.timeline.post_incrementjobstatus(jobDisplayId, data) instead.",
+            DeprecationWarning,
+            stacklevel=2
+        )
         path = "/incrementjobstatus"
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
+
     def post_undoincrementjobstatus(self, data: dict = None) -> dict:
         """POST /api/dashboard/undoincrementjobstatus
-        
-        
-        
+
+        .. deprecated:: 709
+            This endpoint was removed in API version 709.
+            Use :meth:`ABConnect.api.endpoints.jobs.timeline.JobTimelineEndpoint.post_undoincrementjobstatus`
+            at ``/api/job/{jobDisplayId}/timeline/undoincrementjobstatus`` instead.
+
         Returns:
             dict: API response data
         """
+        warnings.warn(
+            "post_undoincrementjobstatus() is deprecated since API v709. "
+            "Use api.jobs.timeline.post_undoincrementjobstatus(jobDisplayId, data) instead.",
+            DeprecationWarning,
+            stacklevel=2
+        )
         path = "/undoincrementjobstatus"
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
+
     def get_gridsettings(self, company_id: Optional[str] = None, dashboard_type: Optional[str] = None) -> dict:
         """GET /api/dashboard/gridsettings
-        
-        
-        
+
+        .. deprecated:: 709
+            This endpoint was removed in API version 709.
+            Use :meth:`ABConnect.api.endpoints.company.CompanyEndpoint.get_gridsettings`
+            at ``/api/company/{companyId}/gridsettings`` instead.
+
         Returns:
             dict: API response data
         """
+        warnings.warn(
+            "get_gridsettings() is deprecated since API v709. "
+            "Use api.company.get_gridsettings(companyId) instead.",
+            DeprecationWarning,
+            stacklevel=2
+        )
         path = "/gridsettings"
         kwargs = {}
         params = {}
@@ -213,14 +246,24 @@ class DashboardEndpoint(BaseEndpoint):
         if params:
             kwargs["params"] = params
         return self._make_request("GET", path, **kwargs)
+
     def post_gridsettings(self, data: dict = None) -> dict:
         """POST /api/dashboard/gridsettings
-        
-        
-        
+
+        .. deprecated:: 709
+            This endpoint was removed in API version 709.
+            Use :meth:`ABConnect.api.endpoints.company.CompanyEndpoint.post_gridsettings`
+            at ``/api/company/{companyId}/gridsettings`` instead.
+
         Returns:
             dict: API response data
         """
+        warnings.warn(
+            "post_gridsettings() is deprecated since API v709. "
+            "Use api.company.post_gridsettings(companyId, data) instead.",
+            DeprecationWarning,
+            stacklevel=2
+        )
         path = "/gridsettings"
         kwargs = {}
         if data is not None:

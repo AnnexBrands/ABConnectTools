@@ -6,7 +6,7 @@ This package contains all job-related endpoints organized by their swagger tags.
 from .job import JobEndpoint
 from .agent_helpers import AgentEndpoint
 from .email import JobEmailEndpoint
-from .form import JobFormEndpoint
+from .form_helpers import JobFormHelper
 from .freightproviders import JobFreightProvidersEndpoint
 from .intacct import JobIntacctEndpoint
 from .items_helpers import ItemsHelper
@@ -37,7 +37,7 @@ class JobsPackage:
         self.agent = AgentEndpoint()  # Use enhanced job endpoint with helpers
         self.job = JobEndpoint()
         self.email = JobEmailEndpoint()
-        self.form = JobFormEndpoint()
+        self.form = JobFormHelper()
         self.freightproviders = JobFreightProvidersEndpoint()
         self.intacct = JobIntacctEndpoint()
         self.items = ItemsHelper()  # Items helper with Pydantic model casting

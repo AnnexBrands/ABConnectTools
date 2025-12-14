@@ -7,7 +7,6 @@ import logging
 from typing import Optional, Dict, Any
 from ABConnect.api.endpoints.jobs.job import JobEndpoint
 
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # ServiceType mapping based on API enum
@@ -75,7 +74,7 @@ class AgentEndpoint(JobEndpoint):
         agent_id = self._resolve_agent_identifier(agent)
 
         logger.info(
-            f"Changing Origin Agent for job {jobid} to {agent} (UUID: {agent_id})"
+            f"JOBS:AGENT_HEPERS:OA - Job {jobid} to {agent} (UUID: {agent_id})"
         )
 
         return self.post_changeAgent(

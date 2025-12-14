@@ -40,6 +40,7 @@ class CalendarJob(JobRelatedModel):
     contact_email: Optional[str] = Field(None, alias="contactEmail")
     contact_phone: Optional[str] = Field(None, alias="contactPhone")
     access_level: Optional[JobAccessLevel] = Field(None, alias="accessLevel")
+    unread_sms_count: Optional[int] = Field(None, alias="unreadSMSCount", description="Unread SMS count (v709)")
 
 
 class ChangeJobAgentRequest(ABConnectBaseModel):

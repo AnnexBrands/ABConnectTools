@@ -2,6 +2,11 @@
 
 Auto-generated from swagger.json specification.
 Contains endpoint classes for all API modules.
+
+New in API version 709:
+- CommodityEndpoint (commodity management)
+- CommodityMapEndpoint (commodity mapping)
+- PartnerEndpoint (partner management)
 """
 
 from .base import BaseEndpoint
@@ -31,6 +36,11 @@ from .v3 import V3Endpoint
 from .views import ViewsEndpoint
 from .webhooks import WebhooksEndpoint
 
+# New endpoints in API version 709
+from .commodity import CommodityEndpoint
+from .commoditymap import CommodityMapEndpoint
+from .partner import PartnerEndpoint
+
 # Export all endpoint classes
 __all__ = [
     "BaseEndpoint",
@@ -58,4 +68,8 @@ __all__ = [
     "V3Endpoint",
     "ViewsEndpoint",
     "WebhooksEndpoint",
+    # New in API v709
+    "CommodityEndpoint",
+    "CommodityMapEndpoint",
+    "PartnerEndpoint",
 ]

@@ -466,6 +466,8 @@ class Items(TimestampedModel):
     document_exists: Optional[bool] = Field(None, alias="documentExists")
     force_crate: Optional[bool] = Field(None, alias="forceCrate")
     auto_pack_failed: Optional[bool] = Field(None, alias="autoPackFailed")
+    do_not_tip: Optional[bool] = Field(None, alias="doNotTip", description="Do not tip flag (v709)")
+    commodity_id: Optional[int] = Field(None, alias="commodityId", description="Commodity ID for HS code (v709)")
     longest_dimension: Optional[float] = Field(None, alias="longestDimension")
     second_dimension: Optional[float] = Field(None, alias="secondDimension")
     pkd_girth: Optional[float] = Field(None, alias="pkdGirth")
@@ -994,4 +996,18 @@ class WorkTimeLogModel(IdentifiedModel):
     end_time: Optional[TimeSpan] = Field(None, alias="endTime")
 
 
-__all__ = ['AccesorialCharges', 'AutoCompleteValue', 'Base64File', 'BaseTask', 'BookShipmentSpecificParams', 'CalendarItem', 'CalendarNotes', 'CalendarTask', 'CarrierAccountInfo', 'CarrierInfo', 'CarrierProviderMessage', 'CarrierRateModel', 'CarrierTaskModel', 'Commodity', 'CreatedTask', 'CustomerInfo', 'Details', 'DocumentDetails', 'EmailDetails', 'EstesAccountData', 'ExportPackingInfo', 'ExportTotalCosts', 'ExpressFreightDetail', 'FedExAccountData', 'FedExRestApiAccount', 'FedExSpecific', 'ForwardAirAccountData', 'FranchiseeCarrierAccounts', 'GlobalTranzAccountData', 'GroupingInfo', 'HandlingUnitModel', 'InTheFieldTaskModel', 'InitialNoteModel', 'InsuranceOption', 'ItemTotals', 'Items', 'JToken', 'LaborCharges', 'LastObtainNFM', 'LatLng', 'LookupItem', 'MasterMaterials', 'NameValueEntity', 'ObtainNFMParcelItem', 'ObtainNFMParcelService', 'OnlinePaymentSettings', 'PackagingLaborHours', 'PageOrderedRequestModel', 'PhoneDetails', 'PickupLaborHoursRule', 'PilotAccountData', 'PlannerLabor', 'QuoteRequestComment', 'RequestedParcelPackaging', 'RoadRunnerAccountData', 'RoyaltiesCharges', 'SearchCustomerInfo', 'ServiceInfo', 'ServicePricingsMarkup', 'ShipmentTrackingDocument', 'ShippingHistoryStatus', 'ShippingPackageInfo', 'SimplePriceTariff', 'SimpleTaskModel', 'SoldToDetails', 'SortBy', 'SortByModel', 'SortingInfo', 'StoredProcedureColumn', 'StringMergePreviewDataItem', 'StringOverridable', 'SummaryInfo', 'TaskTruckInfo', 'TaxOption', 'TeamWWAccountData', 'TimeLog', 'TimeLogModel', 'TimeLogPause', 'TimeLogPauseModel', 'TimeSpan', 'TrackingCarrierProps', 'TrackingStatusV2', 'TransportationCharges', 'TransportationRatesRequest', 'UPSAccountData', 'UPSSpecific', 'USPSAccountData', 'USPSSpecific', 'UpdateDateModel', 'UpdateTruckModel', 'WeightInfo', 'WorkTimeLog', 'WorkTimeLogModel']
+class MaerskAccountData(ABConnectBaseModel):
+    """Maersk carrier account data.
+
+    .. versionadded:: 709
+    """
+
+    location_id: Optional[int] = Field(None, alias="locationId", description="Location ID")
+    tariff_header_id: Optional[int] = Field(None, alias="tariffHeaderId", description="Tariff header ID")
+    user_name: Optional[str] = Field(None, alias="userName", max_length=48, description="Account username")
+    password: Optional[str] = Field(None, max_length=128, description="Account password")
+    address_id: Optional[int] = Field(None, alias="addressId", description="Address ID")
+    control_station: Optional[str] = Field(None, alias="controlStation", max_length=32, description="Control station")
+
+
+__all__ = ['AccesorialCharges', 'AutoCompleteValue', 'Base64File', 'BaseTask', 'BookShipmentSpecificParams', 'CalendarItem', 'CalendarNotes', 'CalendarTask', 'CarrierAccountInfo', 'CarrierInfo', 'CarrierProviderMessage', 'CarrierRateModel', 'CarrierTaskModel', 'Commodity', 'CreatedTask', 'CustomerInfo', 'Details', 'DocumentDetails', 'EmailDetails', 'EstesAccountData', 'ExportPackingInfo', 'ExportTotalCosts', 'ExpressFreightDetail', 'FedExAccountData', 'FedExRestApiAccount', 'FedExSpecific', 'ForwardAirAccountData', 'FranchiseeCarrierAccounts', 'GlobalTranzAccountData', 'GroupingInfo', 'HandlingUnitModel', 'InTheFieldTaskModel', 'InitialNoteModel', 'InsuranceOption', 'ItemTotals', 'Items', 'JToken', 'LaborCharges', 'LastObtainNFM', 'LatLng', 'LookupItem', 'MaerskAccountData', 'MasterMaterials', 'NameValueEntity', 'ObtainNFMParcelItem', 'ObtainNFMParcelService', 'OnlinePaymentSettings', 'PackagingLaborHours', 'PageOrderedRequestModel', 'PhoneDetails', 'PickupLaborHoursRule', 'PilotAccountData', 'PlannerLabor', 'QuoteRequestComment', 'RequestedParcelPackaging', 'RoadRunnerAccountData', 'RoyaltiesCharges', 'SearchCustomerInfo', 'ServiceInfo', 'ServicePricingsMarkup', 'ShipmentTrackingDocument', 'ShippingHistoryStatus', 'ShippingPackageInfo', 'SimplePriceTariff', 'SimpleTaskModel', 'SoldToDetails', 'SortBy', 'SortByModel', 'SortingInfo', 'StoredProcedureColumn', 'StringMergePreviewDataItem', 'StringOverridable', 'SummaryInfo', 'TaskTruckInfo', 'TaxOption', 'TeamWWAccountData', 'TimeLog', 'TimeLogModel', 'TimeLogPause', 'TimeLogPauseModel', 'TimeSpan', 'TrackingCarrierProps', 'TrackingStatusV2', 'TransportationCharges', 'TransportationRatesRequest', 'UPSAccountData', 'UPSSpecific', 'USPSAccountData', 'USPSSpecific', 'UpdateDateModel', 'UpdateTruckModel', 'WeightInfo', 'WorkTimeLog', 'WorkTimeLogModel']

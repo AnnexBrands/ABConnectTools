@@ -166,6 +166,8 @@ class ABConnectAPI:
 
         # Maintain backward compatibility
         self.docs = self.documents  # Alias
+        self.tasks = self.jobs.timeline
+        self.forms = self.jobs.form
 
     # def _init_generic_endpoints(self):
     #     """Initialize automatically generated endpoints from swagger."""

@@ -305,4 +305,24 @@ class StatusEnum(int, Enum):
     VALUE_6 = 6
 
 
-__all__ = ['CarrierAPI', 'CommercialCapabilities', 'CopyMaterialsFrom', 'DashboardType', 'DocumentSource', 'ForgotType', 'GeometryType', 'HistoryCodeABCState', 'InheritSettingFrom', 'JobAccessLevel', 'JobContactType', 'JobType', 'KnownFormId', 'LabelImageType', 'LabelType', 'ListSortDirection', 'PaymentType', 'PropertyType', 'QuoteRequestStatus', 'RangeDateEnum', 'RetransTimeZoneEnum', 'SelectedOption', 'SendEmailStatus', 'ServiceType', 'SortByField', 'StatusEnum']
+class FormType(int, Enum):
+    """FormType enumeration for job forms.
+
+    .. versionadded:: 709
+    """
+    VALUE_0 = 0
+    VALUE_1 = 1
+    VALUE_2 = 2
+    VALUE_3 = 3
+
+
+class OperationsFormType(int, Enum):
+    """OperationsFormType enumeration for operations forms.
+
+    .. versionadded:: 709
+    """
+    VALUE_0 = 0
+    VALUE_1 = 1
+
+
+__all__ = ['CarrierAPI', 'CommercialCapabilities', 'CopyMaterialsFrom', 'DashboardType', 'DocumentSource', 'ForgotType', 'FormType', 'GeometryType', 'HistoryCodeABCState', 'InheritSettingFrom', 'JobAccessLevel', 'JobContactType', 'JobType', 'KnownFormId', 'LabelImageType', 'LabelType', 'ListSortDirection', 'OperationsFormType', 'PaymentType', 'PropertyType', 'QuoteRequestStatus', 'RangeDateEnum', 'RetransTimeZoneEnum', 'SelectedOption', 'SendEmailStatus', 'ServiceType', 'SortByField', 'StatusEnum']

@@ -2,19 +2,21 @@
 
 Auto-generated from swagger.json specification.
 Provides type-safe access to company/* endpoints.
+
+New in API version 709:
+- /api/company/{companyId}/gridsettings (migrated from /api/dashboard/gridsettings)
+- /api/company/{companyId}/material (new feature)
 """
 
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 from .base import BaseEndpoint
-# Model imports disabled
-    # Model imports disabled
 
 
 class CompanyEndpoint(BaseEndpoint):
     """Company API endpoint operations.
-    
+
     Handles all API operations for /api/company/* endpoints.
-    Total endpoints: 16
+    Total endpoints: 22 (16 original + 6 new in v709)
     """
     
     api_path = "company"
@@ -229,9 +231,8 @@ class CompanyEndpoint(BaseEndpoint):
         return self._make_request("PUT", path, **kwargs)
     def delete_truck(self, companyId: str, truckId: str) -> dict:
         """DELETE /api/company/{companyId}/truck/{truckId}
-        
-        
-        
+
+
         Returns:
             dict: API response data
         """
@@ -240,3 +241,130 @@ class CompanyEndpoint(BaseEndpoint):
         path = path.replace("{truckId}", truckId)
         kwargs = {}
         return self._make_request("DELETE", path, **kwargs)
+
+    # =========================================================================
+    # New endpoints in API version 709
+    # =========================================================================
+
+    def get_gridsettings(
+        self, companyId: str, dashboard_type: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """GET /api/company/{companyId}/gridsettings
+
+        Get grid settings for a company dashboard.
+
+        .. versionadded:: 709
+            Replaces deprecated /api/dashboard/gridsettings endpoint.
+
+        Args:
+            companyId: Company UUID
+            dashboard_type: Optional dashboard type filter
+
+        Returns:
+            dict: Grid settings data
+        """
+        path = f"/{companyId}/gridsettings"
+        kwargs: Dict[str, Any] = {}
+        params: Dict[str, Any] = {}
+        if dashboard_type is not None:
+            params["dashboardType"] = dashboard_type
+        if params:
+            kwargs["params"] = params
+        return self._make_request("GET", path, **kwargs)
+
+    def post_gridsettings(self, companyId: str, data: dict = None) -> Dict[str, Any]:
+        """POST /api/company/{companyId}/gridsettings
+
+        Save grid settings for a company dashboard.
+
+        .. versionadded:: 709
+            Replaces deprecated /api/dashboard/gridsettings endpoint.
+
+        Args:
+            companyId: Company UUID
+            data: Grid settings data to save
+
+        Returns:
+            dict: Save response
+        """
+        path = f"/{companyId}/gridsettings"
+        kwargs: Dict[str, Any] = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+
+    def get_material(self, companyId: str) -> List[Dict[str, Any]]:
+        """GET /api/company/{companyId}/material
+
+        Get list of materials for a company.
+
+        .. versionadded:: 709
+
+        Args:
+            companyId: Company UUID
+
+        Returns:
+            list: List of company materials
+        """
+        path = f"/{companyId}/material"
+        return self._make_request("GET", path)
+
+    def post_material(self, companyId: str, data: dict = None) -> Dict[str, Any]:
+        """POST /api/company/{companyId}/material
+
+        Create a new material for a company.
+
+        .. versionadded:: 709
+
+        Args:
+            companyId: Company UUID
+            data: Material data (SaveCompanyMaterialModel)
+
+        Returns:
+            dict: Created material data
+        """
+        path = f"/{companyId}/material"
+        kwargs: Dict[str, Any] = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("POST", path, **kwargs)
+
+    def put_material(
+        self, companyId: str, materialId: str, data: dict = None
+    ) -> Dict[str, Any]:
+        """PUT /api/company/{companyId}/material/{materialId}
+
+        Update an existing company material.
+
+        .. versionadded:: 709
+
+        Args:
+            companyId: Company UUID
+            materialId: Material UUID to update
+            data: Updated material data (SaveCompanyMaterialModel)
+
+        Returns:
+            dict: Updated material data
+        """
+        path = f"/{companyId}/material/{materialId}"
+        kwargs: Dict[str, Any] = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("PUT", path, **kwargs)
+
+    def delete_material(self, companyId: str, materialId: str) -> Dict[str, Any]:
+        """DELETE /api/company/{companyId}/material/{materialId}
+
+        Delete a company material.
+
+        .. versionadded:: 709
+
+        Args:
+            companyId: Company UUID
+            materialId: Material UUID to delete
+
+        Returns:
+            dict: Deletion response
+        """
+        path = f"/{companyId}/material/{materialId}"
+        return self._make_request("DELETE", path)

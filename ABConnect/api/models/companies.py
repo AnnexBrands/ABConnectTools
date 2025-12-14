@@ -483,4 +483,48 @@ class WebApiDataSourceLoadOptions(ABConnectBaseModel):
     allow_async_over_sync: Optional[bool] = Field(None, alias="allowAsyncOverSync")
 
 
-__all__ = ['Company', 'CompanyAddressInfo', 'CompanyDetails', 'CompanyDetailsBaseInfo', 'CompanyDetailsFinalMileTariffItem', 'CompanyDetailsInsurancePricing', 'CompanyDetailsPreferences', 'CompanyDetailsServicePricings', 'CompanyDetailsTaxPricing', 'CompanyImageData', 'CompanyInfo', 'CompanyInsurancePricing', 'CompanyServicePricing', 'CompanyTaxPricing', 'ContactDetailsCompanyInfo', 'PackagingLaborSettings', 'PackagingTariffSettings', 'SaveGeoSettingModel', 'SearchCompanyDataSourceLoadOptions', 'SearchCompanyModel', 'SearchCompanyResponse', 'TagBoxDataSourceLoadOptions', 'UpdateCarrierAccountsModel', 'WebApiDataSourceLoadOptions']
+class CompanyMaterial(ABConnectBaseModel):
+    """Company material model for packaging materials.
+
+    .. versionadded:: 709
+    """
+
+    id: Optional[str] = Field(None, description="Material UUID")
+    company_id: Optional[str] = Field(None, alias="companyId", description="Company UUID")
+    is_active: bool = Field(True, alias="isActive", description="Whether material is active")
+    name: Optional[str] = Field(None, description="Material name")
+    description: Optional[str] = Field(None, description="Material description")
+    code: Optional[str] = Field(None, description="Material code")
+    type: Optional[str] = Field(None, description="Material type")
+    unit: Optional[str] = Field(None, description="Unit of measurement")
+    length: Optional[float] = Field(None, description="Length dimension")
+    width: Optional[float] = Field(None, description="Width dimension")
+    height: Optional[float] = Field(None, description="Height dimension")
+    weight: Optional[float] = Field(None, description="Weight")
+    cost: Optional[float] = Field(None, description="Cost")
+    price: Optional[float] = Field(None, description="Price")
+    waste_factor: Optional[float] = Field(None, alias="wasteFactor", description="Waste factor percentage")
+
+
+class SaveCompanyMaterialModel(ABConnectBaseModel):
+    """Model for saving company materials.
+
+    .. versionadded:: 709
+    """
+
+    name: Optional[str] = Field(None, description="Material name")
+    description: Optional[str] = Field(None, description="Material description")
+    code: Optional[str] = Field(None, description="Material code")
+    type: Optional[str] = Field(None, description="Material type")
+    unit: Optional[str] = Field(None, description="Unit of measurement")
+    is_active: bool = Field(True, alias="isActive", description="Whether material is active")
+    length: Optional[float] = Field(None, description="Length dimension")
+    width: Optional[float] = Field(None, description="Width dimension")
+    height: Optional[float] = Field(None, description="Height dimension")
+    weight: Optional[float] = Field(None, description="Weight")
+    cost: Optional[float] = Field(None, description="Cost")
+    price: Optional[float] = Field(None, description="Price")
+    waste_factor: Optional[float] = Field(None, alias="wasteFactor", description="Waste factor percentage")
+
+
+__all__ = ['Company', 'CompanyAddressInfo', 'CompanyDetails', 'CompanyDetailsBaseInfo', 'CompanyDetailsFinalMileTariffItem', 'CompanyDetailsInsurancePricing', 'CompanyDetailsPreferences', 'CompanyDetailsServicePricings', 'CompanyDetailsTaxPricing', 'CompanyImageData', 'CompanyInfo', 'CompanyInsurancePricing', 'CompanyMaterial', 'CompanyServicePricing', 'CompanyTaxPricing', 'ContactDetailsCompanyInfo', 'PackagingLaborSettings', 'PackagingTariffSettings', 'SaveCompanyMaterialModel', 'SaveGeoSettingModel', 'SearchCompanyDataSourceLoadOptions', 'SearchCompanyModel', 'SearchCompanyResponse', 'TagBoxDataSourceLoadOptions', 'UpdateCarrierAccountsModel', 'WebApiDataSourceLoadOptions']

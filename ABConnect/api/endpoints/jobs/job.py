@@ -1,6 +1,9 @@
 """Job Job API endpoints.
 
 Auto-generated from swagger.json specification.
+
+New in API version 709:
+- PUT /api/job/{jobDisplayId}/item/{itemId}
 """
 
 from typing import List, Optional, Dict, Any
@@ -10,7 +13,7 @@ from ABConnect.api.endpoints.base import BaseEndpoint
 class JobEndpoint(BaseEndpoint):
     """Job API endpoint operations.
 
-    Total endpoints: 19
+    Total endpoints: 20 (19 original + 1 new in v709)
     """
 
     api_path = "job"
@@ -294,8 +297,7 @@ class JobEndpoint(BaseEndpoint):
     def get_packagingcontainers(self, jobDisplayId: str) -> Dict[str, Any]:
         """GET /api/job/{jobDisplayId}/packagingcontainers
 
-        
-        
+
 
         Returns:
             Dict[str, Any]: API response data
@@ -304,3 +306,30 @@ class JobEndpoint(BaseEndpoint):
         path = path.replace("{jobDisplayId}", str(jobDisplayId))
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
+
+    # =========================================================================
+    # New endpoints in API version 709
+    # =========================================================================
+
+    def put_item(
+        self, jobDisplayId: str, itemId: str, data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """PUT /api/job/{jobDisplayId}/item/{itemId}
+
+        Update a job item.
+
+        .. versionadded:: 709
+
+        Args:
+            jobDisplayId: Job display ID
+            itemId: Item UUID to update
+            data: Item data to update
+
+        Returns:
+            Dict[str, Any]: Updated item data
+        """
+        path = f"/{jobDisplayId}/item/{itemId}"
+        kwargs: Dict[str, Any] = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request("PUT", path, **kwargs)
