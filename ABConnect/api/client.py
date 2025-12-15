@@ -31,6 +31,7 @@ from ABConnect.api.endpoints import (
     WebhooksEndpoint,
 )
 from ABConnect.api.endpoints.jobs import JobsPackage
+from ABConnect.api.catalog import CatalogAPI
 
 from .auth import FileTokenStorage, SessionTokenStorage
 from .http_client import RequestHandler
@@ -103,9 +104,15 @@ class ABConnectAPI:
         else:
             token_storage = FileTokenStorage(**kwargs)
 
-        # Initialize request handler
+        # Store token storage for sharing with other API clients
+        self._token_storage = token_storage
+
+        # Initialize request handler for ACPortal API
         self._request_handler = RequestHandler(token_storage)
         BaseEndpoint.set_request_handler(self._request_handler)
+
+        # Initialize Catalog API (shares token storage)
+        self.catalog = CatalogAPI(token_storage)
 
         # Initialize raw endpoint access
         # self.raw = RawEndpoint(self._request_handler)

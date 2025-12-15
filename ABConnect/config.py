@@ -93,6 +93,17 @@ class Config:
         return "https://portal.abconnect.co/api/"
 
     @classmethod
+    def get_catalog_base_url(cls) -> str:
+        """Get base API URL for current environment.
+
+        Returns:
+            Base API URL
+        """
+        if cls.get_env() == "staging":
+            return "https://catalog-api.staging.abconnect.co/"
+        return "https://catalog-api.abconnect.co/"
+
+    @classmethod
     def get_identity_url(cls) -> str:
         """Get identity server URL for current environment.
 
