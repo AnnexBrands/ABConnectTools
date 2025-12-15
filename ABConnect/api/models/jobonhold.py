@@ -1,9 +1,13 @@
 """Jobonhold models for ABConnect API."""
 
-from typing import List, Optional
+from __future__ import annotations  # Enable forward references
+from typing import List, Optional, TYPE_CHECKING
 from datetime import datetime
 from pydantic import Field
 from .base import ABConnectBaseModel, IdentifiedModel, TimestampedModel
+
+if TYPE_CHECKING:
+    from .job import CreateScheduledJobEmailResponse
 
 class ExtendedOnHoldInfo(IdentifiedModel):
     """ExtendedOnHoldInfo model"""

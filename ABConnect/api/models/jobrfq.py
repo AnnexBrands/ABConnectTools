@@ -1,9 +1,19 @@
 """Jobrfq models for ABConnect API."""
 
-from typing import List, Optional
+from __future__ import annotations
+from typing import List, Optional, TYPE_CHECKING
 from datetime import datetime
 from pydantic import Field
 from .base import ActiveModel
+from .enums import ServiceType, SendEmailStatus
+from .shared import QuoteRequestComment
+
+if TYPE_CHECKING:
+    from .address import AddressDetails
+    from .companies import CommercialCapabilities
+
+# QuoteRequestStatus is defined in enums as well
+from .enums import QuoteRequestStatus
 
 class QuoteRequestDisplayInfo(ActiveModel):
     """QuoteRequestDisplayInfo model"""

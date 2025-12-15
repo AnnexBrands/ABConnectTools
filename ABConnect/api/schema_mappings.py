@@ -78,7 +78,7 @@ REQUEST_MAPPINGS: Dict[Tuple[str, str], str] = {
     ('POST', '/api/job/{jobDisplayId}/shipment/ratequotes'): 'TransportationRatesRequestModel',
     ('POST', '/api/job/{jobDisplayId}/sms'): 'SendSMSModel',
     ('POST', '/api/job/{jobDisplayId}/sms/read'): 'MarkSmsAsReadModel',
-    ('POST', '/api/job/{jobDisplayId}/timeline'): 'BaseTaskModel',
+    ('POST', '/api/job/{jobDisplayId}/timeline'): 'TimelineTaskInput',
     ('POST', '/api/job/{jobDisplayId}/timeline/incrementjobstatus'): 'IncrementJobStatusInputModel',
     ('POST', '/api/jobintacct/{jobDisplayId}'): 'CreateJobIntacctModel',
     ('POST', '/api/jobintacct/{jobDisplayId}/draft'): 'CreateJobIntacctModel',

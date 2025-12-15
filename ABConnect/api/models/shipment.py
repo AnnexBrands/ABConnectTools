@@ -1,9 +1,12 @@
 """Shipment models for ABConnect API."""
 
+from __future__ import annotations
 from typing import List, Optional
 from datetime import datetime
 from pydantic import Field
 from .base import ABConnectBaseModel
+from .enums import CarrierAPI
+from .shared import ShippingHistoryStatus, WeightInfo, ShippingPackageInfo
 
 class ShipmentDetails(ABConnectBaseModel):
     """ShipmentDetails model"""

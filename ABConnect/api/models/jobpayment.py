@@ -3,6 +3,7 @@
 from typing import List, Optional
 from pydantic import Field
 from .base import ABConnectBaseModel, IdentifiedModel
+from .shared import CustomerInfo
 
 class AttachCustomerBankModel(ABConnectBaseModel):
     """AttachCustomerBankModel model"""

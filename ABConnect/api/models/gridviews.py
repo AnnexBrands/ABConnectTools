@@ -1,8 +1,10 @@
 """Gridviews models for ABConnect API."""
 
+from __future__ import annotations
 from typing import List, Optional
 from pydantic import Field
 from .base import IdentifiedModel
+from .shared import StoredProcedureColumn
 
 class GridViewAccess(IdentifiedModel):
     """GridViewAccess model"""

@@ -5,6 +5,7 @@ from datetime import datetime
 from pydantic import Field
 from .base import ABConnectBaseModel, CompanyRelatedModel, IdentifiedModel, JobRelatedModel
 from .enums import RangeDateEnum
+from .shared import SortBy
 
 class InsuranceReport(ABConnectBaseModel):
     """InsuranceReport model"""

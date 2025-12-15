@@ -1,8 +1,10 @@
 """Carriererrormessage models for ABConnect API."""
 
+from __future__ import annotations
 from typing import Optional
 from pydantic import Field
 from .base import FullAuditModel
+from .enums import CarrierAPI
 
 class CarrierErrorMessage(FullAuditModel):
     """CarrierErrorMessage model"""

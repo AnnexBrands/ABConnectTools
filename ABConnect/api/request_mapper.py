@@ -5,9 +5,11 @@ Pydantic models, enabling automatic validation of request data before
 sending to the API.
 """
 
-from typing import Any, Dict, List, Optional, Type, Union
+from typing import Any, Dict, List, Optional, Type, Union, get_origin
 import importlib
 import logging
+
+from pydantic import TypeAdapter
 
 logger = logging.getLogger(__name__)
 
@@ -156,10 +158,19 @@ class RequestMapper:
             logger.debug(f"No request model mapping for {method} {path}")
             return data
 
-        # Use the model's check() method for validation and transformation
-        # This raises ValidationError on failure
-        logger.debug(f"Validating {method} {path} request with {model_class.__name__}")
-        return model_class.check(data)
+        # Check if this is a Union type (type alias) or a regular model
+        if get_origin(model_class) is Union:
+            # For Union types, use TypeAdapter for validation
+            logger.debug(f"Validating {method} {path} request with Union type")
+            adapter = TypeAdapter(model_class)
+            validated = adapter.validate_python(data)
+            # Dump using the validated model's method
+            return validated.model_dump(by_alias=True, exclude_unset=True, mode='json')
+        else:
+            # Use the model's check() method for validation and transformation
+            # This raises ValidationError on failure
+            logger.debug(f"Validating {method} {path} request with {model_class.__name__}")
+            return model_class.check(data)
 
 
 # Singleton instance

@@ -1,8 +1,10 @@
 """Planner models for ABConnect API."""
 
+from __future__ import annotations
 from typing import Optional
 from pydantic import Field
 from .base import JobRelatedModel
+from .shared import Details, ItemTotals, CreatedTask
 
 class PlannerTask(JobRelatedModel):
     """PlannerTask model"""

@@ -4,6 +4,8 @@ from typing import List, Optional
 from datetime import datetime
 from pydantic import Field
 from .base import ABConnectBaseModel, CompanyRelatedModel, JobRelatedModel
+from .shared import JToken
+from .enums import DashboardType
 
 class GridSettingsEntity(ABConnectBaseModel):
     """GridSettingsEntity model"""

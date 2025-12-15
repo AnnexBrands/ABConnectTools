@@ -296,6 +296,7 @@ def __getattr__(name):
         'TimeLogPauseModel': 'shared',
         'TimeSpan': 'shared',
         'TimelineResponse': 'jobtimeline',
+        'TimelineTaskInput': 'jobtimeline',
         'TrackingCarrierProps': 'shared',
         'TrackingStatusV2': 'shared',
         'TransferModel': 'job',
@@ -348,8 +349,9 @@ def rebuild_models():
     # Import all model modules
     import importlib
     modules_to_rebuild = [
+        'shared', 'jobtimeline', 'jobpayment',  # These first to resolve forward refs
         'account', 'address', 'companies', 'contacts', 'job',
-        'jobform', 'jobpayment', 'jobshipment', 'documents',
+        'jobform', 'jobshipment', 'documents',
         'users', 'dashboard', 'reports', 'lookup'
     ]
 

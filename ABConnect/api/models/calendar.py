@@ -1,8 +1,14 @@
 """Calendar models for ABConnect API."""
 
-from typing import List, Optional
+from __future__ import annotations
+from typing import List, Optional, TYPE_CHECKING
 from pydantic import Field
 from .base import ABConnectBaseModel
+
+if TYPE_CHECKING:
+    from .address import CalendarAddress
+    from .contacts import CalendarContact
+    from .job import BaseInfoCalendarJob, CalendarJob
 
 class BaseInfoCalendar(ABConnectBaseModel):
     """BaseInfoCalendar model"""

@@ -1,5 +1,6 @@
 """Note models for ABConnect API."""
 
+from __future__ import annotations
 from typing import List, Optional
 from datetime import datetime
 from datetime import date

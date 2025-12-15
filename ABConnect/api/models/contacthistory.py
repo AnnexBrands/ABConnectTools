@@ -1,9 +1,14 @@
 """Contacthistory models for ABConnect API."""
 
-from typing import Any, Dict, List, Optional
+from __future__ import annotations
+from typing import Any, Dict, List, Optional, TYPE_CHECKING
 from pydantic import Field
 from .base import ABConnectBaseModel, TimestampedModel
 from .enums import StatusEnum
+from .shared import SortingInfo, GroupingInfo, SummaryInfo
+
+if TYPE_CHECKING:
+    from .contacts import ContactHistoryRevenueSum, ContactHistoryPricePerPound
 
 class ContactHistoryAggregatedCost(ABConnectBaseModel):
     """ContactHistoryAggregatedCost model"""

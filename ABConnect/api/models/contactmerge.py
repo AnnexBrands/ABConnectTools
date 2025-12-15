@@ -1,8 +1,14 @@
 """Contactmerge models for ABConnect API."""
 
-from typing import List, Optional
+from __future__ import annotations
+from typing import List, Optional, TYPE_CHECKING
 from pydantic import Field
 from .base import ABConnectBaseModel
+from .shared import StringMergePreviewDataItem
+
+if TYPE_CHECKING:
+    from .contacts import BaseContactDetails
+    from .address import AddressDetailsMergePreviewDataItem
 
 class MergeContactsPreviewInfo(ABConnectBaseModel):
     """MergeContactsPreviewInfo model"""
