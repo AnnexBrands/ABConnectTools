@@ -28,7 +28,9 @@ def _is_usps(code: str) -> bool:
     return _norm(code).startswith("USPS")
 
 
-def _extract_triples(rates: Iterable[Dict[str, Any]]) -> List[Tuple[str, Optional[str], Decimal]]:
+def _extract_triples(
+    rates: Iterable[Dict[str, Any]],
+) -> List[Tuple[str, Optional[str], Decimal]]:
     """Extract (carrierCode, account, price) triples with normalized code and Decimal price, filtering malformed rows."""
     triples: List[Tuple[str, Optional[str], Decimal]] = []
     for r in rates or ():
@@ -41,7 +43,9 @@ def _extract_triples(rates: Iterable[Dict[str, Any]]) -> List[Tuple[str, Optiona
     return triples
 
 
-def _first_non_usps(triples: List[Tuple[str, Optional[str], Decimal]]) -> Optional[Tuple[str, Optional[str], Decimal]]:
+def _first_non_usps(
+    triples: List[Tuple[str, Optional[str], Decimal]],
+) -> Optional[Tuple[str, Optional[str], Decimal]]:
     return next((t for t in triples if not _is_usps(t[0])), None)
 
 
@@ -96,14 +100,16 @@ class ShipHelper(BaseEndpoint):
         triples = _extract_triples(rates)
 
         if not triples:
-            logger.info(
+            logger.warning(
                 "No rate quotes for job %s; returning empty choice set.", job_display_id
             )
             return rq.get("ratesKey", ""), {}
 
         # Always include the first (lowest) rate.
         first_code, first_account, first_price = triples[0]
-        choices: Dict[str, List[Optional[str] | Decimal]] = {first_code: [first_account, first_price]}
+        choices: Dict[str, List[Optional[str] | Decimal]] = {
+            first_code: [first_account, first_price]
+        }
 
         # If caller specifically wants that provider and it's already first, we're done.
         if ensure and ensure == first_code:

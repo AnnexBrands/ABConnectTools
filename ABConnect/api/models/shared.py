@@ -144,6 +144,7 @@ class CarrierTaskModel(TimestampedModel):
     planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
     initial_note: Optional["InitialNoteModel"] = Field(None, alias="initialNote")
     work_time_logs: Optional[List["WorkTimeLogModel"]] = Field(None, alias="workTimeLogs")
+    notes: Optional[List["JobTaskNote"]] = Field(None)
     scheduled_date: Optional[datetime] = Field(None, alias="scheduledDate")
     pickup_completed_date: Optional[datetime] = Field(None, alias="pickupCompletedDate")
     delivery_completed_date: Optional[datetime] = Field(None, alias="deliveryCompletedDate")
@@ -351,6 +352,7 @@ class InTheFieldTaskModel(TimestampedModel):
     planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
     initial_note: Optional["InitialNoteModel"] = Field(None, alias="initialNote")
     work_time_logs: Optional[List["WorkTimeLogModel"]] = Field(None, alias="workTimeLogs")
+    notes: Optional[List["JobTaskNote"]] = Field(None)
     planned_end_date: Optional[datetime] = Field(None, alias="plannedEndDate")
     preferred_start_date: Optional[datetime] = Field(None, alias="preferredStartDate")
     preferred_end_date: Optional[datetime] = Field(None, alias="preferredEndDate")
@@ -752,6 +754,7 @@ class SimpleTaskModel(TimestampedModel):
     planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
     initial_note: Optional[InitialNoteModel] = Field(None, alias="initialNote")
     work_time_logs: Optional[List["WorkTimeLogModel"]] = Field(None, alias="workTimeLogs")
+    notes: Optional[List["JobTaskNote"]] = Field(None)
     time_log: Optional["TimeLogModel"] = Field(None, alias="timeLog")
 
 

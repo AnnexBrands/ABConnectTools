@@ -25,6 +25,11 @@ class BaseTaskModel(TimestampedModel):
     planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
     initial_note: Optional["InitialNoteModel"] = Field(None, alias="initialNote")
     work_time_logs: Optional[List["WorkTimeLogModel"]] = Field(None, alias="workTimeLogs")
+    notes: Optional[List["JobTaskNote"]] = Field(None)
+    scheduled_date: Optional[datetime] = Field(None, alias="scheduledDate")
+    pickup_completed_date: Optional[datetime] = Field(None, alias="pickupCompletedDate")
+    delivery_completed_date: Optional[datetime] = Field(None, alias="deliveryCompletedDate")
+    expected_delivery_date: Optional[datetime] = Field(None, alias="expectedDeliveryDate")
 
 
 class CarrierTask(TimestampedModel):

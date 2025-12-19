@@ -352,9 +352,22 @@ def rebuild_models():
         'shared', 'jobtimeline', 'jobpayment',  # These first to resolve forward refs
         'account', 'address', 'companies', 'contacts', 'job',
         'jobform', 'jobshipment', 'documents',
-        'users', 'dashboard', 'reports', 'lookup'
+        'users', 'dashboard', 'reports', 'lookup', 'jobnote'
     ]
 
+    # Build a namespace with all model classes for forward reference resolution
+    namespace = {}
+    for module_name in modules_to_rebuild:
+        try:
+            module = importlib.import_module(f'.{module_name}', package='ABConnect.api.models')
+            for attr_name in dir(module):
+                attr = getattr(module, attr_name)
+                if hasattr(attr, 'model_rebuild'):
+                    namespace[attr_name] = attr
+        except ImportError:
+            pass
+
+    # Now rebuild all models with the complete namespace
     for module_name in modules_to_rebuild:
         try:
             module = importlib.import_module(f'.{module_name}', package='ABConnect.api.models')
@@ -363,7 +376,7 @@ def rebuild_models():
                 attr = getattr(module, attr_name)
                 if hasattr(attr, 'model_rebuild'):
                     try:
-                        attr.model_rebuild()
+                        attr.model_rebuild(_types_namespace=namespace)
                     except:
                         pass  # Some models might not need rebuilding
         except ImportError:
