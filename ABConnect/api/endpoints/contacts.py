@@ -243,3 +243,7 @@ class ContactsEndpoint(BaseEndpoint):
         path = path.replace("{contactId}", contactId)
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
+
+    def get_did(self, displayId):
+        id = self.get_cache(displayId)
+        return self.get_get(id)

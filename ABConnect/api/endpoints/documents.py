@@ -239,7 +239,9 @@ class DocumentsEndpoint(BaseEndpoint):
         return responses[0] if len(responses) == 1 else responses
 
     @staticmethod
-    def _resolve_document_type(document_type: Union[str, int, DocumentType]) -> DocumentType:
+    def _resolve_document_type(
+        document_type: Union[str, int, DocumentType],
+    ) -> DocumentType:
         """Resolve document_type to a DocumentType enum.
 
         Args:
@@ -255,27 +257,31 @@ class DocumentsEndpoint(BaseEndpoint):
             ValueError: If string doesn't match any DocumentType name
         """
         if isinstance(document_type, DocumentType):
-            return document_type
+            return document_type.value
         if isinstance(document_type, int):
-            return DocumentType(document_type)
+            return DocumentType(document_type).value
         if isinstance(document_type, str):
             # Convert "commercial invoice" -> "COMMERCIAL_INVOICE"
-            normalized = document_type.strip().upper().replace(" ", "_").replace("-", "_")
+            normalized = (
+                document_type.strip().upper().replace(" ", "_").replace("-", "_")
+            )
             try:
-                return DocumentType[normalized]
+                return DocumentType[normalized].value
             except KeyError:
                 valid_names = [dt.name for dt in DocumentType]
                 raise ValueError(
                     f"Unknown document type: '{document_type}'. "
                     f"Valid types: {', '.join(valid_names)}"
                 )
-        raise TypeError(f"document_type must be str, int, or DocumentType, got {type(document_type)}")
+        raise TypeError(
+            f"document_type must be str, int, or DocumentType, got {type(document_type)}"
+        )
 
     def upload_doc(
         self,
         job_display_id: int,
-        filename: Optional[str] = None,
-        file_path: Union[str, Path, BinaryIO],
+        filename: str,
+        data: BinaryIO,
         document_type: Union[str, int, DocumentType],
         shared: int = 28,
         rfq_id: Optional[int] = None,
@@ -334,36 +340,13 @@ class DocumentsEndpoint(BaseEndpoint):
             "document_type": resolved_type,
             "shared": shared,
         }
-        if item_ids:
-            request_data["job_items"] = item_ids
+        # if item_ids:
+        #     request_data["job_items"] = item_ids
         if rfq_id is not None:
             request_data["rfq_id"] = rfq_id
 
-        # Validate request with Pydantic model
         upload_request = DocumentUploadRequest.model_validate(request_data)
-
-        # Handle file input
-        if isinstance(file_path, (str, Path)):
-            file_path = Path(file_path)
-            if not filename:
-                filename = file_path.name
-            with open(file_path, "rb") as f:
-                file_content = f.read()
-            # Auto-detect content type from file extension
-            if not content_type:
-                content_type, _ = mimetypes.guess_type(str(file_path))
-                content_type = content_type or "application/octet-stream"
-        else:
-            file_content = file_path.read()
-            if not filename:
-                filename = getattr(file_path, "name", "document")
-            if not content_type:
-                content_type = "application/octet-stream"
-
-        # Prepare multipart form data
-        files = {"file": (filename, file_content, content_type)}
-
-        # Convert model to form data using aliases
+        files = {"file": (filename, data, content_type)}
         form_data = upload_request.model_dump(by_alias=True, exclude_none=True)
 
         # Make the upload request

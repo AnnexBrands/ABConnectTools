@@ -73,10 +73,15 @@ class DocumentUploadResponse(ABConnectBaseModel):
     """Response model for document upload."""
 
     success: Optional[bool] = Field(None, description="Whether the upload was successful")
+    successfully: Optional[bool] = Field(None, description="Whether the upload completed successfully")
     uploaded_files: Optional[List[UploadedFile]] = Field(None, alias="uploadedFiles", description="List of uploaded files")
     message: Optional[str] = Field(None, description="Response message")
     id: Optional[int] = Field(None, description="Document ID if single file uploaded")
     file_name: Optional[str] = Field(None, alias="fileName", description="Filename if single file uploaded")
+    amazon_exception: Optional[bool] = Field(None, alias="amazonException", description="Whether an Amazon S3 exception occurred")
+    amazon_error_message: Optional[str] = Field(None, alias="amazonErrorMessage", description="Amazon S3 error message if any")
+    amazon_error_code: Optional[str] = Field(None, alias="amazonErrorCode", description="Amazon S3 error code if any")
+    document_details: Optional[dict] = Field(None, alias="documentDetails", description="Detailed document information")
 
 
 __all__ = [
