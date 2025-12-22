@@ -2,8 +2,10 @@
 
 from enum import Enum
 
+
 class CarrierAPI(int, Enum):
     """CarrierAPI enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -16,23 +18,26 @@ class CarrierAPI(int, Enum):
     VALUE_10 = 10
     VALUE_11 = 11
     VALUE_12 = 12
-    VALUE_20 = 20
+    USPS = 20
 
 
 class CommercialCapabilities(int, Enum):
     """CommercialCapabilities enumeration"""
-    VALUE_1 = 1
-    VALUE_2 = 2
-    VALUE_4 = 4
-    VALUE_8 = 8
-    VALUE_16 = 16
-    VALUE_32 = 32
-    VALUE_64 = 64
+
+    PARCEL = 1
+    SOME_COMMERCIAL = 2
+    FILL_COMMERCIAL = 4
+    CAN_GET_API_LEADS = 8
+    VALUE_16 = 16  # TODO
+    VALUE_32 = 32  # TODO
+    VALUE_64 = 64  # TODO
     VALUE_128 = 128
+    ELABEL_ONLY = 256
 
 
 class CopyMaterialsFrom(int, Enum):
     """CopyMaterialsFrom enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -40,6 +45,7 @@ class CopyMaterialsFrom(int, Enum):
 
 class DashboardType(int, Enum):
     """DashboardType enumeration"""
+
     VALUE_1 = 1
     VALUE_2 = 2
     VALUE_3 = 3
@@ -49,19 +55,46 @@ class DashboardType(int, Enum):
 
 class DocumentSource(int, Enum):
     """DocumentSource enumeration"""
+
     VALUE_1 = 1
     VALUE_4 = 4
     VALUE_8 = 8
 
 
+class DocumentType(int, Enum):
+    """DocumentType enumeration for document uploads and management."""
+
+    LABEL = 1
+    USAR = 2
+    CREDIT_CARD_AUTH = 3
+    BOL = 4
+    ELECTRONIC_INVOICE = 5
+    ITEM_PHOTO = 6
+    OTHER = 7
+    MANIFEST = 8
+    COMMERCIAL_INVOICE = 9
+    PRO_FORMA_INVOICE = 10
+    PACKING_LIST = 11
+    INTERNATIONAL_FORMS = 12
+    AIR_WAYBILL = 13
+    TERMS_AND_CONDITIONS = 14
+    CUSTOMER_QUOTE = 15
+    PICKUP_RECEIPT = 16
+    EMAIL_CONTENT = 17
+    UPS_CONTROL_LOG = 18
+    DELETED_LABEL = 19
+
+
 class ForgotType(int, Enum):
     """ForgotType enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
 
 
 class GeometryType(int, Enum):
     """GeometryType enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -69,6 +102,7 @@ class GeometryType(int, Enum):
 
 class HistoryCodeABCState(int, Enum):
     """HistoryCodeABCState enumeration"""
+
     VALUE_1 = 1
     VALUE_2 = 2
     VALUE_3 = 3
@@ -77,6 +111,7 @@ class HistoryCodeABCState(int, Enum):
 
 class InheritSettingFrom(int, Enum):
     """InheritSettingFrom enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -84,6 +119,7 @@ class InheritSettingFrom(int, Enum):
 
 class JobAccessLevel(int, Enum):
     """JobAccessLevel enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -95,6 +131,7 @@ class JobAccessLevel(int, Enum):
 
 class JobContactType(int, Enum):
     """JobContactType enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -102,6 +139,7 @@ class JobContactType(int, Enum):
 
 class JobType(int, Enum):
     """JobType enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -111,6 +149,7 @@ class JobType(int, Enum):
 
 class KnownFormId(int, Enum):
     """KnownFormId enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -128,6 +167,7 @@ class KnownFormId(int, Enum):
 
 class LabelImageType(int, Enum):
     """LabelImageType enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -135,6 +175,7 @@ class LabelImageType(int, Enum):
 
 class LabelType(int, Enum):
     """LabelType enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -145,12 +186,14 @@ class LabelType(int, Enum):
 
 class ListSortDirection(int, Enum):
     """ListSortDirection enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
 
 
 class PaymentType(int, Enum):
     """PaymentType enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -158,6 +201,7 @@ class PaymentType(int, Enum):
 
 class PropertyType(int, Enum):
     """PropertyType enumeration"""
+
     VALUE_1 = 1
     VALUE_2 = 2
     VALUE_3 = 3
@@ -165,6 +209,7 @@ class PropertyType(int, Enum):
 
 class QuoteRequestStatus(int, Enum):
     """QuoteRequestStatus enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -177,6 +222,7 @@ class QuoteRequestStatus(int, Enum):
 
 class RangeDateEnum(int, Enum):
     """RangeDateEnum enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -186,6 +232,7 @@ class RangeDateEnum(int, Enum):
 
 class RetransTimeZoneEnum(int, Enum):
     """RetransTimeZoneEnum enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -194,6 +241,7 @@ class RetransTimeZoneEnum(int, Enum):
 
 class SelectedOption(int, Enum):
     """SelectedOption enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -203,6 +251,7 @@ class SelectedOption(int, Enum):
 
 class SendEmailStatus(int, Enum):
     """SendEmailStatus enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -218,6 +267,7 @@ class SendEmailStatus(int, Enum):
 
 class ServiceType(int, Enum):
     """ServiceType enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -227,6 +277,7 @@ class ServiceType(int, Enum):
 
 class SortByField(int, Enum):
     """SortByField enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -296,6 +347,7 @@ class SortByField(int, Enum):
 
 class StatusEnum(int, Enum):
     """StatusEnum enumeration"""
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -310,6 +362,7 @@ class FormType(int, Enum):
 
     .. versionadded:: 709
     """
+
     VALUE_0 = 0
     VALUE_1 = 1
     VALUE_2 = 2
@@ -321,8 +374,39 @@ class OperationsFormType(int, Enum):
 
     .. versionadded:: 709
     """
+
     VALUE_0 = 0
     VALUE_1 = 1
 
 
-__all__ = ['CarrierAPI', 'CommercialCapabilities', 'CopyMaterialsFrom', 'DashboardType', 'DocumentSource', 'ForgotType', 'FormType', 'GeometryType', 'HistoryCodeABCState', 'InheritSettingFrom', 'JobAccessLevel', 'JobContactType', 'JobType', 'KnownFormId', 'LabelImageType', 'LabelType', 'ListSortDirection', 'OperationsFormType', 'PaymentType', 'PropertyType', 'QuoteRequestStatus', 'RangeDateEnum', 'RetransTimeZoneEnum', 'SelectedOption', 'SendEmailStatus', 'ServiceType', 'SortByField', 'StatusEnum']
+__all__ = [
+    "CarrierAPI",
+    "CommercialCapabilities",
+    "CopyMaterialsFrom",
+    "DashboardType",
+    "DocumentSource",
+    "DocumentType",
+    "ForgotType",
+    "FormType",
+    "GeometryType",
+    "HistoryCodeABCState",
+    "InheritSettingFrom",
+    "JobAccessLevel",
+    "JobContactType",
+    "JobType",
+    "KnownFormId",
+    "LabelImageType",
+    "LabelType",
+    "ListSortDirection",
+    "OperationsFormType",
+    "PaymentType",
+    "PropertyType",
+    "QuoteRequestStatus",
+    "RangeDateEnum",
+    "RetransTimeZoneEnum",
+    "SelectedOption",
+    "SendEmailStatus",
+    "ServiceType",
+    "SortByField",
+    "StatusEnum",
+]

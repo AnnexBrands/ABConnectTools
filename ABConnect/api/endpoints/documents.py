@@ -4,10 +4,16 @@ Auto-generated from swagger.json specification.
 Provides type-safe access to documents/* endpoints.
 """
 
-from typing import Optional, Union, BinaryIO
+import mimetypes
+from typing import Optional, Union, BinaryIO, List
 from pathlib import Path
 from ..models.documents import DocumentUpdateModel
-from ..models.document_upload import ItemPhotoUploadRequest
+from ..models.document_upload import (
+    ItemPhotoUploadRequest,
+    DocumentUploadRequest,
+    DocumentUploadResponse,
+)
+from ..models.enums import DocumentType
 from .base import BaseEndpoint
 
 
@@ -138,9 +144,6 @@ class DocumentsEndpoint(BaseEndpoint):
     ) -> dict:
         """Upload an item photo using the documents endpoint.
 
-        Convenience method that uploads a file as an item photo using the Pydantic
-        DocumentUploadModel for type safety and validation.
-
         Args:
             file_path: Path to the image file or file-like object
             item_id: Item ID to associate the photo with
@@ -155,28 +158,20 @@ class DocumentsEndpoint(BaseEndpoint):
             >>> # Upload a photo for item
             >>> response = client.docs.upload_item_photo(
             ...     file_path="/path/to/photo.jpg",
-            ...     item_id="12345",
-            ...     job_display_id="JOB-001"
+            ...     item_id="00000000-0000-0000-0000-000000000001",
+            ...     job_display_id="2000000"
             ... )
         """
         # Create upload model with item photo settings
-        # Convert job_display_id to int if it's a string like "JOB-2000000"
-        if isinstance(job_display_id, str) and job_display_id.startswith("JOB-"):
-            job_display_id_int = int(job_display_id.replace("JOB-", ""))
-        elif isinstance(job_display_id, str) and job_display_id.isdigit():
-            job_display_id_int = int(job_display_id)
-        else:
-            job_display_id_int = job_display_id
 
         upload_data = ItemPhotoUploadRequest(
-            job_display_id=job_display_id_int,
-            document_type=6,  # 6 for Item_Photo according to existing model
+            job_display_id=job_display_id,
+            document_type=6,
             document_type_description="Item Photo",
-            shared=28 if shared else 0,  # Use default shared value from model
-            job_items=[str(item_id)],  # Keep as string UUID
+            shared=28 if shared else 0,
+            job_items=[str(item_id)],
         )
 
-        # Handle file input
         if isinstance(file_path, (str, Path)):
             file_path = Path(file_path)
             if not filename:
@@ -184,7 +179,6 @@ class DocumentsEndpoint(BaseEndpoint):
             with open(file_path, "rb") as f:
                 file_content = f.read()
         else:
-            # Assume it's a file-like object
             file_content = file_path.read()
             if not filename:
                 filename = getattr(file_path, "name", "item_photo.jpg")
@@ -195,9 +189,6 @@ class DocumentsEndpoint(BaseEndpoint):
         # Convert model to form data using aliases
         form_data = upload_data.model_dump(by_alias=True, exclude_none=True)
 
-        # Make the request with files and form data using upload_file
-        # Note: upload_file expects "api/documents/" format which results in correct
-        # URL: https://portal.abconnect.co/api/api/documents/ (double api is intentional)
         path = f"api/{self.api_path}/"
         return self._r.upload_file(path=path, files=files, data=form_data)
 
@@ -246,3 +237,138 @@ class DocumentsEndpoint(BaseEndpoint):
             responses.append(response)
 
         return responses[0] if len(responses) == 1 else responses
+
+    @staticmethod
+    def _resolve_document_type(document_type: Union[str, int, DocumentType]) -> DocumentType:
+        """Resolve document_type to a DocumentType enum.
+
+        Args:
+            document_type: Can be:
+                - DocumentType enum value
+                - int (enum value)
+                - str like "commercial invoice", "COMMERCIAL_INVOICE", "Commercial Invoice"
+
+        Returns:
+            DocumentType enum value
+
+        Raises:
+            ValueError: If string doesn't match any DocumentType name
+        """
+        if isinstance(document_type, DocumentType):
+            return document_type
+        if isinstance(document_type, int):
+            return DocumentType(document_type)
+        if isinstance(document_type, str):
+            # Convert "commercial invoice" -> "COMMERCIAL_INVOICE"
+            normalized = document_type.strip().upper().replace(" ", "_").replace("-", "_")
+            try:
+                return DocumentType[normalized]
+            except KeyError:
+                valid_names = [dt.name for dt in DocumentType]
+                raise ValueError(
+                    f"Unknown document type: '{document_type}'. "
+                    f"Valid types: {', '.join(valid_names)}"
+                )
+        raise TypeError(f"document_type must be str, int, or DocumentType, got {type(document_type)}")
+
+    def upload_doc(
+        self,
+        job_display_id: int,
+        filename: Optional[str] = None,
+        file_path: Union[str, Path, BinaryIO],
+        document_type: Union[str, int, DocumentType],
+        shared: int = 28,
+        rfq_id: Optional[int] = None,
+        content_type: Optional[str] = None,
+    ) -> DocumentUploadResponse:
+        """Upload a document of any type using the DocumentType enum.
+
+        This convenience function validates the request using Pydantic models
+        and returns a validated response model.
+
+        Args:
+            file_path: Path to the file or file-like object
+            job_display_id: Job display ID (integer, e.g., 2000000)
+            document_type: Document type - accepts:
+                - DocumentType enum (e.g., DocumentType.BOL)
+                - int (e.g., 4 for BOL)
+                - str (e.g., "commercial invoice", "COMMERCIAL_INVOICE", "Commercial-Invoice")
+            item_ids: Optional list of item UUIDs to associate with the document
+            filename: Optional custom filename (inferred from path if not provided)
+            shared: Sharing level (0=private, 28=shared). Defaults to 28.
+            rfq_id: Optional RFQ ID if applicable
+            content_type: Optional MIME type (auto-detected if not provided)
+
+        Returns:
+            DocumentUploadResponse: Validated response model
+
+        Example:
+            >>> from ABConnect.api.models.enums import DocumentType
+            >>> # Upload using enum
+            >>> response = client.docs.upload_doc(
+            ...     file_path="/path/to/bol.pdf",
+            ...     job_display_id=2000000,
+            ...     document_type=DocumentType.BOL,
+            ... )
+
+            >>> # Upload using string (flexible formats)
+            >>> response = client.docs.upload_doc(
+            ...     file_path="/path/to/invoice.pdf",
+            ...     job_display_id=2000000,
+            ...     document_type="commercial invoice",
+            ... )
+
+            >>> # Upload using int
+            >>> response = client.docs.upload_doc(
+            ...     file_path="/path/to/list.pdf",
+            ...     job_display_id=2000000,
+            ...     document_type=11,  # PACKING_LIST
+            ... )
+        """
+        # Resolve document_type to enum
+        resolved_type = self._resolve_document_type(document_type)
+
+        # Build and validate request model
+        request_data = {
+            "job_display_id": job_display_id,
+            "document_type": resolved_type,
+            "shared": shared,
+        }
+        if item_ids:
+            request_data["job_items"] = item_ids
+        if rfq_id is not None:
+            request_data["rfq_id"] = rfq_id
+
+        # Validate request with Pydantic model
+        upload_request = DocumentUploadRequest.model_validate(request_data)
+
+        # Handle file input
+        if isinstance(file_path, (str, Path)):
+            file_path = Path(file_path)
+            if not filename:
+                filename = file_path.name
+            with open(file_path, "rb") as f:
+                file_content = f.read()
+            # Auto-detect content type from file extension
+            if not content_type:
+                content_type, _ = mimetypes.guess_type(str(file_path))
+                content_type = content_type or "application/octet-stream"
+        else:
+            file_content = file_path.read()
+            if not filename:
+                filename = getattr(file_path, "name", "document")
+            if not content_type:
+                content_type = "application/octet-stream"
+
+        # Prepare multipart form data
+        files = {"file": (filename, file_content, content_type)}
+
+        # Convert model to form data using aliases
+        form_data = upload_request.model_dump(by_alias=True, exclude_none=True)
+
+        # Make the upload request
+        path = f"api/{self.api_path}/"
+        raw_response = self._r.upload_file(path=path, files=files, data=form_data)
+
+        # Validate response with Pydantic model
+        return DocumentUploadResponse.model_validate(raw_response)

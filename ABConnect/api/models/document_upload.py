@@ -1,15 +1,16 @@
 """Document upload models for ABConnect API."""
 
-from typing import List, Optional, BinaryIO, Tuple, Any
+from typing import List, Optional, Union
 from pydantic import BaseModel, Field
 from .base import ABConnectBaseModel
+from .enums import DocumentType
 
 
 class ItemPhotoUploadRequest(BaseModel):
     """Request model for uploading item photos."""
 
     job_display_id: int = Field(..., alias="JobDisplayId", description="The job display ID (e.g., 2000000)")
-    document_type: int = Field(..., alias="DocumentType", description="Document type ID (6 for Item_Photo)")
+    document_type: Union[int, DocumentType] = Field(..., alias="DocumentType", description="Document type ID. See DocumentType enum for valid values (e.g., DocumentType.ITEM_PHOTO = 6)")
     document_type_description: str = Field(..., alias="DocumentTypeDescription", description="Document type description")
     shared: int = Field(28, alias="Shared", description="Sharing level")
     job_items: List[str] = Field(..., alias="JobItems", description="List of item UUIDs")
@@ -38,4 +39,50 @@ class ItemPhotoUploadResponse(ABConnectBaseModel):
     message: str = Field(..., description="Response message")
 
 
-__all__ = ['ItemPhotoUploadRequest', 'UploadedFile', 'ItemPhotoUploadResponse']
+class DocumentUploadRequest(BaseModel):
+    """Request model for uploading documents of any type.
+
+    Example:
+        >>> from ABConnect.api.models.enums import DocumentType
+        >>> request = DocumentUploadRequest(
+        ...     job_display_id=2000000,
+        ...     document_type=DocumentType.BOL,
+        ...     shared=28,
+        ...     job_items=["550e8400-e29b-41d4-a716-446655440001"]
+        ... )
+    """
+
+    job_display_id: int = Field(..., alias="JobDisplayId", description="The job display ID (e.g., 2000000)")
+    document_type: Union[int, DocumentType] = Field(..., alias="DocumentType", description="Document type ID. See DocumentType enum.")
+    document_type_description: Optional[str] = Field(None, alias="DocumentTypeDescription", description="Document type description (auto-set from enum if not provided)")
+    shared: int = Field(28, alias="Shared", description="Sharing level (0=private, 28=shared)")
+    job_items: Optional[List[str]] = Field(None, alias="JobItems", description="List of item UUIDs to associate with document")
+    rfq_id: Optional[int] = Field(None, alias="RfqId", description="RFQ ID if applicable")
+
+    class Config:
+        populate_by_name = True
+
+    def model_post_init(self, __context) -> None:
+        """Auto-populate document_type_description from enum if not provided."""
+        if self.document_type_description is None and isinstance(self.document_type, DocumentType):
+            # Convert enum name to title case with spaces
+            self.document_type_description = self.document_type.name.replace("_", " ").title()
+
+
+class DocumentUploadResponse(ABConnectBaseModel):
+    """Response model for document upload."""
+
+    success: Optional[bool] = Field(None, description="Whether the upload was successful")
+    uploaded_files: Optional[List[UploadedFile]] = Field(None, alias="uploadedFiles", description="List of uploaded files")
+    message: Optional[str] = Field(None, description="Response message")
+    id: Optional[int] = Field(None, description="Document ID if single file uploaded")
+    file_name: Optional[str] = Field(None, alias="fileName", description="Filename if single file uploaded")
+
+
+__all__ = [
+    'ItemPhotoUploadRequest',
+    'UploadedFile',
+    'ItemPhotoUploadResponse',
+    'DocumentUploadRequest',
+    'DocumentUploadResponse',
+]
