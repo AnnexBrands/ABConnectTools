@@ -45,9 +45,12 @@ class TokenStorage(ABC):
         if r.ok:
             resp = r.json()
             self.set_token(resp)
-            logger.info(f"Login successful for user {data.get('username')} using grant_type {data.get('grant_type')}")
+            logger.info(
+                f"Login successful for user {data.get('username')} using grant_type {data.get('grant_type')}"
+            )
         else:
-            raise LoginFailedError().no_traceback()
+            msg = f"Login failed for {data.get('username')}: {r.status_code} {r.text}"
+            raise LoginFailedError(msg).no_traceback()
 
     def _login(self):
         data = {
@@ -72,15 +75,17 @@ class TokenStorage(ABC):
         """Refresh the token if needed and return the updated token."""
         pass
 
+    @abstractmethod
+    def _get_creds(self):
+        """Return dict with 'username' and 'password' keys for credential login."""
+        pass
+
 
 class SessionTokenStorage(TokenStorage):
     def __init__(self, *args, **kwargs):
         self._token = None
         self.request = kwargs["request"]
-        self._creds = {
-            "username": kwargs["username"],
-            "password": kwargs["password"]
-        }
+        self._creds = {"username": kwargs["username"], "password": kwargs["password"]}
         self._load_token()
 
     def _load_token(self):
@@ -110,9 +115,11 @@ class SessionTokenStorage(TokenStorage):
                 "password": self._creds["password"],
             }
         else:
-            if hasattr(self.request, "user") \
-                and hasattr(self.request.user, "username") \
-                and hasattr(self.request.user, "pw"):
+            if (
+                hasattr(self.request, "user")
+                and hasattr(self.request.user, "username")
+                and hasattr(self.request.user, "pw")
+            ):
                 return {
                     "username": self.request.user.username,
                     "password": self.request.user.pw,
@@ -138,15 +145,21 @@ class SessionTokenStorage(TokenStorage):
         elif self.request.user.refresh_token:
             refresh_token = self.request.user.refresh_token
         else:
-            return
+            return False
 
         data = {
             "grant_type": "refresh_token",
             "refresh_token": refresh_token,
             **self._identity_body(),
         }
-        self._call_login(data)
-        return True
+        try:
+            self._call_login(data)
+            return True
+        except LoginFailedError:
+            logger.info(
+                "Refresh token expired or invalid, will attempt credential login"
+            )
+            return False
 
 
 class FileTokenStorage(TokenStorage):
@@ -174,6 +187,7 @@ class FileTokenStorage(TokenStorage):
 
     def _get_creds(self):
         username = get_config("ABCONNECT_USERNAME")
+        logger.info(f"ABConnect will attempt login using username: {username}")
         password = get_config("ABCONNECT_PASSWORD")
         return {"username": username, "password": password}
 
@@ -203,5 +217,11 @@ class FileTokenStorage(TokenStorage):
             **self._identity_body(),
         }
 
-        self._call_login(data)
-        return True
+        try:
+            self._call_login(data)
+            return True
+        except LoginFailedError:
+            logger.info(
+                "Refresh token expired or invalid, will attempt credential login"
+            )
+            return False

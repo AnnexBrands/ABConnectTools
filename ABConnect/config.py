@@ -6,14 +6,14 @@ for different environments (production, staging, testing).
 
 import os
 from typing import Optional, Dict, Any
-from dotenv import load_dotenv, dotenv_values
+from dotenv import load_dotenv, dotenv_values, find_dotenv
 
 
 class Config:
     """Configuration manager for ABConnect."""
 
     _instance: Optional["Config"] = None
-    _env_file: str = ".env"
+    _env_file: str = find_dotenv() or ".env"
     _env_values: Dict[str, Any] = {}
     _loaded: bool = False
 
@@ -125,7 +125,7 @@ class Config:
         custom_url = cls.get("ABC_SWAGGER_URL")
         if custom_url:
             return custom_url
-            
+
         if cls.get_env() == "staging":
             return "https://portal.staging.abconnect.co/swagger/v1/swagger.json"
         return "https://portal.abconnect.co/swagger/v1/swagger.json"
@@ -136,7 +136,7 @@ class Config:
         cls._loaded = False
         cls._env_values = {}
         cls._env_file = ".env"
-    
+
     def __repr__(self):
         """Return string representation of Config instance."""
         return (

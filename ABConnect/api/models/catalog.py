@@ -65,7 +65,7 @@ class LotDataDto(ABConnectBaseModel):
     h: Optional[float] = Field(None, validation_alias=AliasChoices('H', 'h'), serialization_alias='H', description="Height")
     wgt: Optional[float] = Field(None, validation_alias=AliasChoices('Wgt', 'wgt'), serialization_alias='Wgt', description="Weight")
     value: Optional[float] = Field(None, validation_alias=AliasChoices('Value', 'value'), serialization_alias='Value', description="Value")
-    cpack: Optional[str] = Field(None, validation_alias=AliasChoices('Cpack', 'cpack'), serialization_alias='Cpack', description="Container pack ID")
+    cpack: Optional[str] = Field(None, validation_alias=AliasChoices('CPack', 'Cpack', 'cpack'), serialization_alias='CPack', description="Container pack ID")
     description: Optional[str] = Field(None, validation_alias=AliasChoices('Description', 'description'), serialization_alias='Description')
     notes: Optional[str] = Field(None, validation_alias=AliasChoices('Notes', 'notes'), serialization_alias='Notes')
     item_id: Optional[int] = Field(None, validation_alias=AliasChoices('ItemID', 'itemID'), serialization_alias='ItemID', description="Item ID")

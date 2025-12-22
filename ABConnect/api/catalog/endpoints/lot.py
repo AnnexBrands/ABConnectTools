@@ -31,7 +31,7 @@ class LotEndpoint(BaseCatalogEndpoint):
         self,
         page_number: int = 1,
         page_size: int = 10,
-        catalog_id: Optional[int] = None,
+        customer_catalog_id: Optional[str] = None,
         **kwargs,
     ) -> LotDtoPaginatedList:
         """List lots with pagination.
@@ -39,7 +39,7 @@ class LotEndpoint(BaseCatalogEndpoint):
         Args:
             page_number: Page number (1-indexed)
             page_size: Number of items per page
-            catalog_id: Filter by catalog ID
+            customer_catalog_id: Filter by customer catalog ID (e.g., "400160")
 
         Returns:
             Paginated list of lots
@@ -49,8 +49,8 @@ class LotEndpoint(BaseCatalogEndpoint):
             "PageSize": page_size,
             **kwargs,
         }
-        if catalog_id is not None:
-            params["CatalogId"] = catalog_id
+        if customer_catalog_id is not None:
+            params["CustomerCatalogId"] = customer_catalog_id
         response = self._get(params=params)
         return LotDtoPaginatedList.model_validate(response)
 

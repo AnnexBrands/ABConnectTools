@@ -47,6 +47,7 @@ IMAGE_URL_TEMPLATE = "https://s3.amazonaws.com/static2.liveauctioneers.com/{hous
 # Converters
 # =============================================================================
 
+
 def parse_datetime(value) -> datetime:
     """Parse datetime from various formats."""
     if isinstance(value, datetime):
@@ -58,6 +59,14 @@ def parse_datetime(value) -> datetime:
             except ValueError:
                 continue
     raise ValueError(f"Cannot parse datetime: {value}")
+
+
+def ensure_future(dt: datetime) -> datetime:
+    """Ensure datetime is in the future by adding 1 year if needed."""
+    now = datetime.now()
+    if dt <= now:
+        return dt.replace(year=dt.year + 1)
+    return dt
 
 
 def to_float(value, default: float = 0.0) -> float:
@@ -102,15 +111,14 @@ def convert_cpack(value: str) -> str:
 def build_image_url(house_id: int, catalog_id: int, lot_id: int) -> str:
     """Build image URL from IDs."""
     return IMAGE_URL_TEMPLATE.format(
-        house_id=house_id,
-        catalog_id=catalog_id,
-        lot_id=lot_id
+        house_id=house_id, catalog_id=catalog_id, lot_id=lot_id
     )
 
 
 # =============================================================================
 # Data Builder
 # =============================================================================
+
 
 class CatalogDataBuilder:
     """Builds BulkInsertRequest from spreadsheet rows."""
@@ -135,7 +143,7 @@ class CatalogDataBuilder:
         if catalog_id in self.catalogs_data:
             return
 
-        start_date = parse_datetime(row["Catalog Start Date"])
+        start_date = ensure_future(parse_datetime(row["Catalog Start Date"]))
         end_date = start_date + timedelta(hours=1)
 
         self.catalogs_data[catalog_id] = {
@@ -190,6 +198,10 @@ class CatalogDataBuilder:
             w=w,
             l=l,
             wgt=wgt,
+            cpack=cpack,
+            description=description,
+            notes=lot_description,
+            force_crate=force_crate,
         )
 
         # Build override_data (with cpack, noted_conditions, description)
@@ -201,7 +213,7 @@ class CatalogDataBuilder:
             wgt=wgt,
             cpack=cpack,
             description=description,
-            noted_conditions=lot_description,
+            notes=lot_description,
             force_crate=force_crate,
         )
 
@@ -257,10 +269,9 @@ class CatalogDataBuilder:
 # Main Functions
 # =============================================================================
 
+
 def load_catalog(
-    file_path: str | Path,
-    agent: str = DEFAULT_AGENT,
-    dry_run: bool = False
+    file_path: str | Path, agent: str = DEFAULT_AGENT, dry_run: bool = False
 ) -> BulkInsertRequest:
     """Load catalog data from spreadsheet and insert via API.
 
@@ -302,14 +313,17 @@ def main():
     """Example usage."""
     import sys
 
-    # Default file or from command line
-    if len(sys.argv) > 1:
-        file_path = sys.argv[1]
-    else:
-        file_path = Path.cwd() / "examples" / "shipping-info-398425.xlsx"
-
     # Check for dry-run flag
     dry_run = "--dry-run" in sys.argv or "-n" in sys.argv
+
+    # Get positional arguments (exclude flags)
+    args = [arg for arg in sys.argv[1:] if not arg.startswith("-")]
+
+    # Default file or from command line
+    if args:
+        file_path = args[0]
+    else:
+        file_path = Path.cwd() / "examples" / "shipping-info-400160.xlsx"
 
     load_catalog(file_path, dry_run=dry_run)
 
