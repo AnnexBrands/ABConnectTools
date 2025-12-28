@@ -105,9 +105,9 @@ class ResponseMapper:
     def cast_response(
         self,
         response: Any,
-        method: str,
-        path: str,
-        operation_id: Optional[str] = None
+        method: Optional[str] = None,
+        path: Optional[str] = None,
+        response_model: Optional[str] = None,
     ) -> Union[Any, Dict, list]:
         """Cast an API response to the appropriate Pydantic model.
 
@@ -115,38 +115,36 @@ class ResponseMapper:
             response: The raw API response
             method: HTTP method (GET, POST, etc.)
             path: API path
-            operation_id: Optional OpenAPI operation ID
-
+            response_model: Optional response model name
         Returns:
             Cast model instance or original response if no mapping found
         """
-        # Find matching endpoint pattern
-        model_spec = None
+
+        model_spec = response_model
+
         for (endpoint_method, endpoint_pattern), model_name in self.endpoint_mappings.items():
-            if method.upper() == endpoint_method and self._match_path(path, endpoint_pattern):
+            if method and path and method.upper() == endpoint_method and self._match_path(path, endpoint_pattern):
                 model_spec = model_name
                 break
 
         if not model_spec:
-            # No mapping found, return original response
             logger.debug(f"No model mapping for {method} {path}")
             return response
 
-        # Handle list responses
+        # List of models
         if isinstance(model_spec, list):
             model_name = model_spec[0]
             model_class = self._get_model_class(model_name)
 
             if model_class and isinstance(response, list):
                 try:
-                    # Cast each item in the list
                     return [model_class.model_validate(item) for item in response]
                 except Exception as e:
                     logger.warning(f"Failed to cast list response to {model_name}: {e}")
                     return response
             return response
 
-        # Handle single model responses
+        # single model
         model_class = self._get_model_class(model_spec)
         if model_class:
             try:

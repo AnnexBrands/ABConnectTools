@@ -6,7 +6,6 @@ Provides type-safe access to SmsTemplate/* endpoints.
 
 from typing import Optional, Union
 from .base import BaseEndpoint
-from ..utils import resolve_company_id_param
 
 
 class SmstemplateEndpoint(BaseEndpoint):
@@ -81,10 +80,8 @@ class SmstemplateEndpoint(BaseEndpoint):
         path = "/list"
         kwargs = {}
 
-        # Resolve company parameter to companyId
-        params = resolve_company_id_param(company, self)
-        if params:
-            kwargs["params"] = params
+        if company:
+            kwargs["params"] = {"companyId": self.get_cache(company)}
 
         return self._make_request("GET", path, **kwargs)
     def get_get(self, templateId: str) -> dict:

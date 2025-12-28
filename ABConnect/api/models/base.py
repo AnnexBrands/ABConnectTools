@@ -19,7 +19,7 @@ class ABConnectBaseModel(BaseModel):
     Provides common configuration and utilities.
     """
     model_config = ConfigDict(
-        extra="forbid",  # Strict mode for generated models
+        extra="ignore",  # Ignore extra fields from API responses (schemas may evolve)
         populate_by_name=True,
         str_strip_whitespace=True,
         validate_assignment=True,
@@ -66,12 +66,11 @@ class ABConnectBaseModel(BaseModel):
         if isinstance(data, list):
             adapter = TypeAdapter(List[cls])
             validated = adapter.validate_python(data)
-            return [item.model_dump(by_alias=True, exclude_unset=exclude_unset, mode='json') for item in validated]
+            return [item.model_dump(by_alias=True, exclude_none=True, exclude_unset=exclude_unset, mode='json') for item in validated]
 
         # Handle single item (dict or model instance)
         validated = cls.model_validate(data)
-        return validated.model_dump(by_alias=True, exclude_unset=exclude_unset, mode='json')
-
+        return validated.model_dump(by_alias=True, exclude_none=True, exclude_unset=exclude_unset, mode='json')
 
 class IdentifiedModel(ABConnectBaseModel):
     """Base for models with ID fields (63 schemas have 'id')."""

@@ -102,7 +102,7 @@ class TestRequestMapper(ABConnectTestCase):
         )
         if model_class:
             # Should not raise
-            result = model_class.check(data)
+            result = model_class.json(data)
             self.assertIsInstance(result, dict)
             # Verify camelCase transformation
             self.assertIn('agentId', result)
@@ -144,7 +144,7 @@ class TestRequestMapperIntegration(ABConnectTestCase):
         if model:
             # Should raise ValidationError due to extra="forbid" in ABConnectBaseModel
             with self.assertRaises(ValidationError):
-                model.check(invalid_data)
+                model.json(invalid_data)
 
     def test_job_save_request_validation(self):
         """Test validation against JobSaveRequestModel."""

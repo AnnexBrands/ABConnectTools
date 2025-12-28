@@ -19,4 +19,6 @@ class JobFormHelper(JobFormEndpoint):
         return self.get_bol(job, "House")
 
     def get_ops(self, job: str):
-        return self.get_form_operations(job)
+        name = f"{job}_ops.pdf"
+        data = self.get_form_operations(job)
+        return {name: data}

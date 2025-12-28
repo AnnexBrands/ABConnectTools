@@ -4,11 +4,11 @@ Provides convenience methods for timeline operations that handle the get-update
 pattern to avoid collisions when updating job timeline tasks.
 """
 
-import logging
 from typing import Optional, Dict, Any, Tuple
 from ABConnect.api.endpoints.jobs.timeline import JobTimelineEndpoint
 from ABConnect.common import load_json_resource, TaskCodes
-
+from datetime import datetime, timedelta
+import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -132,6 +132,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         Returns:
             API response or None if already at/past this status
         """
+        logger.info(f"Setting job {jobid} as scheduled with start={start}, end={end}")
         statusinfo, task = self.get_task(jobid, TaskCodes.PICKUP)
         curr = statusinfo.get("code", 0)
 
@@ -155,22 +156,33 @@ class TimelineHelpers(JobTimelineEndpoint):
         return self.schedule(*args, **kwargs)
 
     def received(
-        self, jobid: int, start: str, end: str, createEmail: bool = False
+        self,
+        jobid: int,
+        start: Optional[str] = None,
+        end: Optional[str] = None,
+        createEmail: bool = False
     ) -> Optional[Dict[str, Any]]:
-        """Set the received date for a job (Status 3).
-
+        """Set the job as received (Status 3: Pickup completed).
+        
+        Handles onsite time logging according to the following rules:
+        - If neither start nor end provided: end = now (current hour), no onSiteTimeLog
+        - If only end provided: use end, do NOT include onSiteTimeLog
+        - If only start provided: end = start + 1 hour, include onSiteTimeLog
+        - If both provided: use both, include onSiteTimeLog
+        
         Args:
             jobid: Job display ID
-            start: Onsite start time (ISO format)
-            end: Onsite end time/completion (ISO format)
+            start: Onsite start time in ISO format (e.g., "2025-12-20T14:30:00")
+            end: Onsite end time/completion in ISO format
             createEmail: Whether to send email notification
-
+        
         Returns:
-            API response or None if already at/past this status
+            API response dict or None if job is already at/past status 3
         """
+        logger.info(f"Setting job {jobid} as received with start={start}, end={end}")
+
         statusinfo, task = self.get_task(jobid, TaskCodes.PICKUP)
         curr = statusinfo.get("code", 0)
-
         if curr >= 3:
             logger.warning(
                 f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})"
@@ -180,8 +192,50 @@ class TimelineHelpers(JobTimelineEndpoint):
         if not task:
             task = self.new_field_task.copy()
 
-        task["onSiteTimeLog"] = {"start": start, "end": end}
-        task["completedDate"] = end
+        # Determine final end time
+        final_end: str
+        include_onsite_log: bool = False
+        onsite_start: Optional[str] = None
+        onsite_end: Optional[str] = None
+
+        if start and end:
+            final_end = end
+            include_onsite_log = True
+            onsite_start = start
+            onsite_end = end
+
+        elif start and not end:
+            try:
+                start_dt = datetime.fromisoformat(start.replace("Z", "+00:00"))
+                end_dt = start_dt + timedelta(hours=1)
+                final_end = end_dt.isoformat(timespec='seconds')
+                include_onsite_log = True
+                onsite_start = start
+                onsite_end = final_end
+            except ValueError as e:
+                logger.error(f"Invalid start datetime format for job {jobid}: {start}")
+                raise ValueError(f"Invalid ISO format for start: {start}") from e
+
+        elif end and not start:
+            final_end = end
+            include_onsite_log = False
+
+        else:
+            now = datetime.now()
+            current_hour = now.replace(minute=0, second=0, microsecond=0)
+            final_end = current_hour.isoformat(timespec='seconds') + "Z"
+            include_onsite_log = False
+
+        task["completedDate"] = final_end
+
+        if include_onsite_log:
+            task["onSiteTimeLog"] = {
+                "start": onsite_start,
+                "end": onsite_end
+            }
+        else:
+            task.pop("onSiteTimeLog", None)
+
         return self.set_task(jobid, TaskCodes.PICKUP, task, createEmail)
 
     def _3(self, *args, **kwargs) -> Optional[Dict[str, Any]]:

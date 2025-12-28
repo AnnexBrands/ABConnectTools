@@ -89,8 +89,8 @@ class Config:
             Base API URL
         """
         if cls.get_env() == "staging":
-            return "https://portal.staging.abconnect.co/api/"
-        return "https://portal.abconnect.co/api/"
+            return "https://portal.staging.abconnect.co/api/api"
+        return "https://portal.abconnect.co/api/api"
 
     @classmethod
     def get_catalog_base_url(cls) -> str:
@@ -100,8 +100,8 @@ class Config:
             Base API URL
         """
         if cls.get_env() == "staging":
-            return "https://catalog-api.staging.abconnect.co/"
-        return "https://catalog-api.abconnect.co/"
+            return "https://catalog-api.staging.abconnect.co/api"
+        return "https://catalog-api.abconnect.co/api"
 
     @classmethod
     def get_identity_url(cls) -> str:

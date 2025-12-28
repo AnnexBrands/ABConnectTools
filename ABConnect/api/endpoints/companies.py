@@ -6,7 +6,6 @@ Provides type-safe access to companies/* endpoints.
 
 from typing import List, Optional, Union
 from .base import BaseEndpoint
-from ..utils import resolve_company_identifier
 from ..models.companies import (
     Company,
     CompanyDetails,
@@ -21,6 +20,8 @@ from ..models.companies import (
     PackagingTariffSettings,
 )
 
+import logging
+logger = logging.getLogger(__name__)
 
 class CompaniesEndpoint(BaseEndpoint):
     """Companies API endpoint operations.
@@ -55,8 +56,10 @@ class CompaniesEndpoint(BaseEndpoint):
             # Get by code with specific details endpoint
             company = api.companies.get('16023SC', details='details')
         """
-        # Use DRY helper to resolve company code/ID to UUID
-        company_uuid = resolve_company_identifier(code_or_id, self)
+        logger.info("Fetching company with code or ID: %s", code_or_id)
+        company_uuid = self.get_cache(code_or_id)
+
+        logger.info("Resolved company UUID: %s", company_uuid)
 
         # Use appropriate endpoint based on detail level
         # Pass cast_response parameter to enable model casting
@@ -77,8 +80,7 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        path = "/{id}"
-        path = path.replace("{id}", id)
+        path = f"/{id}"
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
 
@@ -173,8 +175,7 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        path = "/{companyId}/fulldetails"
-        path = path.replace("{companyId}", companyId)
+        path = f"/{companyId}/fulldetails"
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
 
@@ -186,8 +187,7 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        path = "/{companyId}/fulldetails"
-        path = path.replace("{companyId}", companyId)
+        path = f"/{companyId}/fulldetails"
         kwargs = {}
         if data is not None:
             kwargs["json"] = data

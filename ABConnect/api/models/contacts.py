@@ -6,11 +6,11 @@ from pydantic import Field
 from .base import ABConnectBaseModel, CompanyRelatedModel, IdentifiedModel, TimestampedModel
 from .enums import ListSortDirection
 
-if TYPE_CHECKING:
-    from .companies import Company, ContactDetailsCompanyInfo
-    from .address import Address, FreightRateRequestAddressDetails
-    from .shared import PhoneDetails, EmailDetails, AddressDetails, PageOrderedRequestModel, AutoCompleteValue
-    from .users import Users
+# Runtime imports for forward reference resolution (avoid circular imports with deferred import)
+from .address import Address, AddressDetails, FreightRateRequestAddressDetails
+from .shared import PhoneDetails, EmailDetails, PageOrderedRequestModel, AutoCompleteValue
+from .users import Users
+from .companies import Company, ContactDetailsCompanyInfo
 
 class BaseContactDetails(CompanyRelatedModel):
     """BaseContactDetails model"""
@@ -387,3 +387,11 @@ class ShipmentContactDetails(CompanyRelatedModel):
 
 
 __all__ = ['BaseContactDetails', 'CalendarContact', 'Contact', 'ContactAddressDetails', 'ContactAddressEditDetails', 'ContactDetailedInfo', 'ContactDetails', 'ContactEmailDetails', 'ContactEmailEditDetails', 'ContactHistoryPricePerPound', 'ContactHistoryRevenueSum', 'ContactPhoneDetails', 'ContactPhoneEditDetails', 'ContactPrimaryDetails', 'MergeContactsSearchRequestModel', 'MergeContactsSearchRequestParameters', 'PlannerContact', 'SearchContactEntityResult', 'SearchContactRequest', 'ShipmentContactAddressDetails', 'ShipmentContactDetails']
+
+# Rebuild models to resolve forward references within this module
+Contact.model_rebuild()
+ContactDetailedInfo.model_rebuild()
+ContactDetails.model_rebuild()
+ContactPrimaryDetails.model_rebuild()
+ShipmentContactAddressDetails.model_rebuild()
+ShipmentContactDetails.model_rebuild()

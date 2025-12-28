@@ -6,6 +6,7 @@ Auto-generated from swagger.json specification.
 from typing import List, Optional, Dict, Any, Union
 from ABConnect.api.endpoints.base import BaseEndpoint
 from ABConnect.api.models.jobparcelitems import ParcelItem, SaveAllParcelItemsRequest
+from ABConnect.api.routes import SCHEMA
 
 
 class JobParcelItemsEndpoint(BaseEndpoint):
@@ -27,9 +28,10 @@ class JobParcelItemsEndpoint(BaseEndpoint):
         Returns:
             Union[List[ParcelItem], List[Dict[str, Any]]]: List of ParcelItem models or list of dicts
         """
-        path = f"/{jobDisplayId}/parcelitems"
-        kwargs = {"cast_response": True}
-        return self._make_request("GET", path, **kwargs)
+        route = SCHEMA["GET_PARCELITEMS"]
+        route.params = {"jobDisplayId": jobDisplayId}
+
+        return self._make_request(route.method, route)
 
     def post_parcelitems(
         self,
@@ -63,7 +65,7 @@ class JobParcelItemsEndpoint(BaseEndpoint):
             )
 
         # Validate incoming data and convert to API format
-        validated_data = SaveAllParcelItemsRequest.check(data)
+        validated_data = SaveAllParcelItemsRequestdata.json()
         kwargs["json"] = validated_data
 
         return self._make_request("POST", path, **kwargs)

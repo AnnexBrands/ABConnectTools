@@ -5,9 +5,10 @@ Provides type-safe access to contacts/* endpoints.
 """
 
 from typing import List, Optional
-from .base import BaseEndpoint
-# Model imports disabled
-# Model imports disabled
+
+from ABConnect.api.endpoints.base import BaseEndpoint
+from ABConnect.api.models.contacts import ContactDetails
+from ABConnect.api.routes import SCHEMA
 
 
 class ContactsEndpoint(BaseEndpoint):
@@ -104,17 +105,28 @@ class ContactsEndpoint(BaseEndpoint):
             kwargs["json"] = data
         return self._make_request("PUT", path, **kwargs)
 
-    def get_get(self, id: str) -> dict:
+    def get(self, id: str) -> ContactDetails:
         """GET /api/contacts/{id}
 
+        Retrieves contact details by ID.
 
+        Args:
+            id: Contact ID (GUID string)
 
         Returns:
-            dict: API response data
+            ContactDetails: Typed contact details model
         """
-        path = f"/{id}"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = SCHEMA['GET_CONTACT']
+        route.params = {"id": id}
+        return self._make_request(route.method, route)
+
+    def get_get(self, id: str) -> ContactDetails:
+        """Alias for get() method for backward compatibility."""
+        return self.get(id)
+
+    def get_ah(self, houseid, *args, **kwargs) -> dict:
+        id = self.get_cache(houseid)
+        return self.get(id)
 
     def get_user(self) -> dict:
         """GET /api/contacts/user

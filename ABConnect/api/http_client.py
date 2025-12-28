@@ -79,7 +79,7 @@ class RequestHandler:
                 error_message = error_info.get("message", response.text)
             except ValueError:
                 error_message = response.text
-
+            logger.error(error_message)
             raise RequestError(response.status_code, error_message, response=response)
 
     def call(

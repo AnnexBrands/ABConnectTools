@@ -5,9 +5,17 @@ maintaining request handler inheritance while adding type safety and
 integration with auto-generated Pydantic models.
 """
 
-from typing import Any, Optional
+from __future__ import annotations
+
+from typing import Any, Optional, TYPE_CHECKING, overload
+
 import requests
+
 from ABConnect.config import get_config
+from ABConnect.api.routes import Route
+
+if TYPE_CHECKING:
+    from pydantic import BaseModel
 
 
 class BaseEndpoint:
@@ -29,83 +37,72 @@ class BaseEndpoint:
 
     @classmethod
     def set_request_handler(cls, handler):
-        """Set the HTTP request handler for all endpoints.
-
-        This class method sets the request handler that will be used by all
-        endpoint instances. It should be called once during API client
-        initialization.
-
-        Args:
-            handler: The HTTP request handler callable. Should accept
-                (method, path, **kwargs) and return the API response.
-
-        Example:
-            >>> from ABConnect.api.http_client import RequestHandler
-            >>> handler = RequestHandler(base_url='https://api.example.com')
-            >>> BaseEndpoint.set_request_handler(handler)
-        """
         cls._r = handler
 
     def _make_request(
         self,
         method: str,
-        path: str,
-        operation_id: Optional[str] = None,
-        cast_response: bool = True,
-        validate_request: bool = True,
+        path: str | Route,
         **kwargs,
     ):
         """Make HTTP request using the shared request handler.
 
+        Supports both legacy (method, path) style and new Route-based style.
+
         Args:
-            method: HTTP method (GET, POST, PUT, DELETE, etc.)
-            path: API path (will be prefixed with api_path if relative)
+            method: HTTP method (ignored if path is a Route)
+            path: API path string or Route object
             operation_id: Optional swagger operation ID for response casting
             cast_response: Whether to cast response to Pydantic model
-            validate_request: Whether to validate request data against Pydantic model.
-                Defaults to True. Set to False to skip validation for edge cases.
-            **kwargs: Additional arguments for the request
+            validate_request: Whether to validate request data against Pydantic model
+            **kwargs: Path parameters (for Route) or request options
 
         Returns:
             API response data (cast to Pydantic model if available)
-
-        Raises:
-            pydantic.ValidationError: If validate_request=True and request data
-                doesn't match the expected model schema
         """
-        # Build relative path (RequestHandler will add base URL with /api/)
-        if path.startswith("/"):
-            # Remove leading slash for relative path
-            path = path.lstrip("/")
-
-        # Combine with api_path (without /api/ prefix)
-        if self.api_path:
-            full_path = f"{self.api_path.strip('/')}/{path}"
-        else:
-            full_path = path
-
-        # Validate request data if present and validation is enabled
-        if validate_request and 'json' in kwargs and kwargs['json'] is not None:
-            kwargs['json'] = self._validate_request(
-                kwargs['json'], method, f"/api/{full_path}"
+        if isinstance(path, Route):
+            # validate request data
+            if path.request_model:
+                kwargs["json"] = self._validate_request(
+                    kwargs.get("json"), request_model=path.request_model
+                )
+            response = self._r.call(
+                path.method,
+                path.url,
+                **kwargs,
             )
-
-        # Make the API call
-        response = self._r.call(method, full_path, **kwargs)
-
-        # Cast response to Pydantic model if requested
-        if cast_response:
             return self._cast_response(
-                response, method, f"/api/api/{full_path}", operation_id
+                response, response_model=path.response_model
             )
 
-        return response
+        else:
+            if path.startswith("/"):
+                path = path.lstrip("/")
+
+            if self.api_path:
+                full_path = f"{self.api_path.strip('/')}/{path}"
+            else:
+                full_path = path
+
+            if "json" in kwargs and kwargs["json"] is not None:
+                kwargs["json"] = self._validate_request(
+                    kwargs["json"], method, f"/api/{full_path}"
+                )
+        
+            response = self._r.call(method, full_path, **kwargs)
+
+
+            return self._cast_response(
+                response, method, f"/api/api/{full_path}"
+            )
+
 
     def _validate_request(
         self,
         data: Any,
         method: str,
         full_path: str,
+        request_model: Optional[str] = None,
     ) -> Any:
         """Validate request data against appropriate Pydantic model.
 
@@ -117,7 +114,7 @@ class BaseEndpoint:
             data: Raw request data (dict or list)
             method: HTTP method
             full_path: Full API path including /api/ prefix
-
+            request_model: Optional request model name
         Returns:
             Validated and transformed data
 
@@ -127,8 +124,12 @@ class BaseEndpoint:
         try:
             from ..request_mapper import get_request_mapper
 
-            mapper = get_request_mapper()
-            return mapper.validate_request(data, method, full_path)
+            mapper = get_request_mapper().validate_request
+
+            if request_model:
+                return mapper(data, request_model=request_model)
+            else:
+                return mapper(data, method, full_path)
         except ImportError as e:
             # If request mapper not available, pass through unchanged
             import logging
@@ -139,9 +140,9 @@ class BaseEndpoint:
     def _cast_response(
         self,
         response: Any,
-        method: str,
-        full_path: str,
-        operation_id: Optional[str] = None,
+        method: Optional[str] = None,
+        full_path: Optional[str] = None,
+        response_model: Optional[str] = None,
     ) -> dict:
         """Cast response to appropriate Pydantic model.
 
@@ -157,8 +158,12 @@ class BaseEndpoint:
         try:
             from ..response_mapper import get_response_mapper
 
-            mapper = get_response_mapper()
-            return mapper.cast_response(response, method, full_path, operation_id)
+            mapper = get_response_mapper().cast_response
+
+            if response_model:
+                return mapper(response, response_model=response_model)
+            else:
+                return mapper(response, method, full_path)
         except ImportError as e:
             # If response mapper not available, return raw response
             import logging
@@ -178,7 +183,8 @@ class BaseEndpoint:
         """
         cache_url = "https://tasks.abconnect.co/cache/%s"
         headers = {"x-api-key": get_config("ABC_CLIENT_SECRET")}
-        result = requests.get(cache_url % key, headers=headers).text
+        upper_key = str(key).upper()
+        result = requests.get(cache_url % upper_key, headers=headers).text
         if result:
             return result
         return None

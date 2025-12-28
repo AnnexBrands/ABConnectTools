@@ -5,9 +5,11 @@ from pydantic import Field
 from .base import ABConnectBaseModel, CompanyRelatedModel, IdentifiedModel, TimestampedModel
 from .enums import PropertyType
 
+# Runtime imports for forward reference resolution
+from .shared import LatLng, StringOverridable
+
 if TYPE_CHECKING:
     from .contacts import Contact
-    from .shared import LatLng, StringOverridable
 
 class Address(TimestampedModel):
     """Address model"""

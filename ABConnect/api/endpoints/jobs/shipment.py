@@ -35,7 +35,7 @@ class JobShipmentEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             # Validate incoming data and convert to API format
-            validated_data = BookShipmentRequest.check(data)
+            validated_data = BookShipmentRequest.json(data)
             kwargs["json"] = validated_data
 
         return self._make_request("POST", path, **kwargs)
@@ -69,7 +69,7 @@ class JobShipmentEndpoint(BaseEndpoint):
             )
 
         # Validate incoming data and convert to API format
-        validated_data = DeleteShipRequestModel.check(data)
+        validated_data = DeleteShipRequestModel.json(data)
         kwargs["json"] = validated_data
 
         return self._make_request("DELETE", path, **kwargs)
@@ -118,7 +118,8 @@ class JobShipmentEndpoint(BaseEndpoint):
         path = path.replace("{jobDisplayId}", str(jobDisplayId))
         kwargs = {}
         if data is not None:
-            kwargs["json"] = data
+            validated_data = BookShipmentRequest.json(data)
+            kwargs["json"] = validated_data
         return self._make_request("POST", path, **kwargs)
 
     def get_shipment_origindestination(self, jobDisplayId: str) -> Dict[str, Any]:

@@ -33,7 +33,7 @@ class JobFreightProvidersEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             # Validate incoming data and convert to API format
-            validated_data = ShipmentPlanProvider.check(data)
+            validated_data = ShipmentPlanProvider.json(data)
             kwargs["json"] = validated_data
 
         response = self._make_request("POST", path, **kwargs)
@@ -83,7 +83,7 @@ class JobFreightProvidersEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             # Validate incoming data and convert to API format
-            validated_data = SetRateModel.check(data)
+            validated_data = SetRateModel.json(data)
             kwargs["json"] = validated_data
 
         return self._make_request("POST", path, **kwargs)

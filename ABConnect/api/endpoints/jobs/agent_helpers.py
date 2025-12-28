@@ -27,25 +27,6 @@ class AgentEndpoint(JobEndpoint):
     - Handle agent resolution automatically
     """
 
-    def _resolve_agent_identifier(self, agent: str) -> str:
-        """Resolve agent code or UUID to agent UUID.
-
-        Args:
-            agent: Agent code (e.g., 'JM') or UUID
-
-        Returns:
-            Agent UUID string
-
-        Raises:
-            ValueError: If agent code not found in cache or invalid
-        """
-        from ABConnect.api.utils import resolve_agent_identifier
-
-        if not agent:
-            raise ValueError("Agent identifier required")
-
-        return resolve_agent_identifier(agent, self)
-
     def oa(
         self,
         jobid: int,
@@ -64,18 +45,9 @@ class AgentEndpoint(JobEndpoint):
         Returns:
             API response dictionary
 
-        Examples:
-            # Change OA using agent code
-            api.jobs.job.change_oa(2000000, "JM")
-
-            # Change OA using UUID with price recalculation
-            api.jobs.job.change_oa(2000000, "550e8400-e29b-41d4-a716-446655440000", recalculate_price=True)
         """
-        agent_id = self._resolve_agent_identifier(agent)
+        agent_id = self.get_cache(agent)
 
-        logger.info(
-            f"JOBS:AGENT_HEPERS:OA - Job {jobid} to {agent} (UUID: {agent_id})"
-        )
 
         return self.post_changeAgent(
             jobDisplayId=str(jobid),

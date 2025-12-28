@@ -126,8 +126,9 @@ class RequestMapper:
     def validate_request(
         self,
         data: Any,
-        method: str,
-        path: str
+        method: Optional[str] = None,
+        path: Optional[str] = None,
+        request_model: Optional[str] = None
     ) -> Any:
         """Validate request data against the appropriate Pydantic model.
 
@@ -147,14 +148,12 @@ class RequestMapper:
         Raises:
             pydantic.ValidationError: If data doesn't match the model schema
         """
-        if data is None:
-            return data
+        if not data:
+            return
 
-        # Find model for this endpoint
-        model_class = self.get_model_for_endpoint(method, path)
+        model_class = request_model or self.get_model_for_endpoint(method, path)
 
         if not model_class:
-            # No mapping found, pass through unchanged
             logger.debug(f"No request model mapping for {method} {path}")
             return data
 
