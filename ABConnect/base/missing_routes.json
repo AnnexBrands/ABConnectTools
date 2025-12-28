@@ -1,0 +1,495 @@
+{
+  "ACCOUNT": [
+    {
+      "route": "GET_PROFILE",
+      "path": "/account/profile",
+      "candidates": [["UserInfo", 0.8], ["Users", 0.6]]
+    },
+    {
+      "route": "GET_VERIFYRESETTOKEN",
+      "path": "/account/verifyresettoken",
+      "candidates": [["ServiceBaseResponse", 0.5]]
+    }
+  ],
+  "ADMIN": [
+    {
+      "route": "GET_ADVANCEDSETTINGS",
+      "path": "/admin/advancedsettings/{id}",
+      "candidates": [["AdvancedSettingsEntitySaveModel", 0.9]]
+    },
+    {
+      "route": "GET_ADVANCEDSETTINGS_ALL",
+      "path": "/admin/advancedsettings/all",
+      "candidates": [["List[AdvancedSettingsEntitySaveModel]", 0.9]]
+    },
+    {
+      "route": "GET_CARRIERERRORMESSAGE_ALL",
+      "path": "/admin/carriererrormessage/all",
+      "candidates": [["List[CarrierErrorMessage]", 0.9]]
+    }
+  ],
+  "COMPANIES": [
+    {
+      "route": "GET",
+      "path": "/companies/{id}",
+      "candidates": [["Company", 1.0], ["CompanyDetails", 0.9], ["CompanyInfo", 0.8]]
+    },
+    {
+      "route": "GET_AVAILABLE_BY_CURRENT_USER",
+      "path": "/companies/availableByCurrentUser",
+      "candidates": [["List[Company]", 0.8], ["List[CompanyInfo]", 0.8]]
+    },
+    {
+      "route": "GET_BRANDS",
+      "path": "/companies/brands",
+      "candidates": [["List[Company]", 0.7], ["List[CompanyInfo]", 0.7]]
+    },
+    {
+      "route": "GET_BRANDSTREE",
+      "path": "/companies/brandstree",
+      "candidates": [["List[Company]", 0.6]]
+    },
+    {
+      "route": "GET_CAPABILITIES",
+      "path": "/companies/{companyId}/capabilities",
+      "candidates": [["CommercialCapabilities", 0.9]]
+    },
+    {
+      "route": "GET_CARRIER_ACOUNTS",
+      "path": "/companies/{companyId}/carrierAcounts",
+      "candidates": [["FranchiseeCarrierAccounts", 0.9], ["List[CarrierAccountInfo]", 0.8]]
+    },
+    {
+      "route": "GET_DETAILS",
+      "path": "/companies/{companyId}/details",
+      "candidates": [["CompanyDetails", 0.9], ["CompanyDetailsBaseInfo", 0.8]]
+    },
+    {
+      "route": "GET_GEOSETTINGS",
+      "path": "/companies/geosettings",
+      "candidates": [["List[SaveGeoSettingModel]", 0.8]]
+    },
+    {
+      "route": "GET_GEO_AREA_COMPANIES",
+      "path": "/companies/geoAreaCompanies",
+      "candidates": [["List[Company]", 0.7], ["List[CompanyInfo]", 0.7]]
+    },
+    {
+      "route": "GET_INFO_FROM_KEY",
+      "path": "/companies/infoFromKey",
+      "candidates": [["CompanyInfo", 0.8], ["Company", 0.7]]
+    },
+    {
+      "route": "GET_INHERITEDPACKAGINGLABOR",
+      "path": "/companies/{companyId}/inheritedpackaginglabor",
+      "candidates": [["PackagingLaborSettings", 0.9]]
+    },
+    {
+      "route": "GET_INHERITED_PACKAGING_TARIFFS",
+      "path": "/companies/{companyId}/inheritedPackagingTariffs",
+      "candidates": [["PackagingTariffSettings", 0.9]]
+    },
+    {
+      "route": "GET_PACKAGINGLABOR",
+      "path": "/companies/{companyId}/packaginglabor",
+      "candidates": [["PackagingLaborSettings", 0.9]]
+    },
+    {
+      "route": "GET_PACKAGINGSETTINGS",
+      "path": "/companies/{companyId}/packagingsettings",
+      "candidates": [["PackagingTariffSettings", 0.9]]
+    },
+    {
+      "route": "GET_SEARCH",
+      "path": "/companies/search",
+      "candidates": [["List[Company]", 0.8], ["List[SearchCompanyResponse]", 0.9]]
+    },
+    {
+      "route": "GET_SEARCH_CARRIER_ACCOUNTS",
+      "path": "/companies/search/carrier-accounts",
+      "candidates": [["List[CarrierAccountInfo]", 0.8]]
+    }
+  ],
+  "COMPANY": [
+    {
+      "route": "GET_ACCOUNTS_STRIPE_CONNECTURL",
+      "path": "/company/{companyId}/accounts/stripe/connecturl",
+      "candidates": [["ServiceBaseResponse", 0.4]]
+    },
+    {
+      "route": "GET_CALENDAR_ENDOFDAY",
+      "path": "/company/{companyId}/calendar/{date}/endofday",
+      "candidates": [["Calendar", 0.7]]
+    },
+    {
+      "route": "GET_CALENDAR_STARTOFDAY",
+      "path": "/company/{companyId}/calendar/{date}/startofday",
+      "candidates": [["Calendar", 0.7]]
+    }
+  ],
+  "CONTACTS": [
+    {
+      "route": "GET",
+      "path": "/contacts/{id}",
+      "candidates": [["Contact", 1.0], ["ContactDetails", 0.9], ["ContactDetailedInfo", 0.9]]
+    },
+    {
+      "route": "GET_USER",
+      "path": "/contacts/user",
+      "candidates": [["Contact", 0.8], ["Users", 0.7], ["UserInfo", 0.7]]
+    }
+  ],
+  "DASHBOARD": [
+    {
+      "route": "GET",
+      "path": "/dashboard",
+      "candidates": [["GridSettingsEntity", 0.6]]
+    },
+    {
+      "route": "GET_GRIDVIEWS",
+      "path": "/dashboard/gridviews",
+      "candidates": [["List[GridViewDetails]", 0.9]]
+    },
+    {
+      "route": "GET_GRIDVIEWSTATE",
+      "path": "/dashboard/gridviewstate/{id}",
+      "candidates": [["GridViewDetails", 0.8]]
+    }
+  ],
+  "DOCUMENTS": [
+    {
+      "route": "GET_GET",
+      "path": "/documents/get/{docPath}",
+      "candidates": [["DocumentDetails", 0.8]]
+    },
+    {
+      "route": "GET_GET_THUMBNAIL",
+      "path": "/documents/get/thumbnail/{docPath}",
+      "candidates": [["DocumentDetails", 0.7]]
+    },
+    {
+      "route": "GET_LIST",
+      "path": "/documents/list",
+      "candidates": [["List[DocumentDetails]", 0.9]]
+    }
+  ],
+  "E_SIGN": [
+    {
+      "route": "GET",
+      "path": "/e-sign/{jobDisplayId}/{bookingKey}",
+      "candidates": []
+    },
+    {
+      "route": "GET_RESULT",
+      "path": "/e-sign/result",
+      "candidates": []
+    }
+  ],
+  "JOB": [
+    {
+      "route": "GET",
+      "path": "/job/{jobDisplayId}",
+      "candidates": [["CalendarJob", 0.8], ["JobSaveRequestModel", 0.6]]
+    },
+    {
+      "route": "GET_CALENDARITEMS",
+      "path": "/job/{jobDisplayId}/calendaritems",
+      "candidates": [["List[CalendarItem]", 0.9]]
+    },
+    {
+      "route": "GET_DOCUMENT_CONFIG",
+      "path": "/job/documentConfig",
+      "candidates": [["DocumentDetails", 0.5]]
+    },
+    {
+      "route": "GET_FEEDBACK",
+      "path": "/job/feedback/{jobDisplayId}",
+      "candidates": [["FeedbackSaveModel", 0.8]]
+    },
+    {
+      "route": "GET_FORM_ADDRESS_LABEL",
+      "path": "/job/{jobDisplayId}/form/address-label",
+      "candidates": []
+    },
+    {
+      "route": "GET_FORM_BILL_OF_LADING",
+      "path": "/job/{jobDisplayId}/form/bill-of-lading",
+      "candidates": []
+    },
+    {
+      "route": "GET_FORM_CREDIT_CARD_AUTHORIZATION",
+      "path": "/job/{jobDisplayId}/form/credit-card-authorization",
+      "candidates": []
+    },
+    {
+      "route": "GET_FORM_CUSTOMER_QUOTE",
+      "path": "/job/{jobDisplayId}/form/customer-quote",
+      "candidates": []
+    },
+    {
+      "route": "GET_FORM_INVOICE",
+      "path": "/job/{jobDisplayId}/form/invoice",
+      "candidates": []
+    },
+    {
+      "route": "GET_FORM_ITEM_LABELS",
+      "path": "/job/{jobDisplayId}/form/item-labels",
+      "candidates": []
+    },
+    {
+      "route": "GET_FORM_OPERATIONS",
+      "path": "/job/{jobDisplayId}/form/operations",
+      "candidates": []
+    },
+    {
+      "route": "GET_FORM_PACKAGING_LABELS",
+      "path": "/job/{jobDisplayId}/form/packaging-labels",
+      "candidates": []
+    },
+    {
+      "route": "GET_FORM_PACKAGING_SPECIFICATION",
+      "path": "/job/{jobDisplayId}/form/packaging-specification",
+      "candidates": []
+    },
+    {
+      "route": "GET_FORM_PACKING_SLIP",
+      "path": "/job/{jobDisplayId}/form/packing-slip",
+      "candidates": []
+    },
+    {
+      "route": "GET_FORM_QUICK_SALE",
+      "path": "/job/{jobDisplayId}/form/quick-sale",
+      "candidates": []
+    },
+    {
+      "route": "GET_FORM_USAR",
+      "path": "/job/{jobDisplayId}/form/usar",
+      "candidates": []
+    },
+    {
+      "route": "GET_JOB_ACCESS_LEVEL",
+      "path": "/job/jobAccessLevel",
+      "candidates": [["JobAccessLevel", 0.9]]
+    },
+    {
+      "route": "GET_PAYMENT",
+      "path": "/job/{jobDisplayId}/payment",
+      "candidates": [["PaymentSourceDetails", 0.7]]
+    },
+    {
+      "route": "GET_PAYMENT_CREATE",
+      "path": "/job/{jobDisplayId}/payment/create",
+      "candidates": [["PaymentSourceDetails", 0.6]]
+    },
+    {
+      "route": "GET_PAYMENT_SOURCES",
+      "path": "/job/{jobDisplayId}/payment/sources",
+      "candidates": [["List[PaymentSourceDetails]", 0.9]]
+    },
+    {
+      "route": "GET_PRICE",
+      "path": "/job/{jobDisplayId}/price",
+      "candidates": []
+    },
+    {
+      "route": "GET_SEARCH",
+      "path": "/job/search",
+      "candidates": [["List[SearchJobInfo]", 0.8]]
+    },
+    {
+      "route": "GET_SHIPMENT_EXPORTDATA",
+      "path": "/job/{jobDisplayId}/shipment/exportdata",
+      "candidates": [["JobExportData", 0.9], ["InternationalParams", 0.7]]
+    },
+    {
+      "route": "GET_SHIPMENT_RATESSTATE",
+      "path": "/job/{jobDisplayId}/shipment/ratesstate",
+      "candidates": [["JobCarrierRatesModel", 0.7]]
+    },
+    {
+      "route": "GET_SMS",
+      "path": "/job/{jobDisplayId}/sms",
+      "candidates": [["SendSMSModel", 0.6]]
+    },
+    {
+      "route": "GET_SMS_TEMPLATEBASED",
+      "path": "/job/{jobDisplayId}/sms/templatebased/{templateId}",
+      "candidates": [["SmsTemplateModel", 0.8]]
+    },
+    {
+      "route": "GET_SUBMANAGEMENTSTATUS",
+      "path": "/job/{jobDisplayId}/submanagementstatus",
+      "candidates": []
+    },
+    {
+      "route": "GET_TRACKING",
+      "path": "/job/{jobDisplayId}/tracking",
+      "candidates": [["ShipmentTrackingDetails", 0.8], ["ShipmentDetails", 0.7]]
+    }
+  ],
+  "JOBINTACCT": [
+    {
+      "route": "GET",
+      "path": "/jobintacct/{jobDisplayId}",
+      "candidates": [["CreateJobIntacctModel", 0.8]]
+    }
+  ],
+  "LOOKUP": [
+    {
+      "route": "GET",
+      "path": "/lookup/{masterConstantKey}/{valueId}",
+      "candidates": [["LookupValue", 0.9]]
+    },
+    {
+      "route": "GET_ACCESS_KEY",
+      "path": "/lookup/accessKey/{accessKey}",
+      "candidates": [["LookupValue", 0.7]]
+    },
+    {
+      "route": "GET_ACCESS_KEYS",
+      "path": "/lookup/accessKeys",
+      "candidates": [["List[LookupValue]", 0.8]]
+    },
+    {
+      "route": "GET_COMON_INSURANCE",
+      "path": "/lookup/comonInsurance",
+      "candidates": [["InsuranceOption", 0.7]]
+    },
+    {
+      "route": "GET_DOCUMENT_TYPES",
+      "path": "/lookup/documentTypes",
+      "candidates": [["List[LookupValue]", 0.8]]
+    },
+    {
+      "route": "GET_ITEMS",
+      "path": "/lookup/items",
+      "candidates": [["List[LookupValue]", 0.7], ["List[Items]", 0.6]]
+    },
+    {
+      "route": "GET_PARCEL_PACKAGE_TYPES",
+      "path": "/lookup/parcelPackageTypes",
+      "candidates": [["List[LookupValue]", 0.8]]
+    },
+    {
+      "route": "GET_PPCCAMPAIGNS",
+      "path": "/lookup/PPCCampaigns",
+      "candidates": [["List[LookupValue]", 0.6]]
+    },
+    {
+      "route": "GET_REFER_CATEGORY",
+      "path": "/lookup/referCategory",
+      "candidates": [["List[LookupValue]", 0.7]]
+    },
+    {
+      "route": "GET_REFER_CATEGORY_HEIRACHY",
+      "path": "/lookup/referCategoryHeirachy",
+      "candidates": [["List[LookupValue]", 0.6]]
+    },
+    {
+      "route": "GET_RESET_MASTER_CONSTANT_CACHE",
+      "path": "/lookup/resetMasterConstantCache",
+      "candidates": [["ServiceBaseResponse", 0.5]]
+    }
+  ],
+  "NOTIFICATIONS": [
+    {
+      "route": "GET",
+      "path": "/notifications",
+      "candidates": []
+    }
+  ],
+  "RFQ": [
+    {
+      "route": "GET",
+      "path": "/rfq/{rfqId}",
+      "candidates": [["QuoteRequestDisplayInfo", 0.9]]
+    },
+    {
+      "route": "GET_FORJOB",
+      "path": "/rfq/forjob/{jobId}",
+      "candidates": [["List[QuoteRequestDisplayInfo]", 0.9]]
+    }
+  ],
+  "SHIPMENT": [
+    {
+      "route": "GET_ACCESSORIALS",
+      "path": "/shipment/accessorials",
+      "candidates": [["List[JobParcelAddOn]", 0.8]]
+    }
+  ],
+  "SMSTEMPLATE": [
+    {
+      "route": "GET",
+      "path": "/SmsTemplate/{templateId}",
+      "candidates": [["SmsTemplateModel", 1.0]]
+    },
+    {
+      "route": "GET_JOB_STATUSES",
+      "path": "/SmsTemplate/jobStatuses",
+      "candidates": [["List[LookupValue]", 0.7]]
+    },
+    {
+      "route": "GET_LIST",
+      "path": "/SmsTemplate/list",
+      "candidates": [["List[SmsTemplateModel]", 0.9]]
+    },
+    {
+      "route": "GET_NOTIFICATION_TOKENS",
+      "path": "/SmsTemplate/notificationTokens",
+      "candidates": [["List[LookupValue]", 0.6]]
+    }
+  ],
+  "USERS": [
+    {
+      "route": "GET_POCUSERS",
+      "path": "/users/pocusers",
+      "candidates": [["List[Users]", 0.8], ["List[UserInfo]", 0.8]]
+    },
+    {
+      "route": "GET_ROLES",
+      "path": "/users/roles",
+      "candidates": [["List[LookupValue]", 0.6]]
+    }
+  ],
+  "V2": [
+    {
+      "route": "GET_JOB_TRACKING",
+      "path": "/v2/job/{jobDisplayId}/tracking/{historyAmount}",
+      "candidates": [["ShipmentTrackingDetails", 0.8], ["ShipmentDetails", 0.7]]
+    }
+  ],
+  "VALUES": [
+    {
+      "route": "GET",
+      "path": "/Values",
+      "candidates": []
+    }
+  ],
+  "VIEWS": [
+    {
+      "route": "GET",
+      "path": "/views/{viewId}",
+      "candidates": [["GridViewDetails", 0.9]]
+    },
+    {
+      "route": "GET_ACCESSINFO",
+      "path": "/views/{viewId}/accessinfo",
+      "candidates": [["GridViewAccess", 0.9]]
+    },
+    {
+      "route": "GET_ALL",
+      "path": "/views/all",
+      "candidates": [["List[GridViewDetails]", 0.9]]
+    },
+    {
+      "route": "GET_DATASETSP",
+      "path": "/views/datasetsp/{spName}",
+      "candidates": [["List[StoredProcedureColumn]", 0.7]]
+    },
+    {
+      "route": "GET_DATASETSPS",
+      "path": "/views/datasetsps",
+      "candidates": []
+    }
+  ]
+}

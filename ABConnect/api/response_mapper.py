@@ -140,7 +140,7 @@ class ResponseMapper:
                 try:
                     return [model_class.model_validate(item) for item in response]
                 except Exception as e:
-                    logger.warning(f"Failed to cast list response to {model_name}: {e}")
+                    logger.warning(f"Failed to cast list response to {model_spec}: {e}")
                     return response
             return response
 

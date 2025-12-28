@@ -24,6 +24,7 @@ class RequestMapper:
 
         # Load mappings from generated schema_mappings module
         from .schema_mappings import REQUEST_MAPPINGS
+
         self.endpoint_mappings = REQUEST_MAPPINGS
 
     def _ensure_models_rebuilt(self):
@@ -31,6 +32,7 @@ class RequestMapper:
         if not self._models_rebuilt:
             try:
                 from ABConnect.api.models import rebuild_models
+
                 rebuild_models()
                 self._models_rebuilt = True
             except Exception as e:
@@ -54,6 +56,7 @@ class RequestMapper:
 
             # Try to import from models package
             from ABConnect.api import models
+
             model_class = getattr(models, model_name, None)
 
             if model_class:
@@ -78,12 +81,12 @@ class RequestMapper:
             True if the path matches the pattern
         """
         # Normalize paths
-        actual_path = actual_path.rstrip('/')
-        pattern = pattern.rstrip('/')
+        actual_path = actual_path.rstrip("/")
+        pattern = pattern.rstrip("/")
 
         # Split paths into segments
-        actual_parts = actual_path.strip('/').split('/')
-        pattern_parts = pattern.strip('/').split('/')
+        actual_parts = actual_path.strip("/").split("/")
+        pattern_parts = pattern.strip("/").split("/")
 
         # Must have same number of segments
         if len(actual_parts) != len(pattern_parts):
@@ -92,7 +95,7 @@ class RequestMapper:
         # Check each segment
         for actual, pattern_part in zip(actual_parts, pattern_parts):
             # Skip placeholders
-            if pattern_part.startswith('{') and pattern_part.endswith('}'):
+            if pattern_part.startswith("{") and pattern_part.endswith("}"):
                 continue
             # Non-placeholder parts must match exactly (case-insensitive for path segments)
             if actual.lower() != pattern_part.lower():
@@ -100,11 +103,7 @@ class RequestMapper:
 
         return True
 
-    def get_model_for_endpoint(
-        self,
-        method: str,
-        path: str
-    ) -> Optional[Type]:
+    def get_model_for_endpoint(self, method: str, path: str) -> Optional[Type]:
         """Get the Pydantic model class for an endpoint.
 
         Args:
@@ -117,18 +116,27 @@ class RequestMapper:
         method_upper = method.upper()
 
         # Find matching endpoint pattern
-        for (endpoint_method, endpoint_pattern), model_name in self.endpoint_mappings.items():
-            if method_upper == endpoint_method and self._match_path(path, endpoint_pattern):
+        for (
+            endpoint_method,
+            endpoint_pattern,
+        ), model_name in self.endpoint_mappings.items():
+            if method_upper == endpoint_method and self._match_path(
+                path, endpoint_pattern
+            ):
                 return self._get_model_class(model_name)
 
         return None
+    
+    def check(self, data, model_name: str) -> Optional[Type]:
+        """ get model_class and call Pydantic check() """
+        cls = self._get_model_class(model_name)
+        return cls.check(data)
 
     def validate_request(
         self,
         data: Any,
         method: Optional[str] = None,
         path: Optional[str] = None,
-        request_model: Optional[str] = None
     ) -> Any:
         """Validate request data against the appropriate Pydantic model.
 
@@ -151,7 +159,7 @@ class RequestMapper:
         if not data:
             return
 
-        model_class = request_model or self.get_model_for_endpoint(method, path)
+        model_class = self.get_model_for_endpoint(method, path)
 
         if not model_class:
             logger.debug(f"No request model mapping for {method} {path}")
@@ -164,11 +172,8 @@ class RequestMapper:
             adapter = TypeAdapter(model_class)
             validated = adapter.validate_python(data)
             # Dump using the validated model's method
-            return validated.model_dump(by_alias=True, exclude_unset=True, mode='json')
+            return validated.model_dump(by_alias=True, exclude_unset=True, mode="json")
         else:
-            # Use the model's check() method for validation and transformation
-            # This raises ValidationError on failure
-            logger.debug(f"Validating {method} {path} request with {model_class.__name__}")
             return model_class.check(data)
 
 

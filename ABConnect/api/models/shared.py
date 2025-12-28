@@ -1,11 +1,96 @@
 """Shared models for ABConnect API."""
 
+import logging
 from typing import List, Optional, TYPE_CHECKING
 from datetime import datetime
 from datetime import date
 from pydantic import Field
 from .base import ABConnectBaseModel, CompanyRelatedModel, IdentifiedModel, JobRelatedModel, TimestampedModel
 from .enums import RetransTimeZoneEnum, LabelType, PaymentType, LabelImageType, JobAccessLevel, CarrierAPI, HistoryCodeABCState, ListSortDirection, SortByField, SelectedOption
+
+logger = logging.getLogger(__name__)
+
+
+class ServiceBaseResponse(ABConnectBaseModel):
+    """Standard success/error response used by many API endpoints.
+
+    Common response format:
+    - {'success': True} on success
+    - {'success': False, 'errorMessage': '...'} on failure
+
+    Example:
+        response = api.job.post_freightproviders(job_id)
+        response.raise_for_error()  # Raises if failed
+
+        # Or check manually:
+        if response:
+            print("Success!")
+        else:
+            print(f"Failed: {response.error_message}")
+    """
+
+    success: Optional[bool] = Field(None)
+    error_message: Optional[str] = Field(None, alias="errorMessage")
+
+    def raise_for_error(self) -> None:
+        """Raise ValueError if response indicates failure.
+
+        Logs the error message before raising.
+
+        Raises:
+            ValueError: If success is False
+        """
+        if self.success is False:
+            error_msg = self.error_message or "Unknown error"
+            logger.error("API request failed: %s", error_msg)
+            raise ValueError(error_msg)
+
+    def __bool__(self) -> bool:
+        """Allow using response in boolean context.
+
+        Returns:
+            True if success is True, False otherwise
+        """
+        return self.success is True
+
+    def __repr__(self) -> str:
+        if self.success:
+            return "ServiceBaseResponse(success=True)"
+        return f"ServiceBaseResponse(success=False, error_message={self.error_message!r})"
+
+
+class ServiceWarningResponse(ServiceBaseResponse):
+    """ServiceBaseResponse with additional warning message field.
+
+    Extends ServiceBaseResponse to include a warning_message that may be
+    present even on successful responses.
+    """
+
+    warning_message: Optional[str] = Field(None, alias="warningMessage")
+
+    def log_warning_if_present(self) -> None:
+        """Log warning message if present."""
+        if self.warning_message:
+            logger.warning("API response warning: %s", self.warning_message)
+
+    def raise_for_error(self) -> None:
+        """Raise ValueError if response indicates failure, log warnings.
+
+        Also logs any warning message present in the response.
+
+        Raises:
+            ValueError: If success is False
+        """
+        self.log_warning_if_present()
+        super().raise_for_error()
+
+    def __repr__(self) -> str:
+        parts = [f"success={self.success}"]
+        if self.error_message:
+            parts.append(f"error_message={self.error_message!r}")
+        if self.warning_message:
+            parts.append(f"warning_message={self.warning_message!r}")
+        return f"ServiceWarningResponse({', '.join(parts)})"
 
 if TYPE_CHECKING:
     from .jobnote import JobTaskNote
@@ -1013,4 +1098,4 @@ class MaerskAccountData(ABConnectBaseModel):
     control_station: Optional[str] = Field(None, alias="controlStation", max_length=32, description="Control station")
 
 
-__all__ = ['AccesorialCharges', 'AutoCompleteValue', 'Base64File', 'BaseTask', 'BookShipmentSpecificParams', 'CalendarItem', 'CalendarNotes', 'CalendarTask', 'CarrierAccountInfo', 'CarrierInfo', 'CarrierProviderMessage', 'CarrierRateModel', 'CarrierTaskModel', 'Commodity', 'CreatedTask', 'CustomerInfo', 'Details', 'DocumentDetails', 'EmailDetails', 'EstesAccountData', 'ExportPackingInfo', 'ExportTotalCosts', 'ExpressFreightDetail', 'FedExAccountData', 'FedExRestApiAccount', 'FedExSpecific', 'ForwardAirAccountData', 'FranchiseeCarrierAccounts', 'GlobalTranzAccountData', 'GroupingInfo', 'HandlingUnitModel', 'InTheFieldTaskModel', 'InitialNoteModel', 'InsuranceOption', 'ItemTotals', 'Items', 'JToken', 'LaborCharges', 'LastObtainNFM', 'LatLng', 'LookupItem', 'MaerskAccountData', 'MasterMaterials', 'NameValueEntity', 'ObtainNFMParcelItem', 'ObtainNFMParcelService', 'OnlinePaymentSettings', 'PackagingLaborHours', 'PageOrderedRequestModel', 'PhoneDetails', 'PickupLaborHoursRule', 'PilotAccountData', 'PlannerLabor', 'QuoteRequestComment', 'RequestedParcelPackaging', 'RoadRunnerAccountData', 'RoyaltiesCharges', 'SearchCustomerInfo', 'ServiceInfo', 'ServicePricingsMarkup', 'ShipmentTrackingDocument', 'ShippingHistoryStatus', 'ShippingPackageInfo', 'SimplePriceTariff', 'SimpleTaskModel', 'SoldToDetails', 'SortBy', 'SortByModel', 'SortingInfo', 'StoredProcedureColumn', 'StringMergePreviewDataItem', 'StringOverridable', 'SummaryInfo', 'TaskTruckInfo', 'TaxOption', 'TeamWWAccountData', 'TimeLog', 'TimeLogModel', 'TimeLogPause', 'TimeLogPauseModel', 'TimeSpan', 'TrackingCarrierProps', 'TrackingStatusV2', 'TransportationCharges', 'TransportationRatesRequest', 'UPSAccountData', 'UPSSpecific', 'USPSAccountData', 'USPSSpecific', 'UpdateDateModel', 'UpdateTruckModel', 'WeightInfo', 'WorkTimeLog', 'WorkTimeLogModel']
+__all__ = ['AccesorialCharges', 'AutoCompleteValue', 'Base64File', 'BaseTask', 'BookShipmentSpecificParams', 'CalendarItem', 'CalendarNotes', 'CalendarTask', 'CarrierAccountInfo', 'CarrierInfo', 'CarrierProviderMessage', 'CarrierRateModel', 'CarrierTaskModel', 'Commodity', 'CreatedTask', 'CustomerInfo', 'Details', 'DocumentDetails', 'EmailDetails', 'EstesAccountData', 'ExportPackingInfo', 'ExportTotalCosts', 'ExpressFreightDetail', 'FedExAccountData', 'FedExRestApiAccount', 'FedExSpecific', 'ForwardAirAccountData', 'FranchiseeCarrierAccounts', 'GlobalTranzAccountData', 'GroupingInfo', 'HandlingUnitModel', 'InTheFieldTaskModel', 'InitialNoteModel', 'InsuranceOption', 'ItemTotals', 'Items', 'JToken', 'LaborCharges', 'LastObtainNFM', 'LatLng', 'LookupItem', 'MaerskAccountData', 'MasterMaterials', 'NameValueEntity', 'ObtainNFMParcelItem', 'ObtainNFMParcelService', 'OnlinePaymentSettings', 'PackagingLaborHours', 'PageOrderedRequestModel', 'PhoneDetails', 'PickupLaborHoursRule', 'PilotAccountData', 'PlannerLabor', 'QuoteRequestComment', 'RequestedParcelPackaging', 'RoadRunnerAccountData', 'RoyaltiesCharges', 'SearchCustomerInfo', 'ServiceBaseResponse', 'ServiceInfo', 'ServicePricingsMarkup', 'ServiceWarningResponse', 'ShipmentTrackingDocument', 'ShippingHistoryStatus', 'ShippingPackageInfo', 'SimplePriceTariff', 'SimpleTaskModel', 'SoldToDetails', 'SortBy', 'SortByModel', 'SortingInfo', 'StoredProcedureColumn', 'StringMergePreviewDataItem', 'StringOverridable', 'SummaryInfo', 'TaskTruckInfo', 'TaxOption', 'TeamWWAccountData', 'TimeLog', 'TimeLogModel', 'TimeLogPause', 'TimeLogPauseModel', 'TimeSpan', 'TrackingCarrierProps', 'TrackingStatusV2', 'TransportationCharges', 'TransportationRatesRequest', 'UPSAccountData', 'UPSSpecific', 'USPSAccountData', 'USPSSpecific', 'UpdateDateModel', 'UpdateTruckModel', 'WeightInfo', 'WorkTimeLog', 'WorkTimeLogModel']

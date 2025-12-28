@@ -2,13 +2,16 @@
 
 from typing import Optional
 from pydantic import Field
-from .base import ABConnectBaseModel, ActiveModel, IdentifiedModel
+from .base import ActiveModel, IdentifiedModel
+from .shared import ServiceBaseResponse, ServiceWarningResponse  # noqa: F401 - re-exported
 
-class SaveEntityResponse(IdentifiedModel):
-    """SaveEntityResponse model"""
 
-    success: Optional[bool] = Field(None)
-    error_message: Optional[str] = Field(None, alias="errorMessage")
+class SaveEntityResponse(IdentifiedModel, ServiceBaseResponse):
+    """Response model for save operations that return an entity ID.
+
+    Combines IdentifiedModel (id field) with ServiceBaseResponse (success/error).
+    """
+    pass
 
 
 class SaveTruckRequest(ActiveModel):
@@ -22,14 +25,6 @@ class SaveTruckRequest(ActiveModel):
     price_per_mile: Optional[float] = Field(None, alias="pricePerMile")
     cubes_capacity: Optional[int] = Field(None, alias="cubesCapacity")
     shared_for_children: Optional[bool] = Field(None, alias="sharedForChildren")
-
-
-class ServiceWarningResponse(ABConnectBaseModel):
-    """ServiceWarningResponse model"""
-
-    success: Optional[bool] = Field(None)
-    error_message: Optional[str] = Field(None, alias="errorMessage")
-    warning_message: Optional[str] = Field(None, alias="warningMessage")
 
 
 class Truck(IdentifiedModel):

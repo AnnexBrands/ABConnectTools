@@ -13,9 +13,14 @@ class Config:
     """Configuration manager for ABConnect."""
 
     _instance: Optional["Config"] = None
-    _env_file: str = find_dotenv() or ".env"
     _env_values: Dict[str, Any] = {}
     _loaded: bool = False
+
+    def __init__(self, env=None):
+        if not env:
+            self._env_file = ".env"
+        elif env=='staging':
+            self._env_file = ".staging.env"
 
     def __new__(cls):
         """Singleton pattern to ensure single config instance."""

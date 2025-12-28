@@ -5,14 +5,14 @@ maintaining request handler inheritance while adding type safety and
 integration with auto-generated Pydantic models.
 """
 
-from __future__ import annotations
-
-from typing import Any, Optional, TYPE_CHECKING, overload
-
-import requests
-
 from ABConnect.config import get_config
 from ABConnect.api.routes import Route
+from ABConnect.api.request_mapper import get_request_mapper
+
+import requests
+from typing import Any, Optional, TYPE_CHECKING, overload
+import logging
+logger = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from pydantic import BaseModel
@@ -61,11 +61,10 @@ class BaseEndpoint:
             API response data (cast to Pydantic model if available)
         """
         if isinstance(path, Route):
-            # validate request data
+            data = kwargs.get("json")
             if path.request_model:
-                kwargs["json"] = self._validate_request(
-                    kwargs.get("json"), request_model=path.request_model
-                )
+                kwargs["json"] = self._validate_route(path, data)
+                    
             response = self._r.call(
                 path.method,
                 path.url,
@@ -96,13 +95,29 @@ class BaseEndpoint:
                 response, method, f"/api/api/{full_path}"
             )
 
+    def _validate_route(self, route: Route, data: Any) -> Any:
+        """Validate request data against Route's request model.
+
+        Args:
+            route: Route object
+            data: Pydantic model or json
+
+        Returns:
+            validated json
+
+        Raises:
+            pydantic.ValidationError: If data doesn't match the model schema
+        """
+        mapper = get_request_mapper()
+        data = mapper.check(data, route.request_model)
+        return data
+        
 
     def _validate_request(
         self,
         data: Any,
         method: str,
-        full_path: str,
-        request_model: Optional[str] = None,
+        full_path: str
     ) -> Any:
         """Validate request data against appropriate Pydantic model.
 
@@ -114,7 +129,6 @@ class BaseEndpoint:
             data: Raw request data (dict or list)
             method: HTTP method
             full_path: Full API path including /api/ prefix
-            request_model: Optional request model name
         Returns:
             Validated and transformed data
 
@@ -122,19 +136,12 @@ class BaseEndpoint:
             pydantic.ValidationError: If data doesn't match the model schema
         """
         try:
-            from ..request_mapper import get_request_mapper
+            
 
-            mapper = get_request_mapper().validate_request
-
-            if request_model:
-                return mapper(data, request_model=request_model)
-            else:
-                return mapper(data, method, full_path)
+            mapper = get_request_mapper()
+            return mapper.validate_request(data, method, full_path)
         except ImportError as e:
-            # If request mapper not available, pass through unchanged
-            import logging
-
-            logging.debug(f"Failed to import request_mapper: {e}")
+            logger.error(f"Failed calling request model validate: {e}")
             return data
 
     def _cast_response(
@@ -158,17 +165,15 @@ class BaseEndpoint:
         try:
             from ..response_mapper import get_response_mapper
 
-            mapper = get_response_mapper().cast_response
+            mapper = get_response_mapper()
 
             if response_model:
-                return mapper(response, response_model=response_model)
+                return mapper.cast_response(response, response_model=response_model)
             else:
-                return mapper(response, method, full_path)
+                return mapper.cast_response(response, method=method, full_path=full_path)
         except ImportError as e:
             # If response mapper not available, return raw response
-            import logging
-
-            logging.debug(f"Failed to import response_mapper: {e}")
+            logger.error(f"Failed to import response_mapper: {e}")
             return response
 
     @staticmethod

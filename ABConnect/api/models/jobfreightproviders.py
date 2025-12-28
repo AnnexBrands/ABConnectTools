@@ -5,7 +5,8 @@ from datetime import datetime
 from pydantic import Field
 from .base import ABConnectBaseModel, JobRelatedModel
 from .enums import CarrierAPI
-from .shared import CarrierAccountInfo
+from .shared import CarrierAccountInfo, ServiceBaseResponse  # noqa: F401 - re-exported
+
 
 class PricedFreightProvider(ABConnectBaseModel):
     """PricedFreightProvider model"""
@@ -25,13 +26,6 @@ class PricedFreightProvider(ABConnectBaseModel):
     shipment_accepted_date: Optional[datetime] = Field(None, alias="shipmentAcceptedDate")
     obtain_nfm_job_state: Optional[str] = Field(None, alias="obtainNFMJobState")
     used_carrier_account_info: Optional[CarrierAccountInfo] = Field(None, alias="usedCarrierAccountInfo")
-
-
-class ServiceBaseResponse(ABConnectBaseModel):
-    """ServiceBaseResponse model"""
-
-    success: Optional[bool] = Field(None)
-    error_message: Optional[str] = Field(None, alias="errorMessage")
 
 
 class SetRateModel(ABConnectBaseModel):
