@@ -8,6 +8,7 @@ integration with auto-generated Pydantic models.
 from ABConnect.config import get_config
 from ABConnect.api.routes import Route
 from ABConnect.api.request_mapper import get_request_mapper
+from ABConnect.api.response_mapper import get_response_mapper
 
 import requests
 from typing import Any, Optional, TYPE_CHECKING, overload
@@ -162,9 +163,11 @@ class BaseEndpoint:
         Returns:
             Typed model instance or original response
         """
-        try:
-            from ..response_mapper import get_response_mapper
+        # Skip casting for binary responses
+        if isinstance(response, bytes):
+            return response
 
+        try:
             mapper = get_response_mapper()
 
             if response_model:

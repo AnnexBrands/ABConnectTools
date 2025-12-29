@@ -5,7 +5,7 @@ Provides endpoints for managing commodity mappings between items and HS codes.
 """
 
 from typing import List, Optional, Dict, Any
-from .base import BaseEndpoint
+from ABConnect.api.endpoints.base import BaseEndpoint
 
 
 class CommodityMapEndpoint(BaseEndpoint):

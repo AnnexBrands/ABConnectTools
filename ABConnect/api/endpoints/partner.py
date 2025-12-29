@@ -5,7 +5,7 @@ Provides endpoints for managing partners.
 """
 
 from typing import List, Optional, Dict, Any
-from .base import BaseEndpoint
+from ABConnect.api.endpoints.base import BaseEndpoint
 
 
 class PartnerEndpoint(BaseEndpoint):

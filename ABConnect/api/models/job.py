@@ -12,7 +12,7 @@ if TYPE_CHECKING:
         EmailDetails, PhoneDetails, AddressDetails,
         Commodity, ExportPackingInfo, ExportTotalCosts, SoldToDetails,
         USPSSpecific, FedExSpecific, UPSSpecific,
-        InitialNoteModel, WorkTimeLogModel, Items, ServiceInfo, SortByModel,
+        InitialNoteModel, Items, ServiceInfo, SortByModel,
         SearchCustomerInfo
     )
     from .contacts import ContactDetails

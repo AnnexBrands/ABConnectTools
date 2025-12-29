@@ -5,9 +5,8 @@ Provides type-safe access to admin/* endpoints.
 """
 
 from typing import List, Optional
-from .base import BaseEndpoint
-# Model imports temporarily disabled
-    # Temporarily disabled: # Model imports temporarily disabled
+from ABConnect.api.endpoints.base import BaseEndpoint
+
 
 
 class AdminEndpoint(BaseEndpoint):

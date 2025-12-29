@@ -5,7 +5,7 @@ Provides type-safe access to SmsTemplate/* endpoints.
 """
 
 from typing import Optional, Union
-from .base import BaseEndpoint
+from ABConnect.api.endpoints.base import BaseEndpoint
 
 
 class SmstemplateEndpoint(BaseEndpoint):

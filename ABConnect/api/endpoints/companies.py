@@ -5,20 +5,8 @@ Provides type-safe access to companies/* endpoints.
 """
 
 from typing import List, Optional, Union
-from .base import BaseEndpoint
-from ..models.companies import (
-    Company,
-    CompanyDetails,
-    SearchCompanyResponse,
-    SearchCompanyDataSourceLoadOptions,
-    SearchCompanyModel,
-    TagBoxDataSourceLoadOptions,
-    WebApiDataSourceLoadOptions,
-    SaveGeoSettingModel,
-    UpdateCarrierAccountsModel,
-    PackagingLaborSettings,
-    PackagingTariffSettings,
-)
+from ABConnect.api.endpoints.base import BaseEndpoint
+
 
 import logging
 logger = logging.getLogger(__name__)

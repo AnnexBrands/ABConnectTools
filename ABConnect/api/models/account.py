@@ -21,7 +21,22 @@ class ConfirmEmailModel(ABConnectBaseModel):
 
 
 class ForgotLoginModel(ABConnectBaseModel):
-    """ForgotLoginModel model"""
+    """ 
+        Model for initiating a forgot-username or forgot-password request.    
+    
+        example:
+        ---------
+        >>> from ABConnect.api import models
+        >>> request = models.ForgotLoginModel(
+        ...     user_name="training",
+        ...     email="abconnect@annexbrands.com",
+        ...     forgot_type=models.ForgotType.USERNAME
+        ... )
+        >>> response = abapi.account.post_forgot(request)
+        >>> print(response.success)   # True if the request was processed
+        >>> print(response.message)   # e.g., "No account found with that email"
+    
+    """
 
     user_name: Optional[str] = Field(None, alias="userName")
     email: Optional[str] = Field(None)

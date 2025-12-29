@@ -7,7 +7,7 @@ from .base import ABConnectBaseModel, IdentifiedModel, TimestampedModel
 
 # Import models needed for forward reference resolution
 from .shared import (
-    InitialNoteModel, WorkTimeLogModel, WorkTimeLog, LookupItem, BaseTask,
+    InitialNoteModel, WorkTimeLog, LookupItem, BaseTask,
     UpdateDateModel, UpdateTruckModel, SimpleTaskModel, CarrierTaskModel,
     InTheFieldTaskModel, TimeLogModel, TaskTruckInfo
 )
@@ -24,7 +24,7 @@ class BaseTaskModel(TimestampedModel):
     task_code: str = Field(..., alias="taskCode", min_length=1)
     planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
     initial_note: Optional["InitialNoteModel"] = Field(None, alias="initialNote")
-    work_time_logs: Optional[List["WorkTimeLogModel"]] = Field(None, alias="workTimeLogs")
+    work_time_logs: Optional[List["WorkTimeLog"]] = Field(None, alias="workTimeLogs")
     notes: Optional[List["JobTaskNote"]] = Field(None)
     scheduled_date: Optional[datetime] = Field(None, alias="scheduledDate")
     pickup_completed_date: Optional[datetime] = Field(None, alias="pickupCompletedDate")

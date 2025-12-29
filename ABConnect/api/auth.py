@@ -8,10 +8,6 @@ from ABConnect.exceptions import LoginFailedError
 from ABConnect.config import Config, get_config
 from appdirs import user_cache_dir
 
-# Set up logging
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
 logger = logging.getLogger(__name__)
 
 
@@ -50,6 +46,7 @@ class TokenStorage(ABC):
             )
         else:
             msg = f"Login failed for {data.get('username')}: {r.status_code} {r.text}"
+            logger.error(msg)
             raise LoginFailedError(msg).no_traceback()
 
     def _login(self):
@@ -164,17 +161,40 @@ class SessionTokenStorage(TokenStorage):
 
 class FileTokenStorage(TokenStorage):
     def __init__(self, *args, **kwargs):
-        filename = kwargs.get("filename", None)
-        if filename is None:
-            cache_dir = user_cache_dir("ABConnect")
-            os.makedirs(cache_dir, exist_ok=True)
-            filename = os.path.join(cache_dir, "token.json")
-        self.path = filename
+        self._resolve_creds(**kwargs)
+        cache_dir = user_cache_dir("ABConnect")
+        os.makedirs(cache_dir, exist_ok=True)
+
+        # Include environment in filename to separate staging/production tokens
+        env_suffix = "_staging" if Config._env == "staging" else ""
+        self.path = os.path.join(cache_dir, f"token_{self.creds['username']}{env_suffix}.json")
         self._token = None
         self._load_token()
 
         if not self._token:
             raise RuntimeError("Failed to load or obtain a valid access token.")
+
+    def _resolve_creds(self, **kwargs):
+        username = kwargs.get("username")
+        password = kwargs.get("password")
+
+        if username and password:
+            username = username.lower()
+        elif username:
+            username = username.lower()
+            password = get_config(f"AB_USER_{username.upper()}")
+            if not password:
+                raise LoginFailedError(f"No password configured for user '{username}'")
+        else:
+            username = get_config("ABCONNECT_USERNAME")
+            password = get_config("ABCONNECT_PASSWORD")
+            if not (username and password):
+                raise LoginFailedError("Default credentials (ABCONNECT_USERNAME/PASSWORD) not set")
+
+        self.creds = {"username": username.lower(), "password": password}
+    
+    def _get_creds(self):
+        return self.creds
 
     def _load_token(self):
         if os.path.exists(self.path):
@@ -184,12 +204,6 @@ class FileTokenStorage(TokenStorage):
             except Exception as e:
                 logger.error(f"Error reading token file: {e}")
         self.get_token()
-
-    def _get_creds(self):
-        username = get_config("ABCONNECT_USERNAME")
-        logger.info(f"ABConnect will attempt login using username: {username}")
-        password = get_config("ABCONNECT_PASSWORD")
-        return {"username": username, "password": password}
 
     def get_token(self):
         if self.expired:

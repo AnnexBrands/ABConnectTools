@@ -4,7 +4,7 @@ Auto-generated from swagger.json specification.
 Provides type-safe access to users/* endpoints.
 """
 
-from .base import BaseEndpoint
+from ABConnect.api.endpoints.base import BaseEndpoint
 
 
 class UsersEndpoint(BaseEndpoint):

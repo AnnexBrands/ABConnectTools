@@ -56,15 +56,44 @@ class ABConnectAPI:
 
     """
 
+    @property
+    def models(self):
+        """Access to all API models and enums.
+
+        Usage:
+            abapi = ABConnectAPI()
+            m = abapi.models
+            m.ForgotType.USERNAME
+            m.ServiceBaseResponse
+        """
+        from . import models
+        return models
+
+    # Class-level reference to current config
+    _config: Config = None
+
+    @property
+    def env(self) -> str:
+        """Current environment type ('staging' or 'production')."""
+        return Config._env
+
+    @property
+    def env_file(self) -> str:
+        """Current environment file path."""
+        return Config._env_file
+
     def __init__(self, *args, **kwargs):
-        """Initialize the API client."""
-        
-        env = kwargs.pop('env', 'prod')
-        # if env:
-        #     # If already loaded from a staging env file, don't reload from default
-        #     if not (Config._loaded and ".staging" in Config._env_file):
-        #         Config._loaded = False  # Force config reload
-        #         Config.load()  # Reload with new environment
+        """Initialize the API client.
+
+        Args:
+            env: Environment name ('staging', 'production', or None for default)
+            username: Optional username override
+            request: Django request object for session-based auth
+        """
+        env = kwargs.pop('env', None)
+        ABConnectAPI._config = Config.load(env)
+
+        self.usr = kwargs.get('username', None)
 
         if 'request' in kwargs:
             token_storage = SessionTokenStorage(**kwargs)

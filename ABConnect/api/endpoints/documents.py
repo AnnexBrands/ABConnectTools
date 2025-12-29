@@ -7,14 +7,10 @@ Provides type-safe access to documents/* endpoints.
 import mimetypes
 from typing import Optional, Union, BinaryIO, List
 from pathlib import Path
-from ..models.documents import DocumentUpdateModel
-from ..models.document_upload import (
-    ItemPhotoUploadRequest,
-    DocumentUploadRequest,
-    DocumentUploadResponse,
-)
-from ..models.enums import DocumentType
-from .base import BaseEndpoint
+
+from ABConnect.api.endpoints.base import BaseEndpoint
+from ABConnect.api import models
+from ABConnect.api.routes import SCHEMA
 
 
 class DocumentsEndpoint(BaseEndpoint):
@@ -26,7 +22,7 @@ class DocumentsEndpoint(BaseEndpoint):
 
     api_path = "documents"
 
-    def get_get_thumbnail(self, docPath: str) -> Union[dict, bytes]:
+    def thumbnail(self, docPath: str) -> Union[dict, bytes]:
         """GET /api/documents/get/thumbnail/{docPath}
 
         Get a thumbnail of a document. Returns binary image data for image thumbnails,
@@ -38,12 +34,12 @@ class DocumentsEndpoint(BaseEndpoint):
         Returns:
             Union[dict, bytes]: Binary image data for thumbnails, or JSON response data
         """
-        path = "/get/thumbnail/{docPath}"
-        path = path.replace("{docPath}", docPath)
+        route = SCHEMA["DOCUMENTS"]["THUMBNAIL"]
+        route.params = {"docPath": docPath}
         kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
-    def get_get(self, docPath: str) -> Union[dict, bytes]:
+    def get(self, docPath: str) -> Union[dict, bytes]:
         """GET /api/documents/get/{docPath}
 
         Download a document. Returns binary data for files like PDFs, images, etc.,
@@ -53,21 +49,20 @@ class DocumentsEndpoint(BaseEndpoint):
             docPath: Path to the document
 
         Returns:
-            Union[dict, bytes]: Binary document data (e.g., PDF bytes, image bytes),
-                               or JSON response data
+            Binary document data (e.g., PDF bytes, image bytes),
 
         Example:
             >>> # Download a PDF document
-            >>> pdf_bytes = client.docs.get_get("path/to/document.pdf")
+            >>> pdf_bytes = client.docs.get("path/to/document.pdf")
             >>> with open("downloaded.pdf", "wb") as f:
             ...     f.write(pdf_bytes)
         """
-        path = "/get/{docPath}"
-        path = path.replace("{docPath}", docPath)
+        route = SCHEMA["DOCUMENTS"]["GET"]
+        route.params = {"docPath": docPath}
         kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
-    def get_list(
+    def list(
         self,
         job_display_id: Optional[str] = None,
         item_id: Optional[str] = None,
@@ -80,7 +75,7 @@ class DocumentsEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        path = "/list"
+        route = SCHEMA["DOCUMENTS"]["LIST"]
         kwargs = {}
         params = {}
         if job_display_id is not None:
@@ -91,9 +86,9 @@ class DocumentsEndpoint(BaseEndpoint):
             params["rfqId"] = rfq_id
         if params:
             kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
-    def post_post(self, data: dict = None) -> dict:
+    def post(self, data: dict = None) -> dict:
         """POST /api/documents
 
 
@@ -101,13 +96,13 @@ class DocumentsEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        path = "/"
+        route = SCHEMA["DOCUMENTS"]["POST"]
+        
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
-
-    def put_update(self, docId: str, data: dict = None) -> dict:
+        return self._make_request(route.method, route, **kwargs)
+    def update(self, docId: str, data: dict = None) -> dict:
         """PUT /api/documents/update/{docId}
 
 
@@ -115,8 +110,7 @@ class DocumentsEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        path = "/update/{docId}"
-        path = path.replace("{docId}", docId)
+        
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
@@ -136,9 +130,9 @@ class DocumentsEndpoint(BaseEndpoint):
 
     def upload_item_photo(
         self,
+        job_display_id: str,
         file_path: Union[str, Path, BinaryIO],
         item_id: str,
-        job_display_id: Optional[str] = None,
         filename: Optional[str] = None,
         shared: bool = True,
     ) -> dict:
@@ -190,6 +184,7 @@ class DocumentsEndpoint(BaseEndpoint):
         form_data = upload_data.model_dump(by_alias=True, exclude_none=True)
 
         path = f"api/{self.api_path}/"
+
         return self._r.upload_file(path=path, files=files, data=form_data)
 
     def upload_item_photos(self, jobid: int, itemid: int, files: dict) -> dict:
@@ -209,9 +204,6 @@ class DocumentsEndpoint(BaseEndpoint):
             >>> files = {'img1': ('photo.jpg', file_content, 'image/jpeg')}
             >>> response = client.docs.upload_item_photos(jobid=2000000, itemid=1, files=files)
         """
-        # Convert to our expected format - jobid is already an int
-        job_display_id_int = jobid
-        item_id = str(itemid)  # Keep as string UUID
 
         # Handle the files dict format expected by existing code
         responses = []
@@ -220,11 +212,11 @@ class DocumentsEndpoint(BaseEndpoint):
 
             # Create upload model
             upload_data = ItemPhotoUploadRequest(
-                job_display_id=job_display_id_int,
+                job_display_id=jobid,
                 document_type=6,  # 6 for Item_Photo
                 document_type_description="Item Photo",
                 shared=28,  # Default shared value
-                job_items=[item_id],
+                job_items=[str(itemid)],
             )
 
             # Prepare request
@@ -232,8 +224,7 @@ class DocumentsEndpoint(BaseEndpoint):
             form_data = upload_data.model_dump(by_alias=True, exclude_none=True)
 
             # Note: upload_file expects "api/documents/" format for correct URL construction
-            path = f"api/{self.api_path}/"
-            response = self._r.upload_file(path=path, files=files_data, data=form_data)
+            response = self._r.upload_file(path=f"/{self.api_path}/", files=files_data, data=form_data)
             responses.append(response)
 
         return responses[0] if len(responses) == 1 else responses

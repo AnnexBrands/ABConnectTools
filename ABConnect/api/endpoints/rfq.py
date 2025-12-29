@@ -5,7 +5,7 @@ Provides type-safe access to rfq/* endpoints.
 """
 
 from typing import Optional
-from .base import BaseEndpoint
+from ABConnect.api.endpoints.base import BaseEndpoint
 
 
 class RfqEndpoint(BaseEndpoint):

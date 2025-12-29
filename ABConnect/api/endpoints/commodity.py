@@ -5,7 +5,7 @@ Provides endpoints for managing commodities (HS codes, tariff classifications).
 """
 
 from typing import List, Optional, Dict, Any
-from .base import BaseEndpoint
+from ABConnect.api.endpoints.base import BaseEndpoint
 
 
 class CommodityEndpoint(BaseEndpoint):

@@ -5,9 +5,7 @@ Provides type-safe access to shipment/* endpoints.
 """
 
 from typing import Optional
-from .base import BaseEndpoint
-# Model imports disabled
-    # Model imports disabled
+from ABConnect.api.endpoints.base import BaseEndpoint
 
 
 class ShipmentEndpoint(BaseEndpoint):

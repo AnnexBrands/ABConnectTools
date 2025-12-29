@@ -15,12 +15,8 @@ class Config:
     _instance: Optional["Config"] = None
     _env_values: Dict[str, Any] = {}
     _loaded: bool = False
-
-    def __init__(self, env=None):
-        if not env:
-            self._env_file = ".env"
-        elif env=='staging':
-            self._env_file = ".staging.env"
+    _env: str = "production"  # Current environment type
+    _env_file: str = ".env"   # Current env file path
 
     def __new__(cls):
         """Singleton pattern to ensure single config instance."""
@@ -29,11 +25,11 @@ class Config:
         return cls._instance
 
     @classmethod
-    def load(cls, env_file: str = ".env", force_reload: bool = False) -> "Config":
+    def load(cls, env: Optional[str] = None, force_reload: bool = False) -> "Config":
         """Load configuration from environment file.
 
         Args:
-            env_file: Path to environment file (default: .env)
+            env: Environment name ('staging', 'production', or None for default)
             force_reload: Force reload even if already loaded
 
         Returns:
@@ -41,7 +37,24 @@ class Config:
         """
         instance = cls()
 
+        # Determine env file from env parameter
+        if env == "staging":
+            env_file = ".env.staging"
+            env_type = "staging"
+        elif env == "production":
+            env_file = ".env"
+            env_type = "production"
+        elif env is None:
+            # Keep current or use default
+            env_file = cls._env_file if cls._loaded else ".env"
+            env_type = cls._env if cls._loaded else "production"
+        else:
+            # Custom env file path
+            env_file = env if env.startswith(".env") else f".env.{env}"
+            env_type = env
+
         if force_reload or not cls._loaded or cls._env_file != env_file:
+            cls._env = env_type
             cls._env_file = env_file
             cls._env_values = {}
 
@@ -83,6 +96,9 @@ class Config:
         Returns:
             Environment name (defaults to 'production')
         """
+        # Use class variable if set, otherwise check environment
+        if cls._loaded:
+            return cls._env
         env = cls.get("ABC_ENVIRONMENT", "production")
         return "staging" if env.lower() == "staging" else "production"
 
@@ -165,14 +181,14 @@ def get_config(key: str, default: Optional[str] = None) -> Optional[str]:
     return Config.get(key, default)
 
 
-def load_config(env_file: str = ".env", force_reload: bool = False) -> Config:
-    """Load configuration from environment file.
+def load_config(env: Optional[str] = None, force_reload: bool = False) -> Config:
+    """Load configuration from environment.
 
     Args:
-        env_file: Path to environment file
+        env: Environment name ('staging', 'production', or None)
         force_reload: Force reload even if already loaded
 
     Returns:
         Config instance
     """
-    return Config.load(env_file, force_reload)
+    return Config.load(env, force_reload)

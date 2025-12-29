@@ -4,8 +4,9 @@ This module provides mapping from API endpoints to their corresponding
 Pydantic models, enabling automatic type casting of responses.
 """
 
-from typing import Any, Dict, Optional, Type, Union
+from typing import Any, Dict, Optional, Tuple, Type, Union
 import logging
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -42,11 +43,26 @@ class ResponseMapper:
             except Exception as e:
                 logger.warning(f"Failed to rebuild models: {e}")
 
+    def _parse_type_string(self, type_str: str) -> Tuple[bool, str]:
+        """Parse a type string to detect List[...] wrapper.
+
+        Args:
+            type_str: Type string like 'DocumentDetails' or 'List[DocumentDetails]'
+
+        Returns:
+            Tuple of (is_list, inner_model_name)
+        """
+        # Match List[ModelName] pattern
+        list_match = re.match(r'^List\[(\w+)\]$', type_str)
+        if list_match:
+            return (True, list_match.group(1))
+        return (False, type_str)
+
     def _get_model_class(self, model_name: str) -> Optional[Type]:
         """Get a model class by name, with caching.
 
         Args:
-            model_name: Name of the model class
+            model_name: Name of the model class (simple name, not generic)
 
         Returns:
             Model class or None if not found
@@ -131,7 +147,7 @@ class ResponseMapper:
             logger.debug(f"No model mapping for {method} {path}")
             return response
 
-        # List of models
+        # List of models (Python list format from mappings)
         if isinstance(model_spec, list):
             model_name = model_spec[0]
             model_class = self._get_model_class(model_name)
@@ -144,14 +160,27 @@ class ResponseMapper:
                     return response
             return response
 
-        # single model
-        model_class = self._get_model_class(model_spec)
-        if model_class:
-            try:
-                return model_class.model_validate(response)
-            except Exception as e:
-                logger.warning(f"Failed to cast response to {model_spec}: {e}")
+        # String model spec - check for List[...] syntax
+        if isinstance(model_spec, str):
+            is_list, model_name = self._parse_type_string(model_spec)
+            model_class = self._get_model_class(model_name)
+
+            if is_list:
+                if model_class and isinstance(response, list):
+                    try:
+                        return [model_class.model_validate(item) for item in response]
+                    except Exception as e:
+                        logger.warning(f"Failed to cast list response to {model_spec}: {e}")
+                        return response
                 return response
+            else:
+                # Single model
+                if model_class:
+                    try:
+                        return model_class.model_validate(response)
+                    except Exception as e:
+                        logger.warning(f"Failed to cast response to {model_spec}: {e}")
+                        return response
 
         return response
 

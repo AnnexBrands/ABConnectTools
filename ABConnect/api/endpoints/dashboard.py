@@ -11,7 +11,8 @@ Note: Some endpoints were removed in API version 709:
 
 import warnings
 from typing import List, Optional
-from .base import BaseEndpoint
+
+from ABConnect.api.endpoints.base import BaseEndpoint
 
 
 class DashboardEndpoint(BaseEndpoint):

@@ -1,10 +1,7 @@
-from ABConnect.api.models.account import ForgotLoginModel
-from ABConnect.api.models.shared import ServiceBaseResponse
-
 from ABConnect import ABConnectAPI
 
 abapi = ABConnectAPI()
-m = abapi.models
+from ABConnect.api import models
 
 # DELETE_PAYMENTSOURCE
 # GET_PROFILE
@@ -14,16 +11,16 @@ m = abapi.models
 
 # POST_FORGOT
 
-requestModel = ForgotLoginModel
-forgotlogin = ForgotLoginModel(
+requestModel = models.ForgotLoginModel
+forgotlogin = models.ForgotLoginModel(
     user_name="training",
     email="abconnect@annexbrands.com",
-    forgot_type=m.ForgotType.USERNAME # ForgotType.PASSWORD
+    forgot_type=models.ForgotType.USERNAME # ForgotType.PASSWORD
 )
 
-responseMopdel = ServiceBaseResponse
+responseModel = models.ServiceBaseResponse
 r = abapi.account.post_forgot(forgotlogin)
-print(isinstance(r, ServiceBaseResponse))
+print(isinstance(r, models.ServiceBaseResponse))
 print(r)
 
 # POST_REGISTER

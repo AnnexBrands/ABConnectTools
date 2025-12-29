@@ -4,9 +4,7 @@ Auto-generated from swagger.json specification.
 Provides type-safe access to reports/* endpoints.
 """
 
-from .base import BaseEndpoint
-# Model imports disabled
-    # Model imports disabled
+from ABConnect.api.endpoints.base import BaseEndpoint
 
 
 class ReportsEndpoint(BaseEndpoint):

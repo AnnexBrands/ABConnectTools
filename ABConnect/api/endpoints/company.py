@@ -9,7 +9,7 @@ New in API version 709:
 """
 
 from typing import List, Optional, Dict, Any
-from .base import BaseEndpoint
+from ABConnect.api.endpoints.base import BaseEndpoint
 
 
 class CompanyEndpoint(BaseEndpoint):

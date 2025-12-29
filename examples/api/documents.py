@@ -10,42 +10,36 @@ import io
 import os
 from pathlib import Path
 from PIL import Image
-from ABConnect.api import ABConnectAPI
-from ABConnect.api.models.document_upload import ItemPhotoUploadRequest, ItemPhotoUploadResponse
+from ABConnect import ABConnectAPI
+from ABConnect import models
 
 
-def fetch_imgs():
-    attachments = {}
-    url = "https://s3.amazonaws.com/static2.liveauctioneers.com/176/387998/214867371_%d_m.jpg"
-    for i in range(1, 3):
-        with requests.Session() as session:
-            response = session.get(url % i)
-            response.raise_for_status()
-            file_data = response.content
-
-            with Image.open(io.BytesIO(file_data)) as img:
-                img.load()
-                output = io.BytesIO()
-                img.save(output, format='JPEG', quality=1, optimize=True)
-
-                form_field_name = f"img{i}"
-                filename = f"{214867371}_{i}.jpg"
-                content_type = response.headers.get("Content-Type")
-                attachments[form_field_name] = (
-                    filename,
-                    file_data,
-                    content_type,
-                )
-    return attachments
-
-
-def upload_imgs(api, attachments):
+def upload_imgs(api):
     """Upload images using backward compatibility method."""
+    
+    filename = "ABConnect/tiny.jpg"
+    with open(filename, "rb") as f:
+        file_data = f.read()
+    attachments = {
+        "img1": (
+            filename,
+            file_data,
+            "image/jpeg",
+        )
+    }
+
+    data = models.DocumentUploadRequest(
+        job_display_id=2000000,
+        document_type=models.DocumentType.ITEM_PHOTO,
+        shared=28,
+        job_items=["8FA87330-AF59-EF11-8393-16D570081145"],
+    )
+
     for key, value in attachments.items():
         try:
             response = api.docs.upload_item_photos(
-                jobid=2_000_000,
-                itemid='8FA87330-AF59-EF11-8393-16D570081145',
+                jobid=2000000,
+                itemid="8FA87330-AF59-EF11-8393-16D570081145",
                 files={key: value},
             )
             print(f"   Uploaded {key}: {response}")
@@ -53,6 +47,15 @@ def upload_imgs(api, attachments):
             print(f"   Upload demo for {key}: {e}")
 
 
-api = ABConnectAPI()
-atts = fetch_imgs()
-upload_imgs(api, atts)
+api = ABConnectAPI(env='staging', username='instaquote')
+
+# upload_imgs(api)
+
+# r = api.docs.list(2000000)
+# for doc in r:
+#     print(doc)
+
+# path='job/2000000/tiny.jpg'
+# thumb = api.docs.thumbnail(path)
+# print (thumb[:10])
+

@@ -125,6 +125,7 @@ class JobAccessLevel(int, Enum):
     PICKUP_AGENT = 4,
     PACKAGING_AGENT = 8,
     DELIVERY_AGENT = 16,
+    ALL_AGENTS = 28,
     AGENTS = 29
 
 
@@ -186,8 +187,8 @@ class LabelType(int, Enum):
 class ListSortDirection(int, Enum):
     """ListSortDirection enumeration"""
 
-    VALUE_0 = 0
-    VALUE_1 = 1
+    ASC = 0
+    DESC = 1
 
 
 class PaymentType(int, Enum):

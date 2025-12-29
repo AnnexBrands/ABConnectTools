@@ -5,9 +5,7 @@ Provides type-safe access to address/* endpoints.
 """
 
 from typing import Optional
-from .base import BaseEndpoint
-# Temporarily disable model imports until circular dependencies resolved
-# # Model imports temporarily disabled
+from ABConnect.api.endpoints.base import BaseEndpoint
 
 
 class AddressEndpoint(BaseEndpoint):
