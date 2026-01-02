@@ -19,6 +19,7 @@ class ContactsEndpoint(BaseEndpoint):
     """
 
     api_path = "contacts"
+    routes = SCHEMA["CONTACTS"]
 
     def post_history(self, contactId: str, data: dict = None) -> dict:
         """POST /api/contacts/{contactId}/history
@@ -28,6 +29,8 @@ class ContactsEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
+        route = self.routes["HISTORY"]
+        route.params = {"contactId": contactId}
         path = "/{contactId}/history"
         path = path.replace("{contactId}", contactId)
         kwargs = {}
@@ -116,13 +119,9 @@ class ContactsEndpoint(BaseEndpoint):
         Returns:
             ContactDetails: Typed contact details model
         """
-        route = SCHEMA['GET_CONTACT']
+        route = self.routes['GET']
         route.params = {"id": id}
         return self._make_request(route.method, route)
-
-    def get_get(self, id: str) -> ContactDetails:
-        """Alias for get() method for backward compatibility."""
-        return self.get(id)
 
     def get_ah(self, houseid, *args, **kwargs) -> dict:
         id = self.get_cache(houseid)

@@ -140,7 +140,7 @@ SCHEMA = {
         "PUT_TRUCK": Route("PUT", "/company/{companyId}/truck/{truckId}", "SaveTruckRequest", "SaveEntityResponse", {}),
     },
     "CONTACTS": {
-        "GET": Route("GET", "/contacts/{id}", None, "Contact", {}),
+        "GET": Route("GET", "/contacts/{id}", None, "ContactDetails", {}),
         "GET_EDITDETAILS": Route("GET", "/contacts/{contactId}/editdetails", None, "ContactDetailedInfo", {}),
         "HISTORY_AGGREGATED": Route("GET", "/contacts/{contactId}/history/aggregated", None, "ContactHistoryAggregatedCost", {}),
         "HISTORY_GRAPHDATA": Route("GET", "/contacts/{contactId}/history/graphdata", None, "ContactHistoryGraphData", {}),

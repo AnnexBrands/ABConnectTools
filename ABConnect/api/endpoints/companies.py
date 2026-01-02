@@ -47,11 +47,6 @@ class CompaniesEndpoint(BaseEndpoint):
         logger.info("Fetching company with code or ID: %s", code_or_id)
         company_uuid = self.get_cache(code_or_id)
 
-        logger.info("Resolved company UUID: %s", company_uuid)
-
-        # Use appropriate endpoint based on detail level
-        # Pass cast_response parameter to enable model casting
-        kwargs["cast_response"] = cast
 
         if details == "short":
             return self._make_request("GET", f"/{company_uuid}", **kwargs)

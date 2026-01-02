@@ -19,7 +19,7 @@ class ABConnectBaseModel(BaseModel):
     Provides common configuration and utilities.
     """
     model_config = ConfigDict(
-        extra="ignore",  # Ignore extra fields from API responses (schemas may evolve)
+        extra="forbid",  # Forbid extra fields from API responses (schemas may evolve)
         populate_by_name=True,
         str_strip_whitespace=True,
         validate_assignment=True,
@@ -71,6 +71,10 @@ class ABConnectBaseModel(BaseModel):
         # Handle single item (dict or model instance)
         validated = cls.model_validate(data)
         return validated.model_dump(by_alias=True, exclude_none=True, exclude_unset=exclude_unset, mode='json')
+
+    def json(self) -> Dict[str, Any]:
+        """Return the model data as a JSON-serializable dict with camelCase keys."""
+        return self.model_dump(by_alias=True, exclude_none=True, mode='json')
 
 class IdentifiedModel(ABConnectBaseModel):
     """Base for models with ID fields (63 schemas have 'id')."""

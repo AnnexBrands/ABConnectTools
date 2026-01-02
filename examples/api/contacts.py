@@ -4,12 +4,13 @@ Contacts API Examples - Getting Responses as Pydantic Objects
 This example demonstrates how to work with contacts and get typed responses.
 """
 
-from ABConnect.api import ABConnectAPI
+from ABConnect.api import ABConnectAPI, models
 from pprint import pprint
 
 api = ABConnectAPI()
+TRAINING_ID = 266841
 
-artemis = api.contacts.get_ah(1103)
+training_obj = api.contacts.get(TRAINING_ID)
 # Now you have a typed Pydantic object
-print(f"Contact type: {type(artemis.addresses_list)}")
-pprint(artemis.addresses_list)
+print(f"type: {type(training_obj)}")
+# pprint(training_obj.json())

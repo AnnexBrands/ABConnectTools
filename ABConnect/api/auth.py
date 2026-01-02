@@ -82,18 +82,14 @@ class SessionTokenStorage(TokenStorage):
     def __init__(self, *args, **kwargs):
         self._token = None
         self.request = kwargs["request"]
-        self._creds = {"username": kwargs["username"], "password": kwargs["password"]}
         self._load_token()
 
     def _load_token(self):
-        # First try to get token from session
         if "abc_token" in self.request.session:
             self._token = self.request.session["abc_token"]
             if not self.expired:
                 logger.info(f"From ABConnect.api.auth._load_token() -- Success")
                 return
-
-        # Then try to get refresh token from user model
         if (
             hasattr(self.request.user, "refresh_token")
             and self.request.user.refresh_token
@@ -101,8 +97,6 @@ class SessionTokenStorage(TokenStorage):
             self._token = {"refresh_token": self.request.user.refresh_token}
             if self.refresh_token():
                 return
-
-        # Finally fall back to credential based login
         self._login()
 
     def _get_creds(self):
@@ -236,6 +230,6 @@ class FileTokenStorage(TokenStorage):
             return True
         except LoginFailedError:
             logger.info(
-                "Refresh token expired or invalid, will attempt credential login"
+                f"Refresh token failed for {self.creds['username']}"
             )
             return False

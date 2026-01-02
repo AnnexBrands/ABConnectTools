@@ -86,7 +86,7 @@ class Contact(TimestampedModel):
     contact_fax: Optional[str] = Field(None, alias="contactFax")
     customer_cell: Optional[str] = Field(None, alias="customerCell")
     contact_email_id: Optional[str] = Field(None, alias="contactEmailId")
-    contact_type_id: Optional[str] = Field(None, alias="contactTypeId")
+    contact_type_id: Optional[int] = Field(None, alias="contactTypeId")
     refer_id: Optional[str] = Field(None, alias="referId")
     referred_name: Optional[str] = Field(None, alias="referredName")
     contact_dept: Optional[str] = Field(None, alias="contactDept")
@@ -133,13 +133,9 @@ class ContactAddressDetails(IdentifiedModel):
     address: Optional["AddressDetails"] = Field(None)
 
 
-class ContactAddressEditDetails(IdentifiedModel):
-    """ContactAddressEditDetails model"""
+class ContactAddressEditDetails(ContactAddressDetails):
+    """ContactAddressEditDetails model - extends ContactAddressDetails with edit metadata."""
 
-    is_active: Optional[bool] = Field(None, alias="isActive")
-    deactivated_reason: Optional[str] = Field(None, alias="deactivatedReason")
-    meta_data: Optional[str] = Field(None, alias="metaData")
-    address: Optional["AddressDetails"] = Field(None)
     editable: Optional[bool] = Field(None)
     detail_hash: Optional[str] = Field(None, alias="detailHash")
 
@@ -232,13 +228,9 @@ class ContactEmailDetails(IdentifiedModel):
     email: Optional["EmailDetails"] = Field(None)
 
 
-class ContactEmailEditDetails(IdentifiedModel):
-    """ContactEmailEditDetails model"""
+class ContactEmailEditDetails(ContactEmailDetails):
+    """ContactEmailEditDetails model - extends ContactEmailDetails with edit metadata."""
 
-    is_active: Optional[bool] = Field(None, alias="isActive")
-    deactivated_reason: Optional[str] = Field(None, alias="deactivatedReason")
-    meta_data: Optional[str] = Field(None, alias="metaData")
-    email: Optional["EmailDetails"] = Field(None)
     editable: Optional[bool] = Field(None)
     detail_hash: Optional[str] = Field(None, alias="detailHash")
 
@@ -271,13 +263,9 @@ class ContactPhoneDetails(IdentifiedModel):
     phone: Optional["PhoneDetails"] = Field(None)
 
 
-class ContactPhoneEditDetails(IdentifiedModel):
-    """ContactPhoneEditDetails model"""
+class ContactPhoneEditDetails(ContactPhoneDetails):
+    """ContactPhoneEditDetails model - extends ContactPhoneDetails with edit metadata."""
 
-    is_active: Optional[bool] = Field(None, alias="isActive")
-    deactivated_reason: Optional[str] = Field(None, alias="deactivatedReason")
-    meta_data: Optional[str] = Field(None, alias="metaData")
-    phone: Optional["PhoneDetails"] = Field(None)
     editable: Optional[bool] = Field(None)
     detail_hash: Optional[str] = Field(None, alias="detailHash")
 

@@ -24,7 +24,7 @@ class DashboardEndpoint(BaseEndpoint):
     
     api_path = "dashboard"
 
-    def get_get(self, view_id: Optional[str] = None, company_id: Optional[str] = None) -> dict:
+    def get(self, view_id: Optional[str] = None, company_id: Optional[str] = None) -> dict:
         """GET /api/dashboard
         
         
