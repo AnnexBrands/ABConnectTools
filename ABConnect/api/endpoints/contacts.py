@@ -130,14 +130,13 @@ class ContactsEndpoint(BaseEndpoint):
     def get_user(self) -> dict:
         """GET /api/contacts/user
 
-
+        Returns the current logged-in user's contact info.
 
         Returns:
-            dict: API response data
+            dict: Contact info for current user
         """
-        path = "/user"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['USER']
+        return self._make_request(route.method, route)
 
     def get_editdetails(self, contactId: str) -> dict:
         """GET /api/contacts/{contactId}/editdetails

@@ -1,0 +1,130 @@
+[
+  {
+    "groupName": "Job Info",
+    "tokens": [
+      {
+        "notificationTokenID": 8,
+        "notificationToken": "[[BookedDate]]"
+      },
+      {
+        "notificationTokenID": 9,
+        "notificationToken": "[[JobAmount]]"
+      },
+      {
+        "notificationTokenID": 5,
+        "notificationToken": "[[JobID]]"
+      },
+      {
+        "notificationTokenID": 6,
+        "notificationToken": "[[JobStatus]]"
+      },
+      {
+        "notificationTokenID": 106,
+        "notificationToken": "[[SMSItems]]"
+      }
+    ]
+  },
+  {
+    "groupName": "Cutomer Info",
+    "tokens": [
+      {
+        "notificationTokenID": 4,
+        "notificationToken": "[[CompanyName]]"
+      },
+      {
+        "notificationTokenID": 3,
+        "notificationToken": "[[CustomerEmail]]"
+      },
+      {
+        "notificationTokenID": 1,
+        "notificationToken": "[[CustomerFirstName]]"
+      },
+      {
+        "notificationTokenID": 2,
+        "notificationToken": "[[CustomerLastName]]"
+      },
+      {
+        "notificationTokenID": 64,
+        "notificationToken": "[[CustomerRef]]"
+      }
+    ]
+  },
+  {
+    "groupName": "Pickup Info",
+    "tokens": [
+      {
+        "notificationTokenID": 21,
+        "notificationToken": "[[PickupAddress]]"
+      },
+      {
+        "notificationTokenID": 22,
+        "notificationToken": "[[PickupCity]]"
+      },
+      {
+        "notificationTokenID": 63,
+        "notificationToken": "[[PickupCompanyName]]"
+      },
+      {
+        "notificationTokenID": 20,
+        "notificationToken": "[[PickupCustomerName]]"
+      },
+      {
+        "notificationTokenID": 95,
+        "notificationToken": "[[PickupPhoneNumber]]"
+      },
+      {
+        "notificationTokenID": 59,
+        "notificationToken": "[[PickupScheduled]]"
+      },
+      {
+        "notificationTokenID": 23,
+        "notificationToken": "[[PickupState]]"
+      },
+      {
+        "notificationTokenID": 24,
+        "notificationToken": "[[PickupZip]]"
+      }
+    ]
+  },
+  {
+    "groupName": "Delivery Info",
+    "tokens": [
+      {
+        "notificationTokenID": 26,
+        "notificationToken": "[[DeliveryAddress]]"
+      },
+      {
+        "notificationTokenID": 27,
+        "notificationToken": "[[DeliveryCity]]"
+      },
+      {
+        "notificationTokenID": 67,
+        "notificationToken": "[[DeliveryCompanyName]]"
+      },
+      {
+        "notificationTokenID": 96,
+        "notificationToken": "[[DeliveryCustomerFirstName]]"
+      },
+      {
+        "notificationTokenID": 25,
+        "notificationToken": "[[DeliveryCustomerName]]"
+      },
+      {
+        "notificationTokenID": 68,
+        "notificationToken": "[[DeliveryPhoneNumber]]"
+      },
+      {
+        "notificationTokenID": 108,
+        "notificationToken": "[[DeliveryScheduled]]"
+      },
+      {
+        "notificationTokenID": 28,
+        "notificationToken": "[[DeliveryState]]"
+      },
+      {
+        "notificationTokenID": 29,
+        "notificationToken": "[[DeliveryZip]]"
+      }
+    ]
+  }
+]

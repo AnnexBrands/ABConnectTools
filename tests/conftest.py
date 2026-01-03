@@ -36,3 +36,23 @@ def ContactDetailsData():
 @pytest.fixture
 def CompanySimpleData():
     return json.loads((fixtures / "CompanySimple.json").read_text())
+
+
+@pytest.fixture
+def ContactUserData():
+    return json.loads((fixtures / "ContactUser.json").read_text())
+
+
+@pytest.fixture
+def CompanyBrandsData():
+    return json.loads((fixtures / "CompanyBrands.json").read_text())
+
+
+@pytest.fixture
+def CompanyBrandsTreeData():
+    return json.loads((fixtures / "CompanyBrandsTree.json").read_text())
+
+
+@pytest.fixture
+def CompanyAvailableByCurrentUserData():
+    return json.loads((fixtures / "CompanyAvailableByCurrentUser.json").read_text())

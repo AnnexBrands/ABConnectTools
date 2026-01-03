@@ -1,0 +1,52 @@
+[
+  {
+    "id": "e503d471-3be0-e711-8f3f-00155d426802",
+    "code": "AIM",
+    "mapsMarkerImage": "Uploads\\MapsMarkerImage\\4ed7291c-4447-ec11-822e-a4aa13c701a3%23aim.png"
+  },
+  {
+    "id": "850be91a-c706-e811-8f3f-00155d426802",
+    "code": "PA+",
+    "mapsMarkerImage": "Uploads\\MapsMarkerImage\\b6ffda1d-bfe2-ec11-822e-a4aa13c701a3%23pa76.png"
+  },
+  {
+    "id": "aaf9eddb-b60c-e611-ae37-00155d426802",
+    "code": "PM",
+    "mapsMarkerImage": "Uploads\\MapsMarkerImage\\e87af0cb-cf47-ec11-822e-a4aa13c701a3%23pin.png"
+  },
+  {
+    "id": "5e2eefc1-d616-e911-b00c-00155d426802",
+    "code": "TRUSTNLS",
+    "mapsMarkerImage": null
+  },
+  {
+    "id": "73d1fa96-9f54-4bff-a146-73d034301938",
+    "code": "NAVIS",
+    "mapsMarkerImage": "Uploads\\MapsMarkerImage\\167e1efc-4247-ec11-822e-a4aa13c701a3%23nav.png"
+  },
+  {
+    "id": "c327c939-83fb-4302-8dfa-992bae643221",
+    "code": "HWC",
+    "mapsMarkerImage": null
+  },
+  {
+    "id": "634afa6e-ad41-ec11-822e-a4aa13c701a3",
+    "code": "SPS",
+    "mapsMarkerImage": "Uploads\\MapsMarkerImage\\6cab78aa-4447-ec11-822e-a4aa13c701a3%23sps.png"
+  },
+  {
+    "id": "31a61ead-ad41-ec11-822e-a4aa13c701a3",
+    "code": "PP",
+    "mapsMarkerImage": "Uploads\\MapsMarkerImage\\c82fe66f-4347-ec11-822e-a4aa13c701a3%23pp.png"
+  },
+  {
+    "id": "d2f9f29f-cf8f-4e0f-8710-ec38690c3875",
+    "code": "NLS",
+    "mapsMarkerImage": null
+  },
+  {
+    "id": "e17a58bf-1cb7-ea11-822b-fcb1a6dfbbb6",
+    "code": "INTL",
+    "mapsMarkerImage": "Uploads\\MapsMarkerImage\\c967f24b-5b62-eb11-822b-fcb1a6dfbbb6%23AnnexBrandsLogo.jpg"
+  }
+]

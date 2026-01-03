@@ -14,6 +14,24 @@ This maintains an explicit request and response model lookup in a central config
 
 Run examples and tests after each change. Verify output before claiming complete.
 
+## Handling Errors
+
+**STOP and flag for hooman when:**
+- API returns 4xx/5xx errors - do NOT wrap in try-except to hide errors
+- Parameters seem to be required but you don't have valid test data
+- Response format doesn't match expected model
+
+**Do NOT:**
+- Guess at parameter values
+- Work around errors with try-except blocks
+- Mark things complete if they're returning errors
+- Assume an endpoint works without running the example
+
+**Instead:**
+- Flag the route with ❗ in REFACTOR_PROGRESS.md
+- Report which endpoint failed and what error was returned
+- Ask hooman for correct constants/parameters
+
 ## Shared Constants
 
 Use `tests/constants.py` for all test data IDs:
@@ -22,6 +40,8 @@ Use `tests/constants.py` for all test data IDs:
 - `COMPANY_ID = "ed282b80-54fe-4f42-bf1b-69103ce1f76c"`
 
 Examples import via `from _constants import *`.
+
+If you need a new constant, ask hooman to provide it.
 
 ## Tracking progress
 

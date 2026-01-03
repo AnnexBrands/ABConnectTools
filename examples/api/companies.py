@@ -17,6 +17,25 @@ company_obj = api.companies.get_by_id(COMPANY_ID)
 print(f"type: {type(company_obj)}")
 print(f"name: {company_obj.name}")
 print(f"code: {company_obj.code}")
-
-# Save fixture if not exists
 save_fixture(company_obj, "CompanySimple")
+
+# Get brands
+brands = api.companies.get_brands()
+print(f"Brands count: {len(brands) if isinstance(brands, list) else 'N/A'}")
+save_fixture(brands, "CompanyBrands")
+
+# Get brands tree
+brands_tree = api.companies.get_brandstree()
+print(f"Brands tree type: {type(brands_tree)}")
+save_fixture(brands_tree, "CompanyBrandsTree")
+
+# Get companies available by current user
+available = api.companies.get_availablebycurrentuser()
+print(f"Available companies count: {len(available) if isinstance(available, list) else 'N/A'}")
+save_fixture(available, "CompanyAvailableByCurrentUser")
+
+search = api.companies.get_search(searchValue="Training")
+save_fixture(search, "CompanySearch_Training")
+
+# geoareacompanies = api.companies.get_geoareacompanies()
+# save_fixture(geoareacompanies, "CompanyGeoAreaCompanies")

@@ -1,0 +1,107 @@
+[
+  {
+    "key": "Job Management Status",
+    "name": "9.4 Final Mile \u2013 In Progress",
+    "value": "b231994a-132f-404a-b4c0-3636de860d4a"
+  },
+  {
+    "key": "JobsStatusTypes",
+    "name": "Estimate",
+    "value": "cc2e2912-82db-4f7e-9312-d3204ed5bff1"
+  },
+  {
+    "key": "JobsStatusTypes",
+    "name": "Quoted",
+    "value": "1686699a-d4ac-4120-9911-baca36cc3bbc"
+  },
+  {
+    "key": "JobsStatusTypes",
+    "name": "1 - Booked",
+    "value": "b178547d-02d8-4433-a744-a38987ab4a14"
+  },
+  {
+    "key": "Job Management Status",
+    "name": "2 - Scheduled",
+    "value": "9736bc14-cf49-4181-926e-2501312fec3f"
+  },
+  {
+    "key": "Job Management Status",
+    "name": "2.1 Pickup in progress",
+    "value": "dbfcdde3-b55a-4eb2-940d-c64732d84f13"
+  },
+  {
+    "key": "Job Management Status",
+    "name": "2.2 Receiving",
+    "value": "91606d73-a368-42b5-94a3-9b9169183a17"
+  },
+  {
+    "key": "Job Management Status",
+    "name": "3 - Received",
+    "value": "69f49f71-a3ab-46d8-a54a-53378739c22c"
+  },
+  {
+    "key": "Job Management Status",
+    "name": "4 - Packaging Started",
+    "value": "a9de6a26-60f4-4db0-a352-5f0ccc488e54"
+  },
+  {
+    "key": "Job Management Status",
+    "name": "5 - Packaging Completed",
+    "value": "4df29f0e-1202-4f9c-b20c-0a68c077eaf8"
+  },
+  {
+    "key": "Job Management Status",
+    "name": "6 - Storage",
+    "value": "e7b13009-a4cb-4267-a1a3-fba1c31feace"
+  },
+  {
+    "key": "Job Management Status",
+    "name": "7 - Carrier Pickup Scheduled",
+    "value": "58748fa9-7b9d-487a-b0c1-6ed3a530b0ce"
+  },
+  {
+    "key": "Job Management Status",
+    "name": "8 - Carrier Pickup Complete",
+    "value": "d8dce069-a45a-4975-8522-974d1b4b03ea"
+  },
+  {
+    "key": "Job Management Status",
+    "name": "9 - Final Mile in Progress",
+    "value": "2d73f273-2fd9-4244-87a4-79e886b6c262"
+  },
+  {
+    "key": "Job Management Status",
+    "name": "9.1 Final Mile \u2013 Incoming",
+    "value": "a212ee9b-d8c3-41fe-9734-4232c662fbe6"
+  },
+  {
+    "key": "Job Management Status",
+    "name": "9.2 Final Mile \u2013 Arrived",
+    "value": "5c35e2c8-d987-4170-9e66-517ca793c22a"
+  },
+  {
+    "key": "Job Management Status",
+    "name": "9.3 Final Mile \u2013 Scheduled",
+    "value": "1f6ae3bb-176e-473b-84e7-2057560f12e3"
+  },
+  {
+    "key": "Job Management Status",
+    "name": "10 - Delivered",
+    "value": "d9ec6689-6b0f-4fdf-a92e-b9560a0528bd"
+  },
+  {
+    "key": "JobsStatusTypes",
+    "name": "Completed",
+    "value": "a986726f-7d14-488d-80f3-69033643c398"
+  },
+  {
+    "key": "JobsStatusTypes",
+    "name": "Template",
+    "value": "0172864e-8694-4a63-ab8e-36ee394b5dc9"
+  },
+  {
+    "key": "JobsStatusTypes",
+    "name": "Cancelled",
+    "value": "8c5f2cf5-74cc-4f1b-bcb9-6639278fbb75"
+  }
+]

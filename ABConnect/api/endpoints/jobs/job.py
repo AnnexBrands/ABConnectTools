@@ -8,6 +8,7 @@ New in API version 709:
 
 from typing import List, Optional, Dict, Any
 from ABConnect.api.endpoints.base import BaseEndpoint
+from ABConnect.api.routes import SCHEMA
 
 
 class JobEndpoint(BaseEndpoint):
@@ -17,6 +18,7 @@ class JobEndpoint(BaseEndpoint):
     """
 
     api_path = "job"
+    routes = SCHEMA["JOB"]
 
     def post_book(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """POST /api/job/{jobDisplayId}/book
@@ -284,15 +286,13 @@ class JobEndpoint(BaseEndpoint):
     def get_documentConfig(self) -> Dict[str, Any]:
         """GET /api/job/documentConfig
 
-        
-        
+        Returns the document configuration settings.
 
         Returns:
-            Dict[str, Any]: API response data
+            Dict[str, Any]: Document configuration data
         """
-        path = "/documentConfig"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_DOCUMENT_CONFIG']
+        return self._make_request(route.method, route)
 
     def get_packagingcontainers(self, jobDisplayId: str) -> Dict[str, Any]:
         """GET /api/job/{jobDisplayId}/packagingcontainers

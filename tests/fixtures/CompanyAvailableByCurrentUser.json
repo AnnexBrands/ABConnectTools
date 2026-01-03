@@ -1,0 +1,4866 @@
+[
+  {
+    "id": "682e2da2-7f91-e711-8f3f-00155d426802",
+    "code": "LA9826",
+    "companyName": "Bread N Butter",
+    "name": "Bread N Butter",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "3ac4eabc-f1ad-e711-8f3f-00155d426802",
+    "code": "LA8109",
+    "companyName": "Curated Gallery",
+    "name": "Curated Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "facec15a-a0b3-e711-8f3f-00155d426802",
+    "code": "NAT",
+    "companyName": "National",
+    "name": "National",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
+  },
+  {
+    "id": "847cd578-66d4-e711-8f3f-00155d426802",
+    "code": "LA9646",
+    "companyName": "20th Century Interiors LLC",
+    "name": "20th Century Interiors LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ff1c0ff1-502c-e811-8f3f-00155d426802",
+    "code": "LA492",
+    "companyName": "Rachel Davis Fine Arts",
+    "name": "Rachel Davis Fine Arts",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b994457b-c174-e811-9c34-00155d426802",
+    "code": "AUCTION",
+    "companyName": "NLS Auctions",
+    "name": "NLS Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
+  },
+  {
+    "id": "ee473173-888e-e811-9c34-00155d426802",
+    "code": "LEADS",
+    "companyName": "Leads",
+    "name": "Leads",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
+  },
+  {
+    "id": "101ecbb7-928e-e811-9c34-00155d426802",
+    "code": "NLSRJ",
+    "companyName": "Navis Logistics Solutions (RJ)",
+    "name": "Navis Logistics Solutions (RJ)",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
+  },
+  {
+    "id": "a41129fe-a28e-e811-9c34-00155d426802",
+    "code": "LA10208",
+    "companyName": "Compass Auctions",
+    "name": "Compass Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "cf8085ed-b2f2-e611-9f52-00155d426802",
+    "code": "LIVE",
+    "companyName": "Liveauctioneers.com",
+    "name": "Liveauctioneers.com",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "facec15a-a0b3-e711-8f3f-00155d426802"
+  },
+  {
+    "id": "54386aae-0ed0-e511-ae37-00155d426802",
+    "code": "NLS-JS",
+    "companyName": "Navis Pack & Ship NLS-JS",
+    "name": "Navis Pack & Ship NLS-JS",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
+  },
+  {
+    "id": "4ff60943-3afb-e511-ae37-00155d426802",
+    "code": "LA10174",
+    "companyName": "DMI Auctions",
+    "name": "DMI Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d3886073-cdec-e811-b00c-00155d426802",
+    "code": "LA6034",
+    "companyName": "Towsonline Auction",
+    "name": "Towsonline Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "db29dab7-cafc-e811-b00c-00155d426802",
+    "code": "LA6060",
+    "companyName": "Lauren Galleries",
+    "name": "Lauren Galleries",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "47dbf5ff-d415-e911-b00c-00155d426802",
+    "code": "LA8873",
+    "companyName": "Bedford Art Gallery",
+    "name": "Bedford Art Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5e2eefc1-d616-e911-b00c-00155d426802",
+    "code": "TRUSTNLS",
+    "companyName": "National Logistics Services",
+    "name": "National Logistics Services",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ad6f8ec0-826e-e811-9c34-00155d426802"
+  },
+  {
+    "id": "50085565-2a2a-e911-b00c-00155d426802",
+    "code": "LA6052",
+    "companyName": "Block Auction House",
+    "name": "Block Auction House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f7de1139-4c2a-e911-b00c-00155d426802",
+    "code": "LA6146",
+    "companyName": "Over & Above Online Auction",
+    "name": "Over & Above Online Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e309ed06-7f6b-e911-b00c-00155d426802",
+    "code": "LA212",
+    "companyName": "Weiss Auctions",
+    "name": "Weiss Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e902dfb1-296d-e911-b00c-00155d426802",
+    "code": "LA3925",
+    "companyName": "The Buddha Gallery",
+    "name": "The Buddha Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e247824e-448e-e911-b00c-00155d426802",
+    "code": "LA10105",
+    "companyName": "Joseph Robert Jewelers",
+    "name": "Joseph Robert Jewelers",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "143d21c6-1b1f-e611-ba2b-00155d426802",
+    "code": "LA6239",
+    "companyName": "Classic Moments",
+    "name": "Classic Moments",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e5dd3796-8e38-e611-ba2b-00155d426802",
+    "code": "LA6356",
+    "companyName": "The Ross Art Group",
+    "name": "The Ross Art Group",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "87e6166a-a468-e611-ba2b-00155d426802",
+    "code": "LA654",
+    "companyName": "Woody Auction",
+    "name": "Woody Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "49d0809b-07dc-e611-ba2b-00155d426802",
+    "code": "LA5173",
+    "companyName": "Matthew Bullock Auctioneers",
+    "name": "Matthew Bullock Auctioneers",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4cafd576-a1dd-e611-ba2b-00155d426802",
+    "code": "LA1100",
+    "companyName": "Gray's Auctioneers",
+    "name": "Gray's Auctioneers",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "1adb9f27-b32b-e511-bfe6-00155d426802",
+    "code": "LA2120",
+    "companyName": "Linwoods Auctions",
+    "name": "Linwoods Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "3b3108ad-5d95-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA7415",
+    "companyName": "Boyd Auctions",
+    "name": "Boyd Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0906c5ff-f9b2-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA7045",
+    "companyName": "Schultz Auctioneers",
+    "name": "Schultz Auctioneers",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "20e9c0ce-3cbb-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA8737",
+    "companyName": "The Rug Life",
+    "name": "The Rug Life",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0cf26bd9-87c4-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA8828",
+    "companyName": "Glory Days Auction",
+    "name": "Glory Days Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ec27f4b1-a7cb-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA6237",
+    "companyName": "500 Gallery",
+    "name": "500 Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "40571a49-4dda-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA8239",
+    "companyName": "Elbert Gallery",
+    "name": "Elbert Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "3b0b87c3-c2df-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA6580",
+    "companyName": "Bid Again Auctions (American Space Museum)",
+    "name": "Bid Again Auctions (American Space Museum)",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d4f7261e-4be1-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA869",
+    "companyName": "Acme Auction House",
+    "name": "Acme Auction House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "854e2e24-a5e8-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA9105",
+    "companyName": "Trunky Fresh",
+    "name": "Trunky Fresh",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5d25cd9d-a5e8-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA7135",
+    "companyName": "Cowboy Joe's Antiques",
+    "name": "Cowboy Joe's Antiques",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "25b48e82-29f1-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA7076",
+    "companyName": "Kelmscott's Gallery",
+    "name": "Kelmscott's Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "bd18e367-06f8-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA8322",
+    "companyName": "Rivington Crown Antiques",
+    "name": "Rivington Crown Antiques",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e85b0feb-66f8-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA8081",
+    "companyName": "Legacy Auctions & Estate Sales",
+    "name": "Legacy Auctions & Estate Sales",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "2f148298-e01d-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA6003",
+    "companyName": "Time Auction",
+    "name": "Time Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "730bd231-191e-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9093",
+    "companyName": "The El Dorado House",
+    "name": "The El Dorado House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "40125022-d624-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9256",
+    "companyName": "Hubbard Burdett LLC",
+    "name": "Hubbard Burdett LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf",
+    "code": "ELABEL",
+    "companyName": "ELABEL",
+    "name": "ELABEL",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
+  },
+  {
+    "id": "3761a983-7e2d-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA887",
+    "companyName": "Acme 2",
+    "name": "Acme 2",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d7ffbf4a-be2d-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA8784",
+    "companyName": "Neo FineArts Inc",
+    "name": "Neo FineArts Inc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d6372da7-fa3e-ef11-ac1c-0a15ce13c9bf",
+    "code": "semicon",
+    "companyName": "SemiCon",
+    "name": "SemiCon",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
+  },
+  {
+    "id": "edd18215-d758-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA8174",
+    "companyName": "Caronna Estate Sales, LLC",
+    "name": "Caronna Estate Sales, LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d97faae1-e85f-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA7874",
+    "companyName": "Crown Collectibles",
+    "name": "Crown Collectibles",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "90e226d9-f65f-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9413",
+    "companyName": "Dunns Attic LLC",
+    "name": "Dunns Attic LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "3c6abe8f-7d61-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA3256",
+    "companyName": "Lakeland Antique Bazaar",
+    "name": "Lakeland Antique Bazaar",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f98f37d0-9365-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA3444",
+    "companyName": "Florida Estate Sales",
+    "name": "Florida Estate Sales",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
+  },
+  {
+    "id": "3108d824-b86e-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9239",
+    "companyName": "Lusher Fine Art & Auctions",
+    "name": "Lusher Fine Art & Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "48415375-1d72-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA7072",
+    "companyName": "MCS Antique and Estate Buyers",
+    "name": "MCS Antique and Estate Buyers",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "77f695e3-3a75-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA5758",
+    "companyName": "Midwest Auctions",
+    "name": "Midwest Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "15a809b2-d975-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9423",
+    "companyName": "Grasons Co. Of Southern AZ",
+    "name": "Grasons Co. Of Southern AZ",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "eea3f385-8d7b-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA8078",
+    "companyName": "Ten East Main Auction",
+    "name": "Ten East Main Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "90452a77-1a84-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9389",
+    "companyName": "In Like Kindness Foundation Inc.",
+    "name": "In Like Kindness Foundation Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "32dc962b-9e85-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA8777",
+    "companyName": "Williamson Auction Gallery",
+    "name": "Williamson Auction Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "62d5c683-4e95-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA7948",
+    "companyName": "NH Auctions and Appraisals",
+    "name": "NH Auctions and Appraisals",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4ecb913e-4e95-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA2466",
+    "companyName": "Brookline Auction Gallery",
+    "name": "Brookline Auction Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "975484e3-9393-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA8913",
+    "companyName": "Turquoise Mountain Auctioneers LLC",
+    "name": "Turquoise Mountain Auctioneers LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "3b7a0350-a18f-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA10152",
+    "companyName": "SHAHKAR Fine Carpets",
+    "name": "SHAHKAR Fine Carpets",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b5fef2b2-eb88-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA8736",
+    "companyName": "Jupiter Auction",
+    "name": "Jupiter Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ff8df75d-cb87-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA1376",
+    "companyName": "3 Kings Auction",
+    "name": "3 Kings Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f1141238-0975-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA5791",
+    "companyName": "Tribal Gatherings",
+    "name": "Tribal Gatherings",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "19b78512-a96e-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA1212",
+    "companyName": "Cedarburg Auction & Appraisals LLC",
+    "name": "Cedarburg Auction & Appraisals LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e61c6732-fd50-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA8154",
+    "companyName": "GCB Estate Sales",
+    "name": "GCB Estate Sales",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "488ea602-fc50-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA8679",
+    "companyName": "Rock Auction Gallery",
+    "name": "Rock Auction Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "c1504c50-fb50-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA5910",
+    "companyName": "Great Deal Auctions",
+    "name": "Great Deal Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "138aa8fd-d13d-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA2161",
+    "companyName": "Concierge Estate Sale Services",
+    "name": "Concierge Estate Sale Services",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7da9b781-a73b-ee11-ac1c-0a15ce13c9bf",
+    "code": "LA8554",
+    "companyName": "Hixenbaugh Ancient Art",
+    "name": "Hixenbaugh Ancient Art",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9a9c7196-218c-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA49",
+    "companyName": "Dargate Auction Galleries",
+    "name": "Dargate Auction Galleries",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "c56cc554-9e8d-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9024",
+    "companyName": "Collectorverse Auctions LLC",
+    "name": "Collectorverse Auctions LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "cbcc77d9-c490-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA2801",
+    "companyName": "Mega International Auction",
+    "name": "Mega International Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a6820a04-c590-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA4467",
+    "companyName": "Vidi Vici Gallery",
+    "name": "Vidi Vici Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "703785f1-5891-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9152",
+    "companyName": "Revival Registry",
+    "name": "Revival Registry",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b2c496f9-6891-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9223",
+    "companyName": "Choice Furniture & Auction Gallery",
+    "name": "Choice Furniture & Auction Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f3d31858-6991-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA2821",
+    "companyName": "Thriftiques of Iowa",
+    "name": "Thriftiques of Iowa",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d7c76466-6991-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9078",
+    "companyName": "Bravo Auctioneers",
+    "name": "Bravo Auctioneers",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e7fd15bf-6c91-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA2588",
+    "companyName": "The Sporting Art Auction",
+    "name": "The Sporting Art Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "277af14b-6d91-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA652",
+    "companyName": "Central Mass Auctions",
+    "name": "Central Mass Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "868619ca-6e91-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA523",
+    "companyName": "Alex Cooper",
+    "name": "Alex Cooper",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e8895fc2-7191-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA7998",
+    "companyName": "SebastianCharles Auctions",
+    "name": "SebastianCharles Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "1d022e09-7291-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA8440",
+    "companyName": "Gregory Hake Auctions",
+    "name": "Gregory Hake Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "01b0656f-7691-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9365",
+    "companyName": "Mounds Park Art Auction LLC",
+    "name": "Mounds Park Art Auction LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d3cbf5bd-7691-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA8422",
+    "companyName": "Louie Luke Auction Gallery",
+    "name": "Louie Luke Auction Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "01d38238-8a91-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA6662",
+    "companyName": "Art Online LLC",
+    "name": "Art Online LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "8c4b216e-8a91-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA7889",
+    "companyName": "Harris Toy and Train Auctions",
+    "name": "Harris Toy and Train Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "76a84230-8e91-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1656",
+    "companyName": "Meissner's Auction Service",
+    "name": "Meissner's Auction Service",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e324a4ed-8f91-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA6218",
+    "companyName": "Antiqi",
+    "name": "Antiqi",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "493680c1-9091-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA7098",
+    "companyName": "Annabels Galleries",
+    "name": "Annabels Galleries",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a8a82e53-2792-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9231",
+    "companyName": "Grace Auction & Estate Gallery LLC",
+    "name": "Grace Auction & Estate Gallery LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "3fc410bf-2b92-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA844",
+    "companyName": "The Photo Review",
+    "name": "The Photo Review",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f51cf36b-2c92-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1396",
+    "companyName": "Saucon Valley / Searchlight Auction",
+    "name": "Saucon Valley / Searchlight Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "6e478989-2e92-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA8781",
+    "companyName": "L&H Auctions Inc",
+    "name": "L&H Auctions Inc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "07b868ee-3a92-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA7475",
+    "companyName": "Blue Box Auction Gallery",
+    "name": "Blue Box Auction Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f422a908-3b92-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9116",
+    "companyName": "American Downsizing and Estate Sales LLC",
+    "name": "American Downsizing and Estate Sales LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "2cdcfc29-7095-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9454",
+    "companyName": "BlueChip Auctions LLC",
+    "name": "BlueChip Auctions LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9edfede5-7198-ef11-ac1c-0a15ce13c9bf",
+    "code": "OffLive",
+    "companyName": "Annex Brands NLS",
+    "name": "Annex Brands NLS",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "facec15a-a0b3-e711-8f3f-00155d426802"
+  },
+  {
+    "id": "884ab0c3-8698-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9545",
+    "companyName": "Slate Row Books",
+    "name": "Slate Row Books",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7c4ac809-8f98-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA191",
+    "companyName": "Associated Estates",
+    "name": "Associated Estates",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "076a066e-9098-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9432",
+    "companyName": "Seven Sea Diamond Inc.",
+    "name": "Seven Sea Diamond Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7676043c-9198-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9528",
+    "companyName": "Lake Lanier Antiques LLC",
+    "name": "Lake Lanier Antiques LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e7145abf-12a2-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA8359",
+    "companyName": "Ageless Auctions",
+    "name": "Ageless Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "28442f42-8da3-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9614",
+    "companyName": "Journal Print of The World",
+    "name": "Journal Print of The World",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "c42f4b01-dda5-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9592",
+    "companyName": "Dover Jewelry",
+    "name": "Dover Jewelry",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "66dc80d5-dda5-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9642",
+    "companyName": "Sapphire Workx",
+    "name": "Sapphire Workx",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "598b0831-38a8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LIVELOCAL",
+    "companyName": "LiveAuctioneers Local Delivery",
+    "name": "LiveAuctioneers Local Delivery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "facec15a-a0b3-e711-8f3f-00155d426802"
+  },
+  {
+    "id": "d5c5cf7f-81ae-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA7804",
+    "companyName": "Mynt Auctions",
+    "name": "Mynt Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b1b5d090-82ae-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA6899",
+    "companyName": "Pacific Global Auction",
+    "name": "Pacific Global Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5957a7d8-9db1-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA808",
+    "companyName": "JMW Auctions",
+    "name": "JMW Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d2b4040b-80b2-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9520",
+    "companyName": "Gold Silver & Collectables, LLC",
+    "name": "Gold Silver & Collectables, LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d78300cb-86b2-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA7877",
+    "companyName": "Winbids Auctions",
+    "name": "Winbids Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "16e81a5d-e5b7-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9652",
+    "companyName": "NY Vintage by Catherine",
+    "name": "NY Vintage by Catherine",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "70b76bc8-e6b7-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9666",
+    "companyName": "Azmina USA LLC",
+    "name": "Azmina USA LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d294aeb8-e9bb-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA6177",
+    "companyName": "NY Elizabeth",
+    "name": "NY Elizabeth",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "980f93e5-24be-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1436",
+    "companyName": "China Arts Auction",
+    "name": "China Arts Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "22157838-0dbf-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA6732",
+    "companyName": "Golden Gate Auctioneers",
+    "name": "Golden Gate Auctioneers",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "55506497-2ebf-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA8184",
+    "companyName": "Golden Air Auctions",
+    "name": "Golden Air Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e0bf3b7b-33bf-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA6581",
+    "companyName": "Trillium Antique Prints & Rare Books",
+    "name": "Trillium Antique Prints & Rare Books",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "97906c63-8dc7-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA469",
+    "companyName": "Valley Auctions LLC",
+    "name": "Valley Auctions LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5d22fda3-40c9-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9627",
+    "companyName": "Velour Furniture DBA Empire Auctioneers",
+    "name": "Velour Furniture DBA Empire Auctioneers",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "557f4134-edc9-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9693",
+    "companyName": "Hanna Antiques",
+    "name": "Hanna Antiques",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "97464297-eccd-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9718",
+    "companyName": "Lee's Trinkets",
+    "name": "Lee's Trinkets",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "18a6f85b-eecd-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9723",
+    "companyName": "Turkey Mountain Traders LLC",
+    "name": "Turkey Mountain Traders LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4e972c26-f0cd-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA4121",
+    "companyName": "Consignworks, Inc.",
+    "name": "Consignworks, Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "62fae839-f1cd-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9478",
+    "companyName": "Western Pennsylvania Trading Inc.",
+    "name": "Western Pennsylvania Trading Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "bd011061-98cf-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA315",
+    "companyName": "Bodnar's Auction Sales",
+    "name": "Bodnar's Auction Sales",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f3913556-a1d2-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9554",
+    "companyName": "GM Davis Investment Fine Art",
+    "name": "GM Davis Investment Fine Art",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b2a4b9d0-57d4-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9710",
+    "companyName": "Timeless Treasures Estate Sales",
+    "name": "Timeless Treasures Estate Sales",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e7956942-22d5-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA8871",
+    "companyName": "Ocean of Antique",
+    "name": "Ocean of Antique",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "380b6621-7eda-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9745",
+    "companyName": "Bostwick Lake Antiques",
+    "name": "Bostwick Lake Antiques",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d60e3915-80da-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9728",
+    "companyName": "SJS Estate & Coin",
+    "name": "SJS Estate & Coin",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e2364015-81da-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9491",
+    "companyName": "Folk Art Auctions LLC",
+    "name": "Folk Art Auctions LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f38c5f60-82da-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA2108",
+    "companyName": "The Southwestern Gallery and Auctions",
+    "name": "The Southwestern Gallery and Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4601eaa7-d9e4-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9779",
+    "companyName": "Bertoni Gallery",
+    "name": "Bertoni Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4de9d209-dfe4-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA3250",
+    "companyName": "The Book Barn",
+    "name": "The Book Barn",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0ddd4418-e0e4-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9759",
+    "companyName": "Skadoosh",
+    "name": "Skadoosh",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ad22d3d5-c3e8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9769",
+    "companyName": "Mineral Taki",
+    "name": "Mineral Taki",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "8ca3b52b-84e9-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9633",
+    "companyName": "Legacy Vault Auctions / Relic Charm",
+    "name": "Legacy Vault Auctions / Relic Charm",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "1d896bbf-85e9-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA8974",
+    "companyName": "Verma Estate Department",
+    "name": "Verma Estate Department",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e8d78d28-41ea-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA5597",
+    "companyName": "Arte Antico",
+    "name": "Arte Antico",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ac4a15a9-03eb-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9836",
+    "companyName": "Anne And Anna\u2019s Estate Services",
+    "name": "Anne And Anna\u2019s Estate Services",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "bbef7857-11eb-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA7385",
+    "companyName": "Check the Oil Auctions",
+    "name": "Check the Oil Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "164df1b0-b1ef-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA2837",
+    "companyName": "Bruce Teleky, Inc",
+    "name": "Bruce Teleky, Inc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ac26635a-b5ef-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA8208",
+    "companyName": "Deker Auctions LLC",
+    "name": "Deker Auctions LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0911493c-b7ef-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9806",
+    "companyName": "Arbor & Crown Auction House",
+    "name": "Arbor & Crown Auction House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "1fa0ed31-b8ef-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9805",
+    "companyName": "Charlie's Gun and Pawn LLC",
+    "name": "Charlie's Gun and Pawn LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d2161105-baef-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA6077",
+    "companyName": "Lakeshore Auction",
+    "name": "Lakeshore Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b3f627ac-baef-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA7781",
+    "companyName": "Barton & Co.",
+    "name": "Barton & Co.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "c1fc654f-cfef-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9760",
+    "companyName": "Smittys Auction",
+    "name": "Smittys Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "3047b2e9-d3ef-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9842",
+    "companyName": "Taha Live Auctioneers",
+    "name": "Taha Live Auctioneers",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4a4a6dd1-e3f2-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9783",
+    "companyName": "Recycle the Love",
+    "name": "Recycle the Love",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "2ac7d5a4-f9f2-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA3333",
+    "companyName": "Eric's Estate & Jewelry",
+    "name": "Eric's Estate & Jewelry",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f336f3b8-7bf3-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA8693",
+    "companyName": "Topwells Auction",
+    "name": "Topwells Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "6b06eaae-b5f3-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA6940",
+    "companyName": "New World Cartographic",
+    "name": "New World Cartographic",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "64eec251-b6f3-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9775",
+    "companyName": "Marek Roik Auctioneer",
+    "name": "Marek Roik Auctioneer",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "760023dd-89f4-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9820",
+    "companyName": "Galerie Camille, Inc.",
+    "name": "Galerie Camille, Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "30e0829a-8af4-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9843",
+    "companyName": "Chicago Estate Advisors",
+    "name": "Chicago Estate Advisors",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "3fb0d617-8ff8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA119",
+    "companyName": "PosterConnection, Inc.",
+    "name": "PosterConnection, Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f109053f-8ff8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA308",
+    "companyName": "Lloyd Ralston Gallery",
+    "name": "Lloyd Ralston Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "492f8252-8ff8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA361",
+    "companyName": "Bill Hood & Sons Art & Antique Auctions",
+    "name": "Bill Hood & Sons Art & Antique Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d440e15f-8ff8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA413",
+    "companyName": "Kodner Galleries Inc.",
+    "name": "Kodner Galleries Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "8524e473-8ff8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA528",
+    "companyName": "The RSL Auction Company",
+    "name": "The RSL Auction Company",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a3df9888-8ff8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA692",
+    "companyName": "Floating World Auctions",
+    "name": "Floating World Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "34b8d6b8-8ff8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA942",
+    "companyName": "Hartzell's Auction Gallery, Inc.",
+    "name": "Hartzell's Auction Gallery, Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "2868afb8-92f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1006",
+    "companyName": "U.S. Auction Gallery",
+    "name": "U.S. Auction Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "04750cd5-92f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1116",
+    "companyName": "Cottone Auctions",
+    "name": "Cottone Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "602898db-92f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1120",
+    "companyName": "Premiere Props",
+    "name": "Premiere Props",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "141fbce1-92f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1133",
+    "companyName": "Ivy Auctions, Inc.",
+    "name": "Ivy Auctions, Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "8942cd02-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1350",
+    "companyName": "Vero Beach Auction",
+    "name": "Vero Beach Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "38ed7c09-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1360",
+    "companyName": "GOLDEN STATE AUCTION GALLERY",
+    "name": "GOLDEN STATE AUCTION GALLERY",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a5d32a10-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1379",
+    "companyName": "Great Estates Auctioneers & Appraisers",
+    "name": "Great Estates Auctioneers & Appraisers",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d28fc616-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1467",
+    "companyName": "The Globe USA LLC",
+    "name": "The Globe USA LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "441fa436-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1512",
+    "companyName": "GWS Auctions Inc.",
+    "name": "GWS Auctions Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ed0b893e-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1537",
+    "companyName": "Dane Fine Art Auctions",
+    "name": "Dane Fine Art Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0305eb44-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1545",
+    "companyName": "M.D.CHJewelry Co.",
+    "name": "M.D.CHJewelry Co.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "04adb552-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1692",
+    "companyName": "Platinum Auction Group",
+    "name": "Platinum Auction Group",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7488d358-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1746",
+    "companyName": "North American Auction Co.",
+    "name": "North American Auction Co.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "18e9895f-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1846",
+    "companyName": "Mannys Jewelry",
+    "name": "Mannys Jewelry",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ec5c9666-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1910",
+    "companyName": "Connoisseur Auctions",
+    "name": "Connoisseur Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "fa5c9666-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1968",
+    "companyName": "Arader Galleries",
+    "name": "Arader Galleries",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7f53ff6c-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA1998",
+    "companyName": "William's Auctions, LLC",
+    "name": "William's Auctions, LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9ee76673-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA2151",
+    "companyName": "Piece of the Past, Inc.",
+    "name": "Piece of the Past, Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7738947f-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA2294",
+    "companyName": "KCM Galleries",
+    "name": "KCM Galleries",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d593fd85-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA2541",
+    "companyName": "Artelisted",
+    "name": "Artelisted",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "92c6b18c-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA2682",
+    "companyName": "Gallery 63",
+    "name": "Gallery 63",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "56083e93-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA2784",
+    "companyName": "Col. Christie Hatman Auctioneers",
+    "name": "Col. Christie Hatman Auctioneers",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "75303699-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA2793",
+    "companyName": "The Lodge Auction House Inc.",
+    "name": "The Lodge Auction House Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d52e6ea0-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA2863",
+    "companyName": "Baker's Antiques and Auctions",
+    "name": "Baker's Antiques and Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "de2e6ea0-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA2899",
+    "companyName": "Quan Rong Gallery",
+    "name": "Quan Rong Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "8ee62ca7-93f8-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA3058",
+    "companyName": "Sabertooth Auctions",
+    "name": "Sabertooth Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "6fe08ca9-67fb-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9830",
+    "companyName": "Time\u2019s Tin Cup Vintage Emporium",
+    "name": "Time\u2019s Tin Cup Vintage Emporium",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "864abf38-7dfb-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9790",
+    "companyName": "RAD Enterprise",
+    "name": "RAD Enterprise",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0564a181-7efb-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9864",
+    "companyName": "Hubba Hubba LA",
+    "name": "Hubba Hubba LA",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4e8fbea2-80fb-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9870",
+    "companyName": "The Baron's Den",
+    "name": "The Baron's Den",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "6320e30b-82fb-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9893",
+    "companyName": "Casanova Venetian Glass & Art",
+    "name": "Casanova Venetian Glass & Art",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "57a671de-84fb-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9205",
+    "companyName": "Treasure Deck Auctions",
+    "name": "Treasure Deck Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "c5b985c6-85fb-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9838",
+    "companyName": "ShopRus",
+    "name": "ShopRus",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e72dcdf0-86fb-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9730",
+    "companyName": "Bach & Rubin Auctions",
+    "name": "Bach & Rubin Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "95ef6462-7eff-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9696",
+    "companyName": "Prints Charming Soho LLC",
+    "name": "Prints Charming Soho LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "71cd5e4e-88ff-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA5897",
+    "companyName": "Rentzel's Auction Service, Inc.",
+    "name": "Rentzel's Auction Service, Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "33a29ff0-89ff-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9694",
+    "companyName": "Scent of Duty",
+    "name": "Scent of Duty",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "50df0c02-8bff-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA6523",
+    "companyName": "White Knight Auction, Inc",
+    "name": "White Knight Auction, Inc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "58ef3b7f-8eff-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9910",
+    "companyName": "Louped Jewelry",
+    "name": "Louped Jewelry",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "319c5a88-8fff-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9780",
+    "companyName": "Golden Age Jewelry Auctions",
+    "name": "Golden Age Jewelry Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b95d5eaa-90ff-ef11-ac1c-0a15ce13c9bf",
+    "code": "LA9734",
+    "companyName": "Help us Help Them",
+    "name": "Help us Help Them",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "c93a719e-3800-f011-ac1c-0a15ce13c9bf",
+    "code": "LA6177-FS",
+    "companyName": "NY Elizabeth FS",
+    "name": "NY Elizabeth FS",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "1ec3befb-4500-f011-ac1c-0a15ce13c9bf",
+    "code": "LA6140",
+    "companyName": "Riverside Galleries",
+    "name": "Riverside Galleries",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "3eb59dac-fa00-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9866",
+    "companyName": "Wayne Mattox Antiques",
+    "name": "Wayne Mattox Antiques",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "dfb32fc9-4104-f011-ac1c-0a15ce13c9bf",
+    "code": "LA5684",
+    "companyName": "A New Day Auctions",
+    "name": "A New Day Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "268f401e-4204-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9582",
+    "companyName": "Oil Capital Collectibles",
+    "name": "Oil Capital Collectibles",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a0d0595d-c605-f011-ac1c-0a15ce13c9bf",
+    "code": "LA8445",
+    "companyName": "Aeron House",
+    "name": "Aeron House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e2dee8f7-c705-f011-ac1c-0a15ce13c9bf",
+    "code": "LA6252",
+    "companyName": "VICTORINS AUCTIONS",
+    "name": "VICTORINS AUCTIONS",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d389586b-9106-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7509",
+    "companyName": "A CUT ABOVE AUCTION",
+    "name": "A CUT ABOVE AUCTION",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "3a71f4c3-9506-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9675",
+    "companyName": "Valourian LLC",
+    "name": "Valourian LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "19243a72-9606-f011-ac1c-0a15ce13c9bf",
+    "code": "LA8015",
+    "companyName": "Himalayan Auction House",
+    "name": "Himalayan Auction House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "2adb33b3-9f06-f011-ac1c-0a15ce13c9bf",
+    "code": "LA6985",
+    "companyName": "Amazing Collectible Galleries",
+    "name": "Amazing Collectible Galleries",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "1e661d31-470b-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9941",
+    "companyName": "Seattle Magpies",
+    "name": "Seattle Magpies",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "1805537a-490b-f011-ac1c-0a15ce13c9bf",
+    "code": "LA3759",
+    "companyName": "Kensington Estate Auction",
+    "name": "Kensington Estate Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f2a7742e-4a0b-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9628",
+    "companyName": "Caring Transitions Wasatch Front",
+    "name": "Caring Transitions Wasatch Front",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5d025a7e-4d0b-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9913",
+    "companyName": "Crossroads Estate Solutions",
+    "name": "Crossroads Estate Solutions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b0c7261e-4e0b-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7967",
+    "companyName": "Jubao Hall Auction House",
+    "name": "Jubao Hall Auction House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9275a677-ec0f-f011-ac1c-0a15ce13c9bf",
+    "code": "CFAC",
+    "companyName": "CFAC",
+    "name": "CFAC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
+  },
+  {
+    "id": "33d38ca1-1910-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9944",
+    "companyName": "Grand Acres Inc",
+    "name": "Grand Acres Inc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "46435361-1f10-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9103",
+    "companyName": "Yardley Antiques",
+    "name": "Yardley Antiques",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9d853635-b010-f011-ac1c-0a15ce13c9bf",
+    "code": "LA6749",
+    "companyName": "SMG Marketing",
+    "name": "SMG Marketing",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a71bee51-6b11-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9987",
+    "companyName": "Pop Culture Hobbies",
+    "name": "Pop Culture Hobbies",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e0588f25-6c11-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7597",
+    "companyName": "Castle Valley Art Gallery Inc",
+    "name": "Castle Valley Art Gallery Inc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "961c1032-6f11-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9903",
+    "companyName": "Latino Arts Project",
+    "name": "Latino Arts Project",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "16dfbc0f-7011-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9490",
+    "companyName": "Slate of Los Angeles",
+    "name": "Slate of Los Angeles",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "72d78184-7011-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9975",
+    "companyName": "FOC Books",
+    "name": "FOC Books",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "eb4366e1-7011-f011-ac1c-0a15ce13c9bf",
+    "code": "LA8132",
+    "companyName": "Hotspot Auctions",
+    "name": "Hotspot Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a91d8378-7111-f011-ac1c-0a15ce13c9bf",
+    "code": "LA8818",
+    "companyName": "Hobby Dealer",
+    "name": "Hobby Dealer",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4de82b3f-bf13-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7073",
+    "companyName": "MiddleManBrokers Inc.",
+    "name": "MiddleManBrokers Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d84cfda1-9015-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7936",
+    "companyName": "Top Notch Collections",
+    "name": "Top Notch Collections",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "6bdb91bd-0c1b-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7684",
+    "companyName": "Michael's Gallery",
+    "name": "Michael's Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "cdcd0fab-0d1b-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9833",
+    "companyName": "Rage of the Age",
+    "name": "Rage of the Age",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "801caaa8-101b-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9621",
+    "companyName": "Lucerne Auctions LLC",
+    "name": "Lucerne Auctions LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "83625f4d-8f1c-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9635",
+    "companyName": "Cardenas Auctions",
+    "name": "Cardenas Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "14822b17-1722-f011-ac1c-0a15ce13c9bf",
+    "code": "LA6259",
+    "companyName": "Mark Lewis Art",
+    "name": "Mark Lewis Art",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "12d44c4f-0e25-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9989",
+    "companyName": "Infinity Jewelers",
+    "name": "Infinity Jewelers",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5add43cc-6125-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7644",
+    "companyName": "Juliet and Friends",
+    "name": "Juliet and Friends",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d96bbc12-0b26-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9909",
+    "companyName": "One Of A Kind Jewelry Creations Inc.",
+    "name": "One Of A Kind Jewelry Creations Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0f55c631-1626-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9970",
+    "companyName": "Thompson Auction & Real Estate Services LLC",
+    "name": "Thompson Auction & Real Estate Services LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f235e729-2026-f011-ac1c-0a15ce13c9bf",
+    "code": "LA8899",
+    "companyName": "Nostalgia Estate Sales",
+    "name": "Nostalgia Estate Sales",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "be411fbb-2326-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9907",
+    "companyName": "Mason and McIntosh LLC",
+    "name": "Mason and McIntosh LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "3730268a-2926-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9997",
+    "companyName": "Willie Maes Antiques & Auctions",
+    "name": "Willie Maes Antiques & Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b5557c7d-8627-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9839",
+    "companyName": "Britannic Auctions",
+    "name": "Britannic Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "abed1933-8f27-f011-ac1c-0a15ce13c9bf",
+    "code": "LA5847",
+    "companyName": "Americana Auctions",
+    "name": "Americana Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "2aee1764-9127-f011-ac1c-0a15ce13c9bf",
+    "code": "LA8013",
+    "companyName": "Luxury Antiques",
+    "name": "Luxury Antiques",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a2e6911d-5029-f011-ac1c-0a15ce13c9bf",
+    "code": "LA4581",
+    "companyName": "Dumus Inc.",
+    "name": "Dumus Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b2cfd513-5129-f011-ac1c-0a15ce13c9bf",
+    "code": "LA6446",
+    "companyName": "Elizabeth Jackson & CI Greenwich LLC",
+    "name": "Elizabeth Jackson & CI Greenwich LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "10a91bda-5129-f011-ac1c-0a15ce13c9bf",
+    "code": "LA6678",
+    "companyName": "Old Stuff For You",
+    "name": "Old Stuff For You",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d259d045-5229-f011-ac1c-0a15ce13c9bf",
+    "code": "LA8807",
+    "companyName": "Antiquarius Art",
+    "name": "Antiquarius Art",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "c7877405-5429-f011-ac1c-0a15ce13c9bf",
+    "code": "1278304",
+    "companyName": "Antiquarius Art",
+    "name": "Antiquarius Art",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "44b73108-5529-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10072",
+    "companyName": "Veolin LLC",
+    "name": "Veolin LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b7f2f8b4-5529-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9778",
+    "companyName": "Raynor's American History Auction House",
+    "name": "Raynor's American History Auction House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9b6bce92-962a-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9597",
+    "companyName": "Alexandra Howard Inc",
+    "name": "Alexandra Howard Inc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "8d1b229e-972a-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10071",
+    "companyName": "Rt 66 Auctions, LLC",
+    "name": "Rt 66 Auctions, LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "58dc4316-a42a-f011-ac1c-0a15ce13c9bf",
+    "code": "LA737",
+    "companyName": "Lyn Knight Auctions",
+    "name": "Lyn Knight Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "47507b50-6d2b-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7405",
+    "companyName": "Irvington Auction Inc",
+    "name": "Irvington Auction Inc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "20107a6d-712f-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9953",
+    "companyName": "Captain's Auction Warehouse",
+    "name": "Captain's Auction Warehouse",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "44a19aa3-2131-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7294",
+    "companyName": "Dana Auctions",
+    "name": "Dana Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "dafbf469-4031-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9795",
+    "companyName": "Blue Dog Treasures",
+    "name": "Blue Dog Treasures",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a94d7120-4631-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10041",
+    "companyName": "Big Darby Auctions, Inc.",
+    "name": "Big Darby Auctions, Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ca99dda2-4831-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7162",
+    "companyName": "Harvest Moon Auctions",
+    "name": "Harvest Moon Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "3dcee24d-b831-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9604",
+    "companyName": "South Florida Auctions",
+    "name": "South Florida Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ecbdec8e-be32-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7291",
+    "companyName": "Ahon Auctions",
+    "name": "Ahon Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "de99852e-c132-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10005",
+    "companyName": "Blaze Auctions",
+    "name": "Blaze Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a7df0133-c232-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9894",
+    "companyName": "Global Memorabilia",
+    "name": "Global Memorabilia",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d612a3ae-c932-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7169",
+    "companyName": "Collectible Auction LLC",
+    "name": "Collectible Auction LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "efe203d1-ca32-f011-ac1c-0a15ce13c9bf",
+    "code": "LA6896",
+    "companyName": "Dandelion Wishes & More",
+    "name": "Dandelion Wishes & More",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "00357344-cc32-f011-ac1c-0a15ce13c9bf",
+    "code": "LA3370",
+    "companyName": "Blackswan Antiques",
+    "name": "Blackswan Antiques",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e0cef551-cd32-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9466",
+    "companyName": "Boca Estate Auction LLC",
+    "name": "Boca Estate Auction LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "48104ab8-cf32-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9784",
+    "companyName": "Jonesboro Trading Group LLC",
+    "name": "Jonesboro Trading Group LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "71663309-d532-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7886",
+    "companyName": "Williston Auctions",
+    "name": "Williston Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e0d11f25-d632-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9812",
+    "companyName": "Estate Sales with Grace",
+    "name": "Estate Sales with Grace",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "32832444-c734-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7699",
+    "companyName": "Esquis Auctions House",
+    "name": "Esquis Auctions House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "57325360-e834-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9904",
+    "companyName": "Vivian Alexander ",
+    "name": "Vivian Alexander ",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "cdc89133-1c35-f011-ac1c-0a15ce13c9bf",
+    "code": "LA8886",
+    "companyName": "Eaton and Brennan Auctions",
+    "name": "Eaton and Brennan Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9c9cd583-1d35-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9848",
+    "companyName": "SJD Auctions",
+    "name": "SJD Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5b799eb8-2235-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9818",
+    "companyName": "Bryant Estate Sales",
+    "name": "Bryant Estate Sales",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "df6e59f6-2335-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10082",
+    "companyName": "Aardvark Estate Services And Appraisals",
+    "name": "Aardvark Estate Services And Appraisals",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "3555dcdb-2435-f011-ac1c-0a15ce13c9bf",
+    "code": "LA8654",
+    "companyName": "M&V Vanguard Jewelry",
+    "name": "M&V Vanguard Jewelry",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7eec22b1-b135-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9921",
+    "companyName": "Every Watch Has a Story",
+    "name": "Every Watch Has a Story",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "c0780a21-f835-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10013",
+    "companyName": "Jewelry Auction House",
+    "name": "Jewelry Auction House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0c5fc890-4736-f011-ac1c-0a15ce13c9bf",
+    "code": "LA8402",
+    "companyName": "Seven's",
+    "name": "Seven's",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "47f6c5e2-4736-f011-ac1c-0a15ce13c9bf",
+    "code": "LA8963",
+    "companyName": "Hannosh's",
+    "name": "Hannosh's",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ef465347-5736-f011-ac1c-0a15ce13c9bf",
+    "code": "LA4659",
+    "companyName": "PPI Auctions",
+    "name": "PPI Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "fff67ebf-8d36-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9996",
+    "companyName": "The Mystic Cove",
+    "name": "The Mystic Cove",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "751c645e-8e36-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9965",
+    "companyName": "Peace of Art Auctions",
+    "name": "Peace of Art Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "fe768ed5-8e36-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10033",
+    "companyName": "Fukano's Antiques and Collectibles",
+    "name": "Fukano's Antiques and Collectibles",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "875a52fa-2437-f011-ac1c-0a15ce13c9bf",
+    "code": "LA6312",
+    "companyName": "Marnie Collection Auction",
+    "name": "Marnie Collection Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "1ce4a1ed-292c-f011-ac1c-0a15ce13c9bf",
+    "code": "LA5311",
+    "companyName": "Dees Auction Company",
+    "name": "Dees Auction Company",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ccfe8a39-2637-f011-ac1c-0a15ce13c9bf",
+    "code": "LA6594",
+    "companyName": "Meander Auctions by Andrew Richmond and Hollie Dav",
+    "name": "Meander Auctions by Andrew Richmond and Hollie Dav",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "c80b3df3-3537-f011-ac1c-0a15ce13c9bf",
+    "code": "LA6109",
+    "companyName": "Amerigem Auctions",
+    "name": "Amerigem Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "17d41b6b-3637-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9695",
+    "companyName": "BidFair Fine Jewelry",
+    "name": "BidFair Fine Jewelry",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "550873e4-3637-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10100",
+    "companyName": "TAG Sales",
+    "name": "TAG Sales",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "eaf3e7a1-5937-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9120",
+    "companyName": "South Beach Antiques LLC",
+    "name": "South Beach Antiques LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0ec9d2bf-643a-f011-ac1c-0a15ce13c9bf",
+    "code": "LA3321",
+    "companyName": "Abo Antiques and Gallery",
+    "name": "Abo Antiques and Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "fb3f37d9-0d3c-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9938",
+    "companyName": "Silla LTD DBA Burd Street Auctions",
+    "name": "Silla LTD DBA Burd Street Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5cb3dbf1-c63c-f011-ac1c-0a15ce13c9bf",
+    "code": "LA3895",
+    "companyName": "LooLoo Auctions",
+    "name": "LooLoo Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9ae832c7-c73c-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9159",
+    "companyName": "Mark Louis Weseloh Estate",
+    "name": "Mark Louis Weseloh Estate",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "325f744a-c83c-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10070",
+    "companyName": "Game Day Legends",
+    "name": "Game Day Legends",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "1308f21b-c93c-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10104",
+    "companyName": "Avanta Auctions",
+    "name": "Avanta Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f9d96dfe-b33d-f011-ac1c-0a15ce13c9bf",
+    "code": "LA1034",
+    "companyName": "Propworx",
+    "name": "Propworx",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "dba6c700-be3d-f011-ac1c-0a15ce13c9bf",
+    "code": "LA8762",
+    "companyName": "Bretton Art USA LLC",
+    "name": "Bretton Art USA LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a7c732af-c03d-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7301",
+    "companyName": "Pasargad Auctions",
+    "name": "Pasargad Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ce5fec67-c23d-f011-ac1c-0a15ce13c9bf",
+    "code": "LA5704",
+    "companyName": "Woodblock Prints World",
+    "name": "Woodblock Prints World",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5a0d49bd-c73d-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9829",
+    "companyName": "Oldstone Ventures LLC",
+    "name": "Oldstone Ventures LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "943b1371-673e-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9687",
+    "companyName": "Campbell\u2019s Melange",
+    "name": "Campbell\u2019s Melange",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "256b1c97-683e-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9823",
+    "companyName": "BIJOUX DE LEE LLC",
+    "name": "BIJOUX DE LEE LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ee0d40cb-693e-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9871",
+    "companyName": "Atkinson Fine Art",
+    "name": "Atkinson Fine Art",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "51df097c-6a3e-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7777",
+    "companyName": "Sunburst Auction",
+    "name": "Sunburst Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "73abac18-6c3e-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10074",
+    "companyName": "AuctionGroove",
+    "name": "AuctionGroove",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "c084d4b2-6c3e-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10028",
+    "companyName": "Artlantic Trades XXIV",
+    "name": "Artlantic Trades XXIV",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "cfa3ea35-6e3e-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10061",
+    "companyName": "Hippo Thrift LLC.",
+    "name": "Hippo Thrift LLC.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d0b453ad-6e3e-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10060",
+    "companyName": "Winston Scott",
+    "name": "Winston Scott",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "54d51222-6f3e-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9872",
+    "companyName": "Recollect to Collect LLC",
+    "name": "Recollect to Collect LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "282c0e19-703e-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9885",
+    "companyName": "Schmidt Auctions",
+    "name": "Schmidt Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "debd1a85-753e-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7100",
+    "companyName": "Prestige Auction House LLC",
+    "name": "Prestige Auction House LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "56bca554-fe3e-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10037",
+    "companyName": "Era's End Auctions",
+    "name": "Era's End Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "33ad86c1-0a3f-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9577",
+    "companyName": "National Rarities",
+    "name": "National Rarities",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "fc814436-0b3f-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9958",
+    "companyName": "The Flippin Rooster LLC",
+    "name": "The Flippin Rooster LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "06946f2e-0c3f-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10002",
+    "companyName": "EyeGallery.com",
+    "name": "EyeGallery.com",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "8e9a8dc5-0c3f-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9980",
+    "companyName": "The Capital Gallery",
+    "name": "The Capital Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "338b4252-0d3f-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9377",
+    "companyName": "Sager Reeves Fine Art Auctions",
+    "name": "Sager Reeves Fine Art Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4aba7c78-0e3f-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9922",
+    "companyName": "East wood Auction LLC",
+    "name": "East wood Auction LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "12a4cd25-283f-f011-ac1c-0a15ce13c9bf",
+    "code": "LA6322",
+    "companyName": "New York Asian Arts Center",
+    "name": "New York Asian Arts Center",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "303669bd-283f-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9834",
+    "companyName": "JOHN MOORADIAN AUCTION & ESTATE SERVICES",
+    "name": "JOHN MOORADIAN AUCTION & ESTATE SERVICES",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "75c87f1f-293f-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10021",
+    "companyName": "Pampillonia of Chevy Chase",
+    "name": "Pampillonia of Chevy Chase",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0b5c4e10-2b3f-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9993",
+    "companyName": "Bouckville Hotel",
+    "name": "Bouckville Hotel",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ef823485-2e3f-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9951",
+    "companyName": "Hammer Time Auctions",
+    "name": "Hammer Time Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9c2e7438-2f3f-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9201",
+    "companyName": "Harrison Auction & Realtor",
+    "name": "Harrison Auction & Realtor",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "3601c779-f73f-f011-ac1c-0a15ce13c9bf",
+    "code": "1281736",
+    "companyName": "Mega International Auction",
+    "name": "Mega International Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5038529b-f93f-f011-ac1c-0a15ce13c9bf",
+    "code": "LA8823",
+    "companyName": "Clark Auctions of Texas",
+    "name": "Clark Auctions of Texas",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "16427dae-9340-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10010",
+    "companyName": "Lee's Auctioneering LLC",
+    "name": "Lee's Auctioneering LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4e178a14-8841-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10099",
+    "companyName": "Lume Arts Inc",
+    "name": "Lume Arts Inc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f3abc088-8841-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9715",
+    "companyName": "Cardozo Fine Art",
+    "name": "Cardozo Fine Art",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "97db1ce9-8841-f011-ac1c-0a15ce13c9bf",
+    "code": "1282117",
+    "companyName": "Cutler Bay Auctions",
+    "name": "Cutler Bay Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "1abf3f4a-1b42-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7571",
+    "companyName": "GLOBAL NETWORTH AUCTIONS",
+    "name": "GLOBAL NETWORTH AUCTIONS",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "509e5339-2542-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7226",
+    "companyName": "Fleischer's Auctions",
+    "name": "Fleischer's Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "fd5beb94-2c42-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9901",
+    "companyName": "The East is Red Auctions",
+    "name": "The East is Red Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a20d9ba1-e842-f011-ac1c-0a15ce13c9bf",
+    "code": "LA10053",
+    "companyName": "Ronin Gallery",
+    "name": "Ronin Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "dc3b3830-eb42-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9766",
+    "companyName": "CIT Electronics",
+    "name": "CIT Electronics",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "578a90ba-ed42-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7963",
+    "companyName": "Eastern Art Auction House",
+    "name": "Eastern Art Auction House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "1ed12044-1d46-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9383",
+    "companyName": "Rum Runners Antiques",
+    "name": "Rum Runners Antiques",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ca1b2d9f-0a47-f011-ac1c-0a15ce13c9bf",
+    "code": "LA7996",
+    "companyName": "Summer Auction",
+    "name": "Summer Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "aeed4d64-1547-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9914",
+    "companyName": "Bastute Auctions",
+    "name": "Bastute Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "aaef3d04-1647-f011-ac1c-0a15ce13c9bf",
+    "code": "LA6450",
+    "companyName": "MJ Auction Gallery LLC",
+    "name": "MJ Auction Gallery LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "69e6af3f-1747-f011-ac1c-0a15ce13c9bf",
+    "code": "LA9511",
+    "companyName": "Sphere Auctions LLC",
+    "name": "Sphere Auctions LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "99346838-b047-f011-ac1c-0a15ce13c9bf",
+    "code": "LA8658",
+    "companyName": "Bucklin",
+    "name": "Bucklin",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5af52924-e723-ed11-abaa-0a1acf9519cf",
+    "code": "LA6970",
+    "companyName": "Intervendue",
+    "name": "Intervendue",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "bcbf64a4-ec23-ed11-abaa-0a1acf9519cf",
+    "code": "LA7374",
+    "companyName": "Absolute Auction Gallery",
+    "name": "Absolute Auction Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "bb945ff1-1d38-ed11-abaa-0a1acf9519cf",
+    "code": "LA9062",
+    "companyName": "Investment Classics ",
+    "name": "Investment Classics ",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9ddc6af2-bd5d-ed11-abaa-0a1acf9519cf",
+    "code": "LA10088",
+    "companyName": "Chess Auction Professionals LLC",
+    "name": "Chess Auction Professionals LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7448dea0-fb7d-ed11-abaa-0a1acf9519cf",
+    "code": "LA10134",
+    "companyName": "EHC Fine Art",
+    "name": "EHC Fine Art",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a3f2bc7b-c47f-ed11-abaa-0a1acf9519cf",
+    "code": "LA8187",
+    "companyName": "Meadow Lane Auctions",
+    "name": "Meadow Lane Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "fa5e7821-7fa9-ed11-abaa-0a1acf9519cf",
+    "code": "LA8258",
+    "companyName": "Ancient Charm Auctions",
+    "name": "Ancient Charm Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "14773651-80a9-ed11-abaa-0a1acf9519cf",
+    "code": "LA8089",
+    "companyName": "Mike's Library",
+    "name": "Mike's Library",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "dd19244d-8da9-ed11-abaa-0a1acf9519cf",
+    "code": "LA7871",
+    "companyName": "Tidewater Galleries",
+    "name": "Tidewater Galleries",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "34ad1d09-8fa9-ed11-abaa-0a1acf9519cf",
+    "code": "LA5763",
+    "companyName": "Royal Sea LLC",
+    "name": "Royal Sea LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4740b341-92a9-ed11-abaa-0a1acf9519cf",
+    "code": "LA3746",
+    "companyName": "Raquel",
+    "name": "Raquel",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "36024740-94a9-ed11-abaa-0a1acf9519cf",
+    "code": "LA7718",
+    "companyName": "JIFB Fine Art",
+    "name": "JIFB Fine Art",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "8fbccd7a-a1ac-ed11-abaa-0a1acf9519cf",
+    "code": "LA2490",
+    "companyName": "AAA Auction Service, LLC",
+    "name": "AAA Auction Service, LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4b9e5426-b0ac-ed11-abaa-0a1acf9519cf",
+    "code": "LA7579",
+    "companyName": "Kellie's Estate Sales",
+    "name": "Kellie's Estate Sales",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "52a059a1-b9ac-ed11-abaa-0a1acf9519cf",
+    "code": "LA3994",
+    "companyName": "Solberg Auction",
+    "name": "Solberg Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "115b6a6d-beac-ed11-abaa-0a1acf9519cf",
+    "code": "LA7536",
+    "companyName": "McCreary Auctions LLC",
+    "name": "McCreary Auctions LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "bdcfbea2-60ad-ed11-abaa-0a1acf9519cf",
+    "code": "LA7863",
+    "companyName": "Town & Country Estate Sales",
+    "name": "Town & Country Estate Sales",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d35ac23d-87ad-ed11-abaa-0a1acf9519cf",
+    "code": "LA6713",
+    "companyName": "Casco Bay Auctions",
+    "name": "Casco Bay Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5f064c31-8ac2-ed11-abaa-0a1acf9519cf",
+    "code": "LA5755",
+    "companyName": "Grant Zahajko Auctions, LLC ",
+    "name": "Grant Zahajko Auctions, LLC ",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "2f7ba2a3-8be4-ed11-abaa-0a1acf9519cf",
+    "code": "LA5785",
+    "companyName": "Bramlett & Co",
+    "name": "Bramlett & Co",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "6274f885-91e4-ed11-abaa-0a1acf9519cf",
+    "code": "LA2171",
+    "companyName": "Scottsdale Art Exchange",
+    "name": "Scottsdale Art Exchange",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e7d503e7-06f4-ed11-abaa-0a1acf9519cf",
+    "code": "LA7853",
+    "companyName": "Lakeshore Event Center",
+    "name": "Lakeshore Event Center",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0e3f27ff-edff-ed11-abaa-0a1acf9519cf",
+    "code": "LA8198",
+    "companyName": "Zevantiques",
+    "name": "Zevantiques",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "1c5c5604-610f-ee11-abaa-0a1acf9519cf",
+    "code": "LA9815",
+    "companyName": "Clement, Curated Antiques",
+    "name": "Clement, Curated Antiques",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5dd9dd55-ff49-f011-ad1d-0afff8bfff41",
+    "code": "LA10111",
+    "companyName": "Next Level Luxury Good LLC",
+    "name": "Next Level Luxury Good LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "913f838b-034a-f011-ad1d-0afff8bfff41",
+    "code": "LA8245",
+    "companyName": "Pandora Auctions",
+    "name": "Pandora Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "dbc3e3f4-044a-f011-ad1d-0afff8bfff41",
+    "code": "LA9000",
+    "companyName": "Diamond Auctions LLC",
+    "name": "Diamond Auctions LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9fb6d901-074a-f011-ad1d-0afff8bfff41",
+    "code": "LA8983",
+    "companyName": "KissiPenne",
+    "name": "KissiPenne",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "471ef7b8-b24a-f011-ad1d-0afff8bfff41",
+    "code": "LA567",
+    "companyName": "Burley Auction Group",
+    "name": "Burley Auction Group",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "c4d7d0ee-d44a-f011-ad1d-0afff8bfff41",
+    "code": "LA4257",
+    "companyName": "Art Wise, Inc.",
+    "name": "Art Wise, Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d45a7772-ea4a-f011-ad1d-0afff8bfff41",
+    "code": "LA8506",
+    "companyName": "Palmer's Auction Co",
+    "name": "Palmer's Auction Co",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b524fe45-7f4c-f011-ad1d-0afff8bfff41",
+    "code": "LA10137",
+    "companyName": "Karmik Couture",
+    "name": "Karmik Couture",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a3054f32-054e-f011-ad1d-0afff8bfff41",
+    "code": "LA9752",
+    "companyName": "Marina Loan and Jewelry LLC",
+    "name": "Marina Loan and Jewelry LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "3cc1adcc-144e-f011-ad1d-0afff8bfff41",
+    "code": "LA10139",
+    "companyName": "Diamond Depot",
+    "name": "Diamond Depot",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "cd4c9379-184e-f011-ad1d-0afff8bfff41",
+    "code": "LA10129",
+    "companyName": "King's Road Auctions",
+    "name": "King's Road Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "34ea8bdd-b34f-f011-ad1d-0afff8bfff41",
+    "code": "LA10009",
+    "companyName": "Dickson Homes LLC",
+    "name": "Dickson Homes LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "06b13088-dd4f-f011-ad1d-0afff8bfff41",
+    "code": "LA9309",
+    "companyName": "I&J Auction",
+    "name": "I&J Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "66808951-df4f-f011-ad1d-0afff8bfff41",
+    "code": "LA6201",
+    "companyName": "Avra Art Auctions",
+    "name": "Avra Art Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "c640025b-4851-f011-ad1d-0afff8bfff41",
+    "code": "LA10116",
+    "companyName": "Laramore Rare Trading Co.",
+    "name": "Laramore Rare Trading Co.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "2511edf0-4851-f011-ad1d-0afff8bfff41",
+    "code": "LA10080",
+    "companyName": "Treasured Auctions",
+    "name": "Treasured Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e3bc9d8d-a352-f011-ad1d-0afff8bfff41",
+    "code": "LA6290",
+    "companyName": "Affinity Antique Auction",
+    "name": "Affinity Antique Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7356ce85-ef52-f011-ad1d-0afff8bfff41",
+    "code": "LA9931",
+    "companyName": "Curio Collect",
+    "name": "Curio Collect",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a6ba7c7b-f352-f011-ad1d-0afff8bfff41",
+    "code": "LA6568",
+    "companyName": "Dave Taylor's Civil War Antiques Online Auctions",
+    "name": "Dave Taylor's Civil War Antiques Online Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "93137a32-f452-f011-ad1d-0afff8bfff41",
+    "code": "LA7252",
+    "companyName": "Yakon Auctions",
+    "name": "Yakon Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b1abcc5e-f552-f011-ad1d-0afff8bfff41",
+    "code": "LA5281",
+    "companyName": "Texas Art Dealers",
+    "name": "Texas Art Dealers",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9900c8ef-f552-f011-ad1d-0afff8bfff41",
+    "code": "LA9983",
+    "companyName": "Land Mark Auction",
+    "name": "Land Mark Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b3dc3416-f852-f011-ad1d-0afff8bfff41",
+    "code": "LA8755",
+    "companyName": "The North Georgia Auction Company LLC",
+    "name": "The North Georgia Auction Company LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "2b6a8cbf-7c53-f011-ad1d-0afff8bfff41",
+    "code": "LA9548",
+    "companyName": "Gurley Antiques Gallery",
+    "name": "Gurley Antiques Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "6cad4c2a-f455-f011-ad1d-0afff8bfff41",
+    "code": "LA6797",
+    "companyName": "Rockefeller Auction Inc",
+    "name": "Rockefeller Auction Inc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "99ab8a78-8b56-f011-ad1d-0afff8bfff41",
+    "code": "LA10150",
+    "companyName": "Auction Pros",
+    "name": "Auction Pros",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "2dccf338-8c56-f011-ad1d-0afff8bfff41",
+    "code": "LA9516",
+    "companyName": "Animation Gallery",
+    "name": "Animation Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b938f048-8d56-f011-ad1d-0afff8bfff41",
+    "code": "LA9709",
+    "companyName": "America Fine Art",
+    "name": "America Fine Art",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "30227bc6-8e56-f011-ad1d-0afff8bfff41",
+    "code": "LA10147",
+    "companyName": "Blue Goose LLC",
+    "name": "Blue Goose LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f98e3aeb-ab56-f011-ad1d-0afff8bfff41",
+    "code": "LA8564",
+    "companyName": "Michael Eckert DBA Alighieri's Auction",
+    "name": "Michael Eckert DBA Alighieri's Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "10c1e0ee-4b58-f011-ad1d-0afff8bfff41",
+    "code": "LA10117",
+    "companyName": "Rhoswens",
+    "name": "Rhoswens",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "acafe1f2-4c58-f011-ad1d-0afff8bfff41",
+    "code": "LA9294",
+    "companyName": "Taos Black Dog",
+    "name": "Taos Black Dog",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "38136566-9e5a-f011-ad1d-0afff8bfff41",
+    "code": "LA9143",
+    "companyName": "Dempsey Auctions",
+    "name": "Dempsey Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7dc49762-235c-f011-ad1d-0afff8bfff41",
+    "code": "1286225",
+    "companyName": "Great Estates Auctioneers & Appraisers",
+    "name": "Great Estates Auctioneers & Appraisers",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "126b2573-335d-f011-ad1d-0afff8bfff41",
+    "code": "LA10158",
+    "companyName": "Vayer Art Gallery, LLC",
+    "name": "Vayer Art Gallery, LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "71fd4e06-ef5d-f011-ad1d-0afff8bfff41",
+    "code": "LA8451",
+    "companyName": "The Mars and Neptune Trust",
+    "name": "The Mars and Neptune Trust",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e9e30cba-1960-f011-ad1d-0afff8bfff41",
+    "code": "LA9954",
+    "companyName": "King Art LLC",
+    "name": "King Art LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4e628baf-d160-f011-ad1d-0afff8bfff41",
+    "code": "LA10166",
+    "companyName": "Legacy Auction House 10166",
+    "name": "Legacy Auction House 10166",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "25b78f0c-5662-f011-ad1d-0afff8bfff41",
+    "code": "LA9194",
+    "companyName": "Cece's Auctions",
+    "name": "Cece's Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "43691705-5762-f011-ad1d-0afff8bfff41",
+    "code": "LA10165",
+    "companyName": "Dansmo LLC",
+    "name": "Dansmo LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "8aa23e7d-5762-f011-ad1d-0afff8bfff41",
+    "code": "LA9538",
+    "companyName": "SMC Auctions",
+    "name": "SMC Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e117b23a-5862-f011-ad1d-0afff8bfff41",
+    "code": "LA9757",
+    "companyName": "Admirable Collections",
+    "name": "Admirable Collections",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "107b62b0-5862-f011-ad1d-0afff8bfff41",
+    "code": "LA10156",
+    "companyName": "Patterson Auctioneering, LLC",
+    "name": "Patterson Auctioneering, LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "3e112529-5962-f011-ad1d-0afff8bfff41",
+    "code": "LA7659",
+    "companyName": "MusicGoldmine.com",
+    "name": "MusicGoldmine.com",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "71546f84-5a62-f011-ad1d-0afff8bfff41",
+    "code": "LA1091",
+    "companyName": "Antique Carpets Online",
+    "name": "Antique Carpets Online",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "8fcd7477-3463-f011-ad1d-0afff8bfff41",
+    "code": "LA9825",
+    "companyName": "Tek Luxury",
+    "name": "Tek Luxury",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "6afc0ed1-3463-f011-ad1d-0afff8bfff41",
+    "code": "LA3209",
+    "companyName": "Find Treasure",
+    "name": "Find Treasure",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9af18e2b-3563-f011-ad1d-0afff8bfff41",
+    "code": "LA10167",
+    "companyName": "Luxury Retold",
+    "name": "Luxury Retold",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "fe80e3c0-5b63-f011-ad1d-0afff8bfff41",
+    "code": "LA1352",
+    "companyName": "New England Book Auctions",
+    "name": "New England Book Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "edf4f824-5c63-f011-ad1d-0afff8bfff41",
+    "code": "LA9025",
+    "companyName": "Bryant Art Auction",
+    "name": "Bryant Art Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e0742a9c-0c64-f011-ad1d-0afff8bfff41",
+    "code": "LA282",
+    "companyName": "Old Barn Auction, LLC",
+    "name": "Old Barn Auction, LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9f947fb4-0e68-f011-ad1d-0afff8bfff41",
+    "code": "LA9443",
+    "companyName": "Olivers Auction LLC",
+    "name": "Olivers Auction LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b18308e9-1068-f011-ad1d-0afff8bfff41",
+    "code": "LA10171",
+    "companyName": "Halcyon Estate Services",
+    "name": "Halcyon Estate Services",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f7636746-1168-f011-ad1d-0afff8bfff41",
+    "code": "LA6053",
+    "companyName": "Dana J. Tharp Auctions",
+    "name": "Dana J. Tharp Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a95394c9-1168-f011-ad1d-0afff8bfff41",
+    "code": "LA6152",
+    "companyName": "Emanon Auctions and Estate Sales",
+    "name": "Emanon Auctions and Estate Sales",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "cd8e148f-1268-f011-ad1d-0afff8bfff41",
+    "code": "LA10177",
+    "companyName": "Port St Lucie Auctions",
+    "name": "Port St Lucie Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "bf95d389-cf68-f011-ad1d-0afff8bfff41",
+    "code": "LA6576",
+    "companyName": "Old World Auctions",
+    "name": "Old World Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "687bfdfc-cf68-f011-ad1d-0afff8bfff41",
+    "code": "LA10084",
+    "companyName": "Aureus Vangaurd",
+    "name": "Aureus Vangaurd",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9a756128-d168-f011-ad1d-0afff8bfff41",
+    "code": "LA10179",
+    "companyName": "Nizhoni Traders LLC",
+    "name": "Nizhoni Traders LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "6359e797-d168-f011-ad1d-0afff8bfff41",
+    "code": "LA10176",
+    "companyName": "Nyekaton",
+    "name": "Nyekaton",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "23390cf6-d168-f011-ad1d-0afff8bfff41",
+    "code": "LA6400",
+    "companyName": "Signari Gallery",
+    "name": "Signari Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "813b065d-d768-f011-ad1d-0afff8bfff41",
+    "code": "LA9157",
+    "companyName": "Detroit Hunt Club",
+    "name": "Detroit Hunt Club",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "16e822be-d768-f011-ad1d-0afff8bfff41",
+    "code": "LA8087",
+    "companyName": "Tambor Auction",
+    "name": "Tambor Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a039f7e8-e66b-f011-ad1d-0afff8bfff41",
+    "code": "LA10186",
+    "companyName": "MS Pickers",
+    "name": "MS Pickers",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5e443d1e-f16b-f011-ad1d-0afff8bfff41",
+    "code": "LA10189",
+    "companyName": "DGW Collectibles & Estates",
+    "name": "DGW Collectibles & Estates",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "37a1c8b6-946c-f011-ad1d-0afff8bfff41",
+    "code": "LA10192",
+    "companyName": "Royal Heritage Gallery and Auction House",
+    "name": "Royal Heritage Gallery and Auction House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "800e2812-1b6e-f011-ad1d-0afff8bfff41",
+    "code": "LA7691",
+    "companyName": "Willow Auction House",
+    "name": "Willow Auction House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "39d5db22-9f6f-f011-ad1d-0afff8bfff41",
+    "code": "LA7652",
+    "companyName": "Magnum Auctions",
+    "name": "Magnum Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ca447cee-e272-f011-ad1d-0afff8bfff41",
+    "code": "LA10198",
+    "companyName": "Preserving Yesterday Antique Center LLC",
+    "name": "Preserving Yesterday Antique Center LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0f95c369-e372-f011-ad1d-0afff8bfff41",
+    "code": "LA10169",
+    "companyName": "Tesoro Auction",
+    "name": "Tesoro Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4fc627de-a473-f011-ad1d-0afff8bfff41",
+    "code": "LA10193",
+    "companyName": "Ferndale Auctions",
+    "name": "Ferndale Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d9440e50-fa73-f011-ad1d-0afff8bfff41",
+    "code": "LA8068",
+    "companyName": "Asian Antique Group",
+    "name": "Asian Antique Group",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "905a1a0e-fb73-f011-ad1d-0afff8bfff41",
+    "code": "LA8453",
+    "companyName": "Amazing International Group",
+    "name": "Amazing International Group",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "285e6a60-fc73-f011-ad1d-0afff8bfff41",
+    "code": "LA1257",
+    "companyName": "Tim's Inc. Auctions",
+    "name": "Tim's Inc. Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9d58cdaa-fd73-f011-ad1d-0afff8bfff41",
+    "code": "LA9624",
+    "companyName": "Zelma's Auctions",
+    "name": "Zelma's Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d2141d61-0077-f011-ad1d-0afff8bfff41",
+    "code": "LA956",
+    "companyName": "Acme 3",
+    "name": "Acme 3",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "49f81e06-5078-f011-ad1d-0afff8bfff41",
+    "code": "LA10204",
+    "companyName": "New Chapter Estate Sales",
+    "name": "New Chapter Estate Sales",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f882bf39-5978-f011-ad1d-0afff8bfff41",
+    "code": "LA10215",
+    "companyName": "Mobile Art Services",
+    "name": "Mobile Art Services",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f7df8ade-f37a-f011-ad1d-0afff8bfff41",
+    "code": "LA7724",
+    "companyName": "EASTERN YUNGE AUCTION, INC",
+    "name": "EASTERN YUNGE AUCTION, INC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "109da264-f47a-f011-ad1d-0afff8bfff41",
+    "code": "LA7140",
+    "companyName": "Cosas Auction",
+    "name": "Cosas Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0fdabbae-f47a-f011-ad1d-0afff8bfff41",
+    "code": "LA8257",
+    "companyName": "The Butterfly Company LLC",
+    "name": "The Butterfly Company LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b1231a00-f57a-f011-ad1d-0afff8bfff41",
+    "code": "LA6150",
+    "companyName": "Hidden Treasures Antiques & Fine Art",
+    "name": "Hidden Treasures Antiques & Fine Art",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "dc87324e-f57a-f011-ad1d-0afff8bfff41",
+    "code": "LA10154",
+    "companyName": "ARTS CAPITAL MANAGEMENT LLC",
+    "name": "ARTS CAPITAL MANAGEMENT LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0964446e-537d-f011-ad1d-0afff8bfff41",
+    "code": "LA10187",
+    "companyName": "Color Jewels Inc",
+    "name": "Color Jewels Inc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "715f5c78-2b7e-f011-ad1d-0afff8bfff41",
+    "code": "LA9177",
+    "companyName": "Black Belt Auctions",
+    "name": "Black Belt Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "89b0bf23-2d7e-f011-ad1d-0afff8bfff41",
+    "code": "LA10225",
+    "companyName": "Sterling Treasures NWA LLC",
+    "name": "Sterling Treasures NWA LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "86bf9141-2f7e-f011-ad1d-0afff8bfff41",
+    "code": "LA8621",
+    "companyName": "MONTANA ANTIQUES",
+    "name": "MONTANA ANTIQUES",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "398aca63-4b81-f011-ad1d-0afff8bfff41",
+    "code": "LA6514",
+    "companyName": "EB Autographs & Collectibles",
+    "name": "EB Autographs & Collectibles",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7a73c9f1-4b81-f011-ad1d-0afff8bfff41",
+    "code": "LA10217",
+    "companyName": "Collect Away",
+    "name": "Collect Away",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "12e6a344-c381-f011-ad1d-0afff8bfff41",
+    "code": "LA5459",
+    "companyName": "Hoboken Auctions",
+    "name": "Hoboken Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "8b2b2f9d-c481-f011-ad1d-0afff8bfff41",
+    "code": "LA10202",
+    "companyName": "KOO Gallery Auction House",
+    "name": "KOO Gallery Auction House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "8fc08092-cc82-f011-ad1d-0afff8bfff41",
+    "code": "LA5614",
+    "companyName": "Orange County Estate Liquidators\u00a0",
+    "name": "Orange County Estate Liquidators\u00a0",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4d12b210-cd82-f011-ad1d-0afff8bfff41",
+    "code": "LA3780",
+    "companyName": "Modern Jewelry",
+    "name": "Modern Jewelry",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "c35bb81f-4883-f011-ad1d-0afff8bfff41",
+    "code": "LA10227",
+    "companyName": "Bonn Auctions llc",
+    "name": "Bonn Auctions llc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e9734001-4983-f011-ad1d-0afff8bfff41",
+    "code": "LA7565",
+    "companyName": "Rehmat Khan",
+    "name": "Rehmat Khan",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0a07f33b-3084-f011-ad1d-0afff8bfff41",
+    "code": "LA6644",
+    "companyName": "Papps Family Liquidation",
+    "name": "Papps Family Liquidation",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9afa12a9-3584-f011-ad1d-0afff8bfff41",
+    "code": "LA6988",
+    "companyName": "Triple SSS Designs",
+    "name": "Triple SSS Designs",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7fa5f97c-0d85-f011-ad1d-0afff8bfff41",
+    "code": "LA9073",
+    "companyName": "Vintiqua",
+    "name": "Vintiqua",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a515b85a-7d87-f011-ad1d-0afff8bfff41",
+    "code": "LA9950",
+    "companyName": "Real Deal Sports of Long Island",
+    "name": "Real Deal Sports of Long Island",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "12ecd916-2c88-f011-ad1d-0afff8bfff41",
+    "code": "LA10235",
+    "companyName": "Blue Marlin Ventures Inc",
+    "name": "Blue Marlin Ventures Inc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9962e30e-2d88-f011-ad1d-0afff8bfff41",
+    "code": "LA9424",
+    "companyName": "Southern Collectibles LLC",
+    "name": "Southern Collectibles LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "551e321f-2e88-f011-ad1d-0afff8bfff41",
+    "code": "LA3206",
+    "companyName": "A Nice Gift For You",
+    "name": "A Nice Gift For You",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5cfdec81-c189-f011-ad1d-0afff8bfff41",
+    "code": "LA8980",
+    "companyName": "Hibido Coins",
+    "name": "Hibido Coins",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "99e9e5f5-c289-f011-ad1d-0afff8bfff41",
+    "code": "LA6875",
+    "companyName": "Karen's Dollhouse Shop",
+    "name": "Karen's Dollhouse Shop",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e01e2a61-c389-f011-ad1d-0afff8bfff41",
+    "code": "LA9049",
+    "companyName": "Ben Hersh Estate Sales LLC",
+    "name": "Ben Hersh Estate Sales LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "64658919-d689-f011-ad1d-0afff8bfff41",
+    "code": "LA4477",
+    "companyName": "Fear Not Art Gallery",
+    "name": "Fear Not Art Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "67633376-7d8b-f011-ad1d-0afff8bfff41",
+    "code": "LA9332",
+    "companyName": "Castle Manor Corporation",
+    "name": "Castle Manor Corporation",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4a0aa72a-7e8b-f011-ad1d-0afff8bfff41",
+    "code": "LA9572",
+    "companyName": "Bag Brats",
+    "name": "Bag Brats",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e23d101f-7f8b-f011-ad1d-0afff8bfff41",
+    "code": "LA9644",
+    "companyName": "Catamount Auctions Co LLC",
+    "name": "Catamount Auctions Co LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "6cfa4e71-808b-f011-ad1d-0afff8bfff41",
+    "code": "LA9601",
+    "companyName": "Crowded House Auction",
+    "name": "Crowded House Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "37f556e0-cf8c-f011-ad1d-0afff8bfff41",
+    "code": "LA10263",
+    "companyName": "Complete Auctions PT LLC",
+    "name": "Complete Auctions PT LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "07849d9f-d08c-f011-ad1d-0afff8bfff41",
+    "code": "LA10255",
+    "companyName": "Thompson's Estate Services, LLC",
+    "name": "Thompson's Estate Services, LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "626e1231-1b8f-f011-ad1d-0afff8bfff41",
+    "code": "LA10261",
+    "companyName": "Artifact Anthology",
+    "name": "Artifact Anthology",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7d5aa060-1d8f-f011-ad1d-0afff8bfff41",
+    "code": "LA6213",
+    "companyName": "LION & TIGER",
+    "name": "LION & TIGER",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "2dd252da-1d8f-f011-ad1d-0afff8bfff41",
+    "code": "LA8054",
+    "companyName": "Legend Artworks Inc",
+    "name": "Legend Artworks Inc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "785a1356-1e8f-f011-ad1d-0afff8bfff41",
+    "code": "LA1004",
+    "companyName": "Gaynor's Fine Consignments",
+    "name": "Gaynor's Fine Consignments",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a256e6a6-e993-f011-ad1d-0afff8bfff41",
+    "code": "LA10230",
+    "companyName": "Great Lakes VNTG",
+    "name": "Great Lakes VNTG",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "6ef7e089-ea93-f011-ad1d-0afff8bfff41",
+    "code": "LA8775",
+    "companyName": "Allure Auctioneers",
+    "name": "Allure Auctioneers",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "efd72e6b-eb93-f011-ad1d-0afff8bfff41",
+    "code": "LA10273",
+    "companyName": "Kingsbury Estate Solutions LLC",
+    "name": "Kingsbury Estate Solutions LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "14df454f-ec93-f011-ad1d-0afff8bfff41",
+    "code": "LA5473",
+    "companyName": "Heartland Artifacts Auctions, Inc",
+    "name": "Heartland Artifacts Auctions, Inc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a5515010-ef93-f011-ad1d-0afff8bfff41",
+    "code": "LA10270",
+    "companyName": "Stockfilm.com",
+    "name": "Stockfilm.com",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "bce404ba-ef93-f011-ad1d-0afff8bfff41",
+    "code": "LA9613",
+    "companyName": "Old City Auctions",
+    "name": "Old City Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d496c0d2-b394-f011-ad1d-0afff8bfff41",
+    "code": "LA8432",
+    "companyName": "Global Jewelry Auction",
+    "name": "Global Jewelry Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "961035b6-d394-f011-ad1d-0afff8bfff41",
+    "code": "LA10271",
+    "companyName": "Jp's Estate Sales, LLC",
+    "name": "Jp's Estate Sales, LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "779ef546-d494-f011-ad1d-0afff8bfff41",
+    "code": "LA10264",
+    "companyName": "KMR Investments LLC",
+    "name": "KMR Investments LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b56de8ce-d494-f011-ad1d-0afff8bfff41",
+    "code": "LA6487",
+    "companyName": "Auctions at Deer Ridge Farm",
+    "name": "Auctions at Deer Ridge Farm",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "812ef59d-d594-f011-ad1d-0afff8bfff41",
+    "code": "LA6586",
+    "companyName": "Richard L. Edwards Auctioneering",
+    "name": "Richard L. Edwards Auctioneering",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b3c78513-7995-f011-ad1d-0afff8bfff41",
+    "code": "LA3053",
+    "companyName": "COAUCTION",
+    "name": "COAUCTION",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "501e218b-bd97-f011-ad1d-0afff8bfff41",
+    "code": "LA9952",
+    "companyName": "Jazz Collection LLC",
+    "name": "Jazz Collection LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "80379e07-be97-f011-ad1d-0afff8bfff41",
+    "code": "LA10272",
+    "companyName": "Alla Moda Vintage",
+    "name": "Alla Moda Vintage",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ecbe42d3-be97-f011-ad1d-0afff8bfff41",
+    "code": "LA10275",
+    "companyName": "Legacy Auction Gallery",
+    "name": "Legacy Auction Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "80044989-bf97-f011-ad1d-0afff8bfff41",
+    "code": "LA10260",
+    "companyName": "The House",
+    "name": "The House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "1f758830-c097-f011-ad1d-0afff8bfff41",
+    "code": "LA10274",
+    "companyName": "Unique Antiques Of Connecticut",
+    "name": "Unique Antiques Of Connecticut",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "32e76076-489a-f011-ad1d-0afff8bfff41",
+    "code": "LA5950",
+    "companyName": "Treasure Rug Gallery",
+    "name": "Treasure Rug Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4c5f71fc-f29a-f011-ad1d-0afff8bfff41",
+    "code": "LA10281",
+    "companyName": "Golden Lane Antiques, Inc",
+    "name": "Golden Lane Antiques, Inc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ba4a0ca3-0d9b-f011-ad1d-0afff8bfff41",
+    "code": "LA7920",
+    "companyName": "Monarch Finwater",
+    "name": "Monarch Finwater",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "974d8a02-0e9b-f011-ad1d-0afff8bfff41",
+    "code": "LA10244",
+    "companyName": "Collector Gallery",
+    "name": "Collector Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b536c804-739d-f011-ad1d-0afff8bfff41",
+    "code": "LA4859",
+    "companyName": "Scollard Auctions",
+    "name": "Scollard Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "420d8327-099f-f011-ad1d-0afff8bfff41",
+    "code": "LA7378",
+    "companyName": "Yashawn Auctions",
+    "name": "Yashawn Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "afb3f72a-139f-f011-ad1d-0afff8bfff41",
+    "code": "MECUM_INDY",
+    "companyName": "Mecum Indy",
+    "name": "Mecum Indy",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "d4c282d0-513d-ea11-822b-fcb1a6dfbbb6"
+  },
+  {
+    "id": "4b4d7d53-9ca3-f011-ad1d-0afff8bfff41",
+    "code": "LA5733",
+    "companyName": "Antique Finder Services",
+    "name": "Antique Finder Services",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7f7ccc1b-9fa3-f011-ad1d-0afff8bfff41",
+    "code": "LA10076",
+    "companyName": "Savoy",
+    "name": "Savoy",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "406eac72-9fa3-f011-ad1d-0afff8bfff41",
+    "code": "LA10283",
+    "companyName": "Shipley's Fine Jewelry",
+    "name": "Shipley's Fine Jewelry",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a62f9528-a0a3-f011-ad1d-0afff8bfff41",
+    "code": "LA7813",
+    "companyName": "Simmons Auction House",
+    "name": "Simmons Auction House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f6812ece-a1a3-f011-ad1d-0afff8bfff41",
+    "code": "LA10284",
+    "companyName": "Galerie Nouveau LLC",
+    "name": "Galerie Nouveau LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e0be91fc-a3a3-f011-ad1d-0afff8bfff41",
+    "code": "LA10291",
+    "companyName": "Treasure Finds",
+    "name": "Treasure Finds",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "2ccb1b0e-a5a3-f011-ad1d-0afff8bfff41",
+    "code": "LA8025",
+    "companyName": "Freeman Yoder Auctions",
+    "name": "Freeman Yoder Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "08f479a9-aaa4-f011-ad1d-0afff8bfff41",
+    "code": "LA10280",
+    "companyName": "World Historics & Relics, LLC",
+    "name": "World Historics & Relics, LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "8fbaebb4-7ba8-f011-ad1d-0afff8bfff41",
+    "code": "LA6925",
+    "companyName": "Holbert Auction Services",
+    "name": "Holbert Auction Services",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5c014b69-81a8-f011-ad1d-0afff8bfff41",
+    "code": "LA5816",
+    "companyName": "1stbid",
+    "name": "1stbid",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b359b90d-0ba9-f011-ad1d-0afff8bfff41",
+    "code": "LA9890",
+    "companyName": "Superior Auctions",
+    "name": "Superior Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "42e06d61-32a9-f011-ad1d-0afff8bfff41",
+    "code": "LA6837",
+    "companyName": "Nations Attic",
+    "name": "Nations Attic",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "152ac64c-d7aa-f011-ad1d-0afff8bfff41",
+    "code": "LA8535",
+    "companyName": "Parvizian Fine Rugs",
+    "name": "Parvizian Fine Rugs",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "2fbe50d9-d7aa-f011-ad1d-0afff8bfff41",
+    "code": "LA9268",
+    "companyName": "Treasure Trove Auctions",
+    "name": "Treasure Trove Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ff02b2a5-dbaa-f011-ad1d-0afff8bfff41",
+    "code": "LA6535",
+    "companyName": "Chupp Auctions & Real Estate, LLC",
+    "name": "Chupp Auctions & Real Estate, LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f784fc50-dcaa-f011-ad1d-0afff8bfff41",
+    "code": "LA10305",
+    "companyName": "MASION DE BEAUBIGONNE LLC",
+    "name": "MASION DE BEAUBIGONNE LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "50aadc79-a4ab-f011-ad1d-0afff8bfff41",
+    "code": "LA10253",
+    "companyName": "Estate Sales New Mexico",
+    "name": "Estate Sales New Mexico",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "eae106fd-a4ab-f011-ad1d-0afff8bfff41",
+    "code": "LA10296",
+    "companyName": "Best Estate Services ",
+    "name": "Best Estate Services ",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "edb03731-77ac-f011-ad1d-0afff8bfff41",
+    "code": "LA3840",
+    "companyName": "Lily Creation Inc.",
+    "name": "Lily Creation Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "8d361bc6-c9ad-f011-ad1d-0afff8bfff41",
+    "code": "LA10295",
+    "companyName": "Conklin Fashions",
+    "name": "Conklin Fashions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "39d6513d-ecb0-f011-ad1d-0afff8bfff41",
+    "code": "LA10293",
+    "companyName": "Greenville Estates LLC",
+    "name": "Greenville Estates LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "eb8010de-ecb0-f011-ad1d-0afff8bfff41",
+    "code": "LA10300",
+    "companyName": "Amatoria Fine Art Books",
+    "name": "Amatoria Fine Art Books",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "514e8c5d-f7b0-f011-ad1d-0afff8bfff41",
+    "code": "LA222",
+    "companyName": "Berner's Antique Auction Gallery",
+    "name": "Berner's Antique Auction Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "eee778c7-17b1-f011-ad1d-0afff8bfff41",
+    "code": "LA10313",
+    "companyName": "Qi Auction Inc",
+    "name": "Qi Auction Inc",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "12d6f126-48b3-f011-ad1d-0afff8bfff41",
+    "code": "LA10310",
+    "companyName": "Lachlan McIntosh",
+    "name": "Lachlan McIntosh",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "500edf35-49b3-f011-ad1d-0afff8bfff41",
+    "code": "LA8277",
+    "companyName": "Michael Scarola Rare and Used Book",
+    "name": "Michael Scarola Rare and Used Book",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "9f3fb51b-0cb4-f011-ad1d-0afff8bfff41",
+    "code": "LA6130",
+    "companyName": "Lee Gallery NYC",
+    "name": "Lee Gallery NYC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "b172c847-0fb4-f011-ad1d-0afff8bfff41",
+    "code": "LA10316",
+    "companyName": "Aeon Furniture",
+    "name": "Aeon Furniture",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "156e67da-0fb4-f011-ad1d-0afff8bfff41",
+    "code": "LA10317",
+    "companyName": "Magnolia Estate Sales LLC",
+    "name": "Magnolia Estate Sales LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "21471e7a-10b4-f011-ad1d-0afff8bfff41",
+    "code": "LA10298",
+    "companyName": "Crest Auction House",
+    "name": "Crest Auction House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0a8dbc99-ebb4-f011-ad1d-0afff8bfff41",
+    "code": "LA10319",
+    "companyName": "Auction All Inc.",
+    "name": "Auction All Inc.",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4ce8e899-ecb4-f011-ad1d-0afff8bfff41",
+    "code": "LA10320",
+    "companyName": "Paris Auction House",
+    "name": "Paris Auction House",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e8d7201c-edb4-f011-ad1d-0afff8bfff41",
+    "code": "LA10106",
+    "companyName": "Tyler Faulk Auctioneer",
+    "name": "Tyler Faulk Auctioneer",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d00836e3-d3b8-f011-ad1d-0afff8bfff41",
+    "code": "LA10302",
+    "companyName": "Crown & Gavel LLC",
+    "name": "Crown & Gavel LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "41de783d-cfb9-f011-ad1d-0afff8bfff41",
+    "code": "LA9476",
+    "companyName": "Traders Loan & Jewelry",
+    "name": "Traders Loan & Jewelry",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "599b203a-d1b9-f011-ad1d-0afff8bfff41",
+    "code": "LA10262",
+    "companyName": "Alpha Auctions",
+    "name": "Alpha Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "47fceba3-d1b9-f011-ad1d-0afff8bfff41",
+    "code": "LA10324",
+    "companyName": "F & L Antiques and Collectibles",
+    "name": "F & L Antiques and Collectibles",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "aa8c630c-d2b9-f011-ad1d-0afff8bfff41",
+    "code": "LA9596",
+    "companyName": "Alltrades Auction",
+    "name": "Alltrades Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a0b57356-d2b9-f011-ad1d-0afff8bfff41",
+    "code": "LA10327",
+    "companyName": "Global Peace Initiative",
+    "name": "Global Peace Initiative",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a0d081f6-d2b9-f011-ad1d-0afff8bfff41",
+    "code": "LA10329",
+    "companyName": "JSG Liquidators",
+    "name": "JSG Liquidators",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "dcdbd6bd-febb-f011-ad1d-0afff8bfff41",
+    "code": "LA10337",
+    "companyName": "Curioso Antiques & Uniquities",
+    "name": "Curioso Antiques & Uniquities",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "1d8e636a-ffbb-f011-ad1d-0afff8bfff41",
+    "code": "LA10334",
+    "companyName": "Bella Lisa Incs",
+    "name": "Bella Lisa Incs",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "71363816-00bc-f011-ad1d-0afff8bfff41",
+    "code": "LA10339",
+    "companyName": "Wynn Ware",
+    "name": "Wynn Ware",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7600fa99-0ec0-f011-ad1d-0afff8bfff41",
+    "code": "LA9837",
+    "companyName": "Eco Estate Jewelry",
+    "name": "Eco Estate Jewelry",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "01592b36-0fc0-f011-ad1d-0afff8bfff41",
+    "code": "LA7983",
+    "companyName": "North American Artifact Auctions",
+    "name": "North American Artifact Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "be6d3dbc-0fc0-f011-ad1d-0afff8bfff41",
+    "code": "LA9289",
+    "companyName": "Florida Highwaymen Auctions LLC",
+    "name": "Florida Highwaymen Auctions LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "56f15376-5fc2-f011-ad1d-0afff8bfff41",
+    "code": "LA10338",
+    "companyName": "Auctions By Maggie",
+    "name": "Auctions By Maggie",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "78b48af7-d2c3-f011-ad1d-0afff8bfff41",
+    "code": "LA8108",
+    "companyName": "Horizon International Auction",
+    "name": "Horizon International Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "de48cf9b-a400-4f95-ab1c-0bb29cb9d951",
+    "code": "NLS-JK",
+    "companyName": "Navis Pack & Ship NLS-JK",
+    "name": "Navis Pack & Ship NLS-JK",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
+  },
+  {
+    "id": "9deb17c4-60a8-4004-b593-1282fe34f731",
+    "code": "RM",
+    "companyName": "RM Sotheby's",
+    "name": "RM Sotheby's",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "b994457b-c174-e811-9c34-00155d426802"
+  },
+  {
+    "id": "d865fdcf-d972-40d0-945b-258e9b68759b",
+    "code": "LA539",
+    "companyName": "Courtney Auctions",
+    "name": "Courtney Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d088b3d2-3a1f-4fed-89f1-35dadfed8bb3",
+    "code": "LA27",
+    "companyName": "Bertoia Auctions",
+    "name": "Bertoia Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4c2f5db0-8c82-4c2e-ae1b-403e7838ef0c",
+    "code": "LA10131",
+    "companyName": "Golden Spike International",
+    "name": "Golden Spike International",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "331b78cd-7838-4851-aaee-4eae575be2ef",
+    "code": "LA9765",
+    "companyName": "Paul Stamati Gallery",
+    "name": "Paul Stamati Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "2547089f-e2da-41e9-963a-59c35b2811a0",
+    "code": "LA2829",
+    "companyName": "Rose's Antiques",
+    "name": "Rose's Antiques",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "f2b1a76a-5a9a-4839-92de-5d757f182e19",
+    "code": "LA2063",
+    "companyName": "The Stein Auction Co",
+    "name": "The Stein Auction Co",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "ed282b80-54fe-4f42-bf1b-69103ce1f76c",
+    "code": "TRAINING",
+    "companyName": "Training",
+    "name": "Training",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
+  },
+  {
+    "id": "ec2f2bec-f256-4182-bcd7-6b915b398e52",
+    "code": "DLC",
+    "companyName": "Annex Brands DLC",
+    "name": "Annex Brands DLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
+  },
+  {
+    "id": "3b1d9d9d-c467-4cef-8767-912efd53d708",
+    "code": "LA8576",
+    "companyName": "Kiechel Fine Art",
+    "name": "Kiechel Fine Art",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a10ae875-ffea-46ea-b51b-9abb8281d2a3",
+    "code": "LA1066",
+    "companyName": "Blanchard's Auction Service LLC",
+    "name": "Blanchard's Auction Service LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "1cdfdf5e-e264-463d-be86-9faf388a5773",
+    "code": "LA6917",
+    "companyName": "Alexander's Antiques",
+    "name": "Alexander's Antiques",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "24ff9605-8327-ec11-822e-a4aa13c701a3",
+    "code": "LA9967",
+    "companyName": "Estate & Downsizing Specialists LLC",
+    "name": "Estate & Downsizing Specialists LLC",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "cf015a97-f12d-ec11-822e-a4aa13c701a3",
+    "code": "LA7634",
+    "companyName": "Eldred's Auction Service",
+    "name": "Eldred's Auction Service",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "51ba3b0e-784c-ec11-822e-a4aa13c701a3",
+    "code": "LA9248",
+    "companyName": "Ventura",
+    "name": "Ventura",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7d368b88-9574-ec11-822e-a4aa13c701a3",
+    "code": "LA8869",
+    "companyName": "Old Steel Historical Firearms",
+    "name": "Old Steel Historical Firearms",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "78a6b105-b59b-ec11-822e-a4aa13c701a3",
+    "code": "LA5636",
+    "companyName": "Atlee Raber Auctions",
+    "name": "Atlee Raber Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "fc73beae-f205-4551-b6d3-a6adb087fb07",
+    "code": "NLS-BM",
+    "companyName": "Navis Pack & Ship NLS-BM",
+    "name": "Navis Pack & Ship NLS-BM",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "5e2eefc1-d616-e911-b00c-00155d426802"
+  },
+  {
+    "id": "6585eb7a-87f6-4f92-b99c-ac3c1ab17a78",
+    "code": "LA1103",
+    "companyName": "Artemis Gallery",
+    "name": "Artemis Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "db71ad36-2310-ec11-822c-b9b51cf78b75",
+    "code": "1ST",
+    "companyName": "1st",
+    "name": "1st",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "facec15a-a0b3-e711-8f3f-00155d426802"
+  },
+  {
+    "id": "e7204b8d-43e9-4fdc-a578-becbd2e182b0",
+    "code": "LA3779",
+    "companyName": "Palmyra Heritage Gallery",
+    "name": "Palmyra Heritage Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "49c8809f-c2b4-488a-8f80-c5ab7de85d5b",
+    "code": "LA406",
+    "companyName": "Rich Penn Auctions",
+    "name": "Rich Penn Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "8ae89a5b-0563-4b65-b51d-d10002e656e9",
+    "code": "LA880",
+    "companyName": "Jackson Hole Art Auction",
+    "name": "Jackson Hole Art Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "98e16189-7b43-4e96-90e1-d8e1f863c97b",
+    "code": "LA6110",
+    "companyName": "Redlands Antique Auction",
+    "name": "Redlands Antique Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "4098bcb0-afb2-4399-9233-d9d3fda0f595",
+    "code": "LA4006",
+    "companyName": "Witherell's",
+    "name": "Witherell's",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "0c217626-21f1-e911-822b-fcb1a6dfbbb6",
+    "code": "LA6715",
+    "companyName": "Cutler Bay Auctions",
+    "name": "Cutler Bay Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d4c282d0-513d-ea11-822b-fcb1a6dfbbb6",
+    "code": "MECUM",
+    "companyName": "National Logistics Services (Mecum)",
+    "name": "National Logistics Services (Mecum)",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "b994457b-c174-e811-9c34-00155d426802"
+  },
+  {
+    "id": "1126df28-b942-ea11-822b-fcb1a6dfbbb6",
+    "code": "LA4177",
+    "companyName": "Crawford Family Auction",
+    "name": "Crawford Family Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "cd970917-1375-ea11-822b-fcb1a6dfbbb6",
+    "code": "LA3527",
+    "companyName": "Fortune Auction Gallery",
+    "name": "Fortune Auction Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "5c21e195-8585-ea11-822b-fcb1a6dfbbb6",
+    "code": "ARTA",
+    "companyName": "ARTA",
+    "name": "ARTA",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "facec15a-a0b3-e711-8f3f-00155d426802"
+  },
+  {
+    "id": "01ed1b94-ebaf-ea11-822b-fcb1a6dfbbb6",
+    "code": "LA4247",
+    "companyName": "Sofe Design Auctions",
+    "name": "Sofe Design Auctions",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "e06444a7-e7c2-ea11-822b-fcb1a6dfbbb6",
+    "code": "LA853",
+    "companyName": "McLaren Auction",
+    "name": "McLaren Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "22e71d02-f9cc-ea11-822b-fcb1a6dfbbb6",
+    "code": "LA1479",
+    "companyName": "Hess Auction",
+    "name": "Hess Auction",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "a1542984-c5cd-ea11-822b-fcb1a6dfbbb6",
+    "code": "LA5943",
+    "companyName": "Joshua Kodner Gallery",
+    "name": "Joshua Kodner Gallery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "fe456b5f-6afe-ea11-822b-fcb1a6dfbbb6",
+    "code": "LA6801",
+    "companyName": "BidHaus",
+    "name": "BidHaus",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "d3bfc27e-c81a-eb11-822b-fcb1a6dfbbb6",
+    "code": "LA6976",
+    "companyName": "Collection W",
+    "name": "Collection W",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "de20385b-ea71-eb11-822b-fcb1a6dfbbb6",
+    "code": "LA8481",
+    "companyName": "Architectural Antiques",
+    "name": "Architectural Antiques",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "00b94f18-a285-eb11-822b-fcb1a6dfbbb6",
+    "code": "LA1255",
+    "companyName": "Just Art Pottery",
+    "name": "Just Art Pottery",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "1e0808c9-d0c7-eb11-822b-fcb1a6dfbbb6",
+    "code": "LA4778",
+    "companyName": "Freedom Auction Company",
+    "name": "Freedom Auction Company",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  },
+  {
+    "id": "7c2429e7-a3cf-eb11-822b-fcb1a6dfbbb6",
+    "code": "BJ",
+    "companyName": "NLS Auctions at Barrett Jackson",
+    "name": "NLS Auctions at Barrett Jackson",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "b994457b-c174-e811-9c34-00155d426802"
+  },
+  {
+    "id": "b3ac84cb-e6d8-eb11-822b-fcb1a6dfbbb6",
+    "code": "LA9932",
+    "companyName": "RH Fine Art",
+    "name": "RH Fine Art",
+    "typeId": "e7f85166-34cf-429b-805d-261b44cb0c04",
+    "parentCompanyId": "ce5201ff-ef2c-ef11-ac1c-0a15ce13c9bf"
+  }
+]

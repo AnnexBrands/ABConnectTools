@@ -4,59 +4,60 @@ Auto-generated from swagger.json specification.
 Provides type-safe access to SmsTemplate/* endpoints.
 """
 
-from typing import Optional, Union
+from typing import List, Optional, Union
 from ABConnect.api.endpoints.base import BaseEndpoint
+from ABConnect.api.routes import SCHEMA
 
 
 class SmstemplateEndpoint(BaseEndpoint):
     """Smstemplate API endpoint operations.
-    
+
     Handles all API operations for /api/SmsTemplate/* endpoints.
     Total endpoints: 6
     """
-    
+
     api_path = "SmsTemplate"
+    routes = SCHEMA["SMSTEMPLATE"]
 
     def get_notificationtokens(self) -> dict:
         """GET /api/SmsTemplate/notificationTokens
-        
-        
-        
+
+        Returns available notification tokens for SMS templates.
+
         Returns:
-            dict: API response data
+            dict: Notification tokens
         """
-        path = "/notificationTokens"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['NOTIFICATION_TOKENS']
+        return self._make_request(route.method, route)
+
     def get_jobstatuses(self) -> dict:
         """GET /api/SmsTemplate/jobStatuses
-        
-        
-        
+
+        Returns available job statuses for SMS templates.
+
         Returns:
-            dict: API response data
+            dict: Job statuses
         """
-        path = "/jobStatuses"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
-    def get_list(self, company_id: Optional[str] = None) -> dict:
+        route = self.routes['JOB_STATUSES']
+        return self._make_request(route.method, route)
+
+    def get_list(self, company_id: Optional[str] = None) -> List[dict]:
         """GET /api/SmsTemplate/list
 
-        Raw API method - use list() convenience method instead.
+        Returns SMS templates, optionally filtered by company.
+
+        Args:
+            company_id: Optional company ID filter
 
         Returns:
-            dict: API response data
+            List[dict]: List of SMS templates
         """
-        path = "/list"
-        kwargs = {}
-        params = {}
+        route = self.routes['LIST']
         if company_id is not None:
-            params["companyId"] = company_id
-        if params:
-            kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
+            route.params = {"companyId": company_id}
+        return self._make_request(route.method, route)
 
-    def list(self, company: Optional[Union[str, None]] = None) -> dict:
+    def list(self, company: Optional[Union[str, None]] = None) -> List[dict]:
         """Get SMS templates for a company.
 
         Convenience method that accepts company code or ID.

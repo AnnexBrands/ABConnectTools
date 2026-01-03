@@ -85,34 +85,32 @@ class CompaniesEndpoint(BaseEndpoint):
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
 
-    def get_availablebycurrentuser(self) -> dict:
+    def get_availablebycurrentuser(self) -> List[dict]:
         """GET /api/companies/availableByCurrentUser
 
-
+        Returns companies available to the current user.
 
         Returns:
-            dict: API response data
+            List[dict]: List of Company objects
         """
-        path = "/availableByCurrentUser"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_AVAILABLE_BY_CURRENT_USER']
+        return self._make_request(route.method, route)
 
-    def get_search(self, search_value: Optional[str] = None) -> dict:
+    def get_search(self, search_value: Optional[str] = None) -> List[dict]:
         """GET /api/companies/search
 
+        Search for companies by value.
 
+        Args:
+            search_value: Optional search term
 
         Returns:
-            dict: API response data
+            List[dict]: List of matching companies
         """
-        path = "/search"
-        kwargs = {}
-        params = {}
+        route = self.routes['GET_SEARCH']
         if search_value is not None:
-            params["searchValue"] = search_value
-        if params:
-            kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
+            route.params = {"searchValue": search_value}
+        return self._make_request(route.method, route)
 
     def post_search_v2(self, data: dict = None) -> List[dict]:
         """POST /api/companies/search/v2
@@ -184,24 +182,27 @@ class CompaniesEndpoint(BaseEndpoint):
 
     def get_search_carrier_accounts(
         self, current_company_id: Optional[str] = None, query: Optional[str] = None
-    ) -> dict:
+    ) -> List[dict]:
         """GET /api/companies/search/carrier-accounts
 
+        Search for carrier accounts.
 
+        Args:
+            current_company_id: Optional company ID filter
+            query: Optional search query
 
         Returns:
-            dict: API response data
+            List[dict]: List of carrier account info
         """
-        path = "/search/carrier-accounts"
-        kwargs = {}
+        route = self.routes['GET_SEARCH_CARRIER_ACCOUNTS']
         params = {}
         if current_company_id is not None:
             params["currentCompanyId"] = current_company_id
         if query is not None:
             params["query"] = query
         if params:
-            kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
+            route.params = params
+        return self._make_request(route.method, route)
 
     def post_fulldetails(self, data: dict = None) -> dict:
         """POST /api/companies/fulldetails
@@ -262,21 +263,25 @@ class CompaniesEndpoint(BaseEndpoint):
             kwargs["json"] = data
         return self._make_request("POST", path, **kwargs)
 
-    def get_geosettings(
+    def get_geosettings_search(
         self,
         latitude: Optional[str] = None,
         longitude: Optional[str] = None,
         miles_radius: Optional[str] = None,
-    ) -> dict:
+    ) -> List[dict]:
         """GET /api/companies/geosettings
 
+        Search for geo settings by location.
 
+        Args:
+            latitude: Optional latitude
+            longitude: Optional longitude
+            miles_radius: Optional radius in miles
 
         Returns:
-            dict: API response data
+            List[dict]: List of geo settings
         """
-        path = "/geosettings"
-        kwargs = {}
+        route = self.routes['GET_GEOSETTINGS']
         params = {}
         if latitude is not None:
             params["Latitude"] = latitude
@@ -285,8 +290,8 @@ class CompaniesEndpoint(BaseEndpoint):
         if miles_radius is not None:
             params["milesRadius"] = miles_radius
         if params:
-            kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
+            route.params = params
+        return self._make_request(route.method, route)
 
     def post_filteredcustomers(self, data: dict = None) -> dict:
         """POST /api/companies/filteredCustomers
@@ -457,38 +462,32 @@ class CompaniesEndpoint(BaseEndpoint):
     def get_geoareacompanies(self) -> dict:
         """GET /api/companies/geoAreaCompanies
 
-
+        Returns list of geo area companies.
 
         Returns:
-            dict: API response data
+            dict: List of companies with geo area info
         """
-        path = "/geoAreaCompanies"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_GEO_AREA_COMPANIES']
+        return self._make_request(route.method, route)
 
-    def get_brands(self) -> dict:
+    def get_brands(self) -> List[dict]:
         """GET /api/companies/brands
 
-
-
-        Returns:
-            dict: API response data
+        Returns list of company brands.
         """
-        path = "/brands"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_BRANDS']
+        return self._make_request(route.method, route)
 
     def get_brandstree(self) -> dict:
         """GET /api/companies/brandstree
 
-
+        Returns the company brands in tree structure.
 
         Returns:
-            dict: API response data
+            dict: Tree structure of company brands
         """
-        path = "/brandstree"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_BRANDSTREE']
+        return self._make_request(route.method, route)
 
     def get_franchiseeaddresses(self, companyId: str) -> List[dict]:
         """GET /api/companies/{companyId}/franchiseeAddresses

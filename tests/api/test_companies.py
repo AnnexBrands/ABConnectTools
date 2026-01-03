@@ -18,3 +18,39 @@ def test_get_company_by_id(api, models, schema):
 def test_company_simple_model(models, CompanySimpleData):
     """fixture validates against CompanySimple model"""
     models.CompanySimple.model_validate(CompanySimpleData)
+
+
+@pytest.mark.integration
+def test_get_brands(api):
+    """server returns brands list"""
+    brands = api.companies.get_brands()
+    assert isinstance(brands, list), "api.companies.get_brands should return a list"
+
+
+def test_brands_fixture(CompanyBrandsData):
+    """fixture has expected structure"""
+    assert isinstance(CompanyBrandsData, list), "CompanyBrands fixture should be a list"
+
+
+@pytest.mark.integration
+def test_get_brandstree(api):
+    """server returns brands tree"""
+    tree = api.companies.get_brandstree()
+    assert tree is not None, "api.companies.get_brandstree should return data"
+
+
+def test_brandstree_fixture(CompanyBrandsTreeData):
+    """fixture has expected structure"""
+    assert CompanyBrandsTreeData is not None, "CompanyBrandsTree fixture should have data"
+
+
+@pytest.mark.integration
+def test_get_availablebycurrentuser(api):
+    """server returns companies available by current user"""
+    available = api.companies.get_availablebycurrentuser()
+    assert isinstance(available, list), "api.companies.get_availablebycurrentuser should return a list"
+
+
+def test_availablebycurrentuser_fixture(CompanyAvailableByCurrentUserData):
+    """fixture has expected structure"""
+    assert isinstance(CompanyAvailableByCurrentUserData, list), "CompanyAvailableByCurrentUser fixture should be a list"

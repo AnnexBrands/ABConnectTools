@@ -176,7 +176,7 @@ class BaseEndpoint:
             if response_model:
                 return mapper.cast_response(response, response_model=response_model)
             else:
-                return mapper.cast_response(response, method=method, full_path=full_path)
+                return mapper.cast_response(response, method=method, path=full_path)
         except ImportError as e:
             # If response mapper not available, return raw response
             logger.error(f"Failed to import response_mapper: {e}")

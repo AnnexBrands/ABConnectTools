@@ -8,10 +8,10 @@ FIXTURES_DIR = Path(__file__).parent.parent.parent / "tests" / "fixtures"
 
 
 def save_fixture(obj, name: str) -> bool:
-    """Save a Pydantic model as a fixture if it doesn't exist.
+    """Save a Pydantic model or dict as a fixture if it doesn't exist.
 
     Args:
-        obj: Pydantic model instance
+        obj: Pydantic model instance or dict/list
         name: Fixture name (without .json extension)
 
     Returns:
@@ -22,9 +22,11 @@ def save_fixture(obj, name: str) -> bool:
         return False
 
     FIXTURES_DIR.mkdir(parents=True, exist_ok=True)
-    fixture_path.write_text(
-        json.dumps(obj.model_dump(by_alias=True), indent=2)
-    )
+    if hasattr(obj, 'model_dump'):
+        data = obj.model_dump(by_alias=True)
+    else:
+        data = obj
+    fixture_path.write_text(json.dumps(data, indent=2))
     print(f"Saved fixture to {fixture_path}")
     return True
 
