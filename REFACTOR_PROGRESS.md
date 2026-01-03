@@ -305,12 +305,12 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 
 | Route | Hooman | Endpoint | Example | Fixture | Test |
 |-------|--------|----------|---------|---------|------|
-| DELETE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET | ❗ | ❌ | ❌ | ❌ | ❌ |
+| DELETE | ❗ | ✅ | ❌ | ❌ | ❌ |
+| GET | ❗ | ✅ | ❌ | ❌ | ❌ |
 | JOB_STATUSES | | ✅ | ✅ | ✅ | ✅ |
 | LIST | | ✅ | ✅ | ✅ | ✅ |
 | NOTIFICATION_TOKENS | | ✅ | ✅ | ✅ | ✅ |
-| SAVE | ❗ | ❌ | ❌ | ❌ | ❌ |
+| SAVE | ❗ | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
@@ -406,12 +406,12 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 
 | Route | Hooman | Endpoint | Example | Fixture | Test |
 |-------|--------|----------|---------|---------|------|
-| GET | ❗ | ❌ | ❌ | ❌ | ❌ |
-| THUMBNAIL | ❗ | ❌ | ❌ | ❌ | ❌ |
-| LIST | | ❌ | ❌ | ❌ | ❌ |
-| POST | ❗ | ❌ | ❌ | ❌ | ❌ |
-| HIDE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| UPDATE | ❗ | ❌ | ❌ | ❌ | ❌ |
+| GET | ❗ | ✅ | ❌ | ❌ | ❌ |
+| THUMBNAIL | ❗ | ✅ | ❌ | ❌ | ❌ |
+| LIST | | ✅ | ❌ | ❌ | ❌ |
+| POST | ❗ | ✅ | ❌ | ❌ | ❌ |
+| HIDE | ❗ | ✅ | ❌ | ❌ | ❌ |
+| UPDATE | ❗ | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
@@ -448,20 +448,20 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 
 | Route | Hooman | Endpoint | Example | Fixture | Test |
 |-------|--------|----------|---------|---------|------|
-| GET | ❗ | ❌ | ❌ | ❌ | ❌ |
-| ACCESS_KEY | ❗ | ❌ | ❌ | ❌ | ❌ |
-| ACCESS_KEYS | | ✅ | ✅ | ✅ | xfail |
-| COMON_INSURANCE | | ❌ | ❌ | ❌ | ❌ |
+| GET | ❗ | ✅ | ❌ | ❌ | ❌ |
+| ACCESS_KEY | ❗ | ✅ | ❌ | ❌ | ❌ |
+| ACCESS_KEYS | | ✅ | ✅ | ✅ | ✅ |
+| COMON_INSURANCE | | ✅ | ❌ | ❌ | ❌ |
 | CONTACT_TYPES | | ✅ | ✅ | ✅ | ✅ |
 | COUNTRIES | | ✅ | ✅ | ✅ | ✅ |
 | DENSITY_CLASS_MAP | | ✅ | ✅ | ✅ | ✅ |
 | DOCUMENT_TYPES | | ✅ | ✅ | ✅ | ✅ |
-| ITEMS | | ❌ | ❌ | ❌ | ❌ |
+| ITEMS | ❗ | ✅ | ❌ | ❌ | ❌ |
 | PARCEL_PACKAGE_TYPES | | ✅ | ✅ | ✅ | ✅ |
-| PPCCAMPAIGNS | | ❌ | ❌ | ❌ | ❌ |
-| REFER_CATEGORY | | ❌ | ❌ | ❌ | ❌ |
-| REFER_CATEGORY_HEIRACHY | | ❌ | ❌ | ❌ | ❌ |
-| RESET_MASTER_CONSTANT_CACHE | | ❌ | ❌ | ❌ | ❌ |
+| PPCCAMPAIGNS | | ✅ | ❌ | ❌ | ❌ |
+| REFER_CATEGORY | | ✅ | ❌ | ❌ | ❌ |
+| REFER_CATEGORY_HEIRACHY | | ✅ | ❌ | ❌ | ❌ |
+| RESET_MASTER_CONSTANT_CACHE | | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
@@ -488,7 +488,7 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 
 | Route | Hooman | Endpoint | Example | Fixture | Test |
 |-------|--------|----------|---------|---------|------|
-| GET | | ✅ | ✅ | ✅ | xfail |
+| GET | | ✅ | ✅ | ✅ | ✅ |
 | POST_SEARCH | ❗ | ❌ | ❌ | ❌ | ❌ |
 
 ---
@@ -536,8 +536,8 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 
 | Route | Hooman | Endpoint | Example | Fixture | Test |
 |-------|--------|----------|---------|---------|------|
-| POCUSERS | | ✅ | ✅ | ✅ | xfail |
-| ROLES | | ✅ | ✅ | ✅ | xfail |
+| POCUSERS | | ✅ | ✅ | ✅ | ✅ |
+| ROLES | | ✅ | ✅ | ✅ | ✅ |
 | LIST | ❗ | ❌ | ❌ | ❌ | ❌ |
 | USER | ❗ | ❌ | ❌ | ❌ | ❌ |
 | USER_UPDATE | ❗ | ❌ | ❌ | ❌ | ❌ |
@@ -572,14 +572,14 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 
 | Route | Hooman | Endpoint | Example | Fixture | Test |
 |-------|--------|----------|---------|---------|------|
-| DELETE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET | ❗ | ❌ | ❌ | ❌ | ❌ |
-| ACCESSINFO | ❗ | ❌ | ❌ | ❌ | ❌ |
-| ALL | | ✅ | ✅ | ✅ | xfail |
-| DATASETSP | ❗ | ❌ | ❌ | ❌ | ❌ |
-| DATASETSPS | | ✅ | ✅ | ✅ | xfail |
-| POST | ❗ | ❌ | ❌ | ❌ | ❌ |
-| PUT_ACCESS | ❗ | ❌ | ❌ | ❌ | ❌ |
+| DELETE | ❗ | ✅ | ❌ | ❌ | ❌ |
+| GET | ❗ | ✅ | ❌ | ❌ | ❌ |
+| ACCESSINFO | ❗ | ✅ | ❌ | ❌ | ❌ |
+| ALL | | ✅ | ✅ | ✅ | ✅ |
+| DATASETSP | ❗ | ✅ | ❌ | ❌ | ❌ |
+| DATASETSPS | | ✅ | ✅ | ✅ | ✅ |
+| POST | ❗ | ✅ | ❌ | ❌ | ❌ |
+| PUT_ACCESS | ❗ | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
@@ -601,27 +601,81 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 **Total Routes:** ~220
 
 **Completed (with endpoint, example, fixture, and test):**
-- COMPANIES: GET, GET_AVAILABLE_BY_CURRENT_USER, GET_BRANDS (xfail), GET_BRANDSTREE (xfail) (4)
+- COMPANIES: GET, GET_AVAILABLE_BY_CURRENT_USER, GET_BRANDS, GET_BRANDSTREE (4)
 - CONTACTS: GET, USER (2)
-- JOB Forms: 15 routes (12 with fixtures, 3 xfail)
+- JOB Forms: 15 routes (12 with fixtures, 3 xfail for API errors)
 - SMSTEMPLATE: JOB_STATUSES, LIST, NOTIFICATION_TOKENS (3)
 - ACCOUNT: GET_PROFILE (1)
 - DASHBOARD: GET, GRIDVIEWS (2)
-- LOOKUP: COUNTRIES, CONTACT_TYPES, DOCUMENT_TYPES, ACCESS_KEYS (xfail), DENSITY_CLASS_MAP, PARCEL_PACKAGE_TYPES (6)
+- LOOKUP: COUNTRIES, CONTACT_TYPES, DOCUMENT_TYPES, ACCESS_KEYS, DENSITY_CLASS_MAP, PARCEL_PACKAGE_TYPES (6)
 - NOTIFICATIONS: GET (1)
-- PARTNER: GET (xfail) (1)
+- PARTNER: GET (1)
 - SHIPMENT: ACCESSORIALS (1)
-- USERS: POCUSERS (xfail), ROLES (xfail) (2)
+- USERS: POCUSERS, ROLES (2)
 - VALUES: GET (1)
-- VIEWS: ALL (xfail), DATASETSPS (xfail) (2)
+- VIEWS: ALL, DATASETSPS (2)
+
+**Endpoints Exist (need examples/fixtures/tests):**
+- SMSTEMPLATE: GET, DELETE, SAVE
+- DOCUMENTS: GET, THUMBNAIL, LIST, POST, HIDE, UPDATE
+- VIEWS: DELETE, GET, ACCESSINFO, DATASETSP, POST, PUT_ACCESS
 
 **Needs Hooman Input:**
-- All POST/PUT/DELETE/PATCH routes
+- All POST/PUT/DELETE/PATCH routes (except those noted above with endpoints)
 - All routes with path parameters (need test IDs)
 - COMPANIES.GET_GEO_AREA_COMPANIES: HTTP 500
 - COMPANIES.GET_SEARCH: HTTP 500 without searchValue
 
 **xfail Notes:**
-- Some endpoints return 403 (Forbidden) with the `training` user
-- Fixtures were generated using `instaquote` user which has elevated permissions
-- Tests are marked xfail but still run to detect if permissions change
+- JOB Forms: GET_FORM_INVOICE_EDITABLE, GET_FORM_PACKAGING_LABELS, GET_FORM_USAR_EDITABLE (API returns 500)
+- Fixtures generated using `instaquote` user which has elevated permissions
+
+---
+
+## Human Follow-Up Required
+
+### High Priority
+
+1. **Complete routes refactoring for remaining files**
+   - COMPLETED: lookup.py, views.py, dashboard.py, users.py, account.py, contacts.py, companies.py, SmsTemplate.py, shipment.py, partner.py, notifications.py, Values.py, documents.py
+   - REMAINING (still using hardcoded paths):
+     - `ABConnect/api/endpoints/jobs/` (all job sub-endpoints)
+     - `ABConnect/api/endpoints/webhooks.py`
+     - `ABConnect/api/endpoints/rfq.py`
+     - `ABConnect/api/endpoints/reports.py`
+     - `ABConnect/api/endpoints/note.py`
+     - `ABConnect/api/endpoints/jobintacct.py`
+     - `ABConnect/api/endpoints/email.py`
+     - `ABConnect/api/endpoints/e_sign.py`
+     - `ABConnect/api/endpoints/address.py`
+     - `ABConnect/api/endpoints/admin.py`
+     - `ABConnect/api/endpoints/commodity.py`
+     - `ABConnect/api/endpoints/commoditymap.py`
+     - `ABConnect/api/endpoints/company.py`
+     - `ABConnect/api/endpoints/v2.py`
+     - `ABConnect/api/endpoints/v3.py`
+
+2. **Add examples/fixtures/tests for endpoints that exist**
+   - SMSTEMPLATE: GET (needs templateId), DELETE (needs templateId), SAVE
+   - DOCUMENTS: GET (needs docPath), THUMBNAIL (needs docPath), LIST, POST, HIDE (needs docId), UPDATE (needs docId)
+   - VIEWS: DELETE (needs viewId), GET (needs viewId), ACCESSINFO (needs viewId), DATASETSP (needs spName), POST, PUT_ACCESS (needs viewId)
+   - LOOKUP: COMON_INSURANCE, PPCCAMPAIGNS, REFER_CATEGORY, REFER_CATEGORY_HEIRACHY, RESET_MASTER_CONSTANT_CACHE
+
+### Medium Priority
+
+3. **Investigate HTTP 500 errors**
+   - `COMPANIES.GET_GEO_AREA_COMPANIES`: Returns 500 (fixture exists from prior run)
+   - `COMPANIES.GET_SEARCH`: Returns 500 without `searchValue` parameter
+
+4. **Test data IDs needed**
+   - Need valid test IDs for endpoints with path parameters (viewId, templateId, docId, contactId, etc.)
+   - Consider creating test data in staging environment
+
+### Low Priority
+
+5. **Documentation alignment**
+   - Ensure sphinx docs match implemented endpoints
+   - Add CLI examples to examples/ for new endpoints
+
+6. **Model validation**
+   - Add Pydantic model validation tests for all fixtures

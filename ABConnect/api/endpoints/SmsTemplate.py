@@ -67,58 +67,40 @@ class SmstemplateEndpoint(BaseEndpoint):
 
         Returns:
             List of SMS templates for the company
-
-        Examples:
-            # List templates by company code
-            templates = api.sms_template.list('LIVE')
-
-            # List templates by company UUID
-            templates = api.sms_template.list('cf8085ed-b2f2-e611-9f52-00155d426802')
-
-            # List all accessible templates
-            templates = api.sms_template.list()
         """
-        path = "/list"
-        kwargs = {}
-
+        route = self.routes['LIST']
         if company:
-            kwargs["params"] = {"companyId": self.get_cache(company)}
+            route.params = {"companyId": self.get_cache(company)}
+        return self._make_request(route.method, route)
 
-        return self._make_request("GET", path, **kwargs)
     def get_get(self, templateId: str) -> dict:
         """GET /api/SmsTemplate/{templateId}
-        
-        
-        
+
         Returns:
             dict: API response data
         """
-        path = "/{templateId}"
-        path = path.replace("{templateId}", templateId)
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET']
+        route.params = {"templateId": templateId}
+        return self._make_request(route.method, route)
+
     def delete_delete(self, templateId: str) -> dict:
         """DELETE /api/SmsTemplate/{templateId}
-        
-        
-        
+
         Returns:
             dict: API response data
         """
-        path = "/{templateId}"
-        path = path.replace("{templateId}", templateId)
-        kwargs = {}
-        return self._make_request("DELETE", path, **kwargs)
+        route = self.routes['DELETE']
+        route.params = {"templateId": templateId}
+        return self._make_request(route.method, route)
+
     def post_save(self, data: dict = None) -> dict:
         """POST /api/SmsTemplate/save
-        
-        
-        
+
         Returns:
             dict: API response data
         """
-        path = "/save"
+        route = self.routes['SAVE']
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)

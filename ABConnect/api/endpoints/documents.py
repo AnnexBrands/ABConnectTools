@@ -21,6 +21,7 @@ class DocumentsEndpoint(BaseEndpoint):
     """
 
     api_path = "documents"
+    routes = SCHEMA["DOCUMENTS"]
 
     def thumbnail(self, docPath: str) -> Union[dict, bytes]:
         """GET /api/documents/get/thumbnail/{docPath}
@@ -105,28 +106,25 @@ class DocumentsEndpoint(BaseEndpoint):
     def update(self, docId: str, data: dict = None) -> dict:
         """PUT /api/documents/update/{docId}
 
-
-
         Returns:
             dict: API response data
         """
-        
+        route = self.routes["UPDATE"]
+        route.params = {"docId": docId}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("PUT", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def put_hide(self, docId: str) -> dict:
         """PUT /api/documents/hide/{docId}
 
-
-
         Returns:
             dict: API response data
         """
-        path = f"/hide/{docId}"
-        kwargs = {}
-        return self._make_request("PUT", path, **kwargs)
+        route = self.routes["HIDE"]
+        route.params = {"docId": docId}
+        return self._make_request(route.method, route)
 
     def upload_item_photo(
         self,
@@ -183,7 +181,7 @@ class DocumentsEndpoint(BaseEndpoint):
         # Convert model to form data using aliases
         form_data = upload_data.model_dump(by_alias=True, exclude_none=True)
 
-        path = f"api/{self.api_path}/"
+        path = f"/{self.api_path}/"
 
         return self._r.upload_file(path=path, files=files, data=form_data)
 
@@ -223,7 +221,6 @@ class DocumentsEndpoint(BaseEndpoint):
             files_data = {field_name: (filename, content, content_type)}
             form_data = upload_data.model_dump(by_alias=True, exclude_none=True)
 
-            # Note: upload_file expects "api/documents/" format for correct URL construction
             response = self._r.upload_file(path=f"/{self.api_path}/", files=files_data, data=form_data)
             responses.append(response)
 
@@ -341,7 +338,7 @@ class DocumentsEndpoint(BaseEndpoint):
         form_data = upload_request.model_dump(by_alias=True, exclude_none=True)
 
         # Make the upload request
-        path = f"api/{self.api_path}/"
+        path = f"/{self.api_path}/"
         raw_response = self._r.upload_file(path=path, files=files, data=form_data)
 
         # Validate response with Pydantic model

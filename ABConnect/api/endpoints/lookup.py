@@ -19,31 +19,16 @@ class LookupEndpoint(BaseEndpoint):
     api_path = "lookup"
     routes = SCHEMA["LOOKUP"]
 
-    def get_get(self, masterConstantKey: str) -> dict:
-        """GET /api/lookup/{masterConstantKey}
-        
-        
-        
-        Returns:
-            dict: API response data
-        """
-        path = "/{masterConstantKey}"
-        path = path.replace("{masterConstantKey}", masterConstantKey)
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
-    def get_get(self, masterConstantKey: str, valueId: str) -> dict:
+    def get_lookup_value(self, masterConstantKey: str, valueId: str) -> dict:
         """GET /api/lookup/{masterConstantKey}/{valueId}
-        
-        
-        
+
         Returns:
             dict: API response data
         """
-        path = "/{masterConstantKey}/{valueId}"
-        path = path.replace("{masterConstantKey}", masterConstantKey)
-        path = path.replace("{valueId}", valueId)
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET']
+        route.params = {"masterConstantKey": masterConstantKey, "valueId": valueId}
+        return self._make_request(route.method, route)
+
     def get_countries(self) -> List[dict]:
         """GET /api/lookup/countries
 
@@ -54,17 +39,16 @@ class LookupEndpoint(BaseEndpoint):
         """
         route = self.routes['COUNTRIES']
         return self._make_request(route.method, route)
+
     def get_resetmasterconstantcache(self) -> dict:
         """GET /api/lookup/resetMasterConstantCache
-        
-        
-        
+
         Returns:
             dict: API response data
         """
-        path = "/resetMasterConstantCache"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['RESET_MASTER_CONSTANT_CACHE']
+        return self._make_request(route.method, route)
+
     def get_accesskeys(self) -> List[dict]:
         """GET /api/lookup/accessKeys
 
@@ -75,18 +59,17 @@ class LookupEndpoint(BaseEndpoint):
         """
         route = self.routes['ACCESS_KEYS']
         return self._make_request(route.method, route)
+
     def get_accesskey(self, accessKey: str) -> dict:
         """GET /api/lookup/accessKey/{accessKey}
-        
-        
-        
+
         Returns:
             dict: API response data
         """
-        path = "/accessKey/{accessKey}"
-        path = path.replace("{accessKey}", accessKey)
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['ACCESS_KEY']
+        route.params = {"accessKey": accessKey}
+        return self._make_request(route.method, route)
+
     def get_documenttypes(self, document_source: Optional[str] = None) -> List[dict]:
         """GET /api/lookup/documentTypes
 
@@ -102,57 +85,50 @@ class LookupEndpoint(BaseEndpoint):
         if document_source is not None:
             route.params = {"documentSource": document_source}
         return self._make_request(route.method, route)
+
     def get_items(self, job_display_id: Optional[str] = None, job_item_id: Optional[str] = None) -> dict:
         """GET /api/lookup/items
-        
-        
-        
+
         Returns:
             dict: API response data
         """
-        path = "/items"
-        kwargs = {}
+        route = self.routes['ITEMS']
         params = {}
         if job_display_id is not None:
             params["jobDisplayId"] = job_display_id
         if job_item_id is not None:
             params["jobItemId"] = job_item_id
         if params:
-            kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
+            route.params = params
+        return self._make_request(route.method, route)
+
     def get_refercategory(self) -> dict:
         """GET /api/lookup/referCategory
-        
-        
-        
+
         Returns:
             dict: API response data
         """
-        path = "/referCategory"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['REFER_CATEGORY']
+        return self._make_request(route.method, route)
+
     def get_refercategoryheirachy(self) -> dict:
         """GET /api/lookup/referCategoryHeirachy
-        
-        
-        
+
         Returns:
             dict: API response data
         """
-        path = "/referCategoryHeirachy"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['REFER_CATEGORY_HEIRACHY']
+        return self._make_request(route.method, route)
+
     def get_ppccampaigns(self) -> dict:
         """GET /api/lookup/PPCCampaigns
-        
-        
-        
+
         Returns:
             dict: API response data
         """
-        path = "/PPCCampaigns"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['PPCCAMPAIGNS']
+        return self._make_request(route.method, route)
+
     def get_parcelpackagetypes(self) -> List[dict]:
         """GET /api/lookup/parcelPackageTypes
 
@@ -163,17 +139,16 @@ class LookupEndpoint(BaseEndpoint):
         """
         route = self.routes['PARCEL_PACKAGE_TYPES']
         return self._make_request(route.method, route)
+
     def get_comoninsurance(self) -> dict:
         """GET /api/lookup/comonInsurance
-        
-        
-        
+
         Returns:
             dict: API response data
         """
-        path = "/comonInsurance"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['COMON_INSURANCE']
+        return self._make_request(route.method, route)
+
     def get_contacttypes(self) -> List[dict]:
         """GET /api/lookup/contactTypes
 
@@ -184,6 +159,7 @@ class LookupEndpoint(BaseEndpoint):
         """
         route = self.routes['CONTACT_TYPES']
         return self._make_request(route.method, route)
+
     def get_densityclassmap(self, carrier_api: Optional[str] = None) -> List[dict]:
         """GET /api/lookup/densityClassMap
 

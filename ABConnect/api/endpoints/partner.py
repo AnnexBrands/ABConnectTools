@@ -6,6 +6,7 @@ Provides endpoints for managing partners.
 
 from typing import List, Optional, Dict, Any
 from ABConnect.api.endpoints.base import BaseEndpoint
+from ABConnect.api.routes import SCHEMA
 
 
 class PartnerEndpoint(BaseEndpoint):
@@ -18,6 +19,7 @@ class PartnerEndpoint(BaseEndpoint):
     """
 
     api_path = "partner"
+    routes = SCHEMA["PARTNER"]
 
     def get_list(self) -> List[Dict[str, Any]]:
         """GET /api/partner
@@ -27,8 +29,8 @@ class PartnerEndpoint(BaseEndpoint):
         Returns:
             List[Dict[str, Any]]: List of partners
         """
-        path = "/"
-        return self._make_request("GET", path)
+        route = self.routes['GET']
+        return self._make_request(route.method, route)
 
     def get_get(self, id: str) -> Dict[str, Any]:
         """GET /api/partner/{id}
@@ -41,8 +43,9 @@ class PartnerEndpoint(BaseEndpoint):
         Returns:
             Dict[str, Any]: Partner data
         """
-        path = f"/{id}"
-        return self._make_request("GET", path)
+        route = self.routes['GET']
+        route.params = {"id": id}
+        return self._make_request(route.method, route)
 
     def post_search(self, data: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
         """POST /api/partner/search
@@ -55,8 +58,8 @@ class PartnerEndpoint(BaseEndpoint):
         Returns:
             List[Dict[str, Any]]: List of matching partners (PartnerServiceResponse)
         """
-        path = "/search"
+        route = self.routes['POST_SEARCH']
         kwargs: Dict[str, Any] = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)

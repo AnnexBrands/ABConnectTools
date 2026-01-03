@@ -79,13 +79,17 @@ class BaseEndpoint:
             )
 
         else:
-            # Build full path: if path starts with /, use as-is; otherwise prepend api_path
-            if path.startswith("/"):
-                full_path = path
-            elif self.api_path:
-                full_path = f"/{self.api_path.strip('/')}/{path.lstrip('/')}"
+            # Build full path: combine api_path with path
+            # For legacy endpoints, path is relative to api_path (e.g., "/" or "/gridviews")
+            if self.api_path:
+                if path == "/" or path == "":
+                    full_path = f"/{self.api_path.strip('/')}"
+                elif path.startswith("/"):
+                    full_path = f"/{self.api_path.strip('/')}{path}"
+                else:
+                    full_path = f"/{self.api_path.strip('/')}/{path}"
             else:
-                full_path = f"/{path.lstrip('/')}"
+                full_path = path if path.startswith("/") else f"/{path}"
 
             if "json" in kwargs and kwargs["json"] is not None:
                 kwargs["json"] = self._validate_request(

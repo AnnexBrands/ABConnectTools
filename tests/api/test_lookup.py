@@ -44,7 +44,6 @@ def test_documenttypes_fixture(LookupDocumentTypesData):
 
 
 @pytest.mark.integration
-@pytest.mark.xfail(reason="Returns 403 - requires elevated permissions")
 def test_get_accesskeys(api):
     """server returns access keys list"""
     access_keys = api.lookup.get_accesskeys()

@@ -21,7 +21,6 @@ def test_company_simple_model(models, CompanySimpleData):
 
 
 @pytest.mark.integration
-@pytest.mark.xfail(reason="Returns 403 - requires elevated permissions")
 def test_get_brands(api):
     """server returns brands list"""
     brands = api.companies.get_brands()
@@ -34,7 +33,6 @@ def test_brands_fixture(CompanyBrandsData):
 
 
 @pytest.mark.integration
-@pytest.mark.xfail(reason="Returns 403 - requires elevated permissions")
 def test_get_brandstree(api):
     """server returns brands tree"""
     tree = api.companies.get_brandstree()

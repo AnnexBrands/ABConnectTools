@@ -41,7 +41,6 @@ def test_gridviews_fixture(DashboardGridViewsData):
 
 # Partner tests
 @pytest.mark.integration
-@pytest.mark.xfail(reason="Returns 403 - requires elevated permissions")
 def test_get_partner_list(api):
     """server returns partner list"""
     partners = api.partner.get_list()
@@ -68,7 +67,6 @@ def test_accessorials_fixture(ShipmentAccessorialsData):
 
 # Users tests
 @pytest.mark.integration
-@pytest.mark.xfail(reason="Returns 403 - requires elevated permissions")
 def test_get_pocusers(api):
     """server returns POC users"""
     pocusers = api.users.get_pocusers()
@@ -81,7 +79,6 @@ def test_pocusers_fixture(UsersPocUsersData):
 
 
 @pytest.mark.integration
-@pytest.mark.xfail(reason="Returns 403 - requires elevated permissions")
 def test_get_roles(api):
     """server returns user roles"""
     roles = api.users.get_roles()
@@ -95,7 +92,6 @@ def test_roles_fixture(UsersRolesData):
 
 # Views tests
 @pytest.mark.integration
-@pytest.mark.xfail(reason="Returns 403 - requires elevated permissions")
 def test_get_views_all(api):
     """server returns all views"""
     views = api.views.get_all()
@@ -108,7 +104,6 @@ def test_views_all_fixture(ViewsAllData):
 
 
 @pytest.mark.integration
-@pytest.mark.xfail(reason="Returns 403 - requires elevated permissions")
 def test_get_datasetsps(api):
     """server returns dataset stored procedures"""
     datasetsps = api.views.get_datasetsps()

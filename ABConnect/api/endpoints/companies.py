@@ -36,27 +36,22 @@ class CompaniesEndpoint(BaseEndpoint):
 
         Returns:
             Company data as Pydantic model (if cast=True) or dict
-
-        Examples:
-            # Get by code with full details (default)
-            company = api.companies.get('16023SC')
-
-            # Get by ID with short details
-            company = api.companies.get('23493e85-a92e-e711-9f52-00155d426802', details='short')
-
-            # Get by code with specific details endpoint
-            company = api.companies.get('16023SC', details='details')
         """
         logger.info("Fetching company with code or ID: %s", code_or_id)
         company_uuid = self.get_cache(code_or_id)
 
-
         if details == "short":
-            return self._make_request("GET", f"/{company_uuid}", **kwargs)
+            route = self.routes['GET']
+            route.params = {"id": company_uuid}
+            return self._make_request(route.method, route, **kwargs)
         elif details == "details":
-            return self._make_request("GET", f"/{company_uuid}/details", **kwargs)
+            route = self.routes['GET_DETAILS']
+            route.params = {"companyId": company_uuid}
+            return self._make_request(route.method, route, **kwargs)
         else:  # full
-            return self._make_request("GET", f"/{company_uuid}/fulldetails", **kwargs)
+            route = self.routes['GET_FULLDETAILS']
+            route.params = {"companyId": company_uuid}
+            return self._make_request(route.method, route, **kwargs)
 
     def get_by_id(self, id: str) -> CompanySimple:
         """GET /api/companies/{id}
@@ -76,14 +71,12 @@ class CompaniesEndpoint(BaseEndpoint):
     def get_details(self, companyId: str) -> dict:
         """GET /api/companies/{companyId}/details
 
-
-
         Returns:
             dict: API response data
         """
-        path = f"/{companyId}/details"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_DETAILS']
+        route.params = {"companyId": companyId}
+        return self._make_request(route.method, route)
 
     def get_availablebycurrentuser(self) -> List[dict]:
         """GET /api/companies/availableByCurrentUser
@@ -115,70 +108,61 @@ class CompaniesEndpoint(BaseEndpoint):
     def post_search_v2(self, data: dict = None) -> List[dict]:
         """POST /api/companies/search/v2
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/search/v2"
+        route = self.routes['POST_SEARCH_V2']
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def post_list(self, data: dict = None) -> dict:
         """POST /api/companies/list
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/list"
+        route = self.routes['POST_LIST']
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def post_simplelist(self, data: dict = None) -> dict:
         """POST /api/companies/simplelist
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/simplelist"
+        route = self.routes['POST_SIMPLELIST']
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def get_fulldetails(self, companyId: str) -> dict:
         """GET /api/companies/{companyId}/fulldetails
 
-
-
         Returns:
             dict: API response data
         """
-        path = f"/{companyId}/fulldetails"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_FULLDETAILS']
+        route.params = {"companyId": companyId}
+        return self._make_request(route.method, route)
 
     def put_fulldetails(self, companyId: str, data: dict = None) -> dict:
         """PUT /api/companies/{companyId}/fulldetails
 
-
-
         Returns:
             dict: API response data
         """
-        path = f"/{companyId}/fulldetails"
+        route = self.routes['PUT_FULLDETAILS']
+        route.params = {"companyId": companyId}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("PUT", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def get_search_carrier_accounts(
         self, current_company_id: Optional[str] = None, query: Optional[str] = None
@@ -207,61 +191,48 @@ class CompaniesEndpoint(BaseEndpoint):
     def post_fulldetails(self, data: dict = None) -> dict:
         """POST /api/companies/fulldetails
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/fulldetails"
+        route = self.routes['POST_FULLDETAILS']
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def get_infofromkey(self, key: Optional[str] = None) -> dict:
         """GET /api/companies/infoFromKey
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/infoFromKey"
-        kwargs = {}
-        params = {}
+        route = self.routes['GET_INFO_FROM_KEY']
         if key is not None:
-            params["key"] = key
-        if params:
-            kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
+            route.params = {"key": key}
+        return self._make_request(route.method, route)
 
     def get_geosettings(self, companyId: str) -> dict:
         """GET /api/companies/{companyId}/geosettings
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{companyId}/geosettings"
-        path = path.replace("{companyId}", companyId)
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['POST_GEOSETTINGS']
+        route.params = {"companyId": companyId}
+        return self._make_request("GET", route)
 
     def post_geosettings(self, companyId: str, data: dict = None) -> dict:
         """POST /api/companies/{companyId}/geosettings
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{companyId}/geosettings"
-        path = path.replace("{companyId}", companyId)
+        route = self.routes['POST_GEOSETTINGS']
+        route.params = {"companyId": companyId}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def get_geosettings_search(
         self,
@@ -296,168 +267,134 @@ class CompaniesEndpoint(BaseEndpoint):
     def post_filteredcustomers(self, data: dict = None) -> dict:
         """POST /api/companies/filteredCustomers
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/filteredCustomers"
+        route = self.routes['POST_FILTERED_CUSTOMERS']
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def get_carrieracounts(self, companyId: str) -> dict:
         """GET /api/companies/{companyId}/carrierAcounts
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{companyId}/carrierAcounts"
-        path = path.replace("{companyId}", companyId)
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_CARRIER_ACOUNTS']
+        route.params = {"companyId": companyId}
+        return self._make_request(route.method, route)
 
     def post_carrieracounts(self, companyId: str, data: dict = None) -> dict:
         """POST /api/companies/{companyId}/carrierAcounts
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{companyId}/carrierAcounts"
-        path = path.replace("{companyId}", companyId)
+        route = self.routes['POST_CARRIER_ACOUNTS']
+        route.params = {"companyId": companyId}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def get_capabilities(self, companyId: str) -> dict:
         """GET /api/companies/{companyId}/capabilities
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{companyId}/capabilities"
-        path = path.replace("{companyId}", companyId)
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_CAPABILITIES']
+        route.params = {"companyId": companyId}
+        return self._make_request(route.method, route)
 
     def post_capabilities(self, companyId: str, data: dict = None) -> dict:
         """POST /api/companies/{companyId}/capabilities
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{companyId}/capabilities"
-        path = path.replace("{companyId}", companyId)
+        route = self.routes['POST_CAPABILITIES']
+        route.params = {"companyId": companyId}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def get_packagingsettings(self, companyId: str) -> dict:
         """GET /api/companies/{companyId}/packagingsettings
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{companyId}/packagingsettings"
-        path = path.replace("{companyId}", companyId)
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_PACKAGINGSETTINGS']
+        route.params = {"companyId": companyId}
+        return self._make_request(route.method, route)
 
     def post_packagingsettings(self, companyId: str, data: dict = None) -> dict:
         """POST /api/companies/{companyId}/packagingsettings
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{companyId}/packagingsettings"
-        path = path.replace("{companyId}", companyId)
+        route = self.routes['POST_PACKAGINGSETTINGS']
+        route.params = {"companyId": companyId}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def get_inheritedpackagingtariffs(
         self, companyId: str, inherit_from: Optional[str] = None
     ) -> dict:
         """GET /api/companies/{companyId}/inheritedPackagingTariffs
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{companyId}/inheritedPackagingTariffs"
-        path = path.replace("{companyId}", companyId)
-        kwargs = {}
-        params = {}
+        route = self.routes['GET_INHERITED_PACKAGING_TARIFFS']
+        route.params = {"companyId": companyId}
         if inherit_from is not None:
-            params["inheritFrom"] = inherit_from
-        if params:
-            kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
+            route.params["inheritFrom"] = inherit_from
+        return self._make_request(route.method, route)
 
     def get_packaginglabor(self, companyId: str) -> dict:
         """GET /api/companies/{companyId}/packaginglabor
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{companyId}/packaginglabor"
-        path = path.replace("{companyId}", companyId)
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_PACKAGINGLABOR']
+        route.params = {"companyId": companyId}
+        return self._make_request(route.method, route)
 
     def post_packaginglabor(self, companyId: str, data: dict = None) -> dict:
         """POST /api/companies/{companyId}/packaginglabor
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{companyId}/packaginglabor"
-        path = path.replace("{companyId}", companyId)
+        route = self.routes['POST_PACKAGINGLABOR']
+        route.params = {"companyId": companyId}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def get_inheritedpackaginglabor(
         self, companyId: str, inherit_from: Optional[str] = None
     ) -> dict:
         """GET /api/companies/{companyId}/inheritedpackaginglabor
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{companyId}/inheritedpackaginglabor"
-        path = path.replace("{companyId}", companyId)
-        kwargs = {}
-        params = {}
+        route = self.routes['GET_INHERITEDPACKAGINGLABOR']
+        route.params = {"companyId": companyId}
         if inherit_from is not None:
-            params["inheritFrom"] = inherit_from
-        if params:
-            kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
+            route.params["inheritFrom"] = inherit_from
+        return self._make_request(route.method, route)
 
     def get_geoareacompanies(self) -> dict:
         """GET /api/companies/geoAreaCompanies
@@ -492,12 +429,9 @@ class CompaniesEndpoint(BaseEndpoint):
     def get_franchiseeaddresses(self, companyId: str) -> List[dict]:
         """GET /api/companies/{companyId}/franchiseeAddresses
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{companyId}/franchiseeAddresses"
-        path = path.replace("{companyId}", companyId)
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_FRANCHISEE_ADDRESSES']
+        route.params = {"companyId": companyId}
+        return self._make_request(route.method, route)

@@ -24,89 +24,69 @@ class ContactsEndpoint(BaseEndpoint):
     def post_history(self, contactId: str, data: dict = None) -> dict:
         """POST /api/contacts/{contactId}/history
 
-
-
         Returns:
             dict: API response data
         """
         route = self.routes["HISTORY"]
         route.params = {"contactId": contactId}
-        path = "/{contactId}/history"
-        path = path.replace("{contactId}", contactId)
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def get_history_aggregated(
         self, contactId: str, statuses: Optional[str] = None
     ) -> dict:
         """GET /api/contacts/{contactId}/history/aggregated
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{contactId}/history/aggregated"
-        path = path.replace("{contactId}", contactId)
-        kwargs = {}
-        params = {}
+        route = self.routes["HISTORY_AGGREGATED"]
+        route.params = {"contactId": contactId}
         if statuses is not None:
-            params["statuses"] = statuses
-        if params:
-            kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
+            route.params["statuses"] = statuses
+        return self._make_request(route.method, route)
 
     def get_history_graphdata(
         self, contactId: str, statuses: Optional[str] = None
     ) -> dict:
         """GET /api/contacts/{contactId}/history/graphdata
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{contactId}/history/graphdata"
-        path = path.replace("{contactId}", contactId)
-        kwargs = {}
-        params = {}
+        route = self.routes["HISTORY_GRAPHDATA"]
+        route.params = {"contactId": contactId}
         if statuses is not None:
-            params["statuses"] = statuses
-        if params:
-            kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
+            route.params["statuses"] = statuses
+        return self._make_request(route.method, route)
 
     def post_merge_preview(self, mergeToId: str, data: dict = None) -> dict:
         """POST /api/contacts/{mergeToId}/merge/preview
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{mergeToId}/merge/preview"
-        path = path.replace("{mergeToId}", mergeToId)
+        route = self.routes["MERGE_PREVIEW"]
+        route.params = {"mergeToId": mergeToId}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def put_merge(self, mergeToId: str, data: dict = None) -> dict:
         """PUT /api/contacts/{mergeToId}/merge
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{mergeToId}/merge"
-        path = path.replace("{mergeToId}", mergeToId)
+        route = self.routes["MERGE"]
+        route.params = {"mergeToId": mergeToId}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("PUT", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def get(self, id: str) -> ContactDetails:
         """GET /api/contacts/{id}
@@ -141,118 +121,93 @@ class ContactsEndpoint(BaseEndpoint):
     def get_editdetails(self, contactId: str) -> dict:
         """GET /api/contacts/{contactId}/editdetails
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{contactId}/editdetails"
-        path = path.replace("{contactId}", contactId)
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes["GET_EDITDETAILS"]
+        route.params = {"contactId": contactId}
+        return self._make_request(route.method, route)
 
     def put_editdetails(
         self, contactId: str, franchisee_id: Optional[str] = None, data: dict = None
     ) -> dict:
         """PUT /api/contacts/{contactId}/editdetails
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{contactId}/editdetails"
-        path = path.replace("{contactId}", contactId)
-        kwargs = {}
-        params = {}
+        route = self.routes["PUT_EDITDETAILS"]
+        route.params = {"contactId": contactId}
         if franchisee_id is not None:
-            params["franchiseeId"] = franchisee_id
-        if params:
-            kwargs["params"] = params
+            route.params["franchiseeId"] = franchisee_id
+        kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("PUT", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def post_editdetails(
         self, franchisee_id: Optional[str] = None, data: dict = None
     ) -> dict:
         """POST /api/contacts/editdetails
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/editdetails"
-        kwargs = {}
-        params = {}
+        route = self.routes["POST_EDITDETAILS"]
         if franchisee_id is not None:
-            params["franchiseeId"] = franchisee_id
-        if params:
-            kwargs["params"] = params
+            route.params = {"franchiseeId": franchisee_id}
+        kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def post_search(self, company_id: Optional[str] = None, data: dict = None) -> dict:
         """POST /api/contacts/search
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/search"
-        kwargs = {}
-        params = {}
+        route = self.routes["SEARCH"]
         if company_id is not None:
-            params["companyId"] = company_id
-        if params:
-            kwargs["params"] = params
+            route.params = {"companyId": company_id}
+        kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def post_v2_search(self, data: dict = None) -> List[dict]:
         """POST /api/contacts/v2/search
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/v2/search"
+        route = self.routes["V2_SEARCH"]
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def post_customers(self, data: dict = None) -> dict:
         """POST /api/contacts/customers
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/customers"
+        route = self.routes["CUSTOMERS"]
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route.method, route, **kwargs)
 
     def get_primarydetails(self, contactId: str) -> dict:
         """GET /api/contacts/{contactId}/primarydetails
 
-
-
         Returns:
             dict: API response data
         """
-        path = "/{contactId}/primarydetails"
-        path = path.replace("{contactId}", contactId)
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes["PRIMARYDETAILS"]
+        route.params = {"contactId": contactId}
+        return self._make_request(route.method, route)
 
     def get_did(self, displayId):
         id = self.get_cache(displayId)
