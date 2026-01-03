@@ -1,7 +1,7 @@
 from ABConnect import ABConnectAPI
 
-abapi = ABConnectAPI()
-from ABConnect.api import models
+api = ABConnectAPI(env='staging', username='instaquote')
+from ABConnect import models
 
 # DELETE_PAYMENTSOURCE
 # GET_PROFILE
@@ -19,7 +19,7 @@ forgotlogin = models.ForgotLoginModel(
 )
 
 responseModel = models.ServiceBaseResponse
-r = abapi.account.post_forgot(forgotlogin)
+r = api.account.post_forgot(forgotlogin)
 print(isinstance(r, models.ServiceBaseResponse))
 print(r)
 

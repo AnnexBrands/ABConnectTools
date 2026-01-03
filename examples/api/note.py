@@ -1,10 +1,13 @@
-from ABConnect.api import ABConnectAPI
+from ABConnect import ABConnectAPI
+
+api = ABConnectAPI(env='staging', username='instaquote')
+from ABConnect import models
 
 JOB_ID = 4637814
 
 def print_note_details():
     """Print details of notes for a specific entity."""
-    api = ABConnectAPI()
+    api = ABConnectAPI(env='staging', username='instaquote')
 
     # Fetch notes for the given JOB_ID
     notes_response = api.jobs.note.get_note(jobDisplayId=JOB_ID)

@@ -10,8 +10,7 @@ Key learnings:
 
 from typing import List
 from ABConnect.api import ABConnectAPI
-from ABConnect.api.models.jobparcelitems import ParcelItem, ParcelItemWithPackage
-from ABConnect.api.models.job import FreightShimpment
+from ABConnect.models import ParcelItem, ParcelItemWithPackage, FreightShimpment
 
 
 PARCEL_JOB_ID = 4675060  # Example job ID with parcel items
@@ -29,7 +28,8 @@ def print_parcel_items(job_display_id: int = PARCEL_JOB_ID):
     print(f"=== Parcel Items for Job {job_display_id} ===\n")
 
     # Initialize API client
-    api = ABConnectAPI()
+
+    api = ABConnectAPI(env='staging', username='instaquote')
 
     try:
         # Get parcel items from the API

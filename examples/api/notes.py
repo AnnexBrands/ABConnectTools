@@ -11,9 +11,8 @@ Key learnings:
 
 from typing import List
 from datetime import datetime
-from ABConnect.api import ABConnectAPI
-from ABConnect.api.models.jobnote import TaskNoteModel, JobTaskNote
-from ABConnect.common import TaskCodes
+from ABConnect import ABConnectAPI
+from ABConnect.models import TaskNoteModel, JobTaskNote, TaskCodes
 
 
 # Example job ID
@@ -36,7 +35,7 @@ def create_packaging_note(job_display_id: int = JOB_DISPLAY_ID,
     print(f"=== Creating Packaging Note for Job {job_display_id} ===\n")
 
     # Initialize API
-    api = ABConnectAPI()
+    api = ABConnectAPI(env='staging', username='instaquote')
 
     # Create the note model
     note = TaskNoteModel(
