@@ -75,9 +75,39 @@ Tracking implementation of route-based endpoints with examples, fixtures, and te
 | GET_CALENDARITEMS | ❗ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | GET_DOCUMENT_CONFIG | | ❌ | ❌ | ❌ | ❌ | ❌ |
 | GET_FEEDBACK | ❗ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| GET_FORM_ADDRESS_LABEL | ❗ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| GET_FORM_BILL_OF_LADING | ❗ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| ... | ... | ... | ... | ... | ... | ... |
+
+### Job Forms (PDF endpoints)
+
+All form endpoints require a valid `jobDisplayId`. Example and tests written, awaiting hooman to set valid job ID in:
+- `examples/api/forms.py` - line 18
+- `tests/api/test_forms.py` - line 11
+
+| Route | Hooman | Endpoint | Example | Fixture | Test (PDF) |
+|-------|--------|----------|---------|---------|------------|
+| GET_FORM_ADDRESS_LABEL | ❗ | ✅ | ✅ | ⏳ | ✅ |
+| GET_FORM_BILL_OF_LADING | ❗ | ✅ | ✅ | ⏳ | ✅ |
+| GET_FORM_CREDIT_CARD_AUTHORIZATION | ❗ | ✅ | ✅ | ⏳ | ✅ |
+| GET_FORM_CUSTOMER_QUOTE | ❗ | ✅ | ✅ | ⏳ | ✅ |
+| GET_FORM_INVOICE | ❗ | ✅ | ✅ | ⏳ | ✅ |
+| GET_FORM_INVOICE_EDITABLE | ❗ | ✅ | ✅ | ⏳ | ✅ |
+| GET_FORM_ITEM_LABELS | ❗ | ✅ | ✅ | ⏳ | ✅ |
+| GET_FORM_OPERATIONS | ❗ | ✅ | ✅ | ⏳ | ✅ |
+| GET_FORM_PACKAGING_LABELS | ❗ | ✅ | ✅ | ⏳ | ✅ |
+| GET_FORM_PACKAGING_SPECIFICATION | ❗ | ✅ | ✅ | ⏳ | ✅ |
+| GET_FORM_PACKING_SLIP | ❗ | ✅ | ✅ | ⏳ | ✅ |
+| GET_FORM_QUICK_SALE | ❗ | ✅ | ✅ | ⏳ | ✅ |
+| GET_FORM_SHIPMENTS | ❗ | ✅ | ✅ | ⏳ | ✅ |
+| GET_FORM_USAR | ❗ | ✅ | ✅ | ⏳ | ✅ |
+| GET_FORM_USAR_EDITABLE | ❗ | ✅ | ✅ | ⏳ | ✅ |
+
+**Helpers** (in `form_helpers.py`):
+| Helper | Example | Test |
+|--------|---------|------|
+| `get_bol(job, transport_mode)` | ✅ | ✅ |
+| `get_hbl(job)` | ✅ | ✅ |
+| `get_ops(job)` | ✅ | ✅ |
+
+### Other JOB routes
 
 ## SMSTEMPLATE
 

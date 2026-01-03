@@ -10,6 +10,7 @@ Note: The generic form endpoint was removed in API version 709.
 import warnings
 from typing import List, Optional, Dict, Any
 from ABConnect.api.endpoints.base import BaseEndpoint
+from ABConnect.api.routes import SCHEMA
 
 
 class JobFormEndpoint(BaseEndpoint):
@@ -33,6 +34,7 @@ class JobFormEndpoint(BaseEndpoint):
     """
 
     api_path = "job"
+    routes = SCHEMA["JOB"]
 
     def get_form_shipments(self, jobDisplayId: str) -> Dict[str, Any]:
         """GET /api/job/{jobDisplayId}/form/shipments
