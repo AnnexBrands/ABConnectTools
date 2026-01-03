@@ -5,10 +5,23 @@ Update all endpoints to lookup Route from ABConnect/api/routes instead of storin
 
 This maintains an explicit request and response model lookup in a central config.
 
-Post Routes Refactor, for each route
-* example is created
-* fixture is stored in tests/fixtures/{ModelName.by_alias=True}.json
-* tests/api/test_{tag}::test_endpoint.py asserts that the 
+## IMPORTANT: Complete each step before moving on
+
+**Do not proceed to the next route until:**
+1. Endpoint uses `route = self.routes['KEY']` with `route.params = {...}`
+2. Example runs without errors
+3. Tests pass (or are marked xfail with reason)
+
+Run examples and tests after each change. Verify output before claiming complete.
+
+## Shared Constants
+
+Use `tests/constants.py` for all test data IDs:
+- `JOB_DISPLAY_ID = "2000000"`
+- `CONTACT_ID = 266841`
+- `COMPANY_ID = "ed282b80-54fe-4f42-bf1b-69103ce1f76c"`
+
+Examples import via `from _constants import *`.
 
 ## Tracking progress
 
@@ -16,7 +29,7 @@ Create a table in REFACTOR_PROGRESS.md checking off the following has happened.
 
 A subagent should also work on a single Route in sequence.
 * Hooman intervention required ( you set ❗, I set ✅)
-* Endpoint implementation uses the route and has params 
+* Endpoint implementation uses the route and has params
 * A simple example allows us to save a fixture (see examples/api/contacts.py for a demo)
 * A fixture allows us to inspect server data (see tests/fixtures/ContactDetails.json with conftest.py fixture)
 * A pytest allows us to assert that running the endpoint returns the model instance, (dict means model validate failed)

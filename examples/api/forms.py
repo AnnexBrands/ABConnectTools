@@ -11,11 +11,9 @@ Demonstrates all form endpoints:
 
 from ABConnect.api import ABConnectAPI
 from _helpers import save_pdf_fixture, validate_pdf
+from _constants import JOB_DISPLAY_ID
 
 api = ABConnectAPI(env='staging', username='instaquote')
-
-# Test job display ID - HOOMAN: set this to a valid job with shipments
-JOB_DISPLAY_ID = "2000000"
 
 print(f"=== Job Forms for {JOB_DISPLAY_ID} ===\n")
 

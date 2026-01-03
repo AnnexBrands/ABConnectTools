@@ -7,61 +7,28 @@ Note: The generic form endpoint was removed in API version 709.
 - NEW: Multiple specific form endpoints (see methods below)
 """
 
-import warnings
-from typing import List, Optional, Dict, Any
+from typing import List, Dict, Any
 from ABConnect.api.endpoints.base import BaseEndpoint
 from ABConnect.api.routes import SCHEMA
 
 
 class JobFormEndpoint(BaseEndpoint):
-    """JobForm API endpoint operations.
-
-    - address-label: Address labels
-    - bill-of-lading: Bill of lading document
-    - credit-card-authorization: Credit card auth form
-    - customer-quote: Customer quote document
-    - invoice: Invoice (read-only)
-    - invoice/editable: Invoice (editable)
-    - item-labels: Item labels
-    - operations: Operations form
-    - packaging-labels: Packaging labels
-    - packaging-specification: Packaging specs
-    - packing-slip: Packing slip
-    - quick-sale: Quick sale form
-    - shipments: Shipments form (existing)
-    - usar: USAR form (read-only)
-    - usar/editable: USAR form (editable)
-    """
+    """JobForm API endpoint operations."""
 
     api_path = "job"
     routes = SCHEMA["JOB"]
 
-    def get_form_shipments(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/form/shipments
+    def get_form_shipments(self, jobDisplayId: str) -> List[Dict[str, Any]]:
+        """GET /api/job/{jobDisplayId}/form/shipments"""
+        route = self.routes['GET_FORM_SHIPMENTS']
+        route.params = {"jobDisplayId": jobDisplayId}
+        return self._make_request(route.method, route)
 
-        Get shipments form for a job.
-
-        Returns:
-            Dict[str, Any]: API response data
-        """
-        path = f"/{jobDisplayId}/form/shipments"
-        return self._make_request("GET", path)
-
-    def get_form_address_label(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/form/address-label
-
-        Get address labels form for a job.
-
-        .. versionadded:: 709
-
-        Args:
-            jobDisplayId: Job display ID
-
-        Returns:
-            Dict[str, Any]: Address label form data
-        """
-        path = f"/{jobDisplayId}/form/address-label"
-        return self._make_request("GET", path)
+    def get_form_address_label(self, jobDisplayId: str) -> bytes:
+        """GET /api/job/{jobDisplayId}/form/address-label"""
+        route = self.routes['GET_FORM_ADDRESS_LABEL']
+        route.params = {"jobDisplayId": jobDisplayId}
+        return self._make_request(route.method, route)
 
     def get_form_bill_of_lading(
         self,
@@ -69,215 +36,83 @@ class JobFormEndpoint(BaseEndpoint):
         shipment_plan_id: str,
         provider_option_index: int = 0
     ) -> bytes:
-        """GET /api/job/{jobDisplayId}/form/bill-of-lading
-
-        Get bill of lading form (PDF) for a specific shipment plan.
-
-        Args:
-            jobDisplayId: Job display ID
-            shipment_plan_id: Shipment plan UUID
-            provider_option_index: Provider option index (default 0)
-
-        Returns:
-            bytes: Bill of lading PDF data
-        """
-        path = f"/{jobDisplayId}/form/bill-of-lading"
-        params = {
+        """GET /api/job/{jobDisplayId}/form/bill-of-lading"""
+        route = self.routes['GET_FORM_BILL_OF_LADING']
+        route.params = {
+            "jobDisplayId": jobDisplayId,
             "shipmentPlanId": shipment_plan_id,
             "providerOptionIndex": provider_option_index
         }
-        return self._make_request("GET", path, params=params)
+        return self._make_request(route.method, route)
 
-    def get_form_credit_card_authorization(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/form/credit-card-authorization
+    def get_form_credit_card_authorization(self, jobDisplayId: str) -> bytes:
+        """GET /api/job/{jobDisplayId}/form/credit-card-authorization"""
+        route = self.routes['GET_FORM_CREDIT_CARD_AUTHORIZATION']
+        route.params = {"jobDisplayId": jobDisplayId}
+        return self._make_request(route.method, route)
 
-        Get credit card authorization form for a job.
+    def get_form_customer_quote(self, jobDisplayId: str) -> bytes:
+        """GET /api/job/{jobDisplayId}/form/customer-quote"""
+        route = self.routes['GET_FORM_CUSTOMER_QUOTE']
+        route.params = {"jobDisplayId": jobDisplayId}
+        return self._make_request(route.method, route)
 
-        .. versionadded:: 709
-
-        Args:
-            jobDisplayId: Job display ID
-
-        Returns:
-            Dict[str, Any]: Credit card authorization form data
-        """
-        path = f"/{jobDisplayId}/form/credit-card-authorization"
-        return self._make_request("GET", path)
-
-    def get_form_customer_quote(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/form/customer-quote
-
-        Get customer quote form for a job.
-
-        .. versionadded:: 709
-
-        Args:
-            jobDisplayId: Job display ID
-
-        Returns:
-            Dict[str, Any]: Customer quote form data
-        """
-        path = f"/{jobDisplayId}/form/customer-quote"
-        return self._make_request("GET", path)
-
-    def get_form_invoice(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/form/invoice
-
-        Get invoice form for a job (read-only).
-
-        .. versionadded:: 709
-
-        Args:
-            jobDisplayId: Job display ID
-
-        Returns:
-            Dict[str, Any]: Invoice form data
-        """
-        path = f"/{jobDisplayId}/form/invoice"
-        return self._make_request("GET", path)
+    def get_form_invoice(self, jobDisplayId: str) -> bytes:
+        """GET /api/job/{jobDisplayId}/form/invoice"""
+        route = self.routes['GET_FORM_INVOICE']
+        route.params = {"jobDisplayId": jobDisplayId}
+        return self._make_request(route.method, route)
 
     def get_form_invoice_editable(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/form/invoice/editable
+        """GET /api/job/{jobDisplayId}/form/invoice/editable"""
+        route = self.routes['GET_FORM_INVOICE_EDITABLE']
+        route.params = {"jobDisplayId": jobDisplayId}
+        return self._make_request(route.method, route)
 
-        Get editable invoice form for a job.
+    def get_form_item_labels(self, jobDisplayId: str) -> bytes:
+        """GET /api/job/{jobDisplayId}/form/item-labels"""
+        route = self.routes['GET_FORM_ITEM_LABELS']
+        route.params = {"jobDisplayId": jobDisplayId}
+        return self._make_request(route.method, route)
 
-        .. versionadded:: 709
+    def get_form_operations(self, jobDisplayId: str, ops_type: int = 0) -> bytes:
+        """GET /api/job/{jobDisplayId}/form/operations"""
+        route = self.routes['GET_FORM_OPERATIONS']
+        route.params = {"jobDisplayId": jobDisplayId, "type": ops_type}
+        return self._make_request(route.method, route)
 
-        Args:
-            jobDisplayId: Job display ID
+    def get_form_packaging_labels(self, jobDisplayId: str) -> bytes:
+        """GET /api/job/{jobDisplayId}/form/packaging-labels"""
+        route = self.routes['GET_FORM_PACKAGING_LABELS']
+        route.params = {"jobDisplayId": jobDisplayId}
+        return self._make_request(route.method, route)
 
-        Returns:
-            Dict[str, Any]: Editable invoice form data
-        """
-        path = f"/{jobDisplayId}/form/invoice/editable"
-        return self._make_request("GET", path)
+    def get_form_packaging_specification(self, jobDisplayId: str) -> bytes:
+        """GET /api/job/{jobDisplayId}/form/packaging-specification"""
+        route = self.routes['GET_FORM_PACKAGING_SPECIFICATION']
+        route.params = {"jobDisplayId": jobDisplayId}
+        return self._make_request(route.method, route)
 
-    def get_form_item_labels(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/form/item-labels
+    def get_form_packing_slip(self, jobDisplayId: str) -> bytes:
+        """GET /api/job/{jobDisplayId}/form/packing-slip"""
+        route = self.routes['GET_FORM_PACKING_SLIP']
+        route.params = {"jobDisplayId": jobDisplayId}
+        return self._make_request(route.method, route)
 
-        Get item labels form for a job.
+    def get_form_quick_sale(self, jobDisplayId: str) -> bytes:
+        """GET /api/job/{jobDisplayId}/form/quick-sale"""
+        route = self.routes['GET_FORM_QUICK_SALE']
+        route.params = {"jobDisplayId": jobDisplayId}
+        return self._make_request(route.method, route)
 
-        .. versionadded:: 709
-
-        Args:
-            jobDisplayId: Job display ID
-
-        Returns:
-            Dict[str, Any]: Item labels form data
-        """
-        path = f"/{jobDisplayId}/form/item-labels"
-        return self._make_request("GET", path)
-
-    def get_form_operations(self, jobDisplayId: str, ops_type: int = 0) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/form/operations
-
-        Get operations form for a job.
-
-        .. versionadded:: 709
-
-        Args:
-            jobDisplayId: Job display ID
-            ops_type: Operations form type (0 or 1, see OperationsFormType enum)
-
-        Returns:
-            Dict[str, Any]: Operations form data
-        """
-        path = f"/{jobDisplayId}/form/operations"
-        params = {"type": ops_type}
-        return self._make_request("GET", path, params=params)
-
-    def get_form_packaging_labels(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/form/packaging-labels
-
-        Get packaging labels form for a job.
-
-        .. versionadded:: 709
-
-        Args:
-            jobDisplayId: Job display ID
-
-        Returns:
-            Dict[str, Any]: Packaging labels form data
-        """
-        path = f"/{jobDisplayId}/form/packaging-labels"
-        return self._make_request("GET", path)
-
-    def get_form_packaging_specification(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/form/packaging-specification
-
-        Get packaging specification form for a job.
-
-        .. versionadded:: 709
-
-        Args:
-            jobDisplayId: Job display ID
-
-        Returns:
-            Dict[str, Any]: Packaging specification form data
-        """
-        path = f"/{jobDisplayId}/form/packaging-specification"
-        return self._make_request("GET", path)
-
-    def get_form_packing_slip(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/form/packing-slip
-
-        Get packing slip form for a job.
-
-        .. versionadded:: 709
-
-        Args:
-            jobDisplayId: Job display ID
-
-        Returns:
-            Dict[str, Any]: Packing slip form data
-        """
-        path = f"/{jobDisplayId}/form/packing-slip"
-        return self._make_request("GET", path)
-
-    def get_form_quick_sale(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/form/quick-sale
-
-        Get quick sale form for a job.
-
-        .. versionadded:: 709
-
-        Args:
-            jobDisplayId: Job display ID
-
-        Returns:
-            Dict[str, Any]: Quick sale form data
-        """
-        path = f"/{jobDisplayId}/form/quick-sale"
-        return self._make_request("GET", path)
-
-    def get_form_usar(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/form/usar
-
-        Get USAR (Uniform Straight Bill of Lading and Receipt) form (read-only).
-
-        .. versionadded:: 709
-
-        Args:
-            jobDisplayId: Job display ID
-
-        Returns:
-            Dict[str, Any]: USAR form data
-        """
-        path = f"/{jobDisplayId}/form/usar"
-        return self._make_request("GET", path)
+    def get_form_usar(self, jobDisplayId: str) -> bytes:
+        """GET /api/job/{jobDisplayId}/form/usar"""
+        route = self.routes['GET_FORM_USAR']
+        route.params = {"jobDisplayId": jobDisplayId}
+        return self._make_request(route.method, route)
 
     def get_form_usar_editable(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/form/usar/editable
-
-        Get editable USAR form for a job.
-
-        .. versionadded:: 709
-
-        Args:
-            jobDisplayId: Job display ID
-
-        Returns:
-            Dict[str, Any]: Editable USAR form data
-        """
-        path = f"/{jobDisplayId}/form/usar/editable"
-        return self._make_request("GET", path)
+        """GET /api/job/{jobDisplayId}/form/usar/editable"""
+        route = self.routes['GET_FORM_USAR_EDITABLE']
+        route.params = {"jobDisplayId": jobDisplayId}
+        return self._make_request(route.method, route)

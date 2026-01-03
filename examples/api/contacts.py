@@ -6,12 +6,12 @@ This example demonstrates how to work with contacts and get typed responses.
 
 from ABConnect.api import ABConnectAPI, models
 from _helpers import save_fixture
+from _constants import CONTACT_ID
 
 api = ABConnectAPI(env='staging', username='instaquote')
-TRAINING_ID = 266841
 
 # Get contact by ID using route-based endpoint
-contact_obj = api.contacts.get(TRAINING_ID)
+contact_obj = api.contacts.get(CONTACT_ID)
 
 # Now you have a typed Pydantic object
 print(f"type: {type(contact_obj)}")
