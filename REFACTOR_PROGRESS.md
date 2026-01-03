@@ -15,9 +15,9 @@ Tracking implementation of route-based endpoints with examples, fixtures, and te
 | Route | Hooman | Endpoint | Example | Fixture | Test |
 |-------|--------|----------|---------|---------|------|
 | GET | ✅ | ✅ | ✅ | ✅ | ✅ |
-| GET_AVAILABLE_BY_CURRENT_USER | | ✅ | ✅ | ✅ | ❌ |
-| GET_BRANDS | | ✅ | ✅ | ✅ | ❌ |
-| GET_BRANDSTREE | | ✅ | ✅ | ✅ | ❌ |
+| GET_AVAILABLE_BY_CURRENT_USER | | ✅ | ✅ | ✅ | ✅ |
+| GET_BRANDS | | ✅ | ✅ | ✅ | ✅ |
+| GET_BRANDSTREE | | ✅ | ✅ | ✅ | ✅ |
 | GET_CAPABILITIES | ❗ | ❌ | ❌ | ❌ | ❌ |
 | GET_CARRIER_ACOUNTS | ❗ | ❌ | ❌ | ❌ | ❌ |
 | GET_DETAILS | ❗ | ❌ | ❌ | ❌ | ❌ |
@@ -30,7 +30,7 @@ Tracking implementation of route-based endpoints with examples, fixtures, and te
 | GET_INHERITED_PACKAGING_TARIFFS | ❗ | ❌ | ❌ | ❌ | ❌ |
 | GET_PACKAGINGLABOR | ❗ | ❌ | ❌ | ❌ | ❌ |
 | GET_PACKAGINGSETTINGS | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_SEARCH | ❗ | ✅ | ❌ | ❌ | ❌ |
+| GET_SEARCH | ✅ | ✅ | ✅ | ❌ | ❌ |
 | GET_SEARCH_CARRIER_ACCOUNTS | | ✅ | ❌ | ❌ | ❌ |
 | GET_SUGGEST_CARRIERS | | ❌ | ❌ | ❌ | ❌ |
 | POST_CAPABILITIES | ❗ | ❌ | ❌ | ❌ | ❌ |
@@ -46,8 +46,7 @@ Tracking implementation of route-based endpoints with examples, fixtures, and te
 | PUT_FULLDETAILS | ❗ | ❌ | ❌ | ❌ | ❌ |
 
 **Errors requiring hooman input:**
-- `GET_GEO_AREA_COMPANIES`: HTTP 500 (fixture exists from prior run)
-- `GET_SEARCH`: HTTP 500 when called without searchValue
+- `GET_GEO_AREA_COMPANIES`: HTTP 500 (fixture exists from prior run - skipped)
 
 ---
 
@@ -89,7 +88,7 @@ Tracking implementation of route-based endpoints with examples, fixtures, and te
 | HISTORY_AGGREGATED | ❗ | ❌ | ❌ | ❌ | ❌ |
 | HISTORY_GRAPHDATA | ❗ | ❌ | ❌ | ❌ | ❌ |
 | PRIMARYDETAILS | ❗ | ❌ | ❌ | ❌ | ❌ |
-| USER | | ✅ | ✅ | ✅ | ❌ |
+| USER | | ✅ | ✅ | ✅ | ✅ |
 | CUSTOMERS | ❗ | ❌ | ❌ | ❌ | ❌ |
 | POST_EDITDETAILS | ❗ | ❌ | ❌ | ❌ | ❌ |
 | HISTORY | ❗ | ❌ | ❌ | ❌ | ❌ |
