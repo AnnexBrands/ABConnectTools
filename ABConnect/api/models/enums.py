@@ -1,6 +1,6 @@
 """Enumeration types for ABConnect API models."""
 
-from enum import Enum
+from enum import Enum, IntFlag
 
 
 class CarrierAPI(int, Enum):
@@ -22,8 +22,8 @@ class CarrierAPI(int, Enum):
     USPS = 20
 
 
-class CommercialCapabilities(int, Enum):
-    """CommercialCapabilities enumeration"""
+class CommercialCapabilities(IntFlag):
+    """CommercialCapabilities flags enumeration - supports combinations like 7 (PARCEL|SOME_COMMERCIAL|FULL_COMMERCIAL)"""
 
     PARCEL = 1
     SOME_COMMERCIAL = 2

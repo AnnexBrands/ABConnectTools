@@ -1,6 +1,6 @@
 from ABConnect import ABConnectAPI
 
-abapi = ABConnectAPI()
+abapi = ABConnectAPI(env='staging', username='training')
 
 token = abapi._request_handler.token_storage.get_token()
 

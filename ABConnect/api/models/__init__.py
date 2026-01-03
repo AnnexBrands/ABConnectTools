@@ -19,7 +19,7 @@ if TYPE_CHECKING:
     from .carriererrormessage import CarrierErrorMessage
     from .catalog import AddCatalogRequest, AddLotRequest, AddSellerRequest, BulkInsertCatalogRequest, BulkInsertLotRequest, BulkInsertRequest, BulkInsertSellerRequest, CatalogDto, CatalogExpandedDto, CatalogExpandedDtoPaginatedList, CatalogWithSellersDto, GetLotsOverridesQuery, ImageLinkDto, LotCatalogDto, LotCatalogInformationDto, LotDataDto, LotDto, LotDtoPaginatedList, LotOverrideDto, PaginatedList, SellerDto, SellerExpandedDto, SellerExpandedDtoPaginatedList, UpdateCatalogRequest, UpdateLotRequest, UpdateSellerRequest
     from .commodity import CommodityDetails, CommodityForMapInfo, CommodityMap, CommodityMapDetails, CommodityWithParents
-    from .companies import Company, CompanyAddressInfo, CompanyDetails, CompanyDetailsBaseInfo, CompanyDetailsFinalMileTariffItem, CompanyDetailsInsurancePricing, CompanyDetailsPreferences, CompanyDetailsServicePricings, CompanyDetailsTaxPricing, CompanyImageData, CompanyInfo, CompanyInsurancePricing, CompanyMaterial, CompanyServicePricing, CompanyTaxPricing, ContactDetailsCompanyInfo, PackagingLaborSettings, PackagingTariffSettings, SaveCompanyMaterialModel, SaveGeoSettingModel, SearchCompanyDataSourceLoadOptions, SearchCompanyModel, SearchCompanyResponse, TagBoxDataSourceLoadOptions, UpdateCarrierAccountsModel, WebApiDataSourceLoadOptions
+    from .companies import Company, CompanyAddressInfo, CompanyDetails, CompanyDetailsBaseInfo, CompanyDetailsFinalMileTariffItem, CompanyDetailsInsurancePricing, CompanyDetailsPreferences, CompanyDetailsServicePricings, CompanyDetailsTaxPricing, CompanyImageData, CompanyInfo, CompanyInsurancePricing, CompanyMaterial, CompanyServicePricing, CompanySimple, CompanyTaxPricing, ContactDetailsCompanyInfo, PackagingLaborSettings, PackagingTariffSettings, SaveCompanyMaterialModel, SaveGeoSettingModel, SearchCompanyDataSourceLoadOptions, SearchCompanyModel, SearchCompanyResponse, TagBoxDataSourceLoadOptions, UpdateCarrierAccountsModel, WebApiDataSourceLoadOptions
     from .companysettings import CompanySetupData
     from .contacthistory import ContactHistoryAggregatedCost, ContactHistoryDataSourceLoadOptions, ContactHistoryGraphData, ContactHistoryInfo
     from .contactmerge import MergeContactsPreviewInfo, MergeContactsPreviewRequestModel, MergeContactsRequestModel
@@ -130,6 +130,7 @@ def __getattr__(name):
         'CompanyListItem': 'jobtimeline',
         'CompanyMaterial': 'companies',
         'CompanyServicePricing': 'companies',
+        'CompanySimple': 'companies',
         'CompanySetupData': 'companysettings',
         'CompanyTaxPricing': 'companies',
         'CommodityDetails': 'commodity',
@@ -462,7 +463,7 @@ __all__ = [
     'CompanyDetailsInsurancePricing', 'CompanyDetailsPreferences', 'CompanyDetailsServicePricings',
     'CompanyDetailsTaxPricing', 'CompanyHierarchyInfo', 'CompanyImageData', 'CompanyInfo',
     'CompanyInsurancePricing', 'CompanyListItem', 'CompanyMaterial', 'CompanyServicePricing',
-    'CompanySetupData', 'CompanyTaxPricing', 'ConfirmEmailModel', 'Contact', 'ContactAddressDetails',
+    'CompanySimple', 'CompanySetupData', 'CompanyTaxPricing', 'ConfirmEmailModel', 'Contact', 'ContactAddressDetails',
     'ContactAddressEditDetails', 'ContactDetailedInfo', 'ContactDetails', 'ContactDetailsCompanyInfo',
     'ContactEmailDetails', 'ContactEmailEditDetails', 'ContactHistoryAggregatedCost',
     'ContactHistoryDataSourceLoadOptions', 'ContactHistoryGraphData', 'ContactHistoryInfo',

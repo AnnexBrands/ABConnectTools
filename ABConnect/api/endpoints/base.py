@@ -65,7 +65,10 @@ class BaseEndpoint:
             data = kwargs.get("json")
             if path.request_model:
                 kwargs["json"] = self._validate_route(path, data)
-                    
+            
+            if path.params:
+                kwargs["params"] = path.params
+
             response = self._r.call(
                 path.method,
                 path.url,

@@ -16,11 +16,22 @@ if TYPE_CHECKING:
     from .contacts import Contact
     from .address import Address
 
+class CompanySimple(IdentifiedModel):
+    """Simple company model for GET /companies/{id} response.
+
+    This is the minimal response from the companies/{id} endpoint.
+    """
+
+    code: Optional[str] = Field(None, description="Company code")
+    name: Optional[str] = Field(None, description="Company name")
+    parent_company_id: Optional[str] = Field(None, alias="parentCompanyId", description="Parent company ID")
+
+
 class Company(TimestampedModel):
     """Company model"""
 
-    company_id: Optional[str] = Field(None, alias="companyId")
-    address_id: Optional[str] = Field(None, alias="addressId")
+    company_id: Optional[str] = Field(None, alias="companyID")  # API uses uppercase ID
+    address_id: Optional[str] = Field(None, alias="addressID")  # API uses uppercase ID
     address1: Optional[str] = Field(None)
     address2: Optional[str] = Field(None)
     city: Optional[str] = Field(None)
@@ -28,19 +39,19 @@ class Company(TimestampedModel):
     state_code: Optional[str] = Field(None, alias="stateCode")
     country_name: Optional[str] = Field(None, alias="countryName")
     country_code: Optional[str] = Field(None, alias="countryCode")
-    country_id: Optional[str] = Field(None, alias="countryId")
+    country_id: Optional[str] = Field(None, alias="countryID")  # API uses uppercase ID
     zip_code: Optional[str] = Field(None, alias="zipCode")
     is_active: Optional[bool] = Field(None, alias="isActive")
     latitude: Optional[str] = Field(None)
     longitude: Optional[str] = Field(None)
     result: Optional[str] = Field(None)
-    address_mapping_id: Optional[str] = Field(None, alias="addressMappingId")
-    contact_id: Optional[str] = Field(None, alias="contactId")
-    user_id: Optional[str] = Field(None, alias="userId")
+    address_mapping_id: Optional[str] = Field(None, alias="addressMappingID")  # API uses uppercase ID
+    contact_id: Optional[str] = Field(None, alias="contactID")  # API uses uppercase ID
+    user_id: Optional[str] = Field(None, alias="userId")  # API sends lowercase
+    user_id_upper: Optional[str] = Field(None, alias="userID")  # API also sends uppercase in same response
     primary_customer_name: Optional[str] = Field(None, alias="primaryCustomerName")
     contact_info: Optional["Contact"] = Field(None, alias="contactInfo")
     address: Optional["Address"] = Field(None)
-    user_id: Optional[str] = Field(None, alias="userId")
     company_name: Optional[str] = Field(None, alias="companyName")
     contact_name: Optional[str] = Field(None, alias="contactName")
     contact_phone: Optional[str] = Field(None, alias="contactPhone")
@@ -49,8 +60,8 @@ class Company(TimestampedModel):
     is_third_party: Optional[bool] = Field(None, alias="isThirdParty")
     company_code: Optional[str] = Field(None, alias="companyCode")
     parent_company_name: Optional[str] = Field(None, alias="parentCompanyName")
-    company_type_id: Optional[str] = Field(None, alias="companyTypeId")
-    parent_company_id: Optional[str] = Field(None, alias="parentCompanyId")
+    company_type_id: Optional[str] = Field(None, alias="companyTypeID")  # API uses uppercase ID
+    parent_company_id: Optional[str] = Field(None, alias="parentCompanyID")  # API uses uppercase ID
     company_phone: Optional[str] = Field(None, alias="companyPhone")
     company_email: Optional[str] = Field(None, alias="companyEmail")
     company_fax: Optional[str] = Field(None, alias="companyFax")
@@ -83,7 +94,8 @@ class Company(TimestampedModel):
     is_qb_user: Optional[bool] = Field(None, alias="isQbUser")
     skip_intacct: Optional[bool] = Field(None, alias="skipIntacct")
     is_access: Optional[str] = Field(None, alias="isAccess")
-    company_display_id: Optional[str] = Field(None, alias="companyDisplayId")
+    is_readonly: Optional[bool] = Field(None, alias="isReadonly")
+    company_display_id: Optional[str] = Field(None, alias="companyDisplayID")  # API uses uppercase ID
     depth: Optional[int] = Field(None)
     franchisee_name: Optional[str] = Field(None, alias="franchiseeName")
     is_prefered: Optional[bool] = Field(None, alias="isPrefered")
@@ -99,8 +111,8 @@ class Company(TimestampedModel):
     account_manager_franchisee_name: Optional[str] = Field(None, alias="accountManagerFranchiseeName")
     carrier_accounts_source_company_id: Optional[str] = Field(None, alias="carrierAccountsSourceCompanyId")
     carrier_accounts_source_company_name: Optional[str] = Field(None, alias="carrierAccountsSourceCompanyName")
-    auto_price_api_enable_emails: Optional[bool] = Field(None, alias="autoPriceApiEnableEmails")
-    auto_price_api_enable_sm_ss: Optional[bool] = Field(None, alias="autoPriceApiEnableSmSs")
+    auto_price_api_enable_emails: Optional[bool] = Field(None, alias="autoPriceAPIEnableEmails")  # API uses uppercase API
+    auto_price_api_enable_sms: Optional[bool] = Field(None, alias="autoPriceAPIEnableSMSs")  # API uses uppercase API/SMSs
     commercial_capabilities: Optional[CommercialCapabilities] = Field(None, alias="commercialCapabilities")
     primary_contact_id: Optional[int] = Field(None, alias="primaryContactId")
     payer_contact_id: Optional[int] = Field(None, alias="payerContactId")
@@ -199,8 +211,8 @@ class CompanyDetailsPreferences(ABConnectBaseModel):
     carrier_accounts_source_company_name: Optional[str] = Field(None, alias="carrierAccountsSourceCompanyName")
     account_manager_franchisee_id: Optional[str] = Field(None, alias="accountManagerFranchiseeId")
     account_manager_franchisee_name: Optional[str] = Field(None, alias="accountManagerFranchiseeName")
-    auto_price_api_enable_emails: Optional[bool] = Field(None, alias="autoPriceApiEnableEmails")
-    auto_price_api_enable_sm_ss: Optional[bool] = Field(None, alias="autoPriceApiEnableSmSs")
+    auto_price_api_enable_emails: Optional[bool] = Field(None, alias="autoPriceAPIEnableEmails")  # API uses uppercase API
+    auto_price_api_enable_sms: Optional[bool] = Field(None, alias="autoPriceAPIEnableSMSs")  # API uses uppercase API/SMSs
     copy_materials: Optional[CopyMaterialsFrom] = Field(None, alias="copyMaterials")
 
 
@@ -527,4 +539,4 @@ class SaveCompanyMaterialModel(ABConnectBaseModel):
     waste_factor: Optional[float] = Field(None, alias="wasteFactor", description="Waste factor percentage")
 
 
-__all__ = ['Company', 'CompanyAddressInfo', 'CompanyDetails', 'CompanyDetailsBaseInfo', 'CompanyDetailsFinalMileTariffItem', 'CompanyDetailsInsurancePricing', 'CompanyDetailsPreferences', 'CompanyDetailsServicePricings', 'CompanyDetailsTaxPricing', 'CompanyImageData', 'CompanyInfo', 'CompanyInsurancePricing', 'CompanyMaterial', 'CompanyServicePricing', 'CompanyTaxPricing', 'ContactDetailsCompanyInfo', 'PackagingLaborSettings', 'PackagingTariffSettings', 'SaveCompanyMaterialModel', 'SaveGeoSettingModel', 'SearchCompanyDataSourceLoadOptions', 'SearchCompanyModel', 'SearchCompanyResponse', 'TagBoxDataSourceLoadOptions', 'UpdateCarrierAccountsModel', 'WebApiDataSourceLoadOptions']
+__all__ = ['Company', 'CompanyAddressInfo', 'CompanyDetails', 'CompanyDetailsBaseInfo', 'CompanyDetailsFinalMileTariffItem', 'CompanyDetailsInsurancePricing', 'CompanyDetailsPreferences', 'CompanyDetailsServicePricings', 'CompanyDetailsTaxPricing', 'CompanyImageData', 'CompanyInfo', 'CompanyInsurancePricing', 'CompanyMaterial', 'CompanyServicePricing', 'CompanySimple', 'CompanyTaxPricing', 'ContactDetailsCompanyInfo', 'PackagingLaborSettings', 'PackagingTariffSettings', 'SaveCompanyMaterialModel', 'SaveGeoSettingModel', 'SearchCompanyDataSourceLoadOptions', 'SearchCompanyModel', 'SearchCompanyResponse', 'TagBoxDataSourceLoadOptions', 'UpdateCarrierAccountsModel', 'WebApiDataSourceLoadOptions']

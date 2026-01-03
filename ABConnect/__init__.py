@@ -7,9 +7,11 @@ from .api import ABConnectAPI
 # Usage: from ABConnect.models import ChangeJobAgentRequest
 import sys
 from .api import models
+from .api import routes
 sys.modules['ABConnect.models'] = models
+sys.modules['ABConnect.routes'] = routes
 
-__all__ = ["FileLoader", "APIRequestBuilder", "Quoter", "ABConnectAPI", "models"]
+__all__ = ["FileLoader", "APIRequestBuilder", "Quoter", "ABConnectAPI", "models", "routes"]
 
 __version__ = "0.2.0"
 VERSION = "0.2.0"

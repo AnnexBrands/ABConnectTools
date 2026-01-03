@@ -11,6 +11,8 @@ Example:
 """
 
 from dataclasses import dataclass, field
+import re
+from typing import Any, Dict
 
 
 @dataclass(slots=True)
@@ -29,11 +31,21 @@ class Route:
     request_model: type | None = None
     response_model: type | None = None
     params: dict[str, str] = field(default_factory=dict)
+    _path_param_names: set[str] = field(default_factory=dict)
+
+    def __post_init__(self):
+            # Extract {param} names from template
+            self._path_param_names = set(re.findall(r"\{([^}]+)\}", self.path))
 
     @property
     def url(self) -> str:
-        return self.path.format(**self.params)
+        return self.path.format(**{k: v for k, v in self.params.items() if k in self._path_param_names})
 
+    @property
+    def params(self) -> Dict[str, Any]:
+        used_in_path = {k for k in self.params if k in self._path_param_names}
+        query_kwargs = {k: v for k, v in self.params.items() if k not in used_in_path and v is not None}
+        return query_kwargs
 
 SCHEMA = {
     "ACCOUNT": {
@@ -84,7 +96,7 @@ SCHEMA = {
         "PUT": Route("PUT", "/commodity-map/{id}", "UpdateCommodityMapModel", "CommodityMapServiceResponse", {}),
     },
     "COMPANIES": {
-        "GET": Route("GET", "/companies/{id}", None, "Company", {}),
+        "GET": Route("GET", "/companies/{id}", None, "CompanySimple", {}),
         "GET_AVAILABLE_BY_CURRENT_USER": Route("GET", "/companies/availableByCurrentUser", None, "List[Company]", {}),
         "GET_BRANDS": Route("GET", "/companies/brands", None, None, {}),
         "GET_BRANDSTREE": Route("GET", "/companies/brandstree", None, None, {}),

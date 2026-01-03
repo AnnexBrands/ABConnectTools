@@ -44,7 +44,7 @@ class AddressData(ABConnectBaseModel):
     first_last_name: Optional[str] = Field(None, alias="firstLastName")
     address_line1: Optional[str] = Field(None, alias="addressLine1")
     address_line2: Optional[str] = Field(None, alias="addressLine2")
-    contact_bol_note: Optional[str] = Field(None, alias="contactBolNote")
+    contact_bol_note: Optional[str] = Field(None, alias="contactBOLNote")  # API uses uppercase BOL
     city: Optional[str] = Field(None)
     state: Optional[str] = Field(None)
     state_code: Optional[str] = Field(None, alias="stateCode")
@@ -86,6 +86,8 @@ class AddressDetails(IdentifiedModel):
     longitude: Optional[float] = Field(None)
     full_city_line: Optional[str] = Field(None, alias="fullCityLine")
     coordinates: Optional["LatLng"] = Field(None)
+    country_skip_zip_code_verification: Optional[bool] = Field(None, alias="countrySkipZipCodeVerification")
+    zip_code_resolving_failed: Optional[bool] = Field(None, alias="zipCodeResolvingFailed")
 
 
 class AddressDetailsMergePreviewDataItem(ABConnectBaseModel):
