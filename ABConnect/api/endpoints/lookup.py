@@ -6,16 +6,18 @@ Provides type-safe access to lookup/* endpoints.
 
 from typing import List, Optional
 from ABConnect.api.endpoints.base import BaseEndpoint
+from ABConnect.api.routes import SCHEMA
 
 
 class LookupEndpoint(BaseEndpoint):
     """Lookup API endpoint operations.
-    
+
     Handles all API operations for /api/lookup/* endpoints.
     Total endpoints: 15
     """
-    
+
     api_path = "lookup"
+    routes = SCHEMA["LOOKUP"]
 
     def get_get(self, masterConstantKey: str) -> dict:
         """GET /api/lookup/{masterConstantKey}
@@ -44,15 +46,14 @@ class LookupEndpoint(BaseEndpoint):
         return self._make_request("GET", path, **kwargs)
     def get_countries(self) -> List[dict]:
         """GET /api/lookup/countries
-        
-        
-        
+
+        Returns list of country codes.
+
         Returns:
-            dict: API response data
+            List[dict]: List of country code objects
         """
-        path = "/countries"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['COUNTRIES']
+        return self._make_request(route.method, route)
     def get_resetmasterconstantcache(self) -> dict:
         """GET /api/lookup/resetMasterConstantCache
         
@@ -64,17 +65,16 @@ class LookupEndpoint(BaseEndpoint):
         path = "/resetMasterConstantCache"
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_accesskeys(self) -> dict:
+    def get_accesskeys(self) -> List[dict]:
         """GET /api/lookup/accessKeys
-        
-        
-        
+
+        Returns list of access keys.
+
         Returns:
-            dict: API response data
+            List[dict]: List of access key lookup values
         """
-        path = "/accessKeys"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['ACCESS_KEYS']
+        return self._make_request(route.method, route)
     def get_accesskey(self, accessKey: str) -> dict:
         """GET /api/lookup/accessKey/{accessKey}
         
@@ -87,22 +87,21 @@ class LookupEndpoint(BaseEndpoint):
         path = path.replace("{accessKey}", accessKey)
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_documenttypes(self, document_source: Optional[str] = None) -> dict:
+    def get_documenttypes(self, document_source: Optional[str] = None) -> List[dict]:
         """GET /api/lookup/documentTypes
-        
-        
-        
+
+        Returns list of document types.
+
+        Args:
+            document_source: Optional document source filter
+
         Returns:
-            dict: API response data
+            List[dict]: List of document type lookup values
         """
-        path = "/documentTypes"
-        kwargs = {}
-        params = {}
+        route = self.routes['DOCUMENT_TYPES']
         if document_source is not None:
-            params["documentSource"] = document_source
-        if params:
-            kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
+            route.params = {"documentSource": document_source}
+        return self._make_request(route.method, route)
     def get_items(self, job_display_id: Optional[str] = None, job_item_id: Optional[str] = None) -> dict:
         """GET /api/lookup/items
         
@@ -154,17 +153,16 @@ class LookupEndpoint(BaseEndpoint):
         path = "/PPCCampaigns"
         kwargs = {}
         return self._make_request("GET", path, **kwargs)
-    def get_parcelpackagetypes(self) -> dict:
+    def get_parcelpackagetypes(self) -> List[dict]:
         """GET /api/lookup/parcelPackageTypes
-        
-        
-        
+
+        Returns list of parcel package types.
+
         Returns:
-            dict: API response data
+            List[dict]: List of parcel package type lookup values
         """
-        path = "/parcelPackageTypes"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['PARCEL_PACKAGE_TYPES']
+        return self._make_request(route.method, route)
     def get_comoninsurance(self) -> dict:
         """GET /api/lookup/comonInsurance
         
@@ -178,28 +176,26 @@ class LookupEndpoint(BaseEndpoint):
         return self._make_request("GET", path, **kwargs)
     def get_contacttypes(self) -> List[dict]:
         """GET /api/lookup/contactTypes
-        
-        
-        
+
+        Returns list of contact types.
+
         Returns:
-            dict: API response data
+            List[dict]: List of contact type entities
         """
-        path = "/contactTypes"
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['CONTACT_TYPES']
+        return self._make_request(route.method, route)
     def get_densityclassmap(self, carrier_api: Optional[str] = None) -> List[dict]:
         """GET /api/lookup/densityClassMap
-        
-        
-        
+
+        Returns density class map.
+
+        Args:
+            carrier_api: Optional carrier API filter
+
         Returns:
-            dict: API response data
+            List[dict]: List of density class map values
         """
-        path = "/densityClassMap"
-        kwargs = {}
-        params = {}
+        route = self.routes['DENSITY_CLASS_MAP']
         if carrier_api is not None:
-            params["carrierApi"] = carrier_api
-        if params:
-            kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
+            route.params = {"carrierApi": carrier_api}
+        return self._make_request(route.method, route)

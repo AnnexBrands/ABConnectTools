@@ -1,0 +1,58 @@
+[
+  {
+    "accessKey": "3CD4E92F-6ADD-4C2B-8F36-79C58E6437E5",
+    "friendlyName": "GoNavisAPI"
+  },
+  {
+    "accessKey": "43FDF64D-9D3E-4999-B820-14216D504DB9",
+    "friendlyName": "1stDibs"
+  },
+  {
+    "accessKey": "0DD59C34-711D-4784-8D1E-D2807E13063F",
+    "friendlyName": "1stdibs_INTL"
+  },
+  {
+    "accessKey": "E042B2B5-FB3A-4671-9ECA-1652BA163282",
+    "friendlyName": "HA"
+  },
+  {
+    "accessKey": "49967953-F597-465B-B2BA-6E96266B576B",
+    "friendlyName": "InstaQuote"
+  },
+  {
+    "accessKey": "EB6FA959-B989-456F-A1FF-290830442D36",
+    "friendlyName": "Customer"
+  },
+  {
+    "accessKey": "280CF169-BBBB-44AB-9F0D-B2ABF7666772",
+    "friendlyName": "Principle-C"
+  },
+  {
+    "accessKey": "420FC1D8-86D5-4D28-A7CA-5137B27F1AF7",
+    "friendlyName": "DAG"
+  },
+  {
+    "accessKey": "1245F29A-3469-433F-B706-8CAA54400D78",
+    "friendlyName": "LiveAuctioneers"
+  },
+  {
+    "accessKey": "8C3835F1-ED6F-43F3-8A1B-83AAFE04F011",
+    "friendlyName": "Public"
+  },
+  {
+    "accessKey": "EC571D7D-BD9B-45C8-B94D-1BD4AA0E918B",
+    "friendlyName": "Auction"
+  },
+  {
+    "accessKey": "C67408C7-FFF9-4F0A-8405-30788E994F5E",
+    "friendlyName": "LA"
+  },
+  {
+    "accessKey": "1C9CC4F3-BCCC-45BC-B45B-D150FC7DE983",
+    "friendlyName": "LiveStaging"
+  },
+  {
+    "accessKey": "560A6F05-9349-4F7E-BC26-BE0079D2077A",
+    "friendlyName": "BobGray"
+  }
+]

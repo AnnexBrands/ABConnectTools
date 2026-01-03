@@ -1,0 +1,332 @@
+[
+  {
+    "id": 22,
+    "name": "1stdibs Billing",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 18,
+    "name": "1stdibs Booked",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 19,
+    "name": "1stdibs On Hold",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 28,
+    "name": "1stdibs SLA Times",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 36,
+    "name": "1stDibs Zones",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 47,
+    "name": "Agent Tracking",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 48,
+    "name": "AgentRoyalties",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 54,
+    "name": "Campaign Results",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 16,
+    "name": "Corp Donan",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 20,
+    "name": "Corp1stdibsBilling",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 24,
+    "name": "CorpBookedEmails",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 29,
+    "name": "Corporate Accounting Payment Details",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 21,
+    "name": "Cust 1stdibs Billing",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 11,
+    "name": "Cust 1stdibs Held Jobs",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 10,
+    "name": "Cust 1stdibs Registered",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 12,
+    "name": "Cust DeMorias",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 35,
+    "name": "Customer List",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 27,
+    "name": "Customer SLA Times",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 39,
+    "name": "Delivery Planner",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 37,
+    "name": "Franchisee CC Fee",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 13,
+    "name": "Franchisee Freight",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 5,
+    "name": "Franchisee Inbound",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 6,
+    "name": "Franchisee Inhouse",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 7,
+    "name": "Franchisee Outbound",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 4,
+    "name": "Franchisee Recent Estimates",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 9,
+    "name": "Franchisee Sales Follow up Pipeline",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 34,
+    "name": "IntacctData",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 40,
+    "name": "Jobs in Progress",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 32,
+    "name": "Leads",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 46,
+    "name": "Live Outbound",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 49,
+    "name": "Live SLA",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 44,
+    "name": "LiveManifest",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 33,
+    "name": "Marketing Drip",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 2,
+    "name": "My Quotes",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 30,
+    "name": "NLS Leads",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 17,
+    "name": "NLS Outside Sales",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 8,
+    "name": "Payment Details",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 51,
+    "name": "Payments",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 41,
+    "name": "Pickup List (Booked)",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 45,
+    "name": "Pickup List (Completed)",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 52,
+    "name": "Pickup Report",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 42,
+    "name": "PickupApp",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 53,
+    "name": "Rebates",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 23,
+    "name": "Requests For Quote",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 3,
+    "name": "Shipped Jobs",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 55,
+    "name": "Tax",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 26,
+    "name": "Third Party Jobs",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 50,
+    "name": "UnpaidJobs",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 43,
+    "name": "Warehouse",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 14,
+    "name": "Web2Lead Raw Feed",
+    "dataKey": null,
+    "isActive": true
+  },
+  {
+    "id": 1,
+    "name": "1stdibs Registered",
+    "dataKey": null,
+    "isActive": false
+  },
+  {
+    "id": 15,
+    "name": "Agent 1stdibs Registered",
+    "dataKey": null,
+    "isActive": false
+  },
+  {
+    "id": 31,
+    "name": "Customer Tracking",
+    "dataKey": null,
+    "isActive": false
+  },
+  {
+    "id": 38,
+    "name": "delete",
+    "dataKey": null,
+    "isActive": false
+  },
+  {
+    "id": 25,
+    "name": "My Orders",
+    "dataKey": null,
+    "isActive": false
+  }
+]

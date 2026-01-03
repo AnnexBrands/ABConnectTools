@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "value": "Carrier"
+  },
+  {
+    "id": 2,
+    "value": "Customers"
+  },
+  {
+    "id": 3,
+    "value": "Employee"
+  },
+  {
+    "id": 4,
+    "value": "Franchisee"
+  },
+  {
+    "id": 5,
+    "value": "Industry"
+  },
+  {
+    "id": 6,
+    "value": "Vendor"
+  }
+]

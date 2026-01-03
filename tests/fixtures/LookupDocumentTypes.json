@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Label",
+    "value": 1,
+    "documentSource": 5
+  },
+  {
+    "name": "USAR",
+    "value": 2,
+    "documentSource": 1
+  },
+  {
+    "name": "Credit Card Auth",
+    "value": 3,
+    "documentSource": 1
+  },
+  {
+    "name": "BOL",
+    "value": 4,
+    "documentSource": 1
+  },
+  {
+    "name": "Electronic Invoice",
+    "value": 5,
+    "documentSource": 1
+  },
+  {
+    "name": "Item Photo",
+    "value": 6,
+    "documentSource": 3
+  },
+  {
+    "name": "Other",
+    "value": 7,
+    "documentSource": 7
+  },
+  {
+    "name": "Manifest",
+    "value": 8,
+    "documentSource": 8
+  },
+  {
+    "name": "Commercial Invoice",
+    "value": 9,
+    "documentSource": 5
+  },
+  {
+    "name": "Pro Forma Invoice",
+    "value": 10,
+    "documentSource": 5
+  },
+  {
+    "name": "Packing List",
+    "value": 11,
+    "documentSource": 5
+  },
+  {
+    "name": "International Forms",
+    "value": 12,
+    "documentSource": 5
+  },
+  {
+    "name": "Air Waybill",
+    "value": 13,
+    "documentSource": 5
+  },
+  {
+    "name": "Terms and Conditions",
+    "value": 14,
+    "documentSource": 5
+  },
+  {
+    "name": "Customer Quote",
+    "value": 15,
+    "documentSource": 1
+  },
+  {
+    "name": "Pickup Receipt",
+    "value": 16,
+    "documentSource": 1
+  },
+  {
+    "name": "UPS Control Log",
+    "value": 18,
+    "documentSource": 5
+  },
+  {
+    "name": "Deleted Label",
+    "value": 19,
+    "documentSource": 5
+  }
+]

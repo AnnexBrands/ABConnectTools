@@ -1,0 +1,224 @@
+[
+  {
+    "id": 4,
+    "name": "Franchisee Recent Estimates",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 5,
+    "name": "Franchisee Inbound",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 6,
+    "name": "Franchisee Inhouse",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 7,
+    "name": "Franchisee Outbound",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 9,
+    "name": "Franchisee Sales Follow up Pipeline",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 13,
+    "name": "Franchisee Freight",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 16,
+    "name": "Corp Donan",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 18,
+    "name": "1stdibs Booked",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 19,
+    "name": "1stdibs On Hold",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 20,
+    "name": "Corp1stdibsBilling",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 22,
+    "name": "1stdibs Billing",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 23,
+    "name": "Requests For Quote",
+    "dataKey": "quoteRequestId",
+    "isActive": false
+  },
+  {
+    "id": 26,
+    "name": "Third Party Jobs",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 28,
+    "name": "1stdibs SLA Times",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 29,
+    "name": "Corporate Accounting Payment Details",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 30,
+    "name": "NLS Leads",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 33,
+    "name": "Marketing Drip",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 34,
+    "name": "IntacctData",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 35,
+    "name": "Customer List",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 36,
+    "name": "1stDibs Zones",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 37,
+    "name": "Franchisee CC Fee",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 39,
+    "name": "Delivery Planner",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 41,
+    "name": "Pickup List (Booked)",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 42,
+    "name": "PickupApp",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 43,
+    "name": "Warehouse",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 44,
+    "name": "LiveManifest",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 45,
+    "name": "Pickup List (Completed)",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 46,
+    "name": "Live Outbound",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 47,
+    "name": "Agent Tracking",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 48,
+    "name": "AgentRoyalties",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 49,
+    "name": "Live SLA",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 50,
+    "name": "UnpaidJobs",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 51,
+    "name": "Payments",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 52,
+    "name": "Pickup Report",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 53,
+    "name": "Rebates",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 54,
+    "name": "Campaign Results",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  },
+  {
+    "id": 55,
+    "name": "Tax",
+    "dataKey": "jobDisplayID",
+    "isActive": false
+  }
+]

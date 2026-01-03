@@ -27,6 +27,25 @@ class CompanySimple(IdentifiedModel):
     parent_company_id: Optional[str] = Field(None, alias="parentCompanyId", description="Parent company ID")
 
 
+class CompanyBrandTreeNode(ABConnectBaseModel):
+    """Company brand tree node for GET /companies/brandstree response.
+
+    Represents a hierarchical tree of company brands where each node
+    can have children nodes of the same type.
+    """
+
+    id: Optional[str] = Field(None, description="Company brand UUID")
+    name: Optional[str] = Field(None, description="Brand name")
+    code: Optional[str] = Field(None, description="Brand code")
+    maps_marker_image: Optional[str] = Field(None, alias="mapsMarkerImage", description="Maps marker image path")
+    children: Optional[List["CompanyBrandTreeNode"]] = Field(None, description="Child brand nodes")
+
+    def __repr__(self) -> str:
+        """Return string representation."""
+        child_count = len(self.children) if self.children else 0
+        return f"CompanyBrandTreeNode(code={self.code!r}, name={self.name!r}, children={child_count})"
+
+
 class Company(TimestampedModel):
     """Company model"""
 
@@ -539,4 +558,4 @@ class SaveCompanyMaterialModel(ABConnectBaseModel):
     waste_factor: Optional[float] = Field(None, alias="wasteFactor", description="Waste factor percentage")
 
 
-__all__ = ['Company', 'CompanyAddressInfo', 'CompanyDetails', 'CompanyDetailsBaseInfo', 'CompanyDetailsFinalMileTariffItem', 'CompanyDetailsInsurancePricing', 'CompanyDetailsPreferences', 'CompanyDetailsServicePricings', 'CompanyDetailsTaxPricing', 'CompanyImageData', 'CompanyInfo', 'CompanyInsurancePricing', 'CompanyMaterial', 'CompanyServicePricing', 'CompanySimple', 'CompanyTaxPricing', 'ContactDetailsCompanyInfo', 'PackagingLaborSettings', 'PackagingTariffSettings', 'SaveCompanyMaterialModel', 'SaveGeoSettingModel', 'SearchCompanyDataSourceLoadOptions', 'SearchCompanyModel', 'SearchCompanyResponse', 'TagBoxDataSourceLoadOptions', 'UpdateCarrierAccountsModel', 'WebApiDataSourceLoadOptions']
+__all__ = ['Company', 'CompanyAddressInfo', 'CompanyBrandTreeNode', 'CompanyDetails', 'CompanyDetailsBaseInfo', 'CompanyDetailsFinalMileTariffItem', 'CompanyDetailsInsurancePricing', 'CompanyDetailsPreferences', 'CompanyDetailsServicePricings', 'CompanyDetailsTaxPricing', 'CompanyImageData', 'CompanyInfo', 'CompanyInsurancePricing', 'CompanyMaterial', 'CompanyServicePricing', 'CompanySimple', 'CompanyTaxPricing', 'ContactDetailsCompanyInfo', 'PackagingLaborSettings', 'PackagingTariffSettings', 'SaveCompanyMaterialModel', 'SaveGeoSettingModel', 'SearchCompanyDataSourceLoadOptions', 'SearchCompanyModel', 'SearchCompanyResponse', 'TagBoxDataSourceLoadOptions', 'UpdateCarrierAccountsModel', 'WebApiDataSourceLoadOptions']

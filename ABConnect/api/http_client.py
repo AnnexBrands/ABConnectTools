@@ -98,6 +98,9 @@ class RequestHandler:
         if headers:
             request_headers.update(headers)
 
+        # Ensure path starts with /
+        if not path.startswith('/'):
+            path = f"/{path}"
         url = f"{self.base_url}{path}"
         logger.debug(f"{method.upper()} {url}")
 
@@ -130,6 +133,9 @@ class RequestHandler:
         if headers:
             request_headers.update(headers)
 
+        # Ensure path starts with /
+        if not path.startswith('/'):
+            path = f"/{path}"
         url = f"{self.base_url}{path}"
         method = "POST"
         logger.debug(f"{method.upper()} {url} (File Upload)")

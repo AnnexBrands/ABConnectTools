@@ -99,7 +99,7 @@ SCHEMA = {
         "GET": Route("GET", "/companies/{id}", None, "CompanySimple", {}),
         "GET_AVAILABLE_BY_CURRENT_USER": Route("GET", "/companies/availableByCurrentUser", None, "List[Company]", {}),
         "GET_BRANDS": Route("GET", "/companies/brands", None, None, {}),
-        "GET_BRANDSTREE": Route("GET", "/companies/brandstree", None, None, {}),
+        "GET_BRANDSTREE": Route("GET", "/companies/brandstree", None, "List[CompanyBrandTreeNode]", {}),
         "GET_CAPABILITIES": Route("GET", "/companies/{companyId}/capabilities", None, "CommercialCapabilities", {}),
         "GET_CARRIER_ACOUNTS": Route("GET", "/companies/{companyId}/carrierAcounts", None, "FranchiseeCarrierAccounts", {}),
         "GET_DETAILS": Route("GET", "/companies/{companyId}/details", None, "CompanyDetails", {}),

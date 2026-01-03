@@ -1,0 +1,155 @@
+[
+  {
+    "id": "1",
+    "value": null,
+    "name": "UPS Tube",
+    "description": null,
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  },
+  {
+    "id": "2",
+    "value": null,
+    "name": "UPS Letter",
+    "description": null,
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  },
+  {
+    "id": "3",
+    "value": null,
+    "name": "UPS Express PAK",
+    "description": null,
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  },
+  {
+    "id": "4",
+    "value": null,
+    "name": "UPS Small Express Box",
+    "description": null,
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  },
+  {
+    "id": "5",
+    "value": null,
+    "name": "UPS Medium Express Box",
+    "description": null,
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  },
+  {
+    "id": "6",
+    "value": null,
+    "name": "UPS Large Express Box",
+    "description": null,
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  },
+  {
+    "id": "7",
+    "value": null,
+    "name": "FedEx Tube",
+    "description": null,
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  },
+  {
+    "id": "8",
+    "value": null,
+    "name": "FedEx Letter",
+    "description": null,
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  },
+  {
+    "id": "9",
+    "value": null,
+    "name": "FedEx PAK",
+    "description": null,
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  },
+  {
+    "id": "10",
+    "value": null,
+    "name": "FedEx Small Box S1",
+    "description": "Rectangular and shallow. Dimensions: Length 10-7/8, Width 1-1/2, Height 12-8/8",
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  },
+  {
+    "id": "11",
+    "value": null,
+    "name": "FedEx Small Box S2",
+    "description": "Rectangular and deep. Dimensions: Length 8-3/4, Width 2-11/16, Height 11-5/16",
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  },
+  {
+    "id": "12",
+    "value": null,
+    "name": "FedEx Medium Box M1",
+    "description": "Rectangular and shallow. Length 11-1/2, Width 2-3/8, Height 13-1/4",
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  },
+  {
+    "id": "13",
+    "value": null,
+    "name": "FedEx Medium Box M2",
+    "description": "Rectangular and deep.Length 9, Width 5, Height 12",
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  },
+  {
+    "id": "14",
+    "value": null,
+    "name": "FedEx Large Box L1",
+    "description": "Rectangular and shallow Length 12-3/8, Width 3, Height 17-1/2",
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  },
+  {
+    "id": "15",
+    "value": null,
+    "name": "FedEx Large Box L2",
+    "description": "Rectangular and deep:Length 8-3/4, Width 7-3/4, Height 11-5/16",
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  },
+  {
+    "id": "16",
+    "value": null,
+    "name": "FedEx Extra Large Box X1",
+    "description": "X1: Cube-shaped Length 11-7/8, Width 10-13/16, Height 11-1/16",
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  },
+  {
+    "id": "17",
+    "value": null,
+    "name": "FedEx Extra Large Box X2",
+    "description": "X2: Rectangular-shaped Length 15-3/4, Width 14-3/16, Height 6",
+    "isActive": true,
+    "sortOrder": null,
+    "metadata": null
+  }
+]

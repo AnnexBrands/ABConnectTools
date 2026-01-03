@@ -307,9 +307,9 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 |-------|--------|----------|---------|---------|------|
 | DELETE | ❗ | ❌ | ❌ | ❌ | ❌ |
 | GET | ❗ | ❌ | ❌ | ❌ | ❌ |
-| JOB_STATUSES | | ✅ | ✅ | ✅ | ❌ |
-| LIST | | ✅ | ✅ | ✅ | ❌ |
-| NOTIFICATION_TOKENS | | ✅ | ✅ | ✅ | ❌ |
+| JOB_STATUSES | | ✅ | ✅ | ✅ | ✅ |
+| LIST | | ✅ | ✅ | ✅ | ✅ |
+| NOTIFICATION_TOKENS | | ✅ | ✅ | ✅ | ✅ |
 | SAVE | ❗ | ❌ | ❌ | ❌ | ❌ |
 
 ---
@@ -319,7 +319,7 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 | Route | Hooman | Endpoint | Example | Fixture | Test |
 |-------|--------|----------|---------|---------|------|
 | DELETE_PAYMENTSOURCE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_PROFILE | | ❌ | ❌ | ❌ | ❌ |
+| GET_PROFILE | | ✅ | ✅ | ✅ | ✅ |
 | GET_VERIFYRESETTOKEN | ❗ | ❌ | ❌ | ❌ | ❌ |
 | POST_CONFIRM | ❗ | ❌ | ❌ | ❌ | ❌ |
 | POST_FORGOT | ❗ | ❌ | ❌ | ❌ | ❌ |
@@ -390,8 +390,8 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 
 | Route | Hooman | Endpoint | Example | Fixture | Test |
 |-------|--------|----------|---------|---------|------|
-| GET | | ❌ | ❌ | ❌ | ❌ |
-| GRIDVIEWS | | ❌ | ❌ | ❌ | ❌ |
+| GET | | ✅ | ✅ | ✅ | ✅ |
+| GRIDVIEWS | | ✅ | ✅ | ✅ | ✅ |
 | GRIDVIEWSTATE | ❗ | ❌ | ❌ | ❌ | ❌ |
 | POST_GRIDVIEWSTATE | ❗ | ❌ | ❌ | ❌ | ❌ |
 | INBOUND | ❗ | ❌ | ❌ | ❌ | ❌ |
@@ -450,14 +450,14 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 |-------|--------|----------|---------|---------|------|
 | GET | ❗ | ❌ | ❌ | ❌ | ❌ |
 | ACCESS_KEY | ❗ | ❌ | ❌ | ❌ | ❌ |
-| ACCESS_KEYS | | ❌ | ❌ | ❌ | ❌ |
+| ACCESS_KEYS | | ✅ | ✅ | ✅ | xfail |
 | COMON_INSURANCE | | ❌ | ❌ | ❌ | ❌ |
-| CONTACT_TYPES | | ❌ | ❌ | ❌ | ❌ |
-| COUNTRIES | | ❌ | ❌ | ❌ | ❌ |
-| DENSITY_CLASS_MAP | | ❌ | ❌ | ❌ | ❌ |
-| DOCUMENT_TYPES | | ❌ | ❌ | ❌ | ❌ |
+| CONTACT_TYPES | | ✅ | ✅ | ✅ | ✅ |
+| COUNTRIES | | ✅ | ✅ | ✅ | ✅ |
+| DENSITY_CLASS_MAP | | ✅ | ✅ | ✅ | ✅ |
+| DOCUMENT_TYPES | | ✅ | ✅ | ✅ | ✅ |
 | ITEMS | | ❌ | ❌ | ❌ | ❌ |
-| PARCEL_PACKAGE_TYPES | | ❌ | ❌ | ❌ | ❌ |
+| PARCEL_PACKAGE_TYPES | | ✅ | ✅ | ✅ | ✅ |
 | PPCCAMPAIGNS | | ❌ | ❌ | ❌ | ❌ |
 | REFER_CATEGORY | | ❌ | ❌ | ❌ | ❌ |
 | REFER_CATEGORY_HEIRACHY | | ❌ | ❌ | ❌ | ❌ |
@@ -480,7 +480,7 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 
 | Route | Hooman | Endpoint | Example | Fixture | Test |
 |-------|--------|----------|---------|---------|------|
-| GET | | ❌ | ❌ | ❌ | ❌ |
+| GET | | ✅ | ✅ | ✅ | ✅ |
 
 ---
 
@@ -488,7 +488,7 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 
 | Route | Hooman | Endpoint | Example | Fixture | Test |
 |-------|--------|----------|---------|---------|------|
-| GET | | ❌ | ❌ | ❌ | ❌ |
+| GET | | ✅ | ✅ | ✅ | xfail |
 | POST_SEARCH | ❗ | ❌ | ❌ | ❌ | ❌ |
 
 ---
@@ -527,7 +527,7 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 | Route | Hooman | Endpoint | Example | Fixture | Test |
 |-------|--------|----------|---------|---------|------|
 | GET | ❗ | ❌ | ❌ | ❌ | ❌ |
-| ACCESSORIALS | | ❌ | ❌ | ❌ | ❌ |
+| ACCESSORIALS | | ✅ | ✅ | ✅ | ✅ |
 | DOCUMENT | ❗ | ❌ | ❌ | ❌ | ❌ |
 
 ---
@@ -536,8 +536,8 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 
 | Route | Hooman | Endpoint | Example | Fixture | Test |
 |-------|--------|----------|---------|---------|------|
-| POCUSERS | | ❌ | ❌ | ❌ | ❌ |
-| ROLES | | ❌ | ❌ | ❌ | ❌ |
+| POCUSERS | | ✅ | ✅ | ✅ | xfail |
+| ROLES | | ✅ | ✅ | ✅ | xfail |
 | LIST | ❗ | ❌ | ❌ | ❌ | ❌ |
 | USER | ❗ | ❌ | ❌ | ❌ | ❌ |
 | USER_UPDATE | ❗ | ❌ | ❌ | ❌ | ❌ |
@@ -564,7 +564,7 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 
 | Route | Hooman | Endpoint | Example | Fixture | Test |
 |-------|--------|----------|---------|---------|------|
-| GET | | ❌ | ❌ | ❌ | ❌ |
+| GET | | ✅ | ✅ | ✅ | ✅ |
 
 ---
 
@@ -575,9 +575,9 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 | DELETE | ❗ | ❌ | ❌ | ❌ | ❌ |
 | GET | ❗ | ❌ | ❌ | ❌ | ❌ |
 | ACCESSINFO | ❗ | ❌ | ❌ | ❌ | ❌ |
-| ALL | | ❌ | ❌ | ❌ | ❌ |
+| ALL | | ✅ | ✅ | ✅ | xfail |
 | DATASETSP | ❗ | ❌ | ❌ | ❌ | ❌ |
-| DATASETSPS | | ❌ | ❌ | ❌ | ❌ |
+| DATASETSPS | | ✅ | ✅ | ✅ | xfail |
 | POST | ❗ | ❌ | ❌ | ❌ | ❌ |
 | PUT_ACCESS | ❗ | ❌ | ❌ | ❌ | ❌ |
 
@@ -600,14 +600,28 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 
 **Total Routes:** ~220
 
-**Completed (with endpoint, example, and fixture):**
-- COMPANIES: GET, GET_AVAILABLE_BY_CURRENT_USER, GET_BRANDS, GET_BRANDSTREE (4)
+**Completed (with endpoint, example, fixture, and test):**
+- COMPANIES: GET, GET_AVAILABLE_BY_CURRENT_USER, GET_BRANDS (xfail), GET_BRANDSTREE (xfail) (4)
 - CONTACTS: GET, USER (2)
 - JOB Forms: 15 routes (12 with fixtures, 3 xfail)
 - SMSTEMPLATE: JOB_STATUSES, LIST, NOTIFICATION_TOKENS (3)
+- ACCOUNT: GET_PROFILE (1)
+- DASHBOARD: GET, GRIDVIEWS (2)
+- LOOKUP: COUNTRIES, CONTACT_TYPES, DOCUMENT_TYPES, ACCESS_KEYS (xfail), DENSITY_CLASS_MAP, PARCEL_PACKAGE_TYPES (6)
+- NOTIFICATIONS: GET (1)
+- PARTNER: GET (xfail) (1)
+- SHIPMENT: ACCESSORIALS (1)
+- USERS: POCUSERS (xfail), ROLES (xfail) (2)
+- VALUES: GET (1)
+- VIEWS: ALL (xfail), DATASETSPS (xfail) (2)
 
 **Needs Hooman Input:**
 - All POST/PUT/DELETE/PATCH routes
 - All routes with path parameters (need test IDs)
 - COMPANIES.GET_GEO_AREA_COMPANIES: HTTP 500
 - COMPANIES.GET_SEARCH: HTTP 500 without searchValue
+
+**xfail Notes:**
+- Some endpoints return 403 (Forbidden) with the `training` user
+- Fixtures were generated using `instaquote` user which has elevated permissions
+- Tests are marked xfail but still run to detect if permissions change

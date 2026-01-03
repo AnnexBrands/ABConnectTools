@@ -19,6 +19,7 @@ from ABConnect.api.endpoints import (
     LookupEndpoint,
     NoteEndpoint,
     NotificationsEndpoint,
+    PartnerEndpoint,
     ReportsEndpoint,
     RfqEndpoint,
     ShipmentEndpoint,
@@ -125,6 +126,7 @@ class ABConnectAPI:
         self.lookup = LookupEndpoint()
         self.note = NoteEndpoint()
         self.notifications = NotificationsEndpoint()
+        self.partner = PartnerEndpoint()
         self.reports = ReportsEndpoint()
         self.rfq = RfqEndpoint()
         self.shipment = ShipmentEndpoint()

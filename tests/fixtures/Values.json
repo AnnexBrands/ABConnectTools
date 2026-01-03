@@ -1,0 +1,7 @@
+{
+  "code": "Default",
+  "emailSignatureTemplate": "nlsAgentSignature",
+  "portalUrl": "https://mystaging.gonavis.com/",
+  "stripeSuccessUrlFormat": "https://mystaging.gonavis.com/pay/{0}/{1}",
+  "stripeCancelUrlFormat": "https://mystaging.gonavis.com/pay/{0}/{1}"
+}

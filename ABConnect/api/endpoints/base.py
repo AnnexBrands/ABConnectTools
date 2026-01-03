@@ -79,24 +79,23 @@ class BaseEndpoint:
             )
 
         else:
+            # Build full path: if path starts with /, use as-is; otherwise prepend api_path
             if path.startswith("/"):
-                path = path.lstrip("/")
-
-            if self.api_path:
-                full_path = f"{self.api_path.strip('/')}/{path}"
-            else:
                 full_path = path
+            elif self.api_path:
+                full_path = f"/{self.api_path.strip('/')}/{path.lstrip('/')}"
+            else:
+                full_path = f"/{path.lstrip('/')}"
 
             if "json" in kwargs and kwargs["json"] is not None:
                 kwargs["json"] = self._validate_request(
-                    kwargs["json"], method, f"/api/{full_path}"
+                    kwargs["json"], method, full_path
                 )
-        
+
             response = self._r.call(method, full_path, **kwargs)
 
-
             return self._cast_response(
-                response, method, f"/api/api/{full_path}"
+                response, method, full_path
             )
 
     def _validate_route(self, route: Route, data: Any) -> Any:
