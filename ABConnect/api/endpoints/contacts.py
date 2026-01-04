@@ -32,7 +32,7 @@ class ContactsEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def get_history_aggregated(
         self, contactId: str, statuses: Optional[str] = None
@@ -46,7 +46,7 @@ class ContactsEndpoint(BaseEndpoint):
         route.params = {"contactId": contactId}
         if statuses is not None:
             route.params["statuses"] = statuses
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_history_graphdata(
         self, contactId: str, statuses: Optional[str] = None
@@ -60,7 +60,7 @@ class ContactsEndpoint(BaseEndpoint):
         route.params = {"contactId": contactId}
         if statuses is not None:
             route.params["statuses"] = statuses
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def post_merge_preview(self, mergeToId: str, data: dict = None) -> dict:
         """POST /api/contacts/{mergeToId}/merge/preview
@@ -73,7 +73,7 @@ class ContactsEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def put_merge(self, mergeToId: str, data: dict = None) -> dict:
         """PUT /api/contacts/{mergeToId}/merge
@@ -86,7 +86,7 @@ class ContactsEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def get(self, id: str) -> ContactDetails:
         """GET /api/contacts/{id}
@@ -101,7 +101,7 @@ class ContactsEndpoint(BaseEndpoint):
         """
         route = self.routes['GET']
         route.params = {"id": id}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_ah(self, houseid, *args, **kwargs) -> dict:
         id = self.get_cache(houseid)
@@ -116,7 +116,7 @@ class ContactsEndpoint(BaseEndpoint):
             dict: Contact info for current user
         """
         route = self.routes['USER']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_editdetails(self, contactId: str) -> dict:
         """GET /api/contacts/{contactId}/editdetails
@@ -126,7 +126,7 @@ class ContactsEndpoint(BaseEndpoint):
         """
         route = self.routes["GET_EDITDETAILS"]
         route.params = {"contactId": contactId}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def put_editdetails(
         self, contactId: str, franchisee_id: Optional[str] = None, data: dict = None
@@ -143,7 +143,7 @@ class ContactsEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_editdetails(
         self, franchisee_id: Optional[str] = None, data: dict = None
@@ -159,7 +159,7 @@ class ContactsEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_search(self, company_id: Optional[str] = None, data: dict = None) -> dict:
         """POST /api/contacts/search
@@ -173,7 +173,7 @@ class ContactsEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_v2_search(self, data: dict = None) -> List[dict]:
         """POST /api/contacts/v2/search
@@ -185,7 +185,7 @@ class ContactsEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_customers(self, data: dict = None) -> dict:
         """POST /api/contacts/customers
@@ -197,7 +197,7 @@ class ContactsEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def get_primarydetails(self, contactId: str) -> dict:
         """GET /api/contacts/{contactId}/primarydetails
@@ -207,7 +207,7 @@ class ContactsEndpoint(BaseEndpoint):
         """
         route = self.routes["PRIMARYDETAILS"]
         route.params = {"contactId": contactId}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_did(self, displayId):
         id = self.get_cache(displayId)

@@ -38,7 +38,7 @@ class DocumentsEndpoint(BaseEndpoint):
         route = SCHEMA["DOCUMENTS"]["THUMBNAIL"]
         route.params = {"docPath": docPath}
         kwargs = {}
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def get(self, docPath: str) -> Union[dict, bytes]:
         """GET /api/documents/get/{docPath}
@@ -61,7 +61,7 @@ class DocumentsEndpoint(BaseEndpoint):
         route = SCHEMA["DOCUMENTS"]["GET"]
         route.params = {"docPath": docPath}
         kwargs = {}
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def list(
         self,
@@ -87,7 +87,7 @@ class DocumentsEndpoint(BaseEndpoint):
             params["rfqId"] = rfq_id
         if params:
             kwargs["params"] = params
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post(self, data: dict = None) -> dict:
         """POST /api/documents
@@ -102,7 +102,7 @@ class DocumentsEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
     def update(self, docId: str, data: dict = None) -> dict:
         """PUT /api/documents/update/{docId}
 
@@ -114,7 +114,7 @@ class DocumentsEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def put_hide(self, docId: str) -> dict:
         """PUT /api/documents/hide/{docId}
@@ -124,7 +124,7 @@ class DocumentsEndpoint(BaseEndpoint):
         """
         route = self.routes["HIDE"]
         route.params = {"docId": docId}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def upload_item_photo(
         self,

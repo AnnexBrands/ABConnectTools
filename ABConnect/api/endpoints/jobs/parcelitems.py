@@ -1,37 +1,39 @@
-"""Job Parcelitems API endpoints.
+"""Job Parcel Items API endpoints.
 
-Auto-generated from swagger.json specification.
+Provides access to job parcel item operations including creation,
+retrieval, updates, and deletion.
 """
 
-from typing import List, Optional, Dict, Any, Union
+from typing import Optional, Dict, Any, Union, List
 from ABConnect.api.endpoints.base import BaseEndpoint
 from ABConnect.api.models.jobparcelitems import ParcelItem, SaveAllParcelItemsRequest
 from ABConnect.api.routes import SCHEMA
 
 
 class JobParcelItemsEndpoint(BaseEndpoint):
-    """JobParcelItems API endpoint operations.
+    """Job Parcel Items API endpoint operations.
 
-    Total endpoints: 4
+    Handles parcel item management for jobs.
     """
 
     api_path = "job"
+    routes = SCHEMA["JOB"]
 
     def get_parcelitems(
-        self, jobDisplayId: str
+        self,
+        jobDisplayId: str
     ) -> Union[List[ParcelItem], List[Dict[str, Any]]]:
-        """GET /api/job/{jobDisplayId}/parcelitems
+        """Get all parcel items for a job.
 
         Args:
             jobDisplayId: The job display ID
 
         Returns:
-            Union[List[ParcelItem], List[Dict[str, Any]]]: List of ParcelItem models or list of dicts
+            List[ParcelItemWithPackage] with parcel item details
         """
-        route = SCHEMA["GET_PARCELITEMS"]
-        route.params = {"jobDisplayId": jobDisplayId}
-
-        return self._make_request(route.method, route)
+        route = self.routes['GET_PARCELITEMS']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        return self._make_request(route)
 
     def post_parcelitems(
         self,
@@ -41,22 +43,22 @@ class JobParcelItemsEndpoint(BaseEndpoint):
         force_update: bool = False,
         job_modified_date: Optional[str] = None,
     ) -> Union[List[ParcelItem], List[Dict[str, Any]]]:
-        """POST /api/job/{jobDisplayId}/parcelitems
+        """Save parcel items for a job.
 
         Args:
             jobDisplayId: The job display ID
-            data: SaveAllParcelItemsRequest as Pydantic model or dict (optional, overrides other params)
-            parcel_items: List of ParcelItem models or dicts (used if data not provided)
-            force_update: Force update flag (default: False)
-            job_modified_date: Job modified date (optional)
+            data: SaveAllParcelItemsRequest (overrides other params)
+            parcel_items: List of parcel items
+            force_update: Force update flag
+            job_modified_date: Job modified date
 
         Returns:
-            Union[List[ParcelItem], List[Dict[str, Any]]]: List of ParcelItem models or list of dicts
+            List[ParcelItemWithPackage] with saved items
         """
-        path = f"/{jobDisplayId}/parcelitems"
-        kwargs = {"cast_response": True}
+        route = self.routes['POST_PARCELITEMS']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        kwargs = {}
 
-        # Use provided data or construct from parameters
         if data is None:
             data = SaveAllParcelItemsRequest(
                 parcel_items=parcel_items,
@@ -64,39 +66,40 @@ class JobParcelItemsEndpoint(BaseEndpoint):
                 job_modified_date=job_modified_date,
             )
 
-        # Validate incoming data and convert to API format
-        validated_data = SaveAllParcelItemsRequestdata.json()
+        validated_data = data.json() if hasattr(data, 'json') else data
         kwargs["json"] = validated_data
-
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def get_parcel_items_with_materials(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/parcel-items-with-materials
+        """Get parcel items with materials for a job.
 
-
-
+        Args:
+            jobDisplayId: The job display ID
 
         Returns:
-            Dict[str, Any]: API response data
+            List[ParcelItemWithMaterials] with material details
         """
-        path = "/{jobDisplayId}/parcel-items-with-materials"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_PARCEL_ITEMS_WITH_MATERIALS']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        return self._make_request(route)
 
     def delete_parcelitems(
-        self, parcelItemId: str, jobDisplayId: str
+        self,
+        parcelItemId: str,
+        jobDisplayId: str
     ) -> Dict[str, Any]:
-        """DELETE /api/job/{jobDisplayId}/parcelitems/{parcelItemId}
+        """Delete a parcel item from a job.
 
-
-
+        Args:
+            parcelItemId: The parcel item ID to delete
+            jobDisplayId: The job display ID
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming deletion
         """
-        path = "/{jobDisplayId}/parcelitems/{parcelItemId}"
-        path = path.replace("{parcelItemId}", str(parcelItemId))
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("DELETE", path, **kwargs)
+        route = self.routes['DELETE_PARCELITEMS']
+        route.params = {
+            "jobDisplayId": str(jobDisplayId),
+            "parcelItemId": str(parcelItemId)
+        }
+        return self._make_request(route)

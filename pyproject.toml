@@ -55,4 +55,9 @@ docs = ["sphinx>=5.0", "sphinx-rtd-theme>=1.0", "sphinx-autodoc-typehints>=1.19"
 [tool.pytest.ini_options]
 pythonpath = "ABConnect"
 testpaths = ["tests"]
+addopts = "-m 'not slow'"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests (require API access)",
+]
 

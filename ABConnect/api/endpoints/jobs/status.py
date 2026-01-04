@@ -1,32 +1,40 @@
 """Job Status API endpoints.
 
-Auto-generated from swagger.json specification.
+Provides access to job status operations including
+changing job status to quote.
 """
 
-from typing import List, Optional, Dict, Any
+from typing import Optional, Dict, Any
 from ABConnect.api.endpoints.base import BaseEndpoint
+from ABConnect.api.routes import SCHEMA
 
 
 class JobStatusEndpoint(BaseEndpoint):
-    """JobStatus API endpoint operations.
+    """Job Status API endpoint operations.
 
-    Total endpoints: 1
+    Handles job status changes.
     """
 
     api_path = "job"
+    routes = SCHEMA["JOB"]
 
-    def post_status_quote(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/status/quote
+    def post_status_quote(
+        self,
+        jobDisplayId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Set job status to quote.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: Optional status change parameters
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming status change
         """
-        path = "/{jobDisplayId}/status/quote"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['POST_STATUS_QUOTE']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)

@@ -5,6 +5,9 @@ import sys
 from pathlib import Path
 import pytest
 
+# Mark entire module as slow (excluded by default, run with: pytest -m slow)
+pytestmark = pytest.mark.slow
+
 # Add tests directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from constants import JOB_DISPLAY_ID

@@ -28,7 +28,7 @@ class UsersEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_user(self, data: dict = None) -> dict:
         """POST /api/users/user
@@ -40,7 +40,7 @@ class UsersEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def put_user(self, data: dict = None) -> dict:
         """PUT /api/users/user
@@ -52,7 +52,7 @@ class UsersEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def get_roles(self) -> dict:
         """GET /api/users/roles
@@ -61,7 +61,7 @@ class UsersEndpoint(BaseEndpoint):
             dict: API response data
         """
         route = self.routes['ROLES']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_pocusers(self) -> dict:
         """GET /api/users/pocusers
@@ -70,4 +70,4 @@ class UsersEndpoint(BaseEndpoint):
             dict: API response data
         """
         route = self.routes['POCUSERS']
-        return self._make_request(route.method, route)
+        return self._make_request(route)

@@ -7,11 +7,11 @@ integration with auto-generated Pydantic models.
 
 from ABConnect.config import get_config
 from ABConnect.api.routes import Route
-from ABConnect.api.request_mapper import get_request_mapper
-from ABConnect.api.response_mapper import get_response_mapper
+from ABConnect.api import models
 
+import re
 import requests
-from typing import Any, Optional, TYPE_CHECKING, overload
+from typing import Any, Optional, TYPE_CHECKING, Tuple
 import logging
 logger = logging.getLogger(__name__)
 
@@ -40,150 +40,80 @@ class BaseEndpoint:
     def set_request_handler(cls, handler):
         cls._r = handler
 
-    def _make_request(
-        self,
-        method: str,
-        path: str | Route,
-        **kwargs,
-    ):
-        """Make HTTP request using the shared request handler.
+    def _validate_request(self, route: Route, kwargs: dict) -> None:
+        if "json" not in kwargs:
+            return
+        
+        data = kwargs["json"]
+        if model := getattr(models, route.request_model, None) is None:
+            raise ValueError(
+                f"Endpoint {route.method} {route.path} received a JSON body "
+                f"but no request_model is defined. Remove the json= argument "
+                f"or define a request_model for this route."
+            )
+        kwargs["json"] = model.model_validate(data)
 
-        Supports both legacy (method, path) style and new Route-based style.
+    def _parse_type_string(self, type_str: str) -> Tuple[bool, str]:
+        """Parse a type string to detect List[...] wrapper.
 
         Args:
-            method: HTTP method (ignored if path is a Route)
-            path: API path string or Route object
-            operation_id: Optional swagger operation ID for response casting
-            cast_response: Whether to cast response to Pydantic model
-            validate_request: Whether to validate request data against Pydantic model
+            type_str: Type string like 'DocumentDetails' or 'List[DocumentDetails]'
+
+        Returns:
+            Tuple of (is_list, inner_model_name)
+        """
+        # Match List[ModelName] pattern
+        list_match = re.match(r'^List\[(\w+)\]$', type_str)
+        if list_match:
+            return (True, list_match.group(1))
+        return (False, type_str)
+
+    def _validate_response(self, response: requests.Response, response_model: Optional[str]) -> Any:
+        """Validate and cast API response to Pydantic model if specified.
+
+        Args:
+            response: Raw HTTP response
+            response_model: Optional response model name
+        
+        Returns:
+            Cast model instance, bytes, or original response data
+        """
+        if response_model == "bytes":
+            return response.content
+        
+        is_list, model_name = self._parse_type_string(response_model)
+        model_class = getattr(models, model_name)
+
+        if is_list:
+            return [model_class.model_validate(item) for item in response]
+        else:
+            return model_class.model_validate(response)
+
+    def _make_request(self, route: Route, **kwargs):
+        """Make HTTP request using the shared request handler.
+
+
+        Args:
+            route: Route object defining the API endpoint
             **kwargs: Path parameters (for Route) or request options
 
         Returns:
             API response data (cast to Pydantic model if available)
         """
-        if isinstance(path, Route):
-            data = kwargs.get("json")
-            if path.request_model:
-                kwargs["json"] = self._validate_route(path, data)
+        self._validate_request(route, kwargs)
             
-            if path.params:
-                kwargs["params"] = path.params
+        if route.params:
+            kwargs["params"] = route.params
 
-            response = self._r.call(
-                path.method,
-                path.url,
-                **kwargs,
-            )
-            return self._cast_response(
-                response, response_model=path.response_model
-            )
+        response = self._r.call(
+            route.method,
+            route.url,
+            **kwargs,
+        )
+        return self._validate_response(
+            response, response_model=route.response_model
+        )
 
-        else:
-            # Build full path: combine api_path with path
-            # For legacy endpoints, path is relative to api_path (e.g., "/" or "/gridviews")
-            if self.api_path:
-                if path == "/" or path == "":
-                    full_path = f"/{self.api_path.strip('/')}"
-                elif path.startswith("/"):
-                    full_path = f"/{self.api_path.strip('/')}{path}"
-                else:
-                    full_path = f"/{self.api_path.strip('/')}/{path}"
-            else:
-                full_path = path if path.startswith("/") else f"/{path}"
-
-            if "json" in kwargs and kwargs["json"] is not None:
-                kwargs["json"] = self._validate_request(
-                    kwargs["json"], method, full_path
-                )
-
-            response = self._r.call(method, full_path, **kwargs)
-
-            return self._cast_response(
-                response, method, full_path
-            )
-
-    def _validate_route(self, route: Route, data: Any) -> Any:
-        """Validate request data against Route's request model.
-
-        Args:
-            route: Route object
-            data: Pydantic model or json
-
-        Returns:
-            validated json
-
-        Raises:
-            pydantic.ValidationError: If data doesn't match the model schema
-        """
-        mapper = get_request_mapper()
-        data = mapper.check(data, route.request_model)
-        return data
-        
-
-    def _validate_request(
-        self,
-        data: Any,
-        method: str,
-        full_path: str
-    ) -> Any:
-        """Validate request data against appropriate Pydantic model.
-
-        Uses ABConnectBaseModel.check() for validation, which validates
-        the data and returns it as a JSON-serializable dict with proper
-        camelCase field aliases.
-
-        Args:
-            data: Raw request data (dict or list)
-            method: HTTP method
-            full_path: Full API path including /api/ prefix
-        Returns:
-            Validated and transformed data
-
-        Raises:
-            pydantic.ValidationError: If data doesn't match the model schema
-        """
-        try:
-            
-
-            mapper = get_request_mapper()
-            return mapper.validate_request(data, method, full_path)
-        except ImportError as e:
-            logger.error(f"Failed calling request model validate: {e}")
-            return data
-
-    def _cast_response(
-        self,
-        response: Any,
-        method: Optional[str] = None,
-        full_path: Optional[str] = None,
-        response_model: Optional[str] = None,
-    ) -> dict:
-        """Cast response to appropriate Pydantic model.
-
-        Args:
-            response: Raw API response
-            method: HTTP method
-            full_path: Full API path including /api/ prefix
-            operation_id: Optional operation ID
-
-        Returns:
-            Typed model instance or original response
-        """
-        # Skip casting for binary responses
-        if isinstance(response, bytes):
-            return response
-
-        try:
-            mapper = get_response_mapper()
-
-            if response_model:
-                return mapper.cast_response(response, response_model=response_model)
-            else:
-                return mapper.cast_response(response, method=method, path=full_path)
-        except ImportError as e:
-            # If response mapper not available, return raw response
-            logger.error(f"Failed to import response_mapper: {e}")
-            return response
 
     @staticmethod
     def get_cache(key: str) -> Optional[str]:

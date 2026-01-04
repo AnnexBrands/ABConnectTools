@@ -35,7 +35,7 @@ class ShipmentEndpoint(BaseEndpoint):
             params["proNumber"] = pro_number
         if params:
             route.params = params
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_accessorials(self) -> dict:
         """GET /api/shipment/accessorials
@@ -44,7 +44,7 @@ class ShipmentEndpoint(BaseEndpoint):
             dict: API response data
         """
         route = self.routes['ACCESSORIALS']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_document(self, docId: str, franchisee_id: Optional[str] = None) -> dict:
         """GET /api/shipment/document/{docId}
@@ -56,4 +56,4 @@ class ShipmentEndpoint(BaseEndpoint):
         route.params = {"docId": docId}
         if franchisee_id is not None:
             route.params["franchiseeId"] = franchisee_id
-        return self._make_request(route.method, route)
+        return self._make_request(route)

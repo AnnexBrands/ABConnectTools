@@ -75,6 +75,28 @@ class ABConnectBaseModel(BaseModel):
     def json(self) -> Dict[str, Any]:
         """Return the model data as a JSON-serializable dict with camelCase keys."""
         return self.model_dump(by_alias=True, exclude_none=True, mode='json')
+    
+    def __repr__(self) -> str:
+            """Return a pretty, indented, one-field-per-line representation."""
+            # Get all fields that are set (exclude_none=True removes Nones)
+            fields = self.model_dump(exclude_none=True, by_alias=True)
+
+            if not fields:
+                return f"{self.__class__.__name__}()"
+
+            lines = [f"{self.__class__.__name__}("]
+            for key, value in fields.items():
+                # Indent and format each field
+                repr_value = repr(value)
+                # Multi-line values (like nested models) get extra indentation
+                if "\n" in repr_value:
+                    indented = "\n    ".join(repr_value.split("\n"))
+                    lines.append(f"    {key}={indented},")
+                else:
+                    lines.append(f"    {key}={repr_value},")
+            lines.append(")")
+
+            return "\n".join(lines)
 
 class IdentifiedModel(ABConnectBaseModel):
     """Base for models with ID fields (63 schemas have 'id')."""

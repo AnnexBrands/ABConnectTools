@@ -25,7 +25,7 @@ class ViewsEndpoint(BaseEndpoint):
             dict: API response data
         """
         route = self.routes['ALL']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_get(self, viewId: str) -> dict:
         """GET /api/views/{viewId}
@@ -35,7 +35,7 @@ class ViewsEndpoint(BaseEndpoint):
         """
         route = self.routes['GET']
         route.params = {"viewId": viewId}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def delete_delete(self, viewId: str) -> dict:
         """DELETE /api/views/{viewId}
@@ -45,7 +45,7 @@ class ViewsEndpoint(BaseEndpoint):
         """
         route = self.routes['DELETE']
         route.params = {"viewId": viewId}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_accessinfo(self, viewId: str) -> dict:
         """GET /api/views/{viewId}/accessinfo
@@ -55,7 +55,7 @@ class ViewsEndpoint(BaseEndpoint):
         """
         route = self.routes['ACCESSINFO']
         route.params = {"viewId": viewId}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def post_post(self, data: dict = None) -> dict:
         """POST /api/views
@@ -67,7 +67,7 @@ class ViewsEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def put_access(self, viewId: str, data: dict = None) -> dict:
         """PUT /api/views/{viewId}/access
@@ -80,7 +80,7 @@ class ViewsEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def get_datasetsps(self) -> dict:
         """GET /api/views/datasetsps
@@ -89,7 +89,7 @@ class ViewsEndpoint(BaseEndpoint):
             dict: API response data
         """
         route = self.routes['DATASETSPS']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_datasetsp(self, spName: str) -> dict:
         """GET /api/views/datasetsp/{spName}
@@ -99,4 +99,4 @@ class ViewsEndpoint(BaseEndpoint):
         """
         route = self.routes['DATASETSP']
         route.params = {"spName": spName}
-        return self._make_request(route.method, route)
+        return self._make_request(route)

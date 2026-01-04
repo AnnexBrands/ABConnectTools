@@ -22,7 +22,7 @@ class AccountEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_sendconfirmation(self, data: dict = None) -> dict:
         """POST /api/account/sendConfirmation
@@ -34,7 +34,7 @@ class AccountEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_confirm(self, data: dict = None) -> dict:
         """POST /api/account/confirm
@@ -46,7 +46,7 @@ class AccountEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_forgot(self, data: dict = None) -> dict:
         """POST /api/account/forgot
@@ -57,7 +57,7 @@ class AccountEndpoint(BaseEndpoint):
             dict: API response data
         """
         route = self.routes["POST_FORGOT"]
-        return self._make_request(route.method, route, json=data)
+        return self._make_request(route, json=data)
 
     def get_verifyresettoken(self, username: Optional[str] = None, token: Optional[str] = None) -> dict:
         """GET /api/account/verifyresettoken
@@ -73,7 +73,7 @@ class AccountEndpoint(BaseEndpoint):
             params["token"] = token
         if params:
             route.params = params
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def post_resetpassword(self, data: dict = None) -> dict:
         """POST /api/account/resetpassword
@@ -85,7 +85,7 @@ class AccountEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def get_profile(self) -> Dict[str, Any]:
         """Get current user profile information.
@@ -94,7 +94,7 @@ class AccountEndpoint(BaseEndpoint):
             User profile with contact info, company details, and payment sources.
         """
         route = self.routes["GET_PROFILE"]
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def post_setpassword(self, data: dict = None) -> dict:
         """POST /api/account/setpassword
@@ -106,7 +106,7 @@ class AccountEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def put_paymentsource(self, sourceId: str, data: dict = None) -> dict:
         """PUT /api/account/paymentsource/{sourceId}
@@ -119,7 +119,7 @@ class AccountEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def delete_paymentsource(self, sourceId: str) -> dict:
         """DELETE /api/account/paymentsource/{sourceId}
@@ -129,4 +129,4 @@ class AccountEndpoint(BaseEndpoint):
         """
         route = self.routes["DELETE_PAYMENTSOURCE"]
         route.params = {"sourceId": sourceId}
-        return self._make_request(route.method, route)
+        return self._make_request(route)

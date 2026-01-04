@@ -28,4 +28,4 @@ class ValuesEndpoint(BaseEndpoint):
         route = self.routes['GET']
         if code is not None:
             route.params = {"code": code}
-        return self._make_request(route.method, route)
+        return self._make_request(route)

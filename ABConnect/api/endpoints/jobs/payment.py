@@ -1,175 +1,213 @@
 """Job Payment API endpoints.
 
-Auto-generated from swagger.json specification.
+Provides access to job payment operations including ACH payments,
+bank source management, and payment verification.
 """
 
-from typing import List, Optional, Dict, Any
+from typing import Optional, Dict, Any
 from ABConnect.api.endpoints.base import BaseEndpoint
+from ABConnect.api.routes import SCHEMA
 
 
 class JobPaymentEndpoint(BaseEndpoint):
-    """JobPayment API endpoint operations.
+    """Job Payment API endpoint operations.
 
-    Total endpoints: 10
+    Handles payment creation, ACH operations, and bank source management.
     """
 
     api_path = "job"
+    routes = SCHEMA["JOB"]
 
     def get_payment_create(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/payment/create
+        """Get payment creation options for a job.
 
-        
-        
-
-        Returns:
-            Dict[str, Any]: API response data
-        """
-        path = "/{jobDisplayId}/payment/create"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
-
-    def post_payment_ACHPaymentSession(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/payment/ACHPaymentSession
-
-        
-        
+        Args:
+            jobDisplayId: The job display ID
 
         Returns:
-            Dict[str, Any]: API response data
+            Payment creation configuration
         """
-        path = "/{jobDisplayId}/payment/ACHPaymentSession"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        if data is not None:
-            kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        route = self.routes['GET_PAYMENT_CREATE']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        return self._make_request(route)
 
-    def post_payment_ACHCreditTransfer(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/payment/ACHCreditTransfer
+    def post_payment_ACHPaymentSession(
+        self,
+        jobDisplayId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Create an ACH payment session for a job.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: ACH payment session parameters
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse with session info
         """
-        path = "/{jobDisplayId}/payment/ACHCreditTransfer"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['POST_PAYMENT_ACHPAYMENT_SESSION']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
-    def get_payment(self, jobDisplayId: str, job_sub_key: Optional[str] = None) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/payment
+    def post_payment_ACHCreditTransfer(
+        self,
+        jobDisplayId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Initiate an ACH credit transfer for a job.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: ACH credit transfer parameters
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming transfer
         """
-        path = "/{jobDisplayId}/payment"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['POST_PAYMENT_ACHCREDIT_TRANSFER']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
-        params = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request(route, **kwargs)
+
+    def get_payment(
+        self,
+        jobDisplayId: str,
+        job_sub_key: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """Get payment information for a job.
+
+        Args:
+            jobDisplayId: The job display ID
+            job_sub_key: Optional job sub key filter
+
+        Returns:
+            Payment details for the job
+        """
+        route = self.routes['GET_PAYMENT']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        kwargs = {}
         if job_sub_key is not None:
-            params["jobSubKey"] = job_sub_key
-        if params:
-            kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
+            kwargs["params"] = {"jobSubKey": job_sub_key}
+        return self._make_request(route, **kwargs)
 
-    def post_payment_attachCustomerBank(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/payment/attachCustomerBank
+    def post_payment_attachCustomerBank(
+        self,
+        jobDisplayId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Attach a customer bank account to a job payment.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: AttachCustomerBankModel with bank details
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming attachment
         """
-        path = "/{jobDisplayId}/payment/attachCustomerBank"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['POST_PAYMENT_ATTACH_CUSTOMER_BANK']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
-    def post_payment_verifyJobACHSource(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/payment/verifyJobACHSource
+    def post_payment_verifyJobACHSource(
+        self,
+        jobDisplayId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Verify an ACH source for a job payment.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: VerifyBankAccountRequest with verification data
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming verification
         """
-        path = "/{jobDisplayId}/payment/verifyJobACHSource"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['POST_PAYMENT_VERIFY_JOB_ACHSOURCE']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
-    def post_payment_cancelJobACHVerification(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/payment/cancelJobACHVerification
+    def post_payment_cancelJobACHVerification(
+        self,
+        jobDisplayId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Cancel an ACH verification for a job payment.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: Optional cancellation parameters
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming cancellation
         """
-        path = "/{jobDisplayId}/payment/cancelJobACHVerification"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['POST_PAYMENT_CANCEL_JOB_ACHVERIFICATION']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def get_payment_sources(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/payment/sources
+        """Get available payment sources for a job.
 
-        
-        
-
-        Returns:
-            Dict[str, Any]: API response data
-        """
-        path = "/{jobDisplayId}/payment/sources"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
-
-    def post_payment_bysource(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/payment/bysource
-
-        
-        
+        Args:
+            jobDisplayId: The job display ID
 
         Returns:
-            Dict[str, Any]: API response data
+            List[PaymentSourceDetails] with available sources
         """
-        path = "/{jobDisplayId}/payment/bysource"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        if data is not None:
-            kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        route = self.routes['GET_PAYMENT_SOURCES']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        return self._make_request(route)
 
-    def post_payment_banksource(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/payment/banksource
+    def post_payment_bysource(
+        self,
+        jobDisplayId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Process a payment using a specific source.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: Payment source and amount details
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming payment
         """
-        path = "/{jobDisplayId}/payment/banksource"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['POST_PAYMENT_BYSOURCE']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
+
+    def post_payment_banksource(
+        self,
+        jobDisplayId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Add a bank source for a job payment.
+
+        Args:
+            jobDisplayId: The job display ID
+            data: PaymentSourceDetails with bank info
+
+        Returns:
+            ServiceBaseResponse confirming addition
+        """
+        route = self.routes['POST_PAYMENT_BANKSOURCE']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request(route, **kwargs)

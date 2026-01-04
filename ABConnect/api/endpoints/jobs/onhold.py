@@ -1,172 +1,218 @@
-"""Job Onhold API endpoints.
+"""Job OnHold API endpoints.
 
-Auto-generated from swagger.json specification.
+Provides access to job on-hold operations including creation, resolution,
+and follow-up user management.
 """
 
-from typing import List, Optional, Dict, Any
+from typing import Optional, Dict, Any
 from ABConnect.api.endpoints.base import BaseEndpoint
+from ABConnect.api.routes import SCHEMA
 
 
 class JobOnHoldEndpoint(BaseEndpoint):
-    """JobOnHold API endpoint operations.
+    """Job OnHold API endpoint operations.
 
-    Total endpoints: 10
+    Handles on-hold creation, updates, resolution, and comments.
     """
 
     api_path = "job"
+    routes = SCHEMA["JOB"]
 
-    def get_onhold(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/onhold
+    def get_onhold_list(self, jobDisplayId: str) -> Dict[str, Any]:
+        """Get all on-hold items for a job.
 
-        
-        
-
-        Returns:
-            Dict[str, Any]: API response data
-        """
-        path = "/{jobDisplayId}/onhold"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
-
-    def post_onhold(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/onhold
-
-        
-        
+        Args:
+            jobDisplayId: The job display ID
 
         Returns:
-            Dict[str, Any]: API response data
+            List[OnHoldDetails] with all on-hold items
         """
-        path = "/{jobDisplayId}/onhold"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        if data is not None:
-            kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
-
-    def delete_onhold(self, jobDisplayId: str) -> Dict[str, Any]:
-        """DELETE /api/job/{jobDisplayId}/onhold
-
-        
-        
-
-        Returns:
-            Dict[str, Any]: API response data
-        """
-        path = "/{jobDisplayId}/onhold"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("DELETE", path, **kwargs)
+        route = self.routes['GET_ONHOLD_LIST']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        return self._make_request(route)
 
     def get_onhold(self, jobDisplayId: str, id: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/onhold/{id}
+        """Get a specific on-hold item by ID.
 
-        
-        
-
-        Returns:
-            Dict[str, Any]: API response data
-        """
-        path = "/{jobDisplayId}/onhold/{id}"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        path = path.replace("{id}", str(id))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
-
-    def put_onhold(self, jobDisplayId: str, onHoldId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """PUT /api/job/{jobDisplayId}/onhold/{onHoldId}
-
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            id: The on-hold item ID
 
         Returns:
-            Dict[str, Any]: API response data
+            OnHoldDetails for the specified on-hold
         """
-        path = "/{jobDisplayId}/onhold/{onHoldId}"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        path = path.replace("{onHoldId}", str(onHoldId))
-        kwargs = {}
-        if data is not None:
-            kwargs["json"] = data
-        return self._make_request("PUT", path, **kwargs)
+        route = self.routes['GET_ONHOLD']
+        route.params = {"jobDisplayId": str(jobDisplayId), "id": str(id)}
+        return self._make_request(route)
 
-    def put_onhold_resolve(self, jobDisplayId: str, onHoldId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """PUT /api/job/{jobDisplayId}/onhold/{onHoldId}/resolve
+    def post_onhold(
+        self,
+        jobDisplayId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Create a new on-hold item for a job.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: SaveOnHoldRequest with on-hold details
 
         Returns:
-            Dict[str, Any]: API response data
+            SaveOnHoldResponse with created on-hold info
         """
-        path = "/{jobDisplayId}/onhold/{onHoldId}/resolve"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        path = path.replace("{onHoldId}", str(onHoldId))
+        route = self.routes['POST_ONHOLD']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("PUT", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
-    def post_onhold_comment(self, jobDisplayId: str, onHoldId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/onhold/{onHoldId}/comment
+    def delete_onhold(self, jobDisplayId: str) -> Dict[str, Any]:
+        """Delete an on-hold item from a job.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming deletion
         """
-        path = "/{jobDisplayId}/onhold/{onHoldId}/comment"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        path = path.replace("{onHoldId}", str(onHoldId))
+        route = self.routes['DELETE_ONHOLD']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        return self._make_request(route)
+
+    def put_onhold(
+        self,
+        jobDisplayId: str,
+        onHoldId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Update an existing on-hold item.
+
+        Args:
+            jobDisplayId: The job display ID
+            onHoldId: The on-hold item ID to update
+            data: SaveOnHoldRequest with updated details
+
+        Returns:
+            SaveOnHoldResponse confirming update
+        """
+        route = self.routes['PUT_ONHOLD']
+        route.params = {
+            "jobDisplayId": str(jobDisplayId),
+            "onHoldId": str(onHoldId)
+        }
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
+
+    def put_onhold_resolve(
+        self,
+        jobDisplayId: str,
+        onHoldId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Resolve an on-hold item.
+
+        Args:
+            jobDisplayId: The job display ID
+            onHoldId: The on-hold item ID to resolve
+            data: SaveOnHoldRequest with resolution details
+
+        Returns:
+            ResolveJobOnHoldResponse confirming resolution
+        """
+        route = self.routes['PUT_ONHOLD_RESOLVE']
+        route.params = {
+            "jobDisplayId": str(jobDisplayId),
+            "onHoldId": str(onHoldId)
+        }
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request(route, **kwargs)
+
+    def post_onhold_comment(
+        self,
+        jobDisplayId: str,
+        onHoldId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Add a comment to an on-hold item.
+
+        Args:
+            jobDisplayId: The job display ID
+            onHoldId: The on-hold item ID
+            data: Comment content
+
+        Returns:
+            OnHoldNoteDetails with created comment
+        """
+        route = self.routes['POST_ONHOLD_COMMENT']
+        route.params = {
+            "jobDisplayId": str(jobDisplayId),
+            "onHoldId": str(onHoldId)
+        }
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request(route, **kwargs)
 
     def get_onhold_followupusers(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/onhold/followupusers
+        """Get all follow-up users for on-hold items.
 
-        
-        
-
-        Returns:
-            Dict[str, Any]: API response data
-        """
-        path = "/{jobDisplayId}/onhold/followupusers"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
-
-    def get_onhold_followupuser(self, jobDisplayId: str, contactId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/onhold/followupuser/{contactId}
-
-        
-        
+        Args:
+            jobDisplayId: The job display ID
 
         Returns:
-            Dict[str, Any]: API response data
+            List[OnHoldUser] with available follow-up users
         """
-        path = "/{jobDisplayId}/onhold/followupuser/{contactId}"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        path = path.replace("{contactId}", str(contactId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_ONHOLD_FOLLOWUPUSERS']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        return self._make_request(route)
 
-    def put_onhold_dates(self, jobDisplayId: str, onHoldId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """PUT /api/job/{jobDisplayId}/onhold/{onHoldId}/dates
+    def get_onhold_followupuser(
+        self,
+        jobDisplayId: str,
+        contactId: str
+    ) -> Dict[str, Any]:
+        """Get a specific follow-up user by contact ID.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            contactId: The contact ID of the follow-up user
 
         Returns:
-            Dict[str, Any]: API response data
+            OnHoldUser details
         """
-        path = "/{jobDisplayId}/onhold/{onHoldId}/dates"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        path = path.replace("{onHoldId}", str(onHoldId))
+        route = self.routes['GET_ONHOLD_FOLLOWUPUSER']
+        route.params = {
+            "jobDisplayId": str(jobDisplayId),
+            "contactId": str(contactId)
+        }
+        return self._make_request(route)
+
+    def put_onhold_dates(
+        self,
+        jobDisplayId: str,
+        onHoldId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Update dates for an on-hold item.
+
+        Args:
+            jobDisplayId: The job display ID
+            onHoldId: The on-hold item ID
+            data: SaveOnHoldDatesModel with date updates
+
+        Returns:
+            ResolveJobOnHoldResponse confirming update
+        """
+        route = self.routes['PUT_ONHOLD_DATES']
+        route.params = {
+            "jobDisplayId": str(jobDisplayId),
+            "onHoldId": str(onHoldId)
+        }
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("PUT", path, **kwargs)
+        return self._make_request(route, **kwargs)

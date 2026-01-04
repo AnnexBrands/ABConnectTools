@@ -41,9 +41,36 @@ class CompanyBrandTreeNode(ABConnectBaseModel):
     children: Optional[List["CompanyBrandTreeNode"]] = Field(None, description="Child brand nodes")
 
     def __repr__(self) -> str:
-        """Return string representation."""
-        child_count = len(self.children) if self.children else 0
-        return f"CompanyBrandTreeNode(code={self.code!r}, name={self.name!r}, children={child_count})"
+        """
+        Return a nicely indented, recursive string representation of the tree node.
+        
+        Example output:
+            CompanyBrandTreeNode(code='ROOT', name='Acme Corp', children=[
+                CompanyBrandTreeNode(code='BR1', name='Brand One', children=[]),
+                CompanyBrandTreeNode(code='BR2', name='Brand Two', children=[
+                    CompanyBrandTreeNode(code='SUB1', name='Sub Brand', children=[]),
+                ]),
+            ])
+        """
+        lines = []
+        lines.append(f"CompanyBrandTreeNode(")
+        lines.append(f"    code={self.code!r},")
+        lines.append(f"    name={self.name!r},")
+        
+        if not self.children:
+            lines.append(f"    children=[]")
+        else:
+            lines.append(f"    children=[")
+            for child in self.children:
+                # Recursive repr, indent each child line by 8 spaces
+                child_repr = repr(child).split("\n")
+                for line in child_repr:
+                    lines.append(f"        {line}")
+            lines.append(f"    ],")
+        
+        lines.append(f")")
+        
+        return "\n".join(lines)
 
 
 class Company(TimestampedModel):

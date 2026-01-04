@@ -40,7 +40,7 @@ class DashboardEndpoint(BaseEndpoint):
             params["companyId"] = company_id
         if params:
             route.params = params
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_gridviewstate(self, id: str) -> dict:
         """GET /api/dashboard/gridviewstate/{id}
@@ -50,7 +50,7 @@ class DashboardEndpoint(BaseEndpoint):
         """
         route = self.routes['GRIDVIEWSTATE']
         route.params = {"id": id}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def post_gridviewstate(self, id: str, data: dict = None) -> dict:
         """POST /api/dashboard/gridviewstate/{id}
@@ -63,7 +63,7 @@ class DashboardEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def get_gridviews(self, company_id: Optional[str] = None) -> dict:
         """GET /api/dashboard/gridviews
@@ -74,7 +74,7 @@ class DashboardEndpoint(BaseEndpoint):
         route = self.routes['GRIDVIEWS']
         if company_id is not None:
             route.params = {"companyId": company_id}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def post_inbound(self, company_id: Optional[str] = None, data: dict = None) -> List[dict]:
         """POST /api/dashboard/inbound
@@ -88,7 +88,7 @@ class DashboardEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_recentestimates(self, company_id: Optional[str] = None, data: dict = None) -> List[dict]:
         """POST /api/dashboard/recentestimates
@@ -102,7 +102,7 @@ class DashboardEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_inhouse(self, company_id: Optional[str] = None, data: dict = None) -> List[dict]:
         """POST /api/dashboard/inhouse
@@ -116,7 +116,7 @@ class DashboardEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_outbound(self, company_id: Optional[str] = None, data: dict = None) -> List[dict]:
         """POST /api/dashboard/outbound
@@ -130,7 +130,7 @@ class DashboardEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_local_deliveries(self, company_id: Optional[str] = None, data: dict = None) -> List[dict]:
         """POST /api/dashboard/local-deliveries
@@ -144,7 +144,7 @@ class DashboardEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_incrementjobstatus(self, data: dict = None) -> dict:
         """POST /api/dashboard/incrementjobstatus

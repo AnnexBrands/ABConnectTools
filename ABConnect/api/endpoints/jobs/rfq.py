@@ -1,51 +1,64 @@
-"""Job Rfq API endpoints.
+"""Job RFQ API endpoints.
 
-Auto-generated from swagger.json specification.
+Provides access to job RFQ (Request for Quote) operations
+including retrieval and status checking.
 """
 
-from typing import List, Optional, Dict, Any
+from typing import Optional, Dict, Any
 from ABConnect.api.endpoints.base import BaseEndpoint
+from ABConnect.api.routes import SCHEMA
 
 
 class JobRfqEndpoint(BaseEndpoint):
-    """JobRfq API endpoint operations.
+    """Job RFQ API endpoint operations.
 
-    Total endpoints: 2
+    Handles RFQ retrieval and status operations for jobs.
     """
 
     api_path = "job"
+    routes = SCHEMA["JOB"]
 
-    def get_rfq(self, jobDisplayId: str, rfq_service_type: Optional[str] = None) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/rfq
+    def get_rfq(
+        self,
+        jobDisplayId: str,
+        rfq_service_type: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """Get RFQ information for a job.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            rfq_service_type: Optional service type filter
 
         Returns:
-            Dict[str, Any]: API response data
+            List[QuoteRequestDisplayInfo] with RFQ details
         """
-        path = "/{jobDisplayId}/rfq"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['GET_RFQ']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
-        params = {}
         if rfq_service_type is not None:
-            params["rfqServiceType"] = rfq_service_type
-        if params:
-            kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
+            kwargs["params"] = {"rfqServiceType": rfq_service_type}
+        return self._make_request(route, **kwargs)
 
-    def get_rfq_statusof_forcompany(self, companyId: str, rfqServiceType: str, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/rfq/statusof/{rfqServiceType}/forcompany/{companyId}
+    def get_rfq_statusof_forcompany(
+        self,
+        companyId: str,
+        rfqServiceType: str,
+        jobDisplayId: str
+    ) -> Dict[str, Any]:
+        """Get RFQ status for a specific company.
 
-        
-        
+        Args:
+            companyId: The company ID
+            rfqServiceType: The RFQ service type
+            jobDisplayId: The job display ID
 
         Returns:
-            Dict[str, Any]: API response data
+            QuoteRequestStatus with status details
         """
-        path = "/{jobDisplayId}/rfq/statusof/{rfqServiceType}/forcompany/{companyId}"
-        path = path.replace("{companyId}", str(companyId))
-        path = path.replace("{rfqServiceType}", str(rfqServiceType))
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_RFQ_STATUSOF_FORCOMPANY']
+        route.params = {
+            "jobDisplayId": str(jobDisplayId),
+            "rfqServiceType": str(rfqServiceType),
+            "companyId": str(companyId)
+        }
+        return self._make_request(route)

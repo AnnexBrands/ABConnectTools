@@ -1,81 +1,108 @@
 """Job Email API endpoints.
 
-Auto-generated from swagger.json specification.
+Provides access to job email operations including sending documents,
+transactional emails, and template-based emails.
 """
 
-from typing import List, Optional, Dict, Any
+from typing import Optional, Dict, Any
 from ABConnect.api.endpoints.base import BaseEndpoint
+from ABConnect.api.routes import SCHEMA
 
 
 class JobEmailEndpoint(BaseEndpoint):
-    """JobEmail API endpoint operations.
+    """Job Email API endpoint operations.
 
-    Total endpoints: 4
+    Handles email sending for documents and transactional emails.
     """
 
     api_path = "job"
+    routes = SCHEMA["JOB"]
 
-    def post_email_senddocument(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/email/senddocument
+    def post_email(
+        self,
+        jobDisplayId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Send an email for a job.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: SendDocumentEmailModel with email content
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming send
         """
-        path = "/{jobDisplayId}/email/senddocument"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['POST_EMAIL']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
-    def post_email(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/email
+    def post_email_senddocument(
+        self,
+        jobDisplayId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Send a document via email for a job.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: SendDocumentEmailModel with document and recipients
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming send
         """
-        path = "/{jobDisplayId}/email"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['POST_EMAIL_SENDDOCUMENT']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
-    def post_email_createtransactionalemail(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/email/createtransactionalemail
+    def post_email_createtransactionalemail(
+        self,
+        jobDisplayId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Create a transactional email for a job.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: Optional transactional email parameters
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming creation
         """
-        path = "/{jobDisplayId}/email/createtransactionalemail"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['POST_EMAIL_CREATETRANSACTIONALEMAIL']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
-    def post_email_send(self, jobDisplayId: str, emailTemplateGuid: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/email/{emailTemplateGuid}/send
+    def post_email_send(
+        self,
+        jobDisplayId: str,
+        emailTemplateGuid: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Send an email using a template.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            emailTemplateGuid: The email template GUID
+            data: Optional template variables
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming send
         """
-        path = f"/{jobDisplayId}/email/{emailTemplateGuid}/send"
-        path = path.replace("{emailTemplateGuid}", str(emailTemplateGuid))
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['POST_EMAIL_SEND']
+        route.params = {
+            "jobDisplayId": str(jobDisplayId),
+            "emailTemplateGuid": str(emailTemplateGuid)
+        }
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)

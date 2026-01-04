@@ -8,6 +8,14 @@ Tracking implementation of route-based endpoints with examples, fixtures, and te
 - ⏳ In progress
 - ❌ Not started
 
+## Directive
+All endpoints MUST use routes from SCHEMA, not hardcoded paths:
+```python
+route = self.routes['ROUTE_KEY']
+route.params = {"paramName": value}
+return self._make_request(route.method, route, **kwargs)
+```
+
 ---
 
 ## COMPANIES (21 routes)
@@ -133,171 +141,200 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 
 ## JOB - Core (10 routes)
 
-| Route | Hooman | Endpoint | Example | Fixture | Test |
-|-------|--------|----------|---------|---------|------|
-| GET | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_CALENDARITEMS | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_DOCUMENT_CONFIG | | ✅ | ❌ | ❌ | ❌ |
-| GET_FEEDBACK | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_JOB_ACCESS_LEVEL | | ❌ | ❌ | ❌ | ❌ |
-| GET_SEARCH | | ❌ | ❌ | ❌ | ❌ |
-| GET_UPDATE_PAGE_CONFIG | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_BOOK | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_SEARCH_BY_DETAILS | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_TRANSFER | ❗ | ❌ | ❌ | ❌ | ❌ |
-| PUT_SAVE | ❗ | ❌ | ❌ | ❌ | ❌ |
+All core job endpoints now use SCHEMA routes with proper docstrings (jobs/job.py refactored).
+
+| Route | Hooman | Endpoint | Docstring | Example | Fixture | Test |
+|-------|--------|----------|-----------|---------|---------|------|
+| GET | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_CALENDARITEMS | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_DOCUMENT_CONFIG | | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_FEEDBACK | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_JOB_ACCESS_LEVEL | | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_SEARCH | | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_UPDATE_PAGE_CONFIG | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_BOOK | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_SEARCH_BY_DETAILS | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_TRANSFER | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| PUT_SAVE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
 ## JOB - OnHold (9 routes)
 
-| Route | Hooman | Endpoint | Example | Fixture | Test |
-|-------|--------|----------|---------|---------|------|
-| DELETE_ONHOLD | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_ONHOLD | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_ONHOLD_FOLLOWUPUSER | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_ONHOLD_FOLLOWUPUSERS | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_ONHOLD | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_ONHOLD_COMMENT | ❗ | ❌ | ❌ | ❌ | ❌ |
-| PUT_ONHOLD | ❗ | ❌ | ❌ | ❌ | ❌ |
-| PUT_ONHOLD_DATES | ❗ | ❌ | ❌ | ❌ | ❌ |
-| PUT_ONHOLD_RESOLVE | ❗ | ❌ | ❌ | ❌ | ❌ |
+All OnHold endpoints now use SCHEMA routes with proper docstrings (jobs/onhold.py refactored).
+
+| Route | Hooman | Endpoint | Docstring | Example | Fixture | Test |
+|-------|--------|----------|-----------|---------|---------|------|
+| DELETE_ONHOLD | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_ONHOLD | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_ONHOLD_LIST | | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_ONHOLD_FOLLOWUPUSER | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_ONHOLD_FOLLOWUPUSERS | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_ONHOLD | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_ONHOLD_COMMENT | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| PUT_ONHOLD | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| PUT_ONHOLD_DATES | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| PUT_ONHOLD_RESOLVE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
 ## JOB - Payment (12 routes)
 
-| Route | Hooman | Endpoint | Example | Fixture | Test |
-|-------|--------|----------|---------|---------|------|
-| GET_PAYMENT | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_PAYMENT_CREATE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_PAYMENT_SOURCES | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_PRICE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_PAYMENT_ACHCREDIT_TRANSFER | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_PAYMENT_ACHPAYMENT_SESSION | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_PAYMENT_ATTACH_CUSTOMER_BANK | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_PAYMENT_BANKSOURCE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_PAYMENT_BYSOURCE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_PAYMENT_CANCEL_JOB_ACHVERIFICATION | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_PAYMENT_VERIFY_JOB_ACHSOURCE | ❗ | ❌ | ❌ | ❌ | ❌ |
+All Payment endpoints now use SCHEMA routes with proper docstrings (jobs/payment.py refactored).
+
+| Route | Hooman | Endpoint | Docstring | Example | Fixture | Test |
+|-------|--------|----------|-----------|---------|---------|------|
+| GET_PAYMENT | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_PAYMENT_CREATE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_PAYMENT_SOURCES | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_PRICE | ❗ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| POST_PAYMENT_ACHCREDIT_TRANSFER | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_PAYMENT_ACHPAYMENT_SESSION | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_PAYMENT_ATTACH_CUSTOMER_BANK | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_PAYMENT_BANKSOURCE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_PAYMENT_BYSOURCE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_PAYMENT_CANCEL_JOB_ACHVERIFICATION | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_PAYMENT_VERIFY_JOB_ACHSOURCE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
 ## JOB - Shipment (12 routes)
 
-| Route | Hooman | Endpoint | Example | Fixture | Test |
-|-------|--------|----------|---------|---------|------|
-| DELETE_SHIPMENT | ❗ | ❌ | ❌ | ❌ | ❌ |
-| DELETE_SHIPMENT_ACCESSORIAL | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_SHIPMENT_ACCESSORIALS | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_SHIPMENT_EXPORTDATA | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_SHIPMENT_ORIGINDESTINATION | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_SHIPMENT_RATEQUOTES | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_SHIPMENT_RATESSTATE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_SHIPMENT_ACCESSORIAL | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_SHIPMENT_BOOK | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_SHIPMENT_EXPORTDATA | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_SHIPMENT_RATEQUOTES | ❗ | ❌ | ❌ | ❌ | ❌ |
+All Shipment endpoints now use SCHEMA routes with proper docstrings (jobs/shipment.py refactored).
+
+| Route | Hooman | Endpoint | Docstring | Example | Fixture | Test |
+|-------|--------|----------|-----------|---------|---------|------|
+| DELETE_SHIPMENT | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| DELETE_SHIPMENT_ACCESSORIAL | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_SHIPMENT_ACCESSORIALS | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_SHIPMENT_EXPORTDATA | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_SHIPMENT_ORIGINDESTINATION | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_SHIPMENT_RATEQUOTES | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_SHIPMENT_RATESSTATE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_SHIPMENT_ACCESSORIAL | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_SHIPMENT_BOOK | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_SHIPMENT_EXPORTDATA | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_SHIPMENT_RATEQUOTES | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
-## JOB - Timeline (7 routes)
+## JOB - Timeline (8 routes)
 
-| Route | Hooman | Endpoint | Example | Fixture | Test |
-|-------|--------|----------|---------|---------|------|
-| DELETE_TIMELINE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_TIMELINE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_TIMELINE_AGENT | ❗ | ❌ | ❌ | ❌ | ❌ |
-| PATCH_TIMELINE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_TIMELINE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_TIMELINE_INCREMENTJOBSTATUS | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_TIMELINE_UNDOINCREMENTJOBSTATUS | ❗ | ❌ | ❌ | ❌ | ❌ |
+All Timeline endpoints now use SCHEMA routes with proper docstrings (jobs/timeline.py refactored).
+
+| Route | Hooman | Endpoint | Docstring | Example | Fixture | Test |
+|-------|--------|----------|-----------|---------|---------|------|
+| DELETE_TIMELINE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_TIMELINE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_TIMELINE_LIST | | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_TIMELINE_AGENT | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| PATCH_TIMELINE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_TIMELINE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_TIMELINE_INCREMENTJOBSTATUS | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_TIMELINE_UNDOINCREMENTJOBSTATUS | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
 ## JOB - FreightProviders (4 routes)
 
-| Route | Hooman | Endpoint | Example | Fixture | Test |
-|-------|--------|----------|---------|---------|------|
-| GET_FREIGHTPROVIDERS | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_FREIGHTITEMS | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_FREIGHTPROVIDERS | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_FREIGHTPROVIDERS_RATEQUOTE | ❗ | ❌ | ❌ | ❌ | ❌ |
+All FreightProviders endpoints now use SCHEMA routes with proper docstrings (jobs/freightproviders.py refactored).
+
+| Route | Hooman | Endpoint | Docstring | Example | Fixture | Test |
+|-------|--------|----------|-----------|---------|---------|------|
+| GET_FREIGHTPROVIDERS | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_FREIGHTITEMS | ❗ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| POST_FREIGHTPROVIDERS | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_FREIGHTPROVIDERS_RATEQUOTE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
-## JOB - ParcelItems (4 routes)
+## JOB - ParcelItems (5 routes)
 
-| Route | Hooman | Endpoint | Example | Fixture | Test |
-|-------|--------|----------|---------|---------|------|
-| DELETE_PARCELITEMS | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_PACKAGINGCONTAINERS | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_PARCELITEMS | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_PARCEL_ITEMS_WITH_MATERIALS | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_PARCELITEMS | ❗ | ❌ | ❌ | ❌ | ❌ |
+All ParcelItems endpoints now use SCHEMA routes with proper docstrings (jobs/parcelitems.py refactored).
+
+| Route | Hooman | Endpoint | Docstring | Example | Fixture | Test |
+|-------|--------|----------|-----------|---------|---------|------|
+| DELETE_PARCELITEMS | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_PACKAGINGCONTAINERS | ❗ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| GET_PARCELITEMS | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_PARCEL_ITEMS_WITH_MATERIALS | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_PARCELITEMS | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
-## JOB - Email (5 routes)
+## JOB - Email (4 routes)
 
-| Route | Hooman | Endpoint | Example | Fixture | Test |
-|-------|--------|----------|---------|---------|------|
-| POST_EMAIL | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_EMAIL_CREATETRANSACTIONALEMAIL | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_EMAIL_SEND | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_EMAIL_SENDDOCUMENT | ❗ | ❌ | ❌ | ❌ | ❌ |
+All Email endpoints now use SCHEMA routes with proper docstrings (jobs/email.py refactored).
+
+| Route | Hooman | Endpoint | Docstring | Example | Fixture | Test |
+|-------|--------|----------|-----------|---------|---------|------|
+| POST_EMAIL | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_EMAIL_CREATETRANSACTIONALEMAIL | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_EMAIL_SEND | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_EMAIL_SENDDOCUMENT | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
 ## JOB - SMS (4 routes)
 
-| Route | Hooman | Endpoint | Example | Fixture | Test |
-|-------|--------|----------|---------|---------|------|
-| GET_SMS | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_SMS_TEMPLATEBASED | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_SMS | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_SMS_READ | ❗ | ❌ | ❌ | ❌ | ❌ |
+All SMS endpoints now use SCHEMA routes with proper docstrings (jobs/sms.py refactored).
+
+| Route | Hooman | Endpoint | Docstring | Example | Fixture | Test |
+|-------|--------|----------|-----------|---------|---------|------|
+| GET_SMS | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_SMS_TEMPLATEBASED | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_SMS | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_SMS_READ | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
-## JOB - RFQ (3 routes)
+## JOB - RFQ (2 routes)
 
-| Route | Hooman | Endpoint | Example | Fixture | Test |
-|-------|--------|----------|---------|---------|------|
-| GET_RFQ | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_RFQ_STATUSOF_FORCOMPANY | ❗ | ❌ | ❌ | ❌ | ❌ |
+All RFQ endpoints now use SCHEMA routes with proper docstrings (jobs/rfq.py refactored).
 
----
-
-## JOB - Notes (4 routes)
-
-| Route | Hooman | Endpoint | Example | Fixture | Test |
-|-------|--------|----------|---------|---------|------|
-| GET_NOTE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_ITEM_NOTES | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_NOTE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| PUT_NOTE | ❗ | ❌ | ❌ | ❌ | ❌ |
+| Route | Hooman | Endpoint | Docstring | Example | Fixture | Test |
+|-------|--------|----------|-----------|---------|---------|------|
+| GET_RFQ | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_RFQ_STATUSOF_FORCOMPANY | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
-## JOB - Tracking (4 routes)
+## JOB - Notes (5 routes)
 
-| Route | Hooman | Endpoint | Example | Fixture | Test |
-|-------|--------|----------|---------|---------|------|
-| GET_TRACKING | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_TRACKING_SHIPMENT | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET_SUBMANAGEMENTSTATUS | ❗ | ❌ | ❌ | ❌ | ❌ |
+All Note endpoints now use SCHEMA routes with proper docstrings (jobs/note.py refactored).
+
+| Route | Hooman | Endpoint | Docstring | Example | Fixture | Test |
+|-------|--------|----------|-----------|---------|---------|------|
+| GET_NOTE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_NOTE_LIST | | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST_ITEM_NOTES | ❗ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| POST_NOTE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| PUT_NOTE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+
+---
+
+## JOB - Tracking (3 routes)
+
+All Tracking endpoints now use SCHEMA routes with proper docstrings (jobs/tracking.py refactored).
+
+| Route | Hooman | Endpoint | Docstring | Example | Fixture | Test |
+|-------|--------|----------|-----------|---------|---------|------|
+| GET_TRACKING | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_TRACKING_SHIPMENT | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET_SUBMANAGEMENTSTATUS | ❗ | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ---
 
 ## JOB - Other (3 routes)
 
-| Route | Hooman | Endpoint | Example | Fixture | Test |
-|-------|--------|----------|---------|---------|------|
-| POST_CHANGE_AGENT | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST_STATUS_QUOTE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| PUT_ITEM | ❗ | ❌ | ❌ | ❌ | ❌ |
+Status endpoint now uses SCHEMA routes with proper docstrings (jobs/status.py refactored).
+
+| Route | Hooman | Endpoint | Docstring | Example | Fixture | Test |
+|-------|--------|----------|-----------|---------|---------|------|
+| POST_CHANGE_AGENT | ❗ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| POST_STATUS_QUOTE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| PUT_ITEM | ❗ | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ---
 
@@ -434,13 +471,15 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 
 ## JOBINTACCT (5 routes)
 
-| Route | Hooman | Endpoint | Example | Fixture | Test |
-|-------|--------|----------|---------|---------|------|
-| DELETE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| GET | ❗ | ❌ | ❌ | ❌ | ❌ |
-| POST | ❗ | ❌ | ❌ | ❌ | ❌ |
-| APPLY_REBATE | ❗ | ❌ | ❌ | ❌ | ❌ |
-| DRAFT | ❗ | ❌ | ❌ | ❌ | ❌ |
+All JobIntacct endpoints now use SCHEMA routes with proper docstrings (jobs/intacct.py refactored).
+
+| Route | Hooman | Endpoint | Docstring | Example | Fixture | Test |
+|-------|--------|----------|-----------|---------|---------|------|
+| DELETE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| GET | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| POST | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| APPLY_REBATE | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
+| DRAFT | ❗ | ✅ | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
@@ -638,14 +677,13 @@ Using `JOB_DISPLAY_ID = "2000000"` from `tests/constants.py`.
 
 1. **Complete routes refactoring for remaining files**
    - COMPLETED: lookup.py, views.py, dashboard.py, users.py, account.py, contacts.py, companies.py, SmsTemplate.py, shipment.py, partner.py, notifications.py, Values.py, documents.py
+   - COMPLETED: All `ABConnect/api/endpoints/jobs/` sub-endpoints (job.py, timeline.py, shipment.py, payment.py, onhold.py, sms.py, note.py, email.py, tracking.py, parcelitems.py, rfq.py, freightproviders.py, intacct.py, status.py, form.py)
    - REMAINING (still using hardcoded paths):
-     - `ABConnect/api/endpoints/jobs/` (all job sub-endpoints)
      - `ABConnect/api/endpoints/webhooks.py`
-     - `ABConnect/api/endpoints/rfq.py`
+     - `ABConnect/api/endpoints/rfq.py` (standalone RFQ endpoint, not job-related)
      - `ABConnect/api/endpoints/reports.py`
-     - `ABConnect/api/endpoints/note.py`
-     - `ABConnect/api/endpoints/jobintacct.py`
-     - `ABConnect/api/endpoints/email.py`
+     - `ABConnect/api/endpoints/note.py` (standalone NOTE endpoint, not job-related)
+     - `ABConnect/api/endpoints/email.py` (standalone EMAIL endpoint, not job-related)
      - `ABConnect/api/endpoints/e_sign.py`
      - `ABConnect/api/endpoints/address.py`
      - `ABConnect/api/endpoints/admin.py`

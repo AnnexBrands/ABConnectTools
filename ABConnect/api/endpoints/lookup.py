@@ -27,7 +27,7 @@ class LookupEndpoint(BaseEndpoint):
         """
         route = self.routes['GET']
         route.params = {"masterConstantKey": masterConstantKey, "valueId": valueId}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_countries(self) -> List[dict]:
         """GET /api/lookup/countries
@@ -38,7 +38,7 @@ class LookupEndpoint(BaseEndpoint):
             List[dict]: List of country code objects
         """
         route = self.routes['COUNTRIES']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_resetmasterconstantcache(self) -> dict:
         """GET /api/lookup/resetMasterConstantCache
@@ -47,7 +47,7 @@ class LookupEndpoint(BaseEndpoint):
             dict: API response data
         """
         route = self.routes['RESET_MASTER_CONSTANT_CACHE']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_accesskeys(self) -> List[dict]:
         """GET /api/lookup/accessKeys
@@ -58,7 +58,7 @@ class LookupEndpoint(BaseEndpoint):
             List[dict]: List of access key lookup values
         """
         route = self.routes['ACCESS_KEYS']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_accesskey(self, accessKey: str) -> dict:
         """GET /api/lookup/accessKey/{accessKey}
@@ -68,7 +68,7 @@ class LookupEndpoint(BaseEndpoint):
         """
         route = self.routes['ACCESS_KEY']
         route.params = {"accessKey": accessKey}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_documenttypes(self, document_source: Optional[str] = None) -> List[dict]:
         """GET /api/lookup/documentTypes
@@ -84,7 +84,7 @@ class LookupEndpoint(BaseEndpoint):
         route = self.routes['DOCUMENT_TYPES']
         if document_source is not None:
             route.params = {"documentSource": document_source}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_items(self, job_display_id: Optional[str] = None, job_item_id: Optional[str] = None) -> dict:
         """GET /api/lookup/items
@@ -100,7 +100,7 @@ class LookupEndpoint(BaseEndpoint):
             params["jobItemId"] = job_item_id
         if params:
             route.params = params
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_refercategory(self) -> dict:
         """GET /api/lookup/referCategory
@@ -109,7 +109,7 @@ class LookupEndpoint(BaseEndpoint):
             dict: API response data
         """
         route = self.routes['REFER_CATEGORY']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_refercategoryheirachy(self) -> dict:
         """GET /api/lookup/referCategoryHeirachy
@@ -118,7 +118,7 @@ class LookupEndpoint(BaseEndpoint):
             dict: API response data
         """
         route = self.routes['REFER_CATEGORY_HEIRACHY']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_ppccampaigns(self) -> dict:
         """GET /api/lookup/PPCCampaigns
@@ -127,7 +127,7 @@ class LookupEndpoint(BaseEndpoint):
             dict: API response data
         """
         route = self.routes['PPCCAMPAIGNS']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_parcelpackagetypes(self) -> List[dict]:
         """GET /api/lookup/parcelPackageTypes
@@ -138,7 +138,7 @@ class LookupEndpoint(BaseEndpoint):
             List[dict]: List of parcel package type lookup values
         """
         route = self.routes['PARCEL_PACKAGE_TYPES']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_comoninsurance(self) -> dict:
         """GET /api/lookup/comonInsurance
@@ -147,7 +147,7 @@ class LookupEndpoint(BaseEndpoint):
             dict: API response data
         """
         route = self.routes['COMON_INSURANCE']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_contacttypes(self) -> List[dict]:
         """GET /api/lookup/contactTypes
@@ -158,7 +158,7 @@ class LookupEndpoint(BaseEndpoint):
             List[dict]: List of contact type entities
         """
         route = self.routes['CONTACT_TYPES']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_densityclassmap(self, carrier_api: Optional[str] = None) -> List[dict]:
         """GET /api/lookup/densityClassMap
@@ -174,4 +174,4 @@ class LookupEndpoint(BaseEndpoint):
         route = self.routes['DENSITY_CLASS_MAP']
         if carrier_api is not None:
             route.params = {"carrierApi": carrier_api}
-        return self._make_request(route.method, route)
+        return self._make_request(route)

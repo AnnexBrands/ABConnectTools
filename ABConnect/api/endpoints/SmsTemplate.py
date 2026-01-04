@@ -28,7 +28,7 @@ class SmstemplateEndpoint(BaseEndpoint):
             dict: Notification tokens
         """
         route = self.routes['NOTIFICATION_TOKENS']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_jobstatuses(self) -> dict:
         """GET /api/SmsTemplate/jobStatuses
@@ -39,7 +39,7 @@ class SmstemplateEndpoint(BaseEndpoint):
             dict: Job statuses
         """
         route = self.routes['JOB_STATUSES']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_list(self, company_id: Optional[str] = None) -> List[dict]:
         """GET /api/SmsTemplate/list
@@ -55,7 +55,7 @@ class SmstemplateEndpoint(BaseEndpoint):
         route = self.routes['LIST']
         if company_id is not None:
             route.params = {"companyId": company_id}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def list(self, company: Optional[Union[str, None]] = None) -> List[dict]:
         """Get SMS templates for a company.
@@ -71,7 +71,7 @@ class SmstemplateEndpoint(BaseEndpoint):
         route = self.routes['LIST']
         if company:
             route.params = {"companyId": self.get_cache(company)}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_get(self, templateId: str) -> dict:
         """GET /api/SmsTemplate/{templateId}
@@ -81,7 +81,7 @@ class SmstemplateEndpoint(BaseEndpoint):
         """
         route = self.routes['GET']
         route.params = {"templateId": templateId}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def delete_delete(self, templateId: str) -> dict:
         """DELETE /api/SmsTemplate/{templateId}
@@ -91,7 +91,7 @@ class SmstemplateEndpoint(BaseEndpoint):
         """
         route = self.routes['DELETE']
         route.params = {"templateId": templateId}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def post_save(self, data: dict = None) -> dict:
         """POST /api/SmsTemplate/save
@@ -103,4 +103,4 @@ class SmstemplateEndpoint(BaseEndpoint):
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)

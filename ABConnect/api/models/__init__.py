@@ -60,9 +60,21 @@ if TYPE_CHECKING:
 
 # Lazy loading function to avoid circular imports
 _MODELS = {}
+_REBUILT = False
 
 def __getattr__(name):
-    """Lazy load models to avoid circular imports."""
+    """Lazy load models to avoid circular imports.
+
+    Automatically rebuilds all models on first access to resolve forward references.
+    """
+    global _REBUILT
+
+    # Rebuild all models once on first access to resolve forward references
+    if not _REBUILT:
+        rebuild_models()
+        _REBUILT = True
+
+    # Check cache (models may have been loaded during rebuild)
     if name in _MODELS:
         return _MODELS[name]
 

@@ -4,9 +4,10 @@ Companies API Examples - Getting Responses as Pydantic Objects
 This example demonstrates how to work with companies and get typed responses.
 """
 
-from ABConnect.api import ABConnectAPI, models
+from ABConnect import ABConnectAPI, models
 from _helpers import save_fixture
 from _constants import COMPANY_ID
+import json
 
 api = ABConnectAPI(env='staging', username='instaquote')
 

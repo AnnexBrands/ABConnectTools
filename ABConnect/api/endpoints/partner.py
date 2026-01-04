@@ -30,7 +30,7 @@ class PartnerEndpoint(BaseEndpoint):
             List[Dict[str, Any]]: List of partners
         """
         route = self.routes['GET']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_get(self, id: str) -> Dict[str, Any]:
         """GET /api/partner/{id}
@@ -45,7 +45,7 @@ class PartnerEndpoint(BaseEndpoint):
         """
         route = self.routes['GET']
         route.params = {"id": id}
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def post_search(self, data: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
         """POST /api/partner/search
@@ -62,4 +62,4 @@ class PartnerEndpoint(BaseEndpoint):
         kwargs: Dict[str, Any] = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request(route.method, route, **kwargs)
+        return self._make_request(route, **kwargs)

@@ -1,168 +1,184 @@
 """Job Timeline API endpoints.
 
-Auto-generated from swagger.json specification.
-
-New in API version 709:
-- POST /api/job/{jobDisplayId}/timeline/incrementjobstatus
-- POST /api/job/{jobDisplayId}/timeline/undoincrementjobstatus
+Provides access to job timeline operations including status tracking,
+task management, and job status increments.
 """
 
-from typing import List, Optional, Dict, Any
+from typing import Optional, Dict, Any
 from ABConnect.api.endpoints.base import BaseEndpoint
+from ABConnect.api.routes import SCHEMA
 
 
 class JobTimelineEndpoint(BaseEndpoint):
-    """JobTimeline API endpoint operations.
+    """Job Timeline API endpoint operations.
 
-    Total endpoints: 8 (6 original + 2 new in v709)
+    Handles timeline tasks, status changes, and increment operations.
     """
 
     api_path = "job"
+    routes = SCHEMA["JOB"]
 
     def get_timeline(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/timeline
+        """Get all timeline tasks for a job.
 
-        
-        
-
-        Returns:
-            Dict[str, Any]: API response data
-        """
-        path = "/{jobDisplayId}/timeline"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
-
-    def post_timeline(self, jobDisplayId: str, create_email: Optional[str] = None, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/timeline
-
-        
-        
+        Args:
+            jobDisplayId: The job display ID (e.g., '2000000')
 
         Returns:
-            Dict[str, Any]: API response data
+            List[CarrierTask] with all timeline tasks
         """
-        path = "/{jobDisplayId}/timeline"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['GET_TIMELINE_LIST']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        return self._make_request(route)
+
+    def post_timeline(
+        self,
+        jobDisplayId: str,
+        create_email: Optional[str] = None,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Create a new timeline task for a job.
+
+        Args:
+            jobDisplayId: The job display ID
+            create_email: Optional email creation flag
+            data: TimelineTaskInput with task details
+
+        Returns:
+            SaveResponseModel with created task info
+        """
+        route = self.routes['POST_TIMELINE']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
-        params = {}
         if create_email is not None:
-            params["createEmail"] = create_email
-        if params:
-            kwargs["params"] = params
+            kwargs["params"] = {"createEmail": create_email}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
-    def patch_timeline(self, timelineTaskId: str, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """PATCH /api/job/{jobDisplayId}/timeline/{timelineTaskId}
+    def patch_timeline(
+        self,
+        timelineTaskId: str,
+        jobDisplayId: str,
+        data: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
+        """Update an existing timeline task.
 
-        
-        
+        Args:
+            timelineTaskId: The timeline task ID to update
+            jobDisplayId: The job display ID
+            data: UpdateTaskModel with updated task details
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming update
         """
-        path = "/{jobDisplayId}/timeline/{timelineTaskId}"
-        path = path.replace("{timelineTaskId}", str(timelineTaskId))
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['PATCH_TIMELINE']
+        route.params = {
+            "jobDisplayId": str(jobDisplayId),
+            "timelineTaskId": str(timelineTaskId)
+        }
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("PATCH", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def delete_timeline(self, timelineTaskId: str, jobDisplayId: str) -> Dict[str, Any]:
-        """DELETE /api/job/{jobDisplayId}/timeline/{timelineTaskId}
+        """Delete a timeline task.
 
-        
-        
-
-        Returns:
-            Dict[str, Any]: API response data
-        """
-        path = "/{jobDisplayId}/timeline/{timelineTaskId}"
-        path = path.replace("{timelineTaskId}", str(timelineTaskId))
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("DELETE", path, **kwargs)
-
-    def get_timeline_task(self, timelineTaskIdentifier: str, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/timeline/{timelineTaskIdentifier}
-
-        
-        
+        Args:
+            timelineTaskId: The timeline task ID to delete
+            jobDisplayId: The job display ID
 
         Returns:
-            Dict[str, Any]: API response data
+            DeleteTaskResponse confirming deletion
         """
-        path = "/{jobDisplayId}/timeline/{timelineTaskIdentifier}"
-        path = path.replace("{timelineTaskIdentifier}", str(timelineTaskIdentifier))
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['DELETE_TIMELINE']
+        route.params = {
+            "jobDisplayId": str(jobDisplayId),
+            "timelineTaskId": str(timelineTaskId)
+        }
+        return self._make_request(route)
+
+    def get_timeline_task(
+        self,
+        timelineTaskIdentifier: str,
+        jobDisplayId: str
+    ) -> Dict[str, Any]:
+        """Get a specific timeline task by identifier.
+
+        Args:
+            timelineTaskIdentifier: The task identifier
+            jobDisplayId: The job display ID
+
+        Returns:
+            CarrierTask with task details
+        """
+        route = self.routes['GET_TIMELINE']
+        route.params = {
+            "jobDisplayId": str(jobDisplayId),
+            "timelineTaskIdentifier": str(timelineTaskIdentifier)
+        }
+        return self._make_request(route)
 
     def get_timeline_agent(self, taskCode: str, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/timeline/{taskCode}/agent
+        """Get the agent assigned to a timeline task.
 
-
+        Args:
+            taskCode: The task code
+            jobDisplayId: The job display ID
 
         Returns:
-            Dict[str, Any]: API response data
+            CompanyListItem with agent company info
         """
-        path = "/{jobDisplayId}/timeline/{taskCode}/agent"
-        path = path.replace("{taskCode}", str(taskCode))
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
-
-    # =========================================================================
-    # New endpoints in API version 709
-    # =========================================================================
+        route = self.routes['GET_TIMELINE_AGENT']
+        route.params = {
+            "jobDisplayId": str(jobDisplayId),
+            "taskCode": str(taskCode)
+        }
+        return self._make_request(route)
 
     def post_incrementjobstatus(
-        self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None
+        self,
+        jobDisplayId: str,
+        data: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/timeline/incrementjobstatus
+        """Increment the job status to the next stage.
 
-        Increment the job status to the next stage.
-
-        .. versionadded:: 709
-            Replaces deprecated /api/dashboard/incrementjobstatus endpoint.
-            The jobId is now passed via URL path instead of request body.
+        Advances the job through its workflow stages (e.g., Quote -> Booked).
 
         Args:
-            jobDisplayId: Job display ID (integer as string)
-            data: Optional request data (IncrementJobStatusInputModel - note: jobId removed)
+            jobDisplayId: The job display ID
+            data: Optional IncrementJobStatusInputModel
 
         Returns:
-            Dict[str, Any]: IncrementJobStatusResponseModel with success status
+            IncrementJobStatusResponseModel with success status
         """
-        path = f"/{jobDisplayId}/timeline/incrementjobstatus"
-        kwargs: Dict[str, Any] = {}
+        route = self.routes['POST_TIMELINE_INCREMENTJOBSTATUS']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_undoincrementjobstatus(
-        self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None
+        self,
+        jobDisplayId: str,
+        data: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/timeline/undoincrementjobstatus
+        """Undo the last job status increment.
 
-        Undo the last job status increment.
-
-        .. versionadded:: 709
-            Replaces deprecated /api/dashboard/undoincrementjobstatus endpoint.
-            The jobId is now passed via URL path instead of request body.
+        Reverts the job to its previous workflow stage.
 
         Args:
-            jobDisplayId: Job display ID (integer as string)
+            jobDisplayId: The job display ID
             data: Optional request data
 
         Returns:
-            Dict[str, Any]: Response data
+            ServiceBaseResponse confirming undo
         """
-        path = f"/{jobDisplayId}/timeline/undoincrementjobstatus"
-        kwargs: Dict[str, Any] = {}
+        route = self.routes['POST_TIMELINE_UNDOINCREMENTJOBSTATUS']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)

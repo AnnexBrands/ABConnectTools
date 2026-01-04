@@ -25,4 +25,4 @@ class NotificationsEndpoint(BaseEndpoint):
             dict: API response data
         """
         route = self.routes['GET']
-        return self._make_request(route.method, route)
+        return self._make_request(route)

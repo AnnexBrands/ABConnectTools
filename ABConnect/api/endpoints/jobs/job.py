@@ -1,335 +1,335 @@
-"""Job Job API endpoints.
+"""Job API endpoints.
 
-Auto-generated from swagger.json specification.
-
-New in API version 709:
-- PUT /api/job/{jobDisplayId}/item/{itemId}
+Provides access to core job operations including creation, retrieval,
+search, and updates for shipping jobs in the ABConnect system.
 """
 
-from typing import List, Optional, Dict, Any
+from typing import Optional, Dict, Any
 from ABConnect.api.endpoints.base import BaseEndpoint
 from ABConnect.api.routes import SCHEMA
 
 
 class JobEndpoint(BaseEndpoint):
-    """Job API endpoint operations.
+    """Core Job API operations.
 
-    Total endpoints: 20 (19 original + 1 new in v709)
+    Handles job creation, retrieval, search, booking, and updates.
     """
 
     api_path = "job"
     routes = SCHEMA["JOB"]
 
-    def post_book(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/book
-
-        
-        
-
-        Returns:
-            Dict[str, Any]: API response data
-        """
-        path = "/{jobDisplayId}/book"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        if data is not None:
-            kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
-
     def get(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}
+        """Retrieve a job by display ID.
 
-        
-        
-
-        Returns:
-            Dict[str, Any]: API response data
-        """
-        path = "/{jobDisplayId}"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
-
-    def get_search(self, job_display_id: Optional[str] = None) -> Dict[str, Any]:
-        """GET /api/job/search
-
-        
-        
+        Args:
+            jobDisplayId: The job display ID (e.g., '2000000')
 
         Returns:
-            Dict[str, Any]: API response data
+            CalendarJob with full job details
         """
-        path = "/search"
-        kwargs = {}
-        params = {}
-        if job_display_id is not None:
-            params["jobDisplayId"] = job_display_id
-        if params:
-            kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
-
-    def post_searchByDetails(self, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/searchByDetails
-
-        
-        
-
-        Returns:
-            Dict[str, Any]: API response data
-        """
-        path = "/searchByDetails"
-        kwargs = {}
-        if data is not None:
-            kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
-
-    def get_calendaritems(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/calendaritems
-
-        
-        
-
-        Returns:
-            Dict[str, Any]: API response data
-        """
-        path = "/{jobDisplayId}/calendaritems"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
-
-    def put_save(self, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """PUT /api/job/save
-
-        
-        
-
-        Returns:
-            Dict[str, Any]: API response data
-        """
-        path = "/save"
-        kwargs = {}
-        if data is not None:
-            kwargs["json"] = data
-        return self._make_request("PUT", path, **kwargs)
+        route = self.routes['GET']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        return self._make_request(route)
 
     def post(self, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job
+        """Create a new job.
 
-        
-        
+        Args:
+            data: JobSaveRequestModel with job details
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse with created job info
         """
-        path = ""
+        route = self.routes['POST']
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
+
+    def put_save(self, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Save/update an existing job.
+
+        Args:
+            data: JobSaveRequest with updated job details
+
+        Returns:
+            ServiceBaseResponse with save confirmation
+        """
+        route = self.routes['PUT_SAVE']
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request(route, **kwargs)
+
+    def post_book(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Book a job for shipping.
+
+        Args:
+            jobDisplayId: The job display ID
+            data: Optional booking parameters
+
+        Returns:
+            ServiceBaseResponse with booking confirmation
+        """
+        route = self.routes['POST_BOOK']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request(route, **kwargs)
+
+    def get_search(self, job_display_id: Optional[str] = None) -> Dict[str, Any]:
+        """Search for jobs.
+
+        Args:
+            job_display_id: Optional job display ID filter
+
+        Returns:
+            List[SearchJobInfo] matching the search criteria
+        """
+        route = self.routes['GET_SEARCH']
+        if job_display_id is not None:
+            route.params = {"jobDisplayId": job_display_id}
+        return self._make_request(route)
+
+    def post_searchByDetails(self, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Search for jobs by detailed criteria.
+
+        Args:
+            data: SearchJobFilter with search parameters
+
+        Returns:
+            ServiceBaseResponse with matching jobs
+        """
+        route = self.routes['POST_SEARCH_BY_DETAILS']
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request(route, **kwargs)
+
+    def get_calendaritems(self, jobDisplayId: str) -> Dict[str, Any]:
+        """Get calendar items for a job.
+
+        Args:
+            jobDisplayId: The job display ID
+
+        Returns:
+            List[CalendarItem] for the job
+        """
+        route = self.routes['GET_CALENDARITEMS']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        return self._make_request(route)
 
     def get_feedback(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/feedback/{jobDisplayId}
+        """Get feedback for a job.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
 
         Returns:
-            Dict[str, Any]: API response data
+            FeedbackSaveModel with job feedback
         """
-        path = "/feedback/{jobDisplayId}"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_FEEDBACK']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        return self._make_request(route)
 
     def post_feedback(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/feedback/{jobDisplayId}
+        """Submit feedback for a job.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: FeedbackSaveModel with feedback content
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming feedback submission
         """
-        path = "/feedback/{jobDisplayId}"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['POST_FEEDBACK']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_transfer(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/transfer/{jobDisplayId}
+        """Transfer a job to another agent/company.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: TransferModel with transfer details
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming transfer
         """
-        path = "/transfer/{jobDisplayId}"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['POST_TRANSFER']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_freightitems(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/freightitems
+        """Save freight items for a job.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: SaveAllFreightItemsRequest with freight item details
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming save
         """
-        path = "/{jobDisplayId}/freightitems"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['POST_FREIGHTITEMS']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def get_submanagementstatus(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/submanagementstatus
+        """Get sub-management status for a job.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
 
         Returns:
-            Dict[str, Any]: API response data
+            Sub-management status data
         """
-        path = "/{jobDisplayId}/submanagementstatus"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_SUBMANAGEMENTSTATUS']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        return self._make_request(route)
 
     def post_item_notes(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/item/notes
+        """Add notes to job items.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: JobItemNotesData with note content
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming note creation
         """
-        path = "/{jobDisplayId}/item/notes"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['POST_ITEM_NOTES']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def post_changeAgent(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """POST /api/job/{jobDisplayId}/changeAgent
+        """Change the assigned agent for a job.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
+            data: ChangeJobAgentRequest with new agent info
 
         Returns:
-            Dict[str, Any]: API response data
+            ServiceBaseResponse confirming agent change
         """
-        path = "/{jobDisplayId}/changeAgent"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
+        route = self.routes['POST_CHANGE_AGENT']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("POST", path, **kwargs)
+        return self._make_request(route, **kwargs)
 
     def get_updatePageConfig(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/updatePageConfig
+        """Get page configuration for updating a job.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
 
         Returns:
-            Dict[str, Any]: API response data
+            JobUpdatePageConfig with UI configuration
         """
-        path = "/{jobDisplayId}/updatePageConfig"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_UPDATE_PAGE_CONFIG']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        return self._make_request(route)
 
     def get_price(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/price
+        """Get pricing information for a job.
 
-        
-        
+        Args:
+            jobDisplayId: The job display ID
 
         Returns:
-            Dict[str, Any]: API response data
+            Price details for the job
         """
-        path = "/{jobDisplayId}/price"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
+        route = self.routes['GET_PRICE']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        return self._make_request(route)
 
     def get_jobAccessLevel(self, job_display_id: Optional[str] = None, job_item_id: Optional[str] = None) -> Dict[str, Any]:
-        """GET /api/job/jobAccessLevel
+        """Get access level for a job.
 
-        
-        
+        Args:
+            job_display_id: Optional job display ID
+            job_item_id: Optional job item ID
 
         Returns:
-            Dict[str, Any]: API response data
+            JobAccessLevel with permission details
         """
-        path = "/jobAccessLevel"
-        kwargs = {}
+        route = self.routes['GET_JOB_ACCESS_LEVEL']
         params = {}
         if job_display_id is not None:
             params["jobDisplayId"] = job_display_id
         if job_item_id is not None:
             params["jobItemId"] = job_item_id
         if params:
-            kwargs["params"] = params
-        return self._make_request("GET", path, **kwargs)
+            route.params = params
+        return self._make_request(route)
 
     def get_documentConfig(self) -> Dict[str, Any]:
-        """GET /api/job/documentConfig
-
-        Returns the document configuration settings.
+        """Get document configuration settings.
 
         Returns:
-            Dict[str, Any]: Document configuration data
+            Document configuration options
         """
         route = self.routes['GET_DOCUMENT_CONFIG']
-        return self._make_request(route.method, route)
+        return self._make_request(route)
 
     def get_packagingcontainers(self, jobDisplayId: str) -> Dict[str, Any]:
-        """GET /api/job/{jobDisplayId}/packagingcontainers
-
-
-
-        Returns:
-            Dict[str, Any]: API response data
-        """
-        path = "/{jobDisplayId}/packagingcontainers"
-        path = path.replace("{jobDisplayId}", str(jobDisplayId))
-        kwargs = {}
-        return self._make_request("GET", path, **kwargs)
-
-    # =========================================================================
-    # New endpoints in API version 709
-    # =========================================================================
-
-    def put_item(
-        self, jobDisplayId: str, itemId: str, data: Optional[Dict[str, Any]] = None
-    ) -> Dict[str, Any]:
-        """PUT /api/job/{jobDisplayId}/item/{itemId}
-
-        Update a job item.
-
-        .. versionadded:: 709
+        """Get packaging containers for a job.
 
         Args:
-            jobDisplayId: Job display ID
-            itemId: Item UUID to update
-            data: Item data to update
+            jobDisplayId: The job display ID
 
         Returns:
-            Dict[str, Any]: Updated item data
+            List[Packaging] with container details
         """
-        path = f"/{jobDisplayId}/item/{itemId}"
-        kwargs: Dict[str, Any] = {}
+        route = self.routes['GET_PACKAGINGCONTAINERS']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        return self._make_request(route)
+
+    def put_item(self, jobDisplayId: str, itemId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Update a job item.
+
+        Args:
+            jobDisplayId: The job display ID
+            itemId: The item UUID to update
+            data: JobItemInfoData with updated item details
+
+        Returns:
+            ServiceBaseResponse confirming update
+        """
+        route = self.routes['PUT_ITEM']
+        route.params = {"jobDisplayId": str(jobDisplayId), "itemId": itemId}
+        kwargs = {}
         if data is not None:
             kwargs["json"] = data
-        return self._make_request("PUT", path, **kwargs)
+        return self._make_request(route, **kwargs)
+
+    def post_status_quote(self, jobDisplayId: str, data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Set job status to quote.
+
+        Args:
+            jobDisplayId: The job display ID
+            data: Optional status data
+
+        Returns:
+            ServiceBaseResponse confirming status change
+        """
+        route = self.routes['POST_STATUS_QUOTE']
+        route.params = {"jobDisplayId": str(jobDisplayId)}
+        kwargs = {}
+        if data is not None:
+            kwargs["json"] = data
+        return self._make_request(route, **kwargs)
