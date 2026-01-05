@@ -13,5 +13,5 @@ sys.modules['ABConnect.routes'] = routes
 
 __all__ = ["FileLoader", "APIRequestBuilder", "Quoter", "ABConnectAPI", "models", "routes"]
 
-__version__ = "0.2.0"
-VERSION = "0.2.0"
+__version__ = "0.2.1"
+VERSION = "0.2.1"
