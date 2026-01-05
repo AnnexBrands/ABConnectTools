@@ -7,11 +7,7 @@ automatic Pydantic model casting for type safety.
 import logging
 from typing import List, Union
 from ABConnect.api.endpoints.base import BaseEndpoint
-from ABConnect.api.models.jobparcelitems import ParcelItem
-from ABConnect.api.models.job import FreightShimpment
-from ABConnect.api.models.shared import CalendarItem
-from ABConnect.api.models.jobnote import TaskNoteModel
-from ABConnect.common import TaskCodes
+from ABConnect.api import models
 from ABConnect.config import get_config
 
 logging.basicConfig(level=logging.INFO)
@@ -59,7 +55,7 @@ class ItemsHelper(BaseEndpoint):
         self._job_endpoint = JobEndpoint()
         self._note_endpoint = JobNoteEndpoint()
 
-    def parcelitems(self, job_display_id: Union[int, str]) -> List[ParcelItem]:
+    def parcelitems(self, job_display_id: Union[int, str]) -> List[models.ParcelItem]:
         """Fetch parcel items for a job with Pydantic model casting.
 
         Parcel items are items configured for parcel shipping (UPS, FedEx, USPS)
@@ -97,14 +93,14 @@ class ItemsHelper(BaseEndpoint):
 
         # Cast response to list of ParcelItem models
         try:
-            parcel_items = [ParcelItem(**item) for item in items_data]
+            parcel_items = [models.ParcelItem(**item) for item in items_data]
             logger.debug(f"Successfully cast {len(parcel_items)} parcel items")
             return parcel_items
         except Exception as e:
             logger.error(f"Error casting parcel items to Pydantic models: {e}")
             raise
 
-    def freightitems(self, job_display_id: Union[int, str]) -> List[FreightShimpment]:
+    def freightitems(self, job_display_id: Union[int, str]) -> List[models.FreightShimpment]:
         """Fetch freight items for a job with Pydantic model casting.
 
         Freight items are items configured for freight shipping (LTL, FTL)
@@ -135,14 +131,14 @@ class ItemsHelper(BaseEndpoint):
 
         # Cast response to list of FreightShimpment models
         try:
-            freight_items = [FreightShimpment(**item) for item in freight_items_data]
+            freight_items = [models.FreightShimpment(**item) for item in freight_items_data]
             logger.debug(f"Successfully cast {len(freight_items)} freight items")
             return freight_items
         except Exception as e:
             logger.error(f"Error casting freight items to Pydantic models: {e}")
             raise
 
-    def jobitems(self, job_display_id: Union[int, str]) -> List[CalendarItem]:
+    def jobitems(self, job_display_id: Union[int, str]) -> List[models.CalendarItem]:
         """Fetch job/calendar items for a job with Pydantic model casting.
 
         Job/calendar items are general items in the calendar view with basic
@@ -175,7 +171,7 @@ class ItemsHelper(BaseEndpoint):
 
         # Cast response to list of CalendarItem models
         try:
-            calendar_items = [CalendarItem(**item) for item in response]
+            calendar_items = [models.CalendarItem(**item) for item in response]
             logger.debug(f"Successfully cast {len(calendar_items)} calendar items")
             return calendar_items
         except Exception as e:
@@ -248,9 +244,9 @@ class ItemsHelper(BaseEndpoint):
             logger.debug(f"Creating note: {note_text}")
 
             # Create note using TaskNoteModel
-            note = TaskNoteModel(
+            note = models.TaskNoteModel(
                 comments=note_text,
-                task_code=TaskCodes.PACKAGING,
+                task_code=models.TaskCodes.PACKAGING,
                 is_important=False,
                 is_completed=False,
                 send_notification=False
@@ -305,7 +301,7 @@ class ItemsHelper(BaseEndpoint):
             logger.error(f"Error in logged_delete_parcel_items for job {job_display_id}: {e}")
             return False
 
-    def replace_parcels(self, job_display_id: Union[int, str], parcel_items: List[Union[ParcelItem, dict]]) -> bool:
+    def replace_parcels(self, job_display_id: Union[int, str], parcel_items: List[Union[models.ParcelItem, dict]]) -> bool:
         """Replace all parcel items for a job with new items.
 
         This method:
@@ -349,7 +345,7 @@ class ItemsHelper(BaseEndpoint):
             # Step 2: Prepare new parcel items data
             items_data = []
             for item in parcel_items:
-                if isinstance(item, ParcelItem):
+                if isinstance(item, models.ParcelItem):
                     # Convert Pydantic model to dict with aliases
                     item_dict = item.model_dump(by_alias=True, exclude_none=True)
                 elif isinstance(item, dict):

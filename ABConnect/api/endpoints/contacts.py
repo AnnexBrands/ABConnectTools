@@ -7,7 +7,7 @@ Provides type-safe access to contacts/* endpoints.
 from typing import List, Optional
 
 from ABConnect.api.endpoints.base import BaseEndpoint
-from ABConnect.api.models.contacts import ContactDetails
+from ABConnect.api import models
 from ABConnect.api.routes import SCHEMA
 
 
@@ -88,7 +88,7 @@ class ContactsEndpoint(BaseEndpoint):
             kwargs["json"] = data
         return self._make_request(route, **kwargs)
 
-    def get(self, id: str) -> ContactDetails:
+    def get(self, id: str) -> models.ContactDetails:
         """GET /api/contacts/{id}
 
         Retrieves contact details by ID.

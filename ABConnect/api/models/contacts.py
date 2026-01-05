@@ -374,7 +374,15 @@ class ShipmentContactDetails(CompanyRelatedModel):
     is_empty: Optional[bool] = Field(None, alias="isEmpty")
 
 
-__all__ = ['BaseContactDetails', 'CalendarContact', 'Contact', 'ContactAddressDetails', 'ContactAddressEditDetails', 'ContactDetailedInfo', 'ContactDetails', 'ContactEmailDetails', 'ContactEmailEditDetails', 'ContactHistoryPricePerPound', 'ContactHistoryRevenueSum', 'ContactPhoneDetails', 'ContactPhoneEditDetails', 'ContactPrimaryDetails', 'MergeContactsSearchRequestModel', 'MergeContactsSearchRequestParameters', 'PlannerContact', 'SearchContactEntityResult', 'SearchContactRequest', 'ShipmentContactAddressDetails', 'ShipmentContactDetails']
+class ContactUser(ABConnectBaseModel):
+    """ContactUser model for GET /contacts/user response."""
+
+    full_name: Optional[str] = Field(None, alias="fullName")
+    company_id: Optional[str] = Field(None, alias="companyId")
+    company_name: Optional[str] = Field(None, alias="companyName")
+
+
+__all__ = ['BaseContactDetails', 'CalendarContact', 'Contact', 'ContactAddressDetails', 'ContactAddressEditDetails', 'ContactDetailedInfo', 'ContactDetails', 'ContactEmailDetails', 'ContactEmailEditDetails', 'ContactHistoryPricePerPound', 'ContactHistoryRevenueSum', 'ContactPhoneDetails', 'ContactPhoneEditDetails', 'ContactPrimaryDetails', 'ContactUser', 'MergeContactsSearchRequestModel', 'MergeContactsSearchRequestParameters', 'PlannerContact', 'SearchContactEntityResult', 'SearchContactRequest', 'ShipmentContactAddressDetails', 'ShipmentContactDetails']
 
 # Rebuild models to resolve forward references within this module
 Contact.model_rebuild()

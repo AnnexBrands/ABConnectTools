@@ -50,7 +50,7 @@ class LookupKeys(str, Enum):
 
 class LookupValue(BaseModel):
     """Lookup value model."""
-    id: Union[str, int]  # Can be either string or int
+    id: Optional[int]
     value: Optional[str] = None  # Some lookups use 'value'
     name: Optional[str] = None   # Some lookups use 'name'
     description: Optional[str] = None
@@ -58,13 +58,13 @@ class LookupValue(BaseModel):
     sort_order: Optional[int] = Field(None, alias="sortOrder")
     metadata: Optional[Dict[str, Any]] = None
     
-    @field_validator('id', mode='before')
-    @classmethod
-    def convert_id_to_string(cls, v):
-        """Convert ID to string if it's an integer."""
-        if isinstance(v, int):
-            return str(v)
-        return v
+    # @field_validator('id', mode='before')
+    # @classmethod
+    # def convert_id_to_string(cls, v):
+    #     """Convert ID to string if it's an integer."""
+    #     if isinstance(v, int):
+    #         return str(v)
+    #     return v
     
     @property
     def display_value(self) -> str:
@@ -85,4 +85,26 @@ class CountryCodeDto(IdentifiedModel):
     iata_code: Optional[str] = Field(None, alias="iataCode")
 
 
-__all__ = ['LookupKeys', 'LookupValue', 'ContactTypeEntity', 'CountryCodeDto']
+class LookupDocumentType(BaseModel):
+    """Document type lookup model for GET /lookup/documentTypes response."""
+
+    name: Optional[str] = Field(None, description="Document type name")
+    value: Optional[int] = Field(None, description="Document type ID")
+    document_source: Optional[int] = Field(None, alias="documentSource", description="Document source ID")
+
+
+class GuidSequentialRangeValue(BaseModel):
+    """Density class map lookup model for GET /lookup/densityClassMap response."""
+
+    range_end: Optional[float] = Field(None, alias="rangeEnd", description="Range end value")
+    value: Optional[str] = Field(None, description="GUID value")
+
+
+class LookupAccessKey(BaseModel):
+    """Access key lookup model for GET /lookup/accessKeys response."""
+
+    access_key: Optional[str] = Field(None, alias="accessKey", description="Access key GUID")
+    friendly_name: Optional[str] = Field(None, alias="friendlyName", description="Friendly name")
+
+
+__all__ = ['LookupKeys', 'LookupValue', 'LookupDocumentType', 'LookupAccessKey', 'GuidSequentialRangeValue', 'ContactTypeEntity', 'CountryCodeDto']

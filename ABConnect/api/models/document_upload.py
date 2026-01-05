@@ -38,10 +38,10 @@ class DocumentUploadRequest(BaseModel):
         response = requests.post(url, files=files, data=data)
 
     Example:
-        >>> from ABConnect.api.models.enums import DocumentType
+        >>> from ABConnect import models
         >>> request = DocumentUploadRequest(
         ...     job_display_id=2000000,
-        ...     document_type=DocumentType.BOL,
+        ...     document_type=models.DocumentType.BOL,
         ...     shared=28,
         ...     job_items=["550e8400-e29b-41d4-a716-446655440001"]
         ... )

@@ -6,7 +6,8 @@ pattern to avoid collisions when updating job timeline tasks.
 
 from typing import Optional, Dict, Any, Tuple
 from ABConnect.api.endpoints.jobs.timeline import JobTimelineEndpoint
-from ABConnect.common import load_json_resource, TaskCodes
+from ABConnect.common import load_json_resource
+from ABConnect.api import models
 from datetime import datetime, timedelta
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -133,7 +134,7 @@ class TimelineHelpers(JobTimelineEndpoint):
             API response or None if already at/past this status
         """
         logger.info(f"Setting job {jobid} as scheduled with start={start}, end={end}")
-        statusinfo, task = self.get_task(jobid, TaskCodes.PICKUP)
+        statusinfo, task = self.get_task(jobid, models.TaskCodes.PICKUP)
         curr = statusinfo.get("code", 0)
 
         if curr >= 2:
@@ -149,7 +150,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         if end:
             task["plannedEndDate"] = end
 
-        return self.set_task(jobid, TaskCodes.PICKUP, task, createEmail)
+        return self.set_task(jobid, models.TaskCodes.PICKUP, task, createEmail)
 
     def _2(self, *args, **kwargs) -> Optional[Dict[str, Any]]:
         """Alias for schedule() - Set status 2."""
@@ -181,7 +182,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         """
         logger.info(f"Setting job {jobid} as received with start={start}, end={end}")
 
-        statusinfo, task = self.get_task(jobid, TaskCodes.PICKUP)
+        statusinfo, task = self.get_task(jobid, models.TaskCodes.PICKUP)
         curr = statusinfo.get("code", 0)
         if curr >= 3:
             logger.warning(
@@ -236,7 +237,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         else:
             task.pop("onSiteTimeLog", None)
 
-        return self.set_task(jobid, TaskCodes.PICKUP, task, createEmail)
+        return self.set_task(jobid, models.TaskCodes.PICKUP, task, createEmail)
 
     def _3(self, *args, **kwargs) -> Optional[Dict[str, Any]]:
         """Alias for received() - Set status 3."""
@@ -257,7 +258,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         Returns:
             API response or None if already at/past this status
         """
-        statusinfo, task = self.get_task(jobid, TaskCodes.PACKAGING)
+        statusinfo, task = self.get_task(jobid, models.TaskCodes.PACKAGING)
         curr = statusinfo.get("code", 0)
 
         if curr >= 4:
@@ -270,7 +271,7 @@ class TimelineHelpers(JobTimelineEndpoint):
             task = self.new_pack_task.copy()
 
         task["timeLog"] = {"start": start}
-        return self.set_task(jobid, TaskCodes.PACKAGING, task, createEmail)
+        return self.set_task(jobid, models.TaskCodes.PACKAGING, task, createEmail)
 
     def _4(self, *args, **kwargs) -> Optional[Dict[str, Any]]:
         """Alias for pack_start() - Set status 4."""
@@ -289,7 +290,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         Returns:
             API response or None if already at/past this status
         """
-        statusinfo, task = self.get_task(jobid, TaskCodes.PACKAGING)
+        statusinfo, task = self.get_task(jobid, models.TaskCodes.PACKAGING)
         curr = statusinfo.get("code", 0)
 
         if curr >= 5:
@@ -303,7 +304,7 @@ class TimelineHelpers(JobTimelineEndpoint):
             task["timeLog"] = {}
 
         task["timeLog"]["end"] = end
-        return self.set_task(jobid, TaskCodes.PACKAGING, task, createEmail)
+        return self.set_task(jobid, models.TaskCodes.PACKAGING, task, createEmail)
 
     def _5(self, *args, **kwargs) -> Optional[Dict[str, Any]]:
         """Alias for pack_finish() - Set status 5."""
@@ -324,7 +325,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         Returns:
             API response
         """
-        statusinfo, task = self.get_task(jobid, TaskCodes.STORAGE)
+        statusinfo, task = self.get_task(jobid, models.TaskCodes.STORAGE)
 
         if not task:
             task = self.new_store_task.copy()
@@ -333,7 +334,7 @@ class TimelineHelpers(JobTimelineEndpoint):
             task["timeLog"] = {}
 
         task["timeLog"]["start"] = start
-        return self.set_task(jobid, TaskCodes.STORAGE, task, createEmail)
+        return self.set_task(jobid, models.TaskCodes.STORAGE, task, createEmail)
 
     def _6(self, *args, **kwargs) -> Dict[str, Any]:
         """Alias for storage_begin() - Set status 6."""
@@ -352,7 +353,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         Returns:
             API response
         """
-        statusinfo, task = self.get_task(jobid, TaskCodes.STORAGE)
+        statusinfo, task = self.get_task(jobid, models.TaskCodes.STORAGE)
 
         if not task:
             task = self.new_store_task.copy()
@@ -361,7 +362,7 @@ class TimelineHelpers(JobTimelineEndpoint):
             task["timeLog"] = {}
 
         task["timeLog"]["end"] = end
-        return self.set_task(jobid, TaskCodes.STORAGE, task, createEmail)
+        return self.set_task(jobid, models.TaskCodes.STORAGE, task, createEmail)
 
     # ========== Carrier Operations (Status 7-8, 10) ==========
 
@@ -378,7 +379,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         Returns:
             API response or None if already at/past this status
         """
-        statusinfo, task = self.get_task(jobid, TaskCodes.CARRIER)
+        statusinfo, task = self.get_task(jobid, models.TaskCodes.CARRIER)
         curr = statusinfo.get("code", 0)
 
         if curr >= 7:
@@ -391,7 +392,7 @@ class TimelineHelpers(JobTimelineEndpoint):
             task = self.new_carrier_task.copy()
 
         task["scheduledDate"] = start
-        return self.set_task(jobid, TaskCodes.CARRIER, task, createEmail)
+        return self.set_task(jobid, models.TaskCodes.CARRIER, task, createEmail)
 
     def _7(self, *args, **kwargs) -> Optional[Dict[str, Any]]:
         """Alias for carrier_schedule() - Set status 7."""
@@ -410,7 +411,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         Returns:
             API response or None if already at/past this status
         """
-        statusinfo, task = self.get_task(jobid, TaskCodes.CARRIER)
+        statusinfo, task = self.get_task(jobid, models.TaskCodes.CARRIER)
         curr = statusinfo.get("code", 0)
 
         if curr >= 8:
@@ -423,7 +424,7 @@ class TimelineHelpers(JobTimelineEndpoint):
             task = self.new_carrier_task.copy()
 
         task["pickupCompletedDate"] = start
-        return self.set_task(jobid, TaskCodes.CARRIER, task, createEmail)
+        return self.set_task(jobid, models.TaskCodes.CARRIER, task, createEmail)
 
     def _8(self, *args, **kwargs) -> Optional[Dict[str, Any]]:
         """Alias for carrier_pickup() - Set status 8."""
@@ -442,13 +443,13 @@ class TimelineHelpers(JobTimelineEndpoint):
         Returns:
             API response
         """
-        statusinfo, task = self.get_task(jobid, TaskCodes.CARRIER)
+        statusinfo, task = self.get_task(jobid, models.TaskCodes.CARRIER)
 
         if not task:
             task = self.new_carrier_task.copy()
 
         task["deliveryCompletedDate"] = end
-        return self.set_task(jobid, TaskCodes.CARRIER, task, createEmail)
+        return self.set_task(jobid, models.TaskCodes.CARRIER, task, createEmail)
 
     def _10(self, *args, **kwargs) -> Dict[str, Any]:
         """Alias for carrier_delivery() - Set status 10."""

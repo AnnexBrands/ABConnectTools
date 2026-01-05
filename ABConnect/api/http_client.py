@@ -88,6 +88,7 @@ class RequestHandler:
         path,
         *,
         params=None,
+        files=None,
         data=None,
         json=None,
         headers=None,
@@ -98,9 +99,6 @@ class RequestHandler:
         if headers:
             request_headers.update(headers)
 
-        # Ensure path starts with /
-        if not path.startswith('/'):
-            path = f"/{path}"
         url = f"{self.base_url}{path}"
         logger.debug(f"{method.upper()} {url}")
 
@@ -111,6 +109,7 @@ class RequestHandler:
             params=params,
             data=data,
             json=json,
+            files=files,
         )
 
         return self._handle_response(

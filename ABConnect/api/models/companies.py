@@ -24,6 +24,8 @@ class CompanySimple(IdentifiedModel):
 
     code: Optional[str] = Field(None, description="Company code")
     name: Optional[str] = Field(None, description="Company name")
+    company_name: Optional[str] = Field(None, alias="companyName", description="Company name (alternate field)")
+    type_id: Optional[str] = Field(None, alias="typeId", description="Company type ID")
     parent_company_id: Optional[str] = Field(None, alias="parentCompanyId", description="Parent company ID")
 
 
@@ -585,4 +587,13 @@ class SaveCompanyMaterialModel(ABConnectBaseModel):
     waste_factor: Optional[float] = Field(None, alias="wasteFactor", description="Waste factor percentage")
 
 
-__all__ = ['Company', 'CompanyAddressInfo', 'CompanyBrandTreeNode', 'CompanyDetails', 'CompanyDetailsBaseInfo', 'CompanyDetailsFinalMileTariffItem', 'CompanyDetailsInsurancePricing', 'CompanyDetailsPreferences', 'CompanyDetailsServicePricings', 'CompanyDetailsTaxPricing', 'CompanyImageData', 'CompanyInfo', 'CompanyInsurancePricing', 'CompanyMaterial', 'CompanyServicePricing', 'CompanySimple', 'CompanyTaxPricing', 'ContactDetailsCompanyInfo', 'PackagingLaborSettings', 'PackagingTariffSettings', 'SaveCompanyMaterialModel', 'SaveGeoSettingModel', 'SearchCompanyDataSourceLoadOptions', 'SearchCompanyModel', 'SearchCompanyResponse', 'TagBoxDataSourceLoadOptions', 'UpdateCarrierAccountsModel', 'WebApiDataSourceLoadOptions']
+class CompanyGeoAreaCompanies(ABConnectBaseModel):
+    """Company geo area item for GET /companies/geoAreaCompanies response."""
+
+    code: Optional[str] = Field(None, description="Company code")
+    brand: Optional[str] = Field(None, description="Company brand")
+    location: Optional[LatLng] = Field(None, description="Geographic coordinates")
+    marker_image: Optional[str] = Field(None, alias="markerImage", description="Map marker image path")
+
+
+__all__ = ['Company', 'CompanyAddressInfo', 'CompanyBrandTreeNode', 'CompanyDetails', 'CompanyDetailsBaseInfo', 'CompanyDetailsFinalMileTariffItem', 'CompanyDetailsInsurancePricing', 'CompanyDetailsPreferences', 'CompanyDetailsServicePricings', 'CompanyDetailsTaxPricing', 'CompanyGeoAreaCompanies', 'CompanyImageData', 'CompanyInfo', 'CompanyInsurancePricing', 'CompanyMaterial', 'CompanyServicePricing', 'CompanySimple', 'CompanyTaxPricing', 'ContactDetailsCompanyInfo', 'PackagingLaborSettings', 'PackagingTariffSettings', 'SaveCompanyMaterialModel', 'SaveGeoSettingModel', 'SearchCompanyDataSourceLoadOptions', 'SearchCompanyModel', 'SearchCompanyResponse', 'TagBoxDataSourceLoadOptions', 'UpdateCarrierAccountsModel', 'WebApiDataSourceLoadOptions']

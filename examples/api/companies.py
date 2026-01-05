@@ -36,7 +36,9 @@ print(f"Available companies count: {len(available) if isinstance(available, list
 save_fixture(available, "CompanyAvailableByCurrentUser")
 
 search = api.companies.get_search(search_value="Training")
+print(search)
 save_fixture(search, "CompanySearch_Training")
 
-# geoareacompanies = api.companies.get_geoareacompanies()
-# save_fixture(geoareacompanies, "CompanyGeoAreaCompanies")
+geoareacompanies = api.companies.get_geoareacompanies()
+print(geoareacompanies)
+save_fixture(geoareacompanies, "CompanyGeoAreaCompanies")

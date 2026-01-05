@@ -156,7 +156,7 @@ class DocumentsEndpoint(BaseEndpoint):
         """
         # Create upload model with item photo settings
 
-        upload_data = ItemPhotoUploadRequest(
+        upload_data = models.ItemPhotoUploadRequest(
             job_display_id=job_display_id,
             document_type=6,
             document_type_description="Item Photo",
@@ -209,7 +209,7 @@ class DocumentsEndpoint(BaseEndpoint):
             filename, content, content_type = file_tuple
 
             # Create upload model
-            upload_data = ItemPhotoUploadRequest(
+            upload_data = models.ItemPhotoUploadRequest(
                 job_display_id=jobid,
                 document_type=6,  # 6 for Item_Photo
                 document_type_description="Item Photo",
@@ -228,8 +228,8 @@ class DocumentsEndpoint(BaseEndpoint):
 
     @staticmethod
     def _resolve_document_type(
-        document_type: Union[str, int, DocumentType],
-    ) -> DocumentType:
+        document_type: Union[str, int, models.DocumentType],
+    ) -> models.DocumentType:
         """Resolve document_type to a DocumentType enum.
 
         Args:
@@ -244,19 +244,19 @@ class DocumentsEndpoint(BaseEndpoint):
         Raises:
             ValueError: If string doesn't match any DocumentType name
         """
-        if isinstance(document_type, DocumentType):
+        if isinstance(document_type, models.DocumentType):
             return document_type.value
         if isinstance(document_type, int):
-            return DocumentType(document_type).value
+            return models.DocumentType(document_type).value
         if isinstance(document_type, str):
             # Convert "commercial invoice" -> "COMMERCIAL_INVOICE"
             normalized = (
                 document_type.strip().upper().replace(" ", "_").replace("-", "_")
             )
             try:
-                return DocumentType[normalized].value
+                return models.DocumentType[normalized].value
             except KeyError:
-                valid_names = [dt.name for dt in DocumentType]
+                valid_names = [dt.name for dt in models.DocumentType]
                 raise ValueError(
                     f"Unknown document type: '{document_type}'. "
                     f"Valid types: {', '.join(valid_names)}"
@@ -270,11 +270,11 @@ class DocumentsEndpoint(BaseEndpoint):
         job_display_id: int,
         filename: str,
         data: BinaryIO,
-        document_type: Union[str, int, DocumentType],
+        document_type: Union[str, int, models.DocumentType],
         shared: int = 28,
         rfq_id: Optional[int] = None,
         content_type: Optional[str] = None,
-    ) -> DocumentUploadResponse:
+    ) -> models.DocumentUploadResponse:
         """Upload a document of any type using the DocumentType enum.
 
         This convenience function validates the request using Pydantic models
@@ -297,12 +297,12 @@ class DocumentsEndpoint(BaseEndpoint):
             DocumentUploadResponse: Validated response model
 
         Example:
-            >>> from ABConnect.api.models.enums import DocumentType
+            >>> from ABConnect import models
             >>> # Upload using enum
             >>> response = client.docs.upload_doc(
             ...     file_path="/path/to/bol.pdf",
             ...     job_display_id=2000000,
-            ...     document_type=DocumentType.BOL,
+            ...     document_type=models.DocumentType.BOL,
             ... )
 
             >>> # Upload using string (flexible formats)
@@ -333,7 +333,7 @@ class DocumentsEndpoint(BaseEndpoint):
         if rfq_id is not None:
             request_data["rfq_id"] = rfq_id
 
-        upload_request = DocumentUploadRequest.model_validate(request_data)
+        upload_request = models.DocumentUploadRequest.model_validate(request_data)
         files = {"file": (filename, data, content_type)}
         form_data = upload_request.model_dump(by_alias=True, exclude_none=True)
 
@@ -342,4 +342,4 @@ class DocumentsEndpoint(BaseEndpoint):
         raw_response = self._r.upload_file(path=path, files=files, data=form_data)
 
         # Validate response with Pydantic model
-        return DocumentUploadResponse.model_validate(raw_response)
+        return models.DocumentUploadResponse.model_validate(raw_response)

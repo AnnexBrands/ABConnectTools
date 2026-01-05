@@ -6,7 +6,7 @@ Provides type-safe access to companies/* endpoints.
 
 from typing import List, Optional, Union
 from ABConnect.api.endpoints.base import BaseEndpoint
-from ABConnect.api.models.companies import Company, CompanySimple
+from ABConnect.api import models
 from ABConnect.api.routes import SCHEMA
 
 
@@ -53,7 +53,7 @@ class CompaniesEndpoint(BaseEndpoint):
             route.params = {"companyId": company_uuid}
             return self._make_request(route, **kwargs)
 
-    def get_by_id(self, id: str) -> CompanySimple:
+    def get_by_id(self, id: str) -> models.CompanySimple:
         """GET /api/companies/{id}
 
         Retrieves company by ID.
