@@ -8,6 +8,40 @@ from .base import ABConnectBaseModel
 from .enums import CarrierAPI
 from .shared import ShippingHistoryStatus, WeightInfo, ShippingPackageInfo
 
+
+class ParcelAddOnRadioOption(ABConnectBaseModel):
+    """Radio button option for parcel add-on configuration."""
+
+    description: Optional[str] = Field(None)
+    code: Optional[str] = Field(None)
+
+
+class ParcelAddOnOptionsGroup(ABConnectBaseModel):
+    """Options group for parcel add-on with radio button choices."""
+
+    key: Optional[str] = Field(None)
+    type: Optional[int] = Field(None)
+    radio_button_options: Optional[List[ParcelAddOnRadioOption]] = Field(
+        None, alias="radioButtonOptions"
+    )
+
+
+class ParcelAddOn(ABConnectBaseModel):
+    """Available parcel add-on/accessorial from GET /shipment/accessorials.
+
+    This represents the catalog of available accessorials that can be
+    applied to a shipment. Note: This is different from JobParcelAddOn
+    which represents an add-on that has been applied to a specific job.
+    """
+
+    unique_id: Optional[str] = Field(None, alias="uniqueId")
+    name: Optional[str] = Field(None)
+    description: Optional[str] = Field(None)
+    price: Optional[str] = Field(None)
+    options: Optional[List[ParcelAddOnOptionsGroup]] = Field(None)
+    source_apis: Optional[List[CarrierAPI]] = Field(None, alias="sourceAPIs")
+
+
 class ShipmentDetails(ABConnectBaseModel):
     """ShipmentDetails model"""
 
@@ -34,4 +68,4 @@ class ShippingDocument(ABConnectBaseModel):
     file_name: Optional[str] = Field(None, alias="fileName")
 
 
-__all__ = ['ShipmentDetails', 'ShippingDocument']
+__all__ = ['ParcelAddOn', 'ParcelAddOnOptionsGroup', 'ParcelAddOnRadioOption', 'ShipmentDetails', 'ShippingDocument']

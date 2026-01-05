@@ -73,15 +73,26 @@ class BaseEndpoint:
 
         Args:
             response: Raw HTTP response
-            response_model: Optional response model name
-        
+            response_model: Response model name (required - errors should not pass silently)
+
         Returns:
             Cast model instance, bytes, or original response data
+
+        Raises:
+            ValueError: If response_model is None - all endpoints must define a response model
         """
         if response_model == "bytes":
             return response.content
-        
+
+        if response_model is None:
+            raise ValueError("All endpoints must define a response_model.")
+
         is_list, model_name = self._parse_type_string(response_model)
+
+        # Handle primitive types (str, int, etc.) - return as-is
+        if model_name == "str":
+            return response if not is_list else list(response)
+
         model_class = getattr(models, model_name)
 
         if is_list:

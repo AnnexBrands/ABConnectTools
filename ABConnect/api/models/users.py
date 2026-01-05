@@ -3,7 +3,17 @@
 from typing import List, Optional
 from datetime import datetime
 from pydantic import Field
-from .base import ActiveModel, IdentifiedModel, TimestampedModel
+from .base import ABConnectBaseModel, ActiveModel, IdentifiedModel, TimestampedModel
+
+
+class PocUser(ABConnectBaseModel):
+    """POC User model for GET /users/pocusers response.
+
+    Simple model containing just id and name.
+    """
+
+    id: Optional[int] = Field(None)
+    name: Optional[str] = Field(None)
 
 class CreateUserModel(ActiveModel):
     """CreateUserModel model"""
@@ -84,4 +94,4 @@ class Users(TimestampedModel):
     crm_contact_id: Optional[int] = Field(None, alias="crmContactId")
 
 
-__all__ = ['CreateUserModel', 'UserInfo', 'Users']
+__all__ = ['CreateUserModel', 'PocUser', 'UserInfo', 'Users']

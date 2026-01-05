@@ -50,7 +50,7 @@ class Route:
 SCHEMA = {
     "ACCOUNT": {
         "DELETE_PAYMENTSOURCE": Route("DELETE", "/account/paymentsource/{sourceId}", None, "ServiceBaseResponse", {}),
-        "GET_PROFILE": Route("GET", "/account/profile", None, "UserInfo", {}),
+        "GET_PROFILE": Route("GET", "/account/profile", None, "AccountProfile", {}),
         "GET_VERIFYRESETTOKEN": Route("GET", "/account/verifyresettoken", None, "ServiceBaseResponse", {}),
         "POST_CONFIRM": Route("POST", "/account/confirm", "ConfirmEmailModel", "ServiceBaseResponse", {}),
         "POST_FORGOT": Route("POST", "/account/forgot", "ForgotLoginModel", "ServiceBaseResponse", {}),
@@ -168,7 +168,7 @@ SCHEMA = {
         "MERGE": Route("PUT", "/contacts/{mergeToId}/merge", "MergeContactsRequestModel", "ServiceBaseResponse", {}),
     },
     "DASHBOARD": {
-        "GET": Route("GET", "/dashboard", None, None, {}),
+        "GET": Route("GET", "/dashboard", None, "DashboardResponse", {}),
         "GRIDVIEWS": Route("GET", "/dashboard/gridviews", None, "List[GridViewDetails]", {}),
         "GRIDVIEWSTATE": Route("GET", "/dashboard/gridviewstate/{id}", None, "GridViewDetails", {}),
         "POST_GRIDVIEWSTATE": Route("POST", "/dashboard/gridviewstate/{id}", None, "ServiceBaseResponse", {}),
@@ -302,8 +302,8 @@ SCHEMA = {
     },
     "LOOKUP": {
         "GET": Route("GET", "/lookup/{masterConstantKey}/{valueId}", None, "LookupValue", {}),
-        "ACCESS_KEY": Route("GET", "/lookup/accessKey/{accessKey}", None, None, {}),
-        "ACCESS_KEYS": Route("GET", "/lookup/accessKeys", None, "List[LookupValue]", {}),
+        "ACCESS_KEY": Route("GET", "/lookup/accessKey/{accessKey}", None, "LookupAccessKey", {}),
+        "ACCESS_KEYS": Route("GET", "/lookup/accessKeys", None, "List[LookupAccessKey]", {}),
         "COMON_INSURANCE": Route("GET", "/lookup/comonInsurance", None, None, {}),
         "CONTACT_TYPES": Route("GET", "/lookup/contactTypes", None, "List[ContactTypeEntity]", {}),
         "COUNTRIES": Route("GET", "/lookup/countries", None, "List[CountryCodeDto]", {}),
@@ -323,7 +323,7 @@ SCHEMA = {
         "PUT": Route("PUT", "/note/{id}", "NoteModel", "ServiceBaseResponse", {}),
     },
     "NOTIFICATIONS": {
-        "GET": Route("GET", "/notifications", None, None, {}),
+        "GET": Route("GET", "/notifications", None, "NotificationsResponse", {}),
     },
     "PARTNER": {
         "GET": Route("GET", "/partner", None, "List[Partner]", {}),
@@ -350,20 +350,20 @@ SCHEMA = {
     },
     "SHIPMENT": {
         "GET": Route("GET", "/shipment", None, "ShipmentDetails", {}),
-        "ACCESSORIALS": Route("GET", "/shipment/accessorials", None, "List[JobParcelAddOn]", {}),
+        "ACCESSORIALS": Route("GET", "/shipment/accessorials", None, "List[ParcelAddOn]", {}),
         "DOCUMENT": Route("GET", "/shipment/document/{docId}", None, "ShippingDocument", {}),
     },
     "SMSTEMPLATE": {
         "DELETE": Route("DELETE", "/SmsTemplate/{templateId}", None, "ServiceBaseResponse", {}),
         "GET": Route("GET", "/SmsTemplate/{templateId}", None, "SmsTemplateModel", {}),
-        "JOB_STATUSES": Route("GET", "/SmsTemplate/jobStatuses", None, None, {}),
+        "JOB_STATUSES": Route("GET", "/SmsTemplate/jobStatuses", None, "List[SmsJobStatus]", {}),
         "LIST": Route("GET", "/SmsTemplate/list", None, "List[SmsTemplateModel]", {}),
-        "NOTIFICATION_TOKENS": Route("GET", "/SmsTemplate/notificationTokens", None, None, {}),
+        "NOTIFICATION_TOKENS": Route("GET", "/SmsTemplate/notificationTokens", None, "List[NotificationTokenGroup]", {}),
         "SAVE": Route("POST", "/SmsTemplate/save", "SmsTemplateModel", "ServiceBaseResponse", {}),
     },
     "USERS": {
-        "POCUSERS": Route("GET", "/users/pocusers", None, "List[Users]", {}),
-        "ROLES": Route("GET", "/users/roles", None, None, {}),
+        "POCUSERS": Route("GET", "/users/pocusers", None, "List[PocUser]", {}),
+        "ROLES": Route("GET", "/users/roles", None, "List[str]", {}),
         "LIST": Route("POST", "/users/list", "WebApiDataSourceLoadOptions", "ServiceBaseResponse", {}),
         "USER": Route("POST", "/users/user", "CreateUserModel", "ServiceBaseResponse", {}),
         "USER_UPDATE": Route("PUT", "/users/user", "UserInfo", "ServiceBaseResponse", {}),
@@ -375,15 +375,15 @@ SCHEMA = {
         "JOB_TRACKING": Route("GET", "/v3/job/{jobDisplayId}/tracking/{historyAmount}", None, "JobTrackingResponseV3", {}),
     },
     "VALUES": {
-        "GET": Route("GET", "/Values", None, None, {}),
+        "GET": Route("GET", "/Values", None, "ValuesResponse", {}),
     },
     "VIEWS": {
         "DELETE": Route("DELETE", "/views/{viewId}", None, "ServiceBaseResponse", {}),
         "GET": Route("GET", "/views/{viewId}", None, "GridViewDetails", {}),
         "ACCESSINFO": Route("GET", "/views/{viewId}/accessinfo", None, "GridViewAccess", {}),
         "ALL": Route("GET", "/views/all", None, "List[GridViewDetails]", {}),
-        "DATASETSP": Route("GET", "/views/datasetsp/{spName}", None, None, {}),
-        "DATASETSPS": Route("GET", "/views/datasetsps", None, None, {}),
+        "DATASETSP": Route("GET", "/views/datasetsp/{spName}", None, "List[StoredProcedureColumn]", {}),
+        "DATASETSPS": Route("GET", "/views/datasetsps", None, "List[str]", {}),
         "POST": Route("POST", "/views", "GridViewDetails", "ServiceBaseResponse", {}),
         "PUT_ACCESS": Route("PUT", "/views/{viewId}/access", None, "ServiceBaseResponse", {}),
     },

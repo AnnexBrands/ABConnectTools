@@ -1,9 +1,23 @@
 """Account models for ABConnect API."""
 
-from typing import Optional
+from typing import Any, Dict, List, Optional
 from pydantic import Field
 from .base import ABConnectBaseModel
 from .enums import ForgotType
+
+
+class AccountProfile(ABConnectBaseModel):
+    """Account profile model for GET /account/profile response.
+
+    Contains the user's account information including contact details,
+    social logins, and payment sources.
+    """
+
+    user_name: Optional[str] = Field(None, alias="userName")
+    email: Optional[str] = Field(None)
+    contact_info: Optional[Dict[str, Any]] = Field(None, alias="contactInfo")
+    social_logins: Optional[List[Dict[str, Any]]] = Field(default_factory=list, alias="socialLogins")
+    payment_sources: Optional[List[Dict[str, Any]]] = Field(default_factory=list, alias="paymentSources")
 
 class ChangePasswordModel(ABConnectBaseModel):
     """ChangePasswordModel model"""
@@ -64,4 +78,4 @@ class ResetPasswordModel(ABConnectBaseModel):
     confirm_password: str = Field(..., alias="confirmPassword", min_length=1)
 
 
-__all__ = ['ChangePasswordModel', 'ConfirmEmailModel', 'ForgotLoginModel', 'RegistrationModel', 'ResetPasswordModel']
+__all__ = ['AccountProfile', 'ChangePasswordModel', 'ConfirmEmailModel', 'ForgotLoginModel', 'RegistrationModel', 'ResetPasswordModel']

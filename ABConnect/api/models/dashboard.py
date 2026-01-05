@@ -186,4 +186,10 @@ class UndoIncrementJobStatusInputModel(JobRelatedModel):
     pass
 
 
-__all__ = ['GridSettingsEntity', 'InboundNewDashboardItem', 'IncrementJobStatusInputModel', 'IncrementJobStatusResponseModel', 'InhouseNewDashboardItem', 'LocalDeliveriesNewDashboardItem', 'OutboundNewDashboardItem', 'RecentEstimatesNewDashboardItem', 'SaveGridSettingsModel', 'UndoIncrementJobStatusInputModel']
+class DashboardResponse(ABConnectBaseModel):
+    """Dashboard response model for GET /dashboard."""
+
+    data: Optional[List[dict]] = Field(default_factory=list, description="Dashboard data items")
+
+
+__all__ = ['DashboardResponse', 'GridSettingsEntity', 'InboundNewDashboardItem', 'IncrementJobStatusInputModel', 'IncrementJobStatusResponseModel', 'InhouseNewDashboardItem', 'LocalDeliveriesNewDashboardItem', 'OutboundNewDashboardItem', 'RecentEstimatesNewDashboardItem', 'SaveGridSettingsModel', 'UndoIncrementJobStatusInputModel']

@@ -12,7 +12,7 @@ from .enums import *
 
 # TYPE_CHECKING imports for IDE support (not imported at runtime)
 if TYPE_CHECKING:
-    from .account import ChangePasswordModel, ConfirmEmailModel, ForgotLoginModel, RegistrationModel, ResetPasswordModel
+    from .account import AccountProfile, ChangePasswordModel, ConfirmEmailModel, ForgotLoginModel, RegistrationModel, ResetPasswordModel
     from .address import Address, AddressData, AddressDetails, AddressDetailsMergePreviewDataItem, AddressIsValidResult, CalendarAddress, FreightRateRequestAddressDetails, OverridableAddressData, PlannerAddress, SaveValidatedRequest, SearchAddress, SoldToAddress
     from .advancedsettings import AdvancedSettingsEntitySaveModel
     from .calendar import BaseInfoCalendar, Calendar
@@ -42,7 +42,7 @@ if TYPE_CHECKING:
     from .jobrfq import QuoteRequestDisplayInfo
     from .jobshipment import BookShipmentRequest, DeleteShipRequestModel, InternationalParams, JobCarrierRatesModel, JobParcelAddOn, ShipmentOriginDestination, TransportationRatesRequestModel
     from .jobsms import MarkSmsAsReadModel, SendSMSModel
-    from .jobsmstemplate import SmsTemplateModel
+    from .jobsmstemplate import NotificationToken, NotificationTokenGroup, SmsJobStatus, SmsTemplateModel
     from .jobtimeline import BaseTaskModel, CarrierTask, CompanyListItem, DeleteTaskResponse, SaveResponseModel, TimelineResponse, TimelineTaskInput, UpdateTaskModel
     from .jobtracking import ShipmentTrackingDetails
     from .jobtrackingv3 import JobTrackingResponseV3
@@ -53,10 +53,12 @@ if TYPE_CHECKING:
     from .reports import InsuranceReport, InsuranceReportRequest, ReferredByReport, ReferredByReportRequest, RevenueCustomer, SalesForecastReport, SalesForecastReportRequest, SalesForecastSummary, SalesForecastSummaryRequest, Web2LeadReport, Web2LeadRevenueFilter, Web2LeadV2RequestModel
     from .rfq import AcceptModel
     from .shared import AccesorialCharges, AutoCompleteValue, Base64File, BaseTask, BookShipmentSpecificParams, CalendarItem, CalendarNotes, CalendarTask, CarrierAccountInfo, CarrierInfo, CarrierProviderMessage, CarrierRateModel, CarrierTaskModel, Commodity, CreatedTask, CustomerInfo, Details, DocumentDetails, EmailDetails, EstesAccountData, ExportPackingInfo, ExportTotalCosts, ExpressFreightDetail, FedExAccountData, FedExRestApiAccount, FedExSpecific, ForwardAirAccountData, FranchiseeCarrierAccounts, GlobalTranzAccountData, GroupingInfo, HandlingUnitModel, InTheFieldTaskModel, InitialNoteModel, InsuranceOption, ItemTotals, Items, JToken, LaborCharges, LastObtainNFM, LatLng, LookupItem, MaerskAccountData, MasterMaterials, NameValueEntity, ObtainNFMParcelItem, ObtainNFMParcelService, OnlinePaymentSettings, PackagingLaborHours, PageOrderedRequestModel, PhoneDetails, PickupLaborHoursRule, PilotAccountData, PlannerLabor, QuoteRequestComment, RequestedParcelPackaging, RoadRunnerAccountData, RoyaltiesCharges, SearchCustomerInfo, ServiceBaseResponse, ServiceInfo, ServicePricingsMarkup, ServiceWarningResponse, ShipmentTrackingDocument, ShippingHistoryStatus, ShippingPackageInfo, SimplePriceTariff, SimpleTaskModel, SoldToDetails, SortBy, SortByModel, SortingInfo, StoredProcedureColumn, StringMergePreviewDataItem, StringOverridable, SummaryInfo, TaskTruckInfo, TaxOption, TeamWWAccountData, TimeLog, TimeLogModel, TimeLogPause, TimeLogPauseModel, TimeSpan, TrackingCarrierProps, TrackingStatusV2, TransportationCharges, TransportationRatesRequest, UPSAccountData, UPSSpecific, USPSAccountData, USPSSpecific, UpdateDateModel, UpdateTruckModel, WeightInfo, WorkTimeLog
-    from .shipment import ShipmentDetails, ShippingDocument
+    from .shipment import ParcelAddOn, ParcelAddOnOptionsGroup, ParcelAddOnRadioOption, ShipmentDetails, ShippingDocument
     from .truck import SaveEntityResponse, SaveTruckRequest, Truck
     from .twiliowebhook import TwilioSmsStatusCallback
-    from .users import CreateUserModel, UserInfo, Users
+    from .users import CreateUserModel, PocUser, UserInfo, Users
+    from .notifications import NotificationsResponse
+    from .values import ValuesResponse
 
 # Lazy loading function to avoid circular imports
 _MODELS = {}
@@ -81,6 +83,7 @@ def __getattr__(name):
     # Map of model names to their modules (auto-generated from swagger.json)
     module_map = {
         'AcceptModel': 'rfq',
+        'AccountProfile': 'account',
         'AddCatalogRequest': 'catalog',
         'AddLotRequest': 'catalog',
         'AddSellerRequest': 'catalog',
@@ -179,6 +182,7 @@ def __getattr__(name):
         'CreateUserModel': 'users',
         'CreatedTask': 'shared',
         'CustomerInfo': 'shared',
+        'DashboardResponse': 'dashboard',
         'DeleteShipRequestModel': 'jobshipment',
         'DeleteTaskResponse': 'jobtimeline',
         'Details': 'shared',
@@ -261,6 +265,9 @@ def __getattr__(name):
         'NameValueEntity': 'shared',
         'NoteModel': 'note',
         'Notes': 'note',
+        'NotificationToken': 'jobsmstemplate',
+        'NotificationTokenGroup': 'jobsmstemplate',
+        'NotificationsResponse': 'notifications',
         'ObtainNFMParcelItem': 'shared',
         'ObtainNFMParcelService': 'shared',
         'OnHoldDetails': 'jobonhold',
@@ -274,6 +281,9 @@ def __getattr__(name):
         'PackagingTariffSettings': 'companies',
         'PageOrderedRequestModel': 'shared',
         'PaginatedList': 'catalog',
+        'ParcelAddOn': 'shipment',
+        'ParcelAddOnOptionsGroup': 'shipment',
+        'ParcelAddOnRadioOption': 'shipment',
         'ParcelItem': 'jobparcelitems',
         'ParcelItemWithPackage': 'jobparcelitems',
         'Partner': 'partner',
@@ -345,6 +355,7 @@ def __getattr__(name):
         'ShippingPackageInfo': 'shared',
         'SimplePriceTariff': 'shared',
         'SimpleTaskModel': 'shared',
+        'SmsJobStatus': 'jobsmstemplate',
         'SmsTemplateModel': 'jobsmstemplate',
         'SoldToAddress': 'address',
         'SoldToDetails': 'shared',
@@ -390,7 +401,9 @@ def __getattr__(name):
         'UpdateTruckModel': 'shared',
         'UploadedFile': 'document_upload',
         'UserInfo': 'users',
+        'PocUser': 'users',
         'Users': 'users',
+        'ValuesResponse': 'values',
         'VerifyBankAccountRequest': 'jobpayment',
         'Web2LeadReport': 'reports',
         'Web2LeadRevenueFilter': 'reports',
