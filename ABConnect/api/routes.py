@@ -102,7 +102,7 @@ SCHEMA = {
         "GET_BRANDSTREE": Route("GET", "/companies/brandstree", None, "List[CompanyBrandTreeNode]", {}),
         "GET_CAPABILITIES": Route("GET", "/companies/{companyId}/capabilities", None, "CommercialCapabilities", {}),
         "GET_CARRIER_ACOUNTS": Route("GET", "/companies/{companyId}/carrierAcounts", None, "FranchiseeCarrierAccounts", {}),
-        "GET_DETAILS": Route("GET", "/companies/{companyId}/details", None, "CompanyDetails", {}),
+        "GET_DETAILS": Route("GET", "/companies/{companyId}/details", None, "Company", {}),
         "GET_FRANCHISEE_ADDRESSES": Route("GET", "/companies/{companyId}/franchiseeAddresses", None, "List[CompanyAddressInfo]", {}),
         "GET_FULLDETAILS": Route("GET", "/companies/{companyId}/fulldetails", None, "CompanyDetails", {}),
         "GET_GEOSETTINGS": Route("GET", "/companies/geosettings", None, "List[SaveGeoSettingModel]", {}),

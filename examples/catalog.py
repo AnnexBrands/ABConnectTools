@@ -319,11 +319,15 @@ def main():
     # Get positional arguments (exclude flags)
     args = [arg for arg in sys.argv[1:] if not arg.startswith("-")]
 
-    # Default file or from command line
     if args:
         file_path = args[0]
+        if not Path(file_path).exists():
+            print(f"File not found: {file_path}")
+            sys.exit(1)
     else:
-        file_path = Path.cwd() / "examples" / "shipping-info-400160.xlsx"
+        err_msg = "Usage: python catalog.py <path_to_spreadsheet> [--dry-run]"
+        print(err_msg)
+        sys.exit(1)
 
     load_catalog(file_path, dry_run=dry_run)
 

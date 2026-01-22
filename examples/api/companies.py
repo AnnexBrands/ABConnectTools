@@ -9,15 +9,16 @@ from _helpers import save_fixture
 from _constants import COMPANY_ID
 import json
 
-api = ABConnectAPI(env='staging', username='instaquote')
+api = ABConnectAPI(username="instaquote")
+# api = ABConnectAPI(env="staging", username="instaquote")
 
 # Get company by ID using route-based endpoint
-company_obj = api.companies.get_by_id(COMPANY_ID)
+company_obj = api.companies.get(COMPANY_ID)
 
 # Now you have a typed Pydantic object (CompanySimple)
 print(f"type: {type(company_obj)}")
-print(f"name: {company_obj.name}")
-print(f"code: {company_obj.code}")
+print(f"name: {company_obj.details.name}")
+print(f"code: {company_obj.details.code}")
 save_fixture(company_obj, "CompanySimple")
 
 # Get brands
@@ -32,7 +33,9 @@ save_fixture(brands_tree, "CompanyBrandsTree")
 
 # Get companies available by current user
 available = api.companies.get_availablebycurrentuser()
-print(f"Available companies count: {len(available) if isinstance(available, list) else 'N/A'}")
+print(
+    f"Available companies count: {len(available) if isinstance(available, list) else 'N/A'}"
+)
 save_fixture(available, "CompanyAvailableByCurrentUser")
 
 search = api.companies.get_search(search_value="Training")

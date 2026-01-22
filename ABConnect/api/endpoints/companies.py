@@ -9,9 +9,12 @@ from ABConnect.api.endpoints.base import BaseEndpoint
 from ABConnect.api import models
 from ABConnect.api.routes import SCHEMA
 
+from uuid import UUID
 
 import logging
+
 logger = logging.getLogger(__name__)
+
 
 class CompaniesEndpoint(BaseEndpoint):
     """Companies API endpoint operations.
@@ -23,8 +26,15 @@ class CompaniesEndpoint(BaseEndpoint):
     api_path = "companies"
     routes = SCHEMA["COMPANIES"]
 
+    def get_id(self, id):
+        try:
+            UUID(id)
+            return id
+        except Exception:
+            return self.get_cache(id)
+
     def get(
-        self, code_or_id: str, details: str = "full", cast: bool = False, **kwargs
+        self, companyId: str, details: str = "full", cast: bool = False, **kwargs
     ) -> dict:
         """Convenience method to get company by code or ID.
 
@@ -37,20 +47,20 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             Company data as Pydantic model (if cast=True) or dict
         """
-        logger.info("Fetching company with code or ID: %s", code_or_id)
-        company_uuid = self.get_cache(code_or_id)
+
+        companyId = self.get_id(companyId)
 
         if details == "short":
-            route = self.routes['GET']
-            route.params = {"id": company_uuid}
+            route = self.routes["GET"]
+            route.params = {"id": companyId}
             return self._make_request(route, **kwargs)
         elif details == "details":
-            route = self.routes['GET_DETAILS']
-            route.params = {"companyId": company_uuid}
+            route = self.routes["GET_DETAILS"]
+            route.params = {"companyId": companyId}
             return self._make_request(route, **kwargs)
         else:  # full
-            route = self.routes['GET_FULLDETAILS']
-            route.params = {"companyId": company_uuid}
+            route = self.routes["GET_FULLDETAILS"]
+            route.params = {"companyId": companyId}
             return self._make_request(route, **kwargs)
 
     def get_by_id(self, id: str) -> models.CompanySimple:
@@ -64,17 +74,18 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             CompanySimple: Typed company model
         """
-        route = self.routes['GET']
+        route = self.routes["GET"]
         route.params = {"id": id}
         return self._make_request(route)
 
-    def get_details(self, companyId: str) -> dict:
+    def get_details(self, companyId: str) -> models.Company:
         """GET /api/companies/{companyId}/details
 
         Returns:
-            dict: API response data
+            Company: Company details (flat structure)
         """
-        route = self.routes['GET_DETAILS']
+        companyId = self.get_id(companyId)
+        route = self.routes["GET_DETAILS"]
         route.params = {"companyId": companyId}
         return self._make_request(route)
 
@@ -86,7 +97,7 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             List[dict]: List of Company objects
         """
-        route = self.routes['GET_AVAILABLE_BY_CURRENT_USER']
+        route = self.routes["GET_AVAILABLE_BY_CURRENT_USER"]
         return self._make_request(route)
 
     def get_search(self, search_value: Optional[str] = None) -> List[dict]:
@@ -100,7 +111,7 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             List[dict]: List of matching companies
         """
-        route = self.routes['GET_SEARCH']
+        route = self.routes["GET_SEARCH"]
         if search_value is not None:
             route.params = {"searchValue": search_value}
         return self._make_request(route)
@@ -111,7 +122,7 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['POST_SEARCH_V2']
+        route = self.routes["POST_SEARCH_V2"]
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
@@ -123,7 +134,7 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['POST_LIST']
+        route = self.routes["POST_LIST"]
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
@@ -135,7 +146,7 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['POST_SIMPLELIST']
+        route = self.routes["POST_SIMPLELIST"]
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
@@ -147,7 +158,8 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['GET_FULLDETAILS']
+        companyId = self.get_id(companyId)
+        route = self.routes["GET_FULLDETAILS"]
         route.params = {"companyId": companyId}
         return self._make_request(route)
 
@@ -157,7 +169,8 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['PUT_FULLDETAILS']
+        companyId = self.get_id(companyId)
+        route = self.routes["PUT_FULLDETAILS"]
         route.params = {"companyId": companyId}
         kwargs = {}
         if data is not None:
@@ -178,7 +191,7 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             List[dict]: List of carrier account info
         """
-        route = self.routes['GET_SEARCH_CARRIER_ACCOUNTS']
+        route = self.routes["GET_SEARCH_CARRIER_ACCOUNTS"]
         params = {}
         if current_company_id is not None:
             params["currentCompanyId"] = current_company_id
@@ -194,7 +207,7 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['POST_FULLDETAILS']
+        route = self.routes["POST_FULLDETAILS"]
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
@@ -206,7 +219,7 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['GET_INFO_FROM_KEY']
+        route = self.routes["GET_INFO_FROM_KEY"]
         if key is not None:
             route.params = {"key": key}
         return self._make_request(route)
@@ -217,7 +230,8 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['POST_GEOSETTINGS']
+        companyId = self.get_id(companyId)
+        route = self.routes["POST_GEOSETTINGS"]
         route.params = {"companyId": companyId}
         return self._make_request("GET", route)
 
@@ -227,7 +241,8 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['POST_GEOSETTINGS']
+        companyId = self.get_id(companyId)
+        route = self.routes["POST_GEOSETTINGS"]
         route.params = {"companyId": companyId}
         kwargs = {}
         if data is not None:
@@ -252,7 +267,7 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             List[dict]: List of geo settings
         """
-        route = self.routes['GET_GEOSETTINGS']
+        route = self.routes["GET_GEOSETTINGS"]
         params = {}
         if latitude is not None:
             params["Latitude"] = latitude
@@ -270,7 +285,7 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['POST_FILTERED_CUSTOMERS']
+        route = self.routes["POST_FILTERED_CUSTOMERS"]
         kwargs = {}
         if data is not None:
             kwargs["json"] = data
@@ -282,7 +297,8 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['GET_CARRIER_ACOUNTS']
+        companyId = self.get_id(companyId)
+        route = self.routes["GET_CARRIER_ACOUNTS"]
         route.params = {"companyId": companyId}
         return self._make_request(route)
 
@@ -292,7 +308,8 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['POST_CARRIER_ACOUNTS']
+        companyId = self.get_id(companyId)
+        route = self.routes["POST_CARRIER_ACOUNTS"]
         route.params = {"companyId": companyId}
         kwargs = {}
         if data is not None:
@@ -305,7 +322,8 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['GET_CAPABILITIES']
+        companyId = self.get_id(companyId)
+        route = self.routes["GET_CAPABILITIES"]
         route.params = {"companyId": companyId}
         return self._make_request(route)
 
@@ -315,7 +333,8 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['POST_CAPABILITIES']
+        companyId = self.get_id(companyId)
+        route = self.routes["POST_CAPABILITIES"]
         route.params = {"companyId": companyId}
         kwargs = {}
         if data is not None:
@@ -328,7 +347,8 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['GET_PACKAGINGSETTINGS']
+        companyId = self.get_id(companyId)
+        route = self.routes["GET_PACKAGINGSETTINGS"]
         route.params = {"companyId": companyId}
         return self._make_request(route)
 
@@ -338,7 +358,8 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['POST_PACKAGINGSETTINGS']
+        companyId = self.get_id(companyId)
+        route = self.routes["POST_PACKAGINGSETTINGS"]
         route.params = {"companyId": companyId}
         kwargs = {}
         if data is not None:
@@ -353,7 +374,8 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['GET_INHERITED_PACKAGING_TARIFFS']
+        companyId = self.get_id(companyId)
+        route = self.routes["GET_INHERITED_PACKAGING_TARIFFS"]
         route.params = {"companyId": companyId}
         if inherit_from is not None:
             route.params["inheritFrom"] = inherit_from
@@ -365,7 +387,8 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['GET_PACKAGINGLABOR']
+        companyId = self.get_id(companyId)
+        route = self.routes["GET_PACKAGINGLABOR"]
         route.params = {"companyId": companyId}
         return self._make_request(route)
 
@@ -375,7 +398,8 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['POST_PACKAGINGLABOR']
+        companyId = self.get_id(companyId)
+        route = self.routes["POST_PACKAGINGLABOR"]
         route.params = {"companyId": companyId}
         kwargs = {}
         if data is not None:
@@ -390,7 +414,8 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['GET_INHERITEDPACKAGINGLABOR']
+        companyId = self.get_id(companyId)
+        route = self.routes["GET_INHERITEDPACKAGINGLABOR"]
         route.params = {"companyId": companyId}
         if inherit_from is not None:
             route.params["inheritFrom"] = inherit_from
@@ -404,7 +429,7 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: List of companies with geo area info
         """
-        route = self.routes['GET_GEO_AREA_COMPANIES']
+        route = self.routes["GET_GEO_AREA_COMPANIES"]
         return self._make_request(route)
 
     def get_brands(self) -> List[dict]:
@@ -412,7 +437,7 @@ class CompaniesEndpoint(BaseEndpoint):
 
         Returns list of company brands.
         """
-        route = self.routes['GET_BRANDS']
+        route = self.routes["GET_BRANDS"]
         return self._make_request(route)
 
     def get_brandstree(self) -> dict:
@@ -423,7 +448,7 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: Tree structure of company brands
         """
-        route = self.routes['GET_BRANDSTREE']
+        route = self.routes["GET_BRANDSTREE"]
         return self._make_request(route)
 
     def get_franchiseeaddresses(self, companyId: str) -> List[dict]:
@@ -432,6 +457,7 @@ class CompaniesEndpoint(BaseEndpoint):
         Returns:
             dict: API response data
         """
-        route = self.routes['GET_FRANCHISEE_ADDRESSES']
+        companyId = self.get_id(companyId)
+        route = self.routes["GET_FRANCHISEE_ADDRESSES"]
         route.params = {"companyId": companyId}
         return self._make_request(route)
