@@ -4,9 +4,26 @@ Provides access to job timeline operations including status tracking,
 task management, and job status increments.
 """
 
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 from ABConnect.api.endpoints.base import BaseEndpoint
 from ABConnect.api.routes import SCHEMA
+from ABConnect.api.models import (
+    CarrierTask,
+    CompanyListItem,
+    DeleteTaskResponse,
+    SaveResponseModel,
+    ServiceBaseResponse,
+    TimelineResponse,
+    TaskCodes,
+)
+from ABConnect.api.models.shared import (
+    InTheFieldTaskModel,
+    SimpleTaskModel,
+    CarrierTaskModel,
+)
+from ABConnect.api.models.dashboard import (
+    IncrementJobStatusResponseModel,
+)
 
 
 class JobTimelineEndpoint(BaseEndpoint):
@@ -18,50 +35,81 @@ class JobTimelineEndpoint(BaseEndpoint):
     api_path = "job"
     routes = SCHEMA["JOB"]
 
-    def get_timeline(self, jobDisplayId: str) -> Dict[str, Any]:
+    def get_timeline(self, jobDisplayId: str) -> TimelineResponse:
         """Get all timeline tasks for a job.
 
         Args:
             jobDisplayId: The job display ID (e.g., '2000000')
 
         Returns:
-            List[CarrierTask] with all timeline tasks
+            TimelineResponse: Timeline data with tasks, on-holds, and job status
         """
         route = self.routes['GET_TIMELINE_LIST']
         route.params = {"jobDisplayId": str(jobDisplayId)}
         return self._make_request(route)
+
+    # Map task codes to their request models
+    _TASK_MODELS = {
+        TaskCodes.PICKUP: InTheFieldTaskModel,      # PU - Field/Pickup tasks
+        TaskCodes.PACKAGING: SimpleTaskModel,       # PK - Packaging tasks
+        TaskCodes.STORAGE: SimpleTaskModel,         # ST - Storage tasks
+        TaskCodes.CARRIER: CarrierTaskModel,        # CP - Carrier tasks
+        TaskCodes.DELIVERY: CarrierTaskModel,       # DE - Delivery tasks
+    }
 
     def post_timeline(
         self,
         jobDisplayId: str,
         create_email: Optional[str] = None,
         data: Optional[Dict[str, Any]] = None
-    ) -> Dict[str, Any]:
-        """Create a new timeline task for a job.
+    ):
+        """Create or update a timeline task for a job.
 
         Args:
             jobDisplayId: The job display ID
             create_email: Optional email creation flag
-            data: TimelineTaskInput with task details
+            data: Task data dict with taskCode and task-specific fields
 
         Returns:
-            SaveResponseModel with created task info
+            The created/updated task validated against the appropriate model
+            (InTheFieldTaskModel, SimpleTaskModel, or CarrierTaskModel)
+
+        Raises:
+            ValueError: If taskCode is missing or invalid
         """
+        if data is None:
+            raise ValueError("data is required for post_timeline")
+
+        # Get task code to determine request/response model
+        task_code = data.get("taskCode")
+        if not task_code:
+            raise ValueError("taskCode is required in timeline task data")
+
+        model_class = self._TASK_MODELS.get(task_code)
+        if model_class is None:
+            raise ValueError(f"Unknown taskCode: {task_code}. Expected one of: {list(self._TASK_MODELS.keys())}")
+
+        # Validate request data and serialize to JSON-compatible dict
+        validated_request = model_class.model_validate(data)
+        json_data = validated_request.model_dump(mode='json', by_alias=True, exclude_none=True)
+
+        # Build request
         route = self.routes['POST_TIMELINE']
-        route.params = {"jobDisplayId": str(jobDisplayId)}
-        kwargs = {}
-        if create_email is not None:
-            kwargs["params"] = {"createEmail": create_email}
-        if data is not None:
-            kwargs["json"] = data
-        return self._make_request(route, **kwargs)
+        url = route.path.format(jobDisplayId=jobDisplayId)
+        params = {"createEmail": create_email} if create_email is not None else None
+
+        # Make raw request (bypass automatic response validation)
+        response = self._r.call(route.method, url, json=json_data, params=params)
+
+        # Validate response against the same model (API returns the task)
+        return model_class.model_validate(response)
 
     def patch_timeline(
         self,
         timelineTaskId: str,
         jobDisplayId: str,
         data: Optional[Dict[str, Any]] = None
-    ) -> Dict[str, Any]:
+    ) -> ServiceBaseResponse:
         """Update an existing timeline task.
 
         Args:
@@ -70,7 +118,7 @@ class JobTimelineEndpoint(BaseEndpoint):
             data: UpdateTaskModel with updated task details
 
         Returns:
-            ServiceBaseResponse confirming update
+            ServiceBaseResponse: Confirmation of update
         """
         route = self.routes['PATCH_TIMELINE']
         route.params = {
@@ -82,7 +130,7 @@ class JobTimelineEndpoint(BaseEndpoint):
             kwargs["json"] = data
         return self._make_request(route, **kwargs)
 
-    def delete_timeline(self, timelineTaskId: str, jobDisplayId: str) -> Dict[str, Any]:
+    def delete_timeline(self, timelineTaskId: str, jobDisplayId: str) -> DeleteTaskResponse:
         """Delete a timeline task.
 
         Args:
@@ -90,7 +138,7 @@ class JobTimelineEndpoint(BaseEndpoint):
             jobDisplayId: The job display ID
 
         Returns:
-            DeleteTaskResponse confirming deletion
+            DeleteTaskResponse: Confirmation of deletion with success status
         """
         route = self.routes['DELETE_TIMELINE']
         route.params = {
@@ -103,7 +151,7 @@ class JobTimelineEndpoint(BaseEndpoint):
         self,
         timelineTaskIdentifier: str,
         jobDisplayId: str
-    ) -> Dict[str, Any]:
+    ) -> CarrierTask:
         """Get a specific timeline task by identifier.
 
         Args:
@@ -111,7 +159,7 @@ class JobTimelineEndpoint(BaseEndpoint):
             jobDisplayId: The job display ID
 
         Returns:
-            CarrierTask with task details
+            CarrierTask: Task details
         """
         route = self.routes['GET_TIMELINE']
         route.params = {
@@ -120,7 +168,7 @@ class JobTimelineEndpoint(BaseEndpoint):
         }
         return self._make_request(route)
 
-    def get_timeline_agent(self, taskCode: str, jobDisplayId: str) -> Dict[str, Any]:
+    def get_timeline_agent(self, taskCode: str, jobDisplayId: str) -> CompanyListItem:
         """Get the agent assigned to a timeline task.
 
         Args:
@@ -128,7 +176,7 @@ class JobTimelineEndpoint(BaseEndpoint):
             jobDisplayId: The job display ID
 
         Returns:
-            CompanyListItem with agent company info
+            CompanyListItem: Agent company info
         """
         route = self.routes['GET_TIMELINE_AGENT']
         route.params = {
@@ -141,7 +189,7 @@ class JobTimelineEndpoint(BaseEndpoint):
         self,
         jobDisplayId: str,
         data: Optional[Dict[str, Any]] = None
-    ) -> Dict[str, Any]:
+    ) -> IncrementJobStatusResponseModel:
         """Increment the job status to the next stage.
 
         Advances the job through its workflow stages (e.g., Quote -> Booked).
@@ -151,7 +199,7 @@ class JobTimelineEndpoint(BaseEndpoint):
             data: Optional IncrementJobStatusInputModel
 
         Returns:
-            IncrementJobStatusResponseModel with success status
+            IncrementJobStatusResponseModel: Success status and new job state
         """
         route = self.routes['POST_TIMELINE_INCREMENTJOBSTATUS']
         route.params = {"jobDisplayId": str(jobDisplayId)}
@@ -164,7 +212,7 @@ class JobTimelineEndpoint(BaseEndpoint):
         self,
         jobDisplayId: str,
         data: Optional[Dict[str, Any]] = None
-    ) -> Dict[str, Any]:
+    ) -> ServiceBaseResponse:
         """Undo the last job status increment.
 
         Reverts the job to its previous workflow stage.
@@ -174,7 +222,7 @@ class JobTimelineEndpoint(BaseEndpoint):
             data: Optional request data
 
         Returns:
-            ServiceBaseResponse confirming undo
+            ServiceBaseResponse: Confirmation of undo operation
         """
         route = self.routes['POST_TIMELINE_UNDOINCREMENTJOBSTATUS']
         route.params = {"jobDisplayId": str(jobDisplayId)}

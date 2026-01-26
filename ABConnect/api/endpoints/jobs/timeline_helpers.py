@@ -8,6 +8,12 @@ from typing import Optional, Dict, Any, Tuple
 from ABConnect.api.endpoints.jobs.timeline import JobTimelineEndpoint
 from ABConnect.common import load_json_resource
 from ABConnect.api import models
+from ABConnect.api.models import (
+    TimelineResponse,
+    SaveResponseModel,
+    DeleteTaskResponse,
+    LookupItem,
+)
 from datetime import datetime, timedelta
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -68,10 +74,15 @@ class TimelineHelpers(JobTimelineEndpoint):
             taskcode: Task code (PU, PK, ST, CP, etc.)
 
         Returns:
-            Tuple of (status_info, task_data or None)
+            Tuple of (status_info dict, task_data dict or None)
         """
-        timeline = self.get_timeline(str(jobid))
-        status = timeline.get("jobSubManagementStatus", {})
+        timeline: TimelineResponse = self.get_timeline(str(jobid))
+
+        # Build status dict from LookupItem model
+        status: Dict[str, Any] = {}
+        if timeline.job_sub_management_status:
+            status["id"] = timeline.job_sub_management_status.id
+            status["name"] = timeline.job_sub_management_status.name
 
         # Enrich status with code and description
         status_id = status.get("id")
@@ -83,16 +94,16 @@ class TimelineHelpers(JobTimelineEndpoint):
             status["code"] = 0
             status["descr"] = "Unknown"
 
-        # Find the specific task
-        for task in timeline.get("tasks", []):
-            if task.get("taskCode") == taskcode:
-                return status, task
+        # Find the specific task and convert to dict for manipulation
+        for task in timeline.tasks or []:
+            if task.task_code == taskcode:
+                return status, task.model_dump(by_alias=True, exclude_none=True)
 
         return status, None
 
     def set_task(
         self, jobid: int, taskcode: str, task: Dict[str, Any], createEmail: bool = False
-    ) -> Dict[str, Any]:
+    ) -> SaveResponseModel:
         """Update or create a timeline task.
 
         This method handles both creating new tasks and updating existing ones.
@@ -105,7 +116,7 @@ class TimelineHelpers(JobTimelineEndpoint):
             createEmail: Whether to send email notification
 
         Returns:
-            API response dictionary
+            SaveResponseModel: Response with success status and task info
         """
         return self.post_timeline(
             jobDisplayId=str(jobid),
@@ -121,7 +132,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         start: str,
         end: Optional[str] = None,
         createEmail: bool = False,
-    ) -> Optional[Dict[str, Any]]:
+    ) -> Optional[SaveResponseModel]:
         """Set the pickup scheduled date for a job (Status 2).
 
         Args:
@@ -131,7 +142,7 @@ class TimelineHelpers(JobTimelineEndpoint):
             createEmail: Whether to send email notification
 
         Returns:
-            API response or None if already at/past this status
+            SaveResponseModel or None if already at/past this status
         """
         logger.info(f"Setting job {jobid} as scheduled with start={start}, end={end}")
         statusinfo, task = self.get_task(jobid, models.TaskCodes.PICKUP)
@@ -152,7 +163,7 @@ class TimelineHelpers(JobTimelineEndpoint):
 
         return self.set_task(jobid, models.TaskCodes.PICKUP, task, createEmail)
 
-    def _2(self, *args, **kwargs) -> Optional[Dict[str, Any]]:
+    def _2(self, *args, **kwargs) -> Optional[SaveResponseModel]:
         """Alias for schedule() - Set status 2."""
         return self.schedule(*args, **kwargs)
 
@@ -162,7 +173,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         start: Optional[str] = None,
         end: Optional[str] = None,
         createEmail: bool = False
-    ) -> Optional[Dict[str, Any]]:
+    ) -> Optional[SaveResponseModel]:
         """Set the job as received (Status 3: Pickup completed).
         
         Handles onsite time logging according to the following rules:
@@ -239,7 +250,7 @@ class TimelineHelpers(JobTimelineEndpoint):
 
         return self.set_task(jobid, models.TaskCodes.PICKUP, task, createEmail)
 
-    def _3(self, *args, **kwargs) -> Optional[Dict[str, Any]]:
+    def _3(self, *args, **kwargs) -> Optional[SaveResponseModel]:
         """Alias for received() - Set status 3."""
         return self.received(*args, **kwargs)
 
@@ -247,7 +258,7 @@ class TimelineHelpers(JobTimelineEndpoint):
 
     def pack_start(
         self, jobid: int, start: str, createEmail: bool = False
-    ) -> Optional[Dict[str, Any]]:
+    ) -> Optional[SaveResponseModel]:
         """Set the packing start date for a job (Status 4).
 
         Args:
@@ -256,7 +267,7 @@ class TimelineHelpers(JobTimelineEndpoint):
             createEmail: Whether to send email notification
 
         Returns:
-            API response or None if already at/past this status
+            SaveResponseModel or None if already at/past this status
         """
         statusinfo, task = self.get_task(jobid, models.TaskCodes.PACKAGING)
         curr = statusinfo.get("code", 0)
@@ -273,13 +284,13 @@ class TimelineHelpers(JobTimelineEndpoint):
         task["timeLog"] = {"start": start}
         return self.set_task(jobid, models.TaskCodes.PACKAGING, task, createEmail)
 
-    def _4(self, *args, **kwargs) -> Optional[Dict[str, Any]]:
+    def _4(self, *args, **kwargs) -> Optional[SaveResponseModel]:
         """Alias for pack_start() - Set status 4."""
         return self.pack_start(*args, **kwargs)
 
     def pack_finish(
         self, jobid: int, end: str, createEmail: bool = False
-    ) -> Optional[Dict[str, Any]]:
+    ) -> Optional[SaveResponseModel]:
         """Set the packing finish date for a job (Status 5).
 
         Args:
@@ -288,7 +299,7 @@ class TimelineHelpers(JobTimelineEndpoint):
             createEmail: Whether to send email notification
 
         Returns:
-            API response or None if already at/past this status
+            SaveResponseModel or None if already at/past this status
         """
         statusinfo, task = self.get_task(jobid, models.TaskCodes.PACKAGING)
         curr = statusinfo.get("code", 0)

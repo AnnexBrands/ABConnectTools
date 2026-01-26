@@ -30,6 +30,17 @@ When adding a new endpoint:
 - Ensure Pydantic models have descriptive __repr__ methods
 - Verify CLI suggestions use friendly/tagged methods, not raw API calls
 
+**Response Model Validation (CRITICAL):**
+Swagger's `response_model` is frequently WRONG. For example, swagger may indicate `SaveResponseModel` when the actual response is a `Timeline` object. Always validate actual responses before trusting swagger.
+
+Workflow for each endpoint:
+1. **Create example** - Call endpoint, print raw response
+2. **Verify response** - Check if actual type matches swagger's claim
+3. **Fix type hints** - Update endpoint return type to match reality
+4. **Update tests** - Add `isinstance()` checks for correct model type
+
+See `REFACTOR_PROGRESS.md` for known swagger inaccuracies and detailed workflow.
+
 ## Virtual Environment
 
 **IMPORTANT**: Create and activate a virtual environment before running any Python or pip commands:

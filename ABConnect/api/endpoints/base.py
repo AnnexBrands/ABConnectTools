@@ -43,13 +43,19 @@ class BaseEndpoint:
     def _validate_request(self, route: Route, kwargs: dict) -> None:
         if "json" not in kwargs:
             return
-        
+
         data = kwargs["json"]
-        if model := getattr(models, route.request_model, None) is None:
+
+        # Check if route has a request_model defined
+        if not route.request_model:
+            # No request model defined - pass data through without validation
+            return
+
+        model = getattr(models, route.request_model, None)
+        if model is None:
             raise ValueError(
-                f"Endpoint {route.method} {route.path} received a JSON body "
-                f"but no request_model is defined. Remove the json= argument "
-                f"or define a request_model for this route."
+                f"Endpoint {route.method} {route.path} has request_model '{route.request_model}' "
+                f"but model class not found in models module."
             )
         kwargs["json"] = model.model_validate(data)
 
@@ -72,7 +78,7 @@ class BaseEndpoint:
         """Validate and cast API response to Pydantic model if specified.
 
         Args:
-            response: Raw HTTP response
+            response: Raw HTTP response (already parsed by http_client)
             response_model: Response model name (required - errors should not pass silently)
 
         Returns:
@@ -89,11 +95,27 @@ class BaseEndpoint:
 
         is_list, model_name = self._parse_type_string(response_model)
 
-        # Handle primitive types (str, int, etc.) - return as-is
-        if model_name == "str":
+        # Handle primitive types (str, int, bool, etc.) - return as-is
+        if model_name in ("str", "bool", "int", "float"):
             return response if not is_list else list(response)
 
         model_class = getattr(models, model_name)
+
+        # Handle case where API returns a primitive (e.g., `true`) instead of a dict
+        # Wrap boolean responses as {"success": value} for ServiceBaseResponse-like models
+        if isinstance(response, bool):
+            if hasattr(model_class, 'model_fields') and 'success' in model_class.model_fields:
+                response = {"success": response}
+            else:
+                logger.warning(
+                    f"API returned bool but model {model_name} has no 'success' field. "
+                    f"Returning raw response."
+                )
+                return response
+
+        # Handle None response
+        if response is None:
+            return None
 
         if is_list:
             return [model_class.model_validate(item) for item in response]

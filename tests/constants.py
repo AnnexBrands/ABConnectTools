@@ -3,6 +3,8 @@
 Central location for test data IDs used across examples and tests.
 """
 
+from datetime import datetime, timedelta
+
 # Job test data
 JOB_DISPLAY_ID = "2000000"
 JOB_ID = "550e8400-e29b-41d4-a716-446655440000"
@@ -18,3 +20,5 @@ ITEM_ID = "550e8400-e29b-41d4-a716-446655440001"
 
 VIEW_ID = 43
 
+START = datetime.now()
+END = START + timedelta(hours=1)

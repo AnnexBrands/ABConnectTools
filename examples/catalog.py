@@ -39,7 +39,7 @@ from ABConnect.api.models.catalog import (
 
 CPACK_MAP = {"nf": "1", "lf": "2", "f": "3", "vf": "4", "pbo": "pbo"}
 DEFAULT_CPACK = "3"
-DEFAULT_AGENT = "DLC"
+DEFAULT_AGENT = "OFFLIVE"
 IMAGE_URL_TEMPLATE = "https://s3.amazonaws.com/static2.liveauctioneers.com/{house_id}/{catalog_id}/{lot_id}_1_m.jpg"
 
 
@@ -323,7 +323,7 @@ def main():
     if args:
         file_path = args[0]
     else:
-        file_path = Path.cwd() / "examples" / "shipping-info-400160.xlsx"
+        file_path = Path.cwd() / "examples" / "shipping-info-403547.xlsx"
 
     load_catalog(file_path, dry_run=dry_run)
 

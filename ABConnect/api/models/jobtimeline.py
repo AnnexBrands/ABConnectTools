@@ -1,6 +1,6 @@
 """Jobtimeline models for ABConnect API."""
 
-from typing import List, Optional, Union, TYPE_CHECKING
+from typing import List, Optional, TYPE_CHECKING
 from datetime import datetime
 from pydantic import Field
 from .base import ABConnectBaseModel, IdentifiedModel, TimestampedModel
@@ -99,10 +99,4 @@ class UpdateTaskModel(ABConnectBaseModel):
     preferred_end_date: Optional["UpdateDateModel"] = Field(None, alias="preferredEndDate")
 
 
-# Union type for timeline task input - accepts any task model variant
-# The POST /api/job/{jobDisplayId}/timeline endpoint is polymorphic and can accept
-# BaseTaskModel, SimpleTaskModel, CarrierTaskModel, or InTheFieldTaskModel
-TimelineTaskInput = Union[SimpleTaskModel, CarrierTaskModel, InTheFieldTaskModel, BaseTaskModel]
-
-
-__all__ = ['BaseTaskModel', 'CarrierTask', 'CompanyListItem', 'DeleteTaskResponse', 'SaveResponseModel', 'TimelineResponse', 'UpdateTaskModel', 'TimelineTaskInput']
+__all__ = ['BaseTaskModel', 'CarrierTask', 'CompanyListItem', 'DeleteTaskResponse', 'SaveResponseModel', 'TimelineResponse', 'UpdateTaskModel']

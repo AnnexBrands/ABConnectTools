@@ -134,6 +134,7 @@ class BaseTask(TimestampedModel):
     planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
     notes: Optional[List["JobTaskNote"]] = Field(None)
     work_time_logs: Optional[List["WorkTimeLog"]] = Field(None, alias="workTimeLogs")
+    time_log: Optional["TimeLog"] = Field(None, alias="timeLog")
     target_start_date: Optional[datetime] = Field(None, alias="targetStartDate")
     actual_end_date: Optional[datetime] = Field(None, alias="actualEndDate")
 

@@ -121,8 +121,8 @@ class Config:
             Base API URL
         """
         if cls.get_env() == "staging":
-            return "https://catalog-api.staging.abconnect.co/api"
-        return "https://catalog-api.abconnect.co/api"
+            return "https://catalog-api.staging.abconnect.co/"
+        return "https://catalog-api.abconnect.co/"
 
     @classmethod
     def get_identity_url(cls) -> str:

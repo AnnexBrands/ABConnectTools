@@ -43,7 +43,7 @@ if TYPE_CHECKING:
     from .jobshipment import BookShipmentRequest, DeleteShipRequestModel, InternationalParams, JobCarrierRatesModel, JobParcelAddOn, ShipmentOriginDestination, TransportationRatesRequestModel
     from .jobsms import MarkSmsAsReadModel, SendSMSModel
     from .jobsmstemplate import NotificationToken, NotificationTokenGroup, SmsJobStatus, SmsTemplateModel
-    from .jobtimeline import BaseTaskModel, CarrierTask, CompanyListItem, DeleteTaskResponse, SaveResponseModel, TimelineResponse, TimelineTaskInput, UpdateTaskModel
+    from .jobtimeline import BaseTaskModel, CarrierTask, CompanyListItem, DeleteTaskResponse, SaveResponseModel, TimelineResponse, UpdateTaskModel
     from .jobtracking import ShipmentTrackingDetails
     from .jobtrackingv3 import JobTrackingResponseV3
     from .lookup import ContactTypeEntity, CountryCodeDto, LookupKeys, LookupValue
@@ -378,7 +378,6 @@ def __getattr__(name):
         'TimeLogPauseModel': 'shared',
         'TimeSpan': 'shared',
         'TimelineResponse': 'jobtimeline',
-        'TimelineTaskInput': 'jobtimeline',
         'TrackingCarrierProps': 'shared',
         'TrackingStatusV2': 'shared',
         'TransferModel': 'job',
@@ -432,7 +431,7 @@ def rebuild_models():
     # Import all model modules
     import importlib
     modules_to_rebuild = [
-        'shared', 'jobtimeline', 'jobpayment',  # These first to resolve forward refs
+        'shared', 'jobtimeline', 'jobpayment', 'jobonhold',  # These first to resolve forward refs
         'account', 'address', 'companies', 'contacts', 'job',
         'jobform', 'jobshipment', 'documents',
         'users', 'dashboard', 'reports', 'lookup', 'jobnote'
@@ -477,7 +476,7 @@ __all__ = [
     'JobAccessLevel', 'JobContactType', 'JobType', 'KnownFormId', 'LabelImageType', 'LabelType',
     'ListSortDirection', 'OperationsFormType', 'PaymentType', 'PropertyType', 'QuoteRequestStatus',
     'RangeDateEnum', 'RetransTimeZoneEnum', 'SelectedOption', 'SendEmailStatus', 'ServiceType',
-    'SortByField', 'StatusEnum',
+    'SortByField', 'StatusEnum', 'TaskCodes',
     # Models (lazily loaded)
     'AcceptModel', 'AccesorialCharges', 'AddCatalogRequest', 'AddLotRequest', 'AddSellerRequest',
     'Address', 'AddressData', 'AddressDetails', 'AddressDetailsMergePreviewDataItem', 'AddressIsValidResult',
@@ -543,7 +542,7 @@ __all__ = [
     'StringMergePreviewDataItem', 'StringOverridable', 'SuggestedContactEntity', 'SummaryInfo',
     'TagBoxDataSourceLoadOptions', 'TaskNoteModel', 'TaskTruckInfo', 'TaxOption', 'TeamWWAccountData',
     'TimeLog', 'TimeLogModel', 'TimeLogPause', 'TimeLogPauseModel', 'TimeSpan', 'TimelineResponse',
-    'TimelineTaskInput', 'TrackingCarrierProps', 'TrackingStatusV2', 'TransferModel', 'TransportationCharges',
+    'TrackingCarrierProps', 'TrackingStatusV2', 'TransferModel', 'TransportationCharges',
     'TransportationRatesRequest', 'TransportationRatesRequestModel', 'Truck', 'TwilioSmsStatusCallback',
     'UPSAccountData', 'UPSSpecific', 'USPSAccountData', 'USPSSpecific', 'UndoIncrementJobStatusInputModel',
     'UpdateCarrierAccountsModel', 'UpdateCatalogRequest', 'UpdateDateModel', 'UpdateLotRequest',

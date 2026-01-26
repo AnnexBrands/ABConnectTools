@@ -464,8 +464,12 @@ class SearchCompanyModel(CompanyRelatedModel):
 
 
 class SearchCompanyResponse(CompanyRelatedModel):
-    """SearchCompanyResponse model"""
+    """SearchCompanyResponse model for GET /companies/search response."""
 
+    id: Optional[str] = Field(None, description="Company UUID")
+    code: Optional[str] = Field(None, description="Company code")
+    name: Optional[str] = Field(None, description="Company name")
+    type_id: Optional[str] = Field(None, alias="typeId", description="Company type ID")
     company_code: Optional[str] = Field(None, alias="companyCode")
     company_display_id: Optional[str] = Field(None, alias="companyDisplayId")
     parent_company_id: Optional[str] = Field(None, alias="parentCompanyId")
