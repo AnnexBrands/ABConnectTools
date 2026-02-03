@@ -49,3 +49,41 @@ def test_get_list(api):
 def test_list_fixture(SmsTemplateListData):
     """fixture has expected structure"""
     assert isinstance(SmsTemplateListData, list), "SmsTemplateList fixture should be a list"
+
+
+# ==============================================================================
+# Routes needing parameters or write operations
+# ==============================================================================
+
+@pytest.mark.integration
+@pytest.mark.xfail(reason=(
+    "Human: Call api.sms_template.get_get(templateId) with a valid templateId "
+    "from the SmsTemplateList fixture (pick first item's id field). "
+    "Save fixture via save_fixture(result, 'SmsTemplateDetail')."
+))
+def test_get_template(api):
+    """get_get returns a specific SMS template"""
+    result = api.sms_template.get_get("NEED_VALID_TEMPLATE_ID")
+    assert result is not None
+
+
+@pytest.mark.integration
+@pytest.mark.xfail(reason=(
+    "Human: Destructive operation. Only test if safe to delete a template in staging. "
+    "Call api.sms_template.delete_delete(templateId) with a test template."
+))
+def test_delete_template(api):
+    """delete_delete removes an SMS template"""
+    result = api.sms_template.delete_delete("NEED_VALID_TEMPLATE_ID")
+    assert result is not None
+
+
+@pytest.mark.integration
+@pytest.mark.xfail(reason=(
+    "Human: Write operation. Call api.sms_template.post_save(data) with valid "
+    "SmsTemplateModel data. Inspect SmsTemplateList fixture for field structure."
+))
+def test_save_template(api):
+    """post_save creates or updates an SMS template"""
+    result = api.sms_template.post_save({"name": "test_template"})
+    assert result is not None
