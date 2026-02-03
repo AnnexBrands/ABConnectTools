@@ -477,7 +477,7 @@ __all__ = [
     'JobAccessLevel', 'JobContactType', 'JobType', 'KnownFormId', 'LabelImageType', 'LabelType',
     'ListSortDirection', 'OperationsFormType', 'PaymentType', 'PropertyType', 'QuoteRequestStatus',
     'RangeDateEnum', 'RetransTimeZoneEnum', 'SelectedOption', 'SendEmailStatus', 'ServiceType',
-    'SortByField', 'StatusEnum',
+    'SortByField', 'StatusEnum', 'TaskCodes',
     # Models (lazily loaded)
     'AcceptModel', 'AccesorialCharges', 'AddCatalogRequest', 'AddLotRequest', 'AddSellerRequest',
     'Address', 'AddressData', 'AddressDetails', 'AddressDetailsMergePreviewDataItem', 'AddressIsValidResult',

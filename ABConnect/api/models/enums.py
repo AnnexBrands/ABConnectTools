@@ -374,6 +374,24 @@ class OperationsFormType(int, Enum):
     WITHNOTES = 1
 
 
+class TaskCodes(str, Enum):
+    """Task codes for job timeline tasks.
+
+    These codes identify different task types in the job timeline:
+    - PICKUP (PU): Field pickup task
+    - PACKAGING (PK): In-house packaging task
+    - STORAGE (ST): Storage task
+    - CARRIER (CP): Carrier pickup/delivery task
+    - DELIVERY (DL): Final delivery task
+    """
+
+    PICKUP = "PU"
+    PACKAGING = "PK"
+    STORAGE = "ST"
+    CARRIER = "CP"
+    DELIVERY = "DL"
+
+
 __all__ = [
     "CarrierAPI",
     "CommercialCapabilities",
@@ -404,4 +422,5 @@ __all__ = [
     "ServiceType",
     "SortByField",
     "StatusEnum",
+    "TaskCodes",
 ]

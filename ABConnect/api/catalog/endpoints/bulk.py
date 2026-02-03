@@ -22,4 +22,7 @@ class BulkEndpoint(BaseCatalogEndpoint):
         Args:
             data: Bulk insert request containing catalogs, lots, and sellers
         """
-        self._post("insert", json=data.model_dump(by_alias=True, exclude_none=True, mode="json"))
+        self._post(
+            "insert",
+            json=data.model_dump(by_alias=True, exclude_none=True, mode="json"),
+        )

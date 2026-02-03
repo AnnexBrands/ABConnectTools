@@ -16,7 +16,7 @@ class Config:
     _env_values: Dict[str, Any] = {}
     _loaded: bool = False
     _env: str = "production"  # Current environment type
-    _env_file: str = ".env"   # Current env file path
+    _env_file: str = ".env"  # Current env file path
 
     def __new__(cls):
         """Singleton pattern to ensure single config instance."""
@@ -118,11 +118,11 @@ class Config:
         """Get base API URL for current environment.
 
         Returns:
-            Base API URL
+            Base API URL (without /api/ since endpoints include it)
         """
         if cls.get_env() == "staging":
-            return "https://catalog-api.staging.abconnect.co/api"
-        return "https://catalog-api.abconnect.co/api"
+            return "https://catalog-api.staging.abconnect.co/"
+        return "https://catalog-api.abconnect.co/"
 
     @classmethod
     def get_identity_url(cls) -> str:
