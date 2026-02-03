@@ -171,6 +171,7 @@ Separate base_url and endpoints, same auth. Work toward seamless.
 - **Flexible authentication**: Token storage abstraction supports both standalone and Django-integrated usage
 - **Environment switching**: Staging vs production controlled via `env` parameter or `ABC_ENVIRONMENT` variable
 - **Auto-discovery**: Tests should warn if any swagger endpoints are not implemented.
+- **Cache-based code→UUID resolution**: `BaseEndpoint.get_cache(key)` calls `https://tasks.abconnect.co/cache/{KEY}` to swap a friendly string code (e.g. CompanyCode "9999AZ") for a UUID (CompanyId). Any endpoint or helper that accepts a CompanyId should also accept a CompanyCode and resolve it via `get_cache()`. This pattern applies broadly: any parameter that is a UUID can potentially accept a short code that gets resolved through the cache.
 
 ### Configuration Files
 - `base/ACPortal_swagger_latest.json`: OpenAPI specification for endpoint discovery
@@ -199,6 +200,13 @@ Separate base_url and endpoints, same auth. Work toward seamless.
 - Format: UUID (string) for most operations
 - Test item ID: `"550e8400-e29b-41d4-a716-446655440001"`
 - Example usage: `itemid="550e8400-e29b-41d4-a716-446655440001"`, `item_id="550e8400-e29b-41d4-a716-446655440001"`
+
+**Company IDs and Codes:**
+- CompanyId format: UUID (string)
+- CompanyCode format: short alphanumeric string (e.g. "9999AZ")
+- `BaseEndpoint.get_cache(code)` resolves CompanyCode → CompanyId (UUID)
+- Helpers that accept a CompanyId should also accept a CompanyCode and resolve via `get_cache()`
+- Example: `api.jobs.agent.oa(job, "9999AZ")` resolves "9999AZ" to its UUID before calling the API
 
 **Document Types:**
 - Item Photo: `document_type=6`
