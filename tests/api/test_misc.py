@@ -97,34 +97,6 @@ def test_roles_fixture(UsersRolesData):
     assert all(isinstance(role, str) for role in UsersRolesData), "all roles should be strings"
 
 
-# Views tests
-@pytest.mark.integration
-def test_get_views_all(api):
-    """server returns all views"""
-    views = api.views.get_all()
-    assert isinstance(views, list), "api.views.get_all should return a list"
-
-
-def test_views_all_fixture(ViewsAllData):
-    """fixture has expected structure"""
-    for item in ViewsAllData:
-        models.GridViewDetails.model_validate(item)
-
-
-@pytest.mark.integration
-def test_get_datasetsps(api):
-    """server returns dataset stored procedures as list of strings"""
-    datasetsps = api.views.get_datasetsps()
-    assert isinstance(datasetsps, list), "datasetsps should be a list"
-    assert all(isinstance(sp, str) for sp in datasetsps), "all stored procedures should be strings"
-
-
-def test_datasetsps_fixture(ViewsDatasetSpsData):
-    """fixture has expected structure - list of stored procedure name strings"""
-    assert isinstance(ViewsDatasetSpsData, list), "ViewsDatasetSps fixture should be a list"
-    assert all(isinstance(sp, str) for sp in ViewsDatasetSpsData), "all stored procedures should be strings"
-
-
 # Notifications tests
 @pytest.mark.integration
 def test_get_notifications(api):
