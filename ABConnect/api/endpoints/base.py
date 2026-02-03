@@ -52,7 +52,7 @@ class BaseEndpoint:
                 f"or define a request_model for this route."
             )
         if hasattr(model, 'model_validate'):
-            kwargs["json"] = model.model_validate(data)
+            kwargs["json"] = model.model_validate(data).json()
 
     def _parse_type_string(self, type_str: str) -> Tuple[bool, str]:
         """Parse a type string to detect List[...] wrapper.

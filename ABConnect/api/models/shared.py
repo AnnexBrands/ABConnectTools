@@ -1,7 +1,7 @@
 """Shared models for ABConnect API."""
 
 import logging
-from typing import List, Literal, Optional, TYPE_CHECKING
+from typing import List, Literal, Optional, Union, TYPE_CHECKING
 from datetime import datetime
 from datetime import date
 from pydantic import Field
@@ -1080,11 +1080,15 @@ class WeightInfo(ABConnectBaseModel):
 
 
 class WorkTimeLog(IdentifiedModel):
-    """WorkTimeLog model"""
+    """WorkTimeLog model
+
+    Note: API may return startTime/endTime as either a TimeSpan object
+    or a plain time string (e.g. "09:37:47").
+    """
 
     date: Optional[datetime] = Field(None)
-    start_time: Optional[TimeSpan] = Field(None, alias="startTime")
-    end_time: Optional[TimeSpan] = Field(None, alias="endTime")
+    start_time: Optional[Union[TimeSpan, str]] = Field(None, alias="startTime")
+    end_time: Optional[Union[TimeSpan, str]] = Field(None, alias="endTime")
 
 
 class MaerskAccountData(ABConnectBaseModel):
