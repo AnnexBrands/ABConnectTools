@@ -374,6 +374,21 @@ class OperationsFormType(int, Enum):
     WITHNOTES = 1
 
 
+class JobStatus(int, Enum):
+    """Job timeline status codes (1-10)."""
+
+    NEW_JOB = 1
+    SCHEDULED = 2              # PU task created with plannedStartDate
+    RECEIVED = 3               # PU task completedDate set
+    PACKAGING_STARTED = 4      # PK task timeLog.start set
+    PACKAGING_COMPLETED = 5    # PK task timeLog.end set
+    STORAGE = 6                # ST task timeLog.start set
+    CARRIER_SCHEDULED = 7      # CP task scheduledDate set
+    CARRIER_PICKUP = 8         # CP task pickupCompletedDate set
+    FINAL_MILE = 9             # (not directly settable via helpers)
+    DELIVERED = 10             # CP task deliveryCompletedDate set
+
+
 class TaskCodes(str, Enum):
     """Task codes for job timeline tasks.
 
@@ -406,6 +421,7 @@ __all__ = [
     "InheritSettingFrom",
     "JobAccessLevel",
     "JobContactType",
+    "JobStatus",
     "JobType",
     "KnownFormId",
     "LabelImageType",

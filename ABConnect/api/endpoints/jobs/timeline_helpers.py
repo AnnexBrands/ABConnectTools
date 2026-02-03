@@ -8,6 +8,7 @@ from typing import Optional, Dict, Any, Tuple
 from ABConnect.api.endpoints.jobs.timeline import JobTimelineEndpoint
 from ABConnect.common import load_json_resource
 from ABConnect.api import models
+from ABConnect.api.models.enums import JobStatus
 from datetime import datetime, timedelta
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -139,7 +140,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         statusinfo, task = self.get_task(jobid, models.TaskCodes.PICKUP)
         curr = statusinfo.get("code", 0)
 
-        if curr >= 2:
+        if curr >= JobStatus.SCHEDULED:
             logger.warning(
                 f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})"
             )
@@ -186,7 +187,7 @@ class TimelineHelpers(JobTimelineEndpoint):
 
         statusinfo, task = self.get_task(jobid, models.TaskCodes.PICKUP)
         curr = statusinfo.get("code", 0)
-        if curr >= 3:
+        if curr >= JobStatus.RECEIVED:
             logger.warning(
                 f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})"
             )
@@ -263,7 +264,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         statusinfo, task = self.get_task(jobid, models.TaskCodes.PACKAGING)
         curr = statusinfo.get("code", 0)
 
-        if curr >= 4:
+        if curr >= JobStatus.PACKAGING_STARTED:
             logger.warning(
                 f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})"
             )
@@ -295,7 +296,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         statusinfo, task = self.get_task(jobid, models.TaskCodes.PACKAGING)
         curr = statusinfo.get("code", 0)
 
-        if curr >= 5:
+        if curr >= JobStatus.PACKAGING_COMPLETED:
             logger.warning(
                 f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})"
             )
@@ -384,7 +385,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         statusinfo, task = self.get_task(jobid, models.TaskCodes.CARRIER)
         curr = statusinfo.get("code", 0)
 
-        if curr >= 7:
+        if curr >= JobStatus.CARRIER_SCHEDULED:
             logger.warning(
                 f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})"
             )
@@ -416,7 +417,7 @@ class TimelineHelpers(JobTimelineEndpoint):
         statusinfo, task = self.get_task(jobid, models.TaskCodes.CARRIER)
         curr = statusinfo.get("code", 0)
 
-        if curr >= 8:
+        if curr >= JobStatus.CARRIER_PICKUP:
             logger.warning(
                 f"Job {jobid} already at status {curr} ({statusinfo.get('descr', 'Unknown')})"
             )
@@ -477,3 +478,22 @@ class TimelineHelpers(JobTimelineEndpoint):
 
         logger.warning(f"Task {taskcode} not found for job {jobid}")
         return None
+
+    def delete_all(self, jobid: int) -> list:
+        """Delete all timeline tasks for a job (resets to status 1).
+
+        Deletes tasks in reverse order (carrier, storage, packaging, pickup)
+        to avoid status transition conflicts.
+
+        Args:
+            jobid: Job display ID
+
+        Returns:
+            List of API responses for each successfully deleted task
+        """
+        results = []
+        for tc in [models.TaskCodes.CARRIER, models.TaskCodes.STORAGE, models.TaskCodes.PACKAGING, models.TaskCodes.PICKUP]:
+            r = self.delete(jobid, tc)
+            if r is not None:
+                results.append(r)
+        return results

@@ -43,7 +43,7 @@ if TYPE_CHECKING:
     from .jobshipment import BookShipmentRequest, DeleteShipRequestModel, InternationalParams, JobCarrierRatesModel, JobParcelAddOn, ShipmentOriginDestination, TransportationRatesRequestModel
     from .jobsms import MarkSmsAsReadModel, SendSMSModel
     from .jobsmstemplate import NotificationToken, NotificationTokenGroup, SmsJobStatus, SmsTemplateModel
-    from .jobtimeline import BaseTaskModel, CarrierTask, CompanyListItem, DeleteTaskResponse, SaveResponseModel, TimelineResponse, TimelineTaskInput, UpdateTaskModel
+    from .jobtimeline import BaseTaskModel, CarrierTask, CompanyListItem, DeleteTaskResponse, SaveResponseModel, TimelineResponse, TimelineTask, TimelineTaskInput, UpdateTaskModel
     from .jobtracking import ShipmentTrackingDetails
     from .jobtrackingv3 import JobTrackingResponseV3
     from .lookup import ContactTypeEntity, CountryCodeDto, LookupKeys, LookupValue
@@ -52,7 +52,7 @@ if TYPE_CHECKING:
     from .planner import PlannerTask
     from .reports import InsuranceReport, InsuranceReportRequest, ReferredByReport, ReferredByReportRequest, RevenueCustomer, SalesForecastReport, SalesForecastReportRequest, SalesForecastSummary, SalesForecastSummaryRequest, Web2LeadReport, Web2LeadRevenueFilter, Web2LeadV2RequestModel
     from .rfq import AcceptModel
-    from .shared import AccesorialCharges, AutoCompleteValue, Base64File, BaseTask, BookShipmentSpecificParams, CalendarItem, CalendarNotes, CalendarTask, CarrierAccountInfo, CarrierInfo, CarrierProviderMessage, CarrierRateModel, CarrierTaskModel, Commodity, CreatedTask, CustomerInfo, Details, DocumentDetails, EmailDetails, EstesAccountData, ExportPackingInfo, ExportTotalCosts, ExpressFreightDetail, FedExAccountData, FedExRestApiAccount, FedExSpecific, ForwardAirAccountData, FranchiseeCarrierAccounts, GlobalTranzAccountData, GroupingInfo, HandlingUnitModel, InTheFieldTaskModel, InitialNoteModel, InsuranceOption, ItemTotals, Items, JToken, LaborCharges, LastObtainNFM, LatLng, LookupItem, MaerskAccountData, MasterMaterials, NameValueEntity, ObtainNFMParcelItem, ObtainNFMParcelService, OnlinePaymentSettings, PackagingLaborHours, PageOrderedRequestModel, PhoneDetails, PickupLaborHoursRule, PilotAccountData, PlannerLabor, QuoteRequestComment, RequestedParcelPackaging, RoadRunnerAccountData, RoyaltiesCharges, SearchCustomerInfo, ServiceBaseResponse, ServiceInfo, ServicePricingsMarkup, ServiceWarningResponse, ShipmentTrackingDocument, ShippingHistoryStatus, ShippingPackageInfo, SimplePriceTariff, SimpleTaskModel, SoldToDetails, SortBy, SortByModel, SortingInfo, StoredProcedureColumn, StringMergePreviewDataItem, StringOverridable, SummaryInfo, TaskTruckInfo, TaxOption, TeamWWAccountData, TimeLog, TimeLogModel, TimeLogPause, TimeLogPauseModel, TimeSpan, TrackingCarrierProps, TrackingStatusV2, TransportationCharges, TransportationRatesRequest, UPSAccountData, UPSSpecific, USPSAccountData, USPSSpecific, UpdateDateModel, UpdateTruckModel, WeightInfo, WorkTimeLog
+    from .shared import AccesorialCharges, AutoCompleteValue, Base64File, BaseTask, BookShipmentSpecificParams, CalendarItem, CalendarNotes, CalendarTask, CarrierAccountInfo, CarrierInfo, CarrierProviderMessage, CarrierRateModel, CarrierTaskModel, Commodity, CreatedTask, CustomerInfo, Details, DocumentDetails, EmailDetails, EstesAccountData, ExportPackingInfo, ExportTotalCosts, ExpressFreightDetail, FedExAccountData, FedExRestApiAccount, FedExSpecific, ForwardAirAccountData, FranchiseeCarrierAccounts, GlobalTranzAccountData, GroupingInfo, HandlingUnitModel, InTheFieldTaskModel, InitialNoteModel, InsuranceOption, ItemTotals, Items, JToken, LaborCharges, LastObtainNFM, LatLng, LookupItem, MaerskAccountData, MasterMaterials, NameValueEntity, ObtainNFMParcelItem, ObtainNFMParcelService, OnlinePaymentSettings, PackagingLaborHours, PackagingTask, PageOrderedRequestModel, PhoneDetails, PickupLaborHoursRule, PickupTask, PilotAccountData, PlannerLabor, QuoteRequestComment, RequestedParcelPackaging, RoadRunnerAccountData, RoyaltiesCharges, SearchCustomerInfo, ServiceBaseResponse, ServiceInfo, ServicePricingsMarkup, ServiceWarningResponse, ShipmentTrackingDocument, ShippingHistoryStatus, ShippingPackageInfo, SimplePriceTariff, SimpleTaskModel, SoldToDetails, SortBy, SortByModel, SortingInfo, StorageTask, StoredProcedureColumn, StringMergePreviewDataItem, StringOverridable, SummaryInfo, TaskTruckInfo, TaxOption, TeamWWAccountData, TimeLog, TimeLogModel, TimeLogPause, TimeLogPauseModel, TimeSpan, TrackingCarrierProps, TrackingStatusV2, TransportationCharges, TransportationRatesRequest, UPSAccountData, UPSSpecific, USPSAccountData, USPSSpecific, UpdateDateModel, UpdateTruckModel, WeightInfo, WorkTimeLog
     from .shipment import ParcelAddOn, ParcelAddOnOptionsGroup, ParcelAddOnRadioOption, ShipmentDetails, ShippingDocument
     from .truck import SaveEntityResponse, SaveTruckRequest, Truck
     from .twiliowebhook import TwilioSmsStatusCallback
@@ -216,6 +216,7 @@ def __getattr__(name):
         'HandlingUnitModel': 'shared',
         'ImageLinkDto': 'catalog',
         'InTheFieldTaskModel': 'shared',
+        'JobStatus': 'enums',
         'InboundNewDashboardItem': 'dashboard',
         'IncrementJobStatusInputModel': 'dashboard',
         'IncrementJobStatusResponseModel': 'dashboard',
@@ -277,6 +278,7 @@ def __getattr__(name):
         'OutboundNewDashboardItem': 'dashboard',
         'OverridableAddressData': 'address',
         'PackagingLaborHours': 'shared',
+        'PackagingTask': 'shared',
         'PackagingLaborSettings': 'companies',
         'PackagingTariffSettings': 'companies',
         'PageOrderedRequestModel': 'shared',
@@ -291,6 +293,7 @@ def __getattr__(name):
         'PaymentSourceDetails': 'jobpayment',
         'PhoneDetails': 'shared',
         'PickupLaborHoursRule': 'shared',
+        'PickupTask': 'shared',
         'PilotAccountData': 'shared',
         'PlannerAddress': 'address',
         'PlannerContact': 'contacts',
@@ -362,6 +365,7 @@ def __getattr__(name):
         'SortBy': 'shared',
         'SortByModel': 'shared',
         'SortingInfo': 'shared',
+        'StorageTask': 'shared',
         'StoredProcedureColumn': 'shared',
         'StringMergePreviewDataItem': 'shared',
         'StringOverridable': 'shared',
@@ -378,6 +382,7 @@ def __getattr__(name):
         'TimeLogPauseModel': 'shared',
         'TimeSpan': 'shared',
         'TimelineResponse': 'jobtimeline',
+        'TimelineTask': 'jobtimeline',
         'TimelineTaskInput': 'jobtimeline',
         'TrackingCarrierProps': 'shared',
         'TrackingStatusV2': 'shared',
@@ -474,7 +479,7 @@ __all__ = [
     # Enums
     'CarrierAPI', 'CommercialCapabilities', 'CopyMaterialsFrom', 'DashboardType', 'DocumentSource',
     'DocumentType', 'ForgotType', 'FormType', 'GeometryType', 'HistoryCodeABCState', 'InheritSettingFrom',
-    'JobAccessLevel', 'JobContactType', 'JobType', 'KnownFormId', 'LabelImageType', 'LabelType',
+    'JobAccessLevel', 'JobContactType', 'JobStatus', 'JobType', 'KnownFormId', 'LabelImageType', 'LabelType',
     'ListSortDirection', 'OperationsFormType', 'PaymentType', 'PropertyType', 'QuoteRequestStatus',
     'RangeDateEnum', 'RetransTimeZoneEnum', 'SelectedOption', 'SendEmailStatus', 'ServiceType',
     'SortByField', 'StatusEnum', 'TaskCodes',
@@ -521,9 +526,9 @@ __all__ = [
     'MergeContactsSearchRequestParameters', 'NameValueEntity', 'NoteModel', 'Notes', 'ObtainNFMParcelItem',
     'ObtainNFMParcelService', 'OnHoldDetails', 'OnHoldNoteDetails', 'OnHoldUser', 'OnlinePaymentSettings',
     'OutboundNewDashboardItem', 'OverridableAddressData', 'PackagingLaborHours', 'PackagingLaborSettings',
-    'PackagingTariffSettings', 'PageOrderedRequestModel', 'PaginatedList', 'ParcelItem',
+    'PackagingTask', 'PackagingTariffSettings', 'PageOrderedRequestModel', 'PaginatedList', 'ParcelItem',
     'ParcelItemWithPackage', 'Partner', 'PartnerServiceResponse', 'PaymentSourceDetails', 'PhoneDetails',
-    'PickupLaborHoursRule', 'PilotAccountData', 'PlannerAddress', 'PlannerContact', 'PlannerLabor',
+    'PickupLaborHoursRule', 'PickupTask', 'PilotAccountData', 'PlannerAddress', 'PlannerContact', 'PlannerLabor',
     'PlannerTask', 'PricedFreightProvider', 'QuoteRequestComment', 'QuoteRequestDisplayInfo',
     'RecentEstimatesNewDashboardItem', 'ReferredByReport', 'ReferredByReportRequest', 'RegistrationModel',
     'RequestedParcelPackaging', 'ResetPasswordModel', 'ResolveJobOnHoldResponse', 'RevenueCustomer',
@@ -539,11 +544,11 @@ __all__ = [
     'ShipmentContactAddressDetails', 'ShipmentContactDetails', 'ShipmentDetails', 'ShipmentOriginDestination',
     'ShipmentPlanProvider', 'ShipmentTrackingDetails', 'ShipmentTrackingDocument', 'ShippingDocument',
     'ShippingHistoryStatus', 'ShippingPackageInfo', 'SimplePriceTariff', 'SimpleTaskModel', 'SmsTemplateModel',
-    'SoldToAddress', 'SoldToDetails', 'SortBy', 'SortByModel', 'SortingInfo', 'StoredProcedureColumn',
+    'SoldToAddress', 'SoldToDetails', 'SortBy', 'SortByModel', 'SortingInfo', 'StorageTask', 'StoredProcedureColumn',
     'StringMergePreviewDataItem', 'StringOverridable', 'SuggestedContactEntity', 'SummaryInfo',
     'TagBoxDataSourceLoadOptions', 'TaskNoteModel', 'TaskTruckInfo', 'TaxOption', 'TeamWWAccountData',
     'TimeLog', 'TimeLogModel', 'TimeLogPause', 'TimeLogPauseModel', 'TimeSpan', 'TimelineResponse',
-    'TimelineTaskInput', 'TrackingCarrierProps', 'TrackingStatusV2', 'TransferModel', 'TransportationCharges',
+    'TimelineTask', 'TimelineTaskInput', 'TrackingCarrierProps', 'TrackingStatusV2', 'TransferModel', 'TransportationCharges',
     'TransportationRatesRequest', 'TransportationRatesRequestModel', 'Truck', 'TwilioSmsStatusCallback',
     'UPSAccountData', 'UPSSpecific', 'USPSAccountData', 'USPSSpecific', 'UndoIncrementJobStatusInputModel',
     'UpdateCarrierAccountsModel', 'UpdateCatalogRequest', 'UpdateDateModel', 'UpdateLotRequest',

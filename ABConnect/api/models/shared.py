@@ -1,7 +1,7 @@
 """Shared models for ABConnect API."""
 
 import logging
-from typing import List, Optional, TYPE_CHECKING
+from typing import List, Literal, Optional, TYPE_CHECKING
 from datetime import datetime
 from datetime import date
 from pydantic import Field
@@ -126,11 +126,7 @@ class Base64File(ABConnectBaseModel):
 
 
 class BaseTask(TimestampedModel):
-    """BaseTask model
-
-    Note: API may return extended task types (InTheFieldTaskModel, etc.) with additional
-    fields beyond the swagger BaseTask definition. All known task fields are included here.
-    """
+    """BaseTask model - common fields shared by all timeline task types."""
 
     id: Optional[int] = Field(None)
     job_id: Optional[str] = Field(None, alias="jobId")
@@ -138,9 +134,15 @@ class BaseTask(TimestampedModel):
     planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
     notes: Optional[List["JobTaskNote"]] = Field(None)
     work_time_logs: Optional[List["WorkTimeLog"]] = Field(None, alias="workTimeLogs")
+    initial_note: Optional["InitialNoteModel"] = Field(None, alias="initialNote")
     target_start_date: Optional[datetime] = Field(None, alias="targetStartDate")
     actual_end_date: Optional[datetime] = Field(None, alias="actualEndDate")
-    # Extended fields returned by API (from InTheFieldTaskModel and other task types)
+
+
+class InTheFieldTaskModel(BaseTask):
+    """Pickup/field task (taskCode=PU, Status 2-3)."""
+
+    task_code: Literal["PU"] = Field("PU", alias="taskCode")
     planned_end_date: Optional[datetime] = Field(None, alias="plannedEndDate")
     preferred_start_date: Optional[datetime] = Field(None, alias="preferredStartDate")
     preferred_end_date: Optional[datetime] = Field(None, alias="preferredEndDate")
@@ -148,7 +150,24 @@ class BaseTask(TimestampedModel):
     on_site_time_log: Optional["TimeLogModel"] = Field(None, alias="onSiteTimeLog")
     trip_time_log: Optional["TimeLogModel"] = Field(None, alias="tripTimeLog")
     completed_date: Optional[datetime] = Field(None, alias="completedDate")
-    initial_note: Optional["InitialNoteModel"] = Field(None, alias="initialNote")
+
+PickupTask = InTheFieldTaskModel
+
+
+class SimpleTaskModel(BaseTask):
+    """Packaging task (taskCode=PK, Status 4-5)."""
+
+    task_code: Literal["PK"] = Field("PK", alias="taskCode")
+    time_log: Optional["TimeLogModel"] = Field(None, alias="timeLog")
+
+PackagingTask = SimpleTaskModel
+
+
+class StorageTask(BaseTask):
+    """Storage task (taskCode=ST, Status 6)."""
+
+    task_code: Literal["ST"] = Field("ST", alias="taskCode")
+    time_log: Optional["TimeLogModel"] = Field(None, alias="timeLog")
 
 
 class BookShipmentSpecificParams(ABConnectBaseModel):
@@ -234,16 +253,10 @@ class CarrierRateModel(ABConnectBaseModel):
     accessorials: Optional[List[str]] = Field(None)
 
 
-class CarrierTaskModel(TimestampedModel):
-    """CarrierTaskModel model"""
+class CarrierTaskModel(BaseTask):
+    """Carrier task (taskCode=CP, Status 7/8/10)."""
 
-    id: Optional[int] = Field(None)
-    job_id: Optional[str] = Field(None, alias="jobId")
-    task_code: str = Field(..., alias="taskCode", min_length=1)
-    planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
-    initial_note: Optional["InitialNoteModel"] = Field(None, alias="initialNote")
-    work_time_logs: Optional[List["WorkTimeLog"]] = Field(None, alias="workTimeLogs")
-    notes: Optional[List["JobTaskNote"]] = Field(None)
+    task_code: Literal["CP"] = Field("CP", alias="taskCode")
     scheduled_date: Optional[datetime] = Field(None, alias="scheduledDate")
     pickup_completed_date: Optional[datetime] = Field(None, alias="pickupCompletedDate")
     delivery_completed_date: Optional[datetime] = Field(None, alias="deliveryCompletedDate")
@@ -454,23 +467,6 @@ class HandlingUnitModel(ABConnectBaseModel):
     parcel_package_code: Optional[str] = Field(None, alias="parcelPackageCode")
 
 
-class InTheFieldTaskModel(TimestampedModel):
-    """InTheFieldTaskModel model"""
-
-    id: Optional[int] = Field(None)
-    job_id: Optional[str] = Field(None, alias="jobId")
-    task_code: str = Field(..., alias="taskCode", min_length=1)
-    planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
-    initial_note: Optional["InitialNoteModel"] = Field(None, alias="initialNote")
-    work_time_logs: Optional[List["WorkTimeLog"]] = Field(None, alias="workTimeLogs")
-    notes: Optional[List["JobTaskNote"]] = Field(None)
-    planned_end_date: Optional[datetime] = Field(None, alias="plannedEndDate")
-    preferred_start_date: Optional[datetime] = Field(None, alias="preferredStartDate")
-    preferred_end_date: Optional[datetime] = Field(None, alias="preferredEndDate")
-    truck: Optional["TaskTruckInfo"] = Field(None)
-    on_site_time_log: Optional["TimeLogModel"] = Field(None, alias="onSiteTimeLog")
-    trip_time_log: Optional["TimeLogModel"] = Field(None, alias="tripTimeLog")
-    completed_date: Optional[datetime] = Field(None, alias="completedDate")
 
 
 class InitialNoteModel(JobRelatedModel):
@@ -856,17 +852,6 @@ class SimplePriceTariff(IdentifiedModel):
     price: Optional[float] = Field(None)
 
 
-class SimpleTaskModel(TimestampedModel):
-    """SimpleTaskModel model"""
-
-    id: Optional[int] = Field(None)
-    job_id: Optional[str] = Field(None, alias="jobId")
-    task_code: str = Field(..., alias="taskCode", min_length=1)
-    planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
-    initial_note: Optional[InitialNoteModel] = Field(None, alias="initialNote")
-    work_time_logs: Optional[List["WorkTimeLog"]] = Field(None, alias="workTimeLogs")
-    notes: Optional[List["JobTaskNote"]] = Field(None)
-    time_log: Optional["TimeLogModel"] = Field(None, alias="timeLog")
 
 
 class SoldToDetails(CompanyRelatedModel):
@@ -1113,4 +1098,4 @@ class MaerskAccountData(ABConnectBaseModel):
     control_station: Optional[str] = Field(None, alias="controlStation", max_length=32, description="Control station")
 
 
-__all__ = ['AccesorialCharges', 'AutoCompleteValue', 'Base64File', 'BaseTask', 'BookShipmentSpecificParams', 'CalendarItem', 'CalendarNotes', 'CalendarTask', 'CarrierAccountInfo', 'CarrierInfo', 'CarrierProviderMessage', 'CarrierRateModel', 'CarrierTaskModel', 'Commodity', 'CreatedTask', 'CustomerInfo', 'Details', 'DocumentDetails', 'EmailDetails', 'EstesAccountData', 'ExportPackingInfo', 'ExportTotalCosts', 'ExpressFreightDetail', 'FedExAccountData', 'FedExRestApiAccount', 'FedExSpecific', 'ForwardAirAccountData', 'FranchiseeCarrierAccounts', 'GlobalTranzAccountData', 'GroupingInfo', 'HandlingUnitModel', 'InTheFieldTaskModel', 'InitialNoteModel', 'InsuranceOption', 'ItemTotals', 'Items', 'JToken', 'LaborCharges', 'LastObtainNFM', 'LatLng', 'LookupItem', 'MaerskAccountData', 'MasterMaterials', 'NameValueEntity', 'ObtainNFMParcelItem', 'ObtainNFMParcelService', 'OnlinePaymentSettings', 'PackagingLaborHours', 'PageOrderedRequestModel', 'PhoneDetails', 'PickupLaborHoursRule', 'PilotAccountData', 'PlannerLabor', 'QuoteRequestComment', 'RequestedParcelPackaging', 'RoadRunnerAccountData', 'RoyaltiesCharges', 'SearchCustomerInfo', 'ServiceBaseResponse', 'ServiceInfo', 'ServicePricingsMarkup', 'ServiceWarningResponse', 'ShipmentTrackingDocument', 'ShippingHistoryStatus', 'ShippingPackageInfo', 'SimplePriceTariff', 'SimpleTaskModel', 'SoldToDetails', 'SortBy', 'SortByModel', 'SortingInfo', 'StoredProcedureColumn', 'StringMergePreviewDataItem', 'StringOverridable', 'SummaryInfo', 'TaskTruckInfo', 'TaxOption', 'TeamWWAccountData', 'TimeLog', 'TimeLogModel', 'TimeLogPause', 'TimeLogPauseModel', 'TimeSpan', 'TrackingCarrierProps', 'TrackingStatusV2', 'TransportationCharges', 'TransportationRatesRequest', 'UPSAccountData', 'UPSSpecific', 'USPSAccountData', 'USPSSpecific', 'UpdateDateModel', 'UpdateTruckModel', 'WeightInfo', 'WorkTimeLog']
+__all__ = ['AccesorialCharges', 'AutoCompleteValue', 'Base64File', 'BaseTask', 'BookShipmentSpecificParams', 'CalendarItem', 'CalendarNotes', 'CalendarTask', 'CarrierAccountInfo', 'CarrierInfo', 'CarrierProviderMessage', 'CarrierRateModel', 'CarrierTaskModel', 'Commodity', 'CreatedTask', 'CustomerInfo', 'Details', 'DocumentDetails', 'EmailDetails', 'EstesAccountData', 'ExportPackingInfo', 'ExportTotalCosts', 'ExpressFreightDetail', 'FedExAccountData', 'FedExRestApiAccount', 'FedExSpecific', 'ForwardAirAccountData', 'FranchiseeCarrierAccounts', 'GlobalTranzAccountData', 'GroupingInfo', 'HandlingUnitModel', 'InTheFieldTaskModel', 'InitialNoteModel', 'InsuranceOption', 'ItemTotals', 'Items', 'JToken', 'LaborCharges', 'LastObtainNFM', 'LatLng', 'LookupItem', 'MaerskAccountData', 'MasterMaterials', 'NameValueEntity', 'ObtainNFMParcelItem', 'ObtainNFMParcelService', 'OnlinePaymentSettings', 'PackagingLaborHours', 'PackagingTask', 'PageOrderedRequestModel', 'PhoneDetails', 'PickupLaborHoursRule', 'PickupTask', 'PilotAccountData', 'PlannerLabor', 'QuoteRequestComment', 'RequestedParcelPackaging', 'RoadRunnerAccountData', 'RoyaltiesCharges', 'SearchCustomerInfo', 'ServiceBaseResponse', 'ServiceInfo', 'ServicePricingsMarkup', 'ServiceWarningResponse', 'ShipmentTrackingDocument', 'ShippingHistoryStatus', 'ShippingPackageInfo', 'SimplePriceTariff', 'SimpleTaskModel', 'SoldToDetails', 'SortBy', 'SortByModel', 'SortingInfo', 'StorageTask', 'StoredProcedureColumn', 'StringMergePreviewDataItem', 'StringOverridable', 'SummaryInfo', 'TaskTruckInfo', 'TaxOption', 'TeamWWAccountData', 'TimeLog', 'TimeLogModel', 'TimeLogPause', 'TimeLogPauseModel', 'TimeSpan', 'TrackingCarrierProps', 'TrackingStatusV2', 'TransportationCharges', 'TransportationRatesRequest', 'UPSAccountData', 'UPSSpecific', 'USPSAccountData', 'USPSSpecific', 'UpdateDateModel', 'UpdateTruckModel', 'WeightInfo', 'WorkTimeLog']

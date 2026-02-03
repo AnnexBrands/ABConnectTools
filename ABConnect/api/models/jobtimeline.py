@@ -1,50 +1,36 @@
 """Jobtimeline models for ABConnect API."""
 
-from typing import List, Optional, Union
+from typing import Annotated, List, Optional, Union
 from datetime import datetime
-from pydantic import Field
-from .base import ABConnectBaseModel, IdentifiedModel, TimestampedModel
-
-# Import models needed for forward reference resolution
+from pydantic import Discriminator, Field, Tag
+from .base import ABConnectBaseModel, IdentifiedModel
 from .shared import (
-    InitialNoteModel, WorkTimeLog, LookupItem, BaseTask,
-    UpdateDateModel, UpdateTruckModel, SimpleTaskModel, CarrierTaskModel,
-    InTheFieldTaskModel, TimeLogModel, TaskTruckInfo
+    LookupItem, BaseTask, InTheFieldTaskModel, SimpleTaskModel,
+    PickupTask, PackagingTask, StorageTask,
+    UpdateDateModel, UpdateTruckModel, CarrierTaskModel,
 )
-from .jobnote import JobTaskNote
 from .jobonhold import OnHoldDetails
 
-class BaseTaskModel(TimestampedModel):
-    """BaseTaskModel model"""
 
-    id: Optional[int] = Field(None)
-    job_id: Optional[str] = Field(None, alias="jobId")
-    task_code: str = Field(..., alias="taskCode", min_length=1)
-    planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
-    initial_note: Optional["InitialNoteModel"] = Field(None, alias="initialNote")
-    work_time_logs: Optional[List["WorkTimeLog"]] = Field(None, alias="workTimeLogs")
-    notes: Optional[List["JobTaskNote"]] = Field(None)
-    scheduled_date: Optional[datetime] = Field(None, alias="scheduledDate")
-    pickup_completed_date: Optional[datetime] = Field(None, alias="pickupCompletedDate")
-    delivery_completed_date: Optional[datetime] = Field(None, alias="deliveryCompletedDate")
-    expected_delivery_date: Optional[datetime] = Field(None, alias="expectedDeliveryDate")
+def _task_discriminator(data):
+    """Discriminator function for timeline task types based on taskCode."""
+    tc = data.get("taskCode") if isinstance(data, dict) else getattr(data, "task_code", None)
+    return {"PU": "PU", "PK": "PK", "ST": "ST", "CP": "CP"}.get(tc, tc)
 
 
-class CarrierTask(TimestampedModel):
-    """CarrierTask model"""
+TimelineTask = Annotated[
+    Union[
+        Annotated[PickupTask, Tag("PU")],
+        Annotated[PackagingTask, Tag("PK")],
+        Annotated[StorageTask, Tag("ST")],
+        Annotated[CarrierTaskModel, Tag("CP")],
+    ],
+    Discriminator(_task_discriminator),
+]
 
-    id: Optional[int] = Field(None)
-    job_id: Optional[str] = Field(None, alias="jobId")
-    task_code: Optional[str] = Field(None, alias="taskCode")
-    planned_start_date: Optional[datetime] = Field(None, alias="plannedStartDate")
-    notes: Optional[List["JobTaskNote"]] = Field(None)
-    work_time_logs: Optional[List["WorkTimeLog"]] = Field(None, alias="workTimeLogs")
-    scheduled_date: Optional[datetime] = Field(None, alias="scheduledDate")
-    pickup_completed_date: Optional[datetime] = Field(None, alias="pickupCompletedDate")
-    delivery_completed_date: Optional[datetime] = Field(None, alias="deliveryCompletedDate")
-    expected_delivery_date: Optional[datetime] = Field(None, alias="expectedDeliveryDate")
-    target_start_date: Optional[datetime] = Field(None, alias="targetStartDate")
-    actual_end_date: Optional[datetime] = Field(None, alias="actualEndDate")
+# Backward compatibility alias
+CarrierTask = CarrierTaskModel
+BaseTaskModel = CarrierTaskModel
 
 
 class CompanyListItem(IdentifiedModel):
@@ -69,7 +55,7 @@ class SaveResponseModel(ABConnectBaseModel):
     success: Optional[bool] = Field(None)
     error_message: Optional[str] = Field(None, alias="errorMessage")
     task_exists: Optional[bool] = Field(None, alias="taskExists")
-    task: Optional["BaseTask"] = Field(None)
+    task: Optional[TimelineTask] = Field(None)
     email_log_id: Optional[int] = Field(None, alias="emailLogId")
     job_sub_management_status: Optional["LookupItem"] = Field(None, alias="jobSubManagementStatus")
 
@@ -79,7 +65,7 @@ class TimelineResponse(ABConnectBaseModel):
 
     success: Optional[bool] = Field(None)
     error_message: Optional[str] = Field(None, alias="errorMessage")
-    tasks: Optional[List["BaseTask"]] = Field(None)
+    tasks: Optional[List[TimelineTask]] = Field(None)
     on_holds: Optional[List["OnHoldDetails"]] = Field(None, alias="onHolds")
     days_per_sla: Optional[int] = Field(None, alias="daysPerSla")
     delivery_service_done_by: Optional[str] = Field(None, alias="deliveryServiceDoneBy")
@@ -97,10 +83,8 @@ class UpdateTaskModel(ABConnectBaseModel):
     preferred_end_date: Optional["UpdateDateModel"] = Field(None, alias="preferredEndDate")
 
 
-# Union type for timeline task input - accepts any task model variant
-# The POST /api/job/{jobDisplayId}/timeline endpoint is polymorphic and can accept
-# BaseTaskModel, SimpleTaskModel, CarrierTaskModel, or InTheFieldTaskModel
-TimelineTaskInput = Union[SimpleTaskModel, CarrierTaskModel, InTheFieldTaskModel, BaseTaskModel]
+# Union type for timeline task input
+TimelineTaskInput = Union[PickupTask, PackagingTask, StorageTask, CarrierTaskModel]
 
 
-__all__ = ['BaseTaskModel', 'CarrierTask', 'CompanyListItem', 'DeleteTaskResponse', 'SaveResponseModel', 'TimelineResponse', 'UpdateTaskModel', 'TimelineTaskInput']
+__all__ = ['BaseTaskModel', 'CarrierTask', 'CompanyListItem', 'DeleteTaskResponse', 'SaveResponseModel', 'TimelineResponse', 'TimelineTask', 'TimelineTaskInput', 'UpdateTaskModel']
