@@ -1,6 +1,6 @@
 """Jobtimeline models for ABConnect API."""
 
-from typing import List, Optional, Union, TYPE_CHECKING
+from typing import List, Optional, Union
 from datetime import datetime
 from pydantic import Field
 from .base import ABConnectBaseModel, IdentifiedModel, TimestampedModel
@@ -11,10 +11,8 @@ from .shared import (
     UpdateDateModel, UpdateTruckModel, SimpleTaskModel, CarrierTaskModel,
     InTheFieldTaskModel, TimeLogModel, TaskTruckInfo
 )
-
-if TYPE_CHECKING:
-    from .jobnote import JobTaskNote
-    from .jobonhold import OnHoldDetails
+from .jobnote import JobTaskNote
+from .jobonhold import OnHoldDetails
 
 class BaseTaskModel(TimestampedModel):
     """BaseTaskModel model"""

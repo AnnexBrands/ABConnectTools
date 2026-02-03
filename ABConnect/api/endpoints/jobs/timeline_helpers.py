@@ -70,7 +70,9 @@ class TimelineHelpers(JobTimelineEndpoint):
         Returns:
             Tuple of (status_info, task_data or None)
         """
-        timeline = self.get_timeline(str(jobid))
+        timeline_response = self.get_timeline(str(jobid))
+        # Convert Pydantic model to dict for backward compatibility
+        timeline = timeline_response.model_dump(by_alias=True) if hasattr(timeline_response, 'model_dump') else timeline_response
         status = timeline.get("jobSubManagementStatus", {})
 
         # Enrich status with code and description

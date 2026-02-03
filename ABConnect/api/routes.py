@@ -31,7 +31,7 @@ class Route:
     request_model: type | None = None
     response_model: type | None = None
     params: dict[str, str] = field(default_factory=dict)
-    _path_param_names: set[str] = field(default_factory=dict)
+    _path_param_names: set[str] = field(default_factory=set)
 
     def __post_init__(self):
             # Extract {param} names from template
@@ -42,10 +42,8 @@ class Route:
         return self.path.format(**{k: v for k, v in self.params.items() if k in self._path_param_names})
 
     @property
-    def params(self) -> Dict[str, Any]:
-        used_in_path = {k for k in self.params if k in self._path_param_names}
-        query_kwargs = {k: v for k, v in self.params.items() if k not in used_in_path and v is not None}
-        return query_kwargs
+    def query_params(self) -> Dict[str, Any]:
+        return {k: v for k, v in self.params.items() if k not in self._path_param_names and v is not None}
 
 SCHEMA = {
     "ACCOUNT": {
@@ -246,7 +244,7 @@ SCHEMA = {
         "GET_SUBMANAGEMENTSTATUS": Route("GET", "/job/{jobDisplayId}/submanagementstatus", None, None, {}),
         "GET_TIMELINE": Route("GET", "/job/{jobDisplayId}/timeline/{timelineTaskIdentifier}", None, "CarrierTask", {}),
         "GET_TIMELINE_AGENT": Route("GET", "/job/{jobDisplayId}/timeline/{taskCode}/agent", None, "CompanyListItem", {}),
-        "GET_TIMELINE_LIST": Route("GET", "/job/{jobDisplayId}/timeline", None, "List[CarrierTask]", {}),
+        "GET_TIMELINE_LIST": Route("GET", "/job/{jobDisplayId}/timeline", None, "TimelineResponse", {}),
         "GET_TRACKING": Route("GET", "/job/{jobDisplayId}/tracking", None, "ShipmentTrackingDetails", {}),
         "GET_TRACKING_SHIPMENT": Route("GET", "/job/{jobDisplayId}/tracking/shipment/{proNumber}", None, "ShipmentTrackingDetails", {}),
         "GET_UPDATE_PAGE_CONFIG": Route("GET", "/job/{jobDisplayId}/updatePageConfig", None, "JobUpdatePageConfig", {}),

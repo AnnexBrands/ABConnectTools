@@ -141,35 +141,41 @@ ABConnect is a Python package for Annex Brands data processing and API interacti
 - Interactive mode for user prompts
 
 #### API (`ABConnect.api`)
-Full-featured API client with three access layers (in order of preference):
-1. **Friendly CLI**: Endpoint commands (`ab smstemplate get_notificationtokens`)
-2. **Friendly Python**: Direct endpoint methods (`api.sms_template.get_notificationtokens()`)
-3. **Raw API** (last resort): Direct endpoint access (`api.raw.get('/api/SmsTemplate/notificationTokens')`)
+Full-featured API client
+1. **Python**: Direct endpoint methods (`api.sms_template.get_notificationtokens()`)
+2. **CLI**: Endpoint commands (`ab smstemplate get_notificationtokens`)
+
+#### CATALOG-API
+Separate base_url and endpoints, same auth. Work toward seamless.
 
 **Usage Guidelines:**
 - Use friendly CLI/Python methods when available (no parameters needed)
-- Fall back to raw API only when parameters are required or friendly methods don't exist
-- Raw API should be considered a last resort, not the primary interface
+- We have ACPortal_swagger_latest.json which gives schemas which may be behind or missing.
+- We use examples to create json fixtures to get a real response.
+- We use models which should always reconcide the fixture to the schema. 
+  - Models should be commented when swagger is wrong.
+  - Models should strictly name all optional columns.
+  - Models using base inheritance should be invisible to the user, that is, inspecting a fixture should be enough to know how to access a pydantic object.
+- We use tests to ensure that both a new call to the endpoint and validating a fixture against a model are both successful.
 
 ### API Client Structure
 - **Endpoint Classes**: Users, Companies, Contacts, Docs, Forms, Items, Jobs, Tasks
 - **Base Classes**: `BaseEndpoint` provides common functionality
 - **Authentication**: Token storage supports both file-based (standalone) and session-based (Django) modes
 - **Pydantic Models**: Type-safe request/response validation
+- **Routes**: Always store expected request and response objects as well as kwargs for url and get params.
 
 ### Key Design Patterns
 - **Template-based requests**: JSON templates in `base/` define request structures dynamically modified at runtime
 - **Endpoint abstraction**: Each API resource has dedicated endpoint class inheriting from `BaseEndpoint`
 - **Flexible authentication**: Token storage abstraction supports both standalone and Django-integrated usage
 - **Environment switching**: Staging vs production controlled via `env` parameter or `ABC_ENVIRONMENT` variable
-- **Auto-discovery**: Generic endpoints automatically generated from swagger.json specification
+- **Auto-discovery**: Tests should warn if any swagger endpoints are not implemented.
 
 ### Configuration Files
+- `base/ACPortal_swagger_latest.json`: OpenAPI specification for endpoint discovery
 - `base/simple_request.json`: Default API request template
 - `base/extra_containers.json`: Additional container configs for 3PL requests
-- `base/companies.json`: Static company reference data
-- `base/statuses.json`: Static status reference data
-- `base/swagger.json`: OpenAPI specification for endpoint discovery
 
 ## Domain Knowledge
 
@@ -177,6 +183,7 @@ Full-featured API client with three access layers (in order of preference):
 
 **URL Format**
 -- make request url is expected to have "double api" like https://portal.abconnect.co/api/api/documents
+-- except https://catalog-api.abconnect.co/api/Catalog has single.
 
 **Job IDs:**
 - Format: UUID (string)
@@ -195,13 +202,10 @@ Full-featured API client with three access layers (in order of preference):
 
 **Document Types:**
 - Item Photo: `document_type=6`
-- General Document: `document_type=1`
-- Technical Drawing: `document_type=2`
 
 **Sharing Levels:**
-- Private: `shared=0`
-- Shared: `shared=28` (default for shared items)
-- Public: `shared=1`
+- Bitwise
+- all agents: `shared=28`
 
 ### Test Data Standards
 

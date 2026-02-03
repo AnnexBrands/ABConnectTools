@@ -41,17 +41,18 @@ class BaseEndpoint:
         cls._r = handler
 
     def _validate_request(self, route: Route, kwargs: dict) -> None:
-        if "json" not in kwargs:
+        if "json" not in kwargs or route.request_model is None:
             return
-        
+
         data = kwargs["json"]
-        if model := getattr(models, route.request_model, None) is None:
+        if (model := getattr(models, route.request_model, None)) is None:
             raise ValueError(
                 f"Endpoint {route.method} {route.path} received a JSON body "
                 f"but no request_model is defined. Remove the json= argument "
                 f"or define a request_model for this route."
             )
-        kwargs["json"] = model.model_validate(data)
+        if hasattr(model, 'model_validate'):
+            kwargs["json"] = model.model_validate(data)
 
     def _parse_type_string(self, type_str: str) -> Tuple[bool, str]:
         """Parse a type string to detect List[...] wrapper.
@@ -112,9 +113,9 @@ class BaseEndpoint:
             API response data (cast to Pydantic model if available)
         """
         self._validate_request(route, kwargs)
-            
-        if route.params:
-            kwargs["params"] = route.params
+
+        if route.query_params:
+            kwargs.setdefault("params", {}).update(route.query_params)
 
         response = self._r.call(
             route.method,

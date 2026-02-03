@@ -126,7 +126,11 @@ class Base64File(ABConnectBaseModel):
 
 
 class BaseTask(TimestampedModel):
-    """BaseTask model"""
+    """BaseTask model
+
+    Note: API may return extended task types (InTheFieldTaskModel, etc.) with additional
+    fields beyond the swagger BaseTask definition. All known task fields are included here.
+    """
 
     id: Optional[int] = Field(None)
     job_id: Optional[str] = Field(None, alias="jobId")
@@ -136,6 +140,15 @@ class BaseTask(TimestampedModel):
     work_time_logs: Optional[List["WorkTimeLog"]] = Field(None, alias="workTimeLogs")
     target_start_date: Optional[datetime] = Field(None, alias="targetStartDate")
     actual_end_date: Optional[datetime] = Field(None, alias="actualEndDate")
+    # Extended fields returned by API (from InTheFieldTaskModel and other task types)
+    planned_end_date: Optional[datetime] = Field(None, alias="plannedEndDate")
+    preferred_start_date: Optional[datetime] = Field(None, alias="preferredStartDate")
+    preferred_end_date: Optional[datetime] = Field(None, alias="preferredEndDate")
+    truck: Optional["TaskTruckInfo"] = Field(None)
+    on_site_time_log: Optional["TimeLogModel"] = Field(None, alias="onSiteTimeLog")
+    trip_time_log: Optional["TimeLogModel"] = Field(None, alias="tripTimeLog")
+    completed_date: Optional[datetime] = Field(None, alias="completedDate")
+    initial_note: Optional["InitialNoteModel"] = Field(None, alias="initialNote")
 
 
 class BookShipmentSpecificParams(ABConnectBaseModel):
