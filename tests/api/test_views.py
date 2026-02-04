@@ -51,27 +51,17 @@ def test_get_datasetsp(api, ViewsDatasetSpsData):
 
 
 # ==============================================================================
-# Routes needing parameters
+# Parameterized GETs using VIEW_ID from constants
 # ==============================================================================
 
 @pytest.mark.integration
-@pytest.mark.xfail(reason=(
-    "Human: Call api.views.get_get(viewId) with VIEW_ID from constants. "
-    "Save fixture via save_fixture(result, 'ViewsDetail'). "
-    "If it works, remove xfail and add fixture validation."
-))
 def test_get_view(api):
     """get_get returns a specific view"""
     result = api.views.get_get(str(VIEW_ID))
-    assert result is not None
+    assert isinstance(result, models.GridViewDetails)
 
 
 @pytest.mark.integration
-@pytest.mark.xfail(reason=(
-    "Human: Call api.views.get_accessinfo(viewId) with VIEW_ID from constants. "
-    "Save fixture via save_fixture(result, 'ViewsAccessInfo'). "
-    "If it works, remove xfail and add fixture validation."
-))
 def test_get_accessinfo(api):
     """get_accessinfo returns view access info"""
     result = api.views.get_accessinfo(str(VIEW_ID))
