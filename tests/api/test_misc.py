@@ -121,3 +121,105 @@ def test_get_values(api):
 def test_values_fixture(ValuesData):
     """fixture has expected structure"""
     models.ValuesResponse.model_validate(ValuesData)
+
+
+# ==============================================================================
+# Dashboard parameterized tests (Commit 6)
+# ==============================================================================
+
+@pytest.mark.integration
+def test_get_gridviewstate(api):
+    """get_gridviewstate returns a specific grid view state"""
+    from tests.constants import VIEW_ID
+    result = api.dashboard.get_gridviewstate(str(VIEW_ID))
+    assert result is not None
+
+
+# ==============================================================================
+# Account xfail tests (Commit 7)
+# ==============================================================================
+
+@pytest.mark.integration
+@pytest.mark.xfail(reason=(
+    "Human: Auth-modifying operation. POST /account/confirm requires "
+    "ConfirmEmailModel data. Do NOT test against staging without confirmation."
+))
+def test_account_confirm(api):
+    """post_confirm confirms an email"""
+    result = api.account.post_confirm(data={})
+    assert result is not None
+
+
+@pytest.mark.integration
+@pytest.mark.xfail(reason=(
+    "Human: Auth-modifying operation. POST /account/forgot requires "
+    "ForgotLoginModel data. Do NOT test against staging."
+))
+def test_account_forgot(api):
+    """post_forgot sends a forgot password/username request"""
+    result = api.account.post_forgot(data={})
+    assert result is not None
+
+
+# ==============================================================================
+# Users xfail tests (Commit 8)
+# ==============================================================================
+
+@pytest.mark.integration
+@pytest.mark.xfail(reason=(
+    "Human: POST /users/list requires WebApiDataSourceLoadOptions data. "
+    "Inspect the swagger schema for required fields."
+))
+def test_users_list(api):
+    """users list returns filtered users"""
+    result = api.users.post_list(data={})
+    assert result is not None
+
+
+@pytest.mark.integration
+@pytest.mark.xfail(reason=(
+    "Human: POST /users/user requires CreateUserModel data. "
+    "This creates a user — do NOT test against staging without confirmation."
+))
+def test_users_create(api):
+    """post_user creates a new user"""
+    result = api.users.post_user(data={})
+    assert result is not None
+
+
+# ==============================================================================
+# Partner xfail tests (Commit 35)
+# ==============================================================================
+
+@pytest.mark.integration
+@pytest.mark.xfail(reason=(
+    "Human: POST /partner/search requires search parameters. "
+    "Inspect swagger for PartnerSearchRequest schema."
+))
+def test_partner_search(api):
+    """partner search returns matching partners"""
+    result = api.partner.post_search(data={})
+    assert result is not None
+
+
+# ==============================================================================
+# Shipment standalone tests (Commit 35)
+# ==============================================================================
+
+@pytest.mark.integration
+@pytest.mark.xfail(reason=(
+    "Human: GET /shipment takes optional query params (franchisee_id, provider_id, pro_number). "
+    "Try calling with known values to get a valid response."
+))
+def test_shipment_get(api):
+    """get returns shipment details"""
+    result = api.shipment.get_get()
+    assert result is not None
+
+
+@pytest.mark.integration
+@pytest.mark.xfail(reason="Human: GET /shipment/document/{docId} needs a valid document ID.")
+def test_shipment_document(api):
+    """get_document returns a shipping document"""
+    result = api.shipment.get_document("NEED_VALID_DOC_ID")
+    assert result is not None
