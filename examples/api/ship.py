@@ -1,30 +1,35 @@
+"""
+Shipping API Examples - Freight provider and shipping operations (WIP)
 
-import json
-from ABConnect.api import ABConnectAPI
+Usage:
+    python ship.py                  # Run all examples
+    python ship.py timestamp        # Run a single example
+    python ship.py help             # List available examples
+"""
 
-api = ABConnectAPI()
+import datetime
+from _base import ExampleRunner
+
 
 JOBID = 4675063
-# ratesKey, choices = api.jobs.ship._get_choices(JOBID, "UPS12")
-# ratesKey = ''
-# print(f"Rates Key: {ratesKey}")
-# print(f"Rates: {json.dumps(choices, indent=2, default=str)}")
 
-# choose = api.jobs.freightproviders.post_freightproviders_ratequote(
-#     optionIndex=4,
-#     jobDisplayId=JOBID,
-#     data={
-#             "ratesKey": "",
-#             "carrierCode": "",
-#             "active": True
-#         }
-# )
 
-# print(choose)
-import datetime
-print(datetime.datetime.now().isoformat())
-data = {
-  "quoteOptionIndex": 0,
-  "shipOutDate": "2025-10-20T00:06:20.944Z",
-  "documentByteCodeRequired": True
-}
+class ShipExamples(ExampleRunner):
+    def __init__(self):
+        super().__init__("Shipping API")
+        self.add("timestamp", "Print current timestamp (placeholder)", self.timestamp)
+
+    def timestamp(self):
+        """Placeholder - shipping examples are WIP."""
+        print(datetime.datetime.now().isoformat())
+        print(f"Ship-out data structure:")
+        data = {
+            "quoteOptionIndex": 0,
+            "shipOutDate": "2025-10-20T00:06:20.944Z",
+            "documentByteCodeRequired": True
+        }
+        print(f"  {data}")
+
+
+if __name__ == "__main__":
+    ShipExamples().run()

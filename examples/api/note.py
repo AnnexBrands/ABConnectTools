@@ -1,29 +1,27 @@
-from ABConnect import ABConnectAPI
+"""
+Note API Examples - Simple notes retrieval
 
-api = ABConnectAPI(env='staging', username='instaquote')
-from ABConnect import models
+Usage:
+    python note.py                  # Run all examples
+    python note.py get              # Run a single example
+    python note.py help             # List available examples
+"""
+
+from _base import ExampleRunner
+
 
 JOB_ID = 4637814
 
-def print_note_details():
-    """Print details of notes for a specific entity."""
-    api = ABConnectAPI(env='staging', username='instaquote')
 
-    # Fetch notes for the given JOB_ID
-    notes_response = api.jobs.note.get_note(jobDisplayId=JOB_ID)
-    print(notes_response)
-    # notes_data = notes_response['notes'] if 'notes' in notes_response else notes_response
+class NoteExamples(ExampleRunner):
+    def __init__(self):
+        super().__init__("Note API", api_kwargs=dict(env='staging', username='instaquote'))
+        self.add("get", "Get notes for a job", self.get_notes)
 
-    # # Cast notes to Note model instances
-    # from ABConnect.api.models.note import Note
-    # notes = [Note(**note) for note in notes_data]
+    def get_notes(self):
+        notes_response = self.api.jobs.note.get_note(jobDisplayId=JOB_ID)
+        print(notes_response)
 
-    # # Print note details
-    # for note in notes:
-    #     print(f"Note ID: {note.note_id}")
-    #     print(f"Created By: {note.created_by}")
-    #     print(f"Created At: {note.created_at}")
-    #     print(f"Content: {note.content}")
-    #     print("-" * 40)
 
-print_note_details()
+if __name__ == "__main__":
+    NoteExamples().run()
