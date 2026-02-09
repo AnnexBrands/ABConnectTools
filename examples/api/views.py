@@ -1,40 +1,24 @@
-"""Views API Examples - Working with saved views and datasets.
+"""
+Views API Examples - Dashboard views and dataset stored procedures
 
-This example demonstrates getting views data and dataset stored procedures.
+Usage:
+    python views.py                 # Run all examples
+    python views.py datasetsp       # Run a single example
+    python views.py help            # List available examples
 """
 
-from ABConnect import ABConnectAPI, models
-from _helpers import save_fixture
+from _base import ExampleRunner
 
-api = ABConnectAPI(username='instaquote')
 
-# =====================================================================
-# 1. Get all views
-# =====================================================================
-print("=== 1. get_all ===")
-views = api.views.get_all()
-print(f"  Views count: {len(views)}")
-save_fixture(views, "ViewsAll")
+class ViewExamples(ExampleRunner):
+    def __init__(self):
+        super().__init__("Views API", api_kwargs=dict(env='staging', username='instaquote'))
+        self.add("datasetsp", "Get a specific dataset stored procedure", self.get_datasetsp)
 
-# =====================================================================
-# 2. Get dataset stored procedures
-# =====================================================================
-print("\n=== 2. get_datasetsps ===")
-datasetsps = api.views.get_datasetsps()
-print(f"  Stored procedures count: {len(datasetsps)}")
-save_fixture(datasetsps, "ViewsDatasetSps")
+    def get_datasetsp(self):
+        res = self.api.views.get_datasetsp('dashboard.agentDonan')
+        print(res)
 
-# =====================================================================
-# 3. Get a specific dataset stored procedure's columns
-# =====================================================================
-print("\n=== 3. get_datasetsp ===")
-if datasetsps:
-    sp_name = datasetsps[0]
-    print(f"  Using SP: {sp_name}")
-    columns = api.views.get_datasetsp(sp_name)
-    print(f"  Columns count: {len(columns)}")
-    for col in columns[:5]:
-        print(f"    {col}")
-    save_fixture(columns, "ViewsDatasetSp")
 
-print("\nDone.")
+if __name__ == "__main__":
+    ViewExamples().run()

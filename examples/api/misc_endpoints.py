@@ -2,9 +2,14 @@
 Miscellaneous API Examples - Various endpoints without path parameters
 
 This example demonstrates getting data from various endpoints.
+
+Usage:
+    python misc_endpoints.py            # Run all examples
+    python misc_endpoints.py profile    # Run a single example
+    python misc_endpoints.py help       # List available examples
 """
 
-from ABConnect.api import ABConnectAPI
+from _base import ExampleRunner
 from _helpers import save_fixture
 
 
@@ -17,95 +22,61 @@ def to_serializable(obj):
     return obj
 
 
-api = ABConnectAPI(env='staging', username='instaquote')
+class MiscExamples(ExampleRunner):
+    def __init__(self):
+        super().__init__("Miscellaneous API", api_kwargs=dict(env='staging', username='instaquote'))
+        self.add("profile", "Account profile", self.account_profile)
+        self.add("dashboard", "Dashboard data", self.dashboard)
+        self.add("gridviews", "Dashboard grid views", self.gridviews)
+        self.add("partners", "Partner list", self.partners)
+        self.add("accessorials", "Shipment accessorials", self.accessorials)
+        self.add("pocusers", "POC users", self.pocusers)
+        self.add("roles", "User roles", self.roles)
+        self.add("views_all", "All views", self.views_all)
+        self.add("datasetsps", "Views dataset SPs", self.datasetsps)
+        self.add("notifications", "Notifications", self.notifications)
+        self.add("values", "Values", self.values)
 
-# Account - GET_PROFILE
-try:
-    profile = api.account.get_profile()
-    print(f"Account profile type: {type(profile)}")
-    save_fixture(to_serializable(profile), "AccountProfile")
-except Exception as e:
-    print(f"Account profile failed: {e}")
+    def _fetch(self, label, call, fixture_name):
+        result = call()
+        print(f"{label} type: {type(result)}")
+        if isinstance(result, list):
+            print(f"{label} count: {len(result)}")
+        save_fixture(to_serializable(result), fixture_name)
 
-# Dashboard - GET
-try:
-    dashboard = api.dashboard.get()
-    print(f"Dashboard type: {type(dashboard)}")
-    save_fixture(to_serializable(dashboard), "Dashboard")
-except Exception as e:
-    print(f"Dashboard failed: {e}")
+    def account_profile(self):
+        self._fetch("Account profile", self.api.account.get_profile, "AccountProfile")
 
-# Dashboard - GRIDVIEWS
-try:
-    gridviews = api.dashboard.get_gridviews()
-    print(f"Dashboard gridviews type: {type(gridviews)}")
-    save_fixture(to_serializable(gridviews), "DashboardGridViews")
-except Exception as e:
-    print(f"Dashboard gridviews failed: {e}")
+    def dashboard(self):
+        self._fetch("Dashboard", self.api.dashboard.get, "Dashboard")
 
-# Partner - GET
-try:
-    partners = api.partner.get_list()
-    print(f"Partners type: {type(partners)}")
-    print(f"Partners count: {len(partners) if isinstance(partners, list) else 'N/A'}")
-    save_fixture(to_serializable(partners), "PartnerList")
-except Exception as e:
-    print(f"Partner list failed: {e}")
+    def gridviews(self):
+        self._fetch("Dashboard gridviews", self.api.dashboard.get_gridviews, "DashboardGridViews")
 
-# Shipment - ACCESSORIALS
-try:
-    accessorials = api.shipment.get_accessorials()
-    print(f"Shipment accessorials type: {type(accessorials)}")
-    save_fixture(to_serializable(accessorials), "ShipmentAccessorials")
-except Exception as e:
-    print(f"Shipment accessorials failed: {e}")
+    def partners(self):
+        self._fetch("Partners", self.api.partner.get_list, "PartnerList")
 
-# Users - POCUSERS
-try:
-    pocusers = api.users.get_pocusers()
-    print(f"POC users type: {type(pocusers)}")
-    save_fixture(to_serializable(pocusers), "UsersPocUsers")
-except Exception as e:
-    print(f"POC users failed: {e}")
+    def accessorials(self):
+        self._fetch("Shipment accessorials", self.api.shipment.get_accessorials, "ShipmentAccessorials")
 
-# Users - ROLES
-try:
-    roles = api.users.get_roles()
-    print(f"User roles type: {type(roles)}")
-    save_fixture(to_serializable(roles), "UsersRoles")
-except Exception as e:
-    print(f"User roles failed: {e}")
+    def pocusers(self):
+        self._fetch("POC users", self.api.users.get_pocusers, "UsersPocUsers")
 
-# Views - ALL
-try:
-    views = api.views.get_all()
-    print(f"Views all type: {type(views)}")
-    save_fixture(to_serializable(views), "ViewsAll")
-except Exception as e:
-    print(f"Views all failed: {e}")
+    def roles(self):
+        self._fetch("User roles", self.api.users.get_roles, "UsersRoles")
 
-# Views - DATASETSPS
-try:
-    datasetsps = api.views.get_datasetsps()
-    print(f"Views datasetsps type: {type(datasetsps)}")
-    save_fixture(to_serializable(datasetsps), "ViewsDatasetSps")
-except Exception as e:
-    print(f"Views datasetsps failed: {e}")
+    def views_all(self):
+        self._fetch("Views all", self.api.views.get_all, "ViewsAll")
 
-# Notifications - GET
-try:
-    notifications = api.notifications.get_get()
-    print(f"Notifications type: {type(notifications)}")
-    save_fixture(to_serializable(notifications), "Notifications")
-except Exception as e:
-    print(f"Notifications failed: {e}")
+    def datasetsps(self):
+        self._fetch("Views datasetsps", self.api.views.get_datasetsps, "ViewsDatasetSps")
 
-# Values - GET
-try:
-    values = api.values.get_get()
-    print(f"Values type: {type(values)}")
-    save_fixture(to_serializable(values), "Values")
-except Exception as e:
-    print(f"Values failed: {e}")
+    def notifications(self):
+        self._fetch("Notifications", self.api.notifications.get_get, "Notifications")
 
-print("\nDone!")
+    def values(self):
+        self._fetch("Values", self.api.values.get_get, "Values")
+
+
+if __name__ == "__main__":
+    MiscExamples().run()

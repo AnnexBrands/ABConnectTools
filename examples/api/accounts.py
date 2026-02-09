@@ -1,31 +1,31 @@
-from ABConnect import ABConnectAPI
+"""
+Account API Examples - Login, registration, and password operations
 
-api = ABConnectAPI(env='staging', username='instaquote')
+Usage:
+    python accounts.py              # Run all examples
+    python accounts.py forgot       # Run a single example
+    python accounts.py help         # List available examples
+"""
+
 from ABConnect import models
-
-# DELETE_PAYMENTSOURCE
-# GET_PROFILE
-# GET_VERIFYRESETTOKEN
-# POST_CONFIRM
+from _base import ExampleRunner
 
 
-# POST_FORGOT
+class AccountExamples(ExampleRunner):
+    def __init__(self):
+        super().__init__("Account API", api_kwargs=dict(env='staging', username='instaquote'))
+        self.add("forgot", "Post a forgot-username request", self.post_forgot)
 
-requestModel = models.ForgotLoginModel
-forgotlogin = models.ForgotLoginModel(
-    user_name="training",
-    email="abconnect@annexbrands.com",
-    forgot_type=models.ForgotType.USERNAME # ForgotType.PASSWORD
-)
+    def post_forgot(self):
+        forgotlogin = models.ForgotLoginModel(
+            user_name="training",
+            email="abconnect@annexbrands.com",
+            forgot_type=models.ForgotType.USERNAME
+        )
+        r = self.api.account.post_forgot(forgotlogin)
+        print(f"isinstance ServiceBaseResponse: {isinstance(r, models.ServiceBaseResponse)}")
+        print(r)
 
-responseModel = models.ServiceBaseResponse
-r = api.account.post_forgot(forgotlogin)
-print(isinstance(r, models.ServiceBaseResponse))
-print(r)
 
-# POST_REGISTER
-# POST_RESETPASSWORD
-# POST_SEND_CONFIRMATION
-# POST_SETPASSWORD
-# PUT_PAYMENTSOURCE
-
+if __name__ == "__main__":
+    AccountExamples().run()
