@@ -41,17 +41,17 @@ class RequestHandler:
             return None
 
         # Check Content-Type header to determine how to handle the response
-        content_type = response.headers.get('Content-Type', '').lower()
+        content_type = response.headers.get("Content-Type", "").lower()
 
         # Binary content types should return bytes directly
         binary_content_types = [
-            'application/pdf',
-            'application/octet-stream',
-            'image/',
-            'video/',
-            'audio/',
-            'application/zip',
-            'application/x-zip-compressed',
+            "application/pdf",
+            "application/octet-stream",
+            "image/",
+            "video/",
+            "audio/",
+            "application/zip",
+            "application/x-zip-compressed",
         ]
 
         if any(ct in content_type for ct in binary_content_types):
@@ -133,7 +133,7 @@ class RequestHandler:
             request_headers.update(headers)
 
         # Ensure path starts with /
-        if not path.startswith('/'):
+        if not path.startswith("/"):
             path = f"/{path}"
         url = f"{self.base_url}{path}"
         method = "POST"

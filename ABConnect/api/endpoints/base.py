@@ -13,6 +13,7 @@ import re
 import requests
 from typing import Any, Optional, TYPE_CHECKING, Tuple
 import logging
+
 logger = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
@@ -51,7 +52,7 @@ class BaseEndpoint:
                 f"but no request_model is defined. Remove the json= argument "
                 f"or define a request_model for this route."
             )
-        if hasattr(model, 'model_validate'):
+        if hasattr(model, "model_validate"):
             kwargs["json"] = model.model_validate(data).json()
 
     def _parse_type_string(self, type_str: str) -> Tuple[bool, str]:
@@ -64,12 +65,14 @@ class BaseEndpoint:
             Tuple of (is_list, inner_model_name)
         """
         # Match List[ModelName] pattern
-        list_match = re.match(r'^List\[(\w+)\]$', type_str)
+        list_match = re.match(r"^List\[(\w+)\]$", type_str)
         if list_match:
             return (True, list_match.group(1))
         return (False, type_str)
 
-    def _validate_response(self, response: requests.Response, response_model: Optional[str]) -> Any:
+    def _validate_response(
+        self, response: requests.Response, response_model: Optional[str]
+    ) -> Any:
         """Validate and cast API response to Pydantic model if specified.
 
         Args:
@@ -83,7 +86,7 @@ class BaseEndpoint:
             ValueError: If response_model is None - all endpoints must define a response model
         """
         if response_model == "bytes":
-            return response.content
+            return response
 
         if response_model is None:
             raise ValueError("All endpoints must define a response_model.")
@@ -122,10 +125,7 @@ class BaseEndpoint:
             route.url,
             **kwargs,
         )
-        return self._validate_response(
-            response, response_model=route.response_model
-        )
-
+        return self._validate_response(response, response_model=route.response_model)
 
     @staticmethod
     def get_cache(key: str) -> Optional[str]:

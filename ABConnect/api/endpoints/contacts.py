@@ -99,7 +99,7 @@ class ContactsEndpoint(BaseEndpoint):
         Returns:
             ContactDetails: Typed contact details model
         """
-        route = self.routes['GET']
+        route = self.routes["GET"]
         route.params = {"id": id}
         return self._make_request(route)
 
@@ -115,7 +115,7 @@ class ContactsEndpoint(BaseEndpoint):
         Returns:
             dict: Contact info for current user
         """
-        route = self.routes['USER']
+        route = self.routes["USER"]
         return self._make_request(route)
 
     def get_editdetails(self, contactId: str) -> dict:
@@ -211,4 +211,4 @@ class ContactsEndpoint(BaseEndpoint):
 
     def get_did(self, displayId):
         id = self.get_cache(displayId)
-        return self.get_get(id)
+        return self.get(id)
