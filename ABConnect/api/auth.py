@@ -82,6 +82,7 @@ class SessionTokenStorage(TokenStorage):
     def __init__(self, *args, **kwargs):
         self._token = None
         self.request = kwargs["request"]
+        self._store_creds(**kwargs)
         self._load_token()
 
     def _load_token(self):
@@ -89,6 +90,8 @@ class SessionTokenStorage(TokenStorage):
             self._token = self.request.session["abc_token"]
             if not self.expired:
                 logger.info(f"From ABConnect.api.auth._load_token() -- Success")
+                return
+            if self.refresh_token():
                 return
         if (
             hasattr(self.request.user, "refresh_token")
@@ -98,6 +101,12 @@ class SessionTokenStorage(TokenStorage):
             if self.refresh_token():
                 return
         self._login()
+
+    def _store_creds(self, username=None, password=None, **_):
+        if username and password:
+            self._creds = {"username": username, "password": password}
+        else:
+            self._creds = {}
 
     def _get_creds(self):
         if "username" in self._creds and "password" in self._creds:
@@ -161,7 +170,9 @@ class FileTokenStorage(TokenStorage):
 
         # Include environment in filename to separate staging/production tokens
         env_suffix = "_staging" if Config._env == "staging" else ""
-        self.path = os.path.join(cache_dir, f"token_{self.creds['username']}{env_suffix}.json")
+        self.path = os.path.join(
+            cache_dir, f"token_{self.creds['username']}{env_suffix}.json"
+        )
         self._token = None
         self._load_token()
 
@@ -183,10 +194,12 @@ class FileTokenStorage(TokenStorage):
             username = get_config("ABCONNECT_USERNAME")
             password = get_config("ABCONNECT_PASSWORD")
             if not (username and password):
-                raise LoginFailedError("Default credentials (ABCONNECT_USERNAME/PASSWORD) not set")
+                raise LoginFailedError(
+                    "Default credentials (ABCONNECT_USERNAME/PASSWORD) not set"
+                )
 
         self.creds = {"username": username.lower(), "password": password}
-    
+
     def _get_creds(self):
         return self.creds
 
@@ -229,7 +242,5 @@ class FileTokenStorage(TokenStorage):
             self._call_login(data)
             return True
         except LoginFailedError:
-            logger.info(
-                f"Refresh token failed for {self.creds['username']}"
-            )
+            logger.info(f"Refresh token failed for {self.creds['username']}")
             return False

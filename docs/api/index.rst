@@ -21,6 +21,8 @@ Available Resources
      - 
    * - :doc:`calendar`
      - Access calendar events and scheduling information for jobs, deliveries, and appointments.
+   * - :doc:`catalog`
+     - Manage catalogs, lots, sellers, and bulk operations for the Catalog service.
    * - :doc:`carriererrormessage`
      - 
    * - :doc:`companies`
@@ -120,6 +122,7 @@ Available Resources
    address
    advancedsettings
    calendar
+   catalog
    carriererrormessage
    companies
    company_external_accounts

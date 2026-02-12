@@ -156,3 +156,18 @@ def NotificationsData():
 @pytest.fixture
 def ValuesData():
     return json.loads((fixtures / "Values.json").read_text())
+
+
+@pytest.fixture
+def CatalogListData():
+    return json.loads((fixtures / "CatalogList.json").read_text())
+
+
+@pytest.fixture
+def CatalogSellerListData():
+    return json.loads((fixtures / "CatalogSellerList.json").read_text())
+
+
+@pytest.fixture
+def CatalogLotListData():
+    return json.loads((fixtures / "CatalogLotList.json").read_text())
