@@ -29,6 +29,10 @@ class SellerEndpoint(BaseCatalogEndpoint):
         self,
         page_number: int = 1,
         page_size: int = 10,
+        id: Optional[int] = None,
+        name: Optional[str] = None,
+        customer_display_id: Optional[int] = None,
+        is_active: Optional[bool] = None,
         **kwargs,
     ) -> SellerExpandedDtoPaginatedList:
         """List sellers with pagination.
@@ -36,6 +40,10 @@ class SellerEndpoint(BaseCatalogEndpoint):
         Args:
             page_number: Page number (1-indexed)
             page_size: Number of items per page
+            id: Filter by seller ID
+            name: Filter by seller name
+            customer_display_id: Filter by customer display ID
+            is_active: Filter by active status
 
         Returns:
             Paginated list of sellers with their catalogs
@@ -45,6 +53,14 @@ class SellerEndpoint(BaseCatalogEndpoint):
             "PageSize": page_size,
             **kwargs,
         }
+        if id is not None:
+            params["Id"] = id
+        if name is not None:
+            params["Name"] = name
+        if customer_display_id is not None:
+            params["CustomerDisplayId"] = customer_display_id
+        if is_active is not None:
+            params["IsActive"] = is_active
         response = self._get(params=params)
         return SellerExpandedDtoPaginatedList.model_validate(response)
 

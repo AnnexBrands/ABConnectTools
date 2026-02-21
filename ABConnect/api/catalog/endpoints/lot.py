@@ -31,6 +31,9 @@ class LotEndpoint(BaseCatalogEndpoint):
         self,
         page_number: int = 1,
         page_size: int = 10,
+        id: Optional[int] = None,
+        customer_item_id: Optional[str] = None,
+        lot_number: Optional[str] = None,
         customer_catalog_id: Optional[str] = None,
         **kwargs,
     ) -> LotDtoPaginatedList:
@@ -39,6 +42,9 @@ class LotEndpoint(BaseCatalogEndpoint):
         Args:
             page_number: Page number (1-indexed)
             page_size: Number of items per page
+            id: Filter by lot ID
+            customer_item_id: Filter by customer item ID
+            lot_number: Filter by lot number
             customer_catalog_id: Filter by customer catalog ID (e.g., "400160")
 
         Returns:
@@ -49,6 +55,12 @@ class LotEndpoint(BaseCatalogEndpoint):
             "PageSize": page_size,
             **kwargs,
         }
+        if id is not None:
+            params["Id"] = id
+        if customer_item_id is not None:
+            params["CustomerItemId"] = customer_item_id
+        if lot_number is not None:
+            params["LotNumber"] = lot_number
         if customer_catalog_id is not None:
             params["CustomerCatalogId"] = customer_catalog_id
         response = self._get(params=params)

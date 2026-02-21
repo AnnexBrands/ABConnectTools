@@ -1,5 +1,6 @@
 """Catalog endpoint for Catalog API."""
 
+from datetime import datetime
 from typing import Dict, List, Optional, Any
 
 from .base import BaseCatalogEndpoint
@@ -29,6 +30,14 @@ class CatalogEndpoint(BaseCatalogEndpoint):
         self,
         page_number: int = 1,
         page_size: int = 10,
+        id: Optional[int] = None,
+        customer_catalog_id: Optional[str] = None,
+        agent: Optional[str] = None,
+        title: Optional[str] = None,
+        start_date: Optional[datetime] = None,
+        end_date: Optional[datetime] = None,
+        is_completed: Optional[bool] = None,
+        seller_ids: Optional[List[int]] = None,
         **kwargs,
     ) -> CatalogExpandedDtoPaginatedList:
         """List catalogs with pagination.
@@ -36,6 +45,14 @@ class CatalogEndpoint(BaseCatalogEndpoint):
         Args:
             page_number: Page number (1-indexed)
             page_size: Number of items per page
+            id: Filter by catalog ID
+            customer_catalog_id: Filter by customer catalog ID
+            agent: Filter by agent name
+            title: Filter by catalog title
+            start_date: Filter by start date (range filter)
+            end_date: Filter by end date (range filter)
+            is_completed: Filter by completion status
+            seller_ids: Filter by seller IDs
 
         Returns:
             Paginated list of catalogs
@@ -45,6 +62,22 @@ class CatalogEndpoint(BaseCatalogEndpoint):
             "PageSize": page_size,
             **kwargs,
         }
+        if id is not None:
+            params["Id"] = id
+        if customer_catalog_id is not None:
+            params["CustomerCatalogId"] = customer_catalog_id
+        if agent is not None:
+            params["Agent"] = agent
+        if title is not None:
+            params["Title"] = title
+        if start_date is not None:
+            params["StartDate"] = start_date.isoformat()
+        if end_date is not None:
+            params["EndDate"] = end_date.isoformat()
+        if is_completed is not None:
+            params["IsCompleted"] = is_completed
+        if seller_ids is not None:
+            params["SellerIds"] = seller_ids
         response = self._get(params=params)
         return CatalogExpandedDtoPaginatedList.model_validate(response)
 
